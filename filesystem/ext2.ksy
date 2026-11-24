@@ -248,10 +248,22 @@ types:
       - id: osd2
         size: 12
     instances:
+      is_fast_symlink:
+        value: '(mode & 0xf000) == 0xa000 and blocks == (file_acl != 0 ? _root.bg1.super_block.block_size / 512 : 0)'
+        doc: |
+          Symlink whose target (up to 60 bytes) is stored in `block`
+          instead of a data block: `blocks` (in 512-byte sectors) counts
+          no data blocks, only an extended attribute block if `file_acl`
+          is set (as in Linux ext2_inode_is_fast_symlink).
       as_dir:
         io: 'block[0].body._io'
         pos: 0
         type: dir
+        if: (mode & 0xf000) == 0x4000
+        doc: |
+          Directory entries in the first block, only for directories
+          (S_IFDIR); for other inodes, e.g. fast symlinks, `block` does not
+          hold block pointers.
   block_ptr:
     seq:
       - id: ptr
@@ -261,6 +273,11 @@ types:
         pos: ptr * _root.bg1.super_block.block_size
         size: _root.bg1.super_block.block_size
         type: raw_block
+        if: ptr != 0 and not _parent.is_fast_symlink
+        doc: |
+          Block contents. Pointer 0 means no block is allocated (end of
+          file or a hole), and a fast symlink stores its target in the
+          pointer array itself.
   raw_block:
     seq:
       - id: body
