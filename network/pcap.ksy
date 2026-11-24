@@ -16,6 +16,7 @@ meta:
     - /network/packet_ppi
     - /network/ieee802_11_prism
     - /hardware/usb/pcap/usbmon
+    - /hardware/usb/pcap/usbpcap
 doc: |
   PCAP (named after libpcap / winpcap) is a popular format for saving
   network traffic grabbed by network sniffers. It is typically
@@ -117,6 +118,7 @@ types:
             'linktype::usb_linux_mmapped': usbmon(64)
             'linktype::usb_linux': usbmon(48)
             'linktype::bluetooth_hci_h4_with_phdr': bluetooth_frame
+            'linktype::usbpcap': usbpcap
         doc-ref: 'https://wiki.wireshark.org/Development/LibpcapFileFormat#Packet_Data'
       - id: discarded
         size: incl_len - len_body

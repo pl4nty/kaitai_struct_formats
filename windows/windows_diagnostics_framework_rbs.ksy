@@ -80,7 +80,7 @@ types:
         type: header
       - id: data
         size: header.size
-        process: "kaitai.compress.zlib(-1, 15)"
+        process: kaitai.compress.deflate
         doc: |
           JSON-serialized data, though JSON looks not very valid. Some info about the data
           in JSON may be found in the documents by the links in -doc-ref.

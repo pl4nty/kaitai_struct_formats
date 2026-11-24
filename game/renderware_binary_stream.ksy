@@ -8,6 +8,7 @@ meta:
   xref:
     justsolve: RenderWare_binary_stream_file
     wikidata: Q29960668
+  license: LicenseRef-All-Rights-Reserved
   endian: le
   bit-endian: le
 doc-ref: https://gtamods.com/wiki/RenderWare_binary_stream_file
