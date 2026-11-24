@@ -46,6 +46,10 @@ types:
             'atom_type::stbl': atom_list
             'atom_type::traf': atom_list
             'atom_type::trak': atom_list
+            'atom_type::tapt': atom_list
+            'atom_type::gmhd': atom_list
+            'atom_type::hnti': atom_list
+            'atom_type::wave': atom_list
 
             # Leaf atoms that have some distinct format inside
             'atom_type::ftyp': ftyp_body
@@ -65,6 +69,14 @@ types:
             'atom_type::stts': stts_body
             'atom_type::stz2': stz2_body
             'atom_type::vmhd': vmhd_body
+            'atom_type::ctts': ctts_body
+            'atom_type::cslg': cslg_body
+            'atom_type::stps': stps_body
+            'atom_type::clef': track_aperture_dimensions_body
+            'atom_type::prof': track_aperture_dimensions_body
+            'atom_type::enof': track_aperture_dimensions_body
+            'atom_type::gmin': gmin_body
+            'atom_type::tref': tref_body
     instances:
       len:
         value: 'len32 == 0 ? (_io.size - 8) : (len32 == 1 ? len64 - 16 : len32 - 8)'
@@ -773,17 +785,131 @@ types:
         type: u2
         repeat: expr
         repeat-expr: 3
+  ctts_body:
+    doc: Composition offset atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: num_entries
+        type: u4
+      - id: entries
+        type: entry
+        repeat: expr
+        repeat-expr: num_entries
+    types:
+      entry:
+        seq:
+          - id: sample_count
+            type: u4
+          - id: composition_offset
+            type: s4
+            doc: |
+              Signed in QuickTime and in version 1 of the ISO/IEC 14496-12
+              box; version 0 of the ISO box declares it unsigned.
+  cslg_body:
+    doc: Composition shift least greatest atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: composition_offset_to_display_offset_shift
+        type: s4
+      - id: least_display_offset
+        type: s4
+      - id: greatest_display_offset
+        type: s4
+      - id: display_start_time
+        type: s4
+      - id: display_end_time
+        type: s4
+  stps_body:
+    doc: Partial sync sample atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: num_entries
+        type: u4
+      - id: sample_numbers
+        type: u4
+        repeat: expr
+        repeat-expr: num_entries
+  track_aperture_dimensions_body:
+    doc: |
+      Body of the track clean aperture (clef), production aperture (prof)
+      and encoded pixels (enof) dimensions atoms, children of the track
+      aperture mode dimensions atom (tapt).
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: width
+        type: fixed_point_16_dot_16
+      - id: height
+        type: fixed_point_16_dot_16
+  gmin_body:
+    doc: Base media info atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: graphics_mode
+        type: u2
+      - id: opcolor
+        type: u2
+        repeat: expr
+        repeat-expr: 3
+      - id: balance
+        type: s2
+      - id: reserved
+        type: u2
+  tref_body:
+    doc: Track reference atom
+    seq:
+      - id: references
+        type: track_reference_type_atom
+        repeat: eos
+    types:
+      track_reference_type_atom:
+        seq:
+          - id: len_atom
+            type: u4
+          - id: reference_type
+            type: u4
+            enum: track_reference_type
+          - id: track_ids
+            size: len_atom - 8
+            type: track_ids
+      track_ids:
+        seq:
+          - id: track_ids
+            type: u4
+            repeat: eos
+            doc: Referenced track IDs (0 is unused)
 enums:
   atom_type:
     0x58747261: xtra
+    0x636c6566: clef
     0x636f3634: co64
+    0x63736c67: cslg
+    0x63747473: ctts
     0x64696e66: dinf
     0x64726566: dref
     0x65647473: edts
     0x656c7374: elst
+    0x656e6f66: enof
     0x66726565: free
     0x66747970: ftyp
+    0x676d6864: gmhd
+    0x676d696e: gmin
     0x68646c72: hdlr
+    0x686e7469: hnti
     0x696f6473: iods
     0x6d646174: mdat
     0x6d646864: mdhd
@@ -793,21 +919,25 @@ enums:
     0x6d6f6f66: moof
     0x6d6f6f76: moov
     0x6d766864: mvhd
+    0x70726f66: prof
     0x736d6864: smhd
     0x7374626c: stbl
     0x7374636f: stco
+    0x73747073: stps
     0x73747363: stsc
     0x73747364: stsd
     0x73747373: stss
     0x7374737a: stsz
     0x73747473: stts
     0x73747a32: stz2
+    0x74617074: tapt
     0x746b6864: tkhd
     0x74726166: traf
     0x7472616b: trak
     0x74726566: tref
     0x75647461: udta
     0x766d6864: vmhd
+    0x77617665: wave
 
   # https://mp4ra.org/#/brands
   #
@@ -822,6 +952,19 @@ enums:
   #   ];
   # }).filter(entry => !!entry).map(entry => `    ${entry[0]}: ${entry[1]}\n`).join(''));
   # ```
+  track_reference_type:
+    0x63646570: cdep
+    0x63647363: cdsc
+    0x63686170: chap
+    0x636c6370: clcp
+    0x66616c6c: fall
+    0x666f6c77: folw
+    0x666f7263: forc
+    0x68696e74: hint
+    0x73637074: scpt
+    0x73737263: ssrc
+    0x73796e63: sync
+    0x746d6364: tmcd
   brand:
     0x33673261: x_3g2a
     0x33676536: x_3ge6
