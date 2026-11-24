@@ -476,185 +476,137 @@ types:
       - id: number_of_linenumbers
         type: u2
       - id: characteristics
-        type: u4
-        doc: Bit flags; see the `section_flags` enum for the individual flag values.
+        size: 4
+        type: section_characteristics
     instances:
       body:
         pos: pointer_to_raw_data
         size: size_of_raw_data
-    enums:
-      section_flags:
-        0x00000000:
-          id: reserved1
-          -orig-id: Reserved1
-          doc: Reserved for future use.
-        0x00000001:
-          id: reserved2
-          -orig-id: Reserved2
-          doc: Reserved for future use.
-        0x00000002:
-          id: reserved3
-          -orig-id: Reserved3
-          doc: Reserved for future use.
-        0x00000004:
-          id: reserved4
-          -orig-id: Reserved4
-          doc: Reserved for future use.
-        0x00000008:
-          id: image_scn_type_no_pad
-          -orig-id: IMAGE_SCN_TYPE_NO_PAD
-          doc: |
-            The section should not be padded to the next boundary. This flag
-            is obsolete and is replaced by IMAGE_SCN_ALIGN_1BYTES. This is
-            valid only for object files.
-        0x00000010:
-          id: reserved5
-          -orig-id: Reserved5
-          doc: Reserved for future use.
-        0x00000020:
-          id: image_scn_cnt_code
-          -orig-id: IMAGE_SCN_CNT_CODE
-          doc: The section contains executable code.
-        0x00000040:
-          id: image_scn_cnt_initialized_data
-          -orig-id: IMAGE_SCN_CNT_INITIALIZED_DATA
-          doc: The section contains initialized data.
-        0x00000080:
-          id: image_scn_cnt_uninitialized_data
-          -orig-id: IMAGE_SCN_CNT_UNINITIALIZED_DATA
-          doc: The section contains uninitialized data.
-        0x00000100:
-          id: image_scn_lnk_other
-          -orig-id: IMAGE_SCN_LNK_OTHER
-          doc: Reserved for future use.
-        0x00000200:
-          id: image_scn_lnk_info
-          -orig-id: IMAGE_SCN_LNK_INFO
-          doc: |
-            The section contains comments or other information. The .drectve
-            section has this type. This is valid for object files only.
-        0x00000400:
-          id: reserved6
-          -orig-id: Reserved6
-          doc: Reserved for future use.
-        0x00000800:
-          id: image_scn_lnk_remove
-          -orig-id: IMAGE_SCN_LNK_REMOVE
-          doc: |
-            The section will not become part of the image. This is valid only
-            for object files.
-        0x00001000:
-          id: image_scn_lnk_comdat
-          -orig-id: IMAGE_SCN_LNK_COMDAT
-          doc: |
-            The section contains COMDAT data. For more information see COMDAT
-            Sections (Object Only). This is valid only for object files.
-        0x00008000:
-          id: image_scn_gprel
-          -orig-id: IMAGE_SCN_GPREL
-          doc: |
-            The section contains data referenced through the global pointer
-            (GP).
-        0x00020000:
-          id: image_scn_mem_purgeable
-          -orig-id: IMAGE_SCN_MEM_PURGEABLE
-          doc: Reserved for future use. Also defined as IMAGE_SCN_MEM_16BIT.
-        0x00040000:
-          id: image_scn_mem_locked
-          -orig-id: IMAGE_SCN_MEM_LOCKED
-          doc: Reserved for future use.
-        0x00080000:
-          id: image_scn_mem_preload
-          -orig-id: IMAGE_SCN_MEM_PRELOAD
-          doc: Reserved for future use.
-        0x00100000:
-          id: image_scn_align_1bytes
-          -orig-id: IMAGE_SCN_ALIGN_1BYTES
-          doc: Align data on a 1-byte boundary. Valid only for object files.
-        0x00200000:
-          id: image_scn_align_2bytes
-          -orig-id: IMAGE_SCN_ALIGN_2BYTES
-          doc: Align data on a 2-byte boundary. Valid only for object files.
-        0x00300000:
-          id: image_scn_align_4bytes
-          -orig-id: IMAGE_SCN_ALIGN_4BYTES
-          doc: Align data on a 4-byte boundary. Valid only for object files.
-        0x00400000:
-          id: image_scn_align_8bytes
-          -orig-id: IMAGE_SCN_ALIGN_8BYTES
-          doc: Align data on an 8-byte boundary. Valid only for object files.
-        0x00500000:
-          id: image_scn_align_16bytes
-          -orig-id: IMAGE_SCN_ALIGN_16BYTES
-          doc: Align data on a 16-byte boundary. Valid only for object files.
-        0x00600000:
-          id: image_scn_align_32bytes
-          -orig-id: IMAGE_SCN_ALIGN_32BYTES
-          doc: Align data on a 32-byte boundary. Valid only for object files.
-        0x00700000:
-          id: image_scn_align_64bytes
-          -orig-id: IMAGE_SCN_ALIGN_64BYTES
-          doc: Align data on a 64-byte boundary. Valid only for object files.
-        0x00800000:
-          id: image_scn_align_128bytes
-          -orig-id: IMAGE_SCN_ALIGN_128BYTES
-          doc: Align data on a 128-byte boundary. Valid only for object files.
-        0x00900000:
-          id: image_scn_align_256bytes
-          -orig-id: IMAGE_SCN_ALIGN_256BYTES
-          doc: Align data on a 256-byte boundary. Valid only for object files.
-        0x00A00000:
-          id: image_scn_align_512bytes
-          -orig-id: IMAGE_SCN_ALIGN_512BYTES
-          doc: Align data on a 512-byte boundary. Valid only for object files.
-        0x00B00000:
-          id: image_scn_align_1024bytes
-          -orig-id: IMAGE_SCN_ALIGN_1024BYTES
-          doc: Align data on a 1024-byte boundary. Valid only for object files.
-        0x00C00000:
-          id: image_scn_align_2048bytes
-          -orig-id: IMAGE_SCN_ALIGN_2048BYTES
-          doc: Align data on a 2048-byte boundary. Valid only for object files.
-        0x00D00000:
-          id: image_scn_align_4096bytes
-          -orig-id: IMAGE_SCN_ALIGN_4096BYTES
-          doc: Align data on a 4096-byte boundary. Valid only for object files.
-        0x00E00000:
-          id: image_scn_align_8192bytes
-          -orig-id: IMAGE_SCN_ALIGN_8192BYTES
-          doc: Align data on an 8192-byte boundary. Valid only for object files.
-        0x01000000:
-          id: image_scn_lnk_nreloc_ovfl
-          -orig-id: IMAGE_SCN_LNK_NRELOC_OVFL
-          doc: The section contains extended relocations.
-        0x02000000:
-          id: image_scn_mem_discardable
-          -orig-id: IMAGE_SCN_MEM_DISCARDABLE
-          doc: The section can be discarded as needed.
-        0x04000000:
-          id: image_scn_mem_not_cached
-          -orig-id: IMAGE_SCN_MEM_NOT_CACHED
-          doc: The section cannot be cached.
-        0x08000000:
-          id: image_scn_mem_not_paged
-          -orig-id: IMAGE_SCN_MEM_NOT_PAGED
-          doc: The section is not pageable.
-        0x10000000:
-          id: image_scn_mem_shared
-          -orig-id: IMAGE_SCN_MEM_SHARED
-          doc: The section can be shared in memory.
-        0x20000000:
-          id: image_scn_mem_execute
-          -orig-id: IMAGE_SCN_MEM_EXECUTE
-          doc: The section can be executed as code.
-        0x40000000:
-          id: image_scn_mem_read
-          -orig-id: IMAGE_SCN_MEM_READ
-          doc: The section can be read.
-        0x80000000:
-          id: image_scn_mem_write
-          -orig-id: IMAGE_SCN_MEM_WRITE
-          doc: The section can be written to.
+  section_characteristics:
+    doc: |
+      Section flags (`Characteristics` in the section header). Bits that the
+      specification marks as reserved are kept as `reserved_*` fields.
+    doc-ref: https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#section-flags
+    seq:
+      - id: reserved_0x00000001
+        type: b1
+      - id: reserved_0x00000002
+        type: b1
+      - id: reserved_0x00000004
+        type: b1
+      - id: type_no_pad
+        -orig-id: IMAGE_SCN_TYPE_NO_PAD
+        type: b1
+        doc: |
+          The section should not be padded to the next boundary. This flag
+          is obsolete and is replaced by IMAGE_SCN_ALIGN_1BYTES. This is
+          valid only for object files.
+      - id: reserved_0x00000010
+        type: b1
+      - id: cnt_code
+        -orig-id: IMAGE_SCN_CNT_CODE
+        type: b1
+        doc: The section contains executable code.
+      - id: cnt_initialized_data
+        -orig-id: IMAGE_SCN_CNT_INITIALIZED_DATA
+        type: b1
+        doc: The section contains initialized data.
+      - id: cnt_uninitialized_data
+        -orig-id: IMAGE_SCN_CNT_UNINITIALIZED_DATA
+        type: b1
+        doc: The section contains uninitialized data.
+      - id: lnk_other
+        -orig-id: IMAGE_SCN_LNK_OTHER
+        type: b1
+        doc: Reserved for future use.
+      - id: lnk_info
+        -orig-id: IMAGE_SCN_LNK_INFO
+        type: b1
+        doc: |
+          The section contains comments or other information. The .drectve
+          section has this type. This is valid for object files only.
+      - id: reserved_0x00000400
+        type: b1
+      - id: lnk_remove
+        -orig-id: IMAGE_SCN_LNK_REMOVE
+        type: b1
+        doc: |
+          The section will not become part of the image. This is valid only
+          for object files.
+      - id: lnk_comdat
+        -orig-id: IMAGE_SCN_LNK_COMDAT
+        type: b1
+        doc: |
+          The section contains COMDAT data. For more information see COMDAT
+          Sections (Object Only). This is valid only for object files.
+      - id: reserved_0x00002000
+        type: b1
+      - id: reserved_0x00004000
+        type: b1
+      - id: gprel
+        -orig-id: IMAGE_SCN_GPREL
+        type: b1
+        doc: |
+          The section contains data referenced through the global pointer
+          (GP).
+      - id: reserved_0x00010000
+        type: b1
+      - id: mem_purgeable
+        -orig-id: IMAGE_SCN_MEM_PURGEABLE
+        type: b1
+        doc: Reserved for future use. Also defined as IMAGE_SCN_MEM_16BIT.
+      - id: mem_locked
+        -orig-id: IMAGE_SCN_MEM_LOCKED
+        type: b1
+        doc: Reserved for future use.
+      - id: mem_preload
+        -orig-id: IMAGE_SCN_MEM_PRELOAD
+        type: b1
+        doc: Reserved for future use.
+      - id: align_code
+        -orig-id: IMAGE_SCN_ALIGN_*
+        type: b4
+        doc: |
+          Alignment of the section data, valid only for object files: 0 means
+          not specified, 1 to 14 mean 2^(align_code - 1) bytes
+          (IMAGE_SCN_ALIGN_1BYTES to IMAGE_SCN_ALIGN_8192BYTES). See
+          `alignment` for the decoded value.
+      - id: lnk_nreloc_ovfl
+        -orig-id: IMAGE_SCN_LNK_NRELOC_OVFL
+        type: b1
+        doc: The section contains extended relocations.
+      - id: mem_discardable
+        -orig-id: IMAGE_SCN_MEM_DISCARDABLE
+        type: b1
+        doc: The section can be discarded as needed.
+      - id: mem_not_cached
+        -orig-id: IMAGE_SCN_MEM_NOT_CACHED
+        type: b1
+        doc: The section cannot be cached.
+      - id: mem_not_paged
+        -orig-id: IMAGE_SCN_MEM_NOT_PAGED
+        type: b1
+        doc: The section is not pageable.
+      - id: mem_shared
+        -orig-id: IMAGE_SCN_MEM_SHARED
+        type: b1
+        doc: The section can be shared in memory.
+      - id: mem_execute
+        -orig-id: IMAGE_SCN_MEM_EXECUTE
+        type: b1
+        doc: The section can be executed as code.
+      - id: mem_read
+        -orig-id: IMAGE_SCN_MEM_READ
+        type: b1
+        doc: The section can be read.
+      - id: mem_write
+        -orig-id: IMAGE_SCN_MEM_WRITE
+        type: b1
+        doc: The section can be written to.
+    instances:
+      alignment:
+        value: '(align_code >= 1 and align_code <= 14) ? 1 << (align_code - 1) : 0'
+        doc: Section data alignment in bytes, or 0 if not specified (or invalid).
 
   # Recursive lookup inside of sections to return pointer_to_raw data of dat_dir
   lookup_iteration:
