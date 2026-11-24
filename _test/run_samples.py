@@ -113,7 +113,7 @@ def load_manifests(only=()):
 def sample_name(sample):
     if sample.get("name"):
         return str(sample["name"])
-    if "data" in sample and "url" not in sample:
+    if "data" in sample:
         return "data"
     return str(sample.get("url", "?")).rstrip("/").rsplit("/", 1)[-1]
 
@@ -176,7 +176,7 @@ def validate_extract(x, where):
     errs = [f"'{where}': unknown key '{k}'" for k in x if k not in EXTRACT_KEYS]
     if x["format"] in ARCHIVES and not isinstance(x.get("member"), str):
         errs.append(f"'{where}.member' is required for {x['format']}")
-    for k in ("offset", "size"):
+    for k in ("offset", "size", "field"):
         if k in x and not (isinstance(x[k], int) and not isinstance(x[k], bool) and x[k] >= 0):
             errs.append(f"'{where}.{k}' must be a non-negative integer")
     if "then" in x:
@@ -251,9 +251,11 @@ def extract(data, spec):
         text = data.decode("ascii", "replace").replace("0x", " ")
         data = bytes.fromhex("".join(c for c in text if c in "0123456789abcdefABCDEF"))
     elif fmt == "base64":  # e.g. an OpenSSH key/cert line: "<type> <base64> [comment]"
-        text = data.decode("ascii", "replace").split()
+        fields = data.decode("ascii", "replace").split()
         field = spec.get("field", 0)
-        data = base64.b64decode(text[field] if text else "", validate=True)
+        if field >= len(fields):
+            raise SpecError(f"base64 field {field} is outside the {len(fields)} available fields")
+        data = base64.b64decode(fields[field], validate=True)
     elif fmt == "zip":
         with zipfile.ZipFile(io.BytesIO(data)) as z:
             data = z.read(spec["member"])
@@ -359,6 +361,7 @@ def run(manifests, args, build_root):
     data_dir = os.path.join(build_root, "_data")
     os.makedirs(data_dir, exist_ok=True)
     os.makedirs(args.cache_dir, exist_ok=True)
+    # keyed by hash; inline `data` samples share the unused None entry
     locks = {s.get("sha256"): threading.Lock() for m in manifests for s in m.doc["samples"]}
     results = []
 

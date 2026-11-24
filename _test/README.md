@@ -12,7 +12,11 @@ python3 _test/run_samples.py --validate-only # schema check, no network
 python3 _test/run_samples.py --coverage      # file formats (meta.file-extension) without samples
 ```
 
-Needs `ksc` 0.11+ on `PATH` (or `--ksc`). Downloads are cached by SHA-256 in
+Needs `ksc` 0.11+ on `PATH` (or `--ksc`). A few specs need more at parse
+time: opaque types and custom `process:` routines come from `_test/opaque`
+(see its README), `process: kaitai.compress.*` needs the `kaitai_compress`
+Python runtime on `PYTHONPATH`, and some compressors need `lz4` or `brotli`.
+Downloads are cached by SHA-256 in
 `_test/.cache` (`KSF_SAMPLE_CACHE` overrides). Generated parsers go to a
 temporary directory; pass `--build-dir DIR` to keep them, e.g. to look up a
 line number from a failure message.
@@ -38,7 +42,7 @@ For each sample the runner:
 samples:
   - url: https://raw.githubusercontent.com/<owner>/<repo>/<commit-sha>/path/file.png
     sha256: <64 lowercase hex>
-    name: optional-unique-name     # default: last URL segment
+    name: optional-unique-name     # default: last URL segment (`data` for inline bytes)
     source: where it came from     # free text, for humans
     license: CC0-1.0               # licence of the sample, if known
     extract:                       # optional
@@ -56,8 +60,9 @@ samples:
       ihdr.color_type: truecolor   # enums compare by name (or by value if an int)
       magic: 89504e47              # bytes compare as hex or as latin-1 text
       len(chunks): 5
-    params:                        # for specs with top-level `params:`
-      array: _data                 # Python expression; `_data` is the sample's bytes
+    params:                        # for specs with top-level `params:`; all of them, by id
+      array: _data                 # Python expression (always a string, so quote
+      num_digits: '4'              # numbers); `_data` is the sample's bytes
     xfail: why this sample fails today   # known spec bug; passing turns red (XPASS)
     skip: why it is not run              # e.g. too large
 ```

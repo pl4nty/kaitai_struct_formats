@@ -128,10 +128,8 @@ def check(job):
             except Exception as e:
                 return f"param {name!r}: {describe(e)}"
     try:
-        if params:
-            root = cls(_io=KaitaiStream(open(job["file"], "rb")), **params)
-        else:
-            root = cls.from_file(job["file"])
+        # not from_file(): it takes no params
+        root = cls(_io=KaitaiStream(open(job["file"], "rb")), **params)
     except Exception as e:
         return f"parse: {describe(e)}"
 

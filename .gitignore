@@ -1,3 +1,4 @@
 _test/.cache/
 _test/.build/
 _test/junit.xml
+__pycache__/
