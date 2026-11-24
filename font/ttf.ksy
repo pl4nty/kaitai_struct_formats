@@ -1264,13 +1264,22 @@ types:
             -orig-id: offset
             type: u2
         instances:
+          is_utf16:
+            value: >-
+              platform_id == platforms::unicode
+              or platform_id == platforms::microsoft
+              or (platform_id == platforms::reserved_2 and encoding_id == 1)
+            doc: |
+              Unicode and Windows platform strings, and ISO 10646 strings of
+              the deprecated ISO platform, are UTF-16BE; Macintosh and other
+              ISO strings use single-byte encodings.
           ascii_value:
             type: str
             size: len_str
             encoding: ascii
             io: _parent._io
             pos: _parent.ofs_strings + ofs_str
-            #if: encoding_id == 0
+            if: not is_utf16
             -webide-parse-mode: eager
           unicode_value:
             type: str
@@ -1278,7 +1287,7 @@ types:
             encoding: utf-16be
             io: _parent._io
             pos: _parent.ofs_strings + ofs_str
-            #if: encoding_id == 1
+            if: is_utf16
             -webide-parse-mode: eager
     seq:
       - id: format_selector
