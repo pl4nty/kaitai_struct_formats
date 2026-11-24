@@ -1,0 +1,87 @@
+# Imported from https://github.com/Game3DEE/darkstone/blob/afc3261693b91fcd371e975889d788dfded04311/src/kaitai/o3d.ksy
+# Licence and copyright: see _community/README.md
+meta:
+  id: darkstone_o3d
+  file-extension: o3d
+  license: MIT
+  encoding: UTF-8
+  endian: le
+
+seq:
+  - id: vertex_count
+    type: u4
+  - id: face_count
+    type: u4
+  - id: unknown1
+    type: u4
+  - id: unknown2
+    type: u4
+  - id: vertices
+    type: vector3f
+    repeat: expr
+    repeat-expr: vertex_count
+  - id: faces
+    type: face
+    repeat: expr
+    repeat-expr: face_count
+
+types:
+  bgra:
+    seq:
+      - id: b
+        type: u1
+      - id: g
+        type: u1
+      - id: r
+        type: u1
+      - id: a
+        type: u1
+
+  vector2f:
+    seq:
+      - id: x
+        type: f4
+      - id: y
+        type: f4
+  
+  vector3f:
+    seq:
+      - id: x
+        type: f4
+      - id: y
+        type: f4
+      - id: z
+        type: f4
+
+  face:
+    seq:
+      - id: color
+        type: bgra
+      - id: tex_coords
+        type: vector2f
+        repeat: expr
+        repeat-expr: 4
+      - id: indices
+        type: u2
+        repeat: expr
+        repeat-expr: 4
+        
+      #BYTE 0 [
+      #  bit0 = Textured
+      #  bit2 = Gouraud
+      #  bit3 = Transparent
+      #  bit4 = Translucide
+      #  bit5 = Z-Correction
+      #  bit7 = Halfbrite
+      #]
+      #BYTE 1 [
+      #  bit0 = Invisible
+      #  bit2 = Emitter
+      #  bit4 = Unlit
+      #  bit5 = Reflection
+      #]
+      - id: flags
+        type: u4
+        
+      - id: tex_number
+        type: u2
