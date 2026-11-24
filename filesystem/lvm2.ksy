@@ -19,12 +19,13 @@ doc: |
   ### Building a test file
 
   ```
-  dd if=/dev/zero of=image.img bs=512 count=$(( 8 * 1024 * 2 ))
-  sudo losetup /dev/loop1 image.img
-  sudo pvcreate /dev/loop1
-  sudo vgcreate vg_test /dev/loop1
-  sudo lvcreate --name lv_test1 vg_test -l100%FREE
-  sudo losetup -d /dev/loop1
+  dd if=/dev/zero of=image.img bs=1M count=16
+  LOOP=$(sudo losetup --find --show image.img)
+  sudo pvcreate "$LOOP"
+  sudo vgcreate vg_test "$LOOP"
+  sudo lvcreate --size 4M --name lv_test1 vg_test
+  sudo vgchange --activate n vg_test
+  sudo losetup -d "$LOOP"
   ```
 doc-ref: https://github.com/libyal/libvslvm/blob/main/documentation/Logical%20Volume%20Manager%20(LVM)%20format.asciidoc
 seq:
