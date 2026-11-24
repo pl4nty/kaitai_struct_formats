@@ -532,7 +532,38 @@ types:
         -orig-id: DnsDomainNameOffset
         type: u2
         doc: Offset from the beginning of the UPN_DNS_INFO structure
+      - id: flags
+        -orig-id: Flags
+        type: u4
+      - id: len_sam_name
+        -orig-id: SamNameLength
+        type: u2
+        if: has_sam_name_and_sid
+      - id: ofs_sam_name
+        -orig-id: SamNameOffset
+        type: u2
+        if: has_sam_name_and_sid
+        doc: Offset from the beginning of the UPN_DNS_INFO structure
+      - id: len_sid
+        -orig-id: SidLength
+        type: u2
+        if: has_sam_name_and_sid
+      - id: ofs_sid
+        -orig-id: SidOffset
+        type: u2
+        if: has_sam_name_and_sid
+        doc: Offset from the beginning of the UPN_DNS_INFO structure
     instances:
+      is_upn_constructed:
+        value: (flags & 1) != 0
+        doc: |
+          U flag: the user account has no UPN set explicitly, so the UPN was
+          constructed from the account name and the DNS domain name
+      has_sam_name_and_sid:
+        value: (flags & 2) != 0
+        doc: |
+          S flag: the structure is extended with the SAM name and SID of the
+          account
       upn:
         pos: ofs_upn
         size: len_upn
@@ -543,6 +574,17 @@ types:
         size: len_dns_domain_name
         type: str
         encoding: UTF-16LE
+      sam_name:
+        pos: ofs_sam_name
+        size: len_sam_name
+        type: str
+        encoding: UTF-16LE
+        if: has_sam_name_and_sid
+      sid:
+        pos: ofs_sid
+        size: len_sid
+        type: rpc_sid
+        if: has_sam_name_and_sid
   pac_signature_data:
     doc: See [MS-PAC] 2.8 PAC_SIGNATURE_DATA
     seq:
@@ -554,14 +596,13 @@ types:
       - id: signature
         -orig-id: Signature
         size: len_signature
-        if: len_signature != -1
       - id: ro_dc_identifier
         -orig-id: RODCIdentifier
         type: u2
         if: not _io.eof
         doc: |
-          First 16 bits of the key version number ([MS-KILE] section 3.1.5.8) when
-          the KDC is an RODC
+          First 16 bits of the key version number ([MS-KILE] section 3.1.5.8)
+          when the KDC is an RODC
     instances:
       len_signature:
         value: |
@@ -570,8 +611,10 @@ types:
             signature_type == signature_type_enum::hmac_sha1_96_aes128 or
             signature_type == signature_type_enum::hmac_sha1_96_aes256
           ) ? 12 :
-          -1
-        doc: -1 if the signature type is unknown
+          _io.size - 4
+        doc: |
+          16 for HMAC-MD5 and 12 for the AES types; for an unknown signature
+          type, the rest of the buffer.
     enums:
       signature_type_enum:
         0xFFFFFF76: kerb_checksum_hmac_md5
