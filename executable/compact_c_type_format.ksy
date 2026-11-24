@@ -216,7 +216,7 @@ types:
             value: 'size_or_type == (is_v2 ? 0xffff : 0xffffffff)'
             doc: Whether the size does not fit and is stored in `lsize_hi` / `lsize_lo`.
           size:
-            value: 'is_large_size ? (lsize_hi << 32) | lsize_lo : size_or_type'
+            value: 'is_large_size ? (lsize_hi.as<u8> << 32) | lsize_lo : size_or_type'
             doc: Size of the type in bytes, where applicable.
           is_large_struct:
             value: 'size >= (is_v2 ? 8192 : 536870912)'
@@ -273,7 +273,7 @@ types:
         instances:
           offset_bits:
             value: >-
-              is_large ? (offset_bits_hi << 32) | offset_bits_lo :
+              is_large ? (offset_bits_hi.as<u8> << 32) | offset_bits_lo :
               is_v2 ? offset_bits_short : offset_bits_v3
             doc: Offset of the member from the start of the structure, in bits.
       enumerator:
