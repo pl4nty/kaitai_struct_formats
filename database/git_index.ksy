@@ -143,6 +143,8 @@ types:
         terminator: 0x0a
       - id: object_name
         size: _root.len_hash
+        if: num_entries != "-1"
+        doc: Absent when the entry is invalidated (`num_entries` is -1).
 enums:
   git_extensions:
     0x54524545: cache_tree   # 'TREE'
