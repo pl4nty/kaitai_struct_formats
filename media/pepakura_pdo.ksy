@@ -122,11 +122,12 @@ instances:
 types:
   text:
     doc: |
-      String in the encoding named by `codepage`.
+      String in the encoding named by `codepage`, with a terminating zero
+      byte that `len_value` counts.
 
       In a locked file `key` has been added to every byte of every string
-      that follows `key` (modulo 256), so it must be subtracted again before
-      decoding the bytes.
+      that follows `key` (modulo 256), except for the terminating zero. It
+      must be subtracted again before decoding the bytes.
     seq:
       - id: len_value
         type: u4
@@ -160,11 +161,14 @@ types:
       shape:
         doc: A face of the 3D model and its position on the paper.
         seq:
-          - id: unknown1
+          - id: idx_texture
             type: s4
-          - id: part
+            doc: Index into `textures` of the file, or -1 if the face has none.
+          - id: idx_part
             type: u4
-            doc: Number of the part of the unfolded model the face belongs to.
+            doc: |
+              Index into `parts` of the layout: the piece of the unfolded
+              model the face belongs to.
           - id: unknown2
             type: f8
             repeat: expr
@@ -201,15 +205,25 @@ types:
             type: rgb
       edge:
         seq:
-          - id: unknown1
+          - id: idx_shape1
             type: u4
-            repeat: expr
-            repeat-expr: 4
-          - id: unknown2
+            doc: Index into `shapes` of the geometry.
+          - id: idx_shape2
+            type: u4
+            doc: |
+              Index into `shapes` of the second face that shares the edge, or
+              0xffff_ffff if there is none.
+          - id: idx_vertex1
+            type: u4
+            doc: Index into `vertices` of the geometry.
+          - id: idx_vertex2
+            type: u4
+            doc: Index into `vertices` of the geometry.
+          - id: unknown1
             type: u1
             repeat: expr
             repeat-expr: 2
-          - id: unknown3
+          - id: unknown2
             type: u4
   texture:
     seq:
@@ -278,14 +292,18 @@ types:
         repeat-expr: num_unknown5
     types:
       part:
+        doc: A piece of the unfolded model, cut out in one go.
         seq:
           - id: unknown1
             type: u4
-          - id: unknown2
+          - id: bounding_box
             type: f8
             repeat: expr
             repeat-expr: 4
-          - id: unknown3
+            doc: |
+              Apparently the left and top coordinates of the part on the
+              paper, followed by its width and height.
+          - id: name
             type: text
             if: _root.is_locked
           - id: num_lines
@@ -300,20 +318,24 @@ types:
             type: u1
           - id: unknown2
             type: u4
-          - id: has_unknown3
+          - id: has_first
             type: u1
-          - id: unknown3
-            type: u4
-            repeat: expr
-            repeat-expr: 2
-            if: has_unknown3 != 0
-          - id: has_unknown4
+          - id: first
+            type: shape_vertex
+            if: has_first != 0
+          - id: has_second
             type: u1
-          - id: unknown4
+          - id: second
+            type: shape_vertex
+            if: has_second != 0
+      shape_vertex:
+        seq:
+          - id: idx_shape
             type: u4
-            repeat: expr
-            repeat-expr: 2
-            if: has_unknown4 != 0
+            doc: Apparently an index into `shapes` of a geometry.
+          - id: idx_vertex
+            type: u4
+            doc: Apparently an index into `vertices` of a geometry.
       label:
         seq:
           - id: unknown1
