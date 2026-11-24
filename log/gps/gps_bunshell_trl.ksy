@@ -13,9 +13,25 @@ doc-ref:
   - https://github.com/gpsbabel/gpsbabel/blob/master/bushnell_trl.cc
 
 seq:
+  - id: name
+    size: 20
+    type: strz
+    encoding: ASCII
+    doc: Track name, NUL-padded.
   - id: points
     type: point
-    repeat: eos
+    repeat: expr
+    repeat-expr: num_points
+  - id: trailer
+    size-eos: true
+    doc: |
+      The rest of the 4502 point slots (all zero), a 4-byte zero end
+      marker, `num_points` (u2), and a byte that gpsbabel always writes
+      as 1.
+instances:
+  num_points:
+    pos: _io.size - 3
+    type: u2
 types:
   point:
     seq:
