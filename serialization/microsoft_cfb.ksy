@@ -9,6 +9,8 @@ meta:
     wikidata: Q5156830
   license: CC0-1.0
   endian: le
+  imports:
+    - /windows/windows_filetime
 doc: |
   Due to restrictions of Kaitai Struct we cannot fully parse CFB file format. In particular,
   index of an entry in a FAT corresponds to a sector in the parsed file, while a value in that FAT entry
@@ -194,11 +196,11 @@ types:
         type: u4
         doc: User-defined flags for storage or root storage objects
       - id: ctime
-        type: u8
-        doc: Creation time, in Windows FILETIME format (number of 100-nanosecond intervals since January 1, 1601, UTC)
+        type: windows_filetime
+        doc: Creation time.
       - id: mtime
-        type: u8
-        doc: Modification time, in Windows FILETIME format (number of 100-nanosecond intervals since January 1, 1601, UTC).
+        type: windows_filetime
+        doc: Modification time.
       - id: sector
         type: u4
         enum: sector_type
