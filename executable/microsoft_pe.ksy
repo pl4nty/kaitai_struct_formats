@@ -476,7 +476,6 @@ types:
       - id: number_of_linenumbers
         type: u2
       - id: characteristics
-        size: 4
         type: section_characteristics
     instances:
       body:
