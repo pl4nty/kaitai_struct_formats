@@ -45,7 +45,9 @@ types:
       - id: begin
         contents: ["B", 0]
       - id: marker
-        contents: [name]
+        size: name.length * 2
+        type: str
+        valid: name
       - id: terminator
         contents: [0,0]
   end_marker:
@@ -56,7 +58,9 @@ types:
       - id: end
         contents: ["E", 0]
       - id: marker
-        contents: [name]
+        size: name.length * 2
+        type: str
+        valid: name
       - id: terminator
         contents: [0,0]
   section_contents:
