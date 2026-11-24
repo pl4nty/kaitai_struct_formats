@@ -7,7 +7,7 @@ meta:
     wikidata: Q2661480
   license: CC0-1.0
   endian: le
-doc: >
+doc: |
   BSON, short for Binary JSON, is a binary-encoded serialization of JSON-like documents. Like JSON, BSON supports the embedding of documents and arrays within other documents and arrays. BSON also contains extensions that allow representation of data types that are not part of the JSON spec. For example, BSON has a Date type and a BinData type.
   BSON can be compared to binary interchange formats, like Protocol Buffers. BSON is more "schemaless" than Protocol Buffers, which can give it an advantage in flexibility but also a slight disadvantage in space efficiency (BSON has overhead for field names within the serialized data).
   BSON was designed to have the following three characteristics:
@@ -111,6 +111,7 @@ types:
           switch-on: subtype
           cases:
             'subtype::byte_array_deprecated': byte_array_deprecated
+            'subtype::crypto': crypto
     types:
       byte_array_deprecated:
         doc: "The BSON \"binary\" or \"BinData\" datatype is used to represent arrays of bytes. It is somewhat analogous to the Java notion of a ByteArray. BSON binary values have a subtype. This is used to indicate what kind of data is in the byte array. Subtypes from zero to 127 are predefined or reserved. Subtypes from 128-255 are user-defined."
@@ -119,6 +120,51 @@ types:
             type: s4
           - id: content
             size: len
+      crypto:
+        meta:
+          application:
+            - libmongocrypt
+            - mongocryptd
+        doc-ref:
+          - https://github.com/mongodb/specifications/tree/master/source/client-side-encryption/
+        seq:
+          - id: subtype
+            type: u1
+            enum: subtype
+          - id: payload
+            type:
+              switch-on: subtype
+              cases:
+                'subtype::intent_to_encrypt': bson
+                'subtype::aead_aes_cbc_hmac_sha512_determenistic_ciphertext': ciphertext(128)
+                'subtype::aead_aes_cbc_hmac_sha512_randomized_ciphertext': ciphertext(128)
+        types:
+          ciphertext:
+            params:
+              - id: block_size
+                type: u2
+            seq:
+              - id: key_uuid
+                size: 16
+              - id: original_bson_type
+                type: u1
+                enum: element::bson_type
+                doc: for schema validation without decryption
+              - id: iv
+                size: block_size
+              - id: ciphertext
+                doc: The encrypted ciphertext
+                size-eos: true
+        enums:
+          subtype:
+            0:
+              id: intent_to_encrypt
+              -orig-id: Intent-to-encrypt marking
+              doc: data to encrypt
+            1:
+              id: aead_aes_cbc_hmac_sha512_determenistic_ciphertext
+            2:
+              id: aead_aes_cbc_hmac_sha512_randomized_ciphertext
     enums:
       subtype:
         0x00: generic #Generic binary subtype
@@ -127,6 +173,7 @@ types:
         0x03: uuid_deprecated #This used to be the UUID subtype, but was deprecated in favor of \\x04. Drivers and tools for languages with a native UUID type should handle \\x03 appropriately.
         0x04: uuid
         0x05: md5
+        0x06: crypto
         0x80: custom #\\x80-\\xFF "User defined" subtypes. The binary data can be anything.
   element:
     seq:
