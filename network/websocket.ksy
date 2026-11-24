@@ -42,9 +42,14 @@ types:
         type: u4
         if: len_payload_primary == 127
       - id: mask_key
-        type: u4
+        size: 4
         if: is_masked
     instances:
+      mask:
+        value: 'is_masked ? mask_key : [0, 0, 0, 0]'
+        doc: |
+          Key the payload is XORed with: `mask_key` for masked frames, all
+          zeroes (i.e. no change) otherwise.
       len_payload:
         value: |
           len_payload_primary <= 125 ? len_payload_primary : (
@@ -57,11 +62,11 @@ types:
         type: frame_header
       - id: payload_bytes
         size: header.len_payload
-        if: 'header.opcode != opcode::text'
-      - id: payload_text
-        size: header.len_payload
-        type: str
-        encoding: UTF-8
+        process: xor(header.mask)
+        doc: Payload, already unmasked.
+    instances:
+      payload_text:
+        value: payload_bytes.to_s("UTF-8")
         if: 'header.opcode == opcode::text'
 
   dataframe:
@@ -70,11 +75,11 @@ types:
         type: frame_header
       - id: payload_bytes
         size: header.len_payload
-        if: '_root.initial_frame.header.opcode != opcode::text'
-      - id: payload_text
-        size: header.len_payload
-        type: str
-        encoding: UTF-8
+        process: xor(header.mask)
+        doc: Payload, already unmasked.
+    instances:
+      payload_text:
+        value: payload_bytes.to_s("UTF-8")
         if: '_root.initial_frame.header.opcode == opcode::text'
 
 enums:
