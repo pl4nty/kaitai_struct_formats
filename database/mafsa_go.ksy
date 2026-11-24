@@ -50,10 +50,10 @@ types:
         repeat-until: _.is_last
   edge:
     seq:
-      - id: char_len
+      - id: len_character
         -orig-id: charLen
         type: b6
-        doc: Length of `char` in bytes (1-4).
+        doc: Length of `character` in bytes (1-4).
       - id: is_last
         -orig-id: endOfNode
         type: b1
@@ -62,8 +62,8 @@ types:
         -orig-id: endOfWord
         type: b1
         doc: A string of the set ends after this edge.
-      - id: char
-        size: char_len
+      - id: character
+        size: len_character
         type: str
         encoding: UTF-8
       - id: ptr
