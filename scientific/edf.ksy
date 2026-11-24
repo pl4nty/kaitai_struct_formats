@@ -1,8 +1,25 @@
 meta:
   id: edf
+  title: European Data Format (EDF / EDF+)
   file-extension: edf
   license: MIT
   endian: le
+
+doc: |
+  EDF: fixed 256-byte ASCII main header, then 256 bytes per signal of
+  field-major signal headers, then data records. Each data record holds,
+  for every signal in order, `num_samples` little-endian two's-complement
+  int16 samples.
+
+  EDF+: `reserved` starts with "EDF+C" (continuous) or "EDF+D"
+  (discontinuous). A signal labelled "EDF Annotations" carries
+  time-stamped annotation lists (TALs) as ASCII bytes inside its int16
+  samples; this spec parses those as ordinary samples.
+
+  If `num_data_records` is -1 (recording still in progress), records are
+  read until the end of the stream.
+
+doc-ref: https://www.edfplus.info/specs/edf.html
 
 seq:
   - id: header
@@ -157,26 +174,33 @@ types:
 
   body:
     seq:
-      - id: "signals"
-        type: signal(_index)
+      - id: records
+        type: record
         repeat: expr
-        repeat-expr: _root.header.ns
+        repeat-expr: _root.header.ndr
+        if: _root.header.ndr >= 0
+      - id: records_until_eof
+        type: record
+        repeat: eos
+        if: _root.header.ndr < 0
+        doc: Used when `num_data_records` is -1 (recording still in progress).
 
     types:
-      data_recording:
+      record:
+        doc: One data record, holding a block of samples for every signal in turn.
         seq:
-          - id: "data"
-            type: u2
+          - id: signals
+            type: signal_block(_index)
             repeat: expr
-            repeat-expr: _root.header.num_samples[_parent.signal_index].to_i
+            repeat-expr: _root.header.ns
 
-      signal:
+      signal_block:
         params:
-          - id: "signal_index"
+          - id: signal_index
             type: s4
 
         seq:
-          - id: "recordings"
-            type: data_recording
+          - id: samples
+            type: s2
             repeat: expr
-            repeat-expr: _root.header.ndr
+            repeat-expr: _root.header.num_samples[signal_index].to_i
