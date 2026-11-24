@@ -233,8 +233,11 @@ types:
             '"|d"': f8le
             '"|g"': f12le
         repeat: expr
-        repeat-expr: _root.parsed_header.shape.as<u8[]>[idx]
-        doc: S<n> for n > 1 is currently out of scope
+        repeat-expr: _root.parsed_header.shape.as<u8[]>[idx + 1]
+        doc: |
+          The innermost dimension: `idx` is the index of the enclosing
+          `ndarray`, so this array has `shape[idx + 1]` items.
+          S<n> for n > 1 is currently out of scope
   ndarray:
     params:
       - id: idx
