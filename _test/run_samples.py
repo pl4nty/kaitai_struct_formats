@@ -48,10 +48,12 @@ SAMPLES_DIR = os.path.join(REPO, "_test", "samples")
 WORKER = os.path.join(REPO, "_test", "parse_worker.py")
 # Python implementations of opaque types and custom processes that specs import
 OPAQUE_DIR = os.path.join(REPO, "_test", "opaque")
+# Small generated samples for formats with no public real-world file
+FIXTURES_DIR = os.path.join(REPO, "_test", "fixtures")
 MAX_DOWNLOAD = 64 * 1024 * 1024
 USER_AGENT = "ksf-sample-tests/1.0"
 
-SAMPLE_KEYS = {"url", "sha256", "data", "name", "source", "license", "extract", "deep",
+SAMPLE_KEYS = {"url", "sha256", "data", "fixture", "recipe", "name", "source", "license", "extract", "deep",
                "eof", "expect", "params", "xfail", "skip", "timeout"}
 EXTRACT_KEYS = {"format", "member", "offset", "size", "field", "then"}
 ARCHIVES = ("zip", "tar")
@@ -115,6 +117,8 @@ def sample_name(sample):
         return str(sample["name"])
     if "data" in sample:
         return "data"
+    if "fixture" in sample:
+        return str(sample["fixture"]).rsplit("/", 1)[-1]
     return str(sample.get("url", "?")).rstrip("/").rsplit("/", 1)[-1]
 
 
@@ -136,7 +140,17 @@ def validate(manifest):
             errs.append(f"{where}: must be a mapping")
             continue
         errs += [f"{where}: unknown key '{k}'" for k in s if k not in SAMPLE_KEYS]
-        if "data" in s:
+        if "fixture" in s:
+            fx = str(s["fixture"])
+            if "url" in s or "data" in s:
+                errs.append(f"{where}: 'fixture' excludes 'url' and 'data'")
+            if fx.startswith("/") or ".." in fx.split("/") or not os.path.isfile(os.path.join(FIXTURES_DIR, fx)):
+                errs.append(f"{where}: 'fixture' must name a file under _test/fixtures")
+            if not re.fullmatch("[0-9a-f]{64}", str(s.get("sha256", ""))):
+                errs.append(f"{where}: 'sha256' must be 64 lowercase hex chars")
+            if not str(s.get("recipe", "")).strip():
+                errs.append(f"{where}: a 'fixture' needs a 'recipe' (how it was generated)")
+        elif "data" in s:
             if "url" in s or "sha256" in s or "extract" in s:
                 errs.append(f"{where}: 'data' excludes 'url', 'sha256' and 'extract'")
             if not (isinstance(s["data"], str) and re.fullmatch(r"(?:\s*[0-9a-fA-F]{2})*\s*", s["data"])):
@@ -334,7 +348,12 @@ def verdict(sample, ok, error):
 def test_sample(spec, sample, build, cache_dir, data_dir, lock):
     """Fetch, extract and parse one sample; return (status, message, seconds)."""
     # Fetch and extract problems are infrastructure failures, never xfail-able.
-    if "data" in sample:  # inline bytes: canonical test vectors, e.g. CRC check input
+    if "fixture" in sample:  # generated file committed under _test/fixtures
+        with open(os.path.join(FIXTURES_DIR, sample["fixture"]), "rb") as f:
+            data = f.read()
+        if hashlib.sha256(data).hexdigest() != sample["sha256"]:
+            return "fail", f"fixture: sha256 mismatch for {sample['fixture']}", 0.0
+    elif "data" in sample:  # inline bytes: canonical test vectors, e.g. CRC check input
         data = bytes.fromhex("".join(sample["data"].split()))
     else:
         try:

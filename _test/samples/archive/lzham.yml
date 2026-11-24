@@ -1,0 +1,13 @@
+# Generated: no public real-world lzhamtest stream was found. Expects are the command's inputs
+# (-d15, the 66-byte input file); the file round-trips with 'lzhamtest d'.
+samples:
+  - fixture: archive/lzham/hello.lzham
+    sha256: aa4ef73f02eb94f4d0c186af182e9bc8f8bcd164c78f0b4a8d22da670f7faa1a
+    recipe: >-
+      lzhamtest from richgel999/lzham_codec d379b1f9121e2197881c61cfc4713c78848bdfe7, built with
+      gcc 13.3 (cmake -DCMAKE_CXX_FLAGS="-include cstdint" .. && make);
+      printf 'Hello, Kaitai Struct! Hello, Kaitai Struct! Hello, Kaitai Struct!\n' > in.txt;
+      lzhamtest -d15 c in.txt hello.lzham
+    expect:
+      header.dict_size_log: 15
+      header.src_file_size: 66

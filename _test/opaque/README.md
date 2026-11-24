@@ -31,3 +31,4 @@ Rules:
 | `lookup_object` | game/gbtd_gbr1 |
 | `concat`, `decompress` | filesystem/squashfs |
 | `util/custom_arc4` | security/gdata_quarantine, security/windef_entries, windef_resources, windef_resource_data |
+| `rot` | game/qsp |

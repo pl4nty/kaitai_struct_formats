@@ -1,0 +1,62 @@
+# Real config-space dumps from pciutils' tests/ (lspci -xxx text), converted to binary because
+# 'extract: hex' cannot skip the dump's offset labels. Expects come from lspci 3.10.0
+# ('lspci -F <dump> -s <slot> -vvnn') run on the same text dump.
+samples:
+  - fixture: firmware/pcieconf/ich10-uhci-af.bin
+    sha256: a4f71183d0682d4e840b59af3da7f6dce9647c003308f74464eeac6f32c0d56c
+    source: pciutils f3bf645929ff3224f1abc0ebb2b2f3e947b238d4 tests/cap-pci-af, device 00:1d.0 (Intel ICH10 UHCI)
+    license: GPL-2.0-or-later
+    recipe: >-
+      Not generated: the 256 hex bytes of slot 00:1d.0 in tests/cap-pci-af, written as binary by a
+      20-line Python script (keep only the lines "NN: " + 16 hex bytes of that device, check each
+      line offset, bytes.fromhex).
+    expect:
+      vendor_id: 0x8086
+      device_id: 0x3a34
+      layout_specific.subsystem_vendor_id: 0x8086
+      layout_specific.subsystem_id: 0x4f53
+      layout_specific.capabilities_pointer.masked_pointer: 0x50
+      layout_specific.capabilities_list.id: af
+  - fixture: firmware/pcieconf/ich10-hda.bin
+    sha256: 9298cb7c259612407373086f5af1d2dc0cebeb87ebeba94340b57ab44dafc13d
+    source: pciutils f3bf645929ff3224f1abc0ebb2b2f3e947b238d4 tests/tree-asus-p6t6, device 00:1b.0 (Intel ICH10 HD Audio)
+    license: GPL-2.0-or-later
+    recipe: >-
+      Not generated: slot 00:1b.0 of tests/tree-asus-p6t6 converted as for ich10-uhci-af.bin, then
+      truncated to the 256-byte PCI-compatible space (truncate -s 256).
+    expect:
+      vendor_id: 0x8086
+      device_id: 0x3a3e
+      class_code.base_class: 0x04
+      class_code.sub_class: 0x03
+      layout_specific.capabilities_list.id: pm
+      layout_specific.capabilities_list.body.pmc.version: 2
+      layout_specific.capabilities_list.next.id: msi
+  - fixture: firmware/pcieconf/x58-root-port1.bin
+    sha256: f774e40a0f30675dfe0131308bf405c50d8957a7eb107133a9264179642899ae
+    source: pciutils f3bf645929ff3224f1abc0ebb2b2f3e947b238d4 tests/tree-asus-p6t6, device 00:01.0 (Intel X58 PCIe root port, a PCI-PCI bridge)
+    license: GPL-2.0-or-later
+    recipe: >-
+      Not generated: slot 00:01.0 of tests/tree-asus-p6t6 converted as for ich10-hda.bin and truncated to 256 bytes.
+    expect:
+      vendor_id: 0x8086
+      device_id: 0x3408
+      revision_id: 0x12
+      header_type.layout: pci_pci_bridge
+      layout_specific.primary_bus_number: 0
+      layout_specific.secondary_bus_number: 1
+      layout_specific.subordinate_bus_number: 1
+      layout_specific.capabilities_pointer.masked_pointer: 0x40
+  - fixture: firmware/pcieconf/virtio-fs.bin
+    sha256: dd142f1973e2cacdf7a1b90d2d50637082563975a1975a097d4b9ef43a63a969
+    source: pciutils f3bf645929ff3224f1abc0ebb2b2f3e947b238d4 tests/cap-vendor-virtio, device 00:04.0 (virtio file system)
+    license: GPL-2.0-or-later
+    recipe: >-
+      Not generated: the 256 hex bytes of slot 00:04.0 in tests/cap-vendor-virtio, converted as for ich10-uhci-af.bin.
+    expect:
+      vendor_id: 0x1af4
+      device_id: 0x105a
+      layout_specific.capabilities_list.id: msix
+      layout_specific.capabilities_list.body.message_control.msix_enable: true
+      layout_specific.capabilities_list.next.id: vendor
+      layout_specific.capabilities_list.next.next_pointer.masked_pointer: 0x5c

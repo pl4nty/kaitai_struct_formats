@@ -72,6 +72,13 @@ inline bytes instead of a download: `data: <hex byte pairs>` replaces `url`,
 `sha256` and `extract`. Use it only for canonical test vectors (e.g. the CRC
 catalogue's `123456789` check input), never for real-world files.
 
+Formats with no public real-world file can use a small generated file
+committed under `_test/fixtures/<spec path>/`: `fixture: <path relative to
+_test/fixtures>` replaces `url`, keeps `sha256`, and needs `recipe:` (the
+exact tool, version and command that produced it). Expects must come from the
+generating tool or its inputs, not from the spec. Prefer real files: a fixture
+only shows the spec agrees with one writer.
+
 Rules for sample URLs:
 
 - Git LFS files: use `media.githubusercontent.com/media/<owner>/<repo>/<sha>/<path>`;

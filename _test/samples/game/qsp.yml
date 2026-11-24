@@ -1,0 +1,28 @@
+# QSP game files from the qspider player's test assets (written by @qsp/converters). Expects come
+# from decoding the files by hand per QSP's gam_desc.txt: UTF-16LE lines ending in CR LF, each
+# encoded line's code units shifted down by 5 (QSP_CODREMOV).
+samples:
+  - url: https://raw.githubusercontent.com/QSPFoundation/qspider/0159dac1cb105485d31470b8c58a7bef43250ade/test-assets/common/common/testlib.qsp
+    sha256: 1e638370463bc25736f33273d40314e0d1925d7923e776e621e01965013957c1
+    source: QSPFoundation/qspider test-assets/common/common/testlib.qsp
+    license: MIT
+    expect:
+      version.val: '@qsp/converters 1.0'
+      password.val: 'No'
+      locations_count: 1
+      locations[0].name.val: testlib
+  - url: https://raw.githubusercontent.com/QSPFoundation/qspider/0159dac1cb105485d31470b8c58a7bef43250ade/test-assets/common/common/libs/nested-lib.qsp
+    sha256: d4dde4c2156aba88b218bfcbdccfb25b6f7349ee11f99c0876fed71c7c8b19bd
+    source: QSPFoundation/qspider test-assets/common/common/libs/nested-lib.qsp
+    license: MIT
+    expect:
+      locations_count: 1
+      locations[0].name.val: nested-lib
+  - url: https://raw.githubusercontent.com/QSPFoundation/qspider/0159dac1cb105485d31470b8c58a7bef43250ade/test-assets/common/common/separate/separate.qsp
+    sha256: 493e73e04959830f93e0628017a7166ca812446c8e0d058170f91f6d26ebe455
+    source: QSPFoundation/qspider test-assets/common/common/separate/separate.qsp
+    license: MIT
+    expect:
+      locations_count: 1
+      locations[0].name.val: start
+      locations[0].code.val.startswith("'this is separate game file"): true

@@ -1,0 +1,24 @@
+# Generated: no public non-game .pak was found. Expects are the inputs: res/hello.txt
+# ("hello heaps\n", 12 bytes, Adler-32 0x1dcc0450) and res/sub/data.json ('{"a":1}\n', 8 bytes),
+# so the data section is 20 bytes.
+samples:
+  - fixture: game/heaps_pak/res.pak
+    sha256: 192dd9097c1dcbe986e4f5e7b7509902fb358e884097fb3385ccedcba9d1d0fc
+    recipe: >-
+      Haxe 4.3.3 (eval target), heaps at 2bbc2b386952dfd8856c04a854bb706a52cb4b58 (the commit the
+      spec cites; newer heaps such as 2.1.1 does not compile for --interp) with HaxeFoundation/format
+      8922e1bc6630498ef3c64d90e0b58e733ea7219e: printf 'hello heaps\n' > res/hello.txt;
+      printf '{"a":1}\n' > res/sub/data.json; haxe -lib heaps -main hxd.fmt.pak.Build --interp
+      (writes res.pak from ./res).
+    expect:
+      header.version: 0
+      header.len_data: 20
+      header.root_entry.flags.is_dir: true
+      header.root_entry.body.num_entries: 2
+      header.root_entry.body.entries[0].name: hello.txt
+      header.root_entry.body.entries[0].body.len_data: 12
+      header.root_entry.body.entries[0].body.checksum: 5004cc1d
+      header.root_entry.body.entries[0].body.data: "hello heaps\n"
+      header.root_entry.body.entries[1].name: sub
+      header.root_entry.body.entries[1].body.entries[0].name: data.json
+      header.root_entry.body.entries[1].body.entries[0].body.len_data: 8
