@@ -37,8 +37,8 @@ jobs:
       - name: Fetch kaitai_compress (for specs with process kaitai.compress.*)
         run: |
           git clone --quiet https://github.com/pl4nty/kaitai_compress "$RUNNER_TEMP/kaitai_compress"
-          git -C "$RUNNER_TEMP/kaitai_compress" fetch --quiet origin cb45a5f377d628af5836b46bb80b9165caf3c37c
-          git -C "$RUNNER_TEMP/kaitai_compress" checkout --quiet cb45a5f377d628af5836b46bb80b9165caf3c37c
+          git -C "$RUNNER_TEMP/kaitai_compress" fetch --quiet origin b8c273263206387f9a8edb21ee1a52670296b767
+          git -C "$RUNNER_TEMP/kaitai_compress" checkout --quiet b8c273263206387f9a8edb21ee1a52670296b767
           echo "PYTHONPATH=$RUNNER_TEMP/kaitai_compress/python" >> "$GITHUB_ENV"
       - name: Validate manifests
         run: python3 _test/run_samples.py --validate-only

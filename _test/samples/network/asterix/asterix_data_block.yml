@@ -8,7 +8,12 @@ samples:
   - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat034.raw
     sha256: a5d24d471cc0fac2554924cbd6aacbf532be96204b4fb335f6275b9a1a0e5766
     eof: true
-    xfail: uap_type only appends items whose FSPEC bit is set (switch has no default), but the iNNN instances index data.items by UAP position, so i060 etc. read past the compacted list
     expect:
       cat: 34
       len: 16
+      # tshark 4.2.2 ASTERIX dissector on the block wrapped in UDP/8600 (text2pcap):
+      # FSPEC f6 = I010,I000,I030,I020,I050,I060 present, I041 absent
+      records[0].i010.value: 190e            # SAC 25, SIC 14
+      records[0].i030.value: 3a692b          # ToD 29906.3359375 s * 128
+      records[0].i041 is None: true
+      records[0].i050.data[4].value: '40'    # SSR subfield, CHAB = 2
