@@ -32,6 +32,7 @@ types:
     seq:
       - id: file_size
         type: u4
+        doc: Total length of the NUD, in bytes.
       - id: version
         type: u2le
         enum: version
@@ -40,10 +41,17 @@ types:
             - version::v2
       - id: num_polysets
         type: u2
+        doc: Number of polysets (meshes).
       - id: bone_channels
         type: u2
+        doc: |
+          Lowest bone index referenced by the objects and vertices in this
+          NUD.
       - id: num_bones
         type: u2
+        doc: |
+          Highest bone index referenced by the objects and vertices in this
+          NUD.
       - id: part_clump_size
         type: u4
       - id: indices_clump_size
@@ -56,6 +64,7 @@ types:
         type: f4
         repeat: expr
         repeat-expr: 4
+        doc: Bounding sphere of the whole model - center x, y, z and radius.
     instances:
       part_clump_start:
         value: 0x30
