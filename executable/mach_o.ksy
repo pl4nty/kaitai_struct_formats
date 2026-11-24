@@ -714,14 +714,14 @@ types:
         seq:
           - id: terminal_size
             type: uleb128
+          - id: terminal
+            size: terminal_size.value
           - id: children_count
             type: u1
           - id: children
             type: child
             repeat: expr
             repeat-expr: children_count
-          - id: terminal
-            size: terminal_size.value
         types:
           child:
             -webide-representation: "{name}: {node_offset}"
