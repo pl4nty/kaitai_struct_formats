@@ -129,9 +129,14 @@ types:
         pos: _root.len_page * index
         size: _root.len_page
         type: page
+        if: _root.len_page * (index + 1) <= _root._io.size
         doc: |
           When referenced, loads the specified page and parses its
           contents appropriately for the type of data it contains.
+
+          Absent if the page lies past the end of the file. This happens
+          for the `next_page` link of a table's last page, which points
+          to the table's `empty_candidate`, a page not yet written.
 
   page:
     doc: |
