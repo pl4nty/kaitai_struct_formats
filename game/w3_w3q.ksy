@@ -1,0 +1,10 @@
+# Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-w3q.ksy
+meta:
+  id: w3_w3q
+  file-extension: w3q
+  license: LicenseRef-All-Rights-Reserved
+  imports:
+    - w3_obj_mod_file
+seq:
+  - id: obj_mod_file
+    type: w3_obj_mod_file(1)

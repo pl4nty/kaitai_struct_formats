@@ -1,0 +1,45 @@
+# Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-w3r.ksy
+meta:
+  id: w3_w3r
+  file-extension: w3r
+  license: LicenseRef-All-Rights-Reserved
+  imports:
+    - /image/w3id
+    - w3str
+  endian: le
+seq:
+  - id: version
+    type: u4
+  - id: num_region
+    type: u4
+  - id: region
+    type: region
+    repeat: expr
+    repeat-expr: num_region
+types:
+  region:
+    seq:
+      - id: left
+        type: f4
+      - id: bottom
+        type: f4
+      - id: right
+        type: f4
+      - id: top
+        type: f4
+      - id: name
+        type: w3str
+      - id: id
+        type: u4
+      - id: weather_id
+        type: w3id
+      - id: ambient_sound
+        type: w3str
+      - id: color_blue
+        type: u1
+      - id: color_green
+        type: u1
+      - id: color_red
+        type: u1
+      - id: end_token
+        type: u1
