@@ -7,7 +7,7 @@ meta:
     - NanoEducator
   file-extension: "256"
   license: Unlicense
-  encoding: UTF-16
+  encoding: UTF-16LE
   endian: le
 doc: It is an old format for a color scheme for visualising SPM scans.
 seq:

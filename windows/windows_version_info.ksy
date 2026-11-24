@@ -77,7 +77,7 @@ types:
         -orig-id: szCSDVersion
         size: _root.csd_version_wchar_size
         type: str
-        encoding: utf-16
+        encoding: UTF-16LE
         if: is_wide
       - id: csd_version_char
         -orig-id: szCSDVersion

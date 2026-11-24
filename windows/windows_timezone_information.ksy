@@ -51,7 +51,7 @@ types:
             -orig-id: StandardName, DaylightName
             size: 32 * 2
             type: str
-            encoding: utf-16
+            encoding: UTF-16LE
           - id: date
             -orig-id: StandardDate, StandardDate
             type: windows_systemtime
@@ -66,7 +66,7 @@ types:
         -orig-id: TimeZoneKeyName
         size: 128 * 2
         type: str
-        encoding: utf-16
+        encoding: UTF-16LE
       - id: dynamic_daylight_saving_disabled
         -orig-id: DynamicDaylightTimeDisabled
         type: u1

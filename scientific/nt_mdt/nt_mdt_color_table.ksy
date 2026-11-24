@@ -6,7 +6,7 @@ meta:
     - Image Analysis
     - NanoEducator
   license: Unlicense
-  encoding: UTF-16
+  encoding: UTF-16LE
   endian: le
 doc: It is a reusable part of a color scheme for visualising SPM scans.
 params:
