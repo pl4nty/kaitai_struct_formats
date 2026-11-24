@@ -14,7 +14,7 @@ doc: |
   ORiNOCO.
   Disclaimer: AFAIK there is no official spec publicly available, most of the
   specs publicly available are reverse-engineered and incorporate their authors
-  beleifs.
+  beliefs.
 
 doc-ref:
   - https://www.tcpdump.org/linktypes/LINKTYPE_IEEE802_11_PRISM.html
@@ -37,9 +37,6 @@ seq:
   - id: body
     size-eos: true
 instances:
-  rssi_offset:
-    value: 100
-    doc: +100 for PRISM II, +149 for Lucent cards
   header_size:
     value: 4 + 4 + 16
   fields_size:
@@ -53,39 +50,55 @@ types:
     types:
       field:
         seq:
-          - id: header
-            type: header
-          - id: is_not_supplied
+          - id: did
+            -orig-id: DID
+            type: u4
+            doc: |
+              Field identifier. Its layout depends on the message code: for
+              message code 0x41 the values are 0x0000N041, for message code
+              0x44 they are 0x000N0044, where N is the field type (see
+              `type`).
+          - id: status
             type: u2
-          - id: size
+            doc: 0 if the value of the field is supplied, 1 if it is not.
+          - id: len_value
+            -orig-id: length
             type: u2
+            doc: Length of `value`; almost always 4.
           - id: value
-            size: size
+            size: len_value
             type:
-              switch-on: header.type
+              switch-on: type
               cases:
                 'type::host_time': u4 # in 10ms units, according to Cris Martin
                 'type::mac_time': u4 # In micro-seconds, according to Cris Martin
                 'type::channel': u4
-                'type::rssi': rssi
+                'type::rssi': s4
                 'type::signal_quality': u4
+                'type::signal': s4
                 'type::noise': s4
-                'type::data_rate': u4 # in units/multiples of 500Khz, according to Cris Martin
+                'type::data_rate': data_rate
                 'type::direction': direction
                 'type::frame_length': u4
         instances:
+          did_code:
+            value: did & 0xff
+            doc: Low byte of `did`; equal to the message code (0x41 or 0x44).
+          type:
+            value: 'did_code == 0x44 ? (did >> 16) & 0xf : (did >> 12) & 0xf'
+            enum: type
           is_supplied:
-            value: is_not_supplied == 0
+            value: status == 0
         types:
-          rssi:
+          data_rate:
             seq:
-              - id: offsetted
+              - id: rate_500khz
                 type: u4
+                doc: Data rate in units of 500 kHz (i.e. 500 kbit/s).
             instances:
-              value:
-                value: "offsetted - _root.rssi_offset"
-                doc-ref: https://github.com/freebsd/freebsd/blob/c71e73b0fbd8b142ebb4a933bb0e93ec2b0d830e/sys/dev/wi/if_wivar.h#L173
-                -affected-by: 88
+              rate_kbps:
+                value: rate_500khz * 500
+                doc: Data rate in kbit/s.
           direction:
             seq:
               - id: value
@@ -98,54 +111,26 @@ types:
                   id: receive
                 1:
                   id: transmit
-          header:
-            # all of these are wild guesses
-            seq:
-              - id: header_size
-                type: b4
-              - id: mandatory_part_offset
-                type: b4
-              - id: placeholder
-                size: header_size - 1
-                type: placeholder
-            instances:
-              mandatory_part_offset_from_first_byte:
-                value: mandatory_part_offset - 1
-              mandatory_part:
-                io: placeholder._io
-                pos: mandatory_part_offset_from_first_byte / 2
-                type: mandatory_part(mandatory_part_skip_nibble)
-              mandatory_part_skip_nibble:
-                value: mandatory_part_offset_from_first_byte % 2 == 1
-              type:
-                value: mandatory_part.type
-            types:
-              placeholder:
-                seq: []
-              mandatory_part:
-                params:
-                  - id: skip_nibble
-                    type: b1
-                seq:
-                  - id: unneeded_nibble
-                    type: b4
-                    if: skip_nibble
-                  - id: type
-                    type: b4
-                    enum: type
-                  - id: unkn
-                    type: b8
 enums:
   type:
     0x1: host_time
     0x2: mac_time
     0x3: channel
-    0x4: rssi
+    0x4:
+      id: rssi
+      doc: Signed value, apparently in dBm.
     0x5: signal_quality
-    0x6: signal
-    0x7: noise
-    0x8: data_rate
+    0x6:
+      id: signal
+      doc: Signed value, apparently in dBm.
+    0x7:
+      id: noise
+      doc: Signed value, apparently in dBm.
+    0x8:
+      id: data_rate
+      doc: In units of 500 kHz.
     0x9:
       id: direction
       -orig-id: is_tx
+      doc: 0 = received packet, 1 = transmitted packet.
     0xa: frame_length
