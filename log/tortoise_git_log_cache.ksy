@@ -5,7 +5,7 @@ meta:
   -filename-regexp: "^tortoisegit\\.data$"
   xref:
     wikidata: Q178572
-  license: GPL-3.0+
+  license: GPL-3.0-or-later
   encoding: UTF-16LE
   endian: le
   #ks-version: 0.9

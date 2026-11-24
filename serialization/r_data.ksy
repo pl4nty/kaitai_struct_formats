@@ -6,7 +6,7 @@ meta:
     - rda
     - rds
     - RData
-  license: GPL-3.0+
+  license: GPL-3.0-or-later
   encoding: UTF-8
 doc: |
   A set of file formats used for serialization of objects of [R language](https://www.r-project.org/about.html) for statistical computing.

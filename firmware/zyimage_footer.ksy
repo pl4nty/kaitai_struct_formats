@@ -3,7 +3,7 @@ meta:
   title: Image header used in Zyxel devices official firmware
   xref:
     wikidata: Q245283
-  license: GPL-2.0
+  license: GPL-2.0-only
   encoding: UTF-8
   endian: le
 

@@ -7,7 +7,7 @@ meta:
   file-extension: lfp
   xref:
     wikidata: Q2984629
-  license: GPL-3.0+ # I'm sorry, but the main sources of info for this format (lfp-reader and plenopticam) are GPLed.
+  license: GPL-3.0-or-later # I'm sorry, but the main sources of info for this format (lfp-reader and plenopticam) are GPLed.
   ks-version: 0.9
   ks-opaque-types: true
   encoding: UTF-8

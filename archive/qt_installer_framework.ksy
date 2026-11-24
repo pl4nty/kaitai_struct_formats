@@ -5,7 +5,7 @@ meta:
   file-extension: exe
   xref:
     wikidata: Q201904
-  license: GPL-3.0 WITH Qt-GPL-exception-1.0
+  license: GPL-3.0-only WITH Qt-GPL-exception-1.0
   encoding: UTF-8
   endian: le
 

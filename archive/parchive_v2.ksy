@@ -11,7 +11,7 @@ meta:
   xref:
     justsolve: Parity_Volume_Set
     wikidata: Q497118
-  license: GNU-FDL-1.3-or-later
+  license: GFDL-1.3-or-later
   encoding: ASCII
   endian: le
 doc: |
