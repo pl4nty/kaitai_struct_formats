@@ -4,7 +4,7 @@ meta:
   xref:
     wikidata: Q1397631
   license: Unlicense
-  endian: le
+  endian: be
 
 doc: |
   FastCGI is a protocol between a web server process and a process generating
