@@ -90,7 +90,7 @@ types:
           Note that it is possible for a RSA certificate key to be signed by a
           Ed25519 or ECDSA CA key and vice-versa.
       - id: signature
-        type: packed_cstring_tuples_packed
+        type: cstring_signature
         doc: |
           signature is computed over all preceding fields from the initial string
           up to, and including the signature key. Signatures are computed and
@@ -108,13 +108,6 @@ types:
       - id: strings
         size: len_strings
         type: cstrings_utf8
-  packed_cstrings_bytes:
-    seq:
-      - id: len_strings
-        type: u4
-      - id: strings
-        size: len_strings
-        type: cstrings_bytes
   nested_cstring_bytes:
     seq:
       - id: len_string
@@ -130,32 +123,15 @@ types:
       - id: tuples
         size: len_tuples
         type: cstring_tuples_nested
-  packed_cstring_tuples_packed:
-    seq:
-      - id: len_tuples
-        type: u4
-      - id: tuples
-        size: len_tuples
-        type: cstring_tuples_packed
   cstrings_utf8:
     seq:
       - id: strings
         type: cstring_utf8
         repeat: eos
-  cstrings_bytes:
-    seq:
-      - id: strings
-        type: cstring_bytes
-        repeat: eos
   cstring_tuples_nested:
     seq:
       - id: tuples
         type: cstring_tuple_nested
-        repeat: eos
-  cstring_tuples_packed:
-    seq:
-      - id: tuples
-        type: cstring_tuple_packed
         repeat: eos
   cstring_tuple_nested:
     -webide-representation: '{name}: {data.string.value:str}'
@@ -164,13 +140,27 @@ types:
         type: cstring_utf8
       - id: data
         type: nested_cstring_bytes
-  cstring_tuple_packed:
-    -webide-representation: '{name}, Length:{data.lenStrings}'
+  cstring_signature:
+    doc: |
+      Signature as a string: the signature format identifier followed by
+      the algorithm-specific signature blob. The blob's structure depends
+      on the algorithm (e.g. a single integer for ssh-rsa, two fixed-size
+      integers for ssh-dss, two mpints for ECDSA) and is left unparsed.
+    -webide-representation: '{value.format}'
     seq:
-      - id: name
+      - id: len_value
+        type: u4
+      - id: value
+        size: len_value
+        type: signature
+  signature:
+    seq:
+      - id: format
         type: cstring_utf8
-      - id: data
-        type: packed_cstrings_bytes
+        doc: Signature format identifier, e.g. "rsa-sha2-512" or "ssh-ed25519".
+      - id: blob
+        type: cstring_bytes
+        doc: Algorithm-specific signature blob.
   cstring_sshkey:
     seq:
       - id: len_value
