@@ -152,7 +152,7 @@ types:
         type: dir_entry_body
         if: len > 0
       - id: padding
-        size: (_root.sector_size - _io.pos % _root.sector_size) % _root.sector_size
+        size: (-_io.pos) % _root.sector_size
         if: len == 0
         doc: |
           Zero fill up to the end of the sector, after the last record in
