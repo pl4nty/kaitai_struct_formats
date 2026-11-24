@@ -107,6 +107,21 @@ types:
         type: u1
       - id: a
         type: u1
+  shape_color:
+    doc: RGB color, followed by an alpha byte (RGBA) when `has_alpha` is set.
+    params:
+      - id: has_alpha
+        type: bool
+    seq:
+      - id: r
+        type: u1
+      - id: g
+        type: u1
+      - id: b
+        type: u1
+      - id: a
+        type: u1
+        if: has_alpha
 # I wish I was able to load Fixed Floating point with Kaitai but couldn't find out how to do it.
   matrix:
     seq:
@@ -197,13 +212,16 @@ types:
       - id: line_styles
         type: line_style(shape_version)
         repeat: expr
-        repeat-expr: line_style_count
-        if: shape_version != 4
+        repeat-expr: num_line_styles
+        if: shape_version < 4
       - id: line_styles2
         type: line_style2(shape_version)
         repeat: expr
-        repeat-expr: 'line_style_count == 0xFF ? line_style_count_extended : line_style_count'
-        if: shape_version == 4
+        repeat-expr: num_line_styles
+        if: shape_version >= 4
+    instances:
+      num_line_styles:
+        value: 'line_style_count == 0xFF ? line_style_count_extended : line_style_count'
   line_style:
     params:
       - id: shape_version
@@ -211,12 +229,9 @@ types:
     seq:
       - id: width
         type: u2
-      - id: color_a
-        type: rgba
-        if: shape_version == 4
       - id: color
-        type: rgb
-        if: shape_version != 4
+        type: shape_color(shape_version >= 3)
+        doc: RGB in DefineShape and DefineShape2, RGBA in DefineShape3.
   line_style2:
     params:
       - id: shape_version
@@ -250,10 +265,10 @@ types:
         if: join_style == join_style::miter_join
       - id: color
         type: rgba
-        if: has_fill_flag == false
+        if: not has_fill_flag
       - id: fill_type
         type: fill_style(shape_version)
-        if: has_fill_flag == true
+        if: has_fill_flag
   fill_style_array:
     params:
       - id: shape_version
@@ -275,36 +290,64 @@ types:
     seq:
       - id: fill_style_type
         type: u1
-        enum: fill_style_type_enum
-      - id: color_a
-        type: rgba
-        if: fill_style_type == fill_style_type_enum::solid and shape_version == 4
+        enum: fill_style_type
       - id: color
-        type: rgb
-        if: fill_style_type == fill_style_type_enum::solid and shape_version != 4
+        type: shape_color(shape_version >= 3)
+        if: fill_style_type == fill_style_type::solid
+        doc: RGB in DefineShape and DefineShape2, RGBA in DefineShape3 and later.
       - id: gradient_matrix
         type: matrix
-        if: fill_style_type == fill_style_type_enum::linear_gradient or fill_style_type == fill_style_type_enum::radial_gradient or fill_style_type == fill_style_type_enum::focal_gradient
+        if: is_gradient
       - id: gradient
-        type: gradient_type(shape_version)
-        if: fill_style_type == fill_style_type_enum::linear_gradient or fill_style_type == fill_style_type_enum::radial_gradient
+        type: gradient_type(shape_version, fill_style_type == fill_style_type::focal_gradient)
+        if: is_gradient
+      - id: bitmap_id
+        -orig-id: BitmapId
+        type: u2
+        if: is_bitmap
+      - id: bitmap_matrix
+        -orig-id: BitmapMatrix
+        type: matrix
+        if: is_bitmap
+    instances:
+      is_gradient:
+        value: >-
+          fill_style_type == fill_style_type::linear_gradient or
+          fill_style_type == fill_style_type::radial_gradient or
+          fill_style_type == fill_style_type::focal_gradient
+      is_bitmap:
+        value: >-
+          fill_style_type == fill_style_type::repeat_bitmap or
+          fill_style_type == fill_style_type::clipped_bitmap or
+          fill_style_type == fill_style_type::non_smoothed_repeat_bitmap or
+          fill_style_type == fill_style_type::non_smoothed_clipped_bitmap
   gradient_type:
+    doc: GRADIENT, or FOCALGRADIENT if `is_focal` is set.
     params:
       - id: shape_version
         type: u1
+      - id: is_focal
+        type: bool
     seq:
       - id: spread_mode
         type: b2
-        enum: spread_mode_enum
+        enum: spread_mode
       - id: interpolation_mode
         type: b2
-        enum: interpolation_mode_enum
+        enum: interpolation_mode
       - id: num_gradient
         type: b4
       - id: gradient_records
         type: grad_record(shape_version)
         repeat: expr
         repeat-expr: num_gradient
+      - id: focal_point
+        -orig-id: FocalPoint
+        type: s2
+        if: is_focal
+        doc: |
+          Focal point location, as signed 8.8 fixed point (FIXED8); -1.0 is
+          the left edge of the gradient circle and 1.0 the right edge.
   grad_record:
     params:
       - id: shape_version
@@ -312,12 +355,9 @@ types:
     seq:
       - id: ratio
         type: u1
-      - id: color_a
-        type: rgba
-        if:  shape_version == 4
       - id: color
-        type: rgb
-        if: shape_version != 4
+        type: shape_color(shape_version >= 3)
+        doc: RGB in DefineShape and DefineShape2, RGBA in DefineShape3 and later.
 
   define_sprite_body:
     seq:
@@ -425,7 +465,7 @@ enums:
     0: round_cap
     1: no_cap
     2: square_cap
-  fill_style_type_enum:
+  fill_style_type:
     0x00: solid
     0x10: linear_gradient
     0x12: radial_gradient
@@ -434,12 +474,12 @@ enums:
     0x41: clipped_bitmap
     0x42: non_smoothed_repeat_bitmap
     0x43: non_smoothed_clipped_bitmap
-  spread_mode_enum:
+  spread_mode:
     0: pad_mode
     1: reflect_mode
     2: repeat_mode
     3: reserved
-  interpolation_mode_enum:
+  interpolation_mode:
     0: normal_rgb
     1: linear_rgb
     2: reserved2
