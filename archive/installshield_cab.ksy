@@ -8,7 +8,7 @@ meta:
     - cab
     - hdr
   license: CC0-1.0
-  ks-version: '0.9'
+  ks-version: '0.11'
   endian: le
 doc: |
   Cabinet format of InstallShield 5 and later (not to be confused with
