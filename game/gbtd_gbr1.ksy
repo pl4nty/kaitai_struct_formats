@@ -6,7 +6,6 @@ meta:
   tags:
     - game
   license: MIT
-  ks-opaque-types: true
   encoding: ASCII
   endian: le
 
@@ -14,9 +13,9 @@ doc: |
   GBR1 files are used by Gameboy Map Builder, GBMB
   to store maps created with the program.
 
-  An example of lookup_object implementation
-  required for this to work can be found at:
-  https://github.com/ZetaTwo/gameboy-project/blob/master/gbm-parser/lookup_object.py
+  Several object types depend on fields of their master object (the object
+  whose `object_id` equals their `master_id`), which is found with the
+  `lookup_object` type.
 doc-ref: https://www.devrs.com/gb/hmgd/gbmb.html
 
 seq:
@@ -27,6 +26,35 @@ seq:
     repeat: eos
 
 types:
+  lookup_object:
+    doc: |
+      Finds the already parsed object whose `object_id` is `object_id`,
+      searching `_root.objects` from the start.
+    params:
+      - id: object_id
+        type: u2
+    seq:
+      - id: steps
+        type: lookup_step(_index, object_id)
+        repeat: until
+        repeat-until: _.found or _.is_last
+    instances:
+      object:
+        value: steps.last.candidate
+        if: steps.last.found
+  lookup_step:
+    params:
+      - id: idx
+        type: s4
+      - id: object_id
+        type: u2
+    instances:
+      candidate:
+        value: _root.objects[idx]
+      found:
+        value: candidate.object_id == object_id
+      is_last:
+        value: idx + 1 >= _root.objects.size
   gbr1_object:
     seq:
       - id: marker
@@ -111,9 +139,9 @@ types:
             repeat-expr: num_records
         instances:
           num_records:
-            value: master.object.as<gbr1_object>.body.as<map>.width * master.object.as<gbr1_object>.body.as<map>.height
+            value: master.object.body.as<map>.width * master.object.body.as<map>.height
           master:
-            type: "lookup_object(_root.objects, _parent.master_id)"
+            type: lookup_object(_parent.master_id)
         types:
           record:
             seq:
@@ -140,9 +168,9 @@ types:
             repeat-expr: num_records
         instances:
           num_records:
-            value: master.object.as<gbr1_object>.body.as<map>.prop_count
+            value: master.object.body.as<map>.prop_count
           master:
-            type: "lookup_object(_root.objects, _parent.master_id)"
+            type: lookup_object(_parent.master_id)
 
         types:
           record:
@@ -163,9 +191,9 @@ types:
             repeat-expr: num_records
         instances:
           num_records:
-            value: master.object.as<gbr1_object>.body.as<map>.prop_count * master.object.as<gbr1_object>.body.as<map>.width * master.object.as<gbr1_object>.body.as<map>.height
+            value: master.object.body.as<map>.prop_count * master.object.body.as<map>.width * master.object.body.as<map>.height
           master:
-            type: "lookup_object(_root.objects, _parent.master_id)"
+            type: lookup_object(_parent.master_id)
 
         types:
           record:
@@ -181,9 +209,9 @@ types:
             repeat-expr: num_records
         instances:
           num_records:
-            value: master.object.as<gbr1_object>.body.as<map>.prop_count * master.object.as<gbr1_object>.body.as<map>.tile_count
+            value: master.object.body.as<map>.prop_count * master.object.body.as<map>.tile_count
           master:
-            type: "lookup_object(_root.objects, _parent.master_id)"
+            type: lookup_object(_parent.master_id)
 
         types:
           record:
@@ -230,9 +258,9 @@ types:
             repeat-expr: num_records
         instances:
           num_records:
-            value: master.object.as<gbr1_object>.body.as<map>.prop_color_count
+            value: master.object.body.as<map>.prop_color_count
           master:
-            type: "lookup_object(_root.objects, _parent.master_id)"
+            type: lookup_object(_parent.master_id)
 
         types:
           record:
@@ -287,9 +315,9 @@ types:
             repeat-expr: num_records
         instances:
           num_records:
-            value: master.object.as<gbr1_object>.body.as<map>.prop_count
+            value: master.object.body.as<map>.prop_count
           master:
-            type: "lookup_object(_root.objects, _parent.master_id)"
+            type: lookup_object(_parent.master_id)
 
         types:
           record:
