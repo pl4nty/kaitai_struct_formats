@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/isledecomp/isle/6c5adc000c941b602b0de7f53d8f061848d025d7/docs/samples/G0.GS
+  sha256: 760000bb2d0ef3529a7236618ea433bd5286497b13732139d6b67c8e5c6985b9
+  source: isledecomp/isle sample files
+  license: LGPL-3.0
+- url: https://raw.githubusercontent.com/isledecomp/isle/6c5adc000c941b602b0de7f53d8f061848d025d7/docs/samples/G1.GS
+  sha256: 4935282b30a0a85ba9de17f3a6f7aa9a59d7f180a993af132d59bccbfe27fdca
+  source: isledecomp/isle sample files
+  license: LGPL-3.0

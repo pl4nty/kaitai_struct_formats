@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/1j01/anypalette.js/eaf17cca78203bf2e68298137859f3f23cc46520/tests/regression-data/writing/KDE40.colors.out.act
+  sha256: 9a1def9b4a6e22d82bf10b32caae746e488a767b57b2063b32bf55761eeaa626
+  source: 1j01/anypalette.js sample files
+  license: MIT
+- url: https://raw.githubusercontent.com/1j01/anypalette.js/eaf17cca78203bf2e68298137859f3f23cc46520/tests/regression-data/writing/ios.sketchpalette.out.act
+  sha256: b06838e02b69701d166b8176c79d1a3ab3824ac9c00f62decc19497404a4f5f4
+  source: 1j01/anypalette.js sample files
+  license: MIT

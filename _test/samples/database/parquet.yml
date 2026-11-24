@@ -1,0 +1,13 @@
+samples:
+- url: https://raw.githubusercontent.com/apache/parquet-testing/0e00127a431f83388d38eebb22cf644d06e86a15/data/alltypes_plain.parquet
+  sha256: 12a618d20a59ee0967fef45e7ec1ff6d451e724838edc1bbeac780ca15e8fcc4
+  source: apache/parquet-testing
+  license: Apache-2.0
+  expect:
+    magic_header: PAR1
+    magic_footer.magic: PAR1
+    footer_len: 730
+- url: https://raw.githubusercontent.com/apache/parquet-testing/0e00127a431f83388d38eebb22cf644d06e86a15/data/alltypes_dictionary.parquet
+  sha256: 7b58c33503858c533e1521b3022b85a0de23e5a144420d7a3c1c426929e5f6fb
+  source: apache/parquet-testing
+  license: Apache-2.0

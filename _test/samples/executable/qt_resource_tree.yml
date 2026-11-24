@@ -1,0 +1,4 @@
+samples:
+- url: https://raw.githubusercontent.com/mblsha/binja-qresource/1f692758f08defb61ed80b72f4214b28c94288eb/test2.qrcbin
+  sha256: c259e8b4929b5f79aa1c5e2c2dc1d7013fe990877a72d2dc611ed55404617987
+  source: mblsha/binja-qresource sample files

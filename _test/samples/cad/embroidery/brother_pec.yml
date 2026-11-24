@@ -1,0 +1,13 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/brother_pec/samples/random1-ew.pec
+  sha256: 92edd94e2d186bc1e8014d8f26a449c0077c980fbf40f643801686f11020f1ff
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/brother_pec/samples/random1-premier.pec
+  sha256: 28696cb05fe4f4117584010d0d33dc0dd3675b28f88ff7aa62323d98623dcaa5
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/brother_pec/samples/spiralbox-wilcom.PEC
+  sha256: 50a9a1e0d0e84112f1d202c60f7330a0eff60b5dbcabb1295fc9941602243dbe
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT

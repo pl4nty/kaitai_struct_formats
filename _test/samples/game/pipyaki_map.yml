@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/maksym-pasichnyk/Pipyaki/98041022f62744254664434eada1f5cdb490ccf1/assets/maps/campaign/map0.map
+  sha256: e6ed5474103946835e6cc63f1866bfe634bb0e248c2e2f24788ca94597f773c9
+  source: maksym-pasichnyk/Pipyaki sample files
+  license: Apache-2.0
+- url: https://raw.githubusercontent.com/maksym-pasichnyk/Pipyaki/98041022f62744254664434eada1f5cdb490ccf1/assets/maps/campaign/map1.map
+  sha256: b52785295cc302270aa6fb41baca9f44c00c69b31d42b0086ab3d74746ffb6d7
+  source: maksym-pasichnyk/Pipyaki sample files
+  license: Apache-2.0

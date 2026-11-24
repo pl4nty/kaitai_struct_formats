@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/heinrich5991/libtw2/060e4b6450fba9f5baa59e430dc22714f2757162/server/dm1.map
+  sha256: 0b0c481d77519c32fbe85624ef16ec0fa9991aec7367ad538bd280f28d8c26cf
+  source: heinrich5991/libtw2 sample files
+  license: Apache-2.0

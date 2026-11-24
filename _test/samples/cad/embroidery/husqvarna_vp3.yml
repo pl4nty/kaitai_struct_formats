@@ -1,0 +1,17 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/husqvarna_vp3/samples/random1-me.vp3
+  sha256: bae47e8cf781e097b890544fe62b6f9df77c54a0b587bef27edc00fa26fdb36a
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/husqvarna_vp3/samples/random1-wilcom.VP3
+  sha256: d8c9e2e3723888e4fc7e8023417c9a9cf6ff47b368958a9d0124471f7876ca8c
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/husqvarna_vp3/samples/random2-premier.vp3
+  sha256: 6584e438d011ba68de739427f07f675dea3b5b0a9eae6e934dd309bc49ee5c5c
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/husqvarna_vp3/samples/spiralbox-premier.vp3
+  sha256: 2329628de8b045ea6fa23e92209d060e9eccf98e2ad6f05d978ce8d4880a49a2
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT

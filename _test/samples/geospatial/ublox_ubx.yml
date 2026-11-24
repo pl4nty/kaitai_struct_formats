@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/semuconsulting/pyubx2/c594f806e00344c12b0b7857b83904e1cf1dcfd9/examples/mon_span.ubx
+  sha256: f15f583112b771103561cf859c95703f7b2cca7428b6613fa75f240d00914a5d
+  source: pyubx2 example captures
+  license: BSD-3-Clause

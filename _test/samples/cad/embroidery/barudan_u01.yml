@@ -1,0 +1,17 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/barudan_u01/samples/scene-me.U01
+  sha256: 6a535b5c06f19ca20b3d17992bdb2fa9315628bb14f19a8c17f2fc3acd921dfe
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/barudan_u01/samples/scene-wilcom.U01
+  sha256: 96242aa8332a9b05d11d1938172669b062d85e1509137035943f45c3747b4af9
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/barudan_u01/samples/scene.u01
+  sha256: fbe386e53938aec89a4d2e298ee88c743991e974ad014fe3cd3218ac7c17a084
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/barudan_u01/samples/spiralbox-wilcom.U01
+  sha256: 11a16d57556e6a704bf3ff27c560ffb00a8d2e2fc5d7755d1200bd403244f011
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT

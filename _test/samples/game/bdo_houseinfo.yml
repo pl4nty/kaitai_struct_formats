@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/Thell/bdo-housecraft/3af0b47113c4709afab148ae2d3fa83748e08ac6/data/houseinfo/gamecommondata/binary/houseinfo.bss
+  sha256: 7c4c2024c8eddbfbc22ff5e51579356c7e09e6938f258375119511954906ad03
+  source: Thell/bdo-housecraft sample files
+  license: Unlicense

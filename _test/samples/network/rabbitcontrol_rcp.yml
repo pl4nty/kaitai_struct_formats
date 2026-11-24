@@ -1,0 +1,13 @@
+samples:
+- url: https://raw.githubusercontent.com/rabbitControl/RCP/be8efcc4a04f7040dc33babae97dd399774af68e/example_data/packet_info.rcp
+  sha256: efda931b42b4643c3d855a0c95d7643670f74a9437e2fa7b3a5922cdf2b65e0a
+  source: rabbitControl/RCP sample files
+  license: LGPL-3.0
+- url: https://raw.githubusercontent.com/rabbitControl/RCP/be8efcc4a04f7040dc33babae97dd399774af68e/example_data/packet_enum.rcp
+  sha256: efc6a82b89f641b5ab52ba9c531061a05ed350e7d6255f5fc525f3833cc6c41f
+  source: rabbitControl/RCP sample files
+  license: LGPL-3.0
+- url: https://raw.githubusercontent.com/rabbitControl/RCP/be8efcc4a04f7040dc33babae97dd399774af68e/example_data/packet_bool_userdata.rcp
+  sha256: 9d15b28ead191a6b371afcd4b968847fcb0c05de7df8b105e447de14361cabaa
+  source: rabbitControl/RCP sample files
+  license: LGPL-3.0

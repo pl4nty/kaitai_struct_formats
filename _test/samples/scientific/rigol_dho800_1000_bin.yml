@@ -1,0 +1,13 @@
+samples:
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/bin/DHO824-ch1.bin
+  sha256: 99a89e17254e165640f8f95c5612ea6b6765dc85eba5829af593e67020c24b81
+  source: RigolWFM test files (real oscilloscope captures)
+  license: BSD-3-Clause
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/bin/DHO824-ch12.bin
+  sha256: a1fd7b104fe3d010aa095e92e1fd9551ca9503b7be995762c9f8741d716bca60
+  source: RigolWFM test files (real oscilloscope captures)
+  license: BSD-3-Clause
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/bin/DHO1074.bin
+  sha256: 7b0b591baf9a0137c79a12be12e9b1f680c5ccfc094e997ca21035751fd5cf53
+  source: RigolWFM test files (real oscilloscope captures)
+  license: BSD-3-Clause

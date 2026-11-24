@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/llama-for3ver/wt_replay_decoder/6b2d759c0048f9757eb662a75110473651763dea/tests/replays/client_1.wrpl
+  sha256: b2c1d2622d7d28b8ce0df2ad9b551cde8f028bb1e148afb7ff66d5ab9c3773bb
+  source: llama-for3ver/wt_replay_decoder sample files
+  license: AGPL-3.0
+- url: https://raw.githubusercontent.com/llama-for3ver/wt_replay_decoder/6b2d759c0048f9757eb662a75110473651763dea/tests/replays/server_2.wrpl
+  sha256: 3f4b9c1e86e9aaa4944e3e41fdd96170bd788979d69ea4ccc37021a5613f1d91
+  source: llama-for3ver/wt_replay_decoder sample files
+  license: AGPL-3.0

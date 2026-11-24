@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/limix/pandas-plink/865f5a52719602e55dae034444ec7a22fe01e653/tests/data_files/data.bed
+  sha256: 7bf9162d486116db12686e14ef7bf2d53c46bb788041555041891cebabf1ba09
+  source: limix/pandas-plink sample files
+  license: MIT

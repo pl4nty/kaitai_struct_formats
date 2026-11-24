@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/Bithack/principia/7a5dcfc7697227ebea74e982b6ace1eefd05c11a/data/lvl/1.plvl
+  sha256: 78685b4703a6790bfca513e80e300e63d69f652799ed422906476f8d05017ab0
+  source: Bithack/principia sample files
+  license: BSD-2-Clause
+- url: https://raw.githubusercontent.com/Bithack/principia/7a5dcfc7697227ebea74e982b6ace1eefd05c11a/data/lvl/10.plvl
+  sha256: 4742c9d7796c19a7b15adf9ea94de823c89c51eec9b1576f6ecffaddc69aab21
+  source: Bithack/principia sample files
+  license: BSD-2-Clause

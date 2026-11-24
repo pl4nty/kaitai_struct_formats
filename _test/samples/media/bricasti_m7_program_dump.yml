@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/codebrain/freecasti/a9466270dd9bb1dd5828dba0c15d3e3bdca117ae/sysex/prog/edit/registers/b0-halls-large-hall/slot-0.syx
+  sha256: b019c004dd00901d6680b28d0805130165f7525de4d9dd7039b7297d372daded
+  source: codebrain/freecasti sample files
+  license: Apache-2.0

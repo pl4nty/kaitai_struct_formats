@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/Bithack/principia/7a5dcfc7697227ebea74e982b6ace1eefd05c11a/data/pkg/7.ppkg
+  sha256: 20a848a4c2982ce18ea799b98ed9bb803b26b9c3984cc46b060242367530f4b0
+  source: Bithack/principia sample files
+  license: BSD-2-Clause

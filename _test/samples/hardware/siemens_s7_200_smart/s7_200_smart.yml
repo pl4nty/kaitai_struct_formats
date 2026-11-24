@@ -1,0 +1,6 @@
+samples:
+- url: https://raw.githubusercontent.com/wpyoga/s7-200-smart-project-file/6803dc0fd0240472457eae4245fd69e37b6a549f/template/template.smart
+  sha256: b59bc8665d5af37a72c5e6d69c5dfaf3e36dc6c4204f37404d1797400a219663
+  source: wpyoga/s7-200-smart-project-file sample files
+  license: MIT
+  xfail: 'spec bug: header.library_marker is validated as 1 (library) although the spec is for project files and the comment says 0 = project; the upstream project template has 0'

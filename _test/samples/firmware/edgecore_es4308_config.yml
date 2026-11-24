@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/dlorent/es4308cfg/3435d03434009cee57c1a5421500b84fa6d661be/samples/switch.cfg
+  sha256: 81e08e75af31ee715b928b67585d684833f7e1f2ee86ca99a38a0d920ae6215c
+  source: dlorent/es4308cfg sample files
+  license: MIT
+- url: https://raw.githubusercontent.com/dlorent/es4308cfg/3435d03434009cee57c1a5421500b84fa6d661be/samples/switch-port7.cfg
+  sha256: e0b87e527c9b86b4aaa0bd0c19c1839438771ae1243216201d9d140d627b83ef
+  source: dlorent/es4308cfg sample files
+  license: MIT

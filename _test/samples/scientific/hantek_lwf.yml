@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/mattdavis90/hantek-wave-viewer/069053f70309324b49ed415d0feabbd44e344276/wavefiles/scope_wave_26_0.lwf
+  sha256: 296153eb58d03219850e303d81d4647644d452555be276f4052d7e1c6e36de38
+  source: mattdavis90/hantek-wave-viewer sample files
+  license: MIT
+- url: https://raw.githubusercontent.com/mattdavis90/hantek-wave-viewer/069053f70309324b49ed415d0feabbd44e344276/wavefiles/scope_wave_26_1.lwf
+  sha256: ac8ec7dd47b7a07f7aa44a089734b6360a97bf87e49f10acc2644b8f94ee2ecf
+  source: mattdavis90/hantek-wave-viewer sample files
+  license: MIT

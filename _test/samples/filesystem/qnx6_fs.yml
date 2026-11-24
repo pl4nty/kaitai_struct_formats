@@ -1,0 +1,8 @@
+samples:
+- url: https://raw.githubusercontent.com/NetherlandsForensicInstitute/qnxmount/11c8a7f9ee9b945d584263743f6ea8524e8776d2/tests/qnx6/test_data/test_image.bin
+  sha256: 7dc3b4f771d9c74af6df0643124c18450357cdb9b01c892d48613b11dc3a3554
+  source: NetherlandsForensicInstitute/qnxmount sample files
+  license: Apache-2.0
+  deep: false
+  params:
+    sector_size: '512'

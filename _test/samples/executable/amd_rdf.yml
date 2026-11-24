@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/GPUOpen-Drivers/libamdrdf/1f13ba88fa0753d908d5fba82fe4483406267b80/rdfm/test/data/empty-chunk.rdf
+  sha256: 5e0ac3f4dc37a80aef802a5f493e01755c4b381242d6527e59ace8ee2d1432e3
+  source: GPUOpen-Drivers/libamdrdf sample files
+  license: MIT

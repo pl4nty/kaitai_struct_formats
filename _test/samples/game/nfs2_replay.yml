@@ -1,0 +1,11 @@
+samples:
+- url: https://raw.githubusercontent.com/Ruslan0Dev/nfs2/05f8c46528f02badf18aeea80fd8e5dbc9011659/replays/cheatrep.rpy
+  sha256: e7a8d6d3fe9aa4c35958ba8e99d970b0c808a3955bdabbe60f7982cd7f9f3973
+  source: Ruslan0Dev/nfs2 sample files
+  license: GPL-3.0
+  xfail: 'spec bug: enum e_state uses unquoted YAML keys on/off, which YAML 1.1 loads as booleans, so e_state::on does not exist'
+- url: https://raw.githubusercontent.com/Ruslan0Dev/nfs2/05f8c46528f02badf18aeea80fd8e5dbc9011659/replays/replay99.rpy
+  sha256: da13462753d0b1421e86fef2773fda5056f585e882108870e25cdf8a2837171a
+  source: Ruslan0Dev/nfs2 sample files
+  license: GPL-3.0
+  xfail: 'spec bug: enum e_state uses unquoted YAML keys on/off, which YAML 1.1 loads as booleans, so e_state::on does not exist'

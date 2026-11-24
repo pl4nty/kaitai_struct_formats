@@ -1,0 +1,11 @@
+samples:
+- url: https://raw.githubusercontent.com/1j01/anypalette.js/eaf17cca78203bf2e68298137859f3f23cc46520/tests/regression-data/writing/KDE40.colors.out.ase
+  sha256: ded5780496c7095507a8502f009b218f5586ff1e4203207ebbf502022e670209
+  source: 1j01/anypalette.js sample files
+  license: MIT
+  xfail: 'spec bug: enum color_mode has a value named "global", a Python keyword, so the generated Python parser does not compile'
+- url: https://raw.githubusercontent.com/1j01/anypalette.js/eaf17cca78203bf2e68298137859f3f23cc46520/tests/regression-data/writing/ios.sketchpalette.out.ase
+  sha256: 59ddf7d1910a0a35cb70c0fa90d16f992bbf6b94ae0efc122ed2c06fe4990a71
+  source: 1j01/anypalette.js sample files
+  license: MIT
+  xfail: 'spec bug: enum color_mode has a value named "global", a Python keyword, so the generated Python parser does not compile'

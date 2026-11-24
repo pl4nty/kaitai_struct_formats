@@ -1,0 +1,17 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/elna_emd/samples/random1-wilcom.EMD
+  sha256: 7d9fd029e7d2c138d040c94682ec68fcab1776d501fe119e1462e890868b1a70
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/elna_emd/samples/random2-wilcom.EMD
+  sha256: 94ccea4cc86de9b9a1d557aa16a05aa83ed21aafa37815a98c475b265f2c8925
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/elna_emd/samples/random3-wilcom.EMD
+  sha256: dbeb04abf80be14339512c038714c1ea04cc26bdc2c1313d998e3c00c7d5524b
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/elna_emd/samples/scene-wilcom.EMD
+  sha256: 1b72df7c3524cb0a6f780f8c142614df67ad2e43be7277c47d1787dd6b9dfd16
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT

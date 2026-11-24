@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/CTR-tools/CTR-tools/8edc826ccab49099776f6431e25b4136a2ecbec3/samples/crash_custom/crash.ctr
+  sha256: b6b07fe82c2ede5673bcd25a78e3cc4e4c4d4e4323c558d87a84586737388bbb
+  source: CTR-tools/CTR-tools sample files
+  license: LGPL-2.1

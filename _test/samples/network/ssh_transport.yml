@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/PatrikH0lop/kaitai-ssh/4f44520683b2ae83bc71036a22966a2e99209352/data/3_client_key_exchange_init.bin
+  sha256: 25a1215f62f99af597ee9acbad217559b0c38f916b293be7f835a6f8c42ff2e4
+  source: PatrikH0lop/kaitai-ssh sample files
+  license: MIT
+- url: https://raw.githubusercontent.com/PatrikH0lop/kaitai-ssh/4f44520683b2ae83bc71036a22966a2e99209352/data/4_server_key_exchange_init.bin
+  sha256: bc3149a6646e44e37113f11179e6e234967faf1e6ec11f905d0e39fd927a5c67
+  source: PatrikH0lop/kaitai-ssh sample files
+  license: MIT

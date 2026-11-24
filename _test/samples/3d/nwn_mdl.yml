@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/plenarius/nwn-mdl-spec/291e2bd85d1796ce1594ec0bf50dd1636d6cf276/conformance/goldens/cmbez01.mdl
+  sha256: 65a803209aee2adc72c988edf96c827cada71df2225d24f309ca0a0dfd091e2f
+  source: plenarius/nwn-mdl-spec sample files
+  license: CC0-1.0
+- url: https://raw.githubusercontent.com/plenarius/nwn-mdl-spec/291e2bd85d1796ce1594ec0bf50dd1636d6cf276/conformance/goldens/cmtan01.mdl
+  sha256: 64ed86ed1253717bf875a32ddeba4afba7d1e062c5463ed6f512684df6b014fa
+  source: plenarius/nwn-mdl-spec sample files
+  license: CC0-1.0

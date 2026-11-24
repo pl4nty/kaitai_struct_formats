@@ -1,0 +1,17 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/melco_exp/samples/random1-me.exp
+  sha256: 3c7ec5fb009ee87a541aef60cfd55fb02f7a69ee2b35ea1ffc347c5b54b86c70
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/melco_exp/samples/scene-wilcom.EXP
+  sha256: f8e592d4a2766e49673b2e98ec8f4f6500bd6c3827eb0986cb12d7732f0a6736
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/melco_exp/samples/spiralbox-ew-%2B.exp
+  sha256: 873c7dd1bbc371d4d8f0c0d9bbdb9b9194dce6a49adc04c6d11da14d4e0b2db3
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/melco_exp/samples/spiralbox-wilcom-bernina.EXP
+  sha256: c49631d8c503af274f7502cae80edcf36b93f35d6ef4fa5a4800524301393f5b
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT

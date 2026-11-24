@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/vii1/DIV/3692483012cbdf9c85b2f93f2ae6a35ac4dd193e/help/help.fnt
+  sha256: d9426aeafa084543190a9bf56b833cefdc0581e8ef5cc71a0cf1acc7ef864288
+  source: vii1/DIV sample files
+  license: GPL-3.0
+- url: https://raw.githubusercontent.com/vii1/DIV/3692483012cbdf9c85b2f93f2ae6a35ac4dd193e/install/inst_sma.fnt
+  sha256: d8cff6fcc47976b5546cf84753900c7401f63b81b9100a9ef9dd8421dd76afe6
+  source: vii1/DIV sample files
+  license: GPL-3.0

@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/armijnhemel/binaryanalysis-ng/d72f0d9c5c4e5484878f357d07690e68334365db/test/testdata/unpackers/bzip2/test.bz2
+  sha256: 95902ac929f056f0efd950c14d052102f940743557445019c6eec866e7f63cf1
+  source: armijnhemel/binaryanalysis-ng sample files
+  license: GPL-3.0
+  expect:
+    header.magic: BZ
+    header.level: 9
+    block_header.signature: '314159265359'

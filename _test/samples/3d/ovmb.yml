@@ -1,0 +1,13 @@
+samples:
+- url: https://raw.githubusercontent.com/OpenVolumeMesh/OpenVolumeMesh/1ab7cf290bc38ea303e8d0403683e8cc940f67bc/src/Unittests/TestFiles/Cube_with_props.ovmb
+  sha256: a9b0b5fb2e2de3233e1373bd02f4e0c7aeb60e2032e705028f1247fd1be966ae
+  source: OpenVolumeMesh/OpenVolumeMesh sample files
+  license: LGPL-2.1
+- url: https://raw.githubusercontent.com/OpenVolumeMesh/OpenVolumeMesh/1ab7cf290bc38ea303e8d0403683e8cc940f67bc/src/Unittests/TestFiles/Cylinder.ovmb
+  sha256: 2f1a987559ccde100fe6e7c51bce04d98e916a1d5327333ace881b0e53773244
+  source: OpenVolumeMesh/OpenVolumeMesh sample files
+  license: LGPL-2.1
+- url: https://raw.githubusercontent.com/OpenVolumeMesh/OpenVolumeMesh/1ab7cf290bc38ea303e8d0403683e8cc940f67bc/src/Unittests/TestFiles/NonManifold.ovmb
+  sha256: 77571f0f901d7cbba94ae88ccb4e449e1d6a98862d0436695ac791a4b4e9313f
+  source: OpenVolumeMesh/OpenVolumeMesh sample files
+  license: LGPL-2.1

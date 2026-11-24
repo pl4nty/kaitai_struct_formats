@@ -1,0 +1,7 @@
+samples:
+- url: https://raw.githubusercontent.com/lpreiner/skale-skm-format/8b1d9f5a67d81eba109c19540616b8cbd929457a/tests/fixtures/authentic/empty-skale-081-first.skm
+  sha256: d52c3a043ef1f54cd91835a0486c7ff33961f019186505075b422e7bc2d4971b
+  source: lpreiner/skale-skm-format sample files
+- url: https://raw.githubusercontent.com/lpreiner/skale-skm-format/8b1d9f5a67d81eba109c19540616b8cbd929457a/tests/fixtures/authentic/envelope-baseline-076.skm
+  sha256: b50053ffc5a8f5fe7c8a5755fe4267ffc8de2af9ebd9e7af0835e3045cc890c6
+  source: lpreiner/skale-skm-format sample files

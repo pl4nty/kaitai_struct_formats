@@ -1,0 +1,6 @@
+samples:
+- url: https://raw.githubusercontent.com/FAForever/faf-scfa-replay-parser/9d0cb7cb4bb0cf6d8be44e5c1ea4bc357aa9a0c5/tests/fixtures/replays/8805560.scfareplay
+  sha256: 4db990391ce7571296fec5c0fcb2b106de8a82ffb3b74d297c1b995928da3a89
+  source: FAForever/faf-scfa-replay-parser sample files
+  license: GPL-3.0
+  xfail: 'spec bug: op_request_resume reads a 1-byte source, but the Resume operation has no payload (faf-scfa-replay-parser command_resume reads nothing)'

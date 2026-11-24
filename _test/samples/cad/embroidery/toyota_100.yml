@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/toyota_100/samples/random1-me.101
+  sha256: 9e46a64558b7905b8190ba7c9b5f312f95c544a36342bdc88a8314543d319e6a
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/toyota_100/samples/spiralbox-me.101
+  sha256: f947074552c78f711b6aa0b72c47265aed2281a78b0b484313a225605630f77e
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT

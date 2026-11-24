@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/Hugoberry/pbixray/c5da940b45d2806c8f8d3e109f0d1909117a7db0/data/xlsx/VertiPaq_C12222B9186F44A3A59B/B95BB70B758547B488E4.2.db/Date_29d5fe95-5d05-400e-bc26-d350cd533b88.0.dim/1.Date_29d5fe95-5d05-400e-bc26-d350cd533b88.Date.0.idf
+  sha256: 013b7438b52bac6b5272b2fbc2037ba746e0165376ed175aa3f85621036d659a
+  source: Hugoberry/pbixray sample files
+  license: MIT

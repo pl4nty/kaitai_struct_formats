@@ -1,0 +1,17 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/singer_xxx/samples/random1-premier.xxx
+  sha256: 23065959bae62d42af47d783495e921a11b1353690bd743a15af7a411a07e494
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/singer_xxx/samples/random1-wilcom-c.XXX
+  sha256: 7a91b41023ba87503da3d3286f1f9f2fae11e6e112a96d16498f63988d8014e8
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/singer_xxx/samples/random2-me-c.xxx
+  sha256: e149096dd0de5e367ec077a04a8e515a79b9a98ea0bceba6ed841fd0626bcee1
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/singer_xxx/samples/random2-me-s.xxx
+  sha256: 52b2b33ba5ef954960eaa20fd998cfe95f5c7af7ee35181e4d7731d73916463c
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT

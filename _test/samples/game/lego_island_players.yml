@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/isledecomp/isle/6c5adc000c941b602b0de7f53d8f061848d025d7/docs/samples/Players.gsi
+  sha256: 57fdc915263eb9e005591dea4bfe4c389287f5a11b4f6663e4ed7197c717d67c
+  source: isledecomp/isle sample files
+  license: LGPL-3.0

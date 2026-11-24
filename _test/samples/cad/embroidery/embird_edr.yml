@@ -1,0 +1,17 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/embird_edr/samples/random1-ew.edr
+  sha256: ede4ed394a9de0c8c393320f473aec98b7eec80c79e89df2f4f01535dfec96a0
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/embird_edr/samples/random2-ew.DST.edr
+  sha256: aab279853b91b3bd9e900b84407db5a8c6a063c51b3f8fa52a49a2cb9651df5d
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/embird_edr/samples/random3-ew.DST.edr
+  sha256: 159591ec904ab983aca9b06c4f692ec01123416cfddd4f9e727897a62f13a29b
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/embird_edr/samples/scene-ew.DST.edr
+  sha256: b2d0dd61d7d77daef51ec773379a690788b99630fbaa2bd9273fb680444a5701
+  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
+  license: MIT

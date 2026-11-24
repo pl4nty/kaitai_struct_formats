@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/quodlibet/mutagen/48b3463d0ed70ba2b797ac9cc83983066ecf076a/tests/data/id3v22-test.mp3
+  sha256: 6b5273efb07ac64f4a33fb12118403cb72e32408747321d08d45ce48944f6507
+  source: mutagen test data
+  license: LGPL-2.1
+  expect:
+    tag.header.version_major: 2
+    tag.frames[0].id: TT2
+    tag.frames[1].id: TP1

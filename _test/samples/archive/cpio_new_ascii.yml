@@ -1,0 +1,14 @@
+samples:
+- url: https://raw.githubusercontent.com/armijnhemel/binaryanalysis-ng/d72f0d9c5c4e5484878f357d07690e68334365db/test/testdata/unpackers/cpio/test-new.cpio
+  sha256: eaf5fb8f968bf2cdb324a9548a89c9cec9379b5e331853b889df211aa2a8160f
+  source: armijnhemel/binaryanalysis-ng sample files
+  license: GPL-3.0
+  expect:
+    entries[0].filename: test.sgi
+    int(entries[0].header.filesize, 16): 592418
+    len(entries): 2
+    trailing_filename: TRAILER!!!
+- url: https://raw.githubusercontent.com/armijnhemel/binaryanalysis-ng/d72f0d9c5c4e5484878f357d07690e68334365db/test/testdata/unpackers/cpio/test-new-multiple-files.cpio
+  sha256: f95c3bf56f8899244d4e285453816a9e1ed45beef131653f4b4c1b1f55fa13cf
+  source: armijnhemel/binaryanalysis-ng sample files
+  license: GPL-3.0

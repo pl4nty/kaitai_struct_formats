@@ -1,0 +1,27 @@
+samples:
+- url: https://raw.githubusercontent.com/armijnhemel/binaryanalysis-ng/d72f0d9c5c4e5484878f357d07690e68334365db/test/testdata/unpackers/sgi/test.sgi
+  sha256: 371e8907d0aa57e07a6f18c44deb4b42f8ccb68f42bf3f17fa52773a79ef6106
+  source: armijnhemel/binaryanalysis-ng sample files
+  license: GPL-3.0
+- url: https://raw.githubusercontent.com/armijnhemel/binaryanalysis-ng/d72f0d9c5c4e5484878f357d07690e68334365db/test/testdata/unpackers/sgi/test-verbatim.sgi
+  sha256: 2a0922160dcec5e4d290d9b8ac60861da548eaaded9514d314a3d5787255636a
+  source: armijnhemel/binaryanalysis-ng sample files
+  license: GPL-3.0
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/hopper.rgb
+  sha256: 986cf6922f29957f6cc87cf060fb9a2af0dd016ca3854ee1361709a5cd27ff43
+  source: Pillow test images
+  license: MIT-CMU
+  expect:
+    header.xsize: 128
+    header.ysize: 128
+    header.zsize: 3
+    header.storage_format: verbatim
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/hopper.bw
+  sha256: 79fee2bc7b0eaed8c72ef18ea8b44be62b08d038ce99df7b391292cb80d5221b
+  source: Pillow test images
+  license: MIT-CMU
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/tv16.sgi
+  sha256: b36788e06d995ff50d7ae441ac50f12bae1701ae10775ab50d699c60cc8dd711
+  source: Pillow test images
+  license: MIT-CMU
+  xfail: 'spec too strict: requires the 404 reserved header bytes (offset 108) to be zero; this file has non-zero bytes there, which readers ignore'
