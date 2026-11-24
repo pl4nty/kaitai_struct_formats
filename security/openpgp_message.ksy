@@ -41,7 +41,7 @@ types:
         type:
           switch-on: new_packet_format
           cases:
-            #true: new_packet
+            true: new_packet
             false: old_packet
 
   old_packet:
@@ -64,6 +64,65 @@ types:
             packet_tags::public_subkey_packet: public_key_packet
             packet_tags::secret_key_packet: secret_key_packet
             packet_tags::secret_subkey_packet: public_key_packet
+
+  new_packet:
+    doc-ref: https://www.rfc-editor.org/rfc/rfc4880#section-4.2.2
+    seq:
+      - id: len
+        type: new_packet_length
+      - id: body
+        size: len.len
+        type:
+          switch-on: _parent.packet_type_new
+          cases:
+            packet_tags::user_id_packet: user_id_packet
+            packet_tags::signature_packet: signature_packet
+            packet_tags::public_key_packet: public_key_packet
+            packet_tags::public_subkey_packet: public_key_packet
+            packet_tags::secret_key_packet: secret_key_packet
+            packet_tags::secret_subkey_packet: public_key_packet
+        if: not len.is_partial
+      - id: partial_body_first
+        size: len.len
+        if: len.is_partial
+        doc: First chunk of a body sent with partial body lengths.
+      - id: partial_body_rest
+        type: partial_body_chunk
+        repeat: until
+        repeat-until: not _.len.is_partial
+        if: len.is_partial
+        doc: |
+          Remaining chunks of a body sent with partial body lengths; the last
+          one has a non-partial length. The body is the concatenation of
+          `partial_body_first` and the `data` of these chunks.
+
+  partial_body_chunk:
+    seq:
+      - id: len
+        type: new_packet_length
+      - id: data
+        size: len.len
+
+  new_packet_length:
+    doc-ref: https://www.rfc-editor.org/rfc/rfc4880#section-4.2.2
+    seq:
+      - id: first_octet
+        type: u1
+      - id: second_octet
+        type: u1
+        if: first_octet >= 192 and first_octet < 224
+      - id: five_octet_len
+        type: u4
+        if: first_octet == 255
+    instances:
+      is_partial:
+        value: first_octet >= 224 and first_octet < 255
+      len:
+        value: >-
+          first_octet < 192 ? first_octet :
+          first_octet < 224 ? ((first_octet - 192) << 8) + second_octet + 192 :
+          first_octet == 255 ? five_octet_len :
+          1 << (first_octet & 0x1f)
 
   public_key_packet:
     seq:
