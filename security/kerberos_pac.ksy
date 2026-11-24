@@ -31,16 +31,12 @@ types:
       - id: num_buffers
         -orig-id: cBuffers
         type: u4
-        doc: |
-          Number of
-          entries in the buffers array
+        doc: Number of entries in the buffers array
       - id: version
         -orig-id: Version
         type: u4
         if: num_buffers != logon_info_magic_number
-        doc: |
-          PAC version;
-          MUST be 0x00000000
+        doc: PAC version; MUST be 0x00000000
       - id: buffers
         -orig-id: Buffers
         type: pac_info_buffer
@@ -291,87 +287,79 @@ types:
       - id: logon_time
         -orig-id: LogonTime
         type: filetime
-        doc: |
-          User account's lastLogon attribute
-          ([MS-ADA1] section 2.351) value
+        doc: User account's lastLogon attribute ([MS-ADA1] section 2.351) value
       - id: logoff_time
         -orig-id: LogoffTime
         type: filetime
-        doc: |
-          Time the client's logon session is set to
-          expire.
+        doc: Time the client's logon session is set to expire.
       - id: kickoff_time
         -orig-id: KickOffTime
         type: filetime
         doc: |
-          LogoffTime minus the user account's
-          forceLogoff attribute ([MS-ADA1] section 2.233) value
+          LogoffTime minus the user account's forceLogoff attribute ([MS-ADA1]
+          section 2.233) value
       - id: password_last_set
         -orig-id: PasswordLastSet
         type: filetime
         doc: |
-          User account's pwdLastSet attribute
-          ([MS-ADA3] section 2.175) value.
+          User account's pwdLastSet attribute ([MS-ADA3] section 2.175)
+          value.
       - id: password_can_change
         -orig-id: PasswordCanChange
         type: filetime
-        doc: |
-          Time at which the client's password is
-          allowed to change.
+        doc: Time at which the client's password is allowed to change.
       - id: password_must_change
         -orig-id: PasswordMustChange
         type: filetime
-        doc: |
-          Time at which the client's password
-          expires.
+        doc: Time at which the client's password expires.
       - id: effective_name
         -orig-id: EffectiveName
         type: rpc_unicode_string
         doc: |
-          User account's samAccountName
-          attribute ([MS-ADA3] section 2.222) value.
+          User account's samAccountName attribute ([MS-ADA3] section 2.222)
+          value.
       - id: full_name
         -orig-id: FullName
         type: rpc_unicode_string
         doc: |
-          User account's full name for
-          interactive logon and is set to zero for network logon.
+          User account's full name for interactive logon and is set to zero for
+          network logon.
       - id: logon_script
         -orig-id: LogonScript
         type: rpc_unicode_string
         doc: |
-          User account's scriptPath
-          attribute ([MS-ADA3] section 2.232) value for interactive logon
+          User account's scriptPath attribute ([MS-ADA3] section 2.232) value
+          for interactive logon
       - id: profile_path
         -orig-id: ProfilePath
         type: rpc_unicode_string
         doc: |
-          User account's profilePath
-          attribute ([MS-ADA3] section 2.167) value for interactive logon
+          User account's profilePath attribute ([MS-ADA3] section 2.167) value
+          for interactive logon
       - id: home_directory
         -orig-id: HomeDirectory
         type: rpc_unicode_string
         doc: |
-          User account's HomeDirectory
-          attribute ([MS-ADA1] section 2.295) value for interactive logon
+          User account's HomeDirectory attribute ([MS-ADA1] section 2.295) value
+          for interactive logon
       - id: home_directory_drive
         -orig-id: HomeDirectoryDrive
         type: rpc_unicode_string
         doc: |
-          User account's HomeDrive
-          attribute ([MS-ADA1] section 2.296) value for interactive logon
+          User account's HomeDrive attribute ([MS-ADA1] section 2.296) value for
+          interactive logon
       - id: logon_count
         -orig-id: LogonCount
         type: u2
         doc: |
-          User account's LogonCount attribute
-          ([MS-ADA1] section 2.375) value.
+          User account's LogonCount attribute ([MS-ADA1] section 2.375)
+          value.
       - id: bad_password_count
         -orig-id: BadPasswordCount
         type: u2
         doc: |
-          User account's badPwdCount attribute
-          ([MS-ADA1] section 2.83) value for interactive logon
+          User account's badPwdCount attribute ([MS-ADA1] section 2.83) value
+          for interactive logon
       - id: user_id
         -orig-id: UserId
         type: u4
@@ -379,24 +367,20 @@ types:
       - id: primary_group_id
         -orig-id: PrimaryGroupId
         type: u4
-        doc: |
-          RID for the primary group to which
-          this account belongs
+        doc: RID for the primary group to which this account belongs
       - id: group_count
         -orig-id: GroupCount
         type: u4
         doc: |
-          Number of groups within the account
-          domain to which the account belongs
+          Number of groups within the account domain to which the account
+          belongs
       - id: group_ids_referent
         -orig-id: GroupIdsReferent
         type: u4
       - id: user_flags
         -orig-id: UserFlags
         type: u4
-        doc: |
-          Set of bit flags that describe the
-          user's logon information
+        doc: Set of bit flags that describe the user's logon information
       - id: user_session_key
         -orig-id: UserSessionKey
         size: 16
@@ -405,14 +389,12 @@ types:
         -orig-id: LogonServer
         type: rpc_unicode_string
         doc: |
-          NetBIOS name of the Kerberos
-          KDC that performed the authentication server (AS) ticket request
+          NetBIOS name of the Kerberos KDC that performed the authentication
+          server (AS) ticket request
       - id: logon_domain_name
         -orig-id: LogonDomainName
         type: rpc_unicode_string
-        doc: |
-          NetBIOS name of the domain to
-          which this account belongs
+        doc: NetBIOS name of the domain to which this account belongs
       - id: logon_domain_id_referent
         -orig-id: LogonDomainIdReferent
         type: u4
@@ -422,33 +404,31 @@ types:
       - id: user_account_control
         -orig-id: UserAccountControl
         type: u4
-        doc: |
-          Set of bit flags that represent
-          information about this account
+        doc: Set of bit flags that represent information about this account
       - id: sub_auth_status
         -orig-id: SubAuthStatus
         type: u4
         doc: |
-          Subauthentication package's
-          ([MS-APDS] section 3.1.5.2.1) status code
+          Subauthentication package's ([MS-APDS] section 3.1.5.2.1) status
+          code
       - id: last_successful_i_logon
         -orig-id: LastSuccessfulILogon
         type: filetime
         doc: |
-          User account's
-          msDS-LastSuccessfulInteractiveLogonTime ([MS-ADA2] section 2.359)
+          User account's msDS-LastSuccessfulInteractiveLogonTime ([MS-ADA2]
+          section 2.359)
       - id: last_failed_i_logon
         -orig-id: LastFailedILogon
         type: filetime
         doc: |
-          User account's
-          msDS-LastFailedInteractiveLogonTime ([MS-ADA2] section 2.357)
+          User account's msDS-LastFailedInteractiveLogonTime ([MS-ADA2] section
+          2.357)
       - id: failed_i_logon_count
         -orig-id: LastFailedILogon
         type: u4
         doc: |
-          User account's
-          msDS-FailedInteractiveLogonCountAtLastSuccessfulLogon ([MS-ADA2] section 2.315)
+          User account's msDS-FailedInteractiveLogonCountAtLastSuccessfulLogon
+          ([MS-ADA2] section 2.315)
       - id: reserved3
         -orig-id: Reserved3
         type: u4
@@ -456,9 +436,8 @@ types:
         -orig-id: SidCount
         type: u4
         doc: |
-          Total number of SIDs present in the
-          ExtraSids member. If this member is not zero then the D bit MUST be set in the
-          UserFlags member
+          Total number of SIDs present in the ExtraSids member. If this member
+          is not zero then the D bit MUST be set in the UserFlags member
       - id: extra_sids_referent
         -orig-id: ExtraSidsReferent
         type: u4
@@ -468,9 +447,7 @@ types:
       - id: resource_group_count
         -orig-id: ResourceGroupCount
         type: u4
-        doc: |
-          Number of resource group identifiers
-          stored in ResourceGroupIds
+        doc: Number of resource group identifiers stored in ResourceGroupIds
       - id: resource_group_ids_referent
         -orig-id: ResourceGroupIdsReferent
         type: u4
@@ -526,9 +503,7 @@ types:
       - id: client_id
         -orig-id: ClientId
         type: filetime
-        doc: |
-          Kerberos initial
-          ticket-granting ticket (TGT) authentication time
+        doc: Kerberos initial ticket-granting ticket (TGT) authentication time
       - id: len_name
         -orig-id: NameLength
         type: u2
@@ -575,9 +550,7 @@ types:
         -orig-id: SignatureType
         type: u4
         enum: signature_type_enum
-        doc: |
-          The
-          cryptographic system used to calculate the checksum
+        doc: The cryptographic system used to calculate the checksum
       - id: signature
         -orig-id: Signature
         size: len_signature
