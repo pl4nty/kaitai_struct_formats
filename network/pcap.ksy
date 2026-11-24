@@ -11,6 +11,7 @@ meta:
   license: CC0-1.0
   ks-version: '0.11'
   imports:
+    - /network/bluetooth_frame
     - /network/ethernet_frame
     - /network/packet_ppi
     - /network/ieee802_11_prism
@@ -114,6 +115,7 @@ types:
             'linktype::ieee802_11_prism': ieee802_11_prism
             'linktype::usb_linux_mmapped': usbmon(64)
             'linktype::usb_linux': usbmon(48)
+            'linktype::bluetooth_hci_h4_with_phdr': bluetooth_frame
         doc-ref: 'https://wiki.wireshark.org/Development/LibpcapFileFormat#Packet_Data'
 enums:
   linktype:
