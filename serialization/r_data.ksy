@@ -132,6 +132,34 @@ types:
                 type::rawsxp: raw
 
                 type::altrep_sxp: altrep_sxp
+          - id: attributes
+            type: item
+            if: flags.has_attr and has_trailing_attr
+            doc: |
+              Attribute pairlist, read after the contents (serialize.c
+              ReadItem). Pairlist-like types read theirs first, in
+              `dotted_pair`, and environments always have one.
+        instances:
+          has_trailing_attr:
+            value: |
+              flags.type == type::charsxp
+                  or flags.type == type::lglsxp
+                  or flags.type == type::intsxp
+                  or flags.type == type::realsxp
+                  or flags.type == type::cplxsxp
+                  or flags.type == type::strsxp
+                  or flags.type == type::vecsxp
+                  or flags.type == type::exprsxp
+                  or flags.type == type::bcodesxp
+                  or flags.type == type::extptrsxp
+                  or flags.type == type::weakrefsxp
+                  or flags.type == type::rawsxp
+                  or flags.type == type::s4sxp
+                  or flags.type == type::specialsxp
+                  or flags.type == type::builtinsxp
+            doc: |
+              Whether this type takes the common ReadItem path, which
+              reads the attributes after the contents.
         types:
           flags:
             seq:
