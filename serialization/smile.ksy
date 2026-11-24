@@ -228,16 +228,16 @@ types:
         value: groups.size - 1
       value:
         value: |
-          ((groups[last] & 0x3f)
-          + (last >= 1 ? ((groups[last - 1] & 0x7f) << 6) : 0)
-          + (last >= 2 ? ((groups[last - 2] & 0x7f) << 13) : 0)
-          + (last >= 3 ? ((groups[last - 3] & 0x7f) << 20) : 0)
-          + (last >= 4 ? ((groups[last - 4] & 0x7f) << 27) : 0)
-          + (last >= 5 ? ((groups[last - 5] & 0x7f) << 34) : 0)
-          + (last >= 6 ? ((groups[last - 6] & 0x7f) << 41) : 0)
-          + (last >= 7 ? ((groups[last - 7] & 0x7f) << 48) : 0)
-          + (last >= 8 ? ((groups[last - 8] & 0x7f) << 55) : 0)
-          + (last >= 9 ? ((groups[last - 9] & 0x7f) << 62) : 0)).as<u8>
+          (groups[last] & 0x3f).as<u8>
+          + (last >= 1 ? (groups[last - 1] & 0x7f).as<u8> << 6 : 0)
+          + (last >= 2 ? (groups[last - 2] & 0x7f).as<u8> << 13 : 0)
+          + (last >= 3 ? (groups[last - 3] & 0x7f).as<u8> << 20 : 0)
+          + (last >= 4 ? (groups[last - 4] & 0x7f).as<u8> << 27 : 0)
+          + (last >= 5 ? (groups[last - 5] & 0x7f).as<u8> << 34 : 0)
+          + (last >= 6 ? (groups[last - 6] & 0x7f).as<u8> << 41 : 0)
+          + (last >= 7 ? (groups[last - 7] & 0x7f).as<u8> << 48 : 0)
+          + (last >= 8 ? (groups[last - 8] & 0x7f).as<u8> << 55 : 0)
+          + (last >= 9 ? (groups[last - 9] & 0x7f).as<u8> << 62 : 0)
   zigzag_vint:
     seq:
       - id: raw
@@ -262,15 +262,15 @@ types:
     instances:
       float_bits:
         value: |
-          (num_groups == 5 ?
-            ((groups[0] & 0x0f) << 28) | ((groups[1] & 0x7f) << 21) | ((groups[2] & 0x7f) << 14)
-            | ((groups[3] & 0x7f) << 7) | (groups[4] & 0x7f)
+          num_groups == 5 ?
+            (groups[0] & 0x0f).as<u8> << 28 | (groups[1] & 0x7f) << 21 | (groups[2] & 0x7f) << 14
+            | (groups[3] & 0x7f) << 7 | (groups[4] & 0x7f)
           :
-            ((groups[0] & 0x01) << 63) | ((groups[1] & 0x7f) << 56) | ((groups[2] & 0x7f) << 49)
-            | ((groups[3] & 0x7f) << 42) | ((groups[4] & 0x7f) << 35) | ((groups[5] & 0x7f) << 28)
-            | ((groups[6] & 0x7f) << 21) | ((groups[7] & 0x7f) << 14) | ((groups[8] & 0x7f) << 7)
+            (groups[0] & 0x01).as<u8> << 63 | (groups[1] & 0x7f).as<u8> << 56
+            | (groups[2] & 0x7f).as<u8> << 49 | (groups[3] & 0x7f).as<u8> << 42
+            | (groups[4] & 0x7f).as<u8> << 35 | (groups[5] & 0x7f).as<u8> << 28
+            | (groups[6] & 0x7f) << 21 | (groups[7] & 0x7f) << 14 | (groups[8] & 0x7f) << 7
             | (groups[9] & 0x7f)
-          ).as<u8>
         doc: Raw IEEE 754 bit pattern of the value.
   safe_binary:
     doc: |
