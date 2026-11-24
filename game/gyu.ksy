@@ -1,0 +1,34 @@
+# Imported from https://github.com/Forlos/vn_re/blob/cce0798ad2771034cee74d1ea92d70efd2a4d27d/ksy/gyu.ksy
+# Licence and copyright: see _community/README.md
+meta:
+  id: gyu
+  title: GYU image format
+  file-extension: gyu
+  license: MIT
+  endian: le
+
+seq:
+  - id: magic
+    contents: "GYU\x1a"
+  - id: version
+    type: u4
+  - id: mt_seed
+    type: u4
+  - id: bpp
+    type: u4
+  - id: width
+    type: u4
+  - id: height
+    type: u4
+  - id: data_size
+    type: u4
+  - id: alpha_channel_size
+    type: u4
+  - id: color_table_size
+    type: u4
+  - id: color_table
+    size: color_table_size * 4
+  - id: data
+    size: data_size
+  - id: alpha_channel
+    size: alpha_channel_size
