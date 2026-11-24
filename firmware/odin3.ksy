@@ -415,15 +415,22 @@ types:
     seq:
       - id: quirky_session
         type: quirky_session
+        if: is_quirky_session_response
       - id: regular_session
         type: regular_session
+        if: not is_quirky_session_response
 
     instances:
       is_quirky_session_response:
         value: _root.is_loki_to_odin and _root.was_previous_item_session_initiation
+        doc: |
+          The device's response to a begin_session request carries no
+          `request` tag, unlike the other session packets, so it can only be
+          recognized from the preceding packet (see the
+          `was_previous_item_session_initiation` parameter).
       session:
         value: "(is_quirky_session_response?quirky_session:regular_session)"
-        doc: Who have designed this shit?
+        doc: The parsed session packet, whichever variant applies.
 
     enums:
       request:
