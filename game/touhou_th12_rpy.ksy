@@ -4,6 +4,14 @@ meta:
   file-extension: raw
   license: Apache-2.0
   endian: le
+doc: |
+  Decompressed body of a Touhou 12 replay (`.rpy`). On disk, the replay starts
+  with the magic `t12r`, a u4 version and the common modern header (userdata
+  offset, compressed and decompressed sizes; see `touhou_modern_rpy`),
+  followed by the encrypted and compressed body and a trailing `USER` block.
+  This spec parses the body after decryption and decompression; thrpy
+  describes the same body prefixed by the magic and header.
+doc-ref: https://github.com/hoangcaominh/thrpy/blob/d9ea268b77c7d28419343803b232f932a1dc3a01/ksy/th12.ksy
 seq:
   - id: header
     type: header
