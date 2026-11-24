@@ -129,11 +129,14 @@ types:
         size: path_table_size.le
         type: path_table_le
   dir_entries:
+    doc: |
+      Directory records of a directory extent. Records never cross a
+      sector boundary: the unused rest of a sector is filled with zeros,
+      and the next record starts at the next sector.
     seq:
       - id: entries
         type: dir_entry
-        repeat: until
-        repeat-until: _.len == 0
+        repeat: eos
   dir_entry:
     seq:
       - id: len
@@ -142,6 +145,12 @@ types:
         type: dir_entry_body
         size: len - 1
         if: len > 0
+      - id: padding
+        size: (_root.sector_size - _io.pos % _root.sector_size) % _root.sector_size
+        if: len == 0
+        doc: |
+          Zero fill up to the end of the sector, after the last record in
+          it (only in a directory extent, which starts on a sector boundary)
   dir_entry_body:
     seq:
       - id: len_ext_attr_rec
