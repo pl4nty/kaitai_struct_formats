@@ -68,8 +68,9 @@ types:
             enum: attribute
           - id: length
             type: u2le
+            if: not has_implicit_length
           - id: value
-            size: length
+            size: 'has_implicit_length ? _io.size - _io.pos : length'
             type:
               switch-on: type
               cases:
@@ -98,6 +99,12 @@ types:
                 'attribute::clone_path': string
                 'attribute::clone_offset': u8le
                 'attribute::clone_len': u8le
+        instances:
+          has_implicit_length:
+            value: _root.header.version >= 2 and type == attribute::data
+            doc: |
+              As of send stream v2, the `data` attribute has no length: it
+              must be the last attribute of the command and runs to its end.
       timespec:
         seq:
           - id: ts_sec
@@ -142,6 +149,10 @@ enums:
     0x14: utimes
     0x15: end
     0x16: update_extent
+    0x17: fallocate
+    0x18: fileattr
+    0x19: encoded_write
+    0x1a: enable_verity
   attribute:
     0x00: unspec
     0x01: uuid
@@ -168,3 +179,14 @@ enums:
     0x16: clone_path
     0x17: clone_offset
     0x18: clone_len
+    0x19: fallocate_mode
+    0x1a: fileattr
+    0x1b: unencoded_file_len
+    0x1c: unencoded_len
+    0x1d: unencoded_offset
+    0x1e: compression
+    0x1f: encryption
+    0x20: verity_algorithm
+    0x21: verity_block_size
+    0x22: verity_salt_data
+    0x23: verity_sig_data
