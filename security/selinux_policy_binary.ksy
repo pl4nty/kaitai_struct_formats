@@ -142,9 +142,15 @@ enums:
     1: base
     2: module
   expression_types:
-    1: not
-    2: and
-    3: or
+    1:
+      id: op_not
+      -orig-id: CEXPR_NOT
+    2:
+      id: op_and
+      -orig-id: CEXPR_AND
+    3:
+      id: op_or
+      -orig-id: CEXPR_OR
     4: attr
     5: names
 

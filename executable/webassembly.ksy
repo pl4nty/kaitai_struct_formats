@@ -60,12 +60,12 @@ types:
           cases:
             'section_id::custom': custom_section
             'section_id::type': type_section
-            'section_id::import': import_section
+            'section_id::import_section': import_section
             'section_id::function': function_section
             'section_id::table': table_section
             'section_id::memory': memory_section
-            'section_id::global': global_section
-            'section_id::export': export_section
+            'section_id::global_section': global_section
+            'section_id::export_section': export_section
             'section_id::start': start_section
             'section_id::element': element_section
             'section_id::code': code_section
@@ -156,7 +156,7 @@ types:
             'import_types::func': vlq_base128_le
             'import_types::table': table
             'import_types::mem': memory
-            'import_types::global': global
+            'import_types::global_var': global
   
   table:
     seq:
@@ -351,12 +351,12 @@ enums:
   section_id:
     0: custom
     1: type
-    2: import
+    2: import_section
     3: function
     4: table
     5: memory
-    6: global
-    7: export
+    6: global_section
+    7: export_section
     8: start
     9: element
     10: code
@@ -376,10 +376,10 @@ enums:
     0x00: func
     0x01: table
     0x02: mem
-    0x03: global
+    0x03: global_var
 
   import_types:
     0x00: func
     0x01: table
     0x02: mem
-    0x03: global
+    0x03: global_var

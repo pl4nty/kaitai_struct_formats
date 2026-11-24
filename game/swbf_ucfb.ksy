@@ -128,7 +128,7 @@ types:
           or tag == tag::lowr
           or tag == tag::comn
           or tag == tag::stat
-          or tag == tag::pass
+          or tag == tag::pass_tag
           or tag == tag::shdr
           or tag == tag::pipe
           or tag == tag::vsp
@@ -287,7 +287,7 @@ enums:
       id: snks
       doc: "'SNKS'."
     0x53534150:
-      id: pass
+      id: pass_tag
       doc: "'PASS'."
     0x53545543:
       id: cuts

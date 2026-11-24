@@ -18,7 +18,7 @@ seq:
     repeat: until
     repeat-until: (_ < 0x80)
 instances:
-  class:
+  tag_class:
     value: (tag_first_byte & 0b11000000) >> 6
     enum: tag_class
   form:
