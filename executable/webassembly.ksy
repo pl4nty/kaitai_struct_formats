@@ -13,7 +13,10 @@ meta:
 
 doc: |
   This document describes the binary format of a WebAssembly module 
-  following the version 1.0 of the core WebAssembly standard.
+  following the version 1.0 of the core WebAssembly standard. The data count
+  section (id 12) of WebAssembly 2.0 (bulk memory operations) is also
+  recognized; other 2.0 additions, such as passive element and data segments,
+  are not.
 
   Repository: https://github.com/henrythasler/wasm-kaitai-struct
 
@@ -71,6 +74,7 @@ types:
             'section_id::element': element_section
             'section_id::code': code_section
             'section_id::data': data_section
+            'section_id::data_count': data_count_section
         doc: Section content
 
   custom_section:
@@ -159,7 +163,7 @@ types:
             'import_types::func': vlq_base128_le
             'import_types::table': table
             'import_types::mem': memory
-            'import_types::global_var': global
+            'import_types::global_var': global_import
   
   table:
     seq:
@@ -188,7 +192,9 @@ types:
       - id: limits
         type: limits
 
-  global:
+  global_import:
+    doc: Type of an imported global (`globaltype`)
+    doc-ref: https://www.w3.org/TR/wasm-core-1/#binary-globaltype
     seq:
       - id: valtype
         type: u1
@@ -198,6 +204,49 @@ types:
         doc: |
           the `is_` prefix avoids conflicts with the C++ keyword `mutable` in generated
           code
+
+  global:
+    doc: A global of the global section, `globaltype` followed by its initializer
+    doc-ref: https://www.w3.org/TR/wasm-core-1/#binary-global
+    seq:
+      - id: valtype
+        type: u1
+        enum: valtype
+      - id: is_mutable
+        type: u1
+        doc: |
+          the `is_` prefix avoids conflicts with the C++ keyword `mutable` in generated
+          code
+      - id: init_expr
+        type: const_expr
+
+  const_expr:
+    doc: |
+      Constant expression: a single constant instruction followed by the `end`
+      opcode (0x0b). Parsing the instruction, rather than scanning for the first
+      0x0b byte, keeps immediates such as `i32.const 11` (bytes 41 0b 0b) intact.
+    doc-ref: https://www.w3.org/TR/wasm-core-1/#valid-constant
+    seq:
+      - id: opcode
+        type: u1
+        enum: const_opcode
+      - id: arg
+        type:
+          switch-on: opcode
+          cases:
+            'const_opcode::i32_const': vlq_base128_le
+            'const_opcode::i64_const': vlq_base128_le
+            'const_opcode::f32_const': f4
+            'const_opcode::f64_const': f8
+            'const_opcode::global_get': vlq_base128_le
+            'const_opcode::ref_null': u1
+            'const_opcode::ref_func': vlq_base128_le
+        doc: |
+          Immediate of the instruction. Integer constants are signed LEB128
+          (use `value_signed`); `global.get` and `ref.func` take an index;
+          `ref.null` takes a reference type.
+      - id: end_opcode
+        contents: [0x0b]
 
   function_section:
     doc: |
@@ -233,7 +282,7 @@ types:
 
   global_section:
     doc: (id 6) Vector of globals
-    doc-ref: https://www.w3.org/TR/wasm-core-1/#binary-memsec
+    doc-ref: https://www.w3.org/TR/wasm-core-1/#binary-globalsec
     seq:
       - id: num_globals
         type: vlq_base128_le
@@ -284,8 +333,8 @@ types:
       - id: tableidx
         type: vlq_base128_le
       - id: offset_expr
-        terminator: 0x0b
-        doc: The offset is given by a constant expression that DOES NOT include an end marker
+        type: const_expr
+        doc: The offset is given by a constant expression
         doc-ref: https://www.w3.org/TR/wasm-core-1/#valid-constant
       - id: num_init
         type: vlq_base128_le
@@ -346,13 +395,20 @@ types:
       - id: data_memidx
         type: vlq_base128_le
       - id: offset_expr
-        terminator: 0x0b
-        doc: The offset is given by a constant expression that DOES NOT include an end marker
+        type: const_expr
+        doc: The offset is given by a constant expression
         doc-ref: https://www.w3.org/TR/wasm-core-1/#valid-constant
       - id: num_init
         type: vlq_base128_le
       - id: init_vec
         size: num_init.value
+
+  data_count_section:
+    doc: (id 12) - Number of data segments (WebAssembly 2.0, bulk memory operations)
+    doc-ref: https://www.w3.org/TR/wasm-core-2/#binary-datacountsec
+    seq:
+      - id: count
+        type: vlq_base128_le
 
 enums:
   section_id:
@@ -368,6 +424,7 @@ enums:
     9: element
     10: code
     11: data
+    12: data_count
 
   valtype:
     0x7f: i32
@@ -390,3 +447,13 @@ enums:
     0x01: table
     0x02: mem
     0x03: global_var
+
+  const_opcode:
+    0x0b: end
+    0x23: global_get
+    0x41: i32_const
+    0x42: i64_const
+    0x43: f32_const
+    0x44: f64_const
+    0xd0: ref_null
+    0xd2: ref_func
