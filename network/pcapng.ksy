@@ -18,6 +18,16 @@ doc-ref:
 seq:
   - id: capture
     type: capture
+instances:
+  byte_order_magic:
+    pos: 8
+    type: u4le
+    doc: |
+      Byte-Order Magic of the first section header block, read as
+      little-endian: 0x1A2B3C4D if the section is little-endian,
+      0x4D3C2B1A if it is big-endian. All blocks are read in this byte
+      order (files that mix sections of both byte orders are not
+      supported).
 types:
   capture:
     seq:
@@ -25,6 +35,12 @@ types:
         type: block
         repeat: eos
   version:
+    meta:
+      endian:
+        switch-on: _root.byte_order_magic
+        cases:
+          0x1a2b3c4d: le
+          0x4d3c2b1a: be
     seq:
       - id: major
         -orig-id: Major Version
@@ -35,6 +51,12 @@ types:
         type: u2
         doc: backward-compatible changes. Currently 0.
   timestamp:
+    meta:
+      endian:
+        switch-on: _root.byte_order_magic
+        cases:
+          0x1a2b3c4d: le
+          0x4d3c2b1a: be
     doc: In units specified by if_tsresol.
     seq:
       - id: high
@@ -47,6 +69,12 @@ types:
       value:
         value: "high << 32 | low"
   options:
+    meta:
+      endian:
+        switch-on: _root.byte_order_magic
+        cases:
+          0x1a2b3c4d: le
+          0x4d3c2b1a: be
     seq:
       - id: options
         type: option
@@ -113,6 +141,12 @@ types:
           id: custom_4bad
         0x8000: reserved_for_local_use
   packet_body:
+    meta:
+      endian:
+        switch-on: _root.byte_order_magic
+        cases:
+          0x1a2b3c4d: le
+          0x4d3c2b1a: be
     seq:
       - id: timestamp
         type: timestamp
@@ -130,6 +164,12 @@ types:
         size: (4 - captured_packet_size % 4) % 4
         doc: Pads the packet data to a 32-bit boundary.
   block:
+    meta:
+      endian:
+        switch-on: _root.byte_order_magic
+        cases:
+          0x1a2b3c4d: le
+          0x4d3c2b1a: be
     seq:
       - id: type
         -orig-id: Block Type
