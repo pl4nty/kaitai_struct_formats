@@ -126,6 +126,7 @@ types:
         enum: decl_type
       - id: method
         type: u1
+        enum: decl_method
       - id: usage
         type: u1
         enum: decl_usage
@@ -372,8 +373,14 @@ enums:
     3: float4
     4: d3dcolor
     5: ubyte4
+    6: short2
+    7: short4
     8: ubyte4n
+    9: short2n
     10: short4n
+    11: ushort2n
+    12: ushort4n
+    13: udec3
     14: dec3n
     15: float16_2
     16: float16_4
@@ -381,12 +388,26 @@ enums:
     56: dxgi_r10g10b10a2_unorm
     58: dxgi_r11g11b10_float
     63: dxgi_r8g8b8a8_snorm
+  decl_method:
+    0: default
+    1: partial_u
+    2: partial_v
+    3: cross_uv
+    4: uv
+    5: lookup
+    6: lookup_presampled
   decl_usage:
     0: position
     1: blendweight
     2: blendindices
     3: normal
+    4: psize
     5: texcoord
     6: tangent
     7: binormal
+    8: tessfactor
+    9: positiont
     10: color
+    11: fog
+    12: depth
+    13: sample
