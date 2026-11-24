@@ -34,6 +34,7 @@ doc: |
 doc-ref:
   - https://equi4.com/metakit/format.html
   - https://wiki.tcl-lang.org/page/Metakit+file+format
+  - https://github.com/jnorthrup/metakit/blob/master/src/persist.cpp
   - https://github.com/ome/ome-metakit/blob/e68d11d07ee4cd515a3143fcb7dbeab09ca09de7/src/main/java/ome/metakit/MetakitReader.java
   - https://github.com/ome/ome-metakit/blob/e68d11d07ee4cd515a3143fcb7dbeab09ca09de7/src/main/java/ome/metakit/MetakitTools.java
 seq:
@@ -60,17 +61,27 @@ instances:
     type: footer
   toc:
     pos: footer.ofs_toc
+    size: footer.len_toc
     type: toc
 types:
   footer:
+    doc: |
+      Two 8-byte marks: one that gives the end of the data, and one that
+      locates the table of contents.
     seq:
-      - id: unknown1
-        type: u4
+      - id: end_mark_tag
+        contents: [0x80]
+      - id: end_mark_len
+        type: b24
+        doc: Unused, 0.
       - id: len_database
         type: u4
         doc: Size of the database data before the footer.
-      - id: unknown2
-        type: u4
+      - id: toc_mark_tag
+        contents: [0x80]
+      - id: len_toc
+        type: b24
+        doc: Size of the table of contents.
       - id: ofs_toc
         type: u4
         doc: Offset of the table of contents.
