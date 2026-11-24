@@ -38,6 +38,7 @@ types:
           cases:
             # Atom types which actually just contain other atoms inside it
             'atom_type::dinf': atom_list
+            'atom_type::edts': atom_list
             'atom_type::mdia': atom_list
             'atom_type::minf': atom_list
             'atom_type::moof': atom_list
@@ -52,6 +53,18 @@ types:
             'atom_type::mvhd': mvhd_body
             'atom_type::mdhd': mdhd_body
             'atom_type::hdlr': hdlr_body
+            'atom_type::co64': co64_body
+            'atom_type::dref': dref_body
+            'atom_type::elst': elst_body
+            'atom_type::smhd': smhd_body
+            'atom_type::stco': stco_body
+            'atom_type::stsc': stsc_body
+            'atom_type::stsd': stsd_body
+            'atom_type::stss': stss_body
+            'atom_type::stsz': stsz_body
+            'atom_type::stts': stts_body
+            'atom_type::stz2': stz2_body
+            'atom_type::vmhd': vmhd_body
     instances:
       len:
         value: 'len32 == 0 ? (_io.size - 8) : (len32 == 1 ? len64 - 16 : len32 - 8)'
@@ -514,9 +527,260 @@ types:
         doc: |
           Element in the 3rd row, 3rd column; QuickTime assumes the value is
           always 1.0.
+  co64_body:
+    doc: Chunk offset atom, 64-bit variant
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: num_entries
+        type: u4
+      - id: chunk_offsets
+        type: u8
+        repeat: expr
+        repeat-expr: num_entries
+  dref_body:
+    doc: Data reference atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: num_entries
+        type: u4
+      - id: entries
+        type: entry
+        repeat: expr
+        repeat-expr: num_entries
+    types:
+      entry:
+        seq:
+          - id: len_entry
+            type: u4
+          - id: type
+            type: str
+            size: 4
+            encoding: ASCII
+          - id: body
+            type: entry_body
+            size: len_entry - 8
+      entry_body:
+        seq:
+          - id: version
+            type: u1
+          - id: flags
+            size: 3
+          - id: name
+            type: strz
+            encoding: UTF-8
+            if: _parent.type == 'urn '
+          - id: location
+            type: strz
+            encoding: UTF-8
+            eos-error: false
+            if: not _io.eof
+            doc: |
+              This field is probably incorrect sometimes (GDCL muxer seems to have a bug here)
+  elst_body:
+    doc: Edit list atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: num_entries
+        type: u4
+      - id: entries
+        type: entry
+        repeat: expr
+        repeat-expr: num_entries
+    types:
+      entry:
+        seq:
+          - id: segment_duration
+            type:
+              switch-on: _parent.version
+              cases:
+                1: u8
+                _: u4
+          - id: media_time
+            type:
+              switch-on: _parent.version
+              cases:
+                1: s8
+                _: s4
+          - id: media_rate_integer
+            type: s2
+          - id: media_rate_fraction
+            type: u2
+  smhd_body:
+    doc: Sound media information header atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: balance
+        type: s2
+      - id: reserved
+        type: u2
+  stco_body:
+    doc: Chunk offset atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: num_entries
+        type: u4
+      - id: chunk_offsets
+        type: u4
+        repeat: expr
+        repeat-expr: num_entries
+  stsc_body:
+    doc: Sample-to-chunk atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: num_entries
+        type: u4
+      - id: entries
+        type: entry
+        repeat: expr
+        repeat-expr: num_entries
+    types:
+      entry:
+        seq:
+          - id: first_chunk
+            type: u4
+          - id: samples_per_chunk
+            type: u4
+          - id: sample_description_index
+            type: u4
+  stsd_body:
+    doc: Sample description atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: num_entries
+        type: u4
+      - id: entries
+        type: entry
+        repeat: expr
+        repeat-expr: num_entries
+    types:
+      entry:
+        seq:
+          - id: len_entry
+            type: u4
+          - id: format
+            type: str
+            size: 4
+            encoding: ASCII
+          - id: body
+            type: entry_body
+            size: len_entry - 8
+      entry_body:
+        seq:
+          - id: reserved
+            size: 6
+          - id: data_reference_index
+            type: u2
+          - id: format_specific
+            size-eos: true
+  stss_body:
+    doc: Sync sample atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: num_entries
+        type: u4
+      - id: sample_numbers
+        type: u4
+        repeat: expr
+        repeat-expr: num_entries
+  stsz_body:
+    doc: Sample size atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: sample_size
+        type: u4
+      - id: num_samples
+        type: u4
+      - id: sample_sizes
+        type: u4
+        repeat: expr
+        repeat-expr: num_samples
+        if: sample_size == 0
+  stts_body:
+    doc: Time-to-sample atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: num_entries
+        type: u4
+      - id: entries
+        type: entry
+        repeat: expr
+        repeat-expr: num_entries
+    types:
+      entry:
+        seq:
+          - id: sample_count
+            type: u4
+          - id: sample_delta
+            type: u4
+  stz2_body:
+    doc: Compact sample size box (ISO/IEC 14496-12)
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: reserved
+        size: 3
+      - id: field_size
+        type: u1
+      - id: num_samples
+        type: u4
+      - id: sample_sizes
+        type:
+          switch-on: field_size
+          cases:
+            4: b4
+            8: u1
+            16: u2
+        repeat: expr
+        repeat-expr: num_samples
+  vmhd_body:
+    doc: Video media information header atom
+    seq:
+      - id: version
+        type: u1
+      - id: flags
+        size: 3
+      - id: graphics_mode
+        type: u2
+      - id: opcolor
+        type: u2
+        repeat: expr
+        repeat-expr: 3
 enums:
   atom_type:
     0x58747261: xtra
+    0x636f3634: co64
     0x64696e66: dinf
     0x64726566: dref
     0x65647473: edts
@@ -538,8 +802,10 @@ enums:
     0x7374636f: stco
     0x73747363: stsc
     0x73747364: stsd
+    0x73747373: stss
     0x7374737a: stsz
     0x73747473: stts
+    0x73747a32: stz2
     0x746b6864: tkhd
     0x74726166: traf
     0x7472616b: trak
