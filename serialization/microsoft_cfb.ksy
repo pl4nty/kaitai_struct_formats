@@ -170,11 +170,15 @@ types:
   dir_entry_type:
     seq:
       - id: name
-        type: str
+        type: strz
         size: 64
         encoding: UTF-16LE
+        doc: |
+          Entry name, terminated by U+0000. The bytes after the terminator
+          are undefined (often garbage) and are not decoded.
       - id: name_length
         type: u2
+        doc: Length of `name` in bytes, including the terminating U+0000
       - id: object_type
         type: u1
         enum: object_type
