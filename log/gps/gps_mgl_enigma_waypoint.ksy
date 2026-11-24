@@ -87,7 +87,6 @@ types:
         type: str
       - id: garbage
         size: max_size - value_size
-        type: str
     instances:
       value_size:
         value: 'max_size > size ? size : max_size'
