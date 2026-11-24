@@ -95,7 +95,8 @@ types:
       ext_area:
         pos: ext_area_ofs
         type: tga_ext_area
-        if: is_valid
+        if: is_valid and ext_area_ofs != 0
+        doc: An offset of 0 means that the file has no extension area.
   tga_ext_area:
     seq:
       - id: ext_area_size
