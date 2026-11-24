@@ -10,8 +10,10 @@ seq:
     doc: Always 0.
   - id: filesize
     type: u4
+    doc: Size of the whole file, after decompressing.
   - id: crc32
     type: u4
+    doc: CRC-32 checksum of everything after this field.
   - id: opening_timestamp
     type: u4
     doc: Timestamp is minutes since 2000.
@@ -21,17 +23,27 @@ seq:
   - id: country_code
     type: u1
     enum: country_code
+    doc: The country this file is for.
   - id: unknown_1
     type: u1
     repeat: expr
     repeat-expr: 3
+    doc: Padding. Never read.
   - id: language_code
     type: u1
     enum: language_code
+    doc: |
+      Language of the file. Must match the console's language. Only the seven
+      languages in the enum are supported; any other console language counts
+      as English.
   - id: unknown_2
     type: u1
+    doc: |
+      Same spot as region_flag in forecast.bin, but nothing checks or uses it
+      here.
   - id: unknown_3
     type: u1
+    doc: Nothing checks or uses it.
   - id: padding
     type: u1
   - id: current_forecast_entry_number
@@ -39,6 +51,12 @@ seq:
   - id: current_forecast_table_offset
     type: u4
 instances:
+  opening_unix:
+    value: (opening_timestamp + 15778080) * 60
+    doc: The time the file was made as a normal Unix time (seconds since 1970).
+  closing_unix:
+    value: (closing_timestamp + 15778080) * 60
+    doc: The time the file expires as a normal Unix time (seconds since 1970).
   current_forecast_table:
     pos: current_forecast_table_offset
     type: current_forecast_table
@@ -56,29 +74,59 @@ types:
         type: u2
       - id: opening_timestamp
         type: u4
-        doc: Timestamp is minutes since 2000.
+        doc: |
+          When this was measured, in the city's local time (minutes since
+          2000). Shown as "As of ..." on the Wii Menu. The channel counts 6am
+          to 6pm local time as daytime and picks its day or night look from
+          it.
       - id: closing_timestamp
         type: u4
-        doc: Timestamp is minutes since 2000.
+        doc: The same moment in UTC (minutes since 2000). Nothing uses it.
       - id: current_forecast
         type: u2
+        doc: |
+          Weather code, looked up in forecast.bin's
+          weather_condition_codes_table. 0xFFFF means unused. If it is unused
+          (or not found), the channel treats the whole entry as empty: no
+          "now" page, and `--` instead of the temperature on the globe label.
       - id: unknown
         type: u1
+        doc: |
+          0 to 99, or 0xFF for unused. Checked but nothing uses it. (It is not
+          padding, and not the same as precipitation, which goes up to 100.)
       - id: current_temperature_celsius
         type: s1
+        doc: Temperature in Celsius. -128 means unused (the channel shows `--`).
       - id: current_temperature_fahrenheit
         type: s1
+        doc: |
+          Temperature in Fahrenheit. -128 means unused (the channel shows
+          `--`).
       - id: current_wind_direction
         type: u1
         enum: wind_direction
+        doc: |
+          Which way the wind blows. `calm` is no wind, `unused` hides the wind
+          line on the channel's "now" page.
       - id: current_wind_speed_kilometers_per_hour
         type: u1
+        doc: Wind speed in km/h. Shown on the "now" page if the user chose km/h.
       - id: current_wind_speed_miles_per_hour
         type: u1
+        doc: Wind speed in mph. Shown on the "now" page if the user chose mph.
       - id: unknown_1
         type: u2
+        doc: Never checked, never read.
       - id: unknown_2
         type: u2
+        doc: Never checked, never read. WiiLink writes 0xFFFF (unused).
+    instances:
+      utc_offset_minutes:
+        value: opening_timestamp - closing_timestamp
+        doc: How far the city's clock is from UTC, in minutes (-300 means UTC-5).
+      current_forecast_is_unused:
+        value: current_forecast == 0xffff
+        doc: True when `current_forecast` is the "no data" marker.
 enums:
   country_code:
     1: japan
