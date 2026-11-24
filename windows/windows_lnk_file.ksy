@@ -48,6 +48,16 @@ seq:
     -orig-id: ICON_LOCATION
     type: string_data
     if: header.flags.has_icon_location
+  - id: extra_data
+    -orig-id: EXTRA_DATA
+    type: extra_data_block
+    repeat: until
+    repeat-until: _.is_terminal or _io.eof
+    if: not _io.eof
+    doc: |
+      Optional data blocks, ended by a terminal block (a block size below 4).
+      Some writers omit the terminal block at the end of the file.
+    doc-ref: 'https://winprotocoldoc.blob.core.windows.net/productionwindowsarchives/MS-SHLLINK/[MS-SHLLINK].pdf Section 2.5'
 types:
   file_header:
     -orig-id: ShellLinkHeader
@@ -259,7 +269,39 @@ types:
         size: chars_str * 2
         type: str
         encoding: UTF-16LE
+  extra_data_block:
+    seq:
+      - id: block_size
+        -orig-id: BlockSize
+        type: u4
+        doc: Size of the whole block, including this field and the signature.
+      - id: block_signature
+        -orig-id: BlockSignature
+        type: u4
+        enum: extra_data_signature
+        if: not is_terminal
+      - id: data
+        size: block_size - 8
+        if: not is_terminal
+    instances:
+      is_terminal:
+        value: block_size < 8
+        doc: |
+          The terminal block is a single u4 below 4; sizes below 8 cannot
+          hold a signature either, so they also end the list.
 enums:
+  extra_data_signature:
+    0xa0000001: environment_variable_data_block
+    0xa0000002: console_data_block
+    0xa0000003: tracker_data_block
+    0xa0000004: console_fe_data_block
+    0xa0000005: special_folder_data_block
+    0xa0000006: darwin_data_block
+    0xa0000007: icon_environment_data_block
+    0xa0000008: shim_data_block
+    0xa0000009: property_store_data_block
+    0xa000000b: known_folder_data_block
+    0xa000000c: vista_and_above_id_list_data_block
   window_state:
     1: normal
     3: maximized
