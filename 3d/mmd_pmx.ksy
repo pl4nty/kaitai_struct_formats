@@ -3,8 +3,8 @@ meta:
   title: MMD (MikuMikuDance) model data (newer format)
   application: MikuMikuDance
   file-extension: pmx
-  endian: le
   license: MIT
+  endian: le
   bit-endian: le
 
 doc: |
@@ -267,15 +267,15 @@ types:
       - id: is_common_toon
         type: u1
       - id: toon_index
-        doc: |
-          If using a common toon texture contains an index into one of the
-          common toon textures shipped with MMD.  Otherwise, contains the
-          index of a texture.
         type:
           switch-on: is_common_toon
           cases:
             0: sized_index(_root.header.texture_index_size)
             1: common_toon_index
+        doc: |
+          If using a common toon texture contains an index into one of the
+          common toon textures shipped with MMD.  Otherwise, contains the
+          index of a texture.
       - id: comment
         type: text
       - id: face_vertex_count
@@ -645,8 +645,8 @@ types:
       - id: length
         type: u4
       - id: value
-        type: str
         size: length
+        type: str
         encoding: UTF-16LE
 
   text_utf8:
@@ -654,8 +654,8 @@ types:
       - id: length
         type: u4
       - id: value
-        type: str
         size: length
+        type: str
         encoding: UTF-8
 
   vec2:
