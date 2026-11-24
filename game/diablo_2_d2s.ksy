@@ -7,9 +7,9 @@ meta:
   file-extension: d2s
   license: MIT
   imports:
-    - d2data
-    - d2enum
-    - d2items
+    - diablo2_data
+    - diablo2_enums
+    - diablo2_items
   endian: le
   bit-endian: le
 
@@ -17,7 +17,7 @@ doc-ref: https://github.com/WalterCouto/D2CE/blob/main/d2s_File_Format.md
 seq:
   - id: data
     size: 0
-    type: d2data
+    type: diablo2_data
   - id: header
     type: d2header
   - id: quests
@@ -62,12 +62,12 @@ types:
         type: save_flag_t
       - id: progression_flags
         type: u1
-        enum: d2enum::char_progression
+        enum: diablo2_enums::char_progression
       - id: unused_save_flags
         type: u2
       - id: character_class
         type: u1
-        enum: d2enum::playerclass
+        enum: diablo2_enums::playerclass
       - id: bonus_stats
         type: u1
         doc: unused?
@@ -108,7 +108,7 @@ types:
       - id: town
         type: town_t
         repeat: expr
-        repeat-expr: d2enum::difficulty::num_difficulties.to_i
+        repeat-expr: diablo2_enums::difficulty::num_difficulties.to_i
         doc: Act number. Highest bit (0x80) = difficulty is completed.
       - id: map_seed
         type: u4
@@ -132,7 +132,7 @@ types:
         type: u1
       - id: d2r_mode
         type: u1
-        enum: d2enum::d2r_game_mode
+        enum: diablo2_enums::d2r_game_mode
       - id: unkn3c
         type: u2
       - id: d2r_menu_appearance
@@ -153,7 +153,7 @@ types:
     seq:
       - id: town
         type: b7
-        enum: d2enum::act
+        enum: diablo2_enums::act
       - id: last_selected
         type: b1
 
@@ -171,14 +171,14 @@ types:
         size: 48 * 2
         type: d2questlist
         repeat: expr
-        repeat-expr: d2enum::difficulty::num_difficulties.to_i
+        repeat-expr: diablo2_enums::difficulty::num_difficulties.to_i
 
   d2questlist:
     seq:
       - id: quests
         type: d2queststate
         repeat: expr
-        repeat-expr: d2enum::quest::num_quests.to_i
+        repeat-expr: diablo2_enums::quest::num_quests.to_i
 
   d2queststate:
     seq:
@@ -229,7 +229,7 @@ types:
         size: 24
         type: waypoint_t
         repeat: expr
-        repeat-expr: d2enum::difficulty::num_difficulties.to_i
+        repeat-expr: diablo2_enums::difficulty::num_difficulties.to_i
 
   waypoint_t:
     seq:
@@ -238,7 +238,7 @@ types:
       - id: waypoint
         type: b1
         repeat: expr
-        repeat-expr: d2enum::waypoint::num_waypoints.to_i
+        repeat-expr: diablo2_enums::waypoint::num_waypoints.to_i
 
   d2npcs:
     seq:
@@ -251,19 +251,19 @@ types:
         size: 8
         type: npc_talk
         repeat: expr
-        repeat-expr: d2enum::difficulty::num_difficulties.to_i
+        repeat-expr: diablo2_enums::difficulty::num_difficulties.to_i
       - id: npc_intro
         size: 8
         type: npc_talk
         repeat: expr
-        repeat-expr: d2enum::difficulty::num_difficulties.to_i
+        repeat-expr: diablo2_enums::difficulty::num_difficulties.to_i
 
   npc_talk:
     seq:
       - id: spoken
         type: b1
         repeat: expr
-        repeat-expr: d2enum::npc::num_npcs.to_i
+        repeat-expr: diablo2_enums::npc::num_npcs.to_i
 
   d2attributes:
     seq:
@@ -272,41 +272,41 @@ types:
       - id: attributes
         type: char_attrib_t
         repeat: until
-        repeat-until: _.id == d2enum::stats::invalid
+        repeat-until: _.id == diablo2_enums::stats::invalid
 
   wrap_b9_attrid:
     doc: Prevents byte alignment injected between bits and switch-on
     seq:
       - id: value
         type: b9
-        enum: d2enum::stats
+        enum: diablo2_enums::stats
 
   char_attrib_t:
     seq:
       - id: id_raw
         type: wrap_b9_attrid
         valid:
-          expr: id == d2enum::stats::invalid or id.to_i <= d2enum::stats::goldbank.to_i
+          expr: id == diablo2_enums::stats::invalid or id.to_i <= diablo2_enums::stats::goldbank.to_i
       - id: amount
         type:
           switch-on: id
           cases:
-            d2enum::stats::strength: b10
-            d2enum::stats::energy: b10
-            d2enum::stats::dexterity: b10
-            d2enum::stats::vitality: b10
-            d2enum::stats::statpts: b10
-            d2enum::stats::newskills: b8
-            d2enum::stats::hitpoints: b21
-            d2enum::stats::maxhp: b21
-            d2enum::stats::mana: b21
-            d2enum::stats::maxmana: b21
-            d2enum::stats::stamina: b21
-            d2enum::stats::maxstamina: b21
-            d2enum::stats::level: b7
-            d2enum::stats::experience: b32
-            d2enum::stats::gold: b25
-            d2enum::stats::goldbank: b25
+            diablo2_enums::stats::strength: b10
+            diablo2_enums::stats::energy: b10
+            diablo2_enums::stats::dexterity: b10
+            diablo2_enums::stats::vitality: b10
+            diablo2_enums::stats::statpts: b10
+            diablo2_enums::stats::newskills: b8
+            diablo2_enums::stats::hitpoints: b21
+            diablo2_enums::stats::maxhp: b21
+            diablo2_enums::stats::mana: b21
+            diablo2_enums::stats::maxmana: b21
+            diablo2_enums::stats::stamina: b21
+            diablo2_enums::stats::maxstamina: b21
+            diablo2_enums::stats::level: b7
+            diablo2_enums::stats::experience: b32
+            diablo2_enums::stats::gold: b25
+            diablo2_enums::stats::goldbank: b25
     instances:
       id:
         value: id_raw.value
@@ -325,7 +325,7 @@ types:
     seq:
       - id: skill
         type: b15
-        enum: d2enum::skill
+        enum: diablo2_enums::skill
       - id: is_left_mouse
         type: b1
         doc: Highest bit (0x8000) indicates hotkey is for the left mouse
@@ -342,7 +342,7 @@ types:
         type: u2
       - id: hireling_id
         type: u2
-        enum: d2enum::hireling
+        enum: diablo2_enums::hireling
       - id: experience
         type: u4
 
@@ -356,7 +356,7 @@ types:
         type: u1
       - id: mod_type
         type: u1
-        enum: d2enum::itemmodtype
+        enum: diablo2_enums::itemmodtype
       - id: field_6
         type: u2
       - id: flags
@@ -428,10 +428,10 @@ types:
         type: itemdata_imode
       - id: world_position
         type: itemdata_world
-        if: imode == d2enum::imode::onground or imode == d2enum::imode::dropping
+        if: imode == diablo2_enums::imode::onground or imode == diablo2_enums::imode::dropping
       - id: inventory_position
         type: itemdata_inventory
-        if: imode != d2enum::imode::onground and imode != d2enum::imode::dropping
+        if: imode != diablo2_enums::imode::onground and imode != diablo2_enums::imode::dropping
       - id: ear_info
         type: itemdata_ear
         if: _parent.flags.iflag_isear
@@ -440,36 +440,36 @@ types:
         if: not _parent.flags.iflag_isear
       - id: gold_info
         type: itemdata_gold
-        if: itemcode == d2enum::itemcodes::gold.to_i
+        if: itemcode == diablo2_enums::itemcodes::gold.to_i
       # Quest items
       - id: quest_info
         type: itemdata_quest
         if: |
-          itemcode == d2enum::itemcodes::decoy_gidbinn.to_i or
-          itemcode == d2enum::itemcodes::the_gidbinn.to_i or
-          itemcode == d2enum::itemcodes::wirts_leg.to_i or
-          itemcode == d2enum::itemcodes::horadric_malus.to_i or
-          itemcode == d2enum::itemcodes::hellforge_hammer.to_i or
-          itemcode == d2enum::itemcodes::horadric_staff.to_i or
-          itemcode == d2enum::itemcodes::staff_of_kings.to_i or
-          itemcode == d2enum::itemcodes::khalims_flail.to_i or
-          itemcode == d2enum::itemcodes::khalims_will.to_i or
-          itemcode == d2enum::itemcodes::amulet_of_the_viper.to_i or
-          itemcode == d2enum::itemcodes::scroll_of_inifuss.to_i or
-          itemcode == d2enum::itemcodes::key_to_the_cairn_stones.to_i or
-          itemcode == d2enum::itemcodes::the_black_tower_key.to_i or
-          itemcode == d2enum::itemcodes::potion_of_life.to_i or
-          itemcode == d2enum::itemcodes::a_jade_figurine.to_i or
-          itemcode == d2enum::itemcodes::the_golden_bird.to_i or
-          itemcode == d2enum::itemcodes::lam_esens_tome.to_i or
-          itemcode == d2enum::itemcodes::horadric_scroll.to_i or
-          itemcode == d2enum::itemcodes::mephistos_soulstone.to_i or
-          itemcode == d2enum::itemcodes::book_of_skill.to_i or
-          itemcode == d2enum::itemcodes::khalims_eye.to_i or
-          itemcode == d2enum::itemcodes::khalims_heart.to_i or
-          itemcode == d2enum::itemcodes::khalims_brain.to_i or
-          itemcode == d2enum::itemcodes::malahs_potion.to_i or
-          itemcode == d2enum::itemcodes::scroll_of_resistance.to_i
+          itemcode == diablo2_enums::itemcodes::decoy_gidbinn.to_i or
+          itemcode == diablo2_enums::itemcodes::the_gidbinn.to_i or
+          itemcode == diablo2_enums::itemcodes::wirts_leg.to_i or
+          itemcode == diablo2_enums::itemcodes::horadric_malus.to_i or
+          itemcode == diablo2_enums::itemcodes::hellforge_hammer.to_i or
+          itemcode == diablo2_enums::itemcodes::horadric_staff.to_i or
+          itemcode == diablo2_enums::itemcodes::staff_of_kings.to_i or
+          itemcode == diablo2_enums::itemcodes::khalims_flail.to_i or
+          itemcode == diablo2_enums::itemcodes::khalims_will.to_i or
+          itemcode == diablo2_enums::itemcodes::amulet_of_the_viper.to_i or
+          itemcode == diablo2_enums::itemcodes::scroll_of_inifuss.to_i or
+          itemcode == diablo2_enums::itemcodes::key_to_the_cairn_stones.to_i or
+          itemcode == diablo2_enums::itemcodes::the_black_tower_key.to_i or
+          itemcode == diablo2_enums::itemcodes::potion_of_life.to_i or
+          itemcode == diablo2_enums::itemcodes::a_jade_figurine.to_i or
+          itemcode == diablo2_enums::itemcodes::the_golden_bird.to_i or
+          itemcode == diablo2_enums::itemcodes::lam_esens_tome.to_i or
+          itemcode == diablo2_enums::itemcodes::horadric_scroll.to_i or
+          itemcode == diablo2_enums::itemcodes::mephistos_soulstone.to_i or
+          itemcode == diablo2_enums::itemcodes::book_of_skill.to_i or
+          itemcode == diablo2_enums::itemcodes::khalims_eye.to_i or
+          itemcode == diablo2_enums::itemcodes::khalims_heart.to_i or
+          itemcode == diablo2_enums::itemcodes::khalims_brain.to_i or
+          itemcode == diablo2_enums::itemcodes::malahs_potion.to_i or
+          itemcode == diablo2_enums::itemcodes::scroll_of_resistance.to_i
       - id: realmdata
         type: itemdata_realmcode
     instances:
@@ -491,7 +491,7 @@ types:
         if: _root.header.version <= 96
       - id: item_mode
         type: b3
-        enum: d2enum::imode
+        enum: diablo2_enums::imode
     instances:
       version:
         value: |
@@ -522,7 +522,7 @@ types:
   itemcode_decoder:
     seq:
       - id: itembits
-        type: 'itemcode_decoder_item(_index == 0 ? d2data::itemcodealgo::start.to_i : itembits[_index - 1].next_index)'
+        type: 'itemcode_decoder_item(_index == 0 ? diablo2_data::itemcodealgo::start.to_i : itembits[_index - 1].next_index)'
         repeat: until
         repeat-until: _root.data.itemcodebits3[_.next_index] != 65535
     instances:
@@ -553,14 +553,14 @@ types:
     seq:
       - id: inv_location
         type: b4
-        enum: d2enum::bodyloc
+        enum: diablo2_enums::bodyloc
       - id: inv_x
         type: b4
       - id: inv_y
         type: b4
       - id: inv_page
         type: b3
-        enum: d2enum::invpage
+        enum: diablo2_enums::invpage
 
   itemdata_gold:
     seq:
@@ -698,9 +698,9 @@ types:
         type: b7
       - id: quality
         type: b4
-        enum: d2enum::itemmodtype
+        enum: diablo2_enums::itemmodtype
         valid:
-          expr: quality.to_i <= d2enum::itemmodtype::tempered.to_i
+          expr: quality.to_i <= diablo2_enums::itemmodtype::tempered.to_i
       - id: hasaltgfx
         type: b1
       - id: altgfx
@@ -727,33 +727,33 @@ types:
       - id: charmitem
         type: itemaffixdef
         if: |
-          _parent.itemcode == d2enum::itemcodes::small_charm.to_i or
-          _parent.itemcode == d2enum::itemcodes::large_charm.to_i or
-          _parent.itemcode == d2enum::itemcodes::grand_charm.to_i or
-          _parent.itemcode == d2enum::itemcodes::crafted_sunder_charm.to_i
+          _parent.itemcode == diablo2_enums::itemcodes::small_charm.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::large_charm.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::grand_charm.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::crafted_sunder_charm.to_i
       - id: bodypart
         type: bodypartdef
         if: |
-          _parent.itemcode == d2enum::itemcodes::heart.to_i or
-          _parent.itemcode == d2enum::itemcodes::brain.to_i or
-          _parent.itemcode == d2enum::itemcodes::jawbone.to_i or
-          _parent.itemcode == d2enum::itemcodes::eye.to_i or
-          _parent.itemcode == d2enum::itemcodes::horn.to_i or
-          _parent.itemcode == d2enum::itemcodes::tail.to_i or
-          _parent.itemcode == d2enum::itemcodes::flag.to_i or
-          _parent.itemcode == d2enum::itemcodes::fang.to_i or
-          _parent.itemcode == d2enum::itemcodes::quill.to_i or
-          _parent.itemcode == d2enum::itemcodes::soul.to_i or
-          _parent.itemcode == d2enum::itemcodes::scalp.to_i or
-          _parent.itemcode == d2enum::itemcodes::spleen.to_i
+          _parent.itemcode == diablo2_enums::itemcodes::heart.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::brain.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::jawbone.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::eye.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::horn.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::tail.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::flag.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::fang.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::quill.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::soul.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::scalp.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::spleen.to_i
       - id: bookscroll
         type: bookscrolldef
         if: |
-          _parent.itemcode == d2enum::itemcodes::scroll_of_town_portal.to_i or
-          _parent.itemcode == d2enum::itemcodes::scroll_of_identify.to_i or
-          _parent.itemcode == d2enum::itemcodes::scroll_of_knowledge.to_i or
-          _parent.itemcode == d2enum::itemcodes::tome_of_town_portal.to_i or
-          _parent.itemcode == d2enum::itemcodes::tome_of_identify.to_i
+          _parent.itemcode == diablo2_enums::itemcodes::scroll_of_town_portal.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::scroll_of_identify.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::scroll_of_knowledge.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::tome_of_town_portal.to_i or
+          _parent.itemcode == diablo2_enums::itemcodes::tome_of_identify.to_i
 
   itemmagicdef:
     seq:
@@ -821,15 +821,15 @@ types:
         type:
           switch-on: _parent.quality
           cases:
-            d2enum::itemmodtype::lowquality: itemqualitydef
-            d2enum::itemmodtype::normal: itemnormaldef
-            d2enum::itemmodtype::hiquality: itemqualitydef
-            d2enum::itemmodtype::magic: itemmagicdef
-            d2enum::itemmodtype::set: itemsetdef
-            d2enum::itemmodtype::rare: itemraredef
-            d2enum::itemmodtype::unique: itemuniquedef
-            d2enum::itemmodtype::crafted: itemraredef
-            d2enum::itemmodtype::tempered: itemtempereddef
+            diablo2_enums::itemmodtype::lowquality: itemqualitydef
+            diablo2_enums::itemmodtype::normal: itemnormaldef
+            diablo2_enums::itemmodtype::hiquality: itemqualitydef
+            diablo2_enums::itemmodtype::magic: itemmagicdef
+            diablo2_enums::itemmodtype::set: itemsetdef
+            diablo2_enums::itemmodtype::rare: itemraredef
+            diablo2_enums::itemmodtype::unique: itemuniquedef
+            diablo2_enums::itemmodtype::crafted: itemraredef
+            diablo2_enums::itemmodtype::tempered: itemtempereddef
             _: itemqualnone
     instances:
       itemcode:
@@ -838,21 +838,21 @@ types:
   itemarmorstats:
     seq:
       - id: armorclass
-        type: d2data::itemattrib_t(d2enum::stats::armorclass)
+        type: diablo2_data::itemattrib_t(diablo2_enums::stats::armorclass)
       - id: maxdurability
-        type: d2data::itemattrib_t(d2enum::stats::maxdurability)
+        type: diablo2_data::itemattrib_t(diablo2_enums::stats::maxdurability)
       - id: durability
-        type: d2data::itemattrib_t(d2enum::stats::durability)
+        type: diablo2_data::itemattrib_t(diablo2_enums::stats::durability)
         if: maxdurability.amount.as<u4> != 0
 
   itemweaponstats:
     seq:
       - id: attackrate
-        type: d2data::itemattrib_t(d2enum::stats::attackrate)
+        type: diablo2_data::itemattrib_t(diablo2_enums::stats::attackrate)
       - id: maxdurability
-        type: d2data::itemattrib_t(d2enum::stats::maxdurability)
+        type: diablo2_data::itemattrib_t(diablo2_enums::stats::maxdurability)
       - id: durability
-        type: d2data::itemattrib_t(d2enum::stats::durability)
+        type: diablo2_data::itemattrib_t(diablo2_enums::stats::durability)
         if: maxdurability.amount.as<u4> != 0
 
   stackabledef:
@@ -861,11 +861,11 @@ types:
         type: b9
         valid:
           expr: |
-            (_parent.itemcode == d2enum::itemcodes::tome_of_identify.to_i or _parent.itemcode == d2enum::itemcodes::tome_of_town_portal.to_i) ?
+            (_parent.itemcode == diablo2_enums::itemcodes::tome_of_identify.to_i or _parent.itemcode == diablo2_enums::itemcodes::tome_of_town_portal.to_i) ?
               quantity <= 20 :
-            (_parent.itemcode == d2enum::itemcodes::key.to_i) ?
+            (_parent.itemcode == diablo2_enums::itemcodes::key.to_i) ?
               quantity <= 12 :
-            (_parent.itemcode == d2enum::itemcodes::arrows.to_i or _parent.itemcode == d2enum::itemcodes::bolts.to_i) ?
+            (_parent.itemcode == diablo2_enums::itemcodes::arrows.to_i or _parent.itemcode == diablo2_enums::itemcodes::bolts.to_i) ?
               quantity <= 500 :
             quantity <= 300
 
@@ -884,11 +884,11 @@ types:
       - id: id_raw
         type: wrap_b9_attrid
         valid:
-          expr: id == d2enum::stats::invalid or id.to_i <= d2enum::stats::heraldtier.to_i
+          expr: id == diablo2_enums::stats::invalid or id.to_i <= diablo2_enums::stats::heraldtier.to_i
       - id: param
-        type: d2data::itemparam_t(id)
+        type: diablo2_data::itemparam_t(id)
       - id: amount
-        type: d2data::itemattrib_t(id)
+        type: diablo2_data::itemattrib_t(id)
     instances:
       id:
         value: id_raw.value
@@ -905,7 +905,7 @@ types:
             statlist.size < 2 or
             statlist.size >= 2 and (statlist[statlist.size - 1].id.to_i != 0 or statlist[statlist.size - 2].id.to_i != 0)
         repeat: until
-        repeat-until: _.id == d2enum::stats::invalid
+        repeat-until: _.id == diablo2_enums::stats::invalid
         if: parent_idx < 0 or (parent_idx >= 0 and ((1 << parent_idx) & _parent.setmask_value) != 0)
 
   unk_bits_def:
@@ -926,14 +926,14 @@ types:
         type: itemdata_imode
       - id: world_position
         type: itemdata_world
-        if: imode == d2enum::imode::onground or imode == d2enum::imode::dropping
+        if: imode == diablo2_enums::imode::onground or imode == diablo2_enums::imode::dropping
       - id: inventory_position
         type: itemdata_inventory
-        if: imode != d2enum::imode::onground and imode != d2enum::imode::dropping
+        if: imode != diablo2_enums::imode::onground and imode != diablo2_enums::imode::dropping
       - id: item_code_data
         type: itemcodedef
       - id: itemcomp_hack
-        type: d2data::itemcomp_util(itemcode)
+        type: diablo2_data::itemcomp_util(itemcode)
       - id: itemattrs
         type: itemdatadef
       - id: oneaffix
@@ -962,22 +962,22 @@ types:
         if: itemcomp_hack.isweapon
       - id: gold_info
         type: itemdata_gold
-        if: itemcode == d2enum::itemcodes::gold.to_i
+        if: itemcode == diablo2_enums::itemcodes::gold.to_i
       - id: stack_info
         type: stackabledef
         if: itemcomp_hack.isstackable
       - id: num_sockets
-        type: d2data::itemattrib_t(d2enum::stats::item_numsockets)
+        type: diablo2_data::itemattrib_t(diablo2_enums::stats::item_numsockets)
         valid:
           expr: num_sockets.amount.as<u4> <= 6
         if: _parent.flags.iflag_socketed
       - id: set_mask
         type: setmaskdef
-        if: quality == d2enum::itemmodtype::set
+        if: quality == diablo2_enums::itemmodtype::set
       - id: statlists
         type: statlistdef(_index - 1)
         repeat: expr
-        repeat-expr: "1 + (quality == d2enum::itemmodtype::set ? 5 : 0) + (_parent.flags.iflag_runeword ? 1 : 0)"
+        repeat-expr: "1 + (quality == diablo2_enums::itemmodtype::set ? 5 : 0) + (_parent.flags.iflag_runeword ? 1 : 0)"
       - id: bullshit_bit
         type: bullshit_bit_def
 
@@ -990,6 +990,6 @@ types:
         value: item_code_data.code
       setmask_value:
         value: |
-          quality == d2enum::itemmodtype::set ? set_mask.mask : 0
+          quality == diablo2_enums::itemmodtype::set ? set_mask.mask : 0
 
     ## TODO finish

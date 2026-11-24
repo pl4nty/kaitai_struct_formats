@@ -5,7 +5,7 @@ meta:
   title: WOLF RPG Editor map
   license: MIT
   imports:
-    - len_str
+    - wolf_rpg_len_str
   endian: le
 seq:
   - id: magic
@@ -18,7 +18,7 @@ seq:
     valid: 0x65
   
   - id: unk
-    type: len_str
+    type: wolf_rpg_len_str
   
   - id: tileset_id
     type: u4
@@ -52,7 +52,7 @@ types:
       - id: unk
         type: u4
       - id: graphic_name
-        type: len_str
+        type: wolf_rpg_len_str
       - id: graphic_direction
         type: u1
       - id: graphic_frame
@@ -193,7 +193,7 @@ types:
       - id: str_arg_len
         type: u1
       - id: str_arg
-        type: len_str
+        type: wolf_rpg_len_str
         repeat: expr
         repeat-expr: str_arg_len
       - id: has_move_route
@@ -242,7 +242,7 @@ types:
       - id: event_id
         type: u4
       - id: name
-        type: len_str
+        type: wolf_rpg_len_str
       - id: x
         type: u4
       - id: y

@@ -5,14 +5,14 @@ meta:
   file-extension: dem
   license: MIT
   imports:
-    - frame
+    - csgo_demo_frame
   endian: le
 
 seq:
   - id: header
     type: header
   - id: frames
-    type: frame
+    type: csgo_demo_frame
     repeat: eos
 
 types:

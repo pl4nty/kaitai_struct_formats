@@ -6,13 +6,13 @@ meta:
   license: Apache-2.0
   imports:
     - ssh_agent_enums
-    - ascii_string
-    - /security/byte_string
-    - /security/mpint
+    - ssh_ascii_string
+    - ssh_byte_string
+    - ssh_mpint
   endian: be
 seq:
   - id: key_type
-    type: ascii_string
+    type: ssh_ascii_string
     valid:
       expr: _.value == "ssh-rsa" or _.value == "ssh-dss" or _.value == "ecdsa-sha2-nistp256" or _.value == "ecdsa-sha2-nistp384" or _.value == "ecdsa-sha2-nistp521"
   - id: key
@@ -25,7 +25,7 @@ seq:
         '"ecdsa-sha2-nistp384"': ec
         '"ecdsa-sha2-nistp521"': ec
   - id: comment
-    type: byte_string
+    type: ssh_byte_string
   - id: constraints
     type: constraint
     repeat: eos
@@ -33,37 +33,37 @@ types:
   rsa:
     seq:
       - id: n
-        type: mpint
+        type: ssh_mpint
       - id: e
-        type: mpint
+        type: ssh_mpint
       - id: d
-        type: mpint
+        type: ssh_mpint
       - id: iqmp
-        type: mpint
+        type: ssh_mpint
       - id: p
-        type: mpint
+        type: ssh_mpint
       - id: q
-        type: mpint
+        type: ssh_mpint
   dsa:
     seq:
       - id: p
-        type: mpint
+        type: ssh_mpint
       - id: q
-        type: mpint
+        type: ssh_mpint
       - id: g
-        type: mpint
+        type: ssh_mpint
       - id: y
-        type: mpint
+        type: ssh_mpint
       - id: x
-        type: mpint
+        type: ssh_mpint
   ec:
     seq:
       - id: curve
-        type: ascii_string
+        type: ssh_ascii_string
       - id: point
-        type: byte_string
+        type: ssh_byte_string
       - id: scalar
-        type: mpint
+        type: ssh_mpint
   constraint:
     seq:
       - id: kind

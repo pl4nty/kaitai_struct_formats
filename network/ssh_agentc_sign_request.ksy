@@ -5,17 +5,17 @@ meta:
   title: SSH_AGENTC_SIGN_REQUEST
   license: Apache-2.0
   imports:
-    - /security/byte_string
+    - ssh_byte_string
   endian: be
 doc: |
   Sign request message (type 13).
   Server requests the agent to sign data with a specific key.
 seq:
   - id: key_blob
-    type: byte_string
+    type: ssh_byte_string
     doc: Public key blob to sign with
   - id: data
-    type: byte_string
+    type: ssh_byte_string
     doc: Data to be signed
   - id: flags
     type: u4

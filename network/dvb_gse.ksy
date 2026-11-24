@@ -5,10 +5,10 @@ meta:
   file-extension: gse_standard
   license: MIT
   imports:
-    - start_of_pdu
-    - middle_of_pdu
-    - end_of_pdu
-    - whole_pdu
+    - dvb_gse_start_of_pdu
+    - dvb_gse_middle_of_pdu
+    - dvb_gse_end_of_pdu
+    - dvb_gse_whole_pdu
   endian: be
 seq:
   - id: start_and_end_indicators
@@ -23,10 +23,10 @@ seq:
     type:
       switch-on: start_and_end_indicators
       cases:
-        'se::start': start_of_pdu(label_type_indicator)
-        'se::middle': middle_of_pdu
-        'se::end': end_of_pdu
-        'se::whole': whole_pdu(label_type_indicator)
+        'se::start': dvb_gse_start_of_pdu(label_type_indicator)
+        'se::middle': dvb_gse_middle_of_pdu
+        'se::end': dvb_gse_end_of_pdu
+        'se::whole': dvb_gse_whole_pdu(label_type_indicator)
     if: not is_padding
 instances:
   is_padding:

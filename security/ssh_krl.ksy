@@ -5,8 +5,8 @@ meta:
   title: OpenSSH key revocation list (KRL)
   license: Apache-2.0
   imports:
-    - byte_string
-    - mpint
+    - ../network/ssh_byte_string
+    - ../network/ssh_mpint
   endian: be
 doc-ref: https://github.com/openssh/openssh-portable/blob/master/PROTOCOL.krl
 seq:
@@ -23,9 +23,9 @@ seq:
     type: u8
     valid: 0
   - id: reserved
-    type: byte_string
+    type: ssh_byte_string
   - id: comment
-    type: byte_string
+    type: ssh_byte_string
   - id: sections
     type: section
     repeat: eos
@@ -51,14 +51,14 @@ types:
   strings:
     seq:
       - id: values
-        type: byte_string
+        type: ssh_byte_string
         repeat: eos
   certificates:
     seq:
       - id: ca_key
-        type: byte_string
+        type: ssh_byte_string
       - id: reserved
-        type: byte_string
+        type: ssh_byte_string
       - id: sections
         type: certificate_section
         repeat: eos
@@ -96,14 +96,14 @@ types:
       - id: offset
         type: u8
       - id: bitmap
-        type: mpint
+        type: ssh_mpint
   extension:
     seq:
       - id: name
-        type: byte_string
+        type: ssh_byte_string
       - id: critical
         type: u1
         valid:
           any-of: [0, 1]
       - id: contents
-        type: byte_string
+        type: ssh_byte_string

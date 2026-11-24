@@ -7,7 +7,7 @@ meta:
   file-extension: cse
   license: CC0-1.0
   imports:
-    - golfer
+    - simgolf_golfer
   endian: le
 doc: |
   A course saved for championship play, `Themes\Championship\<course>.cse`.
@@ -145,7 +145,7 @@ types:
       - id: wild_animals
         size: 0xa00
       - id: golfer_types
-        type: golfer::golfer_type
+        type: simgolf_golfer::golfer_type
         repeat: expr
         repeat-expr: 76
       - id: dev_map

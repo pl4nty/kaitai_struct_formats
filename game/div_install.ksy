@@ -5,8 +5,8 @@ meta:
   file-extension: exe
   license: GPL-3.0-only
   imports:
-    - fpg
-    - fnt
+    - div_fpg
+    - div_fnt
   encoding: ASCII
   endian: le
     
@@ -71,14 +71,14 @@ types:
         type: u4
       - id: install_fpg
         size: _root.tail.size_fpg_z
-        type: fpg
+        type: div_fpg
         process: zlib
       - id: small_fnt
         size: _root.tail.size_fnt1_z
-        type: fnt
+        type: div_fnt
         process: zlib
       - id: big_fnt
         size: _root.tail.size_fnt2_z
-        type: fnt
+        type: div_fnt
         process: zlib
         if: segundo_font != 0

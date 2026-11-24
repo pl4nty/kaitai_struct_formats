@@ -12,7 +12,7 @@ meta:
     wikidata: Q939636
   license: MIT
   imports:
-    - file_streams
+    - coreldraw_file_streams
   encoding: ASCII
   endian: le
   bit-endian: le
@@ -52,7 +52,7 @@ doc-ref:
   - https://github.com/photopea/CDR-specification
 params:
   - id: streams
-    type: file_streams
+    type: coreldraw_file_streams
 seq:
   - id: riff_chunk
     type: riff_chunk_type

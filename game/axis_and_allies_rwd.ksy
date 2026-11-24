@@ -6,7 +6,7 @@ meta:
   file-extension: rwd
   license: MIT
   imports:
-    - tgck
+    - axis_and_allies_tgck
   endian: le
 doc: |
   A TGCK container of three sections: `Header`, `Files`, the files' data
@@ -15,7 +15,7 @@ doc: |
 doc-ref: README.md
 seq:
   - id: header
-    type: tgck::header
+    type: axis_and_allies_tgck::header
   - id: payloads
     size: _io.size - _io.pos - header.section_count * 0x60
   - id: sections
@@ -45,7 +45,7 @@ types:
   section:
     seq:
       - id: record
-        type: tgck::section_record
+        type: axis_and_allies_tgck::section_record
     instances:
       archive_header:
         value: 'record.is_compressed ? inflated_archive_header : stored_archive_header'

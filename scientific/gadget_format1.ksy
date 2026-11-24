@@ -5,7 +5,7 @@ meta:
   title: GADGET snapshot (format 1)
   license: MIT
   imports:
-    - array_buffer
+    - astro_array_buffer
   endian: le
 seq:
   - id: gadget_header
@@ -104,7 +104,7 @@ types:
     seq:
       - id: field
         size: _root.gadget_header.npart[index] * components * 4
-        type: array_buffer(field_type)
+        type: astro_array_buffer(field_type)
         if: has_field
   bool_value:
     params:

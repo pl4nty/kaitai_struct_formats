@@ -5,8 +5,8 @@ meta:
   title: SSH agent lock or unlock
   license: Apache-2.0
   imports:
-    - /security/byte_string
+    - ssh_byte_string
   endian: be
 seq:
   - id: passphrase
-    type: byte_string
+    type: ssh_byte_string

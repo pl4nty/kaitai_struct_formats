@@ -6,7 +6,7 @@ meta:
   license: Apache-2.0
   imports:
     - meshcore
-    - companion_common
+    - meshcore_companion_common
   endian: le
   bit-endian: le
 seq:
@@ -122,7 +122,7 @@ types:
         type: u1
         enum: meshcore::node_type
       - id: flags
-        type: companion_common::contact_flags
+        type: meshcore_companion_common::contact_flags
       - id: num_out_path
         type: u1
       - id: out_path
@@ -169,7 +169,7 @@ types:
         type: u1
       - id: advert_loc_policy
         type: u1
-        enum: companion_common::advert_loc_policy
+        enum: meshcore_companion_common::advert_loc_policy
       - id: telemetry_mode_base
         type: b2
       - id: telemetry_mode_loc
@@ -209,12 +209,12 @@ types:
         type: u1
       - id: txt_type
         type: u1
-        enum: companion_common::txt_type
+        enum: meshcore_companion_common::txt_type
       - id: sender_timestamp
         type: u4
       - id: sender_prefix
         size: 4
-        if: txt_type == companion_common::txt_type::signed_plain
+        if: txt_type == meshcore_companion_common::txt_type::signed_plain
       - id: text
         size-eos: true
         type: str
@@ -230,7 +230,7 @@ types:
         type: u1
       - id: txt_type
         type: u1
-        enum: companion_common::txt_type
+        enum: meshcore_companion_common::txt_type
       - id: sender_timestamp
         type: u4
       - id: text
@@ -416,7 +416,7 @@ types:
         type: u1
         enum: meshcore::node_type
       - id: flags
-        type: companion_common::contact_flags
+        type: meshcore_companion_common::contact_flags
       - id: num_out_path
         type: u1
       - id: out_path

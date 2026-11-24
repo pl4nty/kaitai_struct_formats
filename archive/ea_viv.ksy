@@ -5,10 +5,10 @@ meta:
   file-extension: viv
   license: CC0-1.0
   imports:
-    - fce
-    - ctb
-    - bnk
-    - fedata
+    - ../game/nfs4_fce
+    - ../game/nfs4_ctb
+    - ../game/nfs4_bnk
+    - ../game/nfs4_fedata
   encoding: ASCII
   endian: be
 seq:
@@ -47,17 +47,17 @@ types:
           switch-on: name
           cases:
             '"carp.txt"': strz
-            '"car.fce"': fce
-            '"dash.fce"': fce
-            '"hel.fce"': fce
-            '"careng.ctb"': ctb
-            '"careng.ltb"': ctb
-            '"careng.bnk"': bnk
-            '"ocareng.bnk"': bnk
-            '"scareng.bnk"': bnk
-            '"fedata.eng"': fedata
-            '"fedata.ger"': fedata
-            '"fedata.spa"': fedata
-            '"fedata.ita"': fedata
-            '"fedata.jap"': fedata
-            '"fedata.swe"': fedata
+            '"car.fce"': nfs4_fce
+            '"dash.fce"': nfs4_fce
+            '"hel.fce"': nfs4_fce
+            '"careng.ctb"': nfs4_ctb
+            '"careng.ltb"': nfs4_ctb
+            '"careng.bnk"': nfs4_bnk
+            '"ocareng.bnk"': nfs4_bnk
+            '"scareng.bnk"': nfs4_bnk
+            '"fedata.eng"': nfs4_fedata
+            '"fedata.ger"': nfs4_fedata
+            '"fedata.spa"': nfs4_fedata
+            '"fedata.ita"': nfs4_fedata
+            '"fedata.jap"': nfs4_fedata
+            '"fedata.swe"': nfs4_fedata

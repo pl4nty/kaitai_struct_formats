@@ -8,7 +8,7 @@ meta:
   license: GPL-3.0-only
   imports:
     - rx2_enums
-    - d3d
+    - crackdown2_d3d
   endian: be
 
 doc: |
@@ -80,7 +80,7 @@ types:
       - id: mip_flush
         type: u4
       - id: fetch_constant
-        type: d3d::gpu_texture_fetch_constant
+        type: crackdown2_d3d::gpu_texture_fetch_constant
       - id: m_type
         type: u1
       - id: face
@@ -101,13 +101,13 @@ types:
         type: u2
       - id: data_type
         type: u4
-        enum: d3d::d3ddecltype
+        enum: crackdown2_d3d::d3ddecltype
       - id: method
         type: u1
-        enum: d3d::d3ddeclmethod
+        enum: crackdown2_d3d::d3ddeclmethod
       - id: usage
         type: u1
-        enum: d3d::d3ddeclusage
+        enum: crackdown2_d3d::d3ddeclusage
       - id: usage_index
         type: u1
       - id: type_code

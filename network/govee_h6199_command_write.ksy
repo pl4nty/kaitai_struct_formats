@@ -6,8 +6,8 @@ meta:
   license: MIT
   imports:
     - govee_shared
-    - h6199_diy_selector
-    - h6199_control_payload
+    - govee_h6199_diy_selector
+    - govee_h6199_control_payload
   endian: le
 doc: |
   H6199 20-byte command frame.  The final byte is the XOR of bytes 0 through 18.
@@ -31,9 +31,9 @@ seq:
         'command_op::mode': mode_body
         'command_op::display_setting': display_setting_body
         'command_op::relative_brightness': relative_brightness_body
-        'command_op::strip_direction': h6199_control_payload::write_value
-        'command_op::camera_position': h6199_control_payload::write_value
-        'command_op::gradient': h6199_control_payload::write_value
+        'command_op::strip_direction': govee_h6199_control_payload::write_value
+        'command_op::camera_position': govee_h6199_control_payload::write_value
+        'command_op::gradient': govee_h6199_control_payload::write_value
   - id: checksum
     type: u1
 enums:
@@ -96,7 +96,7 @@ types:
             'mode_sel::scene': scene_body
             'mode_sel::static_colour': static_colour_body
             'mode_sel::music': music_body
-            'mode_sel::diy': h6199_diy_selector::diy_selector
+            'mode_sel::diy': govee_h6199_diy_selector::diy_selector
   scene_body:
     seq:
       - id: scene_id

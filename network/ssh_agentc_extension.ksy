@@ -5,14 +5,14 @@ meta:
   title: SSH_AGENTC_EXTENSION
   license: Apache-2.0
   imports:
-    - /security/byte_string
+    - ssh_byte_string
   endian: be
 doc: |
   Extension request message (type 27).
   Used for protocol extensions like session-bind@openssh.com.
 seq:
   - id: extension_name
-    type: byte_string
+    type: ssh_byte_string
     doc: Extension name (e.g., "session-bind@openssh.com")
   - id: extension_data
     size-eos: true

@@ -21,9 +21,9 @@ meta:
   title: AUTOSAR DLT log file
   license: GPL-3.0-or-later
   imports:
-    - stored_message
+    - autosar_dlt_stored_message
   endian: be
 seq:
   - id: msg
-    type: stored_message
+    type: autosar_dlt_stored_message
     repeat: eos

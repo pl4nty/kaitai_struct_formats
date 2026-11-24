@@ -6,7 +6,7 @@ meta:
   license: Apache-2.0
   imports:
     - meshcore
-    - companion_common
+    - meshcore_companion_common
   endian: le
   bit-endian: le
 seq:
@@ -116,7 +116,7 @@ types:
     seq:
       - id: txt_type
         type: u1
-        enum: companion_common::txt_type
+        enum: meshcore_companion_common::txt_type
       - id: attempt
         type: u1
       - id: msg_timestamp
@@ -131,8 +131,8 @@ types:
     seq:
       - id: txt_type
         type: u1
-        enum: companion_common::txt_type
-        valid: companion_common::txt_type::plain
+        enum: meshcore_companion_common::txt_type
+        valid: meshcore_companion_common::txt_type::plain
       - id: channel_idx
         type: u1
       - id: msg_timestamp
@@ -180,7 +180,7 @@ types:
         type: u1
         enum: meshcore::node_type
       - id: flags
-        type: companion_common::contact_flags
+        type: meshcore_companion_common::contact_flags
       - id: num_out_path
         type: u1
       - id: out_path
@@ -336,7 +336,7 @@ types:
         if: not _io.eof
       - id: advert_loc_policy
         type: u1
-        enum: companion_common::advert_loc_policy
+        enum: meshcore_companion_common::advert_loc_policy
         if: not _io.eof
   send_telemetry_req:
     seq:

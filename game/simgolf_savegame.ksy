@@ -7,7 +7,7 @@ meta:
   file-extension: sve
   license: CC0-1.0
   imports:
-    - golfer
+    - simgolf_golfer
   endian: le
 doc: |
   A saved game, `saved games\<name>.sve` (the autosaves too, and
@@ -171,7 +171,7 @@ types:
       - id: wild_animals
         size: 0xa00
       - id: golfer_types
-        type: golfer::golfer_type
+        type: simgolf_golfer::golfer_type
         repeat: expr
         repeat-expr: 76
       - id: golfer_type_text
@@ -223,7 +223,7 @@ types:
       - id: preference_flags
         type: u4
       - id: extra_golfer_types
-        type: golfer::golfer_type
+        type: simgolf_golfer::golfer_type
         repeat: expr
         repeat-expr: 4
         if: (game_options & 0x40000000) != 0

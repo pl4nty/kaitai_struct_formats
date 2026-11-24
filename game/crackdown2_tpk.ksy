@@ -7,7 +7,7 @@ meta:
   file-extension: tpk
   license: AGPL-3.0-or-later
   imports:
-    - d3d
+    - crackdown2_d3d
   endian: be
   
 seq:  
@@ -44,6 +44,6 @@ types:
         size: _root.header.string_size  
         doc: Concatenated null-terminated texture name strings.  
       - id: textures  
-        type: d3d::d3d_base_texture  
+        type: crackdown2_d3d::d3d_base_texture  
         repeat: expr  
         repeat-expr: _root.header.num_textures  

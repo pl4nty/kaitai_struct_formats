@@ -7,7 +7,7 @@ meta:
   file-extension: anm
   license: MIT
   imports:
-    - mdl
+    - sh2_mdl
     - ../common/ieee754_float/f2le
   endian: le
   bit-endian: le
@@ -21,7 +21,7 @@ doc: |
 
 params:
   - id: model
-    type: mdl
+    type: sh2_mdl
     doc: The model that the animation will be applied to.
 
 seq:
@@ -270,7 +270,7 @@ types:
       necessary.
     params:
       - id: model
-        type: mdl
+        type: sh2_mdl
         doc: The model that the animation applies to.
       - id: block_index
         type: u4

@@ -5,7 +5,7 @@ meta:
   title: WOLF RPG Editor common events
   license: MIT
   imports:
-    - len_str
+    - wolf_rpg_len_str
   endian: le
 seq:
   - id: magic
@@ -46,7 +46,7 @@ types:
       - id: values_len
         type: u4
       - id: values
-        type: len_str
+        type: wolf_rpg_len_str
         repeat: expr
         repeat-expr: values_len
   arg_special_num_data:
@@ -62,7 +62,7 @@ types:
       - id: color
         type: u4
       - id: var_names
-        type: len_str
+        type: wolf_rpg_len_str
         repeat: expr
         repeat-expr: 100
       - id: check
@@ -77,7 +77,7 @@ types:
   wm:
     seq:
       - id: a
-        type: len_str
+        type: wolf_rpg_len_str
       - id: check
         type: u1
         valid:
@@ -90,7 +90,7 @@ types:
   return:
     seq:
       - id: name
-        type: len_str
+        type: wolf_rpg_len_str
       - id: value_id
         type: u4
       - id: check
@@ -101,7 +101,7 @@ types:
       - id: arg_names_len
         type: u4
       - id: arg_names
-        type: len_str
+        type: wolf_rpg_len_str
         repeat: expr
         repeat-expr: arg_names_len
       
@@ -170,7 +170,7 @@ types:
       - id: enabled_str_arg_num
         type: u1
       - id: name
-        type: len_str
+        type: wolf_rpg_len_str
       - id: len
         type: u4
       - id: ins
@@ -182,7 +182,7 @@ types:
       - id: unk
         size: note_len
       - id: note
-        type: len_str
+        type: wolf_rpg_len_str
         if: note_len >= 1
       
       - id: check
@@ -208,7 +208,7 @@ types:
       - id: str_arg_len
         type: u1
       - id: str_arg
-        type: len_str
+        type: wolf_rpg_len_str
         repeat: expr
         repeat-expr: str_arg_len 
       - id: l4
