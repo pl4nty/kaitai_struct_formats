@@ -35,7 +35,7 @@ types:
       - {id: ofs_properties, type: u8}
       - {id: ofs_master_material_path, type: u8}
     instances:
-      name_raw:  # Hack to overcome https://github.com/kaitai-io/kaitai_struct/issues/187
+      name_raw:  # Hack to overcome upstream kaitai_struct issue 187
         {pos: ofs_material_name, type: u2, repeat: until, repeat-until: _ == 0}
       name:
         {pos: ofs_material_name, type: str, encoding: UTF-16LE, size: (name_raw.size * 2) - 2}
@@ -103,7 +103,7 @@ types:
       texture_type:
         {pos: ofs_texture_type, type: str, encoding: UTF-16LE, size: (texture_type_raw.size * 2) - 2}
       texture_path:
-        # Thanks to https://github.com/kaitai-io/kaitai_struct/issues/187#issuecomment-1585245651
+        # Thanks to upstream kaitai_struct issue 187
         {pos: ofs_texture_path, type: str, encoding: UTF-16LE, size: (texture_path_raw.size * 2) - 2}
 
   alpha_flags:
