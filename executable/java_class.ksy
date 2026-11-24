@@ -414,6 +414,8 @@ types:
             '"Exceptions"': attr_body_exceptions # 4.7.5
             '"SourceFile"': attr_body_source_file # 4.7.10
             '"LineNumberTable"': attr_body_line_number_table # 4.7.12
+            '"LocalVariableTable"': attr_body_local_variable_table # 4.7.13
+            '"LocalVariableTypeTable"': attr_body_local_variable_type_table # 4.7.14
     instances:
       name_as_str:
         value: _root.constant_pool[name_index - 1].cp_info.as<utf8_cp_info>.value
@@ -511,6 +513,68 @@ types:
                 type: u2
               - id: line_number
                 type: u2
+      attr_body_local_variable_table:
+        doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.13
+        seq:
+          - id: local_variable_table_length
+            type: u2
+          - id: local_variable_table
+            type: local_variable_table_entry
+            repeat: expr
+            repeat-expr: local_variable_table_length
+        types:
+          local_variable_table_entry:
+            seq:
+              - id: start_pc
+                type: u2
+                doc: Start of the code range where the variable has a value
+              - id: length
+                type: u2
+                doc: Length of that code range
+              - id: name_index
+                type: u2
+              - id: descriptor_index
+                type: u2
+                doc: Field descriptor of the variable's type, index in constant pool
+              - id: index
+                type: u2
+                doc: Index of the variable in the local variable array of the frame
+            instances:
+              name_as_str:
+                value: _root.constant_pool[name_index - 1].cp_info.as<utf8_cp_info>.value
+              descriptor_as_str:
+                value: _root.constant_pool[descriptor_index - 1].cp_info.as<utf8_cp_info>.value
+      attr_body_local_variable_type_table:
+        doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.14
+        seq:
+          - id: local_variable_type_table_length
+            type: u2
+          - id: local_variable_type_table
+            type: local_variable_type_table_entry
+            repeat: expr
+            repeat-expr: local_variable_type_table_length
+        types:
+          local_variable_type_table_entry:
+            seq:
+              - id: start_pc
+                type: u2
+                doc: Start of the code range where the variable has a value
+              - id: length
+                type: u2
+                doc: Length of that code range
+              - id: name_index
+                type: u2
+              - id: signature_index
+                type: u2
+                doc: Field signature of the variable's generic type, index in constant pool
+              - id: index
+                type: u2
+                doc: Index of the variable in the local variable array of the frame
+            instances:
+              name_as_str:
+                value: _root.constant_pool[name_index - 1].cp_info.as<utf8_cp_info>.value
+              signature_as_str:
+                value: _root.constant_pool[signature_index - 1].cp_info.as<utf8_cp_info>.value
   method_info:
     -orig-id: method_info
     doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.6
