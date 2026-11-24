@@ -1,4 +1,5 @@
 # Imported from https://github.com/TheGreatRambler/Mii_to_UMii/blob/64caebae9613dcca464d38709ade7c510caa5bb0/ksy/gen3_switch.ksy
+# Special type, region and checksum fields from https://github.com/WiiLink24/MiiContestChannelServer/blob/HEAD/mii/gen3_switch.ksy
 meta:
   id: gen3_switch_mii
   title: Switch Mii character data
@@ -29,8 +30,13 @@ seq:
       Body weight. Ranges from 0 to 127, small to large. In the Mii editor, pressing
       right will add 1 to this value, and pressing left will subtract 1, allowing for
       precise editing.
+  - id: special_type
+    type: b1
+    doc: |
+      Toggle if the Mii is a Special Mii. Completely unused functionality. Does not
+      allow editing the Mii, or using the Mii in games.
   - id: hair_color
-    type: u1
+    type: b7
     doc: |
       Hair color. Ranges from 0 to 99. Not ordered the same as visible in editor. A
       map of the internal values in correlation to the Mii editor is at
@@ -74,13 +80,20 @@ seq:
       map of the internal values in correlation to the Mii editor is at
       /maps.txt/{glasses-color} for default colors and /maps.txt/{colors} for custom
       colors.
+  - id: region_move
+    type: b2
+    doc: Region move flag. Meaning not confirmed.
   - id: eye_type
-    type: u1
+    type: b6
     doc: |
       Eye type. Ranges from 0 to 59. Not ordered the same as visible in editor. A map
       of the internal values in correlation to the Mii editor is at /maps.txt/{eyes}.
+  - id: font_region
+    type: b2
+    enum: font_region
+    doc: Font region, the character set used for the Mii name.
   - id: mouth_type
-    type: u1
+    type: b6
     doc: |
       Mouth type. Ranges from 0 to 35. Not ordered the same as visible in editor. A
       map of the internal values in correlation to the Mii editor is at
@@ -203,13 +216,30 @@ seq:
     type: str
     encoding: UTF-16LE
     doc: Mii name. Can be up to 10 characters long.
-  - id: unknown
-    type: u1
-    repeat: expr
-    repeat-expr: 16
-    doc: Currently unknown data.
   - id: mii_id
     type: u1
     repeat: expr
-    repeat-expr: 4
-    doc: Mii ID. An identifier used to save Miis in most games.
+    repeat-expr: 16
+    doc: |
+      Unique Mii identifier, randomly generated. The leftmost bit of byte 9 must be
+      set to 1, otherwise the Mii is deemed invalid and the console deletes its Mii
+      database on boot.
+  - id: checksum_mii
+    type: u1
+    repeat: expr
+    repeat-expr: 2
+    doc: CRC-16/XMODEM of the Mii data (everything before this field).
+  - id: checksum_console
+    type: u1
+    repeat: expr
+    repeat-expr: 2
+    doc: |
+      CRC-16/XMODEM of the Mii data and `checksum_mii` together with the console's
+      device ID (stored separately), so it is the same for every Mii from one
+      console.
+enums:
+  font_region:
+    0: usa_pal_jpn
+    1: chn
+    2: kor
+    3: twn
