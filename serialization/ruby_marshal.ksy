@@ -54,6 +54,7 @@ types:
             'codes::ruby_symbol': ruby_symbol
             'codes::ruby_symbol_link': packed_int
             'codes::ruby_object_link': packed_int
+            'codes::user_marshal': user_marshal
   packed_int:
     doc: |
       Ruby uses sophisticated system to pack integers: first `code`
@@ -190,6 +191,18 @@ types:
         type: pair
         repeat: expr
         repeat-expr: num_vars.value
+  user_marshal:
+    doc: |
+      Object of a class that defines `marshal_dump` and `marshal_load`
+      (e.g. Gem::Version): the class name, then the object returned by
+      `marshal_dump`.
+    doc-ref: 'https://docs.ruby-lang.org/en/2.4.0/marshal_rdoc.html#label-marshal_dump+and+marshal_load'
+    seq:
+      - id: class_name
+        type: record
+        doc: Symbol (or symbol link) naming the class.
+      - id: data
+        type: record
   pair:
     seq:
       - id: key
@@ -207,6 +220,7 @@ enums:
     0x49: instance_var
     0x53: ruby_struct
     0x54: const_true
+    0x55: user_marshal
     0x5b: ruby_array
     0x69: packed_int
     0x6c: bignum
