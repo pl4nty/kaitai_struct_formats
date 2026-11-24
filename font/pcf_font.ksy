@@ -73,6 +73,12 @@ types:
             # TODO: bdf_accelerators
     types:
       properties:
+        meta:
+          endian:
+            switch-on: _parent.format.is_big_endian
+            cases:
+              true: be
+              false: le
         doc: |
           Array of properties (key-value pairs), used to convey different X11
           settings of a font. Key is always an X font atom.
@@ -158,6 +164,12 @@ types:
               #value:
               #  value: '(is_string != 0) ? str_value : int_value'
       bitmaps:
+        meta:
+          endian:
+            switch-on: _parent.format.is_big_endian
+            cases:
+              true: be
+              false: le
         doc: |
           Table containing uncompressed glyph bitmaps.
         doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#the-bitmap-table'
@@ -176,6 +188,12 @@ types:
             repeat: expr
             repeat-expr: 4
       bdf_encodings:
+        meta:
+          endian:
+            switch-on: _parent.format.is_big_endian
+            cases:
+              true: be
+              false: le
         doc: |
           Table that allows mapping of character codes to glyphs present in the
           font. Supports 1-byte and 2-byte character codes.
@@ -205,6 +223,12 @@ types:
             repeat: expr
             repeat-expr: (max_char_or_byte2 - min_char_or_byte2 + 1) * (max_byte1 - min_byte1 + 1)
       swidths:
+        meta:
+          endian:
+            switch-on: _parent.format.is_big_endian
+            cases:
+              true: be
+              false: le
         doc: |
           Table containing scalable widths of characters.
         doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#the-scalable-widths-table'
@@ -222,6 +246,12 @@ types:
               The scalable width of a character is the width of the corresponding
               PostScript character in em-units (1/1000ths of an em).
       glyph_names:
+        meta:
+          endian:
+            switch-on: _parent.format.is_big_endian
+            cases:
+              true: be
+              false: le
         doc: |
           Table containing character names for every glyph.
         doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#the-glyph-names-table'
@@ -263,9 +293,9 @@ types:
       it as always little-endian and makes liberal use of bitmasking to parse
       various parts of it.
 
-      TODO: this format specification recognizes endianness and bit
-      order format bits, but it does not really takes any parsing
-      decisions based on them.
+      Table bodies use the byte order given by `is_big_endian`; the bit
+      order and padding bits are recognized, but no parsing decisions are
+      based on them.
     doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#file-header'
     seq:
       - id: padding1
