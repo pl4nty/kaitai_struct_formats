@@ -13,25 +13,30 @@ doc: |
   Qt installer framework is a set of libs to make SFX installers. Installers
   usually contain 7zip-compressed archives. Obviously, Qt installer itself is
   built using this framework.
-  
-  Warning 1: KSC has a bug. It makes the computed values be int32_t. Of course
-  their type should be either explicitly specified by a programmer or derived
-  automatically. The workaroind is to just replace all int32_t to int64_t in
-  sources.
-  Warning 2: don't use this spec on Linux against Qt distribution with overcommit
-  enabled unless you have lot of RAM (> 12 GiB). There is a severe memory leak
-  somewhere (currently I have no idea where exactly). The leak is present in both
-  C++ and python-compiled code. In python even if I have patched the generated
-  source to explicitly free all the `bytes`, `BytesIO`s and `KaitaiStream` objects
-  the leak is still present. At least it is neither in `bytes` nor in `BytesIO`.
-  In C++ I have not patched anything but used move semantics to free the stuff
-  since std::unique_ptr is used. The leak is still present. IDK where it is and
-  how to fix it.
+
+  Warning 1: KSC has a bug. It makes the computed values be int32_t. Of
+  course their type should be either explicitly specified by a programmer or
+  derived automatically. The workaround is to just replace all int32_t to
+  int64_t in sources.
+
+  Warning 2: don't use this spec on Linux against Qt distribution with
+  overcommit enabled unless you have lot of RAM (> 12 GiB). There is a severe
+  memory leak somewhere (currently I have no idea where exactly). The leak is
+  present in both C++ and python-compiled code. In python even if I have
+  patched the generated source to explicitly free all the `bytes`, `BytesIO`s
+  and `KaitaiStream` objects the leak is still present. At least it is
+  neither in `bytes` nor in `BytesIO`. In C++ I have not patched anything but
+  used move semantics to free the stuff since std::unique_ptr is used. The
+  leak is still present. IDK where it is and how to fix it.
 
 -license-header: |
   GNU General Public License Usage
-  Alternatively, this file may be used under the terms of the GNU General Public License version 3 as published by the Free Software Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT included in the packaging of this file. Please review the following information to ensure the GNU General Public License requirements will be met: https://www.gnu.org/licenses/gpl-3.0.html.
-  
+  Alternatively, this file may be used under the terms of the GNU General
+  Public License version 3 as published by the Free Software Foundation with
+  exceptions as appearing in the file LICENSE.GPL3-EXCEPT included in the
+  packaging of this file. Please review the following information to ensure
+  the GNU General Public License requirements will be met:
+  https://www.gnu.org/licenses/gpl-3.0.html.
 
 doc-ref:
   - https://wiki.qt.io/Qt-Installer-Framework
@@ -43,9 +48,10 @@ params:
   - id: magic_cookie_offset
     type: u8
     -orig-id: endOfBinaryContent - 8
-    doc:  |
-      In order to use this spec find the magic cookie [0xf8, 0x68, 0xd6, 0x99, 0x1c,
-      0x0a, 0x63, 0xc2] in the last MiB of file and set this param to its offset.
+    doc: |
+      In order to use this spec find the magic cookie
+      [0xf8, 0x68, 0xd6, 0x99, 0x1c, 0x0a, 0x63, 0xc2] in the last MiB of file
+      and set this param to its offset.
 instances:
   end_of_binary_content:
     value: magic_cookie_offset + sizeof<header::cookie_identifier>
