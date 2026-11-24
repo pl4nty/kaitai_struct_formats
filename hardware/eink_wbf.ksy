@@ -4,7 +4,7 @@ meta:
   file-extension: wbf
   xref:
     wikidata: Q189897
-  license: GPL-2.0
+  license: GPL-2.0-only
   #imports:
   #  - /common/bcd
   # Opaque type implemented in https://github.com/KOLANICH-tools/inkwave.py/blob/master/inkwave/kaitai/eink_wbf_wav_addrs_collection.py
