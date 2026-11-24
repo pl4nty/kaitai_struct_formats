@@ -1,0 +1,29 @@
+samples:
+- url: https://raw.githubusercontent.com/mongodb/mongo-c-driver/2fb305f12215c44c615ca47a7e9dba8bd61d6594/src/libbson/tests/binary/test1.bson
+  sha256: 12b4a2631db1e6671d65a3bf70abddbee31a04b3419f31edb43898df23f135c3
+  source: libbson test binaries
+  license: Apache-2.0
+  eof: true
+  expect:
+    len: 14
+- url: https://raw.githubusercontent.com/mongodb/mongo-c-driver/2fb305f12215c44c615ca47a7e9dba8bd61d6594/src/libbson/tests/binary/codewscope.bson
+  sha256: 4c1d551993f5c6a808b9840680a3948eefd4c8765dabf0b35f4f38bf9a883051
+  source: libbson test binaries
+  license: Apache-2.0
+  eof: true
+  expect:
+    len: 27
+- url: https://raw.githubusercontent.com/mongodb/mongo-c-driver/2fb305f12215c44c615ca47a7e9dba8bd61d6594/src/libbson/tests/binary/eurokey.bson
+  sha256: 5a2710f085b234be53a67ee3a3bacb7e313fb8ceb79d84b34dd30aebd9c20252
+  source: libbson test binaries
+  license: Apache-2.0
+  eof: true
+  expect:
+    len: 42
+- url: https://raw.githubusercontent.com/mongodb/mongo-c-driver/2fb305f12215c44c615ca47a7e9dba8bd61d6594/src/libbson/tests/binary/test20.bson
+  sha256: 17c01a48b6311303d16f827ceda92b4b330e07c7f37a8bf22063149d43be162d
+  source: libbson test binaries
+  license: Apache-2.0
+  eof: true
+  expect:
+    len: 21

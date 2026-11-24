@@ -1,0 +1,27 @@
+samples:
+  - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/mach0/hello-osx-x86_64
+    sha256: fa489cd64303ac9819d55ced34437a67436537980e3ab7226fd598d3470d8836
+    source: radare2-testbins (values from struct-decoded header)
+    xfail: uleb128 type tests b2/b3/... in later `if` conditions even when the earlier byte was absent (AttributeError in dyld_info bind)
+    expect:
+      magic: 0xfeedfacf
+      header.cputype: 0x1000007
+      header.filetype: 2
+      header.ncmds: 11
+  - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/mach0/hello-osx-i386
+    sha256: 1479c2936c9c844997887a033f1e479300a185548186cd2efff7a0dd5cb6c35e
+    source: radare2-testbins (values from struct-decoded header)
+    xfail: uleb128 type tests b2/b3/... in later `if` conditions even when the earlier byte was absent (AttributeError in dyld_info bind)
+    expect:
+      magic: 0xfeedface
+      header.cputype: 7
+      header.ncmds: 11
+      header.sizeofcmds: 1172
+  - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/mach0/hello-macos-arm64-chained
+    sha256: cf73e029b1720ea4975a3727110d3034d8b1eb60a37c037c992f40d2f0f1d2d4
+    source: radare2-testbins (values from struct-decoded header)
+    xfail: code_directory.team_id has no guard for team_id_offset == 0 (seek to -8)
+    expect:
+      header.cputype: 0x100000c
+      header.ncmds: 21
+      header.sizeofcmds: 2424

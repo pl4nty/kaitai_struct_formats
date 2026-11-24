@@ -1,0 +1,25 @@
+samples:
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/hopper.jpg
+  sha256: ffe89a0ab0e94114e10777e7313d7fa83d634e34ebc2ea7479085cffa504c920
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    segments[0].marker: soi
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/pil_sample_cmyk.jpg
+  sha256: 1086f923d60bb5d6c4f2d3f7f56ba5d315d98e6f19ee8c8797dabac630c8ae80
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    segments[0].marker: soi
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/exif-72dpi-int.jpg
+  sha256: 9a77846a19a58f29bae67233c99f29fd2361536044176077c1ea4a2507c79b68
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    segments[0].marker: soi
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/flower.jpg
+  sha256: 8a9d04b92d0de5836c59ede8ae421235488e4031e893e07b1fe7e4b78f6a9901
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    segments[0].marker: soi

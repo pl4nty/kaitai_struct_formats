@@ -1,0 +1,17 @@
+# record count = (file size - 100) / 8
+samples:
+  - url: https://raw.githubusercontent.com/OSGeo/gdal/6d7a6388745ef760b68d3ea460d700f4be5479c4/autotest/ogr/data/poly.shx
+    sha256: ac735bd4487f979081d723ec6611861dc90aab3560d170963ac3c5a886594ea2
+    source: GDAL autotest/ogr/data
+    license: MIT
+    eof: true
+    expect:
+      header.file_length: 90
+      len(records): 10
+  - url: https://raw.githubusercontent.com/OSGeo/gdal/6d7a6388745ef760b68d3ea460d700f4be5479c4/autotest/ogr/data/shp/arcm_with_m.shx
+    sha256: ad64f68e04692545cca95c4a1d661df5d7b63595441c28738378ab842c27dacf
+    source: GDAL autotest/ogr/data/shp
+    license: MIT
+    eof: true
+    expect:
+      len(records): 2

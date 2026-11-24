@@ -1,0 +1,11 @@
+samples:
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/file_rtpdump_coverage.rtp.gz
+    sha256: ade12f74e9f649ac786e3c5137ed8e22cb5a391013048f3a237e201e5dd84ded
+    name: file_rtpdump_coverage.rtp
+    source: Wireshark test captures
+    license: GPL-2.0-or-later
+    extract: {format: gzip}
+    eof: true
+    expect:
+      file_header.shebang: "#!rtpplay1.0"
+      file_header.port: "5004"

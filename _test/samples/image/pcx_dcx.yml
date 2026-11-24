@@ -1,0 +1,7 @@
+samples:
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/hopper.dcx
+  sha256: a183cbc5a2a1c09b276a48db7348887c597ab0025ac9d328979fd38527912a39
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    files[0].body.hdr.img_x_max - files[0].body.hdr.img_x_min + 1: 128

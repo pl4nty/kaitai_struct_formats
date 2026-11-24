@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/apache/tika/39d27b43befe2776ec17137c51dfafd1ab5bc42d/tika-parsers/tika-parsers-standard/tika-parsers-standard-modules/tika-parser-miscoffice-module/src/test/resources/test-documents/testDBF.dbf
+  sha256: 1107cce1aafd9e46c55bce0527f2c43acc405f788966ee7113dd778a1566d51d
+  source: Apache Tika test documents
+  license: Apache-2.0
+  expect:
+    header1.num_records: 20
+    header1.len_header: 129
+    header1.len_record: 38

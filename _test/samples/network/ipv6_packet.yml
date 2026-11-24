@@ -1,0 +1,12 @@
+samples:
+  - url: https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/3541bd5d38635e208d7dd47cc6ea2af00dd7ef0c/tests/LINKTYPE_IPV6.pcap
+    sha256: 522ec0aca58bb965d0294cb3e758f2edeb7524075999e06fb9abb3e913ddf471
+    name: LINKTYPE_IPV6-pkt0
+    source: tcpdump test suite, raw IPv6 packet
+    license: BSD-3-Clause
+    extract: {format: slice, offset: 40, size: 77}
+    eof: true
+    expect:
+      version: 6
+      payload_length: 37
+      next_header_type: 17

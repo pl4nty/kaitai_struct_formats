@@ -1,0 +1,16 @@
+# triangle count read from bytes 80..84, cross-checked against file size (84 + 50*n)
+samples:
+  - url: https://raw.githubusercontent.com/mrdoob/three.js/6d91309bfcf9c2779f32dd98b61fcc5415a74912/examples/models/stl/binary/pr2_head_pan.stl
+    sha256: c4ebcc17156642a8e4df8564a09f730b54db236e783320d71af3e51de17e8315
+    source: three.js examples/models/stl
+    license: MIT
+    eof: true
+    expect:
+      num_triangles: 1000
+  - url: https://raw.githubusercontent.com/mrdoob/three.js/6d91309bfcf9c2779f32dd98b61fcc5415a74912/examples/models/stl/binary/colored.stl
+    sha256: 0012b62d4bb485f902a972192eef29d6ce4b97a9deb2de67a02d30a5b738f461
+    source: three.js examples/models/stl (per-face colour in attribute bytes)
+    license: MIT
+    eof: true
+    expect:
+      num_triangles: 2156

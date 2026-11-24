@@ -1,0 +1,22 @@
+samples:
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/pil184.pcx
+  sha256: 5a735c011ef048bda09f51f91cd5b994713b074eb10a433192918aa8c7b02352
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    hdr.img_x_max - hdr.img_x_min + 1: 447
+    hdr.img_y_max - hdr.img_y_min + 1: 144
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/01r_00.pcx
+  sha256: 4406e81f6ea36a9147c42a3f083abc3c60be3975e1cd1d4fa45eb48bc1d6442b
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  xfail: palette_256 instance is unguarded; 8-bit PCX without a trailing VGA palette fails its 0x0C magic check
+  expect:
+    hdr.img_x_max - hdr.img_x_min + 1: 88
+    hdr.img_y_max - hdr.img_y_min + 1: 52
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/p_4_planes.pcx
+  sha256: fddf69e529bc4670f3b1338ebc94af22d049f8d7121102bce518d091bf480787
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    hdr.num_planes: 4

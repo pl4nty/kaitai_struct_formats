@@ -1,0 +1,11 @@
+samples:
+- url: https://raw.githubusercontent.com/protocolbuffers/protobuf/72c4274dd144d70713462d4364149787685b084b/objectivec/Tests/golden_message
+  sha256: e13a1f037bf433ba60f3bc12743603bd3f332028a1a0b728d5c3bde709207cc0
+  source: protobuf golden test message (TestAllTypes)
+  license: BSD-3-Clause
+  eof: true
+- url: https://raw.githubusercontent.com/protocolbuffers/protobuf/72c4274dd144d70713462d4364149787685b084b/objectivec/Tests/golden_packed_fields_message
+  sha256: e13a1f037bf433ba60f3bc12743603bd3f332028a1a0b728d5c3bde709207cc0
+  source: protobuf golden test message (TestAllTypes)
+  license: BSD-3-Clause
+  eof: true
