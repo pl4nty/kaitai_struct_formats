@@ -1,6 +1,6 @@
 meta:
   id: bluetooth_control_command
-  title: Bluetooth Host Controller Interface Control Protocol
+  title: Bluetooth Host Controller Interface (HCI) command packet
   license: Unlicense
   imports:
     - vendor_specific/bluetooth_control_group_vendor_specific
@@ -18,10 +18,10 @@ params:
 seq:
   - id: opcode
     type: opcode
-  - id: size
+  - id: len_parameters
     type: u1
   - id: parameters
-    size: size
+    size: len_parameters
     type:
       switch-on: opcode.group
       cases:

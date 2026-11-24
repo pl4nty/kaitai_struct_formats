@@ -41,9 +41,10 @@ types:
       addresses or beyond the end of a memory section causes the chip to crash.
     seq:
       - id: address
-        type: u2
-      - id: size
-        type: u8
+        type: u4
+      - id: len_data
+        type: u1
+        doc: Number of bytes to read.
   write_ram:
     doc: |
       is the counterpart of the Read_RAM command which can be used to write up to 251
@@ -52,7 +53,7 @@ types:
       address causes the system to crash.
     seq:
       - id: address
-        type: u2
+        type: u4
       - id: data
         size-eos: true
   launch_ram:
@@ -65,7 +66,7 @@ types:
       into RAM using the Download_Minidriver and Write_RAM commands.
     seq:
       - id: entry_point
-        type: u2
+        type: u4
 enums:
   command:
     # for el in HCI_COMND:
