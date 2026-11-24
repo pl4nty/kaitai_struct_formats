@@ -1,0 +1,64 @@
+# Imported from https://github.com/nnguyen259/SenSchema/blob/25e06d9b529904dcc1b3ca3e8e320a42ac88ff89/schemas/cs3/tbl/entry.ksy
+# Licence and copyright: see _community/README.md
+meta:
+  id: cs3_tbl_entry
+  title: Trails of Cold Steel III table entry
+  license: MIT
+  imports:
+    - atbonus
+    - base_list
+    - char_revise
+    - game_difficulty
+    - item
+    - item_q
+    - master_quartz_base
+    - master_quartz_data
+    - master_quartz_dummy
+    - master_quartz_memo
+    - master_quartz_status
+    - orb_line_list
+    - quartz_cost
+    - qs_chapter
+    - qs_mons
+    - slot_cost
+    - slot_ep
+    - status
+    - status_p
+    - status_revise
+  encoding: UTF-8
+  endian: le
+seq:
+  - id: header_name
+    type: strz
+  - id: entry_length
+    type: u2
+  - id: data
+    type:
+      switch-on: header_name
+      cases:
+        '"AtBonus"': atbonus
+        '"BaseList"': base_list
+        '"char_revise"': char_revise
+        '"game_difficulty"': game_difficulty
+        '"item"': item
+        '"item_q"': item_q
+        '"MasterQuartzBase"': master_quartz_base
+        '"MasterQuartzData"': master_quartz_data
+        '"MasterQuartzDummy"': master_quartz_dummy
+        '"MasterQuartzMemo"': master_quartz_memo
+        '"MasterQuartzStatus"': master_quartz_status
+        '"OrbLineList"': orb_line_list
+        '"QuartzCost"': quartz_cost
+        '"QSChapter"': qs_chapter
+        '"QSMons"': qs_mons
+        "'SlotCost'": slot_cost
+        "'SlotEp'": slot_ep
+        "'status'": status
+        "'status_p'": status_p
+        "'status_revise'": status_revise
+        _: generic
+types:
+  generic:
+    seq:
+      - id: data
+        size: _parent.entry_length
