@@ -75,6 +75,10 @@ seq:
     size: 8
   - id: unknown_always_1
     type: u1
+    doc: |
+      Observed as 1. In OOA 4.1.1.0126 (e.g. Battlefield 1) this field is a u2le,
+      which shifts every later field by one byte; this spec uses the u1 layout of
+      OOA 5.02.x.
   - id: image_base
     type: u8le
   - id: size_of_image
