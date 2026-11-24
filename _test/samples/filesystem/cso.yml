@@ -2,7 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/hrydgard/pspautotests/e37443a681c6a4d562f32b6b48e1f4e36cd69c97/input/cube.cso
     sha256: c61a33afc7e39e1c499db676d48dfadebee79561f296b7f2f883f2ad31af61e6
     source: pspautotests (PPSSPP test suite) input/
-    xfail: "process: kaitai.compress.zlib(15, \"raw\") has no Python runtime: kaitai_compress Zlib() takes no constructor arguments and only inflates zlib-wrapped data (zlib.decompress), not the raw deflate (wbits -15) CSO blocks use"
     expect:   # file(1)
       header.uncompressed_size: 468992
       header.block_size: 2048
@@ -11,7 +10,6 @@ samples:
   - url: https://raw.githubusercontent.com/hrydgard/pspautotests/e37443a681c6a4d562f32b6b48e1f4e36cd69c97/input/test.cso
     sha256: 37e490fc4f183c2415d4dfef097526be3afc1fd4110568252eab92fc48dd73e4
     source: pspautotests (PPSSPP test suite) input/
-    xfail: "process: kaitai.compress.zlib(15, \"raw\") has no Python runtime: kaitai_compress Zlib() takes no constructor arguments and only inflates zlib-wrapped data (zlib.decompress), not the raw deflate (wbits -15) CSO blocks use"
     expect:   # file(1)
       header.uncompressed_size: 6369280
       header.block_size: 2048
