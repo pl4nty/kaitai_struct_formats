@@ -34,7 +34,7 @@ doc: |
 doc-ref:
   - https://equi4.com/metakit/format.html
   - https://wiki.tcl-lang.org/page/Metakit+file+format
-  - https://github.com/jnorthrup/metakit/blob/master/src/persist.cpp
+  - https://github.com/jnorthrup/metakit/blob/ab38c5340d8bb6f88fd0339b65cf33a66c4b9400/src/persist.cpp
   - https://github.com/ome/ome-metakit/blob/e68d11d07ee4cd515a3143fcb7dbeab09ca09de7/src/main/java/ome/metakit/MetakitReader.java
   - https://github.com/ome/ome-metakit/blob/e68d11d07ee4cd515a3143fcb7dbeab09ca09de7/src/main/java/ome/metakit/MetakitTools.java
 seq:
