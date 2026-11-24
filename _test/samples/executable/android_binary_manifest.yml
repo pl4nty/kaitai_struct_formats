@@ -1,0 +1,18 @@
+# androguard test suite (tests/data/AXML); expects read from a hex dump
+# against ResourceTypes.h (ResXMLTree_header, ResStringPool_header)
+samples:
+  - url: https://raw.githubusercontent.com/androguard/androguard/581f7a3251545a97f66ee92b674dd810ee380a00/tests/data/AXML/AndroidManifest.xml
+    sha256: 29fc36efa313e8269f55e5ab86a5e81481de26b98f9c82cc506a8d13eba080f1
+    eof: true
+    expect:
+      len_file: 1340
+      chunks[0].type: string_pool
+      chunks[0].body.num_strings: 21
+      chunks[0].body.is_utf8: false
+  - url: https://raw.githubusercontent.com/androguard/androguard/581f7a3251545a97f66ee92b674dd810ee380a00/tests/data/AXML/AndroidManifestUTF8Strings.xml
+    sha256: 3579ada17ff39c541a9133ff6a5f608e6ccaecab639f366b52721dfdaa59c540
+    eof: true
+    expect:
+      len_file: 4236
+      chunks[0].body.num_strings: 64
+      chunks[0].body.is_utf8: true

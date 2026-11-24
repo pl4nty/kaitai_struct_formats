@@ -1,0 +1,27 @@
+# CCP packets from Wireshark's ppp_coverage.pcapng test capture (PPP link
+# type, HDLC address/control ff03 and protocol 80fd skipped). No real-world
+# CCP capture was found. Expected values from tshark.
+samples:
+  # frame 96: Configure-Request with two OUI options and Predictor type 1
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/ppp_coverage.pcapng.gz
+    sha256: f67788ca208e62613337bf41a242994de14de5cae94a2cb0b95d692bf8c75d3b
+    name: ppp_coverage-f96-configure-request
+    extract: {format: gzip, then: {format: slice, offset: 5372, size: 21}}
+    eof: true
+    expect:
+      code: configure_request
+      identifier: 84
+      length: 21
+      len(data.options): 3
+      data.options[2].type: predictor_type_1
+  # frame 97: Configure-Ack with Predictor type 1 and two Predictor type 2
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/ppp_coverage.pcapng.gz
+    sha256: f67788ca208e62613337bf41a242994de14de5cae94a2cb0b95d692bf8c75d3b
+    name: ppp_coverage-f97-configure-ack
+    extract: {format: gzip, then: {format: slice, offset: 5432, size: 14}}
+    eof: true
+    expect:
+      code: configure_ack
+      identifier: 85
+      len(data.options): 3
+      data.options[1].type: predictor_type_2

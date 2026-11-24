@@ -1,0 +1,27 @@
+# Sample files of the PepakuraReverse project. Expects: lock status values
+# from the project's loader.py (4 unlocked, 5 locked), cube topology (a
+# 100x50x25 box: 8 vertices; faces and edges satisfy Euler's formula).
+# P349.pdo is a Japanese (Shift-JIS) file.
+samples:
+  - url: https://raw.githubusercontent.com/daeken/PepakuraReverse/5d4ef11ba091ea9672a3bee87f9bc98afcd41e70/pdos/cube100x50x25-all37.pdo
+    sha256: 35031592af8b9344ded52f47a8ae4fc3da501e1cc8b2e936e0e3db8824eb9d09
+    eof: true
+    expect:
+      lock_status: 4
+      num_geometries: 1
+      geometries[0].num_vertices: 8
+      geometries[0].num_vertices - geometries[0].num_edges + geometries[0].num_shapes: 2
+  - url: https://raw.githubusercontent.com/daeken/PepakuraReverse/5d4ef11ba091ea9672a3bee87f9bc98afcd41e70/pdos/cube100x50x25-locked-password.pdo
+    sha256: d41ef0257c64bfdcc55c4f3bc31eb2bd095e51c57c27c43d7bc0df50eb24da6c
+    eof: true
+    expect:
+      lock_status: 5
+      geometries[0].num_vertices: 8
+      geometries[0].num_vertices - geometries[0].num_edges + geometries[0].num_shapes: 2
+  - url: https://raw.githubusercontent.com/daeken/PepakuraReverse/5d4ef11ba091ea9672a3bee87f9bc98afcd41e70/pdos/P349.pdo
+    sha256: 0716d37a3de9a1cbe3b58b7ef73ad112105aa02d80edd17363528f8e81349e63
+    eof: true
+    expect:
+      lock_status: 4
+      version: 100
+      codepage.len_value: 10  # "Sfhit-JIS" and a zero byte

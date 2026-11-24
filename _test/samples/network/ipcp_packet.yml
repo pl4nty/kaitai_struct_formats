@@ -1,0 +1,26 @@
+# IPCP packets cut out of a real PPPoE capture (Wireshark wiki
+# SampleCaptures telecomitalia-pppoe.pcap; Ethernet 14 + PPPoE 6 + PPP
+# protocol 2 bytes skipped). Expected values from tshark.
+samples:
+  # frame 13: Configure-Request for IP address and primary/secondary DNS
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/telecomitalia-pppoe.pcap
+    sha256: e430ed66ad07f74ccbc04570dfbb0b6a8a96923afe06bcd15552ed54dc0563d9
+    name: telecomitalia-pppoe-f13-configure-request
+    extract: {format: slice, offset: 834, size: 22}
+    eof: true
+    expect:
+      code: configure_request
+      identifier: 1
+      length: 22
+      len(data.options): 3
+  # frame 15: Configure-Nak proposing 79.51.70.114, DNS 85.37.17.41
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/telecomitalia-pppoe.pcap
+    sha256: e430ed66ad07f74ccbc04570dfbb0b6a8a96923afe06bcd15552ed54dc0563d9
+    name: telecomitalia-pppoe-f15-configure-nak
+    extract: {format: slice, offset: 946, size: 22}
+    eof: true
+    expect:
+      code: configure_nak
+      length: 22
+      data.options[0].value: 4f334672
+      data.options[1].value: '55251129'

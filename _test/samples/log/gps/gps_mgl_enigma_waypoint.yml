@@ -1,0 +1,20 @@
+# MGL Enigma route file from GPSBabel's reference data (gpsbabel 1.6.0;
+# enigma-pfms.ert, written by PFMS). Expects from enigma.gpx, GPSBabel's
+# conversion of this file (testo.d/enigma.test): lat/lon * 180000.
+samples:
+  - url: https://raw.githubusercontent.com/GPSBabel/gpsbabel/f0f20ea4db9b71238ceb72c4838024699181d657/reference/enigma-pfms.ert
+    sha256: 4e01eb04ac60d76c2926b816a69019d51f97310b58e331b61143ca8a655a6b63
+    eof: true
+    expect:
+      len(waypoints): 4
+      waypoints[0].lat.raw: 9392557
+      waypoints[0].lon.raw: -1714281
+      waypoints[0].name_short.value: EIKY
+      waypoints[3].name_long.value: Hoevenen
+  - url: https://raw.githubusercontent.com/GPSBabel/gpsbabel/f0f20ea4db9b71238ceb72c4838024699181d657/reference/enigma-gpsb.ert
+    sha256: d28dc190558a22064ae623d7d52024360acb0852bb0a47782dd9723994f1108b
+    eof: true
+    expect:
+      len(waypoints): 4
+      waypoints[2].name_short.value: DAP(EI
+      waypoints[2].name_long.value: DUBLIN

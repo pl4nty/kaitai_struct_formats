@@ -1,0 +1,31 @@
+# PPP frames (HDLC-like framing without FCS) from PPP link-type captures.
+# Expected values from tshark.
+samples:
+  # tcpdump tests, frame 1: MPLS unicast (0x0281) carrying UDP/IPv4
+  - url: https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/3541bd5d38635e208d7dd47cc6ea2af00dd7ef0c/tests/mpls-traceroute.pcap
+    sha256: d77bf1b346a99dc1ee2cab02987a8ff45939962d6601d120c653577f246faab1
+    name: mpls-traceroute-f1
+    extract: {format: slice, offset: 40, size: 48}
+    eof: true
+    expect:
+      protocol: mpls_unicast
+      body.label_stack[0].label: 100704
+  # tcpdump tests, frame 1: IPv4 (0x0021) LDP hello to 224.0.0.2
+  - url: https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/3541bd5d38635e208d7dd47cc6ea2af00dd7ef0c/tests/mpls-ldp-hello.pcap
+    sha256: 90d3e2fad72f0489ba0d80e7257ad5f4ba0761622dd772079388edec6d10ff68
+    name: mpls-ldp-hello-f1
+    extract: {format: slice, offset: 40, size: 74}
+    eof: true
+    expect:
+      protocol: ipv4
+      body.dst_ip_addr: e0000002
+      body.total_length: 70
+  # Wireshark test capture (synthetic coverage vectors), frame 96: CCP
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/ppp_coverage.pcapng.gz
+    sha256: f67788ca208e62613337bf41a242994de14de5cae94a2cb0b95d692bf8c75d3b
+    name: ppp_coverage-f96-ccp
+    extract: {format: gzip, then: {format: slice, offset: 5368, size: 25}}
+    eof: true
+    expect:
+      protocol: ccp
+      body.code: configure_request

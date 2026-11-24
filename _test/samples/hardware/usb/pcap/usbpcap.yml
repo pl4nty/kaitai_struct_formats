@@ -1,0 +1,43 @@
+# USBPcap packets (link type 249) cut out of pcapng captures. Expected
+# values from tshark, the isochronous header by a manual hex read against
+# USBPcap.h (tshark does not decode it when headerLen is 27).
+samples:
+  # Wireshark wiki SampleCaptures (real USB3 Vision camera, Windows),
+  # frame 1: control transfer, setup stage, GET_DESCRIPTOR
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/usb_u3v_sample.pcapng
+    sha256: f278c4178696d4a744e6e2894d08d1211e2f4aa058d0f23c1f9267d7813c2937
+    name: usb_u3v_sample-f1-control-setup
+    extract: {format: slice, offset: 180, size: 36}
+    eof: true
+    expect:
+      header.len_header: 28
+      header.urb_function: control_transfer
+      header.transfer_type: control
+      header.device_address: 19
+      transfer_header.stage: setup
+      len(data): 8
+  # same capture, frame 19: bulk OUT of 24 bytes to endpoint 4
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/usb_u3v_sample.pcapng
+    sha256: f278c4178696d4a744e6e2894d08d1211e2f4aa058d0f23c1f9267d7813c2937
+    name: usb_u3v_sample-f19-bulk-out
+    extract: {format: slice, offset: 1528, size: 51}
+    eof: true
+    expect:
+      header.len_header: 27
+      header.urb_function: bulk_or_interrupt_transfer
+      header.transfer_type: bulk
+      header.len_data: 24
+      data[0:4]: '55335643'
+  # Wireshark usb_coverage.pcapng test capture, frame 232: isochronous IN,
+  # headerLen 27, start frame 1000, 2 packet descriptors, data truncated
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/usb_coverage.pcapng.gz
+    sha256: 0535f5e267db8c70ca16501169325ed878a2528300578b3af7fae7ffa714d9d5
+    name: usb_coverage-f232-isochronous
+    extract: {format: gzip, then: {format: slice, offset: 25376, size: 63}}
+    eof: true
+    expect:
+      header.transfer_type: isochronous
+      header.len_data: 192
+      transfer_header.start_frame: 1000
+      transfer_header.num_packets: 2
+      transfer_header.packets[1].offset: 96

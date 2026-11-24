@@ -1,0 +1,33 @@
+# Frame Relay frames from Wireshark test captures (Frame Relay link type).
+# Expected values from tshark.
+samples:
+  # arp.pcap frame 1: DLCI 100, NLPID with pad byte, SNAP, Inverse ARP
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/arp.pcap
+    sha256: b527c7839370aa8fdd7190a3a6c873c1270f73214e5ad791cce9fd8b04e7aed9
+    name: arp-f1-snap-inarp
+    extract: {format: slice, offset: 40, size: 30}
+    eof: true
+    expect:
+      dlci: 100
+      payload.nlpid: snap
+      payload.body.protocol_id: arp
+      payload.body.body.opcode: inverse_request
+  # fr_coverage.pcapng (synthetic coverage vectors) frame 1: DLCI 16, NLPID IPv4
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/fr_coverage.pcapng.gz
+    sha256: c3a6b15e727872f966b29bda84356895c2a9edcc3601bd0fd4b3bb71bd739405
+    name: fr_coverage-f1-nlpid-ipv4
+    extract: {format: gzip, then: {format: slice, offset: 156, size: 39}}
+    eof: true
+    expect:
+      dlci: 16
+      payload.nlpid: ipv4
+      payload.body.total_length: 35
+  # fr_coverage.pcapng frame 14: DLCI 22, Cisco encapsulation, EtherType IPv4
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/fr_coverage.pcapng.gz
+    sha256: c3a6b15e727872f966b29bda84356895c2a9edcc3601bd0fd4b3bb71bd739405
+    name: fr_coverage-f14-cisco-ipv4
+    extract: {format: gzip, then: {format: slice, offset: 992, size: 39}}
+    eof: true
+    expect:
+      dlci: 22
+      payload.ether_type: ipv4

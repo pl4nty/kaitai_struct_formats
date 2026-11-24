@@ -1,0 +1,49 @@
+# RTPS messages (UDP payloads) from Wireshark's rtps_coverage.pcapng test
+# capture (synthetic coverage vectors, exported-PDU link type; the slice
+# is the last udp.length - 8 bytes of the frame). The only real-world
+# capture found (wiki rtps_cooked.pcapng) holds pre-2.0 messages that
+# Wireshark itself reports as malformed. Expected values from tshark.
+samples:
+  # frame 72: twelve little-endian HEARTBEATs of 28 bytes each
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/rtps_coverage.pcapng.gz
+    sha256: e2e0ff7c40f3dd5de41612949d3102f5070f192ea8e4abc73a6f3c176f7d814e
+    name: rtps_coverage-f72-heartbeat
+    extract: {format: gzip, then: {format: slice, offset: 7986, size: 404}}
+    eof: true
+    expect:
+      header.protocol_version.major: 2
+      header.protocol_version.minor: 3
+      header.vendor_id: '0101'
+      len(submessages): 12
+      submessages[0].submessage_id: heartbeat
+  # frame 83: five ACKNACKs, the last one big endian (flags 0x00)
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/rtps_coverage.pcapng.gz
+    sha256: e2e0ff7c40f3dd5de41612949d3102f5070f192ea8e4abc73a6f3c176f7d814e
+    name: rtps_coverage-f83-acknack
+    extract: {format: gzip, then: {format: slice, offset: 12042, size: 176}}
+    eof: true
+    expect:
+      len(submessages): 5
+      submessages[4].flags: 0
+      submessages[4].body.octets_to_next_header: 28
+      submessages[3].body.octets_to_next_header: 32
+  # frame 109: DATA(p), inline QoS and serialized payload (flags 0x05)
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/rtps_coverage.pcapng.gz
+    sha256: e2e0ff7c40f3dd5de41612949d3102f5070f192ea8e4abc73a6f3c176f7d814e
+    name: rtps_coverage-f109-data-p
+    extract: {format: gzip, then: {format: slice, offset: 16958, size: 172}}
+    eof: true
+    expect:
+      len(submessages): 1
+      submessages[0].submessage_id: data
+      submessages[0].flags: 5
+      submessages[0].body.octets_to_next_header: 148
+  # frame 115: DATA_FRAG(p)
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/rtps_coverage.pcapng.gz
+    sha256: e2e0ff7c40f3dd5de41612949d3102f5070f192ea8e4abc73a6f3c176f7d814e
+    name: rtps_coverage-f115-data-frag
+    extract: {format: gzip, then: {format: slice, offset: 18082, size: 120}}
+    eof: true
+    expect:
+      submessages[0].submessage_id: data_frag
+      submessages[0].body.octets_to_next_header: 96

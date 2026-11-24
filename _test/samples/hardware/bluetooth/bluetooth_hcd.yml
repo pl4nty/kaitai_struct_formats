@@ -1,0 +1,15 @@
+# Broadcom patchram file from the broadcom-bt-firmware collection. Expects from
+# a hex read: HCI command framing (opcode u2 le, length u1, parameters), OGF
+# 0x3f / OCF 0x04c = Write_RAM, 0x04e = Launch_RAM; 366 Write_RAM commands
+# from address 0x90000 and a final Launch_RAM of 0xffffffff.
+samples:
+  - url: https://raw.githubusercontent.com/winterheart/broadcom-bt-firmware/f326999656515a0749258dfefb7cc6731e9933d5/brcm/BCM20702A1-0a5c-21e6.hcd
+    sha256: ffca88fd00be542926f9e55663a3da27d62f2e2a15ca532b114d76a075b4d46e
+    eof: true
+    params:
+      vendor: '0x131'  # cypress_semiconductor
+    expect:
+      len(commands): 367
+      commands[0].opcode.command: 0x4c
+      commands[0].parameters.payload.payload.address: 0x90000
+      commands[-1].parameters.payload.payload.entry_point: 0xffffffff

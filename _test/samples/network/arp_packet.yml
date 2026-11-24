@@ -1,0 +1,35 @@
+# ARP packets cut out of real captures (link-layer header skipped, Ethernet
+# padding dropped). Expected values from tshark.
+samples:
+  # Wireshark wiki SampleCaptures arp-storm.pcap frame 1: Ethernet request
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/arp-storm.pcap
+    sha256: dc101ea9bfda59f56b54bfb949195c3f169032c045b47f98e6952a86933c1b8d
+    name: arp-storm-f1-request
+    extract: {format: slice, offset: 54, size: 28}
+    eof: true
+    expect:
+      hardware_type: ethernet
+      opcode: request
+      sender_hardware_address: 00070daff454
+      target_protocol_address: 18a6ad9f
+  # Wireshark wiki SampleCaptures rarp_request.cap frame 1: reverse request
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/rarp_request.cap
+    sha256: db4dcd1f7dbe5d817bf1481946a97380f76fb535a73d5b0ead61ddda0e96d927
+    name: rarp_request-f1
+    extract: {format: slice, offset: 54, size: 28}
+    eof: true
+    expect:
+      opcode: reverse_request
+      target_hardware_address: 0000a112dd88
+  # Wireshark test capture arp.pcap frame 1: Inverse ARP over Frame Relay,
+  # 2-byte hardware addresses (FR header, NLPID and SNAP skipped)
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/arp.pcap
+    sha256: b527c7839370aa8fdd7190a3a6c873c1270f73214e5ad791cce9fd8b04e7aed9
+    name: arp-f1-frame-relay-inarp
+    extract: {format: slice, offset: 50, size: 20}
+    eof: true
+    expect:
+      hardware_type: frame_relay
+      opcode: inverse_request
+      len_hardware_address: 2
+      sender_protocol_address: 0ace0102
