@@ -32,7 +32,7 @@ types:
         doc: Protocol ID (must be 0x82 for compact protocol)
       - id: version_and_type
         type: u1
-        doc: Version (4 bits) and message type (4 bits)
+        doc: Version (bits 0-4) and message type (bits 5-7)
       - id: seq_id
         type: varint_z
         doc: Sequence ID (zigzag-encoded)
@@ -44,10 +44,10 @@ types:
         doc: Message fields (struct)
     instances:
       version:
-        value: (version_and_type >> 4) & 0xF
-        doc: Protocol version
+        value: version_and_type & 0x1F
+        doc: Protocol version (1)
       msg_type:
-        value: version_and_type & 0xF
+        value: (version_and_type >> 5) & 0x7
         doc: Message type (1=call, 2=reply, 3=exception, 4=oneway)
 
   compact_struct:
