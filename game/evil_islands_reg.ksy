@@ -36,7 +36,7 @@ types:
             type: u2
           - id: len_name
             type: u2
-            doc: Section name lenght
+            doc: Section name length
           - id: name
             size: len_name
             type: str
@@ -77,9 +77,9 @@ types:
                 type:
                   switch-on: value_type
                   cases:
-                    'key_value_types::int': s4
-                    'key_value_types::float': f4
-                    'key_value_types::string': string
+                    'key_value_types::integer': int_value
+                    'key_value_types::real': float_value
+                    'key_value_types::text': string_value
                 repeat: expr
                 repeat-expr: 'is_array ? num_values : 1'
             instances:
@@ -90,15 +90,23 @@ types:
                 enum: key_value_types
             enums:
               key_value_types:
-                0: int
-                1: float
-                2: string
+                0: integer
+                1: real
+                2: text
             types:
-              string:
+              int_value:
                 seq:
-                  - id: len
+                  - id: value
+                    type: s4
+              float_value:
+                seq:
+                  - id: value
+                    type: f4
+              string_value:
+                seq:
+                  - id: len_value
                     type: u2
                   - id: value
-                    size: len
+                    size: len_value
                     type: str
                     encoding: windows-1251
