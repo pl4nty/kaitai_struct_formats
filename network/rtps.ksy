@@ -1,7 +1,6 @@
 meta:
   id: rtps
-  title: RTPS
-  tags: 2.3
+  title: Real-Time Publish-Subscribe (RTPS) protocol 2.3
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: The RTPS protocol provides DDS interroperability wire protocol.

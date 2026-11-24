@@ -5,7 +5,7 @@ meta:
   file-extension:
     - ewd # WAYPOINT.EWD usually
     - rte # MYROUTE.RTE usually
-  license: Proprietary # Public domain dedication and then ... some conditions that are incompatible to free software and public damain. See the -license-header
+  license: LicenseRef-Proprietary # Public domain dedication and then ... some conditions that are incompatible to free software and public damain. See the -license-header
   encoding: ASCII
   endian: le
 
