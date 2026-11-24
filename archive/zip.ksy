@@ -84,7 +84,57 @@ types:
       - id: header
         type: local_file_header
       - id: body
-        size: header.len_body_compressed
+        size: 'is_streamed ? streamed_body_scan.size - 1 : header.len_body_compressed'
+        doc: |
+          Compressed file data. For a streamed entry (see `is_streamed`)
+          the length is found by scanning for the data descriptor that
+          follows it; that only works when the optional data descriptor
+          signature is present and the descriptor's compressed size
+          matches the scanned length (as in Apache Commons Compress).
+    instances:
+      is_streamed:
+        value: header.flags.has_data_descriptor and header.len_body_compressed == 0
+        doc: |
+          True if the sizes are not known in the local header (bit 3 of the
+          general purpose flags is set and the compressed size is 0), so they
+          are stored only in the data descriptor after the body.
+      ofs_body:
+        value: _io.pos
+        doc: |
+          internal; offset of `body`. Only valid because it is first
+          evaluated while parsing the `body` size, i.e. right after `header`.
+      streamed_body_scan:
+        pos: ofs_body
+        type: data_descriptor_scan_step(ofs_body, ofs_body + _index)
+        repeat: until
+        repeat-until: _.is_end
+        if: is_streamed
+        doc: |
+          internal; one item per byte of a streamed body, plus one for the
+          position of the data descriptor. Use `body` instead.
+  data_descriptor_scan_step:
+    doc: |
+      internal; checks whether a data descriptor with signature starts at
+      `ofs` and describes `ofs - ofs_body` bytes of compressed data.
+    params:
+      - id: ofs_body
+        type: u8
+      - id: ofs
+        type: u8
+    instances:
+      is_end:
+        value: 'ofs + 16 > _io.size or (signature == 0x08074b50 and len_body_compressed == ofs - ofs_body)'
+      signature:
+        pos: ofs
+        type: u4
+        if: ofs + 16 <= _io.size
+      len_body_compressed:
+        pos: ofs + 8
+        type: u4
+        if: ofs + 16 <= _io.size
+        doc: |
+          compressed size in a 32-bit descriptor; in a zip64 descriptor
+          (8-byte sizes) this is its low 32 bits
   local_file_header:
     seq:
       - id: version
