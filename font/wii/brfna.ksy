@@ -1,0 +1,36 @@
+# Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/nw4r/brfna.ksy
+meta:
+  id: brfna
+  title: NW4R BRFNA archived bitmap font
+  file-extension: brfna
+  license: LicenseRef-All-Rights-Reserved
+  imports:
+    - brfnt
+  endian: be
+doc: |
+  An "archived" sibling of BRFNT (magic `RFNT` either way -- BRFNA files
+  differ only in that their `TGLP` texture sheets may be stored
+  compressed, flagged by bit 0x8000 of `sheet_format`). The four-section
+  layout (`FINF`/`TGLP`/`CWDH`/`CMAP`) is otherwise identical to BRFNT;
+  see `nw4r/brfnt.ksy` for that shared structure and `lib-brfna.c` for
+  the compressed-sheet codec (RE'd from `nw4r_fontcvtr.exe`, no written
+  spec exists).
+
+  A compressed `TGLP` sheet is a 4-byte-BE-size-prefixed chunk: the first
+  4 bytes are itself a little-endian word whose top 3 bytes give the
+  decompressed byte target and whose low byte's low nibble selects the
+  codec (0x10 LZSS, 0x20 a self-contained Huffman-style bit-walk, 0x30
+  RLE; 0x80 -- a delta/predictive table encoder -- is never observed on
+  real pixel data and unsupported). This definition exposes the
+  compressed sheet bytes as-is; decoding them is `lib-brfna.c`'s job, not
+  Kaitai's.
+
+  The 0x10/0x20/0x30 nibble values line up with the common Nintendo
+  compression-type byte used elsewhere on GBA/DS/Wii (LZSS at 0x10,
+  Huffman at 0x20, RLE at 0x30, in the same low-nibble position), so
+  BRFNA's compressed-sheet header looks like that family's convention
+  reused for a font sheet rather than a bespoke scheme -- consistent with,
+  but not confirmed against, any public write-up of BRFNA specifically.
+seq:
+  - id: header
+    type: brfnt
