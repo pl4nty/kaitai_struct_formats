@@ -88,6 +88,31 @@ instances:
   sh_idx_hi_reserved:
     -orig-id: SHN_HIRESERVE
     value: 0xffff
+  module_signature_marker:
+    -orig-id: MODULE_SIG_STRING
+    pos: _io.size - 28
+    size: 28
+    if: _io.size >= 40
+    doc: |
+      Last 28 bytes of the file. Signed Linux kernel modules have a
+      signature appended after the ELF image itself, which ends with
+      the marker "~Module signature appended~\n".
+  module_signature:
+    pos: _io.size - 40
+    type: module_signature
+    if: |
+      _io.size >= 40 and module_signature_marker == [
+        0x7e, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x20, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74,
+        0x75, 0x72, 0x65, 0x20, 0x61, 0x70, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x64, 0x7e, 0x0a
+      ]
+    doc: |
+      Information block of a signature appended to a Linux kernel
+      module, present only if the file ends with the module signature
+      marker. Note that the signature is not part of the ELF image:
+      it is not described by any section or program header.
+    doc-ref:
+      - https://github.com/torvalds/linux/blob/v6.18/include/linux/module_signature.h
+      - https://github.com/torvalds/linux/blob/v6.18/scripts/sign-file.c
 types:
   phdr_type_flags:
     params:
@@ -1703,6 +1728,53 @@ types:
                 70:
                   id: mpextension_use_old
                   doc: recoded to MPextension_use (ABI r2.08)
+  module_signature:
+    -orig-id: module_signature
+    doc: |
+      Information block of an appended Linux kernel module signature.
+      It is preceded by the signer's name, the key identifier and the
+      signature data (in that order), and followed by the marker.
+    seq:
+      - id: algo
+        type: u1
+        doc: Public-key crypto algorithm (0 for PKCS#7 signatures).
+      - id: hash
+        type: u1
+        doc: Digest algorithm (0 for PKCS#7 signatures).
+      - id: id_type
+        type: u1
+        enum: pkey_id_type
+        doc: Key identifier type.
+      - id: len_signer
+        -orig-id: signer_len
+        type: u1
+        doc: Length of signer's name (0 for PKCS#7 signatures).
+      - id: len_key_id
+        -orig-id: key_id_len
+        type: u1
+        doc: Length of key identifier (0 for PKCS#7 signatures).
+      - id: pad
+        -orig-id: __pad
+        size: 3
+      - id: len_signature
+        -orig-id: sig_len
+        type: u4be
+        doc: Length of signature data.
+    instances:
+      ofs_signer:
+        value: _root._io.size - 40 - len_signature - len_key_id - len_signer
+      signer:
+        pos: ofs_signer
+        size: len_signer
+        doc: Signer's name.
+      key_id:
+        pos: ofs_signer + len_signer
+        size: len_key_id
+        doc: Key identifier.
+      signature:
+        pos: ofs_signer + len_signer + len_key_id
+        size: len_signature
+        doc: Signature data (a DER-encoded PKCS#7 message for `id_type::pkcs7`).
 enums:
   # e_ident[EI_CLASS]
   bits:
@@ -3846,3 +3918,16 @@ enums:
     0x7ffffffe: used
     0x7fffffff: filter
     # 0x7fffffff: hi_proc
+  pkey_id_type:
+    0:
+      id: pgp
+      -orig-id: PKEY_ID_PGP
+      doc: OpenPGP generated key ID.
+    1:
+      id: x509
+      -orig-id: PKEY_ID_X509
+      doc: X.509 arbitrary subjectKeyIdentifier.
+    2:
+      id: pkcs7
+      -orig-id: PKEY_ID_PKCS7
+      doc: Signature in PKCS#7 message.
