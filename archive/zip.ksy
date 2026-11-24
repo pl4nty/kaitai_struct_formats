@@ -167,7 +167,7 @@ types:
         type:
           switch-on: has_padding
           cases:
-            false: extras(section_types::local_file)
+            false: 'extras(section_types::local_file, len_body_uncompressed == 0xffff_ffff, len_body_compressed == 0xffff_ffff, false, false)'
             true: empty
     instances:
       has_padding:
@@ -266,7 +266,7 @@ types:
         encoding: UTF-8
       - id: extra
         size: len_extra
-        type: extras(section_types::central_dir_entry)
+        type: 'extras(section_types::central_dir_entry, len_body_uncompressed == 0xffff_ffff, len_body_compressed == 0xffff_ffff, ofs_local_header == -1, disk_number_start == 0xffff)'
       - id: comment
         size: len_comment
     instances:
@@ -347,6 +347,18 @@ types:
       - id: type
         type: u4
         enum: section_types
+      - id: zip64_has_len_uncompressed
+        type: bool
+        doc: the header's uncompressed size is 0xFFFFFFFF (stored in the zip64 extra field)
+      - id: zip64_has_len_compressed
+        type: bool
+        doc: the header's compressed size is 0xFFFFFFFF (stored in the zip64 extra field)
+      - id: zip64_has_ofs_local_header
+        type: bool
+        doc: the header's local header offset is 0xFFFFFFFF (stored in the zip64 extra field)
+      - id: zip64_has_disk_start
+        type: bool
+        doc: the header's disk number start is 0xFFFF (stored in the zip64 extra field)
     seq:
       - id: entries
         type: extra_field
@@ -370,7 +382,7 @@ types:
             'extra_codes::aex_encryption': aex_encryption
             'extra_codes::xceed_unicode': xceed_unicode
             'extra_codes::alzip_code_page': alzip_code_page
-            #'extra_codes::zip64': zip64
+            'extra_codes::zip64': zip64(_parent.zip64_has_len_uncompressed, _parent.zip64_has_len_compressed, _parent.zip64_has_ofs_local_header, _parent.zip64_has_disk_start)
     types:
       aex_encryption:
         doc-ref: http://www.winzip.com/aes_info.htm
@@ -391,18 +403,37 @@ types:
             2: bit_192
             3: bit_256
       zip64:
+        doc: |
+          Zip64 extended information. Each field is present only if the
+          corresponding field of the local or central directory header is
+          set to all ones (0xFFFFFFFF, or 0xFFFF for the disk number), in
+          the order below.
+        doc-ref: https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT - 4.5.3
+        params:
+          - id: has_len_original
+            type: bool
+          - id: has_len_compressed
+            type: bool
+          - id: has_ofs_relative_header
+            type: bool
+          - id: has_disk_start_number
+            type: bool
         seq:
           - id: len_original
             type: u8
+            if: has_len_original
             doc: Original uncompressed file size
           - id: len_compressed
             type: u8
+            if: has_len_compressed
             doc: Size of compressed data
           - id: ofs_relative_header
             type: u8
+            if: has_ofs_relative_header
             doc: Offset of local header record
           - id: disk_start_number
             type: u4
+            if: has_disk_start_number
             doc: Number of the disk on which this file starts
       ntfs:
         doc-ref: 'https://github.com/LuaDist/zip/blob/b710806/proginfo/extrafld.txt#L191'
