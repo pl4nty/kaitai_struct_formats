@@ -1,13 +1,24 @@
 meta:
   id: windows_language_id
+  title: Windows language identifier (LANGID)
   license: LicenseRef-All-Rights-Reserved
-doc-ref: https://github.com/reactos/reactos/blob/2204695f0a87741b9b6224625a4707e59b9c9995/sdk/include/xdk/ntbasedef.h#L942-L1082
+  bit-endian: le
+doc: |
+  16-bit number by which Windows identifies a language, e.g. in resources
+  of executables: the low 10 bits name the language, the high 6 bits its
+  regional variant (sublanguage). 0x0409, for instance, is English (0x09)
+  as used in the United States (sublanguage 1).
+
+  The meaning of a sublanguage number depends on the primary language.
+doc-ref: https://github.com/reactos/reactos/blob/2204695f0a87741b9b6224625a4707e59b9c9995/sdk/include/xdk/ntbasedef.h#L927-L1082
 seq:
   - id: primary
-    type: u1
+    -orig-id: PRIMARYLANGID
+    type: b10
     enum: primary
-  - id: secondary
-    type: u1
+  - id: sublanguage
+    -orig-id: SUBLANGID
+    type: b6
 enums:
   primary:
     0x36:
