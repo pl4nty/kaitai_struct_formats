@@ -99,6 +99,7 @@ types:
         doc: True if full field id follows as varint (instead of delta)
       field_delta:
         value: "has_extended_delta ? extended_delta.value : field_delta_short"
+        if: not is_stop
         doc: Field id delta (if delta_short != 0) or absolute field id (if delta_short == 0)
 
   compact_value:
