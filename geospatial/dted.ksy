@@ -483,8 +483,8 @@ types:
         type: str
     instances:
       has_value:
-        value: text != "    " and text.substring(0, 2) != "NA"
-        doc: False for blank fields and for "NA" (not available).
+        value: text != "    " and text != "  NA" and text.substring(0, 2) != "NA"
+        doc: False for blank fields and for "NA" (not available), left- or right-justified.
       value:
         value: text.to_i
         if: has_value
