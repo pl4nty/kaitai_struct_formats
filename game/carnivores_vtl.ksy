@@ -5,8 +5,6 @@ meta:
   title: VTL animation file format for Carnivores
   application: Animator 7
   license: CC0-1.0
-  imports:
-    - ivector
   encoding: UTF-8
   endian: le
 
@@ -31,3 +29,21 @@ types:
         type: ivector
         repeat: expr
         repeat-expr: _root.vertex_count
+  ivector:
+    doc: |
+      Integer 3D vector; coordinates are stored as fixed-point values
+      scaled by 16.
+    seq:
+      - id: ix
+        type: s2
+      - id: iy
+        type: s2
+      - id: iz
+        type: s2
+    instances:
+      x:
+        value: ix / 16.0
+      y:
+        value: iy / 16.0
+      z:
+        value: iz / 16.0

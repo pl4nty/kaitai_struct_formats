@@ -46,7 +46,7 @@
 meta:
   id: diptrace_sch
   title: DipTrace schematic file
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   encoding: UTF-8
   endian: be
 

@@ -3,7 +3,7 @@
 meta:
   id: sprint_layout_lmk
   title: Sprint-Layout macro (LMK) file
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   endian: le
 
 seq:

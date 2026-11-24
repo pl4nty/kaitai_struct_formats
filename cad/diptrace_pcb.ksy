@@ -47,7 +47,7 @@
 meta:
   id: diptrace_pcb
   title: DipTrace PCB file
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   encoding: UTF-8
   endian: be
 

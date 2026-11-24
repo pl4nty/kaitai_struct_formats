@@ -4,7 +4,7 @@ meta:
   id: cardano_scls
   title: Container for the cardano ledger state
   file-extension: scls
-  license: CC0-1.0
+  license: CC-BY-4.0
   ks-version: 0.9
   endian: be
 

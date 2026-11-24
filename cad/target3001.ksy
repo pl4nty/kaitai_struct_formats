@@ -4,7 +4,7 @@ meta:
   id: target3001
   title: TARGET 3001! project file (.T3001)
   file-extension: t3001
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   encoding: windows-1252
   endian: le
 doc: |

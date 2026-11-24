@@ -11,7 +11,7 @@
 meta:
   id: altium_storage
   title: Altium schematic Storage stream
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   encoding: UTF-8
   endian: le
 

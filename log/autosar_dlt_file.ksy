@@ -19,7 +19,7 @@
 meta:
   id: autosar_dlt_file
   title: AUTOSAR DLT log file
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   imports:
     - stored_message
   endian: be

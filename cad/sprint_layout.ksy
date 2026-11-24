@@ -3,7 +3,7 @@
 meta:
   id: sprint_layout
   title: Sprint-Layout PCB file
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   endian: le
 
 seq:

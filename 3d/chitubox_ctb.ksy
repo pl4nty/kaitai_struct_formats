@@ -11,7 +11,7 @@
 meta:
   id: chitubox_ctb
   file-extension: ctb
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   endian: le
 seq:
   - id: header

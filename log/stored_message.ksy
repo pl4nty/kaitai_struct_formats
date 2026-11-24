@@ -20,7 +20,7 @@
 meta:
   id: stored_message
   title: AUTOSAR DLT stored message
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   endian: be
 seq:
   - id: storage_hdr

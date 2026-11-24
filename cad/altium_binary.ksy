@@ -11,7 +11,7 @@
 meta:
   id: altium_binary
   title: Altium PCB binary records
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   encoding: ISO-8859-1
   endian: le
 

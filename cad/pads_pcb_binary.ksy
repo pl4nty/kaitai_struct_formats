@@ -19,7 +19,7 @@ meta:
   id: pads_pcb_binary
   title: PADS PowerPCB binary layout (.pcb)
   file-extension: pcb
-  license: GPL-3.0-only
+  license: GPL-3.0-or-later
   imports:
     - /serialization/microsoft_cfb
   encoding: ASCII
