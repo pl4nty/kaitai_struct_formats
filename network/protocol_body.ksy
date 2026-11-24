@@ -47,13 +47,18 @@ types:
   no_next_header:
     doc: Dummy type for IPv6 "no next header" type, which signifies end of headers chain.
   option_hop_by_hop:
+    doc-ref: https://www.rfc-editor.org/rfc/rfc8200#section-4.3
     seq:
       - id: next_header_type
         type: u1
       - id: hdr_ext_len
         type: u1
+        doc: |
+          Length of the Hop-by-Hop Options header in 8-octet units, not
+          including the first 8 octets.
       - id: body
-        size: 'hdr_ext_len > 0 ? hdr_ext_len - 1 : 1'
+        size: hdr_ext_len * 8 + 6
+        doc: Options (the rest of the header after the first 2 bytes).
       - id: next_header
         type: protocol_body(next_header_type)
 enums:
