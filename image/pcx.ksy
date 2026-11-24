@@ -40,8 +40,18 @@ instances:
   palette_256:
     pos: _io.size - 769
     type: t_palette_256
-    if: hdr.version == versions::v3_0 and hdr.bits_per_pixel == 8 and hdr.num_planes == 1
+    if: >-
+      hdr.version == versions::v3_0 and hdr.bits_per_pixel == 8 and hdr.num_planes == 1
+      and _io.size >= 128 + 769 and palette_256_magic == 0x0c
+    doc: |
+      Optional VGA palette at the end of the file. Some 8-bit files (e.g.
+      greyscale ones) omit it; it is only parsed when the byte 769 bytes
+      before the end of the file is the 0x0c palette marker.
     doc-ref: https://web.archive.org/web/20100206055706/http://www.qzx.com/pc-gpe/pcx.txt - "VGA 256 Color Palette Information"
+  palette_256_magic:
+    pos: _io.size - 769
+    type: u1
+    if: _io.size >= 128 + 769
 types:
   header:
     doc-ref: https://web.archive.org/web/20100206055706/http://www.qzx.com/pc-gpe/pcx.txt - "ZSoft .PCX FILE HEADER FORMAT"
