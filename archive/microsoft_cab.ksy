@@ -32,6 +32,7 @@ doc-ref:
   - https://github.com/kyz/libmspack/blob/8f2a2a91ae2d12f985a196d481962ca4731f0f4d/libmspack/mspack/cab.h
   - https://github.com/kyz/libmspack/blob/8f2a2a91ae2d12f985a196d481962ca4731f0f4d/libmspack/mspack/cabd.c
   - https://github.com/wine-mirror/wine/blob/ff2631c6ed3d1721cd050d951671c307ade32b90/dlls/cabinet/fci.c
+  - https://github.com/wine-mirror/wine/blob/ff2631c6ed3d1721cd050d951671c307ade32b90/include/fci.h
 seq:
   - id: header
     type: header
@@ -165,9 +166,12 @@ types:
       - id: method
         type: b4
         enum: compression_method
-      - id: reserved1
+      - id: quantum_level
+        -orig-id: tcompMASK_QUANTUM_LEVEL
         type: b4
-      - id: window_or_level
+        doc: For Quantum, the compression level (1..7); 0 otherwise.
+      - id: window_bits
+        -orig-id: tcompMASK_LZX_WINDOW, tcompMASK_QUANTUM_MEM
         type: b5
         doc: |
           For LZX, the window size as a power of two (15..21).
