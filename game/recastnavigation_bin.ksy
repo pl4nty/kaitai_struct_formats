@@ -1,49 +1,55 @@
 meta:
   id: recastnavigation_bin
+  title: Recast Navigation navigation mesh set
+  application: Recast Navigation (Detour)
   file-extension: bin
   license: CC0-1.0
   endian: le
-doc: this spec can be used to parse recastnavigation binary files
-doc-ref: https://masagroup.github.io/recastdetour
+doc: |
+  Navigation mesh set as saved by the RecastDemo sample application of Recast
+  Navigation, a navigation mesh toolkit used for path finding in games: a
+  small header with the dtNavMeshParams, followed by the data of each tile of a
+  multi-tile Detour navigation mesh (dtNavMesh). Each tile's data is the
+  blob produced by dtCreateNavMeshData. This spec assumes 32-bit polygon
+  references (the default, without DT_POLYREF64).
+doc-ref:
+  - https://masagroup.github.io/recastdetour
+  - https://github.com/recastnavigation/recastnavigation/blob/main/RecastDemo/Source/Sample_TileMesh.cpp
+  - https://github.com/recastnavigation/recastnavigation/blob/main/Detour/Include/DetourNavMesh.h
 seq:
-  - id: header
-    type: navmesh_set_header
+  - id: magic
+    contents: "TESM"
+    doc: NAVMESHSET_MAGIC ('MSET' as a little-endian integer).
+  - id: version
+    type: s4
+  - id: num_tiles
+    -orig-id: numTiles
+    type: s4
+  - id: origin
+    -orig-id: orig
+    type: float3
+    doc: The world space origin of the navigation mesh's tile space. [(x, y, z)]
+  - id: tile_width
+    -orig-id: tileWidth
+    type: f4
+    doc: The width of each tile. (Along the x-axis.)
+  - id: tile_height
+    -orig-id: tileHeight
+    type: f4
+    doc: The height of each tile. (Along the z-axis.)
+  - id: max_tiles
+    -orig-id: maxTiles
+    type: s4
+    doc: The maximum number of tiles the navigation mesh can contain.
+  - id: max_polys
+    -orig-id: maxPolys
+    type: s4
+    doc: The maximum number of polygons each tile can contain.
   - id: tiles
     type: navmesh_tile
     repeat: expr
-    repeat-expr: header.num_tiles
+    repeat-expr: num_tiles
 types:
-  navmesh_set_header:
-    seq:
-      - id: magic
-        contents: "TESM"
-      - id: version
-        type: s4
-      - id: num_tiles
-        type: s4
-      - id: params
-        type: dt_navmesh_params
-  dt_navmesh_params:
-    doc: |
-      Configuration parameters used to define multi-tile navigation meshes.
-      The values are used to allocate space during the initialization of a navigation
-      mesh.
-    seq:
-      - id: orig
-        type: float3
-        doc: The world space origin of the navigation mesh's tile space. [(x, y, z)]
-      - id: tile_width
-        type: f4
-        doc: The width of each tile. (Along the x-axis.)
-      - id: tile_height
-        type: f4
-        doc: The height of each tile. (Along the z-axis.)
-      - id: max_tiles
-        type: s4
-        doc: The maximum number of tiles the navigation mesh can contain.
-      - id: max_polys
-        type: s4
-        doc: The maximum number of polygons each tile can contain.
   float3:
     seq:
       - id: x
@@ -52,16 +58,6 @@ types:
         type: f4
       - id: z
         type: f4
-  dt_tile_ref:
-    seq:
-      - id: ref
-        type: u4
-  navmesh_tile_header:
-    seq:
-      - id: tile_ref
-        type: dt_tile_ref
-      - id: data_size
-        type: s4
   dt_mesh_header:
     seq:
       - id: magic
@@ -75,37 +71,45 @@ types:
         doc: The x-position of the tile within the dtNavMesh tile grid. (x, y, layer)
       - id: y
         type: s4
-        doc: he y-position of the tile within the dtNavMesh tile grid. (x, y, layer)
+        doc: The y-position of the tile within the dtNavMesh tile grid. (x, y, layer)
       - id: layer
         type: s4
         doc: The layer of the tile within the dtNavMesh tile grid. (x, y, layer)
       - id: user_id
         type: u4
         doc: The user defined id of the tile.
-      - id: poly_count
+      - id: num_polys
+        -orig-id: polyCount
         type: s4
         doc: The number of polygons in the tile.
-      - id: vert_count
+      - id: num_verts
+        -orig-id: vertCount
         type: s4
         doc: The number of vertices in the tile.
-      - id: max_link_count
+      - id: max_links
+        -orig-id: maxLinkCount
         type: s4
         doc: The number of allocated links.
-      - id: detail_mesh_count
+      - id: num_detail_meshes
+        -orig-id: detailMeshCount
         type: s4
         doc: The number of sub-meshes in the detail mesh.
-      - id: detail_vert_count
+      - id: num_detail_verts
+        -orig-id: detailVertCount
         type: s4
         doc: |
           The number of unique vertices in the detail mesh. (In addition to the polygon
           vertices.)
-      - id: detail_tri_count
+      - id: num_detail_tris
+        -orig-id: detailTriCount
         type: s4
         doc: The number of triangles in the detail mesh.
-      - id: bv_node_count
+      - id: num_bv_nodes
+        -orig-id: bvNodeCount
         type: s4
         doc: The number of bounding volume nodes. (Zero if bounding volumes are disabled.)
-      - id: off_mesh_con_count
+      - id: num_off_mesh_cons
+        -orig-id: offMeshConCount
         type: s4
         doc: The number of off-mesh connections.
       - id: off_mesh_base
@@ -133,7 +137,9 @@ types:
     seq:
       - id: first_link
         type: u4
-        doc: Index to first link in linked list. (Or DT_NULL_LINK if there is no link.)
+        doc: |
+          Index to first link in linked list, or 0xffffffff (DT_NULL_LINK) if
+          there is no link.
       - id: verts
         type: u2
         repeat: expr
@@ -141,7 +147,8 @@ types:
         doc: |
           The indices of the polygon's vertices.
           The actual vertices are located in dtMeshTile::verts.
-      - id: neis
+      - id: neighbours
+        -orig-id: neis
         type: u2
         repeat: expr
         repeat-expr: 6
@@ -149,7 +156,8 @@ types:
       - id: flags
         type: u2
         doc: The user defined polygon flags.
-      - id: vert_count
+      - id: num_verts
+        -orig-id: vertCount
         type: u1
         doc: The number of vertices in the polygon.
       - id: area_and_type
@@ -158,17 +166,17 @@ types:
   dt_link:
     seq:
       - id: ref
-        type: dt_tile_ref
-        doc: Neighbour reference. (The neighbor that is linked to.)
+        type: u4
+        doc: Neighbour polygon reference (dtPolyRef). (The neighbor that is linked to.)
       - id: next
         type: u4
-        doc: Index of the next link.
+        doc: Index of the next link, or 0xffffffff (DT_NULL_LINK) at the end of the list.
       - id: edge
         type: u1
         doc: Index of the polygon edge that owns this link.
-      - id: size
+      - id: side
         type: u1
-        doc: Index of the polygon edge that owns this link.
+        doc: If a boundary link, defines on which side the link is.
       - id: bmin
         type: u1
         doc: If a boundary link, defines the minimum sub-edge area.
@@ -183,10 +191,12 @@ types:
       - id: tri_base
         type: u4
         doc: The offset of the triangles in the dtMeshTile::detailTris array.
-      - id: vert_count
+      - id: num_verts
+        -orig-id: vertCount
         type: u1
         doc: The number of vertices in the sub-mesh.
-      - id: tri_count
+      - id: num_tris
+        -orig-id: triCount
         type: u1
         doc: The number of triangles in the sub-mesh.
       # - id: padding
@@ -219,7 +229,8 @@ types:
         repeat: expr
         repeat-expr: 2
         doc: The endpoints of the connection. [(ax, ay, az, bx, by, bz)]
-      - id: rad
+      - id: radius
+        -orig-id: rad
         type: f4
         doc: "The radius of the endpoints. [Limit: >= 0]"
       - id: poly
@@ -243,49 +254,55 @@ types:
       - id: verts
         type: f4
         repeat: expr
-        repeat-expr: header.vert_count*3
+        repeat-expr: header.num_verts * 3
         doc: The tile vertices.
       - id: polys
         type: dt_poly
         repeat: expr
-        repeat-expr: header.poly_count
+        repeat-expr: header.num_polys
         doc: The tile polygons.
       - id: links
         type: dt_link
         repeat: expr
-        repeat-expr: header.max_link_count
+        repeat-expr: header.max_links
         doc: The tile links.
       - id: detail_meshes
         size: 12
         type: dt_poly_detail
         repeat: expr
-        repeat-expr: header.detail_mesh_count
+        repeat-expr: header.num_detail_meshes
         doc: The tile's detail sub-meshes
       - id: detail_verts
         type: f4
         repeat: expr
-        repeat-expr: header.detail_vert_count * 3
+        repeat-expr: header.num_detail_verts * 3
         doc: The detail mesh's unique vertices. [(x, y, z) * dtMeshHeader::detailVertCount]
       - id: detail_tris
         type: u1
         repeat: expr
-        repeat-expr: header.detail_tri_count * 4
+        repeat-expr: header.num_detail_tris * 4
         doc: |
           The detail mesh's triangles. [(vertA, vertB, vertC, triFlags) *
           dtMeshHeader::detailTriCount].
       - id: bv_tree
         type: dt_bv_node
         repeat: expr
-        repeat-expr: header.bv_node_count
+        repeat-expr: header.num_bv_nodes
         doc: The tile bounding volume nodes.
       - id: off_mesh_cons
         type: dt_off_mesh_connection
         repeat: expr
-        repeat-expr: header.off_mesh_con_count
+        repeat-expr: header.num_off_mesh_cons
         doc: The tile off-mesh connections.
   navmesh_tile:
     seq:
-      - id: header
-        type: navmesh_tile_header
-      - id: tile 
+      - id: tile_ref
+        -orig-id: tileRef
+        type: u4
+        doc: Reference (dtTileRef) of the tile in the navigation mesh.
+      - id: len_tile
+        -orig-id: dataSize
+        type: s4
+      - id: tile
+        size: len_tile
         type: dt_mesh_tile
