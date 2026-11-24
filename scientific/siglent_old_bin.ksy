@@ -1,0 +1,73 @@
+# Imported from https://github.com/scottprahl/RigolWFM/blob/9e6f993103f773f81df409fc65c2cc359d7bd249/ksy/siglent_old_bin.ksy
+# Licence and copyright: see _community/README.md
+meta:
+  id: siglent_old_bin
+  title: Siglent Old-Platform BIN File Format
+  file-extension: bin
+  license: BSD-3-Clause
+  endian: le
+doc: |
+  This revision is used by older SDS1000X / SDS2000X families.
+
+  Sources used for this KSY binary format: The binary waveform layout documented
+  by
+  Siglent as "How to Extract Data from the Binary File of SIGLENT Oscilloscope".
+
+  Tested file formats: the synthetic old-platform fixture built in
+  `tests/test_siglent.py`, exercised through revision detection and low-level
+  parsing only.
+
+  Oscilloscope models this format may apply to: older Siglent `SDS1000X` and
+  `SDS2000X` families that the vendor PDF documents as using the "Binary Format
+  in Old Platform" layout.
+
+instances:
+  mso_wave_length:
+    pos: 0x04
+    type: u4
+  mso_ch_open_num:
+    pos: 0x10
+    type: u4
+  mso_ch_open_stats:
+    pos: 0x14
+    type: u1_array_16
+  ch_volt_div_mv:
+    pos: 0xbc
+    type: f4_array_4
+  ch_vert_offset_pixels:
+    pos: 0xdc
+    type: s4_array_4
+  ch_on:
+    pos: 0x100
+    type: s4_array_4
+  time_div_index:
+    pos: 0x248
+    type: s4
+  time_delay_pixels:
+    pos: 0x250
+    type: s4
+  wave_data:
+    pos: 0x1470
+    size: _io.size - 0x1470
+
+types:
+  u1_array_16:
+    seq:
+      - id: entries
+        type: u1
+        repeat: expr
+        repeat-expr: 16
+
+  f4_array_4:
+    seq:
+      - id: entries
+        type: f4
+        repeat: expr
+        repeat-expr: 4
+
+  s4_array_4:
+    seq:
+      - id: entries
+        type: s4
+        repeat: expr
+        repeat-expr: 4
