@@ -14,6 +14,13 @@ doc: |
   description could be used to extract device tree entries from a
   partition images and decompile them with dtc (device tree compiler).
 
+  Only the DT table itself (the first `header.total_size` bytes) is
+  described. A partition image signed with Android Verified Boot (as
+  dumped from many devices) additionally has a vbmeta image and an AVB
+  footer (magic "AVBf", in the last 64 bytes of the partition) after
+  the table and padding; these are not parsed here, see
+  [android_vbmeta](/android_vbmeta/) for the vbmeta image.
+
 doc-ref:
   - https://source.android.com/docs/core/architecture/dto/partitions
   - https://android.googlesource.com/platform/system/libufdt/+/refs/tags/android-10.0.0_r47
