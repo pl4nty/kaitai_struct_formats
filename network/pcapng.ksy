@@ -130,7 +130,7 @@ types:
         type: u4
       - id: body
         -orig-id: Block Body
-        size: total_length
+        size: total_length - 12
         type:
           switch-on: type.type
           cases:
