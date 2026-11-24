@@ -1,19 +1,25 @@
 meta:
   id: masscan
-  title: masscan binary report
+  title: masscan binary scan results
+  application: masscan
   license: LicenseRef-All-Rights-Reserved
   imports:
-    - /common/vlq_base128_le
+    - /common/vlq_base128_be
     - /network/protocol_body
   encoding: ASCII
   endian: be
+doc: |
+  Results of a port scan in the binary format that the masscan tool writes
+  with `-oB` and converts to other formats with `--readscan`.
 
-doc: Results of scanning with masscan tool
-
+  The file is a list of records, each with a type and a length in front.
+  It starts with a 99-byte header, which is a record as well: its first
+  two bytes, the letters "ma", stand for type 109 and length 97. A scan
+  that ended normally closes the file with another record of that type.
 doc-ref:
   - https://github.com/robertdavidgraham/masscan/blob/2895fa0acfe45983a3e9b2bbfadf25934c8d2c65/src/out-binary.c
   - https://github.com/robertdavidgraham/masscan/blob/2895fa0acfe45983a3e9b2bbfadf25934c8d2c65/src/in-binary.c
-
+  - https://github.com/robertdavidgraham/masscan/blob/2895fa0acfe45983a3e9b2bbfadf25934c8d2c65/src/masscan-app.h
 seq:
   - id: header
     size: 99
@@ -21,156 +27,196 @@ seq:
   - id: records
     type: record
     repeat: until
-    repeat-until: _io.size - _io.pos <= header_size
-  - id: footer
-    type: footer
-
-instances:
-  header_size:
-    value: 99
-
-
+    repeat-until: _.type == record_type::file_header or _io.eof
+    if: not _io.eof
+    doc: |
+      The last record is the footer (type `file_header`), unless the scan
+      was interrupted.
 types:
   header:
     seq:
-      - id: signature
-        type: strz
-        terminator: 0x2f
-        valid: "'masscan'"
-      - id: version_str
-        type: strz
-        terminator: 0x0a
-      - id: metadata_str
+      - id: magic
+        contents: masscan/1.1
+      - id: metadata
         size-eos: true
         type: strz
-  footer:
-    seq:
-      - id: signature
-        type: strz
-        terminator: 0x2f
-        valid: _parent.header.signature
-      - id: version_str
-        type: strz
-        valid: _parent.header.version_str
-      - id: metadata_str
-        size-eos: true
-        type: strz
+        doc: |
+          Lines of the form "key:value". The only one written so far is
+          "s", the time the scan was started at as a Unix timestamp.
   record:
     seq:
       - id: type_raw
-        type: vlq_base128_le
-      - id: length
-        type: vlq_base128_le
+        type: vlq_base128_be
+      - id: len_payload
+        type: vlq_base128_be
       - id: payload
-        size: length.value
+        size: 'type == record_type::banner4_short ? len_payload.value + 1 : len_payload.value'
         type:
           switch-on: type
           cases:
-            type::status_open: masscan_record(true, false, true, false, true, true)
-            type::status_closed: masscan_record(false, false, true, false, true, true)
-            type::status2_open: masscan_record(true, true, true, false, true, true)
-            type::status2_closed: masscan_record(false, true, true, false, true, true)
-            type::status6_open: masscan_record(true, false, true, false, true, true)
-            type::status6_closed: masscan_record(false, false, true, false, true, true)
-            type::banner6: masscan_record(true, false, false, true, true, true)
-            type::banner4: masscan_record(true, true, false, true, false, true)
-            type::banner9: masscan_record(true, true, false, true, true, true)
-            type::banner3: masscan_record(true, true, false, true, false, false)
-
+            'record_type::status_open': status
+            'record_type::status_closed': status
+            'record_type::banner3': banner3
+            'record_type::banner4_short': banner4
+            'record_type::banner4': banner4
+            'record_type::status2_open': status2
+            'record_type::status2_closed': status2
+            'record_type::status2_arp': status2
+            'record_type::banner9': banner9
+            'record_type::status6_open': status6
+            'record_type::status6_closed': status6
+            'record_type::status6_arp': status6
+            'record_type::banner6': banner6
     instances:
       type:
         value: type_raw.value
-        enum: type
-    enums:
-      type:
-        1:
-          id: status_open
-        2:
-          id: status_closed
-        3:
-          id: banner3 #
-        4:
-          id: banner4 #
-        5:
-          id: banner_4_1
-        6:
-          id: status2_open #
-        7:
-          id: status2_closed #
-        9:
-          id: banner9 #
-        10:
-          id: status6_open #
-        11:
-          id: status6_closed #
-        13:
-          id: banner6 #
-        109: m #'m' FILEHEADER
-    types:
-      masscan_record:
-        meta:
-          endian:
-            switch-on: old
-            cases:
-              true: le
-              false: be
-        params:
-          - id: is_open
-            type: b1
-          - id: old
-            type: b1
-          - id: has_reason
-            type: b1
-          - id: app_proto_present
-            type: b1
-          - id: has_ttl
-            type: b1
-          - id: has_ip_proto
-            type: b1
-        seq:
-          - id: timestamp
-            type: u4
-          - id: ipv4
-            size: 4
-            if: old
-
-          - id: ip_proto
-            type: u1
-            enum: protocol_body::protocol_enum
-            if: has_ip_proto
-            #--affected-by:
-
-          - id: port
-            type: u2
-          - id: app_proto
-            type: u2
-            enum: app_proto
-            if: app_proto_present
-
-          - id: reason
-            type: u1
-            if: has_reason
-          - id: ttl
-            type: u1
-            if: has_ttl
-
-          - id: ip_with_version
-            type: switcheable_ip_version
-            if: not old
-        instances:
-          ip_addr:
-            value: "(old?ipv4:ip_with_version.addr)"
-
-      switcheable_ip_version:
-        seq:
-          - id: version
-            type: u1
-            valid: 6
-          - id: addr
-            size: 16
-
+        enum: record_type
+  status:
+    seq:
+      - id: timestamp
+        type: u4
+        doc: Unix timestamp.
+      - id: ipv4_address
+        size: 4
+      - id: port
+        type: u2
+      - id: reason
+        type: u1
+        doc: For TCP, the flags of the response.
+      - id: ttl
+        type: u1
+  status2:
+    seq:
+      - id: timestamp
+        type: u4
+        doc: Unix timestamp.
+      - id: ipv4_address
+        size: 4
+      - id: ip_proto
+        type: u1
+        enum: protocol_body::protocol_enum
+      - id: port
+        type: u2
+      - id: reason
+        type: u1
+        doc: For TCP, the flags of the response.
+      - id: ttl
+        type: u1
+  status6:
+    seq:
+      - id: timestamp
+        type: u4
+        doc: Unix timestamp.
+      - id: ip_proto
+        type: u1
+        enum: protocol_body::protocol_enum
+      - id: port
+        type: u2
+      - id: reason
+        type: u1
+        doc: For TCP, the flags of the response.
+      - id: ttl
+        type: u1
+      - id: ip_version
+        type: u1
+      - id: ip_address
+        size: 16
+        doc: IPv6 address.
+  banner3:
+    seq:
+      - id: timestamp
+        type: u4
+        doc: Unix timestamp.
+      - id: ipv4_address
+        size: 4
+      - id: port
+        type: u2
+      - id: app_proto
+        type: u2
+        enum: app_proto
+      - id: banner
+        size-eos: true
+  banner4:
+    seq:
+      - id: timestamp
+        type: u4
+        doc: Unix timestamp.
+      - id: ipv4_address
+        size: 4
+      - id: ip_proto
+        type: u1
+        enum: protocol_body::protocol_enum
+      - id: port
+        type: u2
+      - id: app_proto
+        type: u2
+        enum: app_proto
+      - id: banner
+        size-eos: true
+  banner9:
+    seq:
+      - id: timestamp
+        type: u4
+        doc: Unix timestamp.
+      - id: ipv4_address
+        size: 4
+      - id: ip_proto
+        type: u1
+        enum: protocol_body::protocol_enum
+      - id: port
+        type: u2
+      - id: app_proto
+        type: u2
+        enum: app_proto
+      - id: ttl
+        type: u1
+      - id: banner
+        size-eos: true
+  banner6:
+    seq:
+      - id: timestamp
+        type: u4
+        doc: Unix timestamp.
+      - id: ip_proto
+        type: u1
+        enum: protocol_body::protocol_enum
+      - id: port
+        type: u2
+      - id: app_proto
+        type: u2
+        enum: app_proto
+      - id: ttl
+        type: u1
+      - id: ip_version
+        type: u1
+      - id: ip_address
+        size: 16
+        doc: IPv6 address.
+      - id: banner
+        size-eos: true
 enums:
-  app_proto:  # https://github.com/robertdavidgraham/masscan/blob/0300ff031cff6fafa078b25b31106bea237d3879/src/masscan-app.c
+  record_type:
+    1: status_open
+    2: status_closed
+    3: banner3
+    4:
+      id: banner4_short
+      doc: |
+        Same as `banner4`, written by a version that set the length one
+        byte too low.
+    5: banner4
+    6: status2_open
+    7: status2_closed
+    8: status2_arp
+    9: banner9
+    10: status6_open
+    11: status6_closed
+    12: status6_arp
+    13: banner6
+    109:
+      id: file_header
+      doc: The letter "m" of the header and footer.
+  app_proto:
     0:
       id: none
       -orig-id: PROTO_NONE
