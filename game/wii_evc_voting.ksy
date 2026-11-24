@@ -18,16 +18,21 @@ seq:
     type: u1
   - id: publicity_flag
     type: u1
+    doc: |
+      Only affects worldwide results (not national). Booleanised to 0/1.
+      Written to +0x22 of the worldwide UI result object.
   - id: question_version
     type: u1
   - id: result_version
     type: u1
   - id: national_question_entry_number
     type: u1
+    doc: Client caps at 6 entries.
   - id: national_question_table_offset
     type: u4
   - id: worldwide_question_num
     type: u1
+    doc: Client caps at 2 entries.
   - id: worldwide_question_offset
     type: u4
   - id: question_entry_number
@@ -36,6 +41,7 @@ seq:
     type: u4
   - id: national_result_entry
     type: u1
+    doc: Client caps at 13 entries.
   - id: national_result_offset
     type: u4
   - id: national_result_detailed
@@ -48,10 +54,12 @@ seq:
     type: u4
   - id: worldwide_result_entry_num
     type: u1
+    doc: Client caps at 1 entry.
   - id: worldwide_result_table_offset
     type: u4
   - id: worldwide_result_detailed_num
     type: u2
+    doc: Must be <= 0x80 (128) or the channel rejects the entire file.
   - id: worldwide_result_detailed_offset
     type: u4
   - id: country_name_entry_num
@@ -201,8 +209,14 @@ types:
         type: u4
       - id: accurate_prediction_voters_num
         type: u4
+        doc: |
+          Quatric's Wii-Kaitai reads this as the number of prediction votes
+          for response 1, rather than a count of correct predictions.
       - id: inaccurate_prediction_voters_num
         type: u4
+        doc: |
+          Quatric's Wii-Kaitai reads this as the number of prediction votes
+          for response 2, rather than a count of correct predictions.
       - id: total_worldwide_detailed_tables
         type: u1
       - id: starting_worldwide_detailed_table_number
@@ -220,8 +234,13 @@ types:
         type: u4
       - id: female_voters_response_2_num
         type: u4
+      - id: flag
+        type: u1
+        doc: |
+          High byte of what was previously read as a u2
+          `country_table_count`; meaning not confirmed.
       - id: country_table_count
-        type: u2
+        type: u1
       - id: starting_country_table_number
         type: u4
   country_name_table:
