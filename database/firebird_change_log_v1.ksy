@@ -1,0 +1,257 @@
+# Imported from https://github.com/NeoZX/fb_formats/blob/11c1f367a53e1787fe6d965fe312fe552e1d6d20/kaitai/change_log_v1.ksy
+# Licence and copyright: see _community/README.md
+meta:
+  id: firebird_change_log_v1
+  title: Firebird change log
+  application: firebird
+  license: GPL-2.0-only
+  endian: le
+  bit-endian: le
+doc: | 
+  Firebird change log version 1.
+  Protocol 1 is used in Firebird 4/5
+  Protocal 2 is used in Firebird 6
+seq:
+  - id: header
+    size: 48
+    type: header
+  - id: blocks
+    size: header.blocks_length
+    type: blocks
+types:
+  header:
+    seq:
+      - id: magic
+        size: 12
+        contents: [ "FBCHANGELOG", 0x00 ]
+      - id: version
+        type: u2
+      - id: state
+        type: u2
+        enum: journal_states
+      - id: replication_guid
+        size: 16
+      - id: sequence
+        type: s8
+      - id: log_length
+        type: s8
+    instances:
+      blocks_length:
+        value: 'log_length == 0 ? 0 : log_length - 48'
+  blocks:
+    seq:
+      - id: block
+        type: block
+        repeat: eos
+  block:
+    seq:
+      - id: tra
+        type: s8
+      - id: protocol
+        type: u2
+      - id: flags
+        size: 2
+        type: flags
+      - id: len_operations
+        type: u4
+      - id: operations
+        size: len_operations
+        type: operations
+  operations:
+    seq:
+      - id: operation
+        type: operation
+        repeat: eos
+  operation:
+    seq:
+      - id: tag
+        type: u1
+        enum: tags
+      - id: data
+        type:
+          switch-on: tag
+          cases:
+            'tags::insertrecord': insertrecord
+            'tags::updaterecord': updaterecord
+            'tags::deleterecord': deleterecord
+            'tags::storeblob': storeblob
+            'tags::executesql': executesql
+            'tags::executesqlintl': executesqlintl
+            'tags::setsequence': setsequence
+            'tags::defineatom': defineatom
+  insertrecord:
+    seq:
+      - id: schema_id
+        type: s4
+        if: _parent._parent._parent.protocol == 2
+      - id: atom_id
+        type: s4
+      - id: len_record
+        type: s4
+      - id: record
+        size: len_record
+  updaterecord:
+    seq:
+      - id: schema_id
+        type: s4
+        if: _parent._parent._parent.protocol == 2
+      - id: atom_id
+        type: s4
+      - id: len_org_record
+        type: s4
+      - id: org_record
+        size: len_org_record
+      - id: len_new_record
+        type: s4
+      - id: new_record
+        size: len_new_record
+  deleterecord:
+    seq:
+      - id: schema_id
+        type: s4
+        if: _parent._parent._parent.protocol == 2
+      - id: atom_id
+        type: s4
+      - id: len_record
+        type: s4
+      - id: record
+        size: len_record
+  storeblob:
+    seq:
+      - id: blob_high
+        type: s4
+      - id: blob_low
+        type: s4
+      - id: blob
+        type: blob
+        # todo add eos
+        repeat: until
+        repeat-until: _.len_blob_data == 0
+  blob:
+    seq:
+      - id: len_blob_data
+        type: s2
+      - id: blob_data
+        size: len_blob_data
+  executesql:
+    seq:
+      - id: atom_id
+        type: s4
+      - id: len_text
+        type: s4
+      - id: text
+        size: len_text
+  executesqlintl:
+    seq:
+      - id: atom_id
+        type: s4
+      - id: schema_search_path_atom
+        type: s4
+        if: _parent._parent._parent.protocol == 2
+      - id: charset
+        type: s1
+        enum: charsets
+      - id: len_text
+        type: s4
+      - id: text
+        size: len_text
+  setsequence:
+    seq:
+      - id: schema_search_path_atom
+        type: s4
+        if: _parent._parent._parent.protocol == 2
+      - id: atom_id
+        type: s4
+      - id: value
+        type: s8
+  defineatom:
+    seq:
+      - id: len_name
+        type: u1
+      - id: name
+        size: len_name
+  flags:
+    seq:
+      - id: block_begin_trans
+        type: b1
+      - id: block_end_trans
+        type: b1
+enums:
+  journal_states:
+    0: free
+    1: used
+    2: full
+    3: arch
+  tags:
+    1: starttransaction
+    2: preparetransaction
+    3: committransaction
+    4: rollbacktransaction
+    5: cleanuptransaction
+    6: startsavepoint
+    7: releasesavepoint
+    8: rollbacksavepoint
+    9: insertrecord
+    10: updaterecord
+    11: deleterecord
+    12: storeblob
+    13: executesql
+    14: setsequence
+    15: executesqlintl
+    16: defineatom
+  charsets:
+    0: none
+    1: binary
+    2: ascii
+    3: unicode_fss
+    4: utf8
+    5: sjis
+    6: eucj
+    7: jis_0208
+    8: unicode_ucs2
+    9: dos_737
+    10: dos_437
+    11: dos_850
+    12: dos_865
+    13: dos_860
+    14: dos_863
+    15: dos_775
+    16: dos_858
+    17: dos_862
+    18: dos_864
+    19: next
+    21: iso8859_1
+    22: iso8859_2
+    23: iso8859_3
+    34: iso8859_4
+    35: iso8859_5
+    36: iso8859_6
+    37: iso8859_7
+    38: iso8859_8
+    39: iso8859_9
+    40: iso8859_13
+    44: ksc5601
+    45: dos_852
+    46: dos_857
+    47: dos_861
+    48: dos_866
+    49: dos_869
+    50: cyrl
+    51: win1250
+    52: win1251
+    53: win1252
+    54: win1253
+    55: win1254
+    58: win1255
+    59: win1256
+    60: win1257
+    61: utf16
+    62: utf32
+    63: koi8r
+    64: koi8u
+    65: win1258
+    66: tis620
+    67: gbk
+    68: cp943c
+    69: gb18030
+    127: dynamic
