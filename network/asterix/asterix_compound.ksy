@@ -41,7 +41,8 @@ doc: |
   Extended subfields. For all the other formats a 0 should be used, although it is
   not used at all.
 
-
+doc-ref: |
+  https://www.eurocontrol.int/publication/eurocontrol-specification-surveillance-data-exchange-part-i
 
 params:
   - id: name
@@ -55,13 +56,18 @@ seq:
   - id: flags
     type: asterix_field_spec
   - id: data
+    doc: |
+      Subfield k is announced by bit k % 7 of primary-subfield octet k / 7.
+      When the FX chain ends before that octet, the subfield is absent
+      (ASTERIX Part 1, compound data item format), so the index is bounds
+      checked before the bit is read.
     type:
       switch-on: f_fmt.substring(_index, _index + 1)
       cases:
-        '"E"': asterix_explicit("", flags.octects[_index / 7].bits[_index % 7])
-        '"F"': asterix_fixed("", flags.octects[_index / 7].bits[_index % 7], f_pri_sizes[_index])
-        '"R"': asterix_repetitive("", flags.octects[_index / 7].bits[_index % 7], f_pri_sizes[_index])
-        '"X"': asterix_extended("", flags.octects[_index / 7].bits[_index % 7], f_pri_sizes[_index], f_sec_sizes[_index])
+        '"E"': asterix_explicit("", (_index / 7 < flags.octects.size and flags.octects[_index / 7].bits[_index % 7]))
+        '"F"': asterix_fixed("", (_index / 7 < flags.octects.size and flags.octects[_index / 7].bits[_index % 7]), f_pri_sizes[_index])
+        '"R"': asterix_repetitive("", (_index / 7 < flags.octects.size and flags.octects[_index / 7].bits[_index % 7]), f_pri_sizes[_index])
+        '"X"': asterix_extended("", (_index / 7 < flags.octects.size and flags.octects[_index / 7].bits[_index % 7]), f_pri_sizes[_index], f_sec_sizes[_index])
         _: empty
     repeat: expr
     repeat-expr: total_flags

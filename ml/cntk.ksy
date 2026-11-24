@@ -18,6 +18,7 @@ doc: |
 
 doc-ref:
   - https://github.com/Microsoft/CNTK
+  - https://github.com/microsoft/CNTK/blob/10a8ffcf50d7b9225f3236ffcfdc422b2014fb92/Source/ComputationNetworkLib/ComputationNetwork.cpp#L125-L230
 
 seq:
   - id: network
@@ -77,7 +78,7 @@ types:
             "'Version'": version
             "'NodeList'": node_list
             "'Relation'": relation
-            "'BMAT'": matrix
+            "'MAT'": matrix
             "'RootNodes'": root_nodes
             "'FeatureNodes'": nodes_names
             "'LabelNodes'": nodes_names
@@ -86,50 +87,39 @@ types:
             "'OutputNodes'": nodes_names
     types:
       matrix:
+        doc: |
+          Dense CPU matrix, the body of a "BMAT" ... "EMAT" section.
+        doc-ref: https://github.com/microsoft/CNTK/blob/10a8ffcf50d7b9225f3236ffcfdc422b2014fb92/Source/Math/CPUMatrix.h#L545-L559
         seq:
           - id: element_size
-            -orig-id: elsize
+            -orig-id: sizeof(ElemType)
             type: u8
           - id: name
             type: strz
+            doc: always "unnamed"
           - id: format
-            -orig-id: m_format
-            type: format
+            -orig-id: format
+            type: u4
+            doc: MatrixFormat flags; 0 is dense column-major
           - id: rows
-            -orig-id: numRows
+            -orig-id: m_numRows
             type: u8
           - id: cols
-            -orig-id: numCols
+            -orig-id: m_numCols
             type: u8
           - id: data
-            size: cols*rows*element_size
-        types:
-          format:
-            seq:
-              - id: reserved0
-                type: b3
-              - id: set_value_on_device
-                -orig-id: bitPosSetValueOnDevice
-                type: b1
-                doc: in a setValue situation, the copy from buffer is already on the device
-              - id: dont_own_buffer
-                -orig-id: bitPosDontOwnBuffer
-                type: b1
-                doc: buffer is not owned by this matrix
-              - id: compressed
-                -orig-id: bitPosCompressed
-                type: b1
-                doc: a compressed sparse format (CSC/CSR)
-              - id: sparse
-                -orig-id: bitPosSparse
-                type: b1
-                doc: sparse matrix (COO if uncompressed)
-              - id: row_major
-                -orig-id: bitPosRowMajor
-                type: b1
-                doc: row major matrix
-              - id: reserved1
-                type: b24
+            size: cols * rows * element_size
+            doc: elements in column-major order
+        instances:
+          row_major:
+            -orig-id: bitPosRowMajor
+            value: (format & 1) != 0
+          sparse:
+            -orig-id: bitPosSparse
+            value: (format & 2) != 0
+          compressed:
+            -orig-id: bitPosCompressed
+            value: (format & 4) != 0
       tensor_shape:
         seq:
           - id: rank
@@ -137,10 +127,11 @@ types:
           - id: dims
             type: u4
             repeat: expr
-            repeat-expr: real_rank
-        instances:
-          real_rank:
-            value: "((rank>0) ? rank : 1)"
+            repeat-expr: rank
+        doc: |
+          Current layout as written by TensorShape::Save(); the pre-version-3
+          legacy layout (three size_t W, H, C) is not handled.
+        doc-ref: https://github.com/microsoft/CNTK/blob/10a8ffcf50d7b9225f3236ffcfdc422b2014fb92/Source/Common/Include/TensorShape.h#L401-L412
       version:
         seq:
           - id: major
@@ -246,123 +237,30 @@ types:
                 -orig-id: NodeName
                 type: strz
               - id: node_specific
+                doc: |
+                  Payload written by the node's own `Save()`. Operations without
+                  a case here (Plus, Sigmoid, ElementTimes, ErrorPrediction,
+                  CrossEntropyWithSoftmax, ...) inherit the empty
+                  `ComputationNodeBase::Save()` and write nothing.
                 type:
-                  switch-on: node_name
+                  switch-on: operation_name
                   cases:
-                    '"AveragePoolingNode"': node_generic
-                    '"BatchNormalizationNode"': node_generic
-                    '"ClassificationErrorNode"': classification_error
-                    '"ErrorPrediction"': classification_error
-                    '"ClipNode"': node_generic
-                    '"ConvolutionNode"': convolution
-                    '"CosDistanceNode"': node_generic
-                    '"CosDistanceWithNegativeSamplesNode"': node_generic
-                    '"CoshNode"': node_generic
-                    '"CosineNode"': node_generic
-                    '"CropNode"': node_generic
-                    '"CrossEntropyNode"': node_generic
-                    '"CrossEntropyWithSoftmaxNode"': node_generic
-                    '"ForwardBackwardNode"': node_generic
-                    '"DiagonalNode"': node_generic
-                    '"DiagTimesNode"': node_generic
-                    '"DropoutNode"': node_generic
-                    '"DummyCriterionNode"': node_generic
-                    '"DynamicAxisNode"': node_generic
-                    '"EditDistanceErrorNode"': node_generic
-                    '"AcosNode"': node_generic
-                    '"AsinNode"': node_generic
-                    '"ElementTimesNode"': element_times
-                    '"ColumnElementTimes"': element_times
-                    '"RowElementTimes"': element_times
-                    '"Scale"': element_times
-                    '"EnvironmentInputNode"': node_generic
-                    '"EpochAccumulatorNode"': node_generic
-                    '"EqualNode"': node_generic
-                    '"ExpNode"': node_generic
-                    '"FloorNode"': node_generic
-                    '"FutureValueNode"': node_generic
-                    '"GatherPackedNode"': node_generic
-                    '"GMMLogLikelihoodNode"': node_generic
-                    '"GreaterEqualNode"': node_generic
-                    '"GreaterNode"': node_generic
-                    '"HardmaxNode"': node_generic
-                    '"IfNode"': node_generic
                     '"InputValue"': input_value
-                    '"InvStdDevNode"': node_generic
-                    '"LambdaRankNode"': node_generic
-                    '"NDCG1EvalNode"': node_generic
-                    '"KhatriRaoProductNode"': node_generic
-                    '"LearnableParameter"': node_generic
-                    '"LessEqualNode"': node_generic
-                    '"LessNode"': node_generic
-                    '"LogNode"': node_generic
-                    '"LogPlusNode"': node_generic
-                    '"LogSoftmaxNode"': node_generic
-                    '"LookupTableNode"': node_generic
-                    '"MatrixL1RegNode"': node_generic
-                    '"MatrixL2RegNode"': node_generic
-                    '"MaxPoolingNode"': node_generic
-                    '"MeanNode"': node_generic
-                    '"MinusNode"': node_generic
-                    '"NegateNode"': node_generic
-                    '"NotEqualNode"': node_generic
-                    '"NoiseContrastiveEstimationNode"': node_generic
-                    '"OptimizedRNNStackNode"': optimized_rnn_stack
-                    '"RNN"': optimized_rnn_stack
-                    '"PackedIndexNode"': node_generic
-                    '"PastValueNode"': past_value
-                    '"Delay"': past_value
-                    '"PerDimMeanVarNormalizationNode"': node_generic
-                    '"PerDimMeanVarDeNormalizationNode"': node_generic
-                    '"PassNode"': node_generic
-                    '"LabelsToGraphNode"': node_generic
-                    '"PlusNode"': node_generic
-                    '"PoolingNode"': pooling
-                    '"RandomSampleNode"': node_generic
-                    '"RandomSampleInclusionFrequencyNode"': node_generic
-                    '"ReconcileDynamicAxisNode"': reconcile_dynamic_axis
-                    '"ReconcileMBLayout"': reconcile_dynamic_axis
-                    '"ReciprocalNode"': node_generic
-                    '"RectifiedLinearNode"': node_generic
-                    '"ReduceElementsNode"': node_generic
-                    '"ReshapeNode"': node_generic
-                    '"ROIPoolingNode"': roi_pooling
-                    '"RowRepeatNode"': node_generic
-                    '"RowStackNode"': node_generic
-                    '"ScatterPackedNode"': node_generic
-                    '"SequenceWithSoftmaxNode"': node_generic
-                    '"LatticeSequenceWithSoftmaxNode"': node_generic
-                    '"SequenceDecoderNode"': node_generic
-                    '"ShiftNode"': node_generic
-                    '"SigmoidNode"': node_generic
-                    '"StableSigmoidNode"': node_generic
-                    '"SinNode"': node_generic
-                    '"SinhNode"': node_generic
-                    '"SliceNode"': slice
-                    '"RowSlice"': slice
-                    '"SoftmaxNode"': node_generic
-                    '"SparseInputValue"': node_generic
-                    '"SqrtNode"': node_generic
-                    '"SquareErrorNode"': node_generic
-                    '"LogisticNode"': node_generic
-                    '"SumColumnElementsNode"': node_generic
-                    '"SumElementsNode"': node_generic
-                    '"TanhNode"': node_generic
-                    '"TraceNode"': node_generic
-                    '"TimesNode"': node_generic
-                    '"Transpose"': transpose_dimensions
-                    '"TransposeDimensionsNode"': transpose_dimensions
-                    '"TransposeTimesNode"': node_generic
-                    '"QuantizedTimesNode"': node_generic
-                    '"WhereNode"': node_generic
-                    '"LegacyReshapeNode"': node_generic
-                    '"MaxUnpoolingNode"': node_generic
-                    '"CRFNode"': node_generic
-                    '"AbsNode"': node_generic
-                    '"ClassBasedCrossEntropyWithSoftmaxNode"': node_generic
-                    '"StopGradientNode"': node_generic
+                    '"SparseInputValue"': input_value
+                    '"LearnableParameter"': learnable_parameter
+                    '"Times"': times
+                    '"TransposeTimes"': times
+                    '"Convolution"': convolution
+                    '"Pooling"': convolution
+                    '"MaxPooling"': pooling
+                    '"AveragePooling"': pooling
+                    '"ROIPooling"': roi_pooling
+            instances:
+              model_version:
+                value: _parent._parent.as<computation_network>.version.major
             types:
               input_value:
+                doc-ref: https://github.com/microsoft/CNTK/blob/10a8ffcf50d7b9225f3236ffcfdc422b2014fb92/Source/ComputationNetworkLib/InputAndParamNodes.h#L303-L316
                 seq:
                   - id: rows
                     -orig-id: rowsDummy
@@ -384,6 +282,8 @@ types:
                     type: f4
 
               learnable_parameter:
+                doc: Layout for model version 3 and later.
+                doc-ref: https://github.com/microsoft/CNTK/blob/10a8ffcf50d7b9225f3236ffcfdc422b2014fb92/Source/ComputationNetworkLib/InputAndParamNodes.cpp#L468-L476
                 seq:
                   - id: learning_rate_multiplier
                     -orig-id: m_learningRateMultiplier
@@ -393,84 +293,79 @@ types:
                     type: tensor_shape
                   - id: value
                     -orig-id: Value()
-                    type: section
-              node_generic:
-                seq: []
-              classification_error:
-                seq: []
-              element_times:
-                seq: []
-              optimized_rnn_stack:
-                seq: []
-              past_value:
-                seq: []
-              slice:
-                seq: []
-              transpose_dimensions:
-                seq: []
-              reconcile_dynamic_axis:
-                seq: []
+                    type: matrix_value
 
+              times:
+                doc-ref: https://github.com/microsoft/CNTK/blob/10a8ffcf50d7b9225f3236ffcfdc422b2014fb92/Source/ComputationNetworkLib/LinearAlgebraNodes.h#L411-L430
+                seq:
+                  - id: output_rank
+                    -orig-id: m_outputRank
+                    type: u8
+                    if: _parent.model_version >= 3
+                  - id: infer_input_rank_to_map
+                    -orig-id: m_inferInputRankToMap
+                    type: s4
+                    if: _parent.model_version >= 12
               convolution:
                 seq:
                   - id: kernel_shape
                     -orig-id: m_kernelShape
                     type: tensor_shape
-                    if: (_parent.as<computation_network>.version.major) > 5
+                    if: _parent.model_version > 5
                   - id: map_count
                     -orig-id: m_mapCount
                     type: tensor_shape
-                    if: _parent.as<computation_network>.version.major > 5
+                    if: _parent.model_version > 5
                   - id: stride
                     -orig-id: m_stride
                     type: tensor_shape
-                    if: _parent.as<computation_network>.version.major > 5
+                    if: _parent.model_version > 5
                   - id: sharing
                     -orig-id: m_sharing
                     type: vector_bool
-                    if: _parent.as<computation_network>.version.major > 5
+                    if: _parent.model_version > 5
                   - id: auto_pad
                     -orig-id: m_autoPad
                     type: vector_bool
-                    if: _parent.as<computation_network>.version.major > 5
+                    if: _parent.model_version > 5
                   - id: lower_pad
                     -orig-id: m_lowerPad.Load(fstream);
                     type: tensor_shape
-                    if: _parent.as<computation_network>.version.major > 5
+                    if: _parent.model_version > 5
                   - id: upper_pad
                     -orig-id: m_upperPad.Load(fstream);
                     type: tensor_shape
-                    if: _parent.as<computation_network>.version.major > 5
+                    if: _parent.model_version > 5
                   - id: pool_kind
                     -orig-id: m_poolKind
                     type: s4
                     enum: pool_kind
-                    if: _parent.as<computation_network>.version.major > 5
+                    if: _parent.model_version > 5
                   - id: image_layout
                     -orig-id: m_imageLayout
                     type: s4
                     enum: image_layout_kind
-                    if: _parent.as<computation_network>.version.major > 5
+                    if: _parent.model_version > 5
                   - id: max_temp_mem_size_in_samples
                     -orig-id: m_maxTempMemSizeInSamples
                     type: s8
-                    if: _parent.as<computation_network>.version.major > 5
+                    if: _parent.model_version > 5
                   - id: transpose
                     -orig-id: m_transpose
                     type: u1
-                    if: _parent.as<computation_network>.version.major > 9
+                    if: _parent.model_version > 9
                   - id: output_shape
                     -orig-id: m_outputShape
                     type: tensor_shape
-                    if: _parent.as<computation_network>.version.major > 20
+                    if: _parent.model_version > 20
                   - id: ceil_out_dim
                     -orig-id: m_ceilOutDim
                     type: u1
-                    if: _parent.as<computation_network>.version.major > 21
+                    if: _parent.model_version > 21
                   - id: pool_include_pad
                     -orig-id: m_poolIncludePad
                     type: u1
-                    if: _parent.as<computation_network>.version.major > 23
+                    if: _parent.model_version > 23
               roi_pooling:
                 seq:
                   - id: roi_output_shape
@@ -481,13 +376,13 @@ types:
                     type: s4
                     -default: max
                     enum: pool_kind
-                    if: _parent.as<computation_network>.version.major > 26
+                    if: _parent.model_version > 26
                   - id: spatial_scale
                     -orig-id: m_spatialScale
                     type: s4
                     enum: pool_kind
                     -default: 1.0/16.0
-                    if: _parent.as<computation_network>.version.major > 26
+                    if: _parent.model_version > 26
               pooling:
                 seq:
                   - id: window_width
@@ -506,6 +401,19 @@ types:
                   - id: vertical_subsample
                     -orig-id: m_verticalSubsample
                     type: u8
+  matrix_value:
+    doc: Matrix<ElemType>::Write()
+    doc-ref: https://github.com/microsoft/CNTK/blob/10a8ffcf50d7b9225f3236ffcfdc422b2014fb92/Source/Math/Matrix.cpp#L643-L663
+    seq:
+      - id: matrix_type
+        type: u1
+        enum: matrix_type
+      - id: dense
+        type: section_hardcode("MAT")
+        if: matrix_type == matrix_type::dense
+        doc: |
+          Sparse matrices ('s') are written by GPUSparseMatrix and are not
+          handled here.
   section:
     seq:
       - id: begin_marker
@@ -527,6 +435,9 @@ types:
         type: end_marker(begin_marker.name)
 
 enums:
+  matrix_type:
+    0x64: dense # 'd'
+    0x73: sparse # 's'
   pool_kind:
     0: none
     1: max

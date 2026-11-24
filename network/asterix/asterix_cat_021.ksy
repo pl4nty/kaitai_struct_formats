@@ -56,10 +56,12 @@ types:
 
     seq:
       - id: items
-        type:
-          switch-on: fspec.octects[_index/7].bits[_index % 7]
-          cases:
-            true: asterix_cat_021_catalog(uap_list[ _index ])
+        doc: |
+          One entry per UAP slot (FRN - 1), so items[k] is always UAP slot k.
+          A slot whose FSPEC bit is clear gets a catalog entry with
+          item_ref_num -1, which matches no case and consumes no bytes
+          (ASTERIX Part 1, FSPEC / UAP rules).
+        type: 'asterix_cat_021_catalog(fspec.octects[_index / 7].bits[_index % 7] ? uap_list[_index] : -1)'
         repeat: expr
         repeat-expr: loop_range
 
