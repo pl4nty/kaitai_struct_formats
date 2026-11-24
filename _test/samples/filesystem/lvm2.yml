@@ -3,7 +3,6 @@ samples:
     sha256: 565f564cd35e6ee304ea810631d52223e1ee3bb61d92ff1cd035c5a25f59e43e
     source: dfVFS test data
     license: Apache-2.0
-    xfail: data/metadata area descriptor repeat-until is inverted (stops on a non-zero descriptor instead of the all-zero terminator)
     expect:
       pv.label.label_header.signature: LABELONE
       pv.label.label_header.sector_number: 1

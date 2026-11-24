@@ -4,5 +4,4 @@ samples:
   source: Apache Tika test documents
   license: Apache-2.0
   expect:
-    len_page: 1024
-  xfail: cell body size depends on an instance that is None for this page type (TypeError comparing None with int)
+    header.page_size: 1024

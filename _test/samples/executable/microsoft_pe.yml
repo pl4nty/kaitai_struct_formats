@@ -3,7 +3,6 @@ samples:
     sha256: 41735cf200a619638541bfa8372df9a8bf736c77bb790863a58ff5c5c1160a36
     source: Go debug/pe testdata (values from pefile)
     license: BSD-3-Clause
-    xfail: coff_symbol.section indexes sections[section_number - 1] without guarding special section numbers (0, -1, -2)
     expect:
       mz.ofs_pe: 128
       pe.coff_hdr.machine: 0x14c
@@ -13,7 +12,6 @@ samples:
     sha256: fc2c31e826718712cb56787f7ea30dae8d2feb2c29c9f1b75f8fa019d0bbd08e
     source: Go debug/pe testdata (values from pefile)
     license: BSD-3-Clause
-    xfail: coff_symbol.section indexes sections[section_number - 1] without guarding special section numbers (0, -1, -2)
     expect:
       pe.coff_hdr.machine: 0x8664
       pe.coff_hdr.number_of_sections: 17

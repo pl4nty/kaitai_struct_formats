@@ -9,7 +9,6 @@ samples:
     sha256: 2cc53c7c9328efeaca29e8c7d7fd3a4ac6f9f95301660ba5ca26f77ed3029a10
     source: 'Apache Commons Compress test resources: LHA level 1'
     license: Apache-2.0
-    xfail: level-1 headers - extended headers counted in file_size_compr are not subtracted, so the next record is misaligned
   - url: https://raw.githubusercontent.com/apache/commons-compress/17796875a060734aeb2bfd4c2d3ea0a5aa546c22/src/test/resources/test-msdos-l2.lha
     sha256: 925127df4e266e78ffef1e404046f52eb53f4209c63a605bfa3f5fe70ef395c6
     source: 'Apache Commons Compress test resources: LHA level 2'

@@ -2,7 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/kaitai-io/kaitai_struct_webide/c72e3f331fb923d8593b023763fae74eb35d6c9f/samples/sample1.iso
     sha256: 523dc994094868e2ce65e0612b8ff9564d227c73eee4eecb3768c846278d1d97
     source: Kaitai Web IDE samples
-    xfail: extent_as_dir over-reads past the last directory record in a sector
   - url: https://raw.githubusercontent.com/log2timeline/dfvfs/bf5d2fd3131646306507490d0389783d69b57676/test_data/iso9660.raw
     sha256: 7b9d0c5fbd5a22458eeb2288f2076d65b3541c6e27df449f96e372270fce7720
     source: dfVFS test data

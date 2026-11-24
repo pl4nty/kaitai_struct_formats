@@ -3,8 +3,6 @@ samples:
     sha256: bd77d59379c4be223b41aa69dddae52269e8af78f429eabee89b56e6bcd52833
     source: libyal dtformats test data (values from struct-decoded base block)
     license: Apache-2.0
-    xfail: >-
-      ksc 0.11 Python output copies doc text into a non-raw docstring; the backslash in `%USERPROFILE%\Ntuser.dat` becomes an invalid \N escape (SyntaxError); with that patched, compressed key names decode as ascii but hold Latin-1 bytes (UnicodeDecodeError)
     expect:
       header.primary_sequence_number: 41
       header.secondary_sequence_number: 40
@@ -14,8 +12,6 @@ samples:
     sha256: 711f6a66b304ce6b4ae6424d861d54f26657cfda91746ed8494a64924fa24747
     source: yarp test hives (values from struct-decoded base block)
     license: GPL-3.0
-    xfail: >-
-      ksc 0.11 Python output copies doc text into a non-raw docstring; the backslash in `%USERPROFILE%\Ntuser.dat` becomes an invalid \N escape (SyntaxError); with that patched, hive_bins uses repeat eos instead of hive_bins_data_size, so zero padding after the last bin fails the hbin check
     expect:
       header.minor_version: 3
       header.root_key_offset: 32
@@ -24,8 +20,6 @@ samples:
     sha256: 020577484426d9a7e69993152db7cffbcd0291bda75985504ebbb720e098275d
     source: yarp test hives (values from struct-decoded base block)
     license: GPL-3.0
-    xfail: >-
-      ksc 0.11 Python output copies doc text into a non-raw docstring; the backslash in `%USERPROFILE%\Ntuser.dat` becomes an invalid \N escape (SyntaxError); with that patched, hive_bins uses repeat eos instead of hive_bins_data_size, so zero padding after the last bin fails the hbin check
     expect:
       header.primary_sequence_number: 3
       header.hive_bins_data_size: 4096

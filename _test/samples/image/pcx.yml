@@ -10,7 +10,6 @@ samples:
   sha256: 4406e81f6ea36a9147c42a3f083abc3c60be3975e1cd1d4fa45eb48bc1d6442b
   source: Pillow test suite (Tests/images)
   license: HPND (Pillow test images)
-  xfail: palette_256 instance is unguarded; 8-bit PCX without a trailing VGA palette fails its 0x0C magic check
   expect:
     hdr.img_x_max - hdr.img_x_min + 1: 88
     hdr.img_y_max - hdr.img_y_min + 1: 52

@@ -3,7 +3,6 @@ samples:
     sha256: 6669885cd4c23251aaebb66626860b076a3743509f1220e48b280dead12eceba
     source: fragglet/miniwad (values from struct-decoded header)
     license: BSD-3-Clause
-    xfail: sidedef texture names decode all 8 bytes as ASCII; Doom names are NUL-terminated and bytes after the NUL may be junk (0xff here)
     expect:
       magic: PWAD
       num_index_entries: 11

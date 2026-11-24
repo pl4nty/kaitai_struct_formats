@@ -9,7 +9,6 @@ samples:
   - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/java/HiKt.class
     sha256: bc2d187fc52b4f86ec5029bb3e2dc8734753577f41b625e4c7d05ee4eceea760
     source: radare2-testbins (values from struct-decoded header) (Kotlin-compiled)
-    xfail: utf8_cp_info decodes as strict UTF-8, but class files use modified UTF-8 (NUL is C0 80)
     eof: true
     expect:
       version_major: 50

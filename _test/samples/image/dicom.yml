@@ -17,4 +17,3 @@ samples:
   license: see pydicom test_files README (public test data)
   expect:
     file_header.magic: DICM
-  xfail: t_data_element_implicit tests `vr` in the SQ condition but only reads `vr` for explicit-VR elements

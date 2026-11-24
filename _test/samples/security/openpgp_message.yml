@@ -3,10 +3,8 @@ samples:
   sha256: 47e1e57066a1c9a3848b81a1eb34e18267d045fe5e42c495b451f9e100819415
   source: 'Apache Tika test documents: encrypted message'
   license: Apache-2.0
-  xfail: field id "class" is a Python keyword; generated Python does not import
 
 - url: https://raw.githubusercontent.com/rnpgp/rnp/b3b08cc8dceb47c256425ad2964ddefe7b4cb6fd/src/tests/data/cli_EncryptSign/GnuPG_dsa_elgamal_1024_1024.gpg
   sha256: ace99ac5d4f25218e8f87922619cdad4f301ddcb11318a258185d32551bb46e5
   source: 'rnp test data: GnuPG public keyring'
   license: BSD-2-Clause
-  xfail: field id "class" is a Python keyword; generated Python does not import

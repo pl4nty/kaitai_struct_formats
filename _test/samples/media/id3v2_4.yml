@@ -4,7 +4,6 @@ samples:
     sha256: eb5e75f25ea89fb96156a23645c0ffa4b3fe5c87d1cb2f50b5828c254a0426ca
     source: mutagen tests/data
     license: GPL-2.0-or-later
-    xfail: padding size reads _root.tag while tag is still being parsed (use _parent.header)
     expect:
       tag.header.version_major: 4
       tag.header.size.value: 184
@@ -12,6 +11,5 @@ samples:
     sha256: fa09985c11b8c0ce32ebe496dcfbf61b57f4bda13a7cd5cc8ca1f630ce5d34f0
     source: mutagen tests/data
     license: GPL-2.0-or-later
-    xfail: padding size reads _root.tag while tag is still being parsed (use _parent.header)
     expect:
       tag.header.size.value: 2215

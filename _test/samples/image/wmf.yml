@@ -3,6 +3,5 @@ samples:
   sha256: 6c97d794b914c74845c378723f7f131e08e34d1938f673b41c5e5fa3ad70012f
   source: Pillow test suite (Tests/images)
   license: HPND (Pillow test images)
-  xfail: enum bin_raster_op has member `not`, a Python keyword; generated Python does not import
   expect:
     special_header.magic: d7cdc69a

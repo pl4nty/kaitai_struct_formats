@@ -4,7 +4,6 @@ samples:
     sha256: 423c43f361aad088c9bd00e2955f59b27f1e596074efdacbe47bb7f56a63ad5d
     source: mutagen tests/data
     license: GPL-2.0-or-later
-    xfail: unsynchronisation (header flag 0x80) is not undone, so frame sizes are garbage
     expect:
       tag.header.version_major: 3
       tag.header.size.value: 176

@@ -51,3 +51,10 @@ samples:
   eof: true
   expect:
     ihdr.color_type: indexed
+- url: https://raw.githubusercontent.com/web-platform-tests/wpt/6a5adcd62f63a67b23fa61312c2008228bd815ba/css/css-color/support/swap-990000-iCCP.png
+  sha256: e99902fe0e327cafa97933716dd4dd573181b8502558a66ee1970463c2a3f327
+  source: web-platform-tests (embedded iCCP profile)
+  license: BSD-3-Clause
+  expect:
+    ihdr.width: 200
+    ihdr.height: 200

@@ -2,7 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/mach0/fat-intel
     sha256: 46e112cb023fe327e3ef088c3352b6e920763626cacc8e6743efec10afc248fa
     source: radare2-testbins (values from struct-decoded header)
-    xfail: uleb128 type tests b2/b3/... in later `if` conditions even when the earlier byte was absent (AttributeError in embedded mach_o dyld_info bind)
     expect:
       num_fat_arch: 2
       fat_archs[0].cpu_type: 7
@@ -10,6 +9,5 @@ samples:
   - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/mach0/hellocxx-osx-fat-intel
     sha256: dbe146b096154c831206a92dea8291d94cae931f4f2577ae6e3a494ce4286306
     source: radare2-testbins (values from struct-decoded header)
-    xfail: uleb128 type tests b2/b3/... in later `if` conditions even when the earlier byte was absent (AttributeError in embedded mach_o dyld_info bind)
     expect:
       num_fat_arch: 2

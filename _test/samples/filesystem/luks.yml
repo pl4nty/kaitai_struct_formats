@@ -5,6 +5,6 @@ samples:
     license: Apache-2.0
     deep: false   # payload instance is the whole encrypted volume
     expect:
-      partition_header.version: "0001"
-      partition_header.payload_offset: 4096
-      partition_header.number_of_key_bytes: 32
+      primary_binary_header.version2: 1
+      primary_binary_header.payload_offset: 4096
+      primary_binary_header.number_of_key_bytes: 32
