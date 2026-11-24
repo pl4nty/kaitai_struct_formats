@@ -2,13 +2,14 @@ meta:
   id: bluetooth_control_command
   title: Bluetooth Host Controller Interface Control Protocol
   license: Unlicense
-  endian: le
-  bit-endian: le
   imports:
     - vendor_specific/bluetooth_control_group_vendor_specific
     - ../bluetooth_vendors_ids
+  endian: le
+  bit-endian: le
 doc: |
-  Bluetooth HCI control command. Used for the stuff like managing bluetooth settings and loading firmware.
+  Bluetooth HCI control command. Used for the stuff like managing bluetooth
+  settings and loading firmware.
 doc-ref: https://www.bluetooth.org/docman/handlers/downloaddoc.ashx?doc_id=478726
 params:
   - id: vendor

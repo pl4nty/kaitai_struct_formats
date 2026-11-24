@@ -2,10 +2,10 @@ meta:
   id: llc_frame
   title: Logical-link control
   license: LicenseRef-All-Rights-Reserved
-  endian: be
   #http://www.networksorcery.com/enp/protocol/IEEE8022.htm
   imports:
     - mpls
+  endian: be
 seq:
   - id: dsap
     contents: [0xaa]
@@ -26,13 +26,13 @@ seq:
         'ether_type_enum::mpls': mpls
 types:
   control_field:
-      seq:
-        - id: command
-          type: b6
-        - id: frame_type
-          type: b2
-        - id: additional
-          size: 'frame_type == 0x03 ? 0 : 1'
+    seq:
+      - id: command
+        type: b6
+      - id: frame_type
+        type: b2
+      - id: additional
+        size: 'frame_type == 0x03 ? 0 : 1'
 enums:
   # http://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml
   ether_type_enum:

@@ -1,9 +1,9 @@
 meta:
   id: ipcp_packet
   title: PPP Internet Protocol Control Protocol
-  license: LicenseRef-All-Rights-Reserved
   xref:
     rfc: 3241
+  license: LicenseRef-All-Rights-Reserved
 seq:
   - id: code
     type: u1

@@ -1,17 +1,16 @@
 meta:
   id: bluetooth_hcd
   title: Bluetooth Host Controller Interface Control Protocol
-  license: Unlicense
   file-extension: hcd
-  endian: le
+  xref:
+    ieee: 802.15.1
+    wikidata: Q39531
+  license: Unlicense
   imports:
     - control/bluetooth_control_command
     - bluetooth_vendors_ids
-  xref:
-    wikidata: Q39531
-    ieee: 802.15.1
-doc: |
-  Bluetooth Host Controller Interface protocol.
+  endian: le
+doc: Bluetooth Host Controller Interface protocol.
 doc-ref:
   - https://www.bluetooth.org/docman/handlers/downloaddoc.ashx?doc_id=478726
   - https://software-dl.ti.com/simplelink/esd/simplelink_cc13x2_sdk/1.60.00.29_new/exports/docs/ble5stack/vendor_specific_guide/BLE_Vendor_Specific_HCI_Guide/hci_interface.html

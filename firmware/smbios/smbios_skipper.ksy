@@ -1,9 +1,9 @@
 meta:
   id: smbios_skipper
   license: LicenseRef-All-Rights-Reserved
-  endian: le
   imports:
     - smbios_strings
+  endian: le
 seq:
   - id: length
     type: u1

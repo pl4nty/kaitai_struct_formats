@@ -1,13 +1,13 @@
 meta:
   id: pepakura_pdo
-  endian: le
-  file-extension: pdo
   title: Pepakura PDO v3
   application:
-   - Pepakura Designer
-   - Pepakura Reader
-  encoding: UTF-8
+    - Pepakura Designer
+    - Pepakura Reader
+  file-extension: pdo
   license: LicenseRef-All-Rights-Reserved
+  encoding: UTF-8
+  endian: le
 doc: |
   A proprietary format of popular software for creation of (ki|o)rigami.
   Files for testing: https://github.com/daeken/PepakuraReverse/tree/master/pdos
@@ -26,15 +26,15 @@ seq:
 
   - id: creator
     type: wstr
-    doc: 'This will be empty for en-us, "Pepakura Designer 3" elsewhere'
     if: _root.lock_status == lock_status::locked
+    doc: This will be empty for en-us, "Pepakura Designer 3" elsewhere
   - id: key
     type: u4
     if: _root.lock_status == lock_status::locked
 
   - id: locale
     type: wstr
-    doc: "Empty for en-us"
+    doc: Empty for en-us
   - id: codepage
     type: wstr
 
@@ -141,9 +141,11 @@ types:
       - id: len
         type: u4
       - id: content
-        type: str
         size: len
-        doc: 'For "locked" files, the value _root.key gets subtracted from each byte to "decrypt" it.'
+        type: str
+        doc: |
+          For "locked" files, the value _root.key gets subtracted from each byte to
+          "decrypt" it.
   geometry:
     seq:
       - id: name
@@ -178,7 +180,7 @@ types:
             type: u4
           - id: part
             type: u4
-            doc: "The part number in Pepakura"
+            doc: The part number in Pepakura
           - id: unknown1
             type: f8
             repeat: expr
@@ -196,10 +198,10 @@ types:
             seq:
               - id: index
                 type: u4
-                doc: "Index into Vertices"
+                doc: Index into Vertices
               - id: coord
                 type: coord_2
-                doc: "2D coordinates"
+                doc: 2D coordinates
               - id: unknown0
                 type: f8
                 repeat: expr
@@ -269,10 +271,10 @@ types:
         seq:
           - id: width
             type: u4
-            doc: "In pixels"
+            doc: In pixels
           - id: height
             type: u4
-            doc: "In pixels"
+            doc: In pixels
 
           - id: compressed_size
             type: u4
@@ -307,7 +309,7 @@ types:
         type: text
         repeat: expr
         repeat-expr: strings_count
-        doc: "This holds text strings for rendering on the page"
+        doc: This holds text strings for rendering on the page
 
       - id: unknown4_count
         type: u4
@@ -326,24 +328,24 @@ types:
     types:
       unknown_t_1:
         seq:
-         - id: unknown0
-           type: u4
+          - id: unknown0
+            type: u4
 
-         - id: unknown1
-           type: f8
-           repeat: expr
-           repeat-expr: 4
+          - id: unknown1
+            type: f8
+            repeat: expr
+            repeat-expr: 4
 
-         - id: unknown2
-           type: wstr
-           if: _root.lock_status == lock_status::locked
+          - id: unknown2
+            type: wstr
+            if: _root.lock_status == lock_status::locked
 
-         - id: unknown3_count
-           type: u4
-         - id: unknown3
-           type: unknown_t_2
-           repeat: expr
-           repeat-expr: unknown3_count
+          - id: unknown3_count
+            type: u4
+          - id: unknown3
+            type: unknown_t_2
+            repeat: expr
+            repeat-expr: unknown3_count
         types:
           unknown_t_2:
             seq:
@@ -371,44 +373,44 @@ types:
                 if: have_unknown3.value
       unknown_t_3:
         seq:
-         - id: unknown0
-           type: f8
-           repeat: expr
-           repeat-expr: 4
+          - id: unknown0
+            type: f8
+            repeat: expr
+            repeat-expr: 4
 
-         - id: unknown1
-           type: u4
-           repeat: expr
-           repeat-expr: 2
+          - id: unknown1
+            type: u4
+            repeat: expr
+            repeat-expr: 2
 
-         - id: unknown2_compressed_size
-           type: u4
+          - id: unknown2_compressed_size
+            type: u4
 
-         - id: unknown2
-           size: unknown2_compressed_size
-           process: zlib
+          - id: unknown2
+            size: unknown2_compressed_size
+            process: zlib
       text:
         doc: A string for rendering on the page
         seq:
-         - id: unknown0
-           type: f8
-           repeat: expr
-           repeat-expr: 5
+          - id: unknown0
+            type: f8
+            repeat: expr
+            repeat-expr: 5
 
-         - id: unknown1
-           type: u4
-           repeat: expr
-           repeat-expr: 2
+          - id: unknown1
+            type: u4
+            repeat: expr
+            repeat-expr: 2
 
-         - id: font
-           type: wstr
+          - id: font
+            type: wstr
 
-         - id: lines_count
-           type: u4
-         - id: lines
-           type: wstr
-           repeat: expr
-           repeat-expr: lines_count
+          - id: lines_count
+            type: u4
+          - id: lines
+            type: wstr
+            repeat: expr
+            repeat-expr: lines_count
   rgb_f4:
     seq:
       - id: r

@@ -6,8 +6,8 @@ meta:
     - ewd # WAYPOINT.EWD usually
     - rte # MYROUTE.RTE usually
   license: Proprietary # Public domain dedication and then ... some conditions that are incompatible to free software and public damain. See the -license-header
+  encoding: ASCII
   endian: le
-  encoding: ascii
 
   -license-header: | # the conditions contradict each other and seem to be unenforceable, but I'm not your attorney
     MGL Avionics places this document and the data format it describes in the public domain in order to foster the use of a common, compact waypoint and route file format that is particularly optimized for use with resource limited systems and/or systems that require fast access to individual items in the waypoint files in order to increase overall systems performance.
@@ -17,7 +17,11 @@ meta:
 
 doc: |
   Waypoint format used by Enigma series of EFIS instruments from MGL Avionics.
-  It is common to create an index file containing a simple list of indexes, one to each entry in the waypoint file, sorted by a particular criteria (for example distance of the waypoint to a given location), rather than sorting the actual waypoint list itself. This is a method commonly employed by database applications.
+  It is common to create an index file containing a simple list of indexes, one to
+  each entry in the waypoint file, sorted by a particular criteria (for example
+  distance of the waypoint to a given location), rather than sorting the actual
+  waypoint list itself. This is a method commonly employed by database
+  applications.
 
 doc-ref: https://mglavionics.co.za/Docs/Enigma%20Waypoint%20format.pdf
 
@@ -25,7 +29,12 @@ seq:
   - id: waypoints
     type: waypoint
     repeat: eos
-    doc: There is no demand that waypoints are stored in any particular order in the waypoint file. They might be sorted by short name or waypoint type but this is of little consequence. The order of waypoints in the file matters only for route files. Route waypoints are stored in the file in order of their appearance in the route. A route should have at least one waypoint.
+    doc: |
+      There is no demand that waypoints are stored in any particular order in the
+      waypoint file. They might be sorted by short name or waypoint type but this is
+      of little consequence. The order of waypoints in the file matters only for route
+      files. Route waypoints are stored in the file in order of their appearance in
+      the route. A route should have at least one waypoint.
 
 types:
   waypoint:
@@ -43,22 +52,28 @@ types:
         enum: type
       - id: name_short
         type: dc_str(6)
-        doc: This entry is used as “key” and in aviation terms would contain the short identifier of an airfield or navaid beacon. This key is used to lookup related data in other databases, for example an airport data base containing details of an airport such as frequencies and runway headings.
+        doc: |
+          This entry is used as “key” and in aviation terms would contain the short
+          identifier of an airfield or navaid beacon. This key is used to lookup related
+          data in other databases, for example an airport data base containing details of
+          an airport such as frequencies and runway headings.
       - id: name_long
         type: dc_str(27)
-        doc: an arbitrary human-readable description of the waypoint (e.g. "Los Angeles International"), not used as a search key
+        doc: |
+          an arbitrary human-readable description of the waypoint (e.g. "Los Angeles
+          International"), not used as a search key
 
     instances:
       is_data_frequency:
         value: 9 <= type.to_i and type.to_i <= 25
       altitude:
         value: "( ( data_raw < 0x80000000 ) ? data_raw : ( ( data_raw & 0x7FFFFFFF ) - 0x80000000 ) )"
-        doc: in feet
         if: not is_data_frequency
+        doc: in feet
       frequency:
         value: data_raw
-        doc: in kHz
         if: is_data_frequency
+        doc: in kHz
 
   dc_str:
     params:
@@ -68,11 +83,11 @@ types:
       - id: size
         type: u1
       - id: value
-        type: str
         size: value_size
-      - id: garbage
         type: str
+      - id: garbage
         size: max_size - value_size
+        type: str
     instances:
       value_size:
         value: 'max_size > size ? size : max_size'

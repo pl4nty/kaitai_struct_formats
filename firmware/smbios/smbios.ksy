@@ -1,7 +1,6 @@
 meta:
   id: smbios
   license: LicenseRef-All-Rights-Reserved
-  endian: le
   imports:
     - smbios_bios_info
     - smbios_system_info
@@ -9,11 +8,12 @@ meta:
     - smbios_portable_battery
     - smbios_skipper
     - smbios_strings
+  endian: le
 doc: |
-    SMBIOS (System Management BIOS) addresses how motherboard and system
-    vendors present management information about 340 their products in a
-    standard format by extending the BIOS interface on processor
-    architecture systems.
+  SMBIOS (System Management BIOS) addresses how motherboard and system
+  vendors present management information about 340 their products in a
+  standard format by extending the BIOS interface on processor
+  architecture systems.
 seq:
   - id: tables
     type: table
@@ -40,4 +40,3 @@ types:
         0x01: table1
         0x04: table4
         0x16: table22
-

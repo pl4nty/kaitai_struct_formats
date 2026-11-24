@@ -3,13 +3,35 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  The almanac data are a reduced-precision subset of the clock and ephemeris parameters. The data occupy all bits of words three through ten of each page except the eight MSBs of word three (data ID and SV ID), bits 17 through 24 of word five (SV health), and the 50 bits devoted to parity. The number of bits, the scale factor (LSB), the range, and the units of the almanac parameters are given in Table 20-VI. The algorithms and other material related to the use of the almanac data are given in paragraph 20.3.3.5.2.
-  The almanac message for any dummy SVs shall contain alternating ones and zeros with valid parity.
-  Users are cautioned against attempting to track a dummy SV since the results are unpredictable.
-  The almanac parameters shall be updated by the CS at least once every 6 days while the CS is able to upload the SVs. If the CS is unable to upload the SVs, the accuracy of the almanac parameters transmitted by the SVs will degrade over time.
-  For Block II and IIA SVs, three sets of almanac shall be used to span at least 60 days. The first and second sets will be transmitted for up to six days each; the third set is intended to be transmitted for the remainder of the 60 days minimum, but the actual duration of transmission will depend on the individual SV's capability to retain data in memory. All three sets are based on six-day curve fits that correspond to the first six days of the transmission interval.
-  For Block IIR/IIR-M, IIF, and GPS III SVs, five sets of almanac shall be used to span at least 60 days. The first, second, and third sets will be transmitted for up to six days each; the fourth and fifth sets will be transmitted for up to 32 days; the fifth set is intended to be transmitted for the remainder of the 60 days minimum, but the actual duration of transmission will depend on the individual SV's capability to retain data in memory.
-  The first, second, and third sets are based on six day curve fits. The fourth and fifth sets are based on 32 day curve fits.
+  The almanac data are a reduced-precision subset of the clock and ephemeris
+  parameters. The data occupy all bits of words three through ten of each page
+  except the eight MSBs of word three (data ID and SV ID), bits 17 through 24 of
+  word five (SV health), and the 50 bits devoted to parity. The number of bits,
+  the scale factor (LSB), the range, and the units of the almanac parameters are
+  given in Table 20-VI. The algorithms and other material related to the use of
+  the almanac data are given in paragraph 20.3.3.5.2.
+  The almanac message for any dummy SVs shall contain alternating ones and zeros
+  with valid parity.
+  Users are cautioned against attempting to track a dummy SV since the results are
+  unpredictable.
+  The almanac parameters shall be updated by the CS at least once every 6 days
+  while the CS is able to upload the SVs. If the CS is unable to upload the SVs,
+  the accuracy of the almanac parameters transmitted by the SVs will degrade over
+  time.
+  For Block II and IIA SVs, three sets of almanac shall be used to span at least
+  60 days. The first and second sets will be transmitted for up to six days each;
+  the third set is intended to be transmitted for the remainder of the 60 days
+  minimum, but the actual duration of transmission will depend on the individual
+  SV's capability to retain data in memory. All three sets are based on six-day
+  curve fits that correspond to the first six days of the transmission interval.
+  For Block IIR/IIR-M, IIF, and GPS III SVs, five sets of almanac shall be used to
+  span at least 60 days. The first, second, and third sets will be transmitted for
+  up to six days each; the fourth and fifth sets will be transmitted for up to 32
+  days; the fifth set is intended to be transmitted for the remainder of the 60
+  days minimum, but the actual duration of transmission will depend on the
+  individual SV's capability to retain data in memory.
+  The first, second, and third sets are based on six day curve fits. The fourth
+  and fifth sets are based on 32 day curve fits.
 doc-ref: https://www.gps.gov/technical/icwg/IS-GPS-200H.pdf PDF page 125, 
 seq:
   - id: eccentricity_ # e

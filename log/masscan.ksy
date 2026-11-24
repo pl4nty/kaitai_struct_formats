@@ -2,14 +2,13 @@ meta:
   id: masscan
   title: masscan binary report
   license: LicenseRef-All-Rights-Reserved
-  endian: be
-  encoding: ascii
   imports:
     - /common/vlq_base128_le
     - /network/protocol_body
+  encoding: ASCII
+  endian: be
 
-doc: |
-    Results of scanning with masscan tool
+doc: Results of scanning with masscan tool
 
 doc-ref:
   - https://github.com/robertdavidgraham/masscan/blob/2895fa0acfe45983a3e9b2bbfadf25934c8d2c65/src/out-binary.c
@@ -17,8 +16,8 @@ doc-ref:
 
 seq:
   - id: header
-    type: header
     size: 99
+    type: header
   - id: records
     type: record
     repeat: until
@@ -42,8 +41,8 @@ types:
         type: strz
         terminator: 0x0a
       - id: metadata_str
-        type: strz
         size-eos: true
+        type: strz
   footer:
     seq:
       - id: signature
@@ -54,8 +53,8 @@ types:
         type: strz
         valid: _parent.header.version_str
       - id: metadata_str
-        type: strz
         size-eos: true
+        type: strz
   record:
     seq:
       - id: type_raw
@@ -109,6 +108,12 @@ types:
         109: m #'m' FILEHEADER
     types:
       masscan_record:
+        meta:
+          endian:
+            switch-on: old
+            cases:
+              true: le
+              false: be
         params:
           - id: is_open
             type: b1
@@ -122,12 +127,6 @@ types:
             type: b1
           - id: has_ip_proto
             type: b1
-        meta:
-          endian:
-            switch-on: old
-            cases:
-              true: le
-              false: be
         seq:
           - id: timestamp
             type: u4
@@ -137,8 +136,8 @@ types:
 
           - id: ip_proto
             type: u1
-            if: has_ip_proto
             enum: protocol_body::protocol_enum
+            if: has_ip_proto
             #--affected-by:
 
           - id: port

@@ -1,9 +1,9 @@
 meta:
   id: smbios_portable_battery
   license: LicenseRef-All-Rights-Reserved
-  endian: le
   imports:
     - smbios_strings
+  endian: le
 seq:
   - id: length
     type: u1
@@ -68,5 +68,3 @@ instances:
   sbds_device_chemistry:
     value: strings_array[sbds_device_chemistry_index - 1]
     if: sbds_device_chemistry_index > 0
-
-

@@ -1,9 +1,9 @@
 meta:
   id: lcp_packet
   title: PPP Link Control Protocol
-  license: LicenseRef-All-Rights-Reserved
   xref:
     rfc: 1611
+  license: LicenseRef-All-Rights-Reserved
 seq:
   - id: code
     type: u1

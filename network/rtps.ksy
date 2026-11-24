@@ -1,11 +1,10 @@
 meta:
-    id: rtps
-    title: RTPS
-    license: LicenseRef-All-Rights-Reserved
-    endian: le
-    tags: 2.3
-doc: |
-  The RTPS protocol provides DDS interroperability wire protocol.
+  id: rtps
+  title: RTPS
+  tags: 2.3
+  license: LicenseRef-All-Rights-Reserved
+  endian: le
+doc: The RTPS protocol provides DDS interroperability wire protocol.
 seq:
   - id: header
     type: rtps_header
@@ -123,8 +122,8 @@ types:
       - id: numbits
         type: u4
       - id: bitmap
-        type: fragment_number
         size: numbits
+        type: fragment_number
   info_source:
     seq:
       - id: unused

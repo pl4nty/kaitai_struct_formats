@@ -10,8 +10,8 @@ seq:
     repeat: until
     repeat-until: _.bottom_of_stack
   - id: body
-    type: ipv4_packet
     size-eos: true
+    type: ipv4_packet
 types:
   mpls_header:
     seq:

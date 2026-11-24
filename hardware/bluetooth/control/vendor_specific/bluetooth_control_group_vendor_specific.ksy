@@ -2,10 +2,10 @@ meta:
   id: bluetooth_control_group_vendor_specific
   title: Vendor-specific HCI commands
   license: Unlicense
-  endian: le
   imports:
     - ../../bluetooth_vendors_ids
     - cypress_semiconductor/bluetooth_control_group_vendor_specific_cypress
+  endian: le
 params:
   - id: vendor
     type: u2

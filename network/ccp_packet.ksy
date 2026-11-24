@@ -1,9 +1,9 @@
 meta:
   id: ccp_packet
   title: PPP Compression Control Protocol
-  license: LicenseRef-All-Rights-Reserved
   xref:
     rfc: 1962
+  license: LicenseRef-All-Rights-Reserved
 seq:
   - id: code
     type: u1

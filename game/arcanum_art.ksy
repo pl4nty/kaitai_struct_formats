@@ -1,8 +1,8 @@
 meta:
   id: arcanum_art
   title: "Arcanum: Of Steamworks and Magick Obscura graphics"
-  license: LicenseRef-All-Rights-Reserved
   file-extension: art
+  license: LicenseRef-All-Rights-Reserved
   endian: le
   bit-endian: le
 doc-ref: https://web.archive.org/web/20160913191941/http://arcanum.game-alive.com/forums/viewtopic.php?f=6&t=53&sid=3758668148aa5a568036d9d589202176

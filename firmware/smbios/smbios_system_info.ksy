@@ -1,9 +1,9 @@
 meta:
   id: smbios_system_info
   license: LicenseRef-All-Rights-Reserved
-  endian: le
   imports:
     - smbios_strings
+  endian: le
 seq:
   - id: length
     type: u1
@@ -48,5 +48,3 @@ instances:
   family:
     value: strings_array[family_index - 1]
     if: family_index > 0
-
-

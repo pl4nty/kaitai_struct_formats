@@ -1,12 +1,12 @@
 meta:
   id: osu_file
   license: LicenseRef-All-Rights-Reserved
-  endian: le
   imports:
     - datetime
     - int_double_pair
     - timing_point
     - osu_string
+  endian: le
 seq:
   - id: osu_ver
     type: u4
@@ -89,30 +89,30 @@ types:
         type: u4
       - id: idp1
         type: int_double_pair
-        if: _root.osu_ver >= 20140609 and idp1_count > 0
         repeat: expr
         repeat-expr: idp1_count
+        if: _root.osu_ver >= 20140609 and idp1_count > 0
       - id: idp2_count
         type: u4
       - id: idp2
         type: int_double_pair
-        if: _root.osu_ver >= 20140609 and idp2_count > 0
         repeat: expr
         repeat-expr: idp2_count
+        if: _root.osu_ver >= 20140609 and idp2_count > 0
       - id: idp3_count
         type: u4
       - id: idp3
         type: int_double_pair
-        if: _root.osu_ver >= 20140609 and idp3_count > 0
         repeat: expr
         repeat-expr: idp3_count
+        if: _root.osu_ver >= 20140609 and idp3_count > 0
       - id: idp4_count
         type: u4
       - id: idp4
         type: int_double_pair
-        if: _root.osu_ver >= 20140609 and idp4_count > 0
         repeat: expr
         repeat-expr: idp4_count
+        if: _root.osu_ver >= 20140609 and idp4_count > 0
       - id: draintime
         type: u4
       - id: totaltime

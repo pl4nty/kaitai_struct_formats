@@ -1,9 +1,9 @@
 meta:
   id: ppp_frame
   title: Point-to-Point Protocol
-  license: LicenseRef-All-Rights-Reserved
   xref:
     rfc: 1611
+  license: LicenseRef-All-Rights-Reserved
   imports:
     - ipv4_packet
     - lcp_packet

@@ -1,9 +1,9 @@
 meta:
   id: smbios_bios_info
   license: LicenseRef-All-Rights-Reserved
-  endian: le
   imports:
     - smbios_strings
+  endian: le
 seq:
   - id: length
     type: u1
@@ -40,4 +40,3 @@ instances:
   bios_release_date:
     value: strings_array[bios_release_date_index - 1]
     if: bios_release_date_index > 0
-

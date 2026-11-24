@@ -1,12 +1,13 @@
 meta:
   id: bluetooth_control_group_vendor_specific_cypress
   title: Cypress vendor-specific HCI control commands
-  license: MIT
-  endian: le
   xref:
     wikidata: Q478354
+  license: MIT
+  endian: le
 doc: |
-  Vendor-specific Cypress commands. Mostly reverse-engineered by internalblue project.
+  Vendor-specific Cypress commands. Mostly reverse-engineered by internalblue
+  project.
 
 doc-ref:
   - https://raw.githubusercontent.com/seemoo-lab/internalblue/master/doc/internalblue_thesis_dennis_mantz.pdf
@@ -34,7 +35,10 @@ instances:
 types:
   read_ram:
     doc: |
-      is a command which reads up to 251 bytes of memory from the chips address space and sends it back to the host in the HCI command complete event. Contrary to its name, this command is also able to read the ROM. Any attempt to read unmapped addresses or beyond the end of a memory section causes the chip to crash.
+      is a command which reads up to 251 bytes of memory from the chips address space
+      and sends it back to the host in the HCI command complete event. Contrary to its
+      name, this command is also able to read the ROM. Any attempt to read unmapped
+      addresses or beyond the end of a memory section causes the chip to crash.
     seq:
       - id: address
         type: u2
@@ -42,7 +46,10 @@ types:
         type: u8
   write_ram:
     doc: |
-      is the counterpart of the Read_RAM command which can be used to write up to 251 bytes to the RAM regions of the chips memory. If attempting to write to a ROM section, the command has no effect. However, trying to write to an unmapped address causes the system to crash.
+      is the counterpart of the Read_RAM command which can be used to write up to 251
+      bytes to the RAM regions of the chips memory. If attempting to write to a ROM
+      section, the command has no effect. However, trying to write to an unmapped
+      address causes the system to crash.
     seq:
       - id: address
         type: u2
@@ -50,7 +57,12 @@ types:
         size-eos: true
   launch_ram:
     doc: |
-      can be used to continue code execution on the chip at a specified address using Thumb mode. One of the intended use cases is to exit the Download_Minidriver mode by specifying the pseudo-address 0xFFFFFFFF which will issue the chip to reboot into Bluetooth mode and apply the downloaded patches. Another use case is to jump to the entry point of a so-called Minidriver which was previously loaded into RAM using the Download_Minidriver and Write_RAM commands.
+      can be used to continue code execution on the chip at a specified address using
+      Thumb mode. One of the intended use cases is to exit the Download_Minidriver
+      mode by specifying the pseudo-address 0xFFFFFFFF which will issue the chip to
+      reboot into Bluetooth mode and apply the downloaded patches. Another use case is
+      to jump to the entry point of a so-called Minidriver which was previously loaded
+      into RAM using the Download_Minidriver and Write_RAM commands.
     seq:
       - id: entry_point
         type: u2
@@ -108,7 +120,13 @@ enums:
       id: download_minidriver
       doc: |
         Set the chip into a state where it can receive patches
-        will put the device into a special mode in which it is safe to receive patches. In this mode the normal Bluetooth activity is disabled. Only a very reduced subset of HCI commands are interpreted in the download mode, including Read_RAM, Write_RAM and Launch_RAM. The latter is being used to to exit the download mode and reboot into the normal Bluetooth firmware. Any downloaded ROM patches are applied at an early stage during this reboot. The Download_Minidriver command takes no arguments.
+        will put the device into a special mode in which it is safe to receive patches.
+        In this mode the normal Bluetooth activity is disabled. Only a very reduced
+        subset of HCI commands are interpreted in the download mode, including Read_RAM,
+        Write_RAM and Launch_RAM. The latter is being used to to exit the download mode
+        and reboot into the normal Bluetooth firmware. Any downloaded ROM patches are
+        applied at an early stage during this reboot. The Download_Minidriver command
+        takes no arguments.
     0x02f: crystal_ppm
     0x032: set_afh_behavior
     0x033: read_btw_security_key
@@ -126,7 +144,7 @@ enums:
     0x044: read_uart_clock_setting
     0x045:
       id: write_uart_clock_setting
-      doc: "Change the UART clock (24 MHz or 48 MHz)"
+      doc: Change the UART clock (24 MHz or 48 MHz)
     0x046: set_sleep_clock_accuraty_and_settling_time
     0x047: configure_sleep_mode
     0x048: read_raw_rssi

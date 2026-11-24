@@ -1,12 +1,13 @@
 meta:
   id: android_binary_manifest
   title: Android Binary manifest xml
-  license: LicenseRef-All-Rights-Reserved
   file-extension: xml
+  license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
   Android OS applications have special file with metadata information - Manifest.
-  This Manifest has XML format with binary data. It has a lot of the structure of XML, 
+  This Manifest has XML format with binary data. It has a lot of the structure of
+  XML, 
   just not any of the XML markup.
 seq:
   - id: hdr
@@ -49,127 +50,126 @@ seq:
 types:
   resource_header:
     seq:
-    - id: table_id
-      type: u2
-      doc: | 
-        id of type of table (strings, offsets, resources)
-        for resources should be 0x0180
-    - id: len
-      type: u2
-    - id: id_len
-      type: u4
+      - id: table_id
+        type: u2
+        doc: | 
+          id of type of table (strings, offsets, resources)
+          for resources should be 0x0180
+      - id: len
+        type: u2
+      - id: id_len
+        type: u4
   file_remainder:
     seq:
-    - id: remainder
-      size-eos: true
-      doc: we don't need this to build plaintext XML
+      - id: remainder
+        size-eos: true
+        doc: we don't need this to build plaintext XML
   xml_element:
     seq:
-    - id: id
-      type: u2
-    - id: body
-      type:
-        switch-on: id
-        cases:
-          256: xml_ns_start
-          257: xml_ns_end
-          258: xml_tag_start
-          259: xml_tag_end
-          300: xml_text
-          _: file_remainder
+      - id: id
+        type: u2
+      - id: body
+        type:
+          switch-on: id
+          cases:
+            256: xml_ns_start
+            257: xml_ns_end
+            258: xml_tag_start
+            259: xml_tag_end
+            300: xml_text
+            _: file_remainder
   xml_element_header:
     seq:
-    - id: signature
-      size: 2
-    - id: len
-      type: u4
-    - id: skip_2
-      size: 8
-      doc: skip line number and unknown 0xffffffff
+      - id: signature
+        size: 2
+      - id: len
+        type: u4
+      - id: skip_2
+        size: 8
+        doc: skip line number and unknown 0xffffffff
   xml_ns_start:
     seq:
-    - id: hdr
-      type: xml_element_header
-    - id: name_id
-      type: u4
-    - id: namespace_id
-      type: u4
+      - id: hdr
+        type: xml_element_header
+      - id: name_id
+        type: u4
+      - id: namespace_id
+        type: u4
   xml_ns_end:
     seq:
-    - id: signature
-      size: 8
+      - id: signature
+        size: 8
   xml_tag_start:
     seq:
-    - id: hdr
-      type: xml_element_header
-    - id: namespace_id
-      type: u4
-    - id: name_id
-      type: u4
-    - id: flag_skip
-      size: 4
-    - id: num_attr_data
-      type: u4
-    - id: class_attr_id
-      type: u4
-      doc: |
-        All above ids are used in picking names from resources.arsc file
-    - id: attr_data
-      size: 20
-      repeat: expr
-      repeat-expr: num_attr_data
+      - id: hdr
+        type: xml_element_header
+      - id: namespace_id
+        type: u4
+      - id: name_id
+        type: u4
+      - id: flag_skip
+        size: 4
+      - id: num_attr_data
+        type: u4
+      - id: class_attr_id
+        type: u4
+        doc: All above ids are used in picking names from resources.arsc file
+      - id: attr_data
+        size: 20
+        repeat: expr
+        repeat-expr: num_attr_data
   xml_tag_end:
     seq:
-    - id: hdr
-      type: xml_element_header
-    - id: namespace_id
-      type: u4
-    - id: name_id
-      type: u4
+      - id: hdr
+        type: xml_element_header
+      - id: namespace_id
+        type: u4
+      - id: name_id
+        type: u4
   xml_text:
     seq:
-    - id: hdr
-      type: xml_element_header
-    - id: id
-      type: u4
-    - id: skip
-      size: 8
+      - id: hdr
+        type: xml_element_header
+      - id: id
+        type: u4
+      - id: skip
+        size: 8
   small_header:
     doc: small header includes magic, small header length, length of manifest
     seq:
-    - id: magic
-      size: 2
-      contents: [0x03, 0x00]
-      doc: indicates binary form
-    - id: len
-      type: u2
-      doc: header length
-    - id: file_len
-      type: u4
-      doc: length of manifest file
+      - id: magic
+        size: 2
+        contents: [0x03, 0x00]
+        doc: indicates binary form
+      - id: len
+        type: u2
+        doc: header length
+      - id: file_len
+        type: u4
+        doc: length of manifest file
   header:
     seq:
-    - id: small_hdr
-      type: small_header
-    - id: table_id
-      type: u2
-      doc: id of type of table (strings, offsets, resources)
-    - id: len
-      type: u2
-      doc: full header includes all previous fields
-    - id: len_string_table
-      size: 4
-    - id: num_strings
-      type: u4
-      doc: number of strings in manifest
-    - id: num_styles
-      size: 4
-      doc: number of styles in manifest 
-    - id: flags
-      size: 4
-      doc: |
-        Indicates if strings in utf8 or utf16. 
-        0x00000100 - utf8
+      - id: small_hdr
+        type: small_header
+      - id: table_id
+        type: u2
+        doc: id of type of table (strings, offsets, resources)
+      - id: len
+        type: u2
+        doc: full header includes all previous fields
+      - id: len_string_table
+        size: 4
+      - id: num_strings
+        type: u4
+        doc: number of strings in manifest
+      - id: num_styles
+        size: 4
+        doc: number of styles in manifest 
+      - id: flags
+        size: 4
+        doc: |
+          Indicates if strings in utf8 or utf16. 
+          0x00000100 - utf8
    
   manifest_string:
     seq:
@@ -177,9 +177,9 @@ types:
         type: u2
         doc: length of utf16 string
       - id: string
+        size: len*2
         type: strz
         encoding: UTF-16LE
-        size: len*2
         doc: |
           The problem is Kaitai Struct doesn't correctly supports
           UTF-16 strings. Kaitai Struct 'terminator' keyword assumes

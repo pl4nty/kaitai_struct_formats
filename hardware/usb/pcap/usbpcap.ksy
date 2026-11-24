@@ -4,14 +4,15 @@ meta:
   application:
     - usbpcap
   license: Unlicense
-  endian: le
-  -affected-by: [651, 703]
   imports:
     #- /hardware/usb/usb_urb_windows
     - /hardware/usb/pcap/usb_pcap_endpoint_number
     - /hardware/usb/usbd_status_windows
+  -affected-by: [651, 703]
+  endian: le
 doc: |
-  A native pcap header of [usbpcap](https://github.com/desowin/usbpcap) - an app to capture USB frames in Windows OSes.
+  A native pcap header of [usbpcap](https://github.com/desowin/usbpcap) - an app
+  to capture USB frames in Windows OSes.
 doc-ref: https://desowin.org/usbpcap/captureformat.html
 seq:
   - id: header
@@ -31,7 +32,9 @@ types:
       - id: header_size
         -orig-id: headerLen
         type: u2
-        doc: describes the total length, in bytes, of the header (including all transfer-specific header data).
+        doc: |
+          describes the total length, in bytes, of the header (including all
+          transfer-specific header data).
       - id: header_main
         size: header_size - 2
         type: header_main
@@ -42,14 +45,14 @@ types:
             -orig-id: irpId
             type: u8
             doc: |
-              is merely a pointer to IRP casted to the UINT64. This value can be used to match the request with the response.
+              is merely a pointer to IRP casted to the UINT64. This value can be used to match
+              the request with the response.
           - id: usbd_status_windows_code
             -orig-id:
               - usbd_status
               - status
             type: usbd_status_windows
-            doc: |
-              USB status code is valid only on return from host-controller.
+            doc: USB status code is valid only on return from host-controller.
           - id: urb_function
             -orig-id: function
             type: u2
@@ -59,12 +62,13 @@ types:
             type: info
           - id: bus
             type: u2
-            doc: bus (RootHub) number is the root hub identifier used to distingush between multiple root hubs.
+            doc: |
+              bus (RootHub) number is the root hub identifier used to distingush between
+              multiple root hubs.
           - id: device_address
             -orig-id: device
             type: u2
-            doc: |
-              is USB device number. This field is, contary to the USB specification, 16-bit because the Windows uses 16-bits value for that matter. Check DeviceAddress field of [USB_NODE_CONNECTION_INFORMATION](https://msdn.microsoft.com/en-us/library/windows/hardware/ff540090(v=vs.85).aspx)
+            doc: is USB device number. This field is, contary to the USB specification, 16-bit because the Windows uses 16-bits value for that matter. Check DeviceAddress field of [USB_NODE_CONNECTION_INFORMATION](https://msdn.microsoft.com/en-us/library/windows/hardware/ff540090(v=vs.85).aspx)
           - id: endpoint_number
             -orig-id: endpoint
             type: usb_pcap_endpoint_number
@@ -72,7 +76,9 @@ types:
             -orig-id: transfer
             type: u1
             enum: transfer_type
-            doc: transfer type determines the transfer type and thus the header type. See below for details.
+            doc: |
+              transfer type determines the transfer type and thus the header type. See below
+              for details.
           - id: data_size
             -orig-id: dataLength
             type: u4
@@ -153,4 +159,3 @@ types:
             0xFF:
               id: unknown
               -orig-id: USBPCAP_TRANSFER_UNKNOWN
-

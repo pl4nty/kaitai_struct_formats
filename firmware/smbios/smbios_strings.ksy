@@ -5,6 +5,5 @@ meta:
 seq:
   - id: string
     type: strz
-    encoding: UTF-8
     include: true
-
+    encoding: UTF-8
