@@ -499,14 +499,14 @@ types:
                 "type::empty": empty
                 "type::type": type_ref
                 "type::package": package
-                "type::class": class
+                "type::class_def": class
                 "type::type_def": class
                 "type::module": module
                 "type::val_def": val_def
                 "type::label": node2
                 "type::function": node2
                 "type::apply_dynamic": node2
-                "type::return": node2_header
+                "type::return_expr": node2_header
                 "type::super": node3
                 "type::select": node3
                 "type::bind": bind
@@ -533,7 +533,7 @@ types:
                 "type::type_bounds": node_8
 
                 "type::case": node_7
-                "type::if": node_7
+                "type::if_expr": node_7
 
                 "type::sequence": node_9
                 "type::alternative": node_9
@@ -545,7 +545,7 @@ types:
                 "type::select_from_type": select_from_type
                 "type::doc_def": doc_def
                 "type::template": template
-                "type::import": import
+                "type::import_clause": import
 
         types:
           tree_ref:
@@ -817,13 +817,17 @@ types:
           type:
             1: empty
             2: package
-            3: class
+            3:
+              id: class_def
+              -orig-id: CLASStree
             4: module
             5: val_def
             6: def_def
             7: type_def
             8: label
-            9: import
+            9:
+              id: import_clause
+              -orig-id: IMPORTtree
             11: doc_def
             12: template
             13: block
@@ -838,9 +842,13 @@ types:
             20: array_value
             21: function
             22: assign
-            23: if
+            23:
+              id: if_expr
+              -orig-id: IFtree
             24: match
-            25: return
+            25:
+              id: return_expr
+              -orig-id: RETURNtree
             26: tre
             27: throw
             28: new
