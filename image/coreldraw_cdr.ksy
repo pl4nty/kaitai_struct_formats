@@ -29,25 +29,31 @@ seq:
     contents: RIFF
   - id: len_body
     type: u4
+    doc: Size of the rest of the RIFF chunk, starting with the form type.
+  - id: form_type
+    size: 3
+    type: str
+    valid:
+      any-of: ['"CDR"', '"cdr"']
+  - id: version_char
+    type: u1
+    doc: |
+      Version identifier (a space for version 3, '4'..'9', and 'A'.. for
+      version 10 and later); the exact version is in the `vrsn` chunk.
   - id: body
-    size: len_body
-    type: cdr_body
+    size: len_body - 4
+    type: chunk_list
+instances:
+  version:
+    value: |
+      version_char == 0x20 ? 300
+        : version_char >= 0x31 and version_char <= 0x39 ? (version_char - 0x30) * 100
+        : version_char >= 0x41 ? (version_char - 0x37) * 100
+        : 0
+    doc: |
+      CorelDRAW version times 100 as derived from `version_char`, e.g. 700
+      for '7' and 1000 for 'A'; 0 if the character is not valid.
 types:
-  cdr_body:
-    seq:
-      - id: form_type
-        size: 3
-        type: str
-        valid:
-          any-of: ['"CDR"', '"cdr"']
-      - id: version_char
-        type: u1
-        doc: |
-          Version identifier ('5'..'9' and 'A'.. for later versions); the
-          exact version is in the `vrsn` chunk.
-      - id: chunks
-        type: chunk
-        repeat: eos
   chunk:
     seq:
       - id: id
@@ -81,12 +87,26 @@ types:
           switch-on: list_type
           cases:
             '"cmpr"': compressed_list
+            '"stlt"': text_styles
             _: chunk_list
   chunk_list:
     seq:
       - id: chunks
         type: chunk
         repeat: eos
+  text_styles:
+    doc: |
+      Body of a `LIST` chunk of type `stlt` (text styles). Up to version 6
+      it is a chunk sequence like any other list; since version 7 it is a
+      single record of style tables, kept raw here.
+    seq:
+      - id: chunks
+        type: chunk
+        repeat: eos
+        if: _root.version < 700
+      - id: data
+        size-eos: true
+        if: _root.version >= 700
   compressed_list:
     seq:
       - id: len_part1
