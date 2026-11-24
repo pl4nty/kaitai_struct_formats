@@ -43,10 +43,8 @@ types:
         type: nothing
       - id: num_padding
         type: u4
-      - id: unknown4
-        type: u4
-      - id: unknown5
-        type: u4
+      - type: u4
+      - type: u4
       - id: total_file_len
         type: u4
       - id: padding
@@ -148,8 +146,7 @@ types:
         value: 0
   fonts:
     seq:
-      - id: unknown
-        type: u4
+      - type: u4
   action_script:
     seq:
       - id: num_actions
@@ -179,16 +176,13 @@ types:
     seq:
       - id: num_shapes
         type: u4
-      - id: unknown1
-        type: u4
+      - type: u4
       - id: num_sprites
         type: u4
-      - id: unknown2
-        type: u4
+      - type: u4
       - id: num_texts
         type: u4
-      - id: unknown3
-        type: u4
+      - type: u4
         repeat: expr
         repeat-expr: 3
     instances:
@@ -200,8 +194,7 @@ types:
         type: u4
       - id: placement_id
         type: u4
-      - id: unknown1
-        type: u4
+      - type: u4
       - id: name_id
         type: u4
       - id: placement_mode
@@ -212,12 +205,9 @@ types:
         enum: blend_mode
       - id: depth
         type: u2
-      - id: unknown2
-        type: u2
-      - id: unknown3
-        type: u2
-      - id: unknown4
-        type: u2
+      - type: u2
+      - type: u2
+      - type: u2
       - id: position_id
         type: u2
         doc: |
@@ -261,16 +251,13 @@ types:
     seq:
       - id: action_id
         type: u4
-      - id: unknown
-        type: u4
+      - type: u4
   remove_object:
     seq:
-      - id: unknown1
-        type: u4
+      - type: u4
       - id: depth
         type: u2
-      - id: unknown2
-        type: u2
+      - type: u2
   frame:
     seq:
       - id: id
@@ -288,8 +275,7 @@ types:
     seq:
       - id: character_id
         type: u4
-      - id: unknown1
-        size: 8
+      - size: 8
       - id: num_frame_labels
         type: u4
         doc: labels follow this tag, their respective index is the keyframe id
@@ -298,8 +284,7 @@ types:
         doc: frames and keyframes may be mixed and come directly after this tag
       - id: num_keyframes
         type: u4
-      - id: unknown2
-        type: u4
+      - type: u4
     instances:
       num_children:
         value: num_frame_labels + num_frames + num_keyframes
@@ -307,31 +292,25 @@ types:
     seq:
       - id: character_id
         type: u4
-      - id: unknown1
-        type: u4
+      - type: u4
       - id: placeholder_text
         type: u4
-      - id: unknown2
-        type: u4
+      - type: u4
       - id: stroke_color_id
         type: u4
-      - id: unknown3
-        type: u4
+      - type: u4
         repeat: expr
         repeat-expr: 3
       - id: alignment
         type: u2
         enum: text_alignment
-      - id: unknown4
-        type: u2
-      - id: unknown5
-        type: u4
+      - type: u2
+      - type: u4
         repeat: expr
         repeat-expr: 2
       - id: size
         type: f4
-      - id: unknown6
-        type: u4
+      - type: u4
         repeat: expr
         repeat-expr: 4
     enums:
@@ -343,12 +322,10 @@ types:
     seq:
       - id: character_id
         type: u4
-      - id: unknown1
-        type: u4
+      - type: u4
       - id: bounds_id
         type: u4
-      - id: unknown2
-        type: u4
+      - type: u4
       - id: num_graphics
         type: u4
         doc: graphics are the following tags
@@ -405,26 +382,22 @@ types:
             type: f4
   properties:
     seq:
-      - id: unknown
-        size: 3 * 4
+      - size: 3 * 4
       - id: max_character_id
         type: u4
-      - id: unknown2
-        type: u4
+      - type: u4
       - id: entry_character_id
         type: u4
       - id: max_depth
         type: u2
-      - id: unknown3
-        type: u2
+      - type: u2
       - id: framerate
         type: f4
       - id: width
         type: f4
       - id: height
         type: f4
-      - id: unknown4
-        size: 2 * 4
+      - size: 2 * 4
   bounds:
     seq:
       - id: num_values

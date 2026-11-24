@@ -21,11 +21,11 @@ seq:
   - id: meshes
     type: mesh(_index)
     repeat: expr
-    repeat-expr: header.polyset_count
+    repeat-expr: header.num_polysets
   - id: parts
-    type: parts(meshes[_index].part_count)
+    type: parts(meshes[_index].num_parts)
     repeat: expr
-    repeat-expr: header.polyset_count
+    repeat-expr: header.num_polysets
 
 types:
   header:
@@ -38,11 +38,11 @@ types:
         valid:
           any-of:
             - version::v2
-      - id: polyset_count
+      - id: num_polysets
         type: u2
       - id: bone_channels
         type: u2
-      - id: bone_count
+      - id: num_bones
         type: u2
       - id: part_clump_size
         type: u4
@@ -80,7 +80,7 @@ types:
   mesh:
     params:
       - id: i
-        type: u4
+        type: s4
     seq:
       - id: bounding_sphere
         type: f4
@@ -95,7 +95,7 @@ types:
         type: u2
       - id: bone_index
         type: s2
-      - id: part_count
+      - id: num_parts
         type: u2
       - id: position_b
         type: s4
@@ -132,7 +132,7 @@ types:
         type: b2
         enum: normal_type
       # uv info byte
-      - id: uv_channel_count
+      - id: num_uv_channels
         type: b4
       - id: vertex_color_size
         type: b3
@@ -243,7 +243,7 @@ types:
             true: f4
             false: u2
         repeat: expr
-        repeat-expr: _parent.uv_channel_count * 2
+        repeat-expr: _parent.num_uv_channels * 2
         if: _parent.bone_size == bone_size::no_bones
 
       - id: bone_id
@@ -286,10 +286,8 @@ types:
       #0001 0000 0000 0000 0000 0010 1001 0001
       - id: flags
         type: texture_flags
-      - id: unknown_byte1
-        type: u1
-      - id: unknown_byte2
-        type: u1
+      - type: u1
+      - type: u1
       - id: material_type
         type: u1
       - id: padding
@@ -365,8 +363,7 @@ types:
     seq:
       - id: hash
         type: s4
-      - id: unknown
-        size: 6
+      - size: 6
       - id: map_mode
         type: u2
         enum: map_mode
@@ -385,8 +382,7 @@ types:
       - id: mip_detail
         type: u1
         enum: mip_detail
-      - id: unknown_2
-        size: 7
+      - size: 7
 
 enums:
   normal_type:

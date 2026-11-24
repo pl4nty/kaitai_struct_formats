@@ -35,7 +35,7 @@ types:
       - id: textures
         type: texture(_index)
         repeat: expr
-        repeat-expr: header.count
+        repeat-expr: header.num_textures
     types:
       header:
         seq:
@@ -44,7 +44,7 @@ types:
             valid:
               any-of:
                 - 2
-          - id: count
+          - id: num_textures
             type: u2
       texture:
         params:
@@ -92,13 +92,11 @@ types:
             type: u4
           - id: version2
             type: u4
-          - id: unknown
-            size: 4
+          - size: 4
             type: nothing
           - id: type
             contents: 'GIDX'
-          - id: unknown2
-            size: 4
+          - size: 4
             type: nothing
           - id: hash_id
             type: u4
@@ -107,7 +105,7 @@ types:
           - id: padding
             size: 1
             type: nothing
-          - id: mipmap_count
+          - id: num_mipmaps
             type: u1
           - id: padding3
             size: 1
@@ -142,7 +140,7 @@ types:
           - id: mipmap_sizes
             type: u4
             repeat: expr
-            repeat-expr: mipmap_count - 1
+            repeat-expr: num_mipmaps - 1
         instances:
           surface_count:
             value: |
@@ -179,7 +177,7 @@ types:
             #  ? _parent._parent._parent.data_size
             #  : _parent._parent._parent.texture_info.mipmap_sizes[_index]'
             #repeat: expr
-            #repeat-expr: _parent._parent._parent.texture_info.mipmap_count
+            #repeat-expr: _parent._parent._parent.texture_info.num_mipmaps
 
 enums:
   signature:
