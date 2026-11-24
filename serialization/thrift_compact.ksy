@@ -34,8 +34,10 @@ types:
         type: u1
         doc: Version (bits 0-4) and message type (bits 5-7)
       - id: seq_id
-        type: varint_z
-        doc: Sequence ID (zigzag-encoded)
+        type: varint_u
+        doc: |
+          Sequence ID, a varint that is not zigzag-encoded (unlike field
+          values); `value_u` is the 32-bit two's complement value.
       - id: name
         type: compact_string
         doc: Method name
