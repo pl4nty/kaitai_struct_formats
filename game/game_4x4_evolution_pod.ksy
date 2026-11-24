@@ -1,5 +1,6 @@
 meta:
   id: game_4x4_evolution_pod
+  title: 4x4 Evolution POD archive
   application: 4x4 Evolution
   file-extension: pod
   license: CC0-1.0
@@ -9,8 +10,8 @@ doc-ref: 'https://www.watto.org/specs.html?specs=Archive_POD'
 seq:
   - id: header
     type: archive_header
-  - id: details_directory
-    type: details_directory
+  - id: files
+    type: file
     repeat: expr
     repeat-expr: header.num_files
 types:
@@ -18,23 +19,19 @@ types:
     seq:
       - id: num_files
         type: u4
-        doc: The number of files in the archive
       - id: description
         size: 80
         type: strz
-        doc: A description for the archive
-  details_directory:
+  file:
     seq:
       - id: file_name
         size: 32
         type: strz
-      - id: length
+      - id: len_file_data
         type: u4
-        doc: The length of the file data
-      - id: offset
+      - id: ofs_file_data
         type: u4
-        doc: The offset to the file data in the archive
     instances:
       file_data:
-        pos: offset
-        size: length
+        pos: ofs_file_data
+        size: len_file_data
