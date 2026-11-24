@@ -36,12 +36,13 @@ seq:
     doc: Range is 1-128.
   - id: special
     type: u1
-    valid:
-      eq: 127
     doc: |
       Well... this little byte here is set to 127, so that old trackers will search
       through all patterns when loading. Noisetracker uses this byte for restart, but
       we don't. Protracker uses 0x7F.
+
+      Not checked: many other trackers (e.g. OpenMPT) write 0 or a restart
+      position here.
   - id: song_positions
     type: pattern_index
     repeat: expr
