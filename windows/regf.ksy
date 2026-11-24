@@ -24,13 +24,16 @@ doc: |
 
   Note that one typically can't access files directly on a mounted
   filesystem with a running Windows OS.
-doc-ref: 'https://github.com/libyal/libregf/blob/main/documentation/Windows%20NT%20Registry%20File%20(REGF)%20format.asciidoc'
+doc-ref:
+  - 'https://github.com/msuhanov/regf/blob/master/Windows%20registry%20file%20format%20specification.md'
+  - 'https://github.com/libyal/libregf/blob/main/documentation/Windows%20NT%20Registry%20File%20(REGF)%20format.asciidoc'
 seq:
   - id: header
+    size: 4096
     type: file_header
   - id: hive_bins
-    type: hive_bin
-    repeat: eos
+    size: header.hive_bins_data_size
+    type: hive_bins
 types:
   file_header:
     seq:
@@ -108,49 +111,49 @@ types:
         type: u4
         doc: Contains number of bytes
   hive_bin_cell:
+    -webide-representation: "{cell_data.identifier}"
     seq:
       - id: cell_size_raw
         type: s4
-      - id: identifier_raw
-        type: u2
-        enum: data_flags
-      - id: data
-        size: cell_size - 2 - 4
-        type:
-          switch-on: identifier
-          cases:
-            data_flags::nk: named_key
-            data_flags::lh: sub_key_list_lh_lf
-            data_flags::lf: sub_key_list_lh_lf
-            data_flags::li: sub_key_list_li
-            data_flags::ri: sub_key_list_ri
-            data_flags::vk: sub_key_list_vk
-            data_flags::sk: sub_key_list_sk
-      - id: padding
-        size: (8 - _io.pos) % 8
-    enums:
-      data_flags:
-        0x6B6E: nk
-        0x686C: lh
-        0x666C: lf
-        0x696C: li
-        0x6972: ri
-        0x6B76: vk
-        0x6B73: sk
-        0x0000: nll
-    -webide-representation: "{identifier}"
+      - id: cell_data
+        size: cell_size - 4
+        type: cell_data
     instances:
       cell_size:
         value: "(cell_size_raw < 0 ? -1 : +1) * cell_size_raw"
         -webide-parse-mode: eager
-      identifier:
-        value: "(cell_size_raw > 0 ? data_flags::nll : identifier_raw)"
       is_allocated:
         value: "cell_size_raw < 0"
         -webide-parse-mode: eager
     types:
+      cell_data:
+        -webide-representation: "{identifier}"
+        seq:
+          - id: cell_type
+            type:
+              switch-on: identifier
+              cases:
+                "'nk'": named_key
+                "'lh'": sub_key_list_lh_lf
+                "'lf'": sub_key_list_lh_lf
+                "'li'": sub_key_list_li
+                "'ri'": sub_key_list_ri
+                "'vk'": sub_key_list_vk
+                "'sk'": sub_key_list_sk
+                _     : key_value_list
+            if: _parent.is_allocated
+            doc: Unallocated (free) cells are not parsed.
+        instances:
+          identifier:
+            type: str
+            encoding: iso-8859-1
+            size: 2
+            pos: 0
+            -webide-parse-mode: eager
       named_key:
         seq:
+          - id: signature
+            contents: 'nk'
           - id: flags
             type: u2
             enum: nk_flags
@@ -215,6 +218,10 @@ types:
             0x4000: unknown2
       sub_key_list_lh_lf:
         seq:
+          - id: signature
+            type: str
+            size: 2
+            encoding: ascii
           - id: count
             type: u2
           - id: items
@@ -232,6 +239,8 @@ types:
                 doc: A different hash function is used for different sub key list types
       sub_key_list_li:
         seq:
+          - id: signature
+            contents: 'li'
           - id: count
             type: u2
           - id: items
@@ -246,6 +255,8 @@ types:
                 doc: The offset value is in bytes and relative from the start of the hive bin data
       sub_key_list_ri:
         seq:
+          - id: signature
+            contents: 'ri'
           - id: count
             type: u2
           - id: items
@@ -260,6 +271,8 @@ types:
                 doc: The offset value is in bytes and relative from the start of the hive bin data
       sub_key_list_vk:
         seq:
+          - id: signature
+            contents: 'vk'
           - id: value_name_size
             type: u2
             doc: If the value name size is 0 the value name is "(default)"
@@ -300,6 +313,8 @@ types:
             0x0001: value_comp_name # Name is an ASCII string / Otherwise the name is an Unicode (UTF-16 little-endian) string
       sub_key_list_sk:
         seq:
+          - id: signature
+            contents: 'sk'
           - id: unknown1
             type: u2
           - id: previous_security_key_offset
@@ -308,6 +323,16 @@ types:
             type: u4
           - id: reference_count
             type: u4
+      key_value_list:
+        seq:
+          - id: elements
+            type: u4
+            repeat: eos
+  hive_bins:
+    seq:
+      - id: hive_bins
+        type: hive_bin
+        repeat: eos
   hive_bin:
     seq:
       - id: signature
