@@ -420,14 +420,9 @@ types:
           * a greyscale color space for greyscale images (color types
             `color_type::greyscale` = 0 and `color_type::greyscale_alpha` = 4).
 
-          Note that the imported `icc_4.ksy` spec currently in use here supports
-          only the ICC.1 v4 specification (as the name suggests), not ICC.1 v2.
-          This means that PNG files with an embedded v2 profile (for example
-          https://github.com/web-platform-tests/wpt/blob/495d9d7716298588ff49d6e701bf27c5134bde06/css/css-color/support/swap-990000-iCCP.png)
-          will fail to parse.
-
-          TODO: extend `icc_4.ksy` to support both v4 and v2 profiles, rename it
-          to `icc.ksy`, and use it here.
+          The imported `icc_4.ksy` spec parses both ICC.1 v4 and v2 profiles
+          (despite its name); v2-only tag types other than
+          textDescriptionType are left as raw bytes.
   mdcv_chunk:
     doc-ref:
       - https://www.w3.org/TR/png/#mDCV-chunk
