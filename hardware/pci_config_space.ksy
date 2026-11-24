@@ -3,12 +3,12 @@ meta:
   title: PCI Configuration Space
   license: 0BSD
   imports:
-    - pci_config_space/pci_config_bar_list
-    - pci_config_space/capabilities/pci_config_pm
-    - pci_config_space/capabilities/pci_config_msi
-    - pci_config_space/capabilities/pci_config_vendor
-    - pci_config_space/capabilities/pci_config_msix
-    - pci_config_space/capabilities/pci_config_af
+    - pci_config_space/pci_base_address_registers
+    - pci_config_space/capabilities/pci_cap_power_management
+    - pci_config_space/capabilities/pci_cap_msi
+    - pci_config_space/capabilities/pci_cap_vendor_specific
+    - pci_config_space/capabilities/pci_cap_msi_x
+    - pci_config_space/capabilities/pci_cap_advanced_features
   endian: le
 
 # TODO: EXPANSION ROM
@@ -151,7 +151,7 @@ types:
     seq:
       - id: bar_list
         size: 0x18
-        type: pci_config_bar_list
+        type: pci_base_address_registers
       - id: cardbus_cis_pointer
         type: u4
       - id: subsystem_vendor_id
@@ -184,7 +184,7 @@ types:
     seq:
       - id: bar_list
         size: 0x8
-        type: pci_config_bar_list
+        type: pci_base_address_registers
       - id: primary_bus_number
         type: u1
       - id: secondary_bus_number
@@ -362,11 +362,11 @@ types:
         type:
           switch-on: id
           cases:
-            'capability_id::pm': pci_config_pm
-            'capability_id::msi': pci_config_msi
-            'capability_id::vendor': pci_config_vendor
-            'capability_id::msix': pci_config_msix
-            'capability_id::af': pci_config_af
+            'capability_id::power_management': pci_cap_power_management
+            'capability_id::msi': pci_cap_msi
+            'capability_id::vendor_specific': pci_cap_vendor_specific
+            'capability_id::msi_x': pci_cap_msi_x
+            'capability_id::advanced_features': pci_cap_advanced_features
     instances:
       next:
         io: _root._io
@@ -397,25 +397,28 @@ enums:
     3: reserved
 
   capability_id:
-    0x01: pm
+    # Names follow the PCI Code and ID Assignment Specification, 7. Capability IDs.
+    0x01: power_management
     0x02: agp
-    0x03: vpd
-    0x04: slot_numbering
+    0x03: vital_product_data
+    0x04: slot_identification
     0x05: msi
-    0x06: compact_pci_hotswap
-    0x07: pcix
+    0x06: compact_pci_hot_swap
+    0x07: pci_x
     0x08: hyper_transport
-    0x09: vendor
-    0x0A: debug
-    0x0B: compact_pci
-    0x0C: hotplug
-    0x0D: bridge_subsystem_vendor_id
-    0x0E: agp8x
-    0x0F: secure_device
-    0x10: pcie
-    0x11: msix
-    0x12: sta_hba
-    0x13: af
+    0x09: vendor_specific
+    0x0a: debug_port
+    0x0b: compact_pci_central_resource_control
+    0x0c: pci_hot_plug
+    0x0d: bridge_subsystem_vendor_id
+    0x0e: agp_8x
+    0x0f: secure_device
+    0x10: pci_express
+    0x11: msi_x
+    0x12: sata_data_index_configuration
+    0x13: advanced_features
+    0x14: enhanced_allocation
+    0x15: flattening_portal_bridge
 
   interrupt_pin:
     0: none

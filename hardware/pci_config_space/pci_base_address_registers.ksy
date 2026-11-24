@@ -1,5 +1,5 @@
 meta:
-  id: pci_config_bar_list
+  id: pci_base_address_registers
   title: PCI configuration space base address registers
   license: 0BSD
   endian: le
@@ -11,7 +11,7 @@ doc-ref:
   p224, 6.2.5. Base Addresses
 
 seq:
-  - id: bar
+  - id: bars
     type: bar
     repeat: eos
 

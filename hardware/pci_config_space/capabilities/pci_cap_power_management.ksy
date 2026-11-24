@@ -1,10 +1,12 @@
 meta:
-  id: pci_config_pm
+  id: pci_cap_power_management
   title: PCI power management capability
   license: 0BSD
   endian: le
 
-doc: Power management PCI capability
+doc: |
+  PCI Power Management capability, capability ID 0x01. Parsed from the
+  byte after the next-capability pointer.
 
 doc-ref: |
   PCI Bus Power Management Interface Specification Revision 1.0
@@ -17,22 +19,26 @@ doc-ref: |
 # TODO: re-check PCIe spec
 
 seq:
-  - id: pmc
-    type: pmc
-  - id: pmcsr
-    type: pmscr
-  - id: pmscr_bse
-    type: pmscr_bse
+  - id: capabilities
+    -orig-id: PMC
+    type: capabilities
+  - id: control_status
+    -orig-id: PMCSR
+    type: control_status
+  - id: bridge_support_extensions
+    -orig-id: PMCSR_BSE
+    type: bridge_support_extensions
   - id: data
     type: u1
 
 types:
-  pmc:
+  capabilities:
     seq:
       # bits 7:0
       - id: aux_current_lower
         type: b2
-      - id: dsi
+      - id: device_specific_initialization
+        -orig-id: DSI
         type: b1
       - id: auxiliary_power_source
         # phased out in v1.1
@@ -40,7 +46,7 @@ types:
       - id: pme_clock
         type: b1
       - id: version
-        type: b3 # TODO encode as enum
+        type: b3
       # bits 15:8
       - id: pme_support
         type: b5
@@ -52,9 +58,10 @@ types:
         type: b1
     instances:
       aux_current:
-        value: aux_current_lower | (aux_current_upper.to_i << 3)
+        value: aux_current_lower | (aux_current_upper.to_i << 2)
+        doc: Aux_Current, PMC bits 8:6.
 
-  pmscr:
+  control_status:
     seq:
       # bits 7:0
       - id: reserved0
@@ -69,15 +76,18 @@ types:
         type: b2
       - id: data_select
         type: b4
-      - id: pme_en
+      - id: pme_enable
+        -orig-id: PME_En
         type: b1
 
-  pmscr_bse:
+  bridge_support_extensions:
     seq:
       # bits 7:0
-      - id: bpcc_en
+      - id: bus_power_clock_control_enable
+        -orig-id: BPCC_En
         type: b1
       - id: b2_b3_support
+        -orig-id: B2_B3#
         type: b1
       - id: reserved
         type: b6

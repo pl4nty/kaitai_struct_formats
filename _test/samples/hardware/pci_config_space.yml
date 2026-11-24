@@ -14,7 +14,7 @@ samples:
       layout_specific.subsystem_vendor_id: 0x8086
       layout_specific.subsystem_id: 0x4f53
       layout_specific.capabilities_pointer.masked_pointer: 0x50
-      layout_specific.capabilities_list.id: af
+      layout_specific.capabilities_list.id: advanced_features
   - fixture: hardware/pci_config_space/ich10-hda.bin
     sha256: 9298cb7c259612407373086f5af1d2dc0cebeb87ebeba94340b57ab44dafc13d
     recipe: >-
@@ -25,8 +25,8 @@ samples:
       device_id: 0x3a3e
       class_code.base_class: 0x04
       class_code.sub_class: 0x03
-      layout_specific.capabilities_list.id: pm
-      layout_specific.capabilities_list.body.pmc.version: 2
+      layout_specific.capabilities_list.id: power_management
+      layout_specific.capabilities_list.body.capabilities.version: 2
       layout_specific.capabilities_list.next.id: msi
   - fixture: hardware/pci_config_space/x58-root-port1.bin
     sha256: f774e40a0f30675dfe0131308bf405c50d8957a7eb107133a9264179642899ae
@@ -48,7 +48,7 @@ samples:
     expect:
       vendor_id: 0x1af4
       device_id: 0x105a
-      layout_specific.capabilities_list.id: msix
-      layout_specific.capabilities_list.body.message_control.msix_enable: true
-      layout_specific.capabilities_list.next.id: vendor
+      layout_specific.capabilities_list.id: msi_x
+      layout_specific.capabilities_list.body.message_control.msi_x_enable: true
+      layout_specific.capabilities_list.next.id: vendor_specific
       layout_specific.capabilities_list.next.next_pointer.masked_pointer: 0x5c

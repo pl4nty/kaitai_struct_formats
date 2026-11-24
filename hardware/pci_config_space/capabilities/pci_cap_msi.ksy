@@ -1,10 +1,12 @@
 meta:
-  id: pci_config_msi
+  id: pci_cap_msi
   title: PCI MSI capability
   license: 0BSD
   endian: le
 
-doc: Message signaled interrupt PCI capability
+doc: |
+  Message Signaled Interrupts (MSI) capability, capability ID 0x05. Parsed
+  from the byte after the next-capability pointer.
 
 doc-ref: |
   PCI LOCAL BUS SPECIFICATION, REV. 3.0
@@ -34,12 +36,14 @@ types:
   message_control:
     seq:
       # bits 7:0
-      - id: addr_64bit_capable
+      - id: address_64bit_capable
         type: b1
       - id: multiple_message_enable
-        type: b3 # TODO: encode as enum?
+        type: b3
+        doc: log2 of the number of vectors allocated.
       - id: multiple_message_capable
         type: b3
+        doc: log2 of the number of vectors requested.
       - id: msi_enable
         type: b1
       # bits 15:8
@@ -56,10 +60,10 @@ types:
         type: u4
       - id: raw_upper_address
         type: u4
-        if: _parent.message_control.addr_64bit_capable
+        if: _parent.message_control.address_64bit_capable
     instances:
       masked_address:
         value: >-
           (raw_address & 0xfffffffc) |
-          (_parent.message_control.addr_64bit_capable
+          (_parent.message_control.address_64bit_capable
             ? raw_upper_address << 32 : 0)
