@@ -57,6 +57,53 @@ types:
           max: _root.header.max_block_size
       - id: data
         size: len_compressed
+        type:
+          switch-on: is_small
+          cases:
+            true: small_block
+            false: regular_block
     instances:
       is_last:
         value: len_uncompressed <= _root.header.max_block_size
+      is_small:
+        value: len_uncompressed < 64
+        doc: Blocks smaller than 64 bytes are stored without compression
+  small_block:
+    seq:
+      - id: crc32
+        type: u4
+        doc: CRC32 checksum of the uncompressed data
+      - id: literal
+        contents: [0xff, 0xff, 0xff, 0xff]
+        doc: An invalid `bwt_index`, marking a small block
+      - id: data
+        size-eos: true
+        doc: Uncompressed data
+  regular_block:
+    seq:
+      - id: crc32
+        type: u4
+        doc: CRC32 checksum of the uncompressed data
+      - id: bwt_index
+        type: u4
+        doc: Burrows-Wheeler transform index
+      - id: model
+        type: u1
+        doc: |
+          Compression model flags: 0x02 means the LZP filter was used, 0x04
+          means the RLE filter was used.
+      - id: len_lzp
+        type: u4
+        if: model & 0x02 != 0
+        doc: Size after LZP compression
+      - id: len_rle
+        type: u4
+        if: model & 0x04 != 0
+        doc: Size after RLE compression
+      - id: data
+        size-eos: true
+    instances:
+      has_lzp:
+        value: model & 0x02 != 0
+      has_rle:
+        value: model & 0x04 != 0
