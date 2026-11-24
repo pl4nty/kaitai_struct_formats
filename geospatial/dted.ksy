@@ -82,12 +82,9 @@ types:
           Count of the number of latitude points per longitude line for |
           a full one-degree cell. ( e.g. 1201 for DTED1, 3601.for DTED2).
       - id: multiple_accuracy
-        size: 1
-        type: str
-        encoding: ASCII
-        doc: |
-          0 - Single |
-          1 - Multiple
+        type: u1
+        enum: multiple_accuracy
+        doc: Whether the cell has a single or multiple accuracy.
       - id: reserved
         size: 24
         type: str
@@ -351,7 +348,11 @@ types:
       - id: subregion
         type: acc_subregion
         repeat: expr
-        repeat-expr: 9
+        repeat-expr: num_subregions
+        doc: Populated accuracy subregions.
+      - id: unused_subregions
+        size: (9 - num_subregions) * 284
+        doc: Blank-filled space for the unused accuracy subregions.
       - id: reserved_for_nima_use_only2
         size: 18
         type: str
@@ -360,6 +361,10 @@ types:
         size: 69
         type: str
         doc: Reserved for future use.
+    instances:
+      num_subregions:
+        value: 'multiple_accuracy_outline_flag == "  " ? 0 : multiple_accuracy_outline_flag.to_i'
+        doc: Number of populated accuracy subregions (0 or 2 to 9).
   acc_subregion:
     doc: |
       Start of Accuracy Sub region Description. Repeat to maximum of nine |
@@ -399,11 +404,18 @@ types:
       - id: coordinate_pair
         type: coordinate_pair
         repeat: expr
-        repeat-expr: 14
+        repeat-expr: num_coordinates
         doc: |
           Start of Coordinate Pair Description. Repeat to maximum of fourteen |
           times to outline subregion. Blank fill all unused accuracy |
           subregions and unused portions of subregions.
+      - id: unused_coordinate_pairs
+        size: (14 - num_coordinates) * 19
+        doc: Blank-filled space for the unused coordinate pairs.
+    instances:
+      num_coordinates:
+        value: number_of_coordinates_in_accuracy_subregion_outline.to_i
+        doc: Number of coordinate pairs in the subregion outline (3 to 14).
   data_record:
     doc: |
       Data Record Description. The Data Record is used for magnetic tape and |
@@ -471,7 +483,8 @@ types:
         type: str
     instances:
       has_value:
-        value: text != "    " and text != "NA"
+        value: text != "    " and text.substring(0, 2) != "NA"
+        doc: False for blank fields and for "NA" (not available).
       value:
         value: text.to_i
         if: has_value
@@ -524,7 +537,7 @@ types:
           Some angles are for completly blank ascii strings so we need to |
           check for that
       value:
-        value: '(degrees.to_i + minutes.to_i/60.0 + seconds.to_i/3600.0 + (has_decimal_point==1?tenths_of_seconds.to_i/36000.0 : 0)) * (hemisphere == "N"? 1 : -1)'
+        value: '(degrees.to_i + minutes.to_i/60.0 + seconds.to_i/3600.0 + (has_decimal_point==1?tenths_of_seconds.to_i/36000.0 : 0)) * (hemisphere == "S" or hemisphere == "W" ? -1 : 1)'
         if: has_value
         doc: Degree decimal floating point representation
   date:
@@ -541,8 +554,11 @@ types:
       month:
         value: month_text.to_i
 enums:
+  multiple_accuracy:
+    0x30: single  # '0'
+    0x31: multiple  # '1'
   security_classification_enum:
-    83: secrete
+    83: secret
     67: confidential
     85: unclassified
     82: restricted
