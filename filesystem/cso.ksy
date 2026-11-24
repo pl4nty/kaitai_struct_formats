@@ -81,14 +81,21 @@ types:
           deduplication of blocks is not supported.
       msb:
         value: raw >> 31 == 1
+      is_end:
+        value: idx == _root.header.block_count
+        doc: |
+          True for the final index entry, which only marks the end of the
+          data segment and has no block of its own.
       size:
         value: _root.indexes[idx+1].ptr - ptr
+        if: not is_end
       compression_cso_v1:
         value: 'msb ? compression::none : compression::deflate'
       compression_zso_v1:
         value: 'msb ? compression::none : compression::lz4'
       compression_cso_v2:
         value: '(size < _root.header.block_size) ? (msb ? compression::lz4 : compression::deflate) : compression::none'
+        if: not is_end
       compression:
         value: |
           (
@@ -98,23 +105,27 @@ types:
             :
             (_root.header.flavour == "Z" ? compression_zso_v1 : compression::unknown)
           )
+        if: not is_end
       block_uncompressed:
         io: _root._io
         pos: ptr
         size: size
+        if: not is_end
       block_deflate:
         io: _root._io
         pos: ptr
         size: size
         process: kaitai.compress.zlib(15, "raw")
+        if: not is_end and compression == compression::deflate
       block_lz4:
         io: _root._io
         pos: ptr
         size: size
         process: kaitai.compress.lz4
+        if: not is_end and compression == compression::lz4
       block:
         value: '(compression == compression::deflate) ? block_deflate : ((compression == compression::lz4) ? block_lz4 : block_uncompressed)'
-        if: compression != compression::unknown
+        if: not is_end and compression != compression::unknown
   header:
     seq:
       - id: flavour
