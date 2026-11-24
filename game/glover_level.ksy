@@ -1,4 +1,5 @@
 # Imported from https://github.com/naclomi/libgarib/blob/cf879296afc5108867de03facbca428923618f29/formats/glover.lev.ksy
+# Transform `modifies` targets and WATER/POWERUP declarations from https://github.com/Eddie-Lack/Glovebox/blob/375c0b59570abbd9da32016d182afe388964fb65/formats/glover.lev.ksy
 meta:
   id: glover_level
   file-extension: lev
@@ -405,7 +406,8 @@ types:
   set_actor_rotation: # 0x93
     # x/y/z are axis rotation angles, in radians
     -semantic:
-      modifies: [LAND_ACTOR, BG_ACTOR, ANIMATED_BG_ACTOR]
+      # PLATFORM, ENEMY, POWERUP and WATER need glovebox's game mod (mod/transforms.c)
+      modifies: [LAND_ACTOR, BG_ACTOR, ANIMATED_BG_ACTOR, PLATFORM, ENEMY, POWERUP, WATER]
     seq:
       - id: x
         type: f4
@@ -416,7 +418,8 @@ types:
 
   set_actor_scale: # 0x94
     -semantic:
-      modifies: [LAND_ACTOR, BG_ACTOR, ANIMATED_BG_ACTOR]
+      # PLATFORM, ENEMY, POWERUP and WATER need glovebox's game mod (mod/transforms.c)
+      modifies: [LAND_ACTOR, BG_ACTOR, ANIMATED_BG_ACTOR, PLATFORM, ENEMY, POWERUP, WATER]
     seq:
       - id: x
         type: f4
@@ -468,6 +471,8 @@ types:
 
   water: # 0xA0
     # lol dear lord
+    -semantic:
+      declares: WATER
     seq:
       - id: left
         type: f4
@@ -1902,6 +1907,8 @@ types:
         3: mad_garib
 
   powerup:
+    -semantic:
+      declares: POWERUP
     seq:
       - id: type
         type: u2
