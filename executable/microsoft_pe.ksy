@@ -245,9 +245,17 @@ types:
       #  encoding: ascii
       section:
         value: _root.pe.sections[section_number - 1]
+        if: has_section
+        doc: |
+          Section the symbol is defined in. Absent for the special section
+          numbers 0 (IMAGE_SYM_UNDEFINED), 0xffff (IMAGE_SYM_ABSOLUTE) and
+          0xfffe (IMAGE_SYM_DEBUG), and for out-of-range numbers.
+      has_section:
+        value: section_number > 0 and section_number <= _root.pe.coff_hdr.number_of_sections
       data:
         pos: section.pointer_to_raw_data + value
         size: 1
+        if: has_section
   annoyingstring:
     -webide-representation: '{name}'
     instances:
