@@ -47,7 +47,7 @@ instances:
 types:
   file_header:
     seq:
-      - id: signature
+      - id: magic
         contents: LOGG
       - id: len_header
         type: u4
@@ -100,7 +100,7 @@ types:
         size: base_header.len_object % 4
   object_header_base:
     seq:
-      - id: signature
+      - id: magic
         contents: LOBJ
       - id: len_header
         type: u2
