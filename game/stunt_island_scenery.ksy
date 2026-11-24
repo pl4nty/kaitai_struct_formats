@@ -1,0 +1,24 @@
+# Imported from https://github.com/neilsh/stunt-reel/blob/e2981f3da2808cb21b06ceeae9a55c85706c80f3/research/formats/auxiliary/scenery.scn.ksy
+# Executable structural layout of `SCENERY.scn`.
+# Format anchor: [FMT-MAP-SCENERY] in scenery.md.
+#
+# Both corpus copies are 118,236 bytes: 29,559 little-endian 32-bit words
+# addressed by word index. Node records live in this array and reference
+# children by half-word index, so only the array layout is encoded here.
+meta:
+  id: stunt_island_scenery
+  title: Stunt Island BSP scenery graph (`SCENERY.scn`)
+  file-extension: scn
+  license: LicenseRef-All-Rights-Reserved
+  ks-version: 0.11
+  endian: le
+doc: |
+  The 32-bit word array of the `SCENERY.scn` BSP tree. Meaning is in
+  `scenery.md`.
+seq:
+  - id: words
+    type: u4
+    repeat: eos
+    doc: |
+      Precompiled graph words. Word index 1 is the root node; child
+      pointers are half-word indices into this array.
