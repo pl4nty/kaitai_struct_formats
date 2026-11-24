@@ -65,7 +65,7 @@ types:
             packet_tags::public_key_packet: public_key_packet
             packet_tags::public_subkey_packet: public_key_packet
             packet_tags::secret_key_packet: secret_key_packet
-            packet_tags::secret_subkey_packet: public_key_packet
+            packet_tags::secret_subkey_packet: secret_key_packet
 
   new_packet:
     doc-ref: https://www.rfc-editor.org/rfc/rfc4880#section-4.2.2
@@ -82,7 +82,7 @@ types:
             packet_tags::public_key_packet: public_key_packet
             packet_tags::public_subkey_packet: public_key_packet
             packet_tags::secret_key_packet: secret_key_packet
-            packet_tags::secret_subkey_packet: public_key_packet
+            packet_tags::secret_subkey_packet: secret_key_packet
         if: not len.is_partial
       - id: partial_body_first
         size: len.len
