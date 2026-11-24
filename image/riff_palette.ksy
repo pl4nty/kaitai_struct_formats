@@ -1,5 +1,4 @@
 # Imported from https://github.com/1j01/anypalette.js/blob/eaf17cca78203bf2e68298137859f3f23cc46520/src/formats/ksy/riff_pal.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: riff_palette
   application: Microsoft Paint

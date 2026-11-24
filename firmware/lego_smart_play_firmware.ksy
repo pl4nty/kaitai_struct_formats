@@ -1,5 +1,4 @@
 # Imported from https://github.com/nathankellenicki/node-smartplay/blob/5b467064cceeea372506bf54a6671c94980318ad/research/tools/p11_firmware.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: lego_smart_play_firmware
   title: LEGO Smart Play (~P11) Firmware Container

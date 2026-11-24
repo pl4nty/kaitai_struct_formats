@@ -1,5 +1,4 @@
 # Imported from https://github.com/GDATAAdvancedAnalytics/winreg-tasks/blob/72bc92e0623f9ed3212a04bf81bcce9efc7d7216/kaitai/optional_settings.ksy
-# Licence and copyright: see _community/README.md
 # SPDX-License-Identifier: MIT
 
 meta:

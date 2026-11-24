@@ -1,5 +1,4 @@
 # Imported from https://github.com/justgook/grayworld/blob/435b78e47cec26c8b85d30a338fb14382b8268de/src/ksy/protocol.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ultima_online_protocol
   application: Grayworld server protocol

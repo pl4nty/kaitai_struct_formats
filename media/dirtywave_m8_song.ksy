@@ -1,5 +1,4 @@
 # Imported from https://github.com/colonel-blimp/m8s-kaitai-struct/blob/5bab784198fa2f90faea0942ee2c7c48022fd00b/m8s_midi+initial_v3.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dirtywave_m8_song
   title: 'M8 Song/Instrument/Theme/Scale file (Firmware 2.6.0)'

@@ -1,5 +1,4 @@
 # Imported from https://github.com/MelbourneSpaceProgram/Acrux1Tools/blob/09117af8b0b0307edb9ef643805a4ff87349e295/Acrux1Payloads/Kaitai/acrux1beacon.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: acrux1_beacon
   title: Acrux 1 Beacon

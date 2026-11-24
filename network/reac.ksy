@@ -1,5 +1,4 @@
 # Imported from https://github.com/FreeREAC/reac-protocol/blob/0b38f0a37e3e76d99b0257b9d8effb57f9a464b5/spec/reac.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: reac
   title: Roland REAC 0x8819 frame family (downstream broadcast + upstream stagebox return)

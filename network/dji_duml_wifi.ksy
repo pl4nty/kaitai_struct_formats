@@ -1,5 +1,4 @@
 # Imported from https://github.com/atc1441/Gadgetbridge-BLE-OpenEpaperLink/blob/806c981e4fcdc4126de99ec25af02493fa313f01/app/src/main/ksy/duml_wifi.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dji_duml_wifi
   title: DUML Wi-Fi command set

@@ -1,5 +1,4 @@
 # Imported from https://github.com/scottprahl/RigolWFM/blob/9e6f993103f773f81df409fc65c2cc359d7bd249/ksy/rohde_schwarz_rtp_wfm_bin.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: rohde_schwarz_rtp_wfm_bin
   title: Rohde & Schwarz RTP WFM.BIN Binary Format

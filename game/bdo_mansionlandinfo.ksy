@@ -1,5 +1,4 @@
 # Imported from https://github.com/Thell/bdo-housecraft/blob/3af0b47113c4709afab148ae2d3fa83748e08ac6/data/houseinfo/formats/mansionlandinfo.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: bdo_mansionlandinfo
   file-extension: bss

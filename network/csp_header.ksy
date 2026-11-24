@@ -1,5 +1,4 @@
 # Imported from https://github.com/BelmY/satnogs-decoders/blob/2a2cab20a0edb252727cde695223e734d04ffad7/ksy/cspheader.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: csp_header
   title: Generic CSP Header Struct

@@ -1,5 +1,4 @@
 # Imported from https://github.com/stellargames/bakagain/blob/513a79864ff79fe27f917e721e8cbec714e68af3/formats/req__dat.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: bak_request_ui
   file-extension: dat

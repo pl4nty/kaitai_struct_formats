@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/tools-for-tdc/blob/82eafce22de8b14a427f605b294827806c1ed57d/doc/tdc.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: total_phase_tdc
   title: Total Phase Data Center Capture File

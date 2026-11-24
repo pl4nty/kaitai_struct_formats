@@ -1,5 +1,4 @@
 # Imported from https://github.com/LongSoft/UEFITool/blob/de73942df908b9466c055e15108ac4e4c0b1688c/common/ksy/phoenix_flm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: phoenix_flm
   title: Phoenix Flash Map

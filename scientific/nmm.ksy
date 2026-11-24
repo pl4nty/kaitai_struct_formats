@@ -1,5 +1,4 @@
 # Imported from https://github.com/EBI-Metagenomics/nmm/blob/903834d189b1fcb8e35b4f38e3633e2be2d5a870/file-format/nmm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: nmm
   file-extension: nmm

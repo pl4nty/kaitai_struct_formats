@@ -1,5 +1,4 @@
 # Imported from https://github.com/det-lab/kaitai_struct_awkward_runtime/blob/76ae1efd89757904a3ae70d19f38b85d8e665a8e/example_data/schemas/pixie4e.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pixie4e_list_mode
   file-extension: b00

@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/mediatek-wifi-re/blob/bcbb3b914ce1292add14bffdee4f1e0a8af33500/mediatek_linux_wifi_bt_patch.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mediatek_linux_wifi_bt_patch
   title: MediaTek WiFi/BT Firmware Patch (Linux)

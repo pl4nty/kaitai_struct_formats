@@ -1,5 +1,4 @@
 # Imported from https://github.com/giuliof/siglent-bin2sr/blob/510bad3498b3d7d8a4d53d516ed49f8b49b15965/test/siglent-bin.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: siglent_bin
   title: Siglent oscilloscope binary waveform

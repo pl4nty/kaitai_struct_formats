@@ -1,5 +1,4 @@
 # Imported from https://github.com/Shirakumo/sf3.ksy/blob/6515f909ba82af4f8980284da11e9cc2272b061e/sf3_archive.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: sf3_archive
   title: SF3 Archive

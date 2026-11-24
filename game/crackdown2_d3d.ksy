@@ -1,5 +1,4 @@
 # Imported from https://github.com/matty45/crackdown_2_ksy/blob/1aee060fd0649c52f47a8885deb8427987bf5e59/d3d.ksy
-# Licence and copyright: see _community/README.md
 meta:  
   id: crackdown2_d3d
   title: Crackdown 2 D3D related types  

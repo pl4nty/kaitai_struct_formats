@@ -1,5 +1,4 @@
 # Imported from https://github.com/naclomi/libgarib/blob/cf879296afc5108867de03facbca428923618f29/formats/glover.texbank.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: glover_texbank
   file-extension: tex.bin

@@ -1,5 +1,4 @@
 # Imported from https://github.com/tikoci/m2ir/blob/b678ed9b22b9beea6babdc0166ce2fa75f638b5a/profiles/winbox-ipc/strawman/winbox-ec-srp5.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mikrotik_winbox_ec_srp5
   title: WinBox EC-SRP5 handshake messages (pre-encryption frames)

@@ -1,5 +1,4 @@
 # Imported from https://github.com/joushx/Online-Ticket-Code/blob/593f5c73991be7061d36400a184a531adfb3e2f2/definitions/ticket.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: uic918_3_ticket
   file-extension: ticket

@@ -1,5 +1,4 @@
 # Imported from https://github.com/GPUOpen-Drivers/libamdrdf/blob/1f13ba88fa0753d908d5fba82fe4483406267b80/docs/rdf.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: amd_rdf
   title: Radeon Data File

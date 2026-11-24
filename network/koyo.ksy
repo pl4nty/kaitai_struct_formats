@@ -1,5 +1,4 @@
 # Imported from https://github.com/Thitsanapat/KOYO/blob/c4a90e67c718cfe8f87de8dc656c3222b267382f/koyo.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: koyo
   title: KOYO

@@ -1,5 +1,4 @@
 # Imported from https://github.com/RetroReversing/retroReversing/blob/2a38ef67731f2952f36c74207225dbee638e1ef0/public/js/file-lab/plugins/kaitai-viewer/formats/ilbm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ilbm
   title: IFF ILBM (Interleaved Bitmap)

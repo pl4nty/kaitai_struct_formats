@@ -1,5 +1,4 @@
 # Imported from https://github.com/P1sec/DiagNG/blob/ebff1c3d50e0872fb7db93faf9909da4954095bf/struct/qualcomm/diag/command/diag_log_config_f_req.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: diag_log_config_f_req
   title: Qualcomm DIAG log config request (DIAG_LOG_CONFIG_F)

@@ -1,5 +1,4 @@
 # Imported from https://github.com/WiiLink24/kaitais/blob/c1d1d231889927c5cceb0e34349dace9b13dc067/tv_epg.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: tv_no_tomo_epg
   file-extension: bin

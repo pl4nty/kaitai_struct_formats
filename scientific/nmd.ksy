@@ -1,5 +1,4 @@
 # Imported from https://github.com/htmdec/htmdec_formats/blob/8bd79be26ff363caf85d62131224c9403561c864/src/htmdec_formats/ksy_files/nmdfile.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: nmd
   file-extension: "NMD"

@@ -1,5 +1,4 @@
 # Imported from https://github.com/nanocurrency/nanodb-specification/blob/0b716f4e1c52c97918d6116f5d864848e786e813/nanodb.ksy
-# Licence and copyright: see _community/README.md
 # ----------------------------------------------------------------------
 # Nano database definition
 # ----------------------------------------------------------------------

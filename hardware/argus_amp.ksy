@@ -1,5 +1,4 @@
 # Imported from https://github.com/p-fruck/argus-tools/blob/55953d692e3d2824eb89c19aa43adc0ecb245a8d/src/argus_amp.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: argus_amp
   title: Argus AMP

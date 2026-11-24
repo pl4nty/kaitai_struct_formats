@@ -1,5 +1,4 @@
 # Imported from https://github.com/kismetwireless/kismet/blob/b88a2c5fb632faa928017e270f892986d8d8fd76/kaitai_definitions_disabled/dot11_ie_221_vendor.ksy
-# Licence and copyright: see _community/README.md
 # Top-level breakout for 221 vendor-specific tags, the actual tag is
 # determined by the vendor OUI
 

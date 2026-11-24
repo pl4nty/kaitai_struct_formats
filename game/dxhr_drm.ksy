@@ -1,5 +1,4 @@
 # Imported from https://github.com/vardonir/pyDXHR/blob/be481db8c36f82e7c37306a9f7a5b6cc97504e87/ksy/DRM.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dxhr_drm
   file-extension: drm

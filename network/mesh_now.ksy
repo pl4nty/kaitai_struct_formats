@@ -1,5 +1,4 @@
 # Imported from https://github.com/NellowTCS/Mesh-NOW/blob/202fa52d42bac6b0447b18c649cf69eba5bd3a5b/mesh_now.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mesh_now
   title: Mesh-NOW mesh networking protocol

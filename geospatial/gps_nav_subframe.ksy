@@ -1,5 +1,4 @@
 # Imported from https://github.com/Kirito3481/npilot/blob/dfd7a8c8d74b822a15738a2afedc8159990cd042/system/ubloxd/gps.ksy
-# Licence and copyright: see _community/README.md
 # https://www.gps.gov/technical/icwg/IS-GPS-200E.pdf
 meta:
   id: gps_nav_subframe

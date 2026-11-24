@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/mediatek-lte-baseband-re/blob/8c01efae5a9784ec8c84b4a4087678860de98e20/DSP/mediatek_dbginfo_dsp.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mediatek_dbginfo_dsp
   title: MediaTek Debug Info for DSP

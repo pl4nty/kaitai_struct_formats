@@ -1,5 +1,4 @@
 # Imported from https://github.com/llama-for3ver/wt_replay_decoder/blob/6b2d759c0048f9757eb662a75110473651763dea/tests/replay.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: war_thunder_replay_header
   file-extension: wrpl

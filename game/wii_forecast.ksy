@@ -1,5 +1,4 @@
 # Imported from https://github.com/RiiConnect24/Kaitai-Files/blob/86568af7c4f29040c178ab627c68be707a829829/Kaitais/forecast_file.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: wii_forecast
   application: Forecast Channel

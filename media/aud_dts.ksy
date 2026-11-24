@@ -1,5 +1,4 @@
 # Imported from https://github.com/robin-francois/aud-dts-kaitai-struct/blob/86b24e5642afe575da8b6eb14d3537cf1952017e/aud_dts.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: aud_dts
   file-extension: aud

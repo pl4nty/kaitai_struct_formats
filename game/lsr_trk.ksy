@@ -1,5 +1,4 @@
 # Imported from https://github.com/OpenLSR/lsr_kaitai/blob/e5e20cbc1506f712d0e6f43c9c9d58d418679b32/lsr_trk.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: lsr_trk
   title: LEGO Stunt Rally track file

@@ -1,5 +1,4 @@
 # Imported from https://github.com/BelmY/satnogs-decoders/blob/2a2cab20a0edb252727cde695223e734d04ffad7/ksy/ax25frames.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ax25_frame
   title: AX.25 frame

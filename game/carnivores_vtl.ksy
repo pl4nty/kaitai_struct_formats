@@ -1,5 +1,4 @@
 # Imported from https://github.com/Game3DEE/webcarnivores/blob/b87a109d41179b1a8e8c9c78f63dda7a96339a2b/src/kaitai/vtl.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: carnivores_vtl
   title: VTL animation file format for Carnivores

@@ -1,5 +1,4 @@
 # Imported from https://github.com/dlorent/es4308cfg/blob/3435d03434009cee57c1a5421500b84fa6d661be/spec/es4308.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: edgecore_es4308_config
   title: Edgecore ES4308-PoE NVRAM config (CONF/MW)

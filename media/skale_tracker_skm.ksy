@@ -1,5 +1,4 @@
 # Imported from https://github.com/lpreiner/skale-skm-format/blob/8b1d9f5a67d81eba109c19540616b8cbd929457a/kaitai/skm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: skale_tracker_skm
   title: Skale Tracker SKM module

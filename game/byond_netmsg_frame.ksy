@@ -1,5 +1,4 @@
 # Imported from https://github.com/Redict/byond-network-spec/blob/d585d84f4cb22cdb274604cbdf10797acd106383/ksy/transport/frame_header.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: byond_netmsg_frame
   title: BYOND NetMsg wire frame (transport header + payload)

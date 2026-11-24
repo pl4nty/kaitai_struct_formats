@@ -1,5 +1,4 @@
 # Imported from https://github.com/KiCad/kicad-source-mirror/blob/c508d01f46c7f04fd475d40c6fac93d10fae49b2/pcbnew/pcb_io/diptrace/diptrace_pcb.ksy
-# Licence and copyright: see _community/README.md
 # Can be viewed in: https://ide.kaitai.io/
 #
 # Reverse-engineered DipTrace PCB binary format (.dip).

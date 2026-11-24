@@ -1,5 +1,4 @@
 # Imported from https://github.com/oruponu/ZeroIchi/blob/050337694c8a127164e176d22d1aabff58a590d5/src/ZeroIchi.Core/Formats/media/id3v2_2.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: id3v2_2
   title: ID3v2.2 tag for .mp3 files

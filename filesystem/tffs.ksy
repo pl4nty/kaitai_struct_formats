@@ -1,5 +1,4 @@
 # Imported from https://github.com/NetherlandsForensicInstitute/tffsmount/blob/8c962d4ca7d875b4d59ad8bbcbf5dbb58b366ee6/tffsmount/parser.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: tffs
   title: tffs_parser

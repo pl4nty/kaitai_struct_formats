@@ -1,5 +1,4 @@
 # Imported from https://github.com/erysdren/QCVM/blob/f7de3bfacf4c3b80fb4e95ef6a0f9be11ff2af00/contrib/progs.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: quake_progs
   title: QuakeC Bytecode

@@ -1,5 +1,4 @@
 # Imported from https://github.com/Brachi/albam/blob/6242aaff6c4145732b9b78213f2d7cf9b84d4545/albam/engines/cie/structs/re4-uhd-smd.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: re4_uhd_smd
   title: RE4UHD scenario file (room geometry and placement)

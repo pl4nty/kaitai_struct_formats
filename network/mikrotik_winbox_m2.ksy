@@ -1,5 +1,4 @@
 # Imported from https://github.com/tikoci/m2ir/blob/b678ed9b22b9beea6babdc0166ce2fa75f638b5a/profiles/winbox-ipc/strawman/winbox-m2.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mikrotik_winbox_m2
   title: WinBox "M2" / nv::message TLV format

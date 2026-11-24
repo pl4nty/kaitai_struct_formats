@@ -1,5 +1,4 @@
 # Imported from https://github.com/KiCad/kicad-source-mirror/blob/c508d01f46c7f04fd475d40c6fac93d10fae49b2/pcbnew/pcb_io/pads/pads_binary.ksy
-# Licence and copyright: see _community/README.md
 # Kaitai Struct definition for the PADS PowerPCB binary `.pcb` format.
 #
 # Coordinate convention: absolute geometry is RAW = design + per-axis origin.

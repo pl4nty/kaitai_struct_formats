@@ -1,5 +1,4 @@
 # Imported from https://github.com/schiebel/casatabstream/blob/5cb9e9ed69ed770dde95b4cefe04bd4e01291344/ksy/table_incremental_store.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: casa_table_incremental_store
   title: Casacore Table Data System StandardStMan layout

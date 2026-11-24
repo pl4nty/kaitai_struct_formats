@@ -1,5 +1,4 @@
 # Imported from https://github.com/krokettenkoal/khkh_xldM/blob/e545017f81fe0e928dc5b6e2ff0ce910205104a7/Parser/03system_bin/kh2_03_system_bin.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: kh2_bar
   title: Kingdom Hearts II BAR container

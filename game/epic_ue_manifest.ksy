@@ -1,5 +1,4 @@
 # Imported from https://github.com/legendary-gl/legendary/blob/170964e75affc0c04be467ec2b12879376738ef5/doc/ue_manifest.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: epic_ue_manifest
   title: Binary Unreal Engine Manifest Version 20

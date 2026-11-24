@@ -1,5 +1,4 @@
 # Imported from https://github.com/nuxdie/revenant-map-builder/blob/71d65397afccffe181085bbbdb87e59da6ed0261/_KAITAI/revenant-i2d-format-by-pvtjokerr.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: revenant_i2d
   file-extension: i2d

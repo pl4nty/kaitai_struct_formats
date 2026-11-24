@@ -1,5 +1,4 @@
 # Imported from https://github.com/YamamotoKaderate/ksy/blob/3d0f0a11362819015a45ea3dc7558b31d8b04ac8/commandos_wad.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: commandos_wad
   title: Commandos sprites & palettes archive

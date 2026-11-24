@@ -1,5 +1,4 @@
 # Imported from https://github.com/DGAlexandru/NoCloud/blob/d6b14e429931f0f5058bb8567c55b53facb3f643/assets/kaitai_structs/viomi_map_file.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: viomi_map_file
   title: Viomi vacuum map format

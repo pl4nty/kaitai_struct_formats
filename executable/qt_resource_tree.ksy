@@ -1,5 +1,4 @@
 # Imported from https://github.com/mblsha/binja-qresource/blob/1f692758f08defb61ed80b72f4214b28c94288eb/qresource_tree.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: qt_resource_tree
   file-extension: qrcbin

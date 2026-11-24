@@ -1,5 +1,4 @@
 # Imported from https://github.com/Game3DEE/darkstone/blob/afc3261693b91fcd371e975889d788dfded04311/src/kaitai/language.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: darkstone_language_dat
   file-extension: dat

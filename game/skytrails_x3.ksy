@@ -1,5 +1,4 @@
 # Imported from https://github.com/spillerrec/skytrails-replacer/blob/8c4b64804a1ae01084188cd860e589b62a66e515/specifications/_X3.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: skytrails_x3
   file-extension: _X3

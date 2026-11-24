@@ -1,5 +1,4 @@
 # Imported from https://github.com/TadaoYamaoka/gp5_file_format/blob/46987b0e8a99ebf838dcc415b731fb6f2d18d36a/guitar_pro_5.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: guitar_pro_5
   title: Guitar Pro 5 (.gp5)

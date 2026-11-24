@@ -1,5 +1,4 @@
 # Imported from https://github.com/OK-DMR/dmr-kaitai/blob/7489ff1a8b418e3d37e2a0268acbaf2710543d93/okdmr/kaitai/hytera/data_delivery_states.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: data_delivery_states
   title: Hytera DMR data delivery states

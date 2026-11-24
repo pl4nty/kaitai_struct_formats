@@ -1,5 +1,4 @@
 # Imported from https://github.com/NeoZX/fb_formats/blob/11c1f367a53e1787fe6d965fe312fe552e1d6d20/kaitai/ods11.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: firebird_ods11
   title: Firebird 2.X and Red Database 2.X format ODS11

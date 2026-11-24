@@ -1,5 +1,4 @@
 # Imported from https://github.com/joushx/python-sonicare/blob/2717a078ff46298db17a73e26a628825e4366d6d/docs/firmware.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: sonicare_upg
   title: Philips Sonicare firmware upgrade file (.upg)

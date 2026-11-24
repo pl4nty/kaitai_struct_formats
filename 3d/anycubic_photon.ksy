@@ -1,5 +1,4 @@
 # Imported from https://github.com/fookatchu/pyphotonfile/blob/453fc197a67d3d2424e908a9daed645c92fe1553/fileformat/photon_v2.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: anycubic_photon
   title: AnyCubic Photon mSLA layer archive (v2)

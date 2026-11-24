@@ -1,5 +1,4 @@
 # Imported from https://github.com/SMSG-decomp/SMSG-decomp/blob/0f0a4cd524e98e9588af819113d756643a8bb25b/docs/highscores.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: simgolf_highscores
   title: High Score Table

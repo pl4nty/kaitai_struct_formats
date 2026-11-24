@@ -1,5 +1,4 @@
 # Imported from https://github.com/nviennot/turbo-resin/blob/6cd8f7567e81c6159c356ea18b5942237f86e47d/src/file_formats/ctb.ksy
-# Licence and copyright: see _community/README.md
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # Based on https://github.com/sn4k3/UVtools/blob/master/UVtools.Core/FileFormats/ChituboxFile.cs

@@ -1,5 +1,4 @@
 # Imported from https://github.com/LibreDWG/kaitai-cad/blob/374bb74ef70797ebfef7f533c8f23d6f9a2b8184/dwg_ac1002.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dwg_ac1002
   title: AutoCAD r2.5 drawing (AC1002)

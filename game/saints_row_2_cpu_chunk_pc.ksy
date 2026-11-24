@@ -1,5 +1,4 @@
 # Imported from https://github.com/skelerang/sr2-ksy/blob/1ad0fc7988678697b3b537e9e04ddc1edd532518/sr2_cpu_chunk_pc.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: saints_row_2_cpu_chunk_pc
   file-extension: chunk_pc

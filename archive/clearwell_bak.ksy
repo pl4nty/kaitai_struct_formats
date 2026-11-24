@@ -1,5 +1,4 @@
 # Imported from https://github.com/jankais3r/Clearwell-backup-extractor/blob/cc4d5dcce405e4bf313e925763acbccf0c7890e0/format.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: clearwell_bak
   title: Clearwell .BAK backup

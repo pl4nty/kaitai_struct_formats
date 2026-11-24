@@ -1,5 +1,4 @@
 # Imported from https://github.com/fersatgit/Goldenland-2-Cold-Heaven/blob/18053233e7c88dd223836ac25e98c1176e919289/kaitai/csx.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: goldenland2_csx
   title: "Златогорье 2 CSX"

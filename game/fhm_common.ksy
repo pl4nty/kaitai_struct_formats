@@ -1,5 +1,4 @@
 # Imported from https://github.com/nisamson/shuttle/blob/e72b6854c7cb64dfc1dd1498a35f21d148fa5630/docs/fhm10/data/fhm_common.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: fhm_common
   title: FHM 10 save — shared Qt QDataStream primitives and enums

@@ -1,5 +1,4 @@
 # Imported from https://github.com/gejzenbug/miband_font_exploration_tools/blob/7d46f21a0ba09736c9d003a7fb83d4fc29fd299c/miband3_font.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: miband3_font
   title: Mi Band 3 font file

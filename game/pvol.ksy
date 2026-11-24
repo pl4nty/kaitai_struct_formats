@@ -1,5 +1,4 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/games/pvol.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pvol
   title: Pikmin 1 & 2 model/archive container

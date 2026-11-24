@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/mct-usb-display-adapter-re/blob/6210cb4de18f8da0f8ada46a89ba1aac9736eee5/doc/mct_t6img.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mct_t6img
   file-extension: t6img

@@ -1,5 +1,4 @@
 # Imported from https://github.com/koenvervloesem/BTHome-Kaitai-Struct/blob/b1fe01f8206036e2e57ba1002d4d8eafb576f910/bthome_v2.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: bthome_service_data
   title: BTHome service data

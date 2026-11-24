@@ -1,5 +1,4 @@
 # Imported from https://github.com/nuxdie/revenant-map-builder/blob/71d65397afccffe181085bbbdb87e59da6ed0261/_KAITAI/revenant-maps-dat-file-format.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: revenant_map_sector
   file-extension: dat

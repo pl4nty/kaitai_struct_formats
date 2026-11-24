@@ -1,5 +1,4 @@
 # Imported from https://github.com/OpenDiablo2/dc6/blob/aaf0d5ae63c7fab6367fff2eb8418c11116826d6/pkg/dc6.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: diablo2_dc6
   title: Diablo CEL 6

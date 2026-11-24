@@ -1,5 +1,4 @@
 # Imported from https://github.com/OK-DMR/dmr-kaitai/blob/7489ff1a8b418e3d37e2a0268acbaf2710543d93/okdmr/kaitai/homebrew/homebrew2015.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: homebrew2015
   title: Homebrew DMR protocol (2015)

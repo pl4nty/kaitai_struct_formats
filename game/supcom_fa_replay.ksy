@@ -1,5 +1,4 @@
 # Imported from https://github.com/FAForever/faf-scfa-replay-parser/blob/9d0cb7cb4bb0cf6d8be44e5c1ea4bc357aa9a0c5/replay.ksy
-# Licence and copyright: see _community/README.md
 # kaitai struct was taken from Crotalus repo https://gist.github.com/Crotalus/c003ddb0e3802b30a5740e81e0f8ae65
 meta:
   id: supcom_fa_replay

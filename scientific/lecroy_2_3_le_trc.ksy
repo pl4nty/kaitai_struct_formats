@@ -1,5 +1,4 @@
 # Imported from https://github.com/scottprahl/RigolWFM/blob/9e6f993103f773f81df409fc65c2cc359d7bd249/ksy/lecroy_2_3_le_trc.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: lecroy_2_3_le_trc
   title: LeCroy 2.3 TRC File Format (Little-Endian)

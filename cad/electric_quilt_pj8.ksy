@@ -1,5 +1,4 @@
 # Imported from https://github.com/matthewturk/data-formats/blob/9b7fdbc06e5c7d876a1bea340f7c1d7eeb1ec531/quilts/pj8.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: electric_quilt_pj8
   file-extension: pj8

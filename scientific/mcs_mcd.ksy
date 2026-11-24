@@ -1,5 +1,4 @@
 # Imported from https://github.com/gollischlab/ConvertDatMEA/blob/ecbbafa7a91f17d8776b96ef3b57a5db0f4d1fd9/ConvertDatMEA/Mcd/mcdread.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mcs_mcd
   file-extension: mcd

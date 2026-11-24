@@ -1,5 +1,4 @@
 # Imported from https://github.com/nnguyen259/SenSchema/blob/25e06d9b529904dcc1b3ca3e8e320a42ac88ff89/schemas/cs3/tbl/status_revise.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: status_revise
   title: Trails of Cold Steel III status revision entry

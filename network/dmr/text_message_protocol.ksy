@@ -1,5 +1,4 @@
 # Imported from https://github.com/OK-DMR/dmr-kaitai/blob/7489ff1a8b418e3d37e2a0268acbaf2710543d93/okdmr/kaitai/hytera/text_message_protocol.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: text_message_protocol
   title: Hytera DMR text message protocol

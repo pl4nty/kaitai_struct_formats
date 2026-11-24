@@ -1,5 +1,4 @@
 # Imported from https://github.com/banyaszvonat/psyq_kaitai/blob/26f125f10bc71c00ce9fca3d16a1ae895db9c5e5/psyq_lib.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: psyq_lib
   file-extension: lib

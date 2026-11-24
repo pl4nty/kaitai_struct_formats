@@ -1,5 +1,4 @@
 # Imported from https://github.com/cff29546/pzdataspec/blob/3d39699f74bb13c9269d2f625e7883648a95da5e/data_spec/spec/251/entity/15_mashing_logic.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mashing_logic
   title: 'Project Zomboid save: mashing logic entity component'

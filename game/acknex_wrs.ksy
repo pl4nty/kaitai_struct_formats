@@ -1,5 +1,4 @@
 # Imported from https://github.com/wolfmanfp/kaitai-formats/blob/bebb2549d4bde68f611effd6bdb427044735fd0b/acknex_wrs.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: acknex_wrs
   title: 3D GameStudio/ACKNEX archive (v2-v5)

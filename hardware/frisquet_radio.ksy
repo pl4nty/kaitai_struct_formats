@@ -1,5 +1,4 @@
 # Imported from https://github.com/mgrenonville/sx1211-arduino/blob/a963ac9562a8b77bb71447db20958e9c54e84091/frisquet.ksy
-# Licence and copyright: see _community/README.md
 
 
 meta:

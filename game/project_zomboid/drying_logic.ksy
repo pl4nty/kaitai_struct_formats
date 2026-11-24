@@ -1,5 +1,4 @@
 # Imported from https://github.com/cff29546/pzdataspec/blob/3d39699f74bb13c9269d2f625e7883648a95da5e/data_spec/spec/251/entity/16_drying_logic.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: drying_logic
   title: 'Project Zomboid save: drying logic entity component'

@@ -1,5 +1,4 @@
 # Imported from https://github.com/victorysingh/dvr-forensics-toolkit/blob/896096631eb43823f2e924b747866c3d4dcaa612/formats/dahua_dhfs41.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dahua_dhfs41
   title: Dahua DHFS 4.1 DVR filesystem (as observed on a CP Plus unit's drive)

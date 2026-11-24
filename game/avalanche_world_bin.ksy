@@ -1,5 +1,4 @@
 # Imported from https://github.com/kk49/deca/blob/a5b171c0866d46204d3ea9e1135f1532b4f01895/support/kaitai_struct/world_bin.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: avalanche_world_bin
   file-extension: bin

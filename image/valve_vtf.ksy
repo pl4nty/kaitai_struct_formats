@@ -1,5 +1,4 @@
 # Imported from https://pypi.org/project/no-vtf/
-# Licence and copyright: see _community/README.md
 # SPDX-FileCopyrightText: b5327157 <b5327157@protonmail.com>
 #
 # SPDX-License-Identifier: CC0-1.0

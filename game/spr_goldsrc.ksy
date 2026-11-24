@@ -1,5 +1,4 @@
 # Imported from https://github.com/cs16forge/goldsrc-formats/blob/cafc9d8a8785b82aa3a7b85c6ed06ce0780cd780/schemas/spr_goldsrc.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: spr_goldsrc
   title: GoldSrc sprite (IDSP version 2) - Half-Life, Counter-Strike 1.6

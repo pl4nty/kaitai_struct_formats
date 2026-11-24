@@ -1,5 +1,4 @@
 # Imported from https://github.com/heinermann/d2_apclient/blob/3027ab36d11cf5aaf68d973c096f4ef20a758b5c/src/struct/diablo_2_d2s.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: diablo_2_d2s
   title: "Diablo II character save files"

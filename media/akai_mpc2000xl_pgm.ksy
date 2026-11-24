@@ -1,5 +1,4 @@
 # Imported from https://github.com/p3r7/mpc-tools/blob/2cbabd34c17b5bfe9e1ff2b04176806821ea3899/kaitai/mpc_2000_xl.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: akai_mpc2000xl_pgm
   title: Akai MPC2000XL program

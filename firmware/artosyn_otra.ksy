@@ -1,5 +1,4 @@
 # Imported from https://github.com/fpv-wtf/ar-firmware-tools/blob/74a9c3573388660c2600c0d2ecc4045ce0698278/otra.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: artosyn_otra
   file-extension: img

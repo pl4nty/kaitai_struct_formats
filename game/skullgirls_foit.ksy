@@ -1,5 +1,4 @@
 # Imported from https://github.com/bodriodroid/ZGIRLSLOADER/blob/2035368a217a6d66e9b6eb5a637cd75f6fe94f7e/docs/foit.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: skullgirls_foit
   title: Skullgirls character file (.foit, format version 9)

@@ -1,5 +1,4 @@
 # Imported from https://github.com/sem-geologist/peaksight-binary-parser/blob/6d16a273d317a783f98ea38ab709a770b7fc1ced/cameca.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: cameca
   title: Cameca Peaksight binary data parser

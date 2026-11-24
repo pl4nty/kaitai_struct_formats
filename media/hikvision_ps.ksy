@@ -1,5 +1,4 @@
 # Imported from https://github.com/victorysingh/dvr-forensics-toolkit/blob/896096631eb43823f2e924b747866c3d4dcaa612/formats/hikvision_ps.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hikvision_ps
   title: Hikvision recording as MPEG-2 Program Stream, with "HK" stream-map descriptors

@@ -1,5 +1,4 @@
 # Imported from https://github.com/entriphy/structs/blob/da74778fce553d6e6a7bffa5101c43b5957139f2/klonoa_bv/vmdg.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: vmdg
   file-extension: vmdg

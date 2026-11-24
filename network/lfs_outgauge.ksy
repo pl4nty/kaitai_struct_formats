@@ -1,5 +1,4 @@
 # Imported from https://github.com/Worty/outgaugelistener/blob/b6fa4b6a843a19ef4c031ae246f6f4fbb08bda97/protocol.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: lfs_outgauge
   title: Live for Speed OutGauge packet

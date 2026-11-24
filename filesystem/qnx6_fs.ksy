@@ -1,5 +1,4 @@
 # Imported from https://github.com/NetherlandsForensicInstitute/qnxmount/blob/11c8a7f9ee9b945d584263743f6ea8524e8776d2/qnxmount/qnx6/parser.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: qnx6_fs
   title: qnx6_parser

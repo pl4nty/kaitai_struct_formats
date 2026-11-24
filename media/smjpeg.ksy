@@ -1,5 +1,4 @@
 # Imported from https://github.com/kenrinzero/palimpsest/blob/6d3d9a577e19ebd344da420ecda1aad594a5bc5c/formats/smjpeg.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: smjpeg
   title: Loki SDL Motion JPEG header and packet stream

@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/trendnet-teg-30284-re/blob/ceb0d271ac382d31d14b655e30781de586a66af4/trendnet_teg30284_fw.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: trendnet_teg30284_fw
   title: TRENDnet TEG-30284 firmware update file

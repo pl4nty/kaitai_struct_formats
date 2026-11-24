@@ -1,5 +1,4 @@
 # Imported from https://github.com/paladin-projects/ahsbb/blob/7e4b6d42fcadfa627ab090dd4b1e2e317816888d/ahs.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hpe_ahs
   title: HPE Active Health System (AHS) Log

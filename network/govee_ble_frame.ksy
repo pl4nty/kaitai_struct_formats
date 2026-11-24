@@ -1,5 +1,4 @@
 # Imported from https://github.com/ternarybits/govee-ble-local/blob/374a3a30bb0216e6cbeca0bcaebe57e00ebc2b54/spec/govee_ble.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: govee_ble_frame
   title: Govee BLE 20-byte application frame (vendor GATT protocol)

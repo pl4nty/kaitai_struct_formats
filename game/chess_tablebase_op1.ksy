@@ -1,5 +1,4 @@
 # Imported from https://github.com/cakiki/chess-file-formats/blob/744232d1ffcb6709661d5942082716e57b1dbdf5/tablebases/op1/op1.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: chess_tablebase_op1
   file-extension: mb

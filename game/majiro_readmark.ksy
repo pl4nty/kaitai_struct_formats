@@ -1,5 +1,4 @@
 # Imported from https://github.com/AtomCrafty/MajiroTools/blob/e0261df508b6c8065865bb51b4059263cef84394/doc/majiro_readmark.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: majiro_readmark
   file-extension: mss

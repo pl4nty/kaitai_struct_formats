@@ -1,5 +1,4 @@
 # Imported from https://github.com/DarkMatterCore/dom_xml_dataset_generators/blob/d0906731f589822948942eda8f508d09d162a5ab/structs/cnmt.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: nintendo_switch_cnmt
   file-extension: cnmt

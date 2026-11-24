@@ -1,5 +1,4 @@
 # Imported from https://github.com/broideryfab/embroidery-ksy/blob/424184f8b4222794314ba3149aef31afea9c6e13/formats/husqvarna_hus/husqvarna_hus.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: husqvarna_hus
   title: Husqvarna Viking HUS embroidery format

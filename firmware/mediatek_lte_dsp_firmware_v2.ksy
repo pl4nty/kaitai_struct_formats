@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/mediatek-lte-baseband-re/blob/8c01efae5a9784ec8c84b4a4087678860de98e20/DSP/mediatek_lte_dsp_firmware_v2.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mediatek_lte_dsp_firmware_v2
   title: MediaTek LTE modem DSP firmware (new version)

@@ -1,5 +1,4 @@
 # Imported from https://github.com/SpecterOps/Nemesis/blob/999c3cbb4adde61f588e04118c8576800c5a91af/libs/nemesis_dpapi/kaitai/domain_backup_key.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: microsoft_pvk
   title: Private Key (PVK) File Format

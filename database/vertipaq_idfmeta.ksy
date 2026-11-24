@@ -1,5 +1,4 @@
 # Imported from https://github.com/Hugoberry/pbixray/blob/c5da940b45d2806c8f8d3e109f0d1909117a7db0/docs/idfmeta.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: vertipaq_idfmeta
   title: IDF Column Partition Metadata - XM Serialization Format

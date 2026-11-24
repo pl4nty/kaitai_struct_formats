@@ -1,5 +1,4 @@
 # Imported from https://github.com/spotlightishere/silverutil/blob/3a34c6a7e42555df8ae69fc42d168b5e888ae80b/docs/silverdb.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: silverdb
   file-extension: bin

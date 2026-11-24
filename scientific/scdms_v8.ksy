@@ -1,5 +1,4 @@
 # Imported from https://github.com/det-lab/dataReaderWriter/blob/36da1b77b61061a08ae8987e832f063e6b2abc72/kaitai-examples/ksy/scdms_v8.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: scdms_v8
   title: SuperCDMS MIDAS data (v8)

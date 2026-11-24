@@ -1,5 +1,4 @@
 # Imported from https://github.com/Scrivener07/Kingdom-Come/blob/8c3ad11b5fa2015e37e4de346bdcda4641206fcb/Source/KCD.Kaitai/Table.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: kcd_table
   title: Table Data

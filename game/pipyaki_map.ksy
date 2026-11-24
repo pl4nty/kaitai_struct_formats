@@ -1,5 +1,4 @@
 # Imported from https://github.com/maksym-pasichnyk/Pipyaki/blob/98041022f62744254664434eada1f5cdb490ccf1/map_full.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pipyaki_map
   file-extension: map

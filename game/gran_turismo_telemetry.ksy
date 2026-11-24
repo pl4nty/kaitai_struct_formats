@@ -1,5 +1,4 @@
 # Imported from https://github.com/zetetos/gt-telemetry/blob/96007fc0a1f25ab4bcefe7007e4dca81166667a1/internal/kaitai/gran_turismo_telemetry.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: gran_turismo_telemetry
   title: Gran Turismo Telemetry

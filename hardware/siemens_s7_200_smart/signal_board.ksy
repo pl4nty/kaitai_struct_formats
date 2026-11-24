@@ -1,5 +1,4 @@
 # Imported from https://github.com/wpyoga/s7-200-smart-project-file/blob/6803dc0fd0240472457eae4245fd69e37b6a549f/kaitai/signal_board.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: signal_board
   title: 'S7-200 SMART project: signal board'

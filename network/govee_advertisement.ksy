@@ -1,5 +1,4 @@
 # Imported from https://github.com/ternarybits/govee-ble-local/blob/374a3a30bb0216e6cbeca0bcaebe57e00ebc2b54/spec/govee_adv.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: govee_advertisement
   title: Govee BLE advertisement (manufacturer-specific data) — passive identity & state

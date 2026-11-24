@@ -1,5 +1,4 @@
 # Imported from https://github.com/Woodie-07/meshcore-kaitai/blob/5349249c65237e7e3722a94c0449832aae9de507/meshcore.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: meshcore
   title: MeshCore packet

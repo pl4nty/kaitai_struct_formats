@@ -1,5 +1,4 @@
 # Imported from https://github.com/YakBarber/remarkable_file_format/blob/d28f4d6cd201e0ccd2405252e4ce3a356dd72351/rmv6.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: remarkable_rm_v6
   application: xochitl

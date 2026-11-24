@@ -1,5 +1,4 @@
 # Imported from https://github.com/adespoton/kaitai-applebackup/blob/37c7fa8503f1e6b8ac87d9d5e7068e836fa04daf/applebackup.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: apple_backup
   title: Apple Backup segmented data file format

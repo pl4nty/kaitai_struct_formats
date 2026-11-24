@@ -1,5 +1,4 @@
 # Imported from https://github.com/smash64-dev/krec-struct-format/blob/97cdf7e05d89e724cb76ad95d4f5edfd0046195f/krec_pj64k.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: krec_pj64k
   title: Open Kaillera Recording from Project64K

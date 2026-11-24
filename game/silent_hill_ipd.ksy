@@ -1,5 +1,4 @@
 # Imported from https://github.com/SlickAmogus/silent-hill-decomp/blob/9e598dc3a7dc8dd237cae43d1611cd780af6f728/tools/kaitai_scripts/ipd.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: silent_hill_ipd
   title: Silent Hill 1 Map Model Format

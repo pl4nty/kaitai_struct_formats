@@ -1,5 +1,4 @@
 # Imported from https://github.com/Akron/stree-go/blob/28e85d9f517b85592bfc7c0c7c84947fe8f929aa/stree.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: stree_index
   title: S-Tree Static B-Tree Index

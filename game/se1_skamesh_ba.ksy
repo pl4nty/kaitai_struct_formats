@@ -1,5 +1,4 @@
 # Imported from https://github.com/zcaliptium/Serious-Engine-Formats/blob/2d50fe511b450169df49bb590b76d235a966ee2b/SE1_BA.ksy
-# Licence and copyright: see _community/README.md
 # Copyright ZCaliptium 2021-2022
 meta:
   id: se1_skamesh_ba

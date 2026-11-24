@@ -1,5 +1,4 @@
 # Imported from https://github.com/CrazyCoder/crengine-ng/blob/3068d979281d6b72372d3e159cf70ba4acea0a8f/crengine/docs/xtg.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: xtg
   title: XTG Monochrome Image Format

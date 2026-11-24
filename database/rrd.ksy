@@ -1,5 +1,4 @@
 # Imported from https://github.com/frazew/rrdmerge/blob/dfb2c0ed1125ef5bd74800c948ab344efa351a4f/rrd.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: rrd
   title: RRD (Round-Robin Database) file

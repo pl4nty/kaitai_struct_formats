@@ -1,5 +1,4 @@
 # Imported from https://github.com/SK83RJOSH/SlyTools/blob/890f9458dc3a8fef702ecc7408922c25439c4218/Research/Kaitai/sly4_san.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: sly4_san
   title: "Sanzaru File"

@@ -1,5 +1,4 @@
 # Imported from https://github.com/Equidamoid/dltpy/blob/0da7abc629e4fd6eb80f7161108472d656a4711c/dltpy/gen/stored_message.ksy
-# Licence and copyright: see _community/README.md
 # This file is part of pydlt
 # Copyright 2019  Vladimir Shapranov
 #

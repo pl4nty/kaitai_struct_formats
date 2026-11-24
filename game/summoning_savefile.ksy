@@ -1,5 +1,4 @@
 # Imported from https://github.com/matthewturk/dispersing/blob/7ae6e02d575b01a92955b152376794e9ef13e0f5/dispersing/ksy_files/summoning_savefile.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: summoning_savefile
   file-extension: "SAV"

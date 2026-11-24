@@ -1,5 +1,4 @@
 # Imported from https://github.com/spillerrec/skytrails-replacer/blob/8c4b64804a1ae01084188cd860e589b62a66e515/specifications/dir.ksy
-# Licence and copyright: see _community/README.md
 # Some of the info here is taken from uyjulian findings 
 meta:
   id: skytrails_dir

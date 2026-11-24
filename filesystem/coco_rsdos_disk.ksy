@@ -1,5 +1,4 @@
 # Imported from https://gist.github.com/tlindner/3758abd80693925a04bf47c3ff418bd5
-# Licence and copyright: see _community/README.md
 meta:
   id: coco_rsdos_disk
   title: RS-DOS filesystem wrapped in a basic array of sectors disk image

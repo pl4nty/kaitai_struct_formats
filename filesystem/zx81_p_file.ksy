@@ -1,5 +1,4 @@
 # Imported from https://github.com/tomwhite/zx81-p-file-kaitai/blob/99d3937a8fa4cffcfc2d624017397d8cce9a509a/zx81_p_file.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: zx81_p_file
   title: ZX81 P file

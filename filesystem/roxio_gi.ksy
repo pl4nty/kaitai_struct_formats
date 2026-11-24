@@ -1,5 +1,4 @@
 # Imported from https://github.com/lpreiner/roxio-global-image-format/blob/124f75c0b11d059f77dd23629147f589e0aa6019/roxio_gi.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: roxio_gi
   title: Roxio / Prassi Global Image (.gi) container

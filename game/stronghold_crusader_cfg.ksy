@@ -1,5 +1,4 @@
 # Imported from https://github.com/sourcehold/sourcehold-maps/blob/4f54a802b622180aab99e2767d8f27b723429def/structure/kaitai/crusader.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: stronghold_crusader_cfg
   file-extension: cfg

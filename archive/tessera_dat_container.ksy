@@ -1,5 +1,4 @@
 # Imported from https://github.com/solarbaron/lotro-reimplementation/blob/a6c58382bb431c3937f4ed65ef3017240cc377db/tools/kaitai/tessera_dat_container.ksy
-# Licence and copyright: see _community/README.md
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Kaitai Struct description of the .dat/.datx archive container: file header, directory

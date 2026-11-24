@@ -1,5 +1,4 @@
 # Imported from https://github.com/suncet/suncet_processing_pipeline/blob/fbb0d874493990dffa626cb855eedff60d7d92c7/suncet_processing_pipeline/satnogs/upstream/ksy/suncet.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: suncet
   title: SunCET public APID 1 beacon (CTDB 2.0.5)

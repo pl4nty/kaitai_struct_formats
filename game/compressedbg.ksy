@@ -1,5 +1,4 @@
 # Imported from https://github.com/Forlos/vn_re/blob/cce0798ad2771034cee74d1ea92d70efd2a4d27d/ksy/compressedbg.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: compressedbg
   title: compressedbg image file

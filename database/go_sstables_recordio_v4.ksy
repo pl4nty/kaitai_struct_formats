@@ -1,5 +1,4 @@
 # Imported from https://github.com/thomasjungblut/go-sstables/blob/70b38f7bc9b929af88ef2f038f1e00c5928158b5/kaitai/recordio_v4.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: go_sstables_recordio_v4
   title: go-sstables RecordIO v4 file

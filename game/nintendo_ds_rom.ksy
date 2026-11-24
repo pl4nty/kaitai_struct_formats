@@ -1,5 +1,4 @@
 # Imported from https://github.com/CodeDragon82/nds-ware/blob/0e9e5a19e6fac3ce7444b4c0c460730c2ff61130/definitions/nds.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: nintendo_ds_rom
   file-extension: nds

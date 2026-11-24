@@ -1,5 +1,4 @@
 # Imported from https://github.com/tbu-/libloc-rs/blob/213a347e2f79112182f0863bf909a0f878756b4c/ipfire_libloc_db_v1.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ipfire_libloc_db_v1
   file-extension: db

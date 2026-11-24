@@ -1,5 +1,4 @@
 # Imported from https://github.com/teh-hippo/ha-govee-led-ble/blob/f5242abb27b28aa95e1c71aaeaab7f3e1e06eda7/tools/ble/kaitai/h6199_status_query.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: govee_h6199_status_query
   title: Govee H6199 "aa" status-query envelope (decode-only)

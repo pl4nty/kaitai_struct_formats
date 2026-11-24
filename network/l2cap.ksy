@@ -1,5 +1,4 @@
 # Imported from https://github.com/pknessness/ESPmote/blob/498e933b4967f8990131354889c42e7e89b6ef08/kaitai/l2cap.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: l2cap
   file-extension: l2cap

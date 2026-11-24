@@ -1,5 +1,4 @@
 # Imported from https://github.com/L1nkZ/raglib/blob/bfd5a931017371311a95194d336d35f564308950/kaitai/spr.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ragnarok_spr
   title: Ragnarok Sprite Resource

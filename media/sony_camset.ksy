@@ -1,5 +1,4 @@
 # Imported from https://github.com/camset-dev/camset/blob/65fac0071c4a1dc1ab7b0d0d524b130307c03d45/docs/formats/sony_camset.ksy
-# Licence and copyright: see _community/README.md
 # The container block the ILCE-1M2 writes, for people and for Kaitai's tools and ImHex: the "file" block of its camera
 # file (data/ILCE-1M2_fw4.00/camera_ILCE-1M2_fw4.00.json, its definition's camera.file). One such spec per container
 # block: a body whose block differs gets a spec of its own beside this one when it appears. Written by hand. The

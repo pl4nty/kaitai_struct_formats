@@ -1,5 +1,4 @@
 # Imported from https://github.com/cphyc/astrophysics_toolset/blob/5f7e7922124821c011a0407be65a33889be40371/astrophysics_toolset/io/_disperse.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: disperse_ndskl
   file-extension: NDskl

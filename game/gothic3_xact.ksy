@@ -1,5 +1,4 @@
 # Imported from https://github.com/georgeto/g3blend/blob/e4f64a496d774263efcd299206489434ab5762d9/doc/xact.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: gothic3_xact
   title: Gothic 3 animation actor

@@ -1,5 +1,4 @@
 # Imported from https://github.com/mwwhited-notes/shared/blob/e456314f819f7f89fd1116f863b40c46e07f8ca0/projects/eeg-formats-learning/ksy/bdf.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: biosemi_bdf
   title: BioSemi Data Format (BDF / BDF+)

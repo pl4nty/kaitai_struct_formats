@@ -1,5 +1,4 @@
 # Imported from https://github.com/mrwonko/flatout-open-level-editor/blob/f2705248a28f63f667d89237f320dc132b96bb08/track_cdb2.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: flatout_track_cdb2
   file-extension: track_cdb2.gen

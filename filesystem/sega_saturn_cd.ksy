@@ -1,5 +1,4 @@
 # Imported from https://github.com/RetroReversing/libRetroReversing/blob/b68d811e69f9b1edb0df0379ee627d78a95e0a6b/cd/saturn.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: sega_saturn_cd
   title: Sega Saturn CD filesystem

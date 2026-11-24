@@ -1,5 +1,4 @@
 # Imported from https://github.com/DeveloperJose/Mega-Man-X8-Asset-Manager/blob/3bbd6e1dc270396ffa4b21ba5c11f76e8f33e4ce/kaitai/set.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mega_man_x8_set
   file-extension: set

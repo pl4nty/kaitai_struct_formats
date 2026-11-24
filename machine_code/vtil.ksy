@@ -1,5 +1,4 @@
 # Imported from https://github.com/vtil-project/VTIL-Kaitai/blob/50d6cdc16c63698a6044b5f1a7ce66395c4560ec/src/vtil.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: vtil
   file-extension: vtil

@@ -1,5 +1,4 @@
 # Imported from https://github.com/RonnyReverse/cc-tools/blob/e34efcd858ec4475fa03d3f8668fa4e26f9e780e/ksy/mm_chunk_container.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mm_chunk_container
   file-extension:

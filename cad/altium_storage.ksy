@@ -1,5 +1,4 @@
 # Imported from https://github.com/KiCad/kicad-source-mirror/blob/c508d01f46c7f04fd475d40c6fac93d10fae49b2/eeschema/sch_io/altium/altium_storage_parser.ksy
-# Licence and copyright: see _community/README.md
 # Can be viewed in: https://ide.kaitai.io/
 #
 # This file is a formal specification of the binary format used in Altium SchDoc for the Storage file.

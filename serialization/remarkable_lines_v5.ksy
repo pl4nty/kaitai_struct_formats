@@ -1,5 +1,4 @@
 # Imported from https://github.com/matomatical/reMarkable-kaitai/blob/730ba62be37a40ad290b568844150687e9c6c094/rm_v5.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: remarkable_lines_v5
   title: reMarkable .lines file, version=5

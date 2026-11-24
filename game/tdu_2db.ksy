@@ -1,5 +1,4 @@
 # Imported from https://github.com/djey47/tduf-next/blob/707ff9f7742067e989cb231e66e6524c6475fbbe/doc/RE/2db/2db.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: tdu_2db
   file-extension: 2db

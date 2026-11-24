@@ -1,5 +1,4 @@
 # Imported from https://github.com/pknessness/ESPmote/blob/498e933b4967f8990131354889c42e7e89b6ef08/kaitai/sdp_packet.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: bluetooth_sdp
   file-extension: sdp

@@ -1,5 +1,4 @@
 # Imported from https://github.com/dalvarezperez/umse/blob/ed50248b15828991aed14a9be25daf2e8fad4efb/UMSE format specification/umse.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: umse
   file-extension: umse

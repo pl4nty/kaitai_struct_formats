@@ -1,5 +1,4 @@
 # Imported from https://github.com/Picoseconds/GlacierFormats/blob/5de39927e70d03edd0df0a7954d5c9c3227d87a2/hitman3_rpkg2.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hitman3_rpkg2
   title: HITMAN III RPKG v2 data file

@@ -1,5 +1,4 @@
 # Imported from https://github.com/Zamiell/isaac-save-viewer/blob/57d96c3f6a27aa2d95b4af30b4e80b8bec4b7d2d/static/lib/IsaacSaveFile.ksy
-# Licence and copyright: see _community/README.md
 # Kaitai Struct
 # https://kaitai.io/
 

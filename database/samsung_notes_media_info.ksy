@@ -1,5 +1,4 @@
 # Imported from https://github.com/Downhillghost/Dietrich/blob/bb9c9202a8ab2bf96347e6cd0b16eaa354b80483/schema/samsung_notes/samsung_media_info.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: samsung_notes_media_info
   title: Samsung Notes media info

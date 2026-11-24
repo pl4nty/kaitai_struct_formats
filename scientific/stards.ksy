@@ -1,5 +1,4 @@
 # Imported from https://github.com/DOI-USGS/StarDS/blob/8c5ee62a63d62725669d613385b0e433ca076a43/docs-site/docs/reference/stards.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: stards
   title: StarDS (Simple Tensors Arrays and Rasters) container, on-disk format v1

@@ -1,5 +1,4 @@
 # Imported from https://github.com/AltoRetrato/samba-de-amigo-2k_modding/blob/d3fd7c4a78a28a3e1551a73bfd08e3d1e9d2666c/amigo_explorer/samba_de_amigo_ver_2000_Dreamcast.ksy
-# Licence and copyright: see _community/README.md
 meta:
   # Unknown sections / elements are marked with a [?] question mark.
   id: samba_de_amigo_amg_dc

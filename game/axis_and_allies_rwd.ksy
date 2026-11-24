@@ -1,5 +1,4 @@
 # Imported from https://github.com/rowanseymour/aaa/blob/659d585c5acf12b6795823f960352dca2ac46972/docs/formats/rwd.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: axis_and_allies_rwd
   title: Axis & Allies (2004) file archive

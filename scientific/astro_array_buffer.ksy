@@ -1,5 +1,4 @@
 # Imported from https://github.com/data-exp-lab/astro-data-formats/blob/f3caaa3e68115ee3ad5cf708fe79d163ef6ae0a2/array_buffer.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: astro_array_buffer
   title: Typed numeric array buffer

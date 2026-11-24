@@ -1,5 +1,4 @@
 # Imported from https://github.com/stellargames/bakagain/blob/513a79864ff79fe27f917e721e8cbec714e68af3/formats/dial_z__ddx.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: bak_dialog_ddx
   file-extension: ddx

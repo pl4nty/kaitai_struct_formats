@@ -1,5 +1,4 @@
 # Imported from https://github.com/OpenVolumeMesh/OpenVolumeMesh/blob/1ab7cf290bc38ea303e8d0403683e8cc940f67bc/extra/ovmb-kaitai/ovmb.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ovmb
   title: OVMB (OpenVolumeMesh binary file format)

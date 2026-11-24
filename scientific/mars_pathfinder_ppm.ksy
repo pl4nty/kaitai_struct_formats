@@ -1,5 +1,4 @@
 # Imported from https://github.com/jumpjack/mars-pathfinder-meshes/blob/402f97d20ba3081551131a044c73464401ec2118/PPM.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mars_pathfinder_ppm
   file-extension: ppm

@@ -1,5 +1,4 @@
 # Imported from https://github.com/Kokoroou/rpgmaker-assets-viewer/blob/fde26ab45e1440711f26bb9f8b5754e98a8645e4/docs/formats/rpgmvp.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: rpgmaker_mv_encrypted_asset
   title: RPG Maker MV/MZ encrypted asset (.rpgmvp, .png_, .rpgmvo, .ogg_, .rpgmvm, .m4a_)

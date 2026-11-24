@@ -1,5 +1,4 @@
 # Imported from https://github.com/burnsba/getools/blob/6450b11ff244323536189e49522f77a6d7c9f128/Getools/Getools.Lib/Kaitai/Schema/stan.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: goldeneye_stan
   file-extension: bin

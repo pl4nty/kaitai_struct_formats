@@ -1,5 +1,4 @@
 # Imported from https://github.com/NeoZX/fb_formats/blob/11c1f367a53e1787fe6d965fe312fe552e1d6d20/kaitai/replication_log_v1.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: firebird_replication_log_v1
   title: Firebird replication log version 1, protocol 1 and 2

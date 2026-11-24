@@ -1,5 +1,4 @@
 # Imported from https://github.com/plenarius/nwn-mdl-spec/blob/291e2bd85d1796ce1594ec0bf50dd1636d6cf276/ksy/nwn_mdl.ksy
-# Licence and copyright: see _community/README.md
 # SPDX-License-Identifier: CC0-1.0
 # Neverwinter Nights: Enhanced Edition binary model (MDL), as written by the
 # game's own compiler (nwmain-linux compilemodel, build 89.8193.37-17).

@@ -1,5 +1,4 @@
 # Imported from https://github.com/scottprahl/RigolWFM/blob/9e6f993103f773f81df409fc65c2cc359d7bd249/ksy/rigol_4000_wfm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: rigol_4000_wfm
   title: Rigol 4000 WFM File Format

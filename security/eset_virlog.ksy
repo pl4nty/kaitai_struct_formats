@@ -1,5 +1,4 @@
 # Imported from https://github.com/NUKIB/maldump/blob/8cc4980a98a4890296fa472d22f600d866ecf5d5/maldump/parsers/kaitai/eset_virlog_parser.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: eset_virlog
   title: ESET Antivirus quarantine file parser (virlog.dat)

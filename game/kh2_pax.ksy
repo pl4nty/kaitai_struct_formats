@@ -1,5 +1,4 @@
 # Imported from https://github.com/krokettenkoal/khkh_xldM/blob/e545017f81fe0e928dc5b6e2ff0ce910205104a7/parsePAX_v2/pax.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: kh2_pax
   application: Kingdom Hearts II PAX binary

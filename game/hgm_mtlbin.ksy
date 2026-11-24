@@ -1,5 +1,4 @@
 # Imported from https://github.com/mxtsdev/hgm-viewer/blob/bbcd41c6d1416fcfe8e98dd3a75ffa6e90a9904c/Ksy/mtlbin.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hgm_mtlbin
   file-extension: mtlbin

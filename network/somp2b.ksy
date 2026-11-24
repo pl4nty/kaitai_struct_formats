@@ -1,5 +1,4 @@
 # Imported from https://github.com/Olgidos/SOMPviewer/blob/553bc25c9ec989fd67a4ed41f082ec046d95e378/resource/python/ksy_somp2b.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: somp2b
   title: SOMP2b telemetry frame

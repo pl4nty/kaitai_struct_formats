@@ -1,5 +1,4 @@
 # Imported from https://github.com/cardano-foundation/CIPs/blob/03387471681166e746518d58a33e25f2ccea3d29/CIP-0165/format/format.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: cardano_scls
   title: Container for the cardano ledger state

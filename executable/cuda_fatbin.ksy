@@ -1,5 +1,4 @@
 # Imported from https://github.com/jiegec/fatbinary/blob/7856d02eb17321787df2e342442245b5c725b9f3/fatbinary.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: cuda_fatbin
   file-extension: fatbin

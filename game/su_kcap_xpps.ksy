@@ -1,5 +1,4 @@
 # Imported from https://github.com/MaouAnimus/YoteiPort/blob/7994dfaa023691469ac0f6b03a96afe55896f47c/tools/kcap_xpps.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: su_kcap_xpps
   title: Sucker Punch Ghost of Yotei KCAP Package (.xpps)

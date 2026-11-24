@@ -1,5 +1,4 @@
 # Imported from https://github.com/akatatsu27/FalcomToolsCollection/blob/e847d8a3b69949a6d036099ac1cd165a5657272b/DT22/btset2_THIRD_with_header.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: falcom_btset2
   title: Trails in the Sky the 3rd battle set table 2

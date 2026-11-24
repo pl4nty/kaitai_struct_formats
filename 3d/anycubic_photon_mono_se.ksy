@@ -1,5 +1,4 @@
 # Imported from https://github.com/Glebka/png2photon/blob/ab3107f3b79923ba7fa27ccde7d8872307643c9b/doc/photon.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: anycubic_photon_mono_se
   file-extension: Photon Mono SE format

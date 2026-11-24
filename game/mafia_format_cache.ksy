@@ -1,5 +1,4 @@
 # Imported from https://github.com/jharuda/mafia-kaitai-struct/blob/d95ef5d3ef8031410ee3b03d6406f07deb679872/src_ks/mf_cache_bin.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mafia_format_cache
   file-extension: bin

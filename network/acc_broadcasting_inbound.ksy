@@ -1,5 +1,4 @@
 # Imported from https://github.com/prule/acc-messages/blob/9ead8402547121fa7a38b060f647b1ac7d170ae2/ksy/acc_broadcasting_inbound.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: acc_broadcasting_inbound
   title: Assetto Corsa Competizione Broadcasting UDP Protocol (Inbound)

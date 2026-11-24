@@ -1,5 +1,4 @@
 # Imported from https://github.com/gballa/audi_mmi_studio/blob/eb2fb0c3f28b8f65aeb76a4e2cbca784516c02e9/formats/hb_grammar.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hb_grammar
   title: Harman Becker Binary Grammar Resource

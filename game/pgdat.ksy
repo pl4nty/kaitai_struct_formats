@@ -1,5 +1,4 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/games/pgdat.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pgdat
   title: PlatinumGames DAT archive

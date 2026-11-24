@@ -1,5 +1,4 @@
 # Imported from https://github.com/vii1/DIV/blob/3692483012cbdf9c85b2f93f2ae6a35ac4dd193e/formats/fnt.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: div_fnt
   file-extension: fnt

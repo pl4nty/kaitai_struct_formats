@@ -1,5 +1,4 @@
 # Imported from https://github.com/leeleatherwood/TribesTerrainExporter/blob/d2e970ae8a2e6306d1de6bf6c0ba65ae036de23a/TribesToBlender/dts.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: tribes_dts
   file-extension: dts

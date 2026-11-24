@@ -1,5 +1,4 @@
 # Imported from https://github.com/tickelton/misc.re/blob/d21aeb97bfd28ab7fd0374e600a88900e497bdf5/omf51_parser/omf51.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: omf51
   file-extension: lib

@@ -1,5 +1,4 @@
 # Imported from https://github.com/MaouAnimus/YoteiPort/blob/7994dfaa023691469ac0f6b03a96afe55896f47c/tools/xtbs_sps.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: su_xtbs_sps
   title: Sucker Punch Ghost of Yotei XTBS Texture (.sps)

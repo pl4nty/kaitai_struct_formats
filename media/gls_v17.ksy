@@ -1,5 +1,4 @@
 # Imported from https://github.com/Paint-a-Farm/glsconvert/blob/4881d611f781c3287002fb75224c9f26130df0eb/Gls_v17.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: gls_v17
   file-extension: gls

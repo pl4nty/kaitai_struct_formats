@@ -1,5 +1,4 @@
 # Imported from https://github.com/usr-ein/TriMixxx/blob/ec167648c3a1af822e0ebad24a99c036b2829959/prolinks-compat/ksy/prolink_djl.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: prolink_discovery
   title: Pro DJ Link discovery and device numbering (UDP 50000)

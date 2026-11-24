@@ -1,5 +1,4 @@
 # Imported from https://github.com/MaouAnimus/YoteiPort/blob/7994dfaa023691469ac0f6b03a96afe55896f47c/tools/smbs_xmesh.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: su_smbs_xmesh
   title: Sucker Punch Ghost of Yotei SMBS 3D Mesh (.xmesh)

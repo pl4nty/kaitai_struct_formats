@@ -1,5 +1,4 @@
 # Imported from https://github.com/scottprahl/RigolWFM/blob/9e6f993103f773f81df409fc65c2cc359d7bd249/ksy/lecroy_1_0_be_trc.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: lecroy_1_0_be_trc
   title: LeCroy 1.0 TRC File Format (Big-Endian)

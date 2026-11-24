@@ -1,5 +1,4 @@
 # Imported from https://github.com/vulhunt-re/bias-uefitool/blob/e4c6d878165598ea12076a66c73d4de91b6ea886/common/ksy/insyde_fdm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: insyde_fdm
   title: Insyde Flash Device Map

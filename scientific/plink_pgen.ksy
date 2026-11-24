@@ -1,5 +1,4 @@
 # Imported from https://github.com/limix/pandas-plink/blob/865f5a52719602e55dae034444ec7a22fe01e653/pgen.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: plink_pgen
   file-extension: bed

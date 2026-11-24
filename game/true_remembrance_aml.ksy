@@ -1,5 +1,4 @@
 # Imported from https://github.com/infval/AMLUnpacker_TrueRemembrance/blob/0c06fd5887cb70a24b5878ea392d2654fac0ee23/AML_Arciver.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: true_remembrance_aml
   file-extension: arc

@@ -1,5 +1,4 @@
 # Imported from https://github.com/akatatsu27/FalcomToolsCollection/blob/e847d8a3b69949a6d036099ac1cd165a5657272b/DT22/T_COOK2.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: falcom_t_cook2
   title: Trails in the Sky recipe table (T_COOK2)

@@ -1,5 +1,4 @@
 # Imported from https://github.com/RonnyReverse/cc-tools/blob/e34efcd858ec4475fa03d3f8668fa4e26f9e780e/ksy/up_package.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: up_package
   file-extension: up

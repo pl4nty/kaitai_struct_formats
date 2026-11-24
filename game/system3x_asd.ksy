@@ -1,5 +1,4 @@
 # Imported from https://gist.github.com/kichikuou/e80b96fdc8184166c02c674ade907f4f
-# Licence and copyright: see _community/README.md
 meta:
   id: system3x_asd
   title: System 3.x save file

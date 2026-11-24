@@ -1,5 +1,4 @@
 # Imported from https://codeberg.org/stf_format/stf_schema
-# Licence and copyright: see _community/README.md
 meta:
   id: stf
   title: Squirrel Transfer Format

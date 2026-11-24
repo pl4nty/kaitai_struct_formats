@@ -1,5 +1,4 @@
 # Imported from https://github.com/luvlsco/rldev-rust/blob/f19b941523ed780534a367d141d1f5cc7c0d215c/src/rltoml/gan/gan_parser.ksy
-# Licence and copyright: see _community/README.md
 # RlToml: Kaitai Struct definition for RealLive GAN format
 # Copyright (C) 2026 luvlsco
 

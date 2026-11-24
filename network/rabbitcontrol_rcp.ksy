@@ -1,5 +1,4 @@
 # Imported from https://github.com/rabbitControl/RCP/blob/be8efcc4a04f7040dc33babae97dd399774af68e/kaitai/RCPTypes.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: rabbitcontrol_rcp
   file-extension: rcp

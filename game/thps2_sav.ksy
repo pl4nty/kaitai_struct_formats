@@ -1,5 +1,4 @@
 # Imported from https://github.com/DCxDemo/LegacyTHPS/blob/075ab69a9b2e7fcd042402cc2cccaf84ccb13e87/formats/thps2_sav.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: thps2_sav
   title: Tony Hawk's Pro Skater 2 (PC) save file

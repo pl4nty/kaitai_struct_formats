@@ -1,5 +1,4 @@
 # Imported from https://github.com/armijnhemel/binaryanalysis-ng/blob/d72f0d9c5c4e5484878f357d07690e68334365db/src/bang/parsers/firmware/linux_x86/linux_x86.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: linux_kernel_x86
   title: Linux x86 kernel image

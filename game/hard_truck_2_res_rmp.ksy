@@ -1,5 +1,4 @@
 # Imported from https://github.com/reRNR/RNRFileFormats/blob/f4890fda9f96644a75ee6d5dc70e17986bfc37c0/formats/ksy/hard_truck_2_res_rmp.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hard_truck_2_res_rmp
   application: Дальнобойщики 1 и 2 / Hard Truck Road To The Victory, Hard Truck 2 King of The Road

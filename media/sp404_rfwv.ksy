@@ -1,5 +1,4 @@
 # Imported from https://github.com/iare-digital/open404/blob/294d5cb8278d07295d01c645bca67fb7b158c3a5/specs/sp404_rfwv.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: sp404_rfwv
   title: Roland SP-404MKII Sample Header Format (RFWV)

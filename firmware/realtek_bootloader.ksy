@@ -1,5 +1,4 @@
 # Imported from https://github.com/armijnhemel/binaryanalysis-ng/blob/d72f0d9c5c4e5484878f357d07690e68334365db/src/bang/parsers/firmware/realtek_bootloader/realtek_bootloader.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: realtek_bootloader
   title: Realtek bootloader

@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/usb-to-pcie-re/blob/f6322d3d49d8396553016e396a661cbe774b4cdb/ASM2x6x/tools/asm236x_fw.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: asm236x_fw
   title: ASM236x firmware image

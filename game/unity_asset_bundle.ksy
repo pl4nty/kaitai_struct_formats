@@ -1,5 +1,4 @@
 # Imported from https://github.com/partypooperarchive/AssetRumpus/blob/dbbac9b92bce708db6f71a0e72ac7859a3f3d1f5/asset_bundle.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: unity_asset_bundle
   title: Unity AssetBundle according to format specification V17

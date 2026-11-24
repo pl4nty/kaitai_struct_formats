@@ -1,5 +1,4 @@
 # Imported from https://github.com/scottprahl/RigolWFM/blob/9e6f993103f773f81df409fc65c2cc359d7bd249/ksy/tektronix_wfm_001_be_wfm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: tektronix_wfm_001_be_wfm
   title: Tektronix WFM 001 File Format (Big-Endian)

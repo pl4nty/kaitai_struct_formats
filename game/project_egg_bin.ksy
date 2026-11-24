@@ -1,5 +1,4 @@
 # Imported from https://github.com/einstein95/project_egg/blob/83283833bfb5cf42a4e52ea6e5d7b7112147415a/project_egg_bin.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: project_egg_bin
   title: Project EGG .bin

@@ -1,5 +1,4 @@
 # Imported from https://github.com/Game3DEE/io_game3dee/blob/1702e4476816e9c08d26677cf1f0b2dd4cdd1ecd/kaitai/canopygames_mdl.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: canopygames_mdl
   title: Model format of older Canopy Games

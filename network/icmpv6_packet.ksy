@@ -1,5 +1,4 @@
 # Imported from https://github.com/sebastiancadena/byteql/blob/0ea7e05703f2e5287d47f002d3f294e04b7f888d/packages/formats/pcap/ksy/icmpv6.ksy
-# Licence and copyright: see _community/README.md
 # byteql-authored: no upstream Kaitai Struct ICMPv6 spec exists in
 # kaitai-io/kaitai_struct_formats as of the pinned commit (see PATCHES.md).
 # This file has no `network/` counterpart — it lives only under `ksy/`.

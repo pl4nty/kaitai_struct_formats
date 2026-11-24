@@ -1,5 +1,4 @@
 # Imported from https://github.com/keymanapp/keyman/blob/1e0a9dd113dd4ee52f09dc583060324a63eb4467/common/schemas/kvk/kvk.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: keyman_kvk
   title: Keyman Visual Keyboard

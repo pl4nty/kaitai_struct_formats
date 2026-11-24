@@ -1,5 +1,4 @@
 # Imported from https://github.com/swift-nav/libsbp/blob/6a70551df56974bb58b4d1a65da30cca973075e4/kaitai/ksy/system.ksy
-# Licence and copyright: see _community/README.md
 # Copyright (C) 2015-2023 Swift Navigation Inc.
 # Contact: https://support.swiftnav.com
 #

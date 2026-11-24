@@ -1,5 +1,4 @@
 # Imported from https://github.com/bcyrill/hp_clj_pro_4303_research/blob/41971938d94e04b1ec69788be88995406df28859/firmware-toolkit/ksy/hp_clj_pro_4301_lbi.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hp_lbi
   title: HP CLJ Pro 4301-4303 Loadable Boot Image (LBI)

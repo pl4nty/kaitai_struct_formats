@@ -1,5 +1,4 @@
 # Imported from https://github.com/benmca/lso-spec/blob/f431d76bce618816752d85f031dfc04833ba6335/lso.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: emagic_logic_lso
   title: Emagic Logic Platinum 5.x project file (.LSO)

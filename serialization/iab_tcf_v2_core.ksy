@@ -1,5 +1,4 @@
 # Imported from https://github.com/audienceproject/tcf-parser-java/blob/8deca2ce0deafe8fb2f4ec088c7e7cbc7b075fae/src/main/resources/tcf_core.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: iab_tcf_v2_core
   title: IAB TCF v2 core string

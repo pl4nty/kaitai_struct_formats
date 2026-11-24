@@ -1,5 +1,4 @@
 # Imported from https://github.com/kaitai-io/coreldraw_cdr.ksy/blob/9d8e2704b946961f5114115f1a488750a3c86ed0/coreldraw_cpl.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: coreldraw_cpl
   title: CorelDRAW legacy color palette

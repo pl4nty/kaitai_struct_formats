@@ -1,5 +1,4 @@
 # Imported from https://github.com/WolvenKit/wwise-audio-tools/blob/ec4d73fbbc46ee86459aa3b317d0eb78201f6ed1/ksy/wem.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: wwise_wem
   file-extension: wem

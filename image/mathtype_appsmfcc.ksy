@@ -1,5 +1,4 @@
 # Imported from https://github.com/danilov-pd/mathtype_wmf_appsmfcc_extractor/blob/4e67a1c22d9a00026dc2c4350de32bc9adb3b799/python_version/appsmfcc.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mathtype_appsmfcc
   title: AppsMFCC comment found in MathType WMF documents

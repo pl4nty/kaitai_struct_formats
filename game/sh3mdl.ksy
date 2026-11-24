@@ -1,5 +1,4 @@
 # Imported from https://github.com/dreamingmoths/silent-hill-museum/blob/1c5d033110a77694e7287cf0096ce1f893f8c542/ksy/sh3mdl.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: sh3mdl
   title: Silent Hill PS2 model format

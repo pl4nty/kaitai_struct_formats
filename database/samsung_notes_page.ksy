@@ -1,5 +1,4 @@
 # Imported from https://github.com/Downhillghost/Dietrich/blob/bb9c9202a8ab2bf96347e6cd0b16eaa354b80483/schema/samsung_notes/samsung_page.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: samsung_notes_page
   title: Samsung Notes page file

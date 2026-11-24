@@ -1,5 +1,4 @@
 # Imported from https://github.com/dbdexter-dev/sondedump/blob/528655564f34a42e464334fced4f7e89f9bfee46/scripts/m10.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: meteomodem_m10
   title: Meteomodem M10 radiosonde frames

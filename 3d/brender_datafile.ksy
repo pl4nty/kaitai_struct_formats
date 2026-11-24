@@ -1,5 +1,4 @@
 # Imported from https://github.com/BlazingRenderer/io_scene_brender/blob/c8f4cb1c030c45f4db04d2618f1acf971c8e43d4/brender_datafile.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: brender_datafile
   file-extension: dat

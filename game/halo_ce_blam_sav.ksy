@@ -1,5 +1,4 @@
 # Imported from https://github.com/Sigmmma/HaloKSY/blob/1f6d0dcfa994ba187fc447c3a27a80f9b7132f68/h1/files/blam.ksy
-# Licence and copyright: see _community/README.md
 # Using u1 for booleans. These instances have been marked with comments.
 meta:
   id: halo_ce_blam_sav

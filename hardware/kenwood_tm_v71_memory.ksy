@@ -1,5 +1,4 @@
 # Imported from https://github.com/larsks/tm-v71-tools/blob/a24035694ce6feb76e06442e5297dd71b2de1894/memory.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: kenwood_tm_v71_memory
   title: "TMV71 Channels"

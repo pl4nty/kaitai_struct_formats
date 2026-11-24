@@ -1,5 +1,4 @@
 # Imported from https://github.com/scottprahl/RigolWFM/blob/9e6f993103f773f81df409fc65c2cc359d7bd249/ksy/yokogawa_dl_we_wvf.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: yokogawa_dl_we_wvf
   title: Yokogawa DL/WE WVF Binary Format

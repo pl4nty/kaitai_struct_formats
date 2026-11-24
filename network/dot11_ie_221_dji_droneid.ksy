@@ -1,5 +1,4 @@
 # Imported from https://github.com/kismetwireless/kismet/blob/b88a2c5fb632faa928017e270f892986d8d8fd76/kaitai_definitions_disabled/dot11_ie_221_dji_droneid.ksy
-# Licence and copyright: see _community/README.md
 # Drone ID (DJI Telemetry) sub-packets
 # Embedded in Wi-Fi beacon frames as IE221 tags under the OUI 26:37:12
 #

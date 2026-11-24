@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/mediatek-lte-baseband-re/blob/8c01efae5a9784ec8c84b4a4087678860de98e20/SoC/MT8183/mt8183_pcm_allinone.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mediatek_mt8183_pcm_allinone
   title: MediaTek MT8183 PCM All-in-One Binary

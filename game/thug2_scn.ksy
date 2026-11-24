@@ -1,5 +1,4 @@
 # Imported from https://github.com/DCxDemo/LegacyTHPS/blob/075ab69a9b2e7fcd042402cc2cccaf84ccb13e87/formats/thug2_scn.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: thug2_scn
   title: Tony Hawk's Underground 2 PC Scene file

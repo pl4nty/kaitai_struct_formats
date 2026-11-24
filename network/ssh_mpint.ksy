@@ -1,5 +1,4 @@
 # Imported from https://github.com/connectbot/cbssh/blob/d09fe14dad0155ffcf0f8c6aa177067013cf14bd/protocol/src/main/resources/kaitai/mpint.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ssh_mpint
   title: SSH mpint (big integer)

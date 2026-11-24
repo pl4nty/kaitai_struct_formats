@@ -1,5 +1,4 @@
 # Imported from https://github.com/schwarzeszeux/AoE-Kaitai/blob/45bb12fc9b38891fa1e94bc113805dc59e92367a/definitions/aoe2record_body.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: aoe2record_body
   title: Age of Empires II Definitive Edition recorded game, chapter body (operations)

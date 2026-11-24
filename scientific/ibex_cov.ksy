@@ -1,5 +1,4 @@
 # Imported from https://github.com/ibex-team/cov-kaitai/blob/46dc807f1be296b2a384f1c5fdc593f2194df178/cov.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ibex_cov
   file-extension: cov

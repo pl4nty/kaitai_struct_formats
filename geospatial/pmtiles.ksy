@@ -1,5 +1,4 @@
 # Imported from https://github.com/yskmasumoto/kaitai-pmtiles/blob/237db1c3b8d31fb95d43f34b205ca321caecba0f/ksy/pmtiles.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pmtiles
   title: PMTiles version 3

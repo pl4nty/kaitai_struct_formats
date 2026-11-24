@@ -1,5 +1,4 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/0059.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: gameservice_server_0059_shot_club_change_announce
   title: GameService Server Shot Club Change Announce

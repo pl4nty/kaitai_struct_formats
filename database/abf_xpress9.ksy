@@ -1,5 +1,4 @@
 # Imported from https://github.com/Hugoberry/pbixray/blob/c5da940b45d2806c8f8d3e109f0d1909117a7db0/docs/abf_xpress9.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: abf_xpress9
   title: ABF XPress9 Compressed Backup

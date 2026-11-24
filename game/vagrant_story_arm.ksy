@@ -1,5 +1,4 @@
 # Imported from https://github.com/ser-pounce/rood-reverse/blob/8418ea91c4772c0963312b8e74745dd931ce1e41/tools/kaitai/ksy/data/SMALL/scene_arm.ksy
-# Licence and copyright: see _community/README.md
 # .as<T> cast used to work around kaitai's naming lint warning.
 
 meta:

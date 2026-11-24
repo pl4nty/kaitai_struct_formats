@@ -1,5 +1,4 @@
 # Imported from https://github.com/vardonir/pyDXHR/blob/be481db8c36f82e7c37306a9f7a5b6cc97504e87/ksy/PS3T.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dxhr_ps3t
   title: 'Deus Ex: Human Revolution PS3 texture (PS3T)'

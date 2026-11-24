@@ -1,5 +1,4 @@
 # Imported from https://github.com/avala-ai/4dgs/blob/7077b090cfce6d1ce5efa718820f038d452de404/kaitai/fourdgs.ksy
-# Licence and copyright: see _community/README.md
 # Copyright 2026 Avala AI
 # SPDX-License-Identifier: Apache-2.0
 #

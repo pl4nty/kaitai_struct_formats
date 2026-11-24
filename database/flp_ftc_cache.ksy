@@ -1,5 +1,4 @@
 # Imported from https://github.com/mombesam-unil/FLP-geolocation-analysis/blob/af64f437f83affe13f9ad6eea463e28dacb1b03e/docs/intermediate_traces/cache_structures/ftc_structure.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: flp_ftc_cache
   title: FTC Cache (decrypted payload)

@@ -1,5 +1,4 @@
 # Imported from https://github.com/isledecomp/isle/blob/6c5adc000c941b602b0de7f53d8f061848d025d7/docs/savegame.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: lego_island_savegame
   title: Main Save Game File

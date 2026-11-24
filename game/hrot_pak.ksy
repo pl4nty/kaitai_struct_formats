@@ -1,5 +1,4 @@
 # Imported from https://github.com/wolfmanfp/kaitai-formats/blob/bebb2549d4bde68f611effd6bdb427044735fd0b/hrot_pak.ksy
-# Licence and copyright: see _community/README.md
 # Based on quake_pak.ksy
 meta:
   id: hrot_pak

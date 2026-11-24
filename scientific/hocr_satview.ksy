@@ -1,5 +1,4 @@
 # Imported from https://github.com/raphidoc/sear/blob/a17ecc56cd6b04852b7fde82e17a1b955d51c9ba/inst/ks/hocr_SatView_binary.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hocr_satview
   title: SatView HOCR binary parser

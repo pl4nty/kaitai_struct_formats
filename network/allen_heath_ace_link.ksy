@@ -1,5 +1,4 @@
 # Imported from https://github.com/PatrLind/ah_ace_protocol/blob/847b685b4f891646e78727a841694f694ec3f384/src/kaitai/ace_link.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: allen_heath_ace_link
   title: Allen & Heath ACE link frame

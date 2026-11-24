@@ -1,5 +1,4 @@
 # Imported from https://github.com/germiBest/mediatek-connac2-re/blob/4bf5703fc2e80377fccd59b112a6ebb350d27d11/kaitai/mediatek_connac2_wifi_firmware.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mediatek_connac2_wifi_firmware
   title: MediaTek connac2 Wi-Fi MCU firmware (WIFI_RAM_CODE_*)

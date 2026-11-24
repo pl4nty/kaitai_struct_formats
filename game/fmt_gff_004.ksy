@@ -1,5 +1,4 @@
 # Imported from https://github.com/kibertoad/dark-sun-wake-redux/blob/bf7acb3dbf5224a4f46160ec7ce42a02f58e0af0/spec/formats/fmt_gff_004.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: fmt_gff_004
   title: GFF resource entry in a plain tag table

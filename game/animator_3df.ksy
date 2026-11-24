@@ -1,5 +1,4 @@
 # Imported from https://github.com/Game3DEE/io_game3dee/blob/1702e4476816e9c08d26677cf1f0b2dd4cdd1ecd/kaitai/animator_3df.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: animator_3df
   title: ActionForms Animator model format

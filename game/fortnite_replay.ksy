@@ -1,5 +1,4 @@
 # Imported from https://github.com/linustg/fortnite-replay/blob/a70e39a87d071fe01a863419da26a997925b4adc/fortnite_replay.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: fortnite_replay
   title: Fortnite Replay File

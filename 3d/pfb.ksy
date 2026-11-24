@@ -1,5 +1,4 @@
 # Imported from https://github.com/jumpjack/VST-converter/blob/80c99efb91d28dc2d6e41be9e6da3a67c26f5774/pfb.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pfb
   file-extension: pfb

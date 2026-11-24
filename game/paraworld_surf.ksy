@@ -1,5 +1,4 @@
 # Imported from https://github.com/Qiller123451/pw-exporter/blob/423352fd8e880d07c76fc9820a20ef1cbb0cba68/pwexport/data/ksy/paraworld_surf.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: paraworld_surf
   title: ParaWorld map data (SURF chunk tree, the unpacked contents of a .ula map)

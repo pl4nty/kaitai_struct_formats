@@ -1,5 +1,4 @@
 # Imported from https://github.com/er1t-h/thl-tools/blob/85a9412058daae0b695230aab67e6ef725569308/resources/mbe.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mbe
   file-extension: mbe

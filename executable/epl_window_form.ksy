@@ -1,5 +1,4 @@
 # Imported from https://github.com/EplExplorer/MicroLoader/blob/091359f586234a467074554cb6a368f4412c1202/tools/窗口解析.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: epl_window_form
   title: EPL (Easy Programming Language) window form data

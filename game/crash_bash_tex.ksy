@@ -1,5 +1,4 @@
 # Imported from https://github.com/CTR-tools/CTR-tools/blob/8edc826ccab49099776f6431e25b4136a2ecbec3/formats/bash_tex.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: crash_bash_tex
   title: Crash Bash (PS1) texture file

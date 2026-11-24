@@ -1,5 +1,4 @@
 # Imported from https://github.com/Kirito3481/npilot/blob/dfd7a8c8d74b822a15738a2afedc8159990cd042/system/ubloxd/glonass.ksy
-# Licence and copyright: see _community/README.md
 # http://gauss.gge.unb.ca/GLONASS.ICD.pdf
 # some variables are misprinted but good in the old doc
 # https://www.unavco.org/help/glossary/docs/ICD_GLONASS_4.0_(1998)_en.pdf

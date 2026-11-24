@@ -1,5 +1,4 @@
 # Imported from https://github.com/DL4PD/satnogs-kaitai-structs/blob/7923f330d74eed596736c3a4a315cc20de110591/suomi100.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: suomi100
   title: Suomi 100 telemetry frame

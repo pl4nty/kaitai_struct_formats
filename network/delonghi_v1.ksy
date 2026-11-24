@@ -1,5 +1,4 @@
 # Imported from https://github.com/ComSys-OVGU/iot-coffee-machine/blob/609ecb6a5f99502ab6e219667ca252e601adf39d/src/coffee-webinterface/lib/delonghi/protocols/delonghi_v1.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: delonghi_v1
   file-extension: delonghi_v1

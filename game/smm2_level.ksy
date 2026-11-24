@@ -1,5 +1,4 @@
 # Imported from https://github.com/TheGreatRambler/toost/blob/13ec1484e4010d6e8d0e98ffb44fea44198163b4/level.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: smm2_level
   title: Super Mario Maker 2 level

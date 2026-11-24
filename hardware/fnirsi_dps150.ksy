@@ -1,5 +1,4 @@
 # Imported from https://github.com/Philipp-IoT/fnirsi_protocol/blob/0c9dc79df82f434885650579a5cc77d9af7918a0/protocol/fnirsi_dps150.ksy
-# Licence and copyright: see _community/README.md
 # Serial protocol for the FNIRSI DPS-150 regulated power supply,
 # communicated over USB CDC (virtual COM port, USB bulk endpoint).
 #

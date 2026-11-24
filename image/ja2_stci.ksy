@@ -1,5 +1,4 @@
 # Imported from https://github.com/PaulKuzmin/Ja2EditorLib/blob/51bd04236ac8541e61c9bdc4b7a27eebfc81bac7/Ja2SlfLib/kaitai/sti.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ja2_stci
   title: STCI Header (Sir-Tech's Crazy Image)

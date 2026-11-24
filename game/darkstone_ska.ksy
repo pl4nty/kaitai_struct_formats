@@ -1,5 +1,4 @@
 # Imported from https://github.com/Game3DEE/darkstone/blob/afc3261693b91fcd371e975889d788dfded04311/src/kaitai/ska.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: darkstone_ska
   title: Darkstone skeleton list

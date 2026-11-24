@@ -1,5 +1,4 @@
 # Imported from https://github.com/maierfelix/bnsh-decoder/blob/e02ccef69780831b38fe5b31710855d9ca6a5977/BNSH.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: bnsh
   file-extension: bnsh

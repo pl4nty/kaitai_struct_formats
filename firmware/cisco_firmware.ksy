@@ -1,5 +1,4 @@
 # Imported from https://github.com/PAGalaxyLab/vxhunter/blob/5984b985963e2e370b536a239771110865d44ef0/firmware_tools/kaitai_ksy/cisco_firmware.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: cisco_firmware
   title: Cisco Firmware Image layout

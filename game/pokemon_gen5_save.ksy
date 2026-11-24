@@ -1,5 +1,4 @@
 # Imported from https://github.com/raymond-h/pokesav-ds-gen5/blob/ddce9e81cae6c46ffb1d62cf45d12b1f698e72c1/formats/pokesav-ds-gen5.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pokemon_gen5_save
   application: 'Pokémon Black/White/Black 2/White 2 Version'

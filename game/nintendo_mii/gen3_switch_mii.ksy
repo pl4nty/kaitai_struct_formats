@@ -1,5 +1,4 @@
 # Imported from https://github.com/TheGreatRambler/Mii_to_UMii/blob/64caebae9613dcca464d38709ade7c510caa5bb0/ksy/gen3_switch.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: gen3_switch_mii
   title: Switch Mii character data

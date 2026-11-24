@@ -1,5 +1,4 @@
 # Imported from https://github.com/broideryfab/embroidery-ksy/blob/424184f8b4222794314ba3149aef31afea9c6e13/formats/happy_tap/happy_tap.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: happy_tap
   title: Happy TAP embroidery format

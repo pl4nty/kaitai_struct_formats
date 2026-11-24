@@ -1,5 +1,4 @@
 # Imported from https://github.com/tanuki-no/ksy_test/blob/b2920c644f948ce8e30e3a5397f33042f00060e8/src/teltonica_extended.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: teltonika_codec8_extended
   title: Teltonika Codec 8 Extended AVL packet

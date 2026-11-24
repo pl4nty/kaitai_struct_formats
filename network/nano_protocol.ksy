@@ -1,5 +1,4 @@
 # Imported from https://github.com/nanocurrency/protocol/blob/64546799e0448eb9388cfb041414aa054512ed67/reference/protocol.ksy
-# Licence and copyright: see _community/README.md
 # ----------------------------------------------------------------------
 # Nano protocol definition for Kaitai
 # https://github.com/nanocurrency/protocol

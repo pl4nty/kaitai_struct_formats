@@ -1,5 +1,4 @@
 # Imported from https://gist.github.com/Hugoberry/3696b06b63934e45dd9583471aafa033
-# Licence and copyright: see _community/README.md
 meta:
   id: parquet
   title: Apache Parquet columnar storage format

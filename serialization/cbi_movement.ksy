@@ -1,5 +1,4 @@
 # Imported from https://github.com/simonmx1/CBI_Parser/blob/14401f46970545ab5c1c97d95f449f66f357a6a8/src/parse/cbi.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: cbi_movement
   title: cbi movement

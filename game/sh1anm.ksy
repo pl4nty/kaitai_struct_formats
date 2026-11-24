@@ -1,5 +1,4 @@
 # Imported from https://github.com/dreamingmoths/silent-hill-museum/blob/1c5d033110a77694e7287cf0096ce1f893f8c542/ksy/sh1anm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: sh1anm
   title: Silent Hill animation format

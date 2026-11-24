@@ -1,5 +1,4 @@
 # Imported from https://github.com/nemanjan00/glasgow-rib/blob/03bec31ea24b139347351f3675255afe97bb7d2a/gm600/gm600_codeplug.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: motorola_gm600_codeplug
   title: Motorola GM600 native codeplug (68HC11 internal EEPROM, radio 0x0D80-0x0FFF)

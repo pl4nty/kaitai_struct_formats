@@ -1,5 +1,4 @@
 # Imported from https://github.com/taotao54321/fcdstools/blob/da9efc86b4f0856c2cec8b9a51957815334c7350/kaitai/fds_file_header_block.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: fds_file_header_block
   title: 'Famicom Disk System disk image - file header block'

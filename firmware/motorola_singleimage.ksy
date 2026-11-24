@@ -1,5 +1,4 @@
 # Imported from https://github.com/HemanthJabalpuri/star/blob/e44efe15cf25d86c978054089a6eac2c91073443/ksy/star.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: motorola_singleimage
   title: Motorola singleimage tar archive

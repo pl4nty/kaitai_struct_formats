@@ -1,5 +1,4 @@
 # Imported from https://github.com/PotatoOfDoom/OriginStubDecrypter/blob/57a57d208ff78dd6dc27157e86437e937214d800/ooa_section.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: origin_ooa_section
   file-extension: ooa_section

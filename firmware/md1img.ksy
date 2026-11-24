@@ -1,5 +1,4 @@
 # Imported from https://github.com/nccgroup/mtk_bp/blob/f1d08ae18c10410637b0a97398501f236919e6c1/mtk_structs/md1img.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: md1img
   file-extension: md1img

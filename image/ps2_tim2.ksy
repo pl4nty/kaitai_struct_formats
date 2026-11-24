@@ -1,5 +1,4 @@
 # Imported from https://github.com/kapdap/re-cvx-tools/blob/36c61155d889b85e7a4306d6a05190fe8c5c4401/Resources/Formats/ps2_tim2.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ps2_tim2
   title: 'Sony PlayStation 2 TIM2'

@@ -1,5 +1,4 @@
 # Imported from https://github.com/LongSoft/UEFITool/blob/de73942df908b9466c055e15108ac4e4c0b1688c/common/ksy/intel_acm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: intel_acm
   title: Intel Authenticated Code Module

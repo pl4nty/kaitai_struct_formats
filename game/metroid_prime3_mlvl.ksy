@@ -1,5 +1,4 @@
 # Imported from https://github.com/randovania/retro-data-structures/blob/8e687369ad1b79e2e3e4da94c913e43ce442d6fa/misc/Prime3_MLVL.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: metroid_prime3_mlvl
   file-extension: MLVL

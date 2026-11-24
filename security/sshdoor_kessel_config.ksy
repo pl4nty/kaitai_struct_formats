@@ -1,5 +1,4 @@
 # Imported from https://github.com/eset/malware-ioc/blob/8921a81d245cce3f9b7a199b123d221ed8f1fe33/sshdoor/kessel_config.ksy
-# Licence and copyright: see _community/README.md
 # This Kaitai Struct is provided to the community under the two-clause BSD
 # license as follows:
 #

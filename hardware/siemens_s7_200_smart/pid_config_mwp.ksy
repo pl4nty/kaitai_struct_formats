@@ -1,5 +1,4 @@
 # Imported from https://github.com/wpyoga/s7-200-smart-project-file/blob/6803dc0fd0240472457eae4245fd69e37b6a549f/kaitai/pid_config_mwp.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pid_config_mwp
   title: 'Micro/WIN project: PID wizard configuration'

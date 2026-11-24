@@ -1,5 +1,4 @@
 # Imported from https://github.com/lzoledziewski/nerka/blob/066faa7c6024690d779cb1d78ae648e880f28948/examples/protocols/dlt.ksy
-# Licence and copyright: see _community/README.md
 # DLT (AUTOSAR PRS_Dlt) messages as a protocol definition: the standard and
 # extended headers and the payload (verbose arguments, control messages,
 # non-verbose ids; no FIBEX). An example of a full definition, and a test:

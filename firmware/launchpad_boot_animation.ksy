@@ -1,5 +1,4 @@
 # Imported from https://github.com/anthonyhfm/launchpad-core-firmware/blob/9fdc7bc54abac5e450be3cc5555b65b6522055e3/tools/boot_anim.ksy
-# Licence and copyright: see _community/README.md
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-only
 # Copyright (C) 2026 ZephyrCodesStuff

@@ -1,5 +1,4 @@
 # Imported from https://github.com/Bithack/principia/blob/7a5dcfc7697227ebea74e982b6ace1eefd05c11a/utils/kaitai/ppkg.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: principia_ppkg
   file-extension: ppkg

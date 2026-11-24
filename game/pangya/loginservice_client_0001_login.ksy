@@ -1,5 +1,4 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/loginservice/client/0001.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: loginservice_client_0001_login
   title: LoginService Client Login Packet

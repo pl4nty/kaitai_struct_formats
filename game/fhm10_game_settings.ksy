@@ -1,5 +1,4 @@
 # Imported from https://github.com/nisamson/shuttle/blob/e72b6854c7cb64dfc1dd1498a35f21d148fa5630/docs/fhm10/data/game_settings.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: fhm10_game_settings
   title: FHM 10 save — game_settings.dat

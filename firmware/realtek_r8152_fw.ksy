@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/realtek-nic-re/blob/19d528b636949f8600309066b9bdc12af7f34f79/r8152_fw.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: realtek_r8152_fw
   title: Firmware for Realtek USB NICs

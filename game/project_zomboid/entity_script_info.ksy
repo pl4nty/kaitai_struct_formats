@@ -1,5 +1,4 @@
 # Imported from https://github.com/cff29546/pzdataspec/blob/3d39699f74bb13c9269d2f625e7883648a95da5e/data_spec/spec/251/entity/9_entity_script_info.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: entity_script_info
   title: 'Project Zomboid save: entity script info entity component'

@@ -1,5 +1,4 @@
 # Imported from https://github.com/DL4PD/satnogs-kaitai-structs/blob/7923f330d74eed596736c3a4a315cc20de110591/ax25-elfin-tlm-parser.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: elfin
   title: ELFIN telemetry frame

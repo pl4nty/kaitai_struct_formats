@@ -1,5 +1,4 @@
 # Imported from https://github.com/uniuninaruru/logic-pro-ctl/blob/6598a9ca670ae0933558afa84e5dbd30b308eafd/Research/protocol/logic-remote.ksy
-# Licence and copyright: see _community/README.md
 # Logic Remote application frame (Logic Pro 12.3.1 / 6682), from STATIC analysis only.
 # See Research/static-analysis/SA-REMOTE-FRAME-001.md. Documentation-grade: this file has
 # NOT been compiled with the Kaitai Struct compiler and has not been checked against

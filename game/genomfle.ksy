@@ -1,5 +1,4 @@
 # Imported from https://github.com/georgeto/g3blend/blob/e4f64a496d774263efcd299206489434ab5762d9/doc/genomfle.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: genomfle
   title: Gothic 3 common structures

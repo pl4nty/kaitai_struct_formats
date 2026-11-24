@@ -1,5 +1,4 @@
 # Imported from https://github.com/kismetwireless/kismet/blob/b88a2c5fb632faa928017e270f892986d8d8fd76/kaitai_definitions_disabled/dot11_ie_221_wfa_wpa.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dot11_ie_221_wfa_wpa
   file-extension: dot11_ie_221_wfa_wpa

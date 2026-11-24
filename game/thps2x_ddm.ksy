@@ -1,5 +1,4 @@
 # Imported from https://github.com/DCxDemo/LegacyTHPS/blob/075ab69a9b2e7fcd042402cc2cccaf84ccb13e87/formats/thps2x_ddm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: thps2x_ddm
   title: Tony Hawk's Pro SKater 2X (XBOX) level mesh file

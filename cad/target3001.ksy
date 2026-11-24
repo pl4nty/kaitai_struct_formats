@@ -1,5 +1,4 @@
 # Imported from https://github.com/KiCad/kicad-source-mirror/blob/c508d01f46c7f04fd475d40c6fac93d10fae49b2/common/io/target3001/target3001.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: target3001
   title: TARGET 3001! project file (.T3001)

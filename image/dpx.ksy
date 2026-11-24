@@ -1,5 +1,4 @@
 # Imported from https://github.com/robin-francois/dpx-kaitai-struct/blob/afbf0ff39a5eaac67a169cf93f6f9425fd0c14a2/dpx_struct.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dpx
   file-extension: dpx

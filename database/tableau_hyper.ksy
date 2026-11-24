@@ -1,5 +1,4 @@
 # Imported from https://github.com/Hugoberry/python-hyper/blob/0d14fe4bba6a47ee3fe619ed6f5b248fd9627a59/tableau_hyper.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: tableau_hyper
   title: Tableau Hyper database file (.hyper)

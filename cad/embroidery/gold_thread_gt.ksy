@@ -1,5 +1,4 @@
 # Imported from https://github.com/broideryfab/embroidery-ksy/blob/424184f8b4222794314ba3149aef31afea9c6e13/formats/gold_thread_gt/gold_thread_gt.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: gold_thread_gt
   title: Gold Thread GT embroidery format

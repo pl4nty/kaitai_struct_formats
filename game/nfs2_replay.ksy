@@ -1,5 +1,4 @@
 # Imported from https://github.com/Ruslan0Dev/nfs2/blob/05f8c46528f02badf18aeea80fd8e5dbc9011659/rpy-nfs2replay.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: nfs2_replay
   file-extension: rpy

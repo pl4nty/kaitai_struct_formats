@@ -1,5 +1,4 @@
 # Imported from https://github.com/P1sec/DiagNG/blob/ebff1c3d50e0872fb7db93faf9909da4954095bf/struct/qualcomm/diag/command/diag_cmd_ext_f.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: diag_cmd_ext_f
   title: Qualcomm DIAG extended command (DIAG_CMD_EXT_F)

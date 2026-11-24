@@ -1,5 +1,4 @@
 # Imported from https://gist.github.com/yut23/1a85cf1dd2650bf37c1951c73f654609
-# Licence and copyright: see _community/README.md
 # author: https://github.com/yut23, @yut23 on discord
 meta:
   id: uvs_nirmana_solution

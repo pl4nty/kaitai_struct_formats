@@ -1,5 +1,4 @@
 # Imported from https://github.com/MegaIng/tc_save_kaitai/blob/d1e939cf6cb8373d792a06bd9fee9e83d2cc3d07/v15.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: turing_complete_save
   file-extension: v15

@@ -1,5 +1,4 @@
 # Imported from https://github.com/Serpens66/Stronghold-Crusader-DE-Mods/blob/8c2b25b7e5b1dc374a4b9edbe72d00a1da661126/Helpers/MapParser/Reference/stronghold_crusader_de_map.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: stronghold_crusader_de_map
   title: Stronghold Crusader Definitive Edition map container

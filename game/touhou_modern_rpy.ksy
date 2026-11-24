@@ -1,5 +1,4 @@
 # Imported from https://github.com/hoangcaominh/thrpy-ksy/blob/68e526d5ef2596027e5bcdbdaf4ea710d31c0969/src/th_modern.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: touhou_modern_rpy
   file-extension: rpy

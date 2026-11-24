@@ -1,5 +1,4 @@
 # Imported from https://github.com/reRNR/RNRFileFormats/blob/f4890fda9f96644a75ee6d5dc70e17986bfc37c0/formats/ksy/hard_truck_2_b3d.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hard_truck_2_b3d
   application: Дальнобойщики 2 (8.x) / Hard Truck 2 King of The Road 1.3

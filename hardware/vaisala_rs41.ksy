@@ -1,5 +1,4 @@
 # Imported from https://github.com/dbdexter-dev/sondedump/blob/528655564f34a42e464334fced4f7e89f9bfee46/scripts/rs41.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: vaisala_rs41
   title: Vaisala RS41 radiosonde frames

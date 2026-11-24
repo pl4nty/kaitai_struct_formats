@@ -1,5 +1,4 @@
 # Imported from https://github.com/ZetaTwo/csgo_demo_parser/blob/265212ce4a1821c8f870a8c0af835941f0d35c6f/csgodem_frames.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: csgo_demo_frame
   title: CS:GO demo frame

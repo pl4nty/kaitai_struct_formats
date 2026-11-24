@@ -1,5 +1,4 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/games/pik1.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pik1
   title: Pikmin 1 (GameCube) MOD model, TXE texture and ARC/DIR archive

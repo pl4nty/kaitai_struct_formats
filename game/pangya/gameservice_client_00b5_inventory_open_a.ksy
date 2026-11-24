@@ -1,5 +1,4 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/client/00b5.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: gameservice_client_00b5_inventory_open_a
   title: GameService Client Inventory Open A

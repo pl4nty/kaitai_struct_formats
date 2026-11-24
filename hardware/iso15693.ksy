@@ -1,5 +1,4 @@
 # Imported from https://github.com/g3gg0/ProxmarkWebSerial/blob/f4fc9d091b3ae27c3e93c5d95ea0ab8ae66612dc/iso15693.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: iso15693
   title: ISO15693 NFC protocol

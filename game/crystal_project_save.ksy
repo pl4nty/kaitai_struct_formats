@@ -1,5 +1,4 @@
 # Imported from https://github.com/iconmaster5326/CrystalProjector/blob/79320b343d603aa069aa023fd54020d36419e082/schema/ksy/save.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: crystal_project_save
   title: Crystal Project save file

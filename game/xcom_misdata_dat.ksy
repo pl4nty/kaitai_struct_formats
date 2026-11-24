@@ -1,5 +1,4 @@
 # Imported from https://github.com/redtoad/xcom-editor/blob/47e3ba29f2f3077ea9245405589459e5d3fce536/misc/kaitai-structs/MISDATA.DAT.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: xcom_misdata_dat
   title: Format of MISDATA.DAT

@@ -1,5 +1,4 @@
 # Imported from https://github.com/fbacchella/LogHub/blob/9cf727a4a002d75aec93ac45410ef8e093e15333/loghub-kaitai/src/main/kaitai/igmp.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: igmp
   title: Internet Group Management Protocol (IGMP)

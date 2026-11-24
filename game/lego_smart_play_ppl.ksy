@@ -1,5 +1,4 @@
 # Imported from https://github.com/nathankellenicki/node-smartplay/blob/5b467064cceeea372506bf54a6671c94980318ad/research/tools/p11_ppl.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: lego_smart_play_ppl
   title: "LEGO Smart Play PPL (Play Preset Library)"

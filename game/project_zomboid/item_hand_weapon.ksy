@@ -1,5 +1,4 @@
 # Imported from https://github.com/cff29546/pzdataspec/blob/3d39699f74bb13c9269d2f625e7883648a95da5e/data_spec/spec/251/item/hand_weapon.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: item_hand_weapon
   title: 'Project Zomboid save: hand weapon inventory item'

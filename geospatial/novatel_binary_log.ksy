@@ -1,5 +1,4 @@
 # Imported from https://github.com/csherrell/Snippets/blob/68819f60bbb49c1bfbad6d95b19eeda59ab004fc/kaitai_struct/NovAtel-Message-Parser.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: novatel_binary_log
   file-extension: dat

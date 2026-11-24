@@ -1,5 +1,4 @@
 # Imported from https://github.com/NeoZX/fb_formats/blob/11c1f367a53e1787fe6d965fe312fe552e1d6d20/kaitai/gbak_header.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: firebird_gbak_header
   title: Backup file version 11 (Firebird 4.0)

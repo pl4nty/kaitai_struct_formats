@@ -1,5 +1,4 @@
 # Imported from https://github.com/lllama/burp-projects/blob/e490358692c3a7c0fa8a50f4b3550775e26432f9/burp.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: burp_project
   title: Burp Suite project file (outer storage version 1)

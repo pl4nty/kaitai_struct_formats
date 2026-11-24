@@ -1,5 +1,4 @@
 # Imported from https://github.com/MonoS/SupMover/blob/bed12333c02f600e56f3a251a55722c9ccd0c0bf/sup-parser.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pgs_sup
   title: PGS/Sup Subtitle

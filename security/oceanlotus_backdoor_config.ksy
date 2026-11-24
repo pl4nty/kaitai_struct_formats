@@ -1,5 +1,4 @@
 # Imported from https://github.com/eset/malware-research/blob/f879e217b726ff883e2c23fb5d8c5f5d69a9cacf/oceanlotus/ol_backdoor_conf.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: oceanlotus_backdoor_config
   title: OceanLotus backdoor configuration

@@ -1,5 +1,4 @@
 # Imported from https://github.com/madwareru/orom-file-formats/blob/8a68f9c2693f9e58d418e4bd6485e14e71efe233/KSY/images/rom_16a.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: rage_of_mages_1_16a
   title: Rage Of Mages Seal Of Mystery *.16a image files

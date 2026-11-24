@@ -1,5 +1,4 @@
 # Imported from https://github.com/vfig/SaturnQuakePC/blob/a53c4034a948489d5883252c4f9982af81259356/tools/kaitaistruct/dat_skank.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dat_skank
   file-extension: dat

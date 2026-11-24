@@ -1,5 +1,4 @@
 # Imported from https://github.com/MightyDuke/ico2gltf/blob/6facbeaec6ca4a7a35f1239e8adf1548b333e67c/ksy/ps2ico.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ps2ico
   title: PlayStation 2 icon file

@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/mediatek-lte-baseband-re/blob/8c01efae5a9784ec8c84b4a4087678860de98e20/SoC/mediatek_download_agent.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: mediatek_download_agent
   title: MediaTek Download Agent Archive

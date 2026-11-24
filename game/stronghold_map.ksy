@@ -1,5 +1,4 @@
 # Imported from https://github.com/sourcehold/sourcehold-maps/blob/4f54a802b622180aab99e2767d8f27b723429def/structure/kaitai/kaitai_map.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: stronghold_map
   file-extension: map, sav, msv

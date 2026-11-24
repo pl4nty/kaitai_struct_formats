@@ -1,5 +1,4 @@
 # Imported from https://gist.github.com/yut23/8092d812e4067372d24188ee7ebc859f
-# Licence and copyright: see _community/README.md
 # author: https://github.com/yut23, @yut23 on discord
 meta:
   id: kaizen_solution

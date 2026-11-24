@@ -1,5 +1,4 @@
 # Imported from https://github.com/andreas-volz/startsconverter/blob/f4566b9ef4eb242eaa46bcd2a6a3800dcf672c08/src/kaitai/lo_overlay.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: starcraft_lo_overlay
   title: LO* Overlay File

@@ -1,5 +1,4 @@
 # Imported from https://github.com/ProNoob1029/allwpilib/blob/03401e6d723e015d9ff47d04cb36ddd328507180/wpiutil/doc/wpilog.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: wpilog
   title: WPILib Data Log

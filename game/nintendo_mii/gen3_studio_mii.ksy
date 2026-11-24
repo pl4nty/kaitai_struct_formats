@@ -1,5 +1,4 @@
 # Imported from https://github.com/TheGreatRambler/Mii_to_UMii/blob/64caebae9613dcca464d38709ade7c510caa5bb0/ksy/gen3_studio.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: gen3_studio_mii
   title: Mii Studio Mii character data

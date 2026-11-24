@@ -1,5 +1,4 @@
 # Imported from https://github.com/NeoRail/train-barcode-kaitai-spec/blob/66a13883559fc7de6964570ede9252fa8eadca5a/sncf/sncf-carte-avantage.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: barcode_sncf_carte_avantage
   title: SNCF Carte Avantage barcode

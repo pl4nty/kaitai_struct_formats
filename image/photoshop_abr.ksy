@@ -1,5 +1,4 @@
 # Imported from https://github.com/jlai/brush-viewer/blob/9cea4e82a5afbc44b1bdb897f645562622fd0937/shared/abr/ABR.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: photoshop_abr
   file-extension: abr

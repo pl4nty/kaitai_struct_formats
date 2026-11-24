@@ -1,5 +1,4 @@
 # Imported from https://github.com/KOLANICH-physics/SMSD.py/blob/cc2b9852b1bd75c004f6a814207c006bdcce6f39/specs/smsd_modbus.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: smsd_modbus
   title: Modbus instruction for Smart Motor Devices BLSD-20Modbus controllers

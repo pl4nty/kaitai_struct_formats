@@ -1,5 +1,4 @@
 # Imported from https://github.com/AnthoChamb/FsgXmk/blob/986e81e29f01dc7c4162d3b6caca858380afaff0/src/FsgXmk.Kaitai/xmk.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: fsg_xmk
   file-extension: xmk

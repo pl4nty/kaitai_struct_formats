@@ -1,5 +1,4 @@
 # Imported from https://github.com/dungwinux/pac_patcher/blob/3b0c3b4b3744a898c89350649c46b891c4f28610/pac.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: tmrhiro_pac
   application: TmrHiroADVSystem

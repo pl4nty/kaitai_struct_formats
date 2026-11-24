@@ -1,5 +1,4 @@
 # Imported from https://github.com/CTR-tools/CTR-tools/blob/8edc826ccab49099776f6431e25b4136a2ecbec3/formats/ctr_xnf.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ctr_xnf
   title: Crash Team Racing (PS1) XA mapping file

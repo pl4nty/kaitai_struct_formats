@@ -1,5 +1,4 @@
 # Imported from https://github.com/HenryOfCarim/GameFilesTemplates/blob/f61646c9173f4f9052e2fa8421c17e4bea7776b9/albam/engines/hexn/edgemodel.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hexane_edgemodel
   title: Hexane Engine Model Format

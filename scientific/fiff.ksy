@@ -1,5 +1,4 @@
 # Imported from https://github.com/mwwhited-notes/shared/blob/e456314f819f7f89fd1116f863b40c46e07f8ca0/projects/eeg-formats-learning/ksy/fif.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: fiff
   title: FIFF (Neuromag / Elekta / MEGIN), used by MNE-Python

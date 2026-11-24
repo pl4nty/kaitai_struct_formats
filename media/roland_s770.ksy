@@ -1,5 +1,4 @@
 # Imported from https://github.com/transverberate/smpl_extract/blob/163cd2b3bd791303bcd2f42f57a747d894626329/ksy/roland/s770.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: roland_s770
   file-extension: roland_s770

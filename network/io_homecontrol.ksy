@@ -1,5 +1,4 @@
 # Imported from https://github.com/Velocet/iown-homecontrol/blob/b7a526d07506f5192548aadfecf68d0f6e5497fa/scripts/io-homecontrol.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: io_homecontrol
   title: io-homecontrol packet

@@ -1,5 +1,4 @@
 # Imported from https://github.com/NurbsOtter/kaitai-cannibal/blob/9e70bd6ef1bcf911867bdfe69c52d5d8b4dbb1d1/cannibal.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: cannibal_cpj
   file-extension: cpj

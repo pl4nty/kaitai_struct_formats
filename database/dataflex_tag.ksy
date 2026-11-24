@@ -1,5 +1,4 @@
 # Imported from https://github.com/the-wondersmith/ferroflex/blob/e2f6a6a2a56903e6ab7bac9284a98d65b2ed4237/docs/kaitai-struct/tag.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dataflex_tag
   title: DataFlex v2.3 / v3 Database File

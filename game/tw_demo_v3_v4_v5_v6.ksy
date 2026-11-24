@@ -1,5 +1,4 @@
 # Imported from https://github.com/heinrich5991/libtw2/blob/060e4b6450fba9f5baa59e430dc22714f2757162/doc/demo.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: tw_demo_v3_v4_v5_v6
   file-extension: demo

@@ -1,5 +1,4 @@
 # Imported from https://github.com/P1sec/DiagNG/blob/ebff1c3d50e0872fb7db93faf9909da4954095bf/struct/qualcomm/diag/log/nr5g_rrc_ota_packet.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: nr5g_rrc_ota_packet
   title: Qualcomm DIAG 5G NR RRC OTA packet log

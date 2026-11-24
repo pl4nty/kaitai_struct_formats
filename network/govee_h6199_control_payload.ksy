@@ -1,5 +1,4 @@
 # Imported from https://github.com/teh-hippo/ha-govee-led-ble/blob/f5242abb27b28aa95e1c71aaeaab7f3e1e06eda7/tools/ble/kaitai/speculative/h6199_control_payload.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: govee_h6199_control_payload
   title: H6199 installation and Gradient payloads

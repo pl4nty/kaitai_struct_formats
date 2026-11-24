@@ -1,5 +1,4 @@
 # Imported from https://github.com/connectbot/cbssh/blob/d09fe14dad0155ffcf0f8c6aa177067013cf14bd/protocol/src/main/resources/kaitai/ssh_agentc_add_identity.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ssh_agentc_add_identity
   title: SSH agent add identity

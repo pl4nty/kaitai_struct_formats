@@ -1,5 +1,4 @@
 # Imported from https://github.com/AtomCrafty/yukatool/blob/db06e24fa29045c897676199de6dfb217b1c65cc/doc/ykg_format.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: yuka_ykg
   file-extension: ykg

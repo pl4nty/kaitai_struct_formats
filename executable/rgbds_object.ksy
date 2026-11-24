@@ -1,5 +1,4 @@
 # Imported from https://github.com/qguv/undercooked/blob/98529e1f7edb701a3862c92fe9fdbf10cb2da041/doc/rgblink.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: rgbds_object
   file-extension: o

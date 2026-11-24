@@ -1,5 +1,4 @@
 # Imported from https://github.com/cs16forge/goldsrc-formats/blob/cafc9d8a8785b82aa3a7b85c6ed06ce0780cd780/schemas/wad3.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: wad3
   title: GoldSrc texture archive (WAD3) - Half-Life, Counter-Strike 1.6

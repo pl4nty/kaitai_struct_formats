@@ -1,5 +1,4 @@
 # Imported from https://github.com/nnguyen259/SenSchema/blob/25e06d9b529904dcc1b3ca3e8e320a42ac88ff89/schemas/headers/header_extend.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: header_extend
   title: Trails of Cold Steel III extended table header

@@ -1,5 +1,4 @@
 # Imported from https://gist.github.com/arbruijn/725931b526f605e5582580360db8d110
-# Licence and copyright: see _community/README.md
 meta:
   id: lx_le_exe
   title: LX_executable

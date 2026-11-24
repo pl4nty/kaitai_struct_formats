@@ -1,5 +1,4 @@
 # Imported from https://github.com/MIT-REALM/ground_control/blob/886211dc1cc7e66d7f10f32fe7d69a2ab9c9d37f/submodules/f1tenth_system/vesc/vesc_driver/src/vesc6.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: vesc_6
   file-extension: vesc_6

@@ -1,5 +1,4 @@
 # Imported from https://github.com/n-rook/thscoreboard/blob/94c94f2a1d7a4d48d5d63420bea1ed0193ba2f7a/ref/threp-ksy/th12.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: touhou_th12_rpy
   file-extension: raw

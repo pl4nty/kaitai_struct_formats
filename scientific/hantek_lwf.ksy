@@ -1,5 +1,4 @@
 # Imported from https://github.com/mattdavis90/hantek-wave-viewer/blob/069053f70309324b49ed415d0feabbd44e344276/kaitai/hantek.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: hantek_lwf
   file-extension: lwf

@@ -1,5 +1,4 @@
 # Imported from https://github.com/Digilent/dlog-utils/blob/27ce9e49e752270ffbd301a999ced54c5d39db8a/src/dlog.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: digilent_dlog
   file-extension:

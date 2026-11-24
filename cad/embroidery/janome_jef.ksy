@@ -1,5 +1,4 @@
 # Imported from https://github.com/broideryfab/embroidery-ksy/blob/424184f8b4222794314ba3149aef31afea9c6e13/formats/janome_jef/janome_jef.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: janome_jef
   title: Janome JEF embroidery format

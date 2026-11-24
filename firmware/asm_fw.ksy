@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/asmedia-xhc-re/blob/010e8a31833a159e298898da7167d3b8926a6849/doc/fw/asm_fw.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: asm_fw
   title: ASMedia xHC Firmware Image

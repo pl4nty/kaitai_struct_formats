@@ -1,5 +1,4 @@
 # Imported from https://github.com/YakBarber/rmconvert_exploratory/blob/27ef5a27d154d6250ad238fb58a262aaef5f39ba/rmv6.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: remarkable_lines_v6
   application: xochitl

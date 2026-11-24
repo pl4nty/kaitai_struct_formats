@@ -1,5 +1,4 @@
 # Imported from https://github.com/petermm/bthome/blob/45c6fffce4d4fdb1bb09e65e8b125fec46e772c6/bthome_v2.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: bthome_v2
   title: BTHome service data

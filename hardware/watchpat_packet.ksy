@@ -1,5 +1,4 @@
 # Imported from https://github.com/dakahler/watchpat/blob/3438620688fc5a4798d38299003619c3f14d3527/watchpat.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: watchpat_packet
   title: WatchPAT ONE BLE protocol packet

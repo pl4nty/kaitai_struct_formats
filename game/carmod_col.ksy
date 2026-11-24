@@ -1,5 +1,4 @@
 # Imported from https://github.com/ralf2oo2/carmod/blob/a0b5e7dde2dc0f02ee5eaac22ae167f458ae20ec/Col.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: carmod_col
   title: Collision file

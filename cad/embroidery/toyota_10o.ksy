@@ -1,5 +1,4 @@
 # Imported from https://github.com/broideryfab/embroidery-ksy/blob/424184f8b4222794314ba3149aef31afea9c6e13/formats/toyota_10o/toyota_10o.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: toyota_10o
   title: Toyota 10O embroidery format

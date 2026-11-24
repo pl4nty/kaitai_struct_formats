@@ -1,5 +1,4 @@
 # Imported from https://github.com/8ga3/roller485/blob/cc9f7e958ae3b1948d9507bc5e524d4325c27b16/roller485.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: m5stack_roller485
   title: M5Stack Unit-Roller485 RS485 Protocol (Requests and Responses)

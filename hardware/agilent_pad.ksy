@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/agilent-pcie-analyzer-re/blob/7728fff6770cac18eb7191f38d0b6cbc7121d52a/doc/agilent_pad.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: agilent_pad
   title: Agilent PAD (Protocol Analyzer Data) file

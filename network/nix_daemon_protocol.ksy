@@ -1,5 +1,4 @@
 # Imported from https://github.com/straylight-software/nix/blob/96e3d6ec0281bd917463ebb7ced11f46afbf9d9b/src/straylight/nix/protocol/nix_daemon.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: nix_daemon_protocol
   title: Nix Daemon Worker Protocol

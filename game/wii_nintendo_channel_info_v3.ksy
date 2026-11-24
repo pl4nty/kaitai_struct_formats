@@ -1,5 +1,4 @@
 # Imported from https://github.com/WiiLink24/kaitais/blob/c1d1d231889927c5cceb0e34349dace9b13dc067/ninch_info_v3.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: wii_nintendo_channel_info_v3
   file-extension: info

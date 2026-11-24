@@ -1,5 +1,4 @@
 # Imported from https://github.com/krokettenkoal/khkh_xldM/blob/e545017f81fe0e928dc5b6e2ff0ce910205104a7/Parser/12-spawn-point-data/kh2-ard.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: kh2_ard_spawn_point
   file-extension: bin

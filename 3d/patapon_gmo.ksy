@@ -1,5 +1,4 @@
 # Imported from https://github.com/efonte/patapon-re/blob/7cc421a84994521e4e7692dfc8adf3f7fcb781b5/Kaitai Struct/patapon_gmo.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: patapon_gmo
   title: Patapon (gmo)

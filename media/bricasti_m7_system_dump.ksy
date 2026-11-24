@@ -1,5 +1,4 @@
 # Imported from https://github.com/codebrain/freecasti/blob/a9466270dd9bb1dd5828dba0c15d3e3bdca117ae/specification/system/m7_system_dump.ksy
-# Licence and copyright: see _community/README.md
 # GENERATED FILE — do not hand-edit.
 # Produced by m7_sysex export from byte_map + parameter analyses.
 # Compile with: kaitai-struct-compiler bricasti_m7_system_dump.ksy

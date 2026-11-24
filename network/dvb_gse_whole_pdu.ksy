@@ -1,5 +1,4 @@
 # Imported from https://github.com/ucsdsysnet/dontlookup/blob/c15765a15740e9367df825f71c35ab224a8022e4/parser/parsers/gse/whole_pdu.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dvb_gse_whole_pdu
   file-extension: whole_pdu

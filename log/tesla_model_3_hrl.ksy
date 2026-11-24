@@ -1,5 +1,4 @@
 # Imported from https://github.com/NetherlandsForensicInstitute/teslalogs/blob/150e1906a7e3d452a5c00faffed5764177e62b64/teslalogs/model_3/Model3_HRL.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: tesla_model_3_hrl
   title: Model3 High Resolution Log

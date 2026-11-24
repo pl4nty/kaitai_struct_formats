@@ -1,5 +1,4 @@
 # Imported from https://github.com/estcube/Telemetry-Forwarding-Client/blob/8d31671372fe167c2dbbabdbb3c4dd28c7595500/client/spec/icp.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: estcube_icp
   title: ESTCube ICP packet

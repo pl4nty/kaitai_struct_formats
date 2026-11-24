@@ -1,5 +1,4 @@
 # Imported from https://github.com/LumiaSecurity/mitmproxy-ace/blob/9083d94426e836f107b880d019f975aca855ed11/mitmproxy/contrib/kaitaistruct/dtls_client_hello.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dtls_client_hello
   title: DTLS ClientHello message

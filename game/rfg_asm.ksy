@@ -1,5 +1,4 @@
 # Imported from https://github.com/rfg-modding/RFGM.Formats/blob/56da288e84a8b8d713e463e2884688f892720dc9/RFGM.Formats/Asm/Models/rfg_asm.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: rfg_asm
   title: Red Faction Guerrilla Asset Assembler file

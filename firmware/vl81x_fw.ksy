@@ -1,5 +1,4 @@
 # Imported from https://github.com/cyrozap/usb-hub-re/blob/dfba74f9b38250c14df0c9c23633c25adf4b4ebe/vl81x/vl81x_fw.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: vl81x_fw
   title: VIA Labs VL81x Firmware Image

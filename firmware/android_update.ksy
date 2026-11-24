@@ -1,5 +1,4 @@
 # Imported from https://github.com/armijnhemel/binaryanalysis-ng/blob/d72f0d9c5c4e5484878f357d07690e68334365db/src/bang/parsers/firmware/android_update/android_update.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: android_update
   title: Android Update images

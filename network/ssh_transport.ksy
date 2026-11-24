@@ -1,5 +1,4 @@
 # Imported from https://github.com/PatrikH0lop/kaitai-ssh/blob/4f44520683b2ae83bc71036a22966a2e99209352/parser.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: ssh_transport
   title: SSH protocol parser by Patrik Holop.

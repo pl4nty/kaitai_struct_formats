@@ -1,5 +1,4 @@
 # Imported from https://github.com/raymond-h/pokesav-ds-gen4/blob/f9d33c91fb9a175266c35ca0976d28287e15dd9a/formats/pokesav-ds-gen4.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pokemon_gen4_save
   application: 'Pokémon Diamond/Pearl/Platinum/HeartGold/SoulSilver Version'

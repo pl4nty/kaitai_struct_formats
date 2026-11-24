@@ -1,5 +1,4 @@
 # Imported from https://github.com/sibeshkar/jiminy/blob/7754f86fb0f246e7d039ea0cbfd9950fcae4adfb/examples/ksy/rfp_server.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: vnc_rfb_server
   file-extension: rfp_server

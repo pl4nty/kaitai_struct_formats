@@ -1,5 +1,4 @@
 # Imported from https://github.com/pschmitt/Gadgetbridge/blob/7e6cbc79ac04ce4c896b9ff4cc914c804c1061be/app/src/main/ksy/duml_general.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: duml_general
   title: DUML General command set

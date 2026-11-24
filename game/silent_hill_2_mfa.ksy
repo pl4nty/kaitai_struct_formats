@@ -1,5 +1,4 @@
 # Imported from https://github.com/dreamingmoths/memory-of-alessa/blob/d7bced53891792477e1ece98442178091e88f18e/tools/alessatool/kaitai/mfa.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: silent_hill_2_mfa
   file-extension: mfa

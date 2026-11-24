@@ -1,5 +1,4 @@
 # Imported from https://github.com/TagnumElite/File-Format-Templates/blob/57463112a3419da7407896b0d84649d36bd0d8a3/klei/kanim.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: klei_kanim
   file-extension: bytes

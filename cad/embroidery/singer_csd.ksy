@@ -1,5 +1,4 @@
 # Imported from https://github.com/broideryfab/embroidery-ksy/blob/424184f8b4222794314ba3149aef31afea9c6e13/formats/singer_csd/singer_csd.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: singer_csd
   title: Singer CSD embroidery format

@@ -1,5 +1,4 @@
 # Imported from https://github.com/Wargus/stargus/blob/b6b90dceb7d327909987580d680b8241bedd568b/src/kaitai/images_dat.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: starcraft_images_dat
   title: StarCraft images.dat

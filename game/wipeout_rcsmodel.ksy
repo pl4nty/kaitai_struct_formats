@@ -1,5 +1,4 @@
 # Imported from https://github.com/PierreBelmondo/vscode-wipeout/blob/fde78f7b7e257a22378d2c8c498cc38d0b1bdfc5/resources/kaitai/rcsmodel.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: wipeout_rcsmodel
   file-extension: rcsmodel

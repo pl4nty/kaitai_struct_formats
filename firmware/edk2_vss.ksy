@@ -1,5 +1,4 @@
 # Imported from https://github.com/LongSoft/UEFITool/blob/de73942df908b9466c055e15108ac4e4c0b1688c/common/ksy/edk2_vss.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: edk2_vss
   title: EDK2 VSS NVRAM store

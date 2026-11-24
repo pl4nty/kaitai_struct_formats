@@ -1,5 +1,4 @@
 # Imported from https://github.com/armijnhemel/binaryanalysis-ng/blob/d72f0d9c5c4e5484878f357d07690e68334365db/src/bang/parsers/media/xg3d/xg3d.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: xg3d
   title: 3D Studio Max XG Exporter files

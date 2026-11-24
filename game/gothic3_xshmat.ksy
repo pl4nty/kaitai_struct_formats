@@ -1,5 +1,4 @@
 # Imported from https://github.com/georgeto/g3blend/blob/e4f64a496d774263efcd299206489434ab5762d9/doc/xshmat.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: gothic3_xshmat
   title: Gothic 3 shader material

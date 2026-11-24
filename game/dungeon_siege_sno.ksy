@@ -1,5 +1,4 @@
 # Imported from https://github.com/OpenSiege/OpenSiege/blob/0373da7e91aeca1aeef42f53ba5ba304acf8a72a/ksy/sno.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dungeon_siege_sno
   file-extension: sno

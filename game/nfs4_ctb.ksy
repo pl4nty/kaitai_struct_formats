@@ -1,5 +1,4 @@
 # Imported from https://github.com/e-rk/speedtools/blob/c7b1286fdc0c6983ad121712d90bf0dba7b6a975/speedtools/specs/ctb.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: nfs4_ctb
   file-extension: ctb

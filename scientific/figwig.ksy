@@ -1,5 +1,4 @@
 # Imported from https://github.com/jmschrei/figwig/blob/497066768b39828491f5f63693d7b6a84d24ac01/docs/figwig.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: figwig
   title: figwig file, version 1

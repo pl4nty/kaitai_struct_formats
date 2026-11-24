@@ -1,5 +1,4 @@
 # Imported from https://github.com/aimrebirth/tools/blob/edcc2d8bad7e2d688038a6aaa5bc41552a313c1e/formats/tab.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: aim_db_tab
   title: A.I.M. database table (.tab) file

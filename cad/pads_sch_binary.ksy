@@ -1,5 +1,4 @@
 # Imported from https://github.com/KiCad/kicad-source-mirror/blob/c508d01f46c7f04fd475d40c6fac93d10fae49b2/eeschema/sch_io/pads/pads_sch_binary.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: pads_sch_binary
   title: PADS Logic binary schematic database

@@ -1,5 +1,4 @@
 # Imported from https://github.com/spiral6/idolmasterSCBParser/blob/2a1a94b08ae43c2da1fd92494755cd208b14a565/file_formats/scb0.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: imas_scb0
   file-extension: scb0

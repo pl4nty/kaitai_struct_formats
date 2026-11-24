@@ -1,5 +1,4 @@
 # Imported from https://github.com/OK-DMR/dmr-kaitai/blob/7489ff1a8b418e3d37e2a0268acbaf2710543d93/okdmr/kaitai/etsi/dmr_csbk.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: dmr_csbk
   title: DMR Control Signalling Block (CSBK)

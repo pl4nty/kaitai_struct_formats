@@ -1,5 +1,4 @@
 # Imported from https://github.com/sebastiancadena/byteql/blob/0ea7e05703f2e5287d47f002d3f294e04b7f888d/packages/formats/pcap/ksy/linux_sll2.ksy
-# Licence and copyright: see _community/README.md
 # byteql-authored: the vendored kaitai-io/kaitai_struct_formats `network/` set has no Linux
 # cooked-capture spec (see PATCHES.md). This file has no `network/` counterpart.
 meta:

@@ -1,5 +1,4 @@
 # Imported from https://github.com/About-Time-Technologies/Lighting-Protocols/blob/9ccb465f76bc93bbd533ce450e42364075ecea0c/artnet/ksy/firmware.ksy
-# Licence and copyright: see _community/README.md
 # Development notes:
 #   * Note: this is not a packet but is formally defined
 #   * Username is assumed ASCII but not explicitly specified

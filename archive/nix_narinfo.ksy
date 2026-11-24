@@ -1,5 +1,4 @@
 # Imported from https://github.com/straylight-software/nix/blob/96e3d6ec0281bd917463ebb7ced11f46afbf9d9b/kaitai/narinfo.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: nix_narinfo
   title: Nix Binary Cache NAR Info

@@ -1,5 +1,4 @@
 # Imported from https://github.com/n-rook/thscoreboard/blob/94c94f2a1d7a4d48d5d63420bea1ed0193ba2f7a/ref/threp-ksy/th_modern_20_header.ksy
-# Licence and copyright: see _community/README.md
 # Header and userdata formatting for th20. (And beyond?)
 meta:
   id: touhou_th_modern_20_header

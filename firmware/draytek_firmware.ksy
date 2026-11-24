@@ -1,5 +1,4 @@
 # Imported from https://github.com/infobyte/draytek-arsenal/blob/d601252b2e6a62e3cd3e5962e164d32dabf1c6ae/draytek_fw.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: draytek_firmware
   file-extension: all

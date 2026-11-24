@@ -1,5 +1,4 @@
 # Imported from https://github.com/heinrich5991/libtw2/blob/060e4b6450fba9f5baa59e430dc22714f2757162/doc/uncompressed_snap.ksy
-# Licence and copyright: see _community/README.md
 meta:
   id: tw_uncompressed_snap
   title: Teeworlds uncompressed snapshot
