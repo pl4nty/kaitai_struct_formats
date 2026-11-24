@@ -32,6 +32,9 @@ doc-ref:
   - "https://github.com/roginvs/space-rangers-quest/blob/ad86c9bb720a6f7aa11a6d9b04a12e08d7dc3187/src/lib/qmreader.ts"
   - "http://www.abaduaber.narod.ru/lastqm.txt"
   - "https://github.com/ObKo/OpenSR/blob/rework/QM/QM.cpp"
+  - "https://github.com/ObKo/OpenSR/blob/rework/include/OpenSR/QM/QM.h"
+  - "https://github.com/VirRus77/Space-Rangers-Quests/blob/master/SpaceRangersQuests.Model/FileQuest.cs"
+  - "https://github.com/ObKo/OpenSR/blob/rework/QM/QM.cpp"
 seq:
   - id: magic
     -orig-id: header

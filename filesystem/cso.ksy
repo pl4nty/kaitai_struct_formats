@@ -31,8 +31,10 @@ doc: |
   Brackets.
   A CSO file consists of a file header, index section, and data section.
 doc-ref:
-  - https://github.com/unknownbrackets/maxcso/blob/master/README_CSO.md
-  - https://github.com/unknownbrackets/maxcso/blob/master/README_ZSO.md
+  - https://github.com/unknownbrackets/maxcso/blob/961f232cf99d546b2b7e704c0ecf3fc5bea52221/README_CSO.md
+  - https://github.com/unknownbrackets/maxcso/blob/961f232cf99d546b2b7e704c0ecf3fc5bea52221/README_ZSO.md
+  - https://github.com/unknownbrackets/maxcso/blob/961f232cf99d546b2b7e704c0ecf3fc5bea52221/src/input.cpp#L438-L447
+  - https://github.com/lz4/lz4/blob/ebb370ca83af193212df4dcbadcc5d87bc0de2f0/doc/lz4_Block_format.md
 seq:
   - id: header
     type: header
@@ -121,8 +123,14 @@ types:
         io: _root._io
         pos: ptr
         size: size
-        process: kaitai.compress.lz4
+        process: kaitai.compress.lz4_block(_root.header.block_size)
         if: not is_end and compression == compression::lz4
+        doc: |
+          A raw LZ4 block (no frame header, no size prefix) that decompresses to
+          `block_size` bytes. maxcso compresses each whole block with
+          `LZ4_compress_HC` / `LZ4_compress_default`, and reads it back with
+          `LZ4_decompress_safe_partial` because `size` may include padding after
+          the block when `index_shift` is greater than 0.
       block:
         value: '(compression == compression::deflate) ? block_deflate : ((compression == compression::lz4) ? block_lz4 : block_uncompressed)'
         if: not is_end and compression != compression::unknown

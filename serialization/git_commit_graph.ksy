@@ -37,11 +37,11 @@ seq:
     valid: 1
   - id: hash_version
     type: u1
-    enum: hash_versions
+    enum: hash_version
     valid:
       any-of:
-        - hash_versions::sha1
-        - hash_versions::sha256
+        - hash_version::sha1
+        - hash_version::sha256
   - id: num_chunks
     -orig-id: C
     type: u1
@@ -66,7 +66,7 @@ seq:
     doc: Hash (SHA-1 or SHA-256, per `hash_version`) of everything before it.
 instances:
   len_hash:
-    value: 'hash_version == hash_versions::sha256 ? 32 : 20'
+    value: 'hash_version == hash_version::sha256 ? 32 : 20'
     doc: H, the length of an object ID and of the trailing checksum.
 types:
   chunk_entry:
@@ -76,7 +76,7 @@ types:
     seq:
       - id: chunk_id
         type: u4
-        enum: chunk_ids
+        enum: chunk_id
         doc: 0 terminates the table.
       - id: offset
         type: u8
@@ -95,15 +95,15 @@ types:
         type:
           switch-on: chunk_id
           cases:
-            chunk_ids::oid_fanout: oid_fanout
-            chunk_ids::oid_lookup: oid_lookup
-            chunk_ids::commit_data: commit_data
-            chunk_ids::generation_data: generation_data
-            chunk_ids::generation_data_overflow: generation_data_overflow
-            chunk_ids::extra_edge_list: extra_edge_list
-            chunk_ids::bloom_filter_index: bloom_filter_index
-            chunk_ids::bloom_filter_data: bloom_filter_data
-            chunk_ids::base_graphs_list: base_graphs_list
+            chunk_id::oid_fanout: oid_fanout
+            chunk_id::oid_lookup: oid_lookup
+            chunk_id::commit_data: commit_data
+            chunk_id::generation_data: generation_data
+            chunk_id::generation_data_overflow: generation_data_overflow
+            chunk_id::extra_edge_list: extra_edge_list
+            chunk_id::bloom_filter_index: bloom_filter_index
+            chunk_id::bloom_filter_data: bloom_filter_data
+            chunk_id::base_graphs_list: base_graphs_list
   oid_fanout:
     -orig-id: OIDF
     seq:
@@ -237,10 +237,10 @@ types:
         repeat-expr: _root.num_base_graphs
         doc: Checksums of the base commit-graph files of this split chain.
 enums:
-  hash_versions:
+  hash_version:
     1: sha1
     2: sha256
-  chunk_ids:
+  chunk_id:
     0: terminator
     0x4f494446:
       id: oid_fanout
