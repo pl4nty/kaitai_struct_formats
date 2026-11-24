@@ -134,7 +134,12 @@ types:
       - id: ofs_bitmap
         -orig-id: bfOffBits
         type: s4
-        doc: Offset to actual raw pixel data of the image
+        valid:
+          min: 14 + 12
+        doc: |
+          Offset to actual raw pixel data of the image. It must leave room
+          for this 14-byte file header and at least the smallest (12-byte
+          BITMAPCOREHEADER) DIB header.
   bitmap_info:
     -orig-id: BITMAPINFO
     doc-ref: https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfo
