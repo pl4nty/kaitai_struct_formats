@@ -1,14 +1,14 @@
 meta:
-  id: pcieconf
-  title: PCI configuration space
+  id: pci_config_space
+  title: PCI Configuration Space
   license: 0BSD
   imports:
-    - pcieconf/bar_list
-    - pcieconf/capabilities/pm
-    - pcieconf/capabilities/msi
-    - pcieconf/capabilities/vendor
-    - pcieconf/capabilities/msix
-    - pcieconf/capabilities/af
+    - pci_config_space/pci_config_bar_list
+    - pci_config_space/capabilities/pci_config_pm
+    - pci_config_space/capabilities/pci_config_msi
+    - pci_config_space/capabilities/pci_config_vendor
+    - pci_config_space/capabilities/pci_config_msix
+    - pci_config_space/capabilities/pci_config_af
   endian: le
 
 # TODO: EXPANSION ROM
@@ -151,7 +151,7 @@ types:
     seq:
       - id: bar_list
         size: 0x18
-        type: bar_list
+        type: pci_config_bar_list
       - id: cardbus_cis_pointer
         type: u4
       - id: subsystem_vendor_id
@@ -184,7 +184,7 @@ types:
     seq:
       - id: bar_list
         size: 0x8
-        type: bar_list
+        type: pci_config_bar_list
       - id: primary_bus_number
         type: u1
       - id: secondary_bus_number
@@ -362,11 +362,11 @@ types:
         type:
           switch-on: id
           cases:
-            'capability_id::pm': pm
-            'capability_id::msi': msi
-            'capability_id::vendor': vendor
-            'capability_id::msix': msix
-            'capability_id::af': af
+            'capability_id::pm': pci_config_pm
+            'capability_id::msi': pci_config_msi
+            'capability_id::vendor': pci_config_vendor
+            'capability_id::msix': pci_config_msix
+            'capability_id::af': pci_config_af
     instances:
       next:
         io: _root._io

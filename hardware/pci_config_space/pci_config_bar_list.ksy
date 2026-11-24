@@ -1,5 +1,5 @@
 meta:
-  id: bar_list
+  id: pci_config_bar_list
   title: PCI configuration space base address registers
   license: 0BSD
   endian: le

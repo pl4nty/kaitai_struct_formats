@@ -1,5 +1,5 @@
 meta:
-  id: pm
+  id: pci_config_pm
   title: PCI power management capability
   license: 0BSD
   endian: le
