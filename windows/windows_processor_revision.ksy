@@ -97,7 +97,8 @@ types:
   rev_alpha:
     doc: low-order 16 bits of the processor revision number from the firmware
     seq:
-      - id: pass
+      - id: pass_num
+        -orig-id: pass
         type: u1
         doc: low-order 8 bits of the PRId register
       - id: model
