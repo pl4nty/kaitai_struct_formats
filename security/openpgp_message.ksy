@@ -48,7 +48,7 @@ types:
     seq:
       - id: len
         type:
-          switch-on: _parent.len_type
+          switch-on: _parent.len_type.as<u1>
           cases:
             0: u1
             1: u2
@@ -167,7 +167,7 @@ types:
             subpacket_types::preferred_key_server: preferred_key_server
             subpacket_types::primary_user_id: primary_user_id
             subpacket_types::policy_uri: policy_uri
-            subpacket_types::key_flags: key_flags
+            subpacket_types::key_flags: key_flags_subpacket
             subpacket_types::signers_user_id: signers_user_id
             subpacket_types::reason_for_revocation: reason_for_revocation
             subpacket_types::features: features
@@ -247,7 +247,7 @@ types:
 
   revocation_key:
     seq:
-      - id: class
+      - id: revocation_class
         type: u1
       - id: public_key_algorithm
         enum: public_key_algorithms
@@ -292,7 +292,7 @@ types:
         type: str
         size-eos: true
 
-  key_flags:
+  key_flags_subpacket:
     seq:
       - id: flag
         type: u1
