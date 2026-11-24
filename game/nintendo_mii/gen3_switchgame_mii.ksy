@@ -1,29 +1,27 @@
 # Imported from https://github.com/TheGreatRambler/Mii_to_UMii/blob/64caebae9613dcca464d38709ade7c510caa5bb0/ksy/gen3_switchgame.ksy
+# Field names for the former unknown bytes from https://github.com/WiiLink24/MiiContestChannelServer/blob/HEAD/mii/gen3_switchgame.ksy
 meta:
   id: gen3_switchgame_mii
   title: Switch game Mii character data
   license: MIT
   endian: le
 seq:
-  - id: unknown_data
+  - id: mii_id
     type: u1
     repeat: expr
     repeat-expr: 16
-    doc: Currently unknown data.
+    doc: Mii ID. An identifier used to save Miis in most games.
   - id: mii_name
-    size: 20
+    size: 22
     type: str
     encoding: UTF-16LE
     doc: |
-      Mii name. Can be up to 10 characters long. Different from the Mii name that
-      appears in Smash - in game, this is never seen.
-  - id: unknown_buffer
+      Mii name. Can be up to 10 characters long (plus a terminating NUL). Different
+      from the Mii name that appears in Smash - in game, this is never seen.
+  - id: font_region
     type: u1
-    repeat: expr
-    repeat-expr: 3
-    doc: |
-      Currently unknown data - likely a 00 buffer between the name and misc. info and
-      the rest of the Mii data.
+    enum: font_region
+    doc: Font region, the character set used for the Mii name.
   - id: favorite_color
     type: u1
     doc: Favorite color. Ranges from 0 to 11.
@@ -36,13 +34,14 @@ seq:
   - id: body_weight
     type: u1
     doc: Body weight. Ranges from 0 to 127, small to large.
-  - id: unknown_buffer2
+  - id: special_type
     type: u1
-    repeat: expr
-    repeat-expr: 2
     doc: |
-      Currently unknown data - likely a 00 buffer between the Mii body data and the
-      Mii face data.
+      Toggle if the Mii is a Special Mii. Completely unused functionality. Does not
+      allow editing the Mii, or using the Mii in games.
+  - id: region_move
+    type: u1
+    doc: Region move flag. Meaning not confirmed.
   - id: face_type
     type: u1
     doc: |
@@ -219,10 +218,12 @@ seq:
   - id: mole_vertical
     type: u1
     doc: Mole Y (vertical) position. Ranges from 30 to 0, low to high.
-  - id: unknown_buffer3
+  - id: always_zero
     type: u1
-    repeat: expr
-    repeat-expr: 1
-    doc: |
-      Currently unknown data - likely a 00 buffer between the Mii data and the Smash
-      Ultimate data.
+    doc: Always 0. Documented by the Switch, but not used.
+enums:
+  font_region:
+    0: usa_pal_jpn
+    1: chn
+    2: kor
+    3: twn
