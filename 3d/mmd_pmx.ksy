@@ -106,13 +106,13 @@ types:
       - id: rigid_body_index_size
         type: u1
       - id: model_name
-        type: text
+        type: text(encoding)
       - id: english_model_name
-        type: text
+        type: text(encoding)
       - id: comment
-        type: text
+        type: text(encoding)
       - id: english_comment
-        type: text
+        type: text(encoding)
 
   vertex:
     seq:
@@ -212,15 +212,15 @@ types:
   texture:
     seq:
       - id: name
-        type: text
+        type: text(_root.header.encoding)
         doc: Indicates the filename of the texture image
 
   material:
     seq:
       - id: name
-        type: text
+        type: text(_root.header.encoding)
       - id: english_name
-        type: text
+        type: text(_root.header.encoding)
       - id: diffuse
         type: color4
       - id: specular
@@ -277,16 +277,16 @@ types:
           common toon textures shipped with MMD.  Otherwise, contains the
           index of a texture.
       - id: comment
-        type: text
+        type: text(_root.header.encoding)
       - id: face_vertex_count
         type: u4
 
   bone:
     seq:
       - id: name
-        type: text
+        type: text(_root.header.encoding)
       - id: english_name
-        type: text
+        type: text(_root.header.encoding)
       - id: position
         type: vec3
       - id: parent_index
@@ -407,9 +407,9 @@ types:
   morph:
     seq:
       - id: name
-        type: text
+        type: text(_root.header.encoding)
       - id: english_name
-        type: text
+        type: text(_root.header.encoding)
       - id: panel
         type: u1
       - id: type
@@ -508,9 +508,9 @@ types:
   frame:
     seq:
       - id: name
-        type: text
+        type: text(_root.header.encoding)
       - id: english_name
-        type: text
+        type: text(_root.header.encoding)
       - id: type
         type: u1
       - id: element_count
@@ -535,9 +535,9 @@ types:
   rigid_body:
     seq:
       - id: name
-        type: text
+        type: text(_root.header.encoding)
       - id: english_name
-        type: text
+        type: text(_root.header.encoding)
       - id: bone_index
         type: sized_index(_root.header.bone_index_size)
         doc: index of a related bone
@@ -577,9 +577,9 @@ types:
   joint:
     seq:
       - id: name
-        type: text
+        type: text(_root.header.encoding)
       - id: english_name
-        type: text
+        type: text(_root.header.encoding)
       - id: type
         type: u1
         enum: joint_type
@@ -632,10 +632,17 @@ types:
     doc: |
       A text string. Can be UTF-8 or UTF-16LE depending on the setting
       in the header.
+    params:
+      - id: encoding
+        type: u1
+        doc: |
+          `encoding` from the header. It is passed in rather than read from
+          `_root.header`, because the header itself contains text fields
+          and is not yet assigned while they are parsed.
     seq:
       - id: value
         type:
-          switch-on: _root.header.encoding
+          switch-on: encoding
           cases:
             0: text_utf16
             1: text_utf8
