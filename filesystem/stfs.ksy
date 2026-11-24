@@ -311,20 +311,24 @@ types:
         size: 0x14
       - id: display_names
         size: 0x80
-        type: str
+        type: strz
+        encoding: UTF-16BE
         repeat: expr
         repeat-expr: 0x10
       - id: descriptions
         size: 0x80
-        type: str
+        type: strz
+        encoding: UTF-16BE
         repeat: expr
         repeat-expr: 0x10
       - id: publisher
         size: 0x80
-        type: str
+        type: strz
+        encoding: UTF-16BE
       - id: title_name
         size: 0x80
-        type: str
+        type: strz
+        encoding: UTF-16BE
       - id: transfer_flags
         size: 0x1
         type: x_content_attributes
@@ -336,7 +340,8 @@ types:
         size: thumbnail_size
       - id: display_names_ex
         size: 0x80
-        type: str
+        type: strz
+        encoding: UTF-16BE
         repeat: expr
         repeat-expr: 6
         if: 'metadata_version == metadata_version::two'
@@ -344,7 +349,8 @@ types:
         size: title_thumbnail_size
       - id: descriptions_ex
         size: 0x80
-        type: str
+        type: strz
+        encoding: UTF-16BE
         repeat: expr
         repeat-expr: 6
         if: 'metadata_version == metadata_version::two'
