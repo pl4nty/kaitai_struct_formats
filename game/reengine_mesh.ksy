@@ -128,7 +128,7 @@ types:
       - {id: parent_idx, type: u2}
       - {id: unk_02, type: u2, repeat: expr, repeat-expr: 6}
 
-  name_offset: # Thanks: https://github.com/kaitai-io/kaitai_struct/issues/14
+  name_offset: # Thanks: upstream kaitai_struct issue 14
     seq:
       - {id: offset, type: u8}
     instances:

@@ -618,7 +618,7 @@ types:
           - id: value_new
             size-eos: true
             # FIXME: should be `type: strz` but Kaitai Struct doesn't support it for
-            # UTF-16 yet, see https://github.com/kaitai-io/kaitai_struct/issues/187
+            # UTF-16 yet, see upstream kaitai_struct issue 187
             type: str
             encoding: UTF-16LE
             if: _root.version >= 1200
@@ -2612,7 +2612,7 @@ types:
           - id: value_new
             size-eos: true
             # FIXME: should be `type: strz` but Kaitai Struct doesn't support it for
-            # UTF-16 yet, see https://github.com/kaitai-io/kaitai_struct/issues/187
+            # UTF-16 yet, see upstream kaitai_struct issue 187
             type: str
             encoding: UTF-16LE
             if: _root.version >= 1200

@@ -486,7 +486,7 @@ types:
       fscrypt context at +0x00 and/or the 4-byte checksum at +0x1c.
     seq:
       - size: 0
-        if: offset_in_cluster < 0     # trick to cache start offset in an instance: https://github.com/kaitai-io/kaitai_struct/issues/868
+        if: offset_in_cluster < 0     # trick to cache start offset in an instance: upstream kaitai_struct issue 868
       - id: flags
         type: direntry_flags
       - id: num_slots
