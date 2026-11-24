@@ -1,6 +1,6 @@
 meta:
   id: crc_tabulated_generic
-  title: Computes CRC checksum of an array.
+  title: Generic table-driven CRC
   license: Unlicense
   imports:
     - /common/bit_reflector/bit_reflector_u8

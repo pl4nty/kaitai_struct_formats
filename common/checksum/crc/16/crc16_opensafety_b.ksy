@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x20fe
   -polynomial: 0x755b
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes OPENSAFETY-B variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the OPENSAFETY-B variant of CRC-16 of an array.
 
 params:
   - id: array

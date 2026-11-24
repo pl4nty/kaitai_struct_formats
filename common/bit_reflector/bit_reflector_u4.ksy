@@ -1,6 +1,6 @@
 meta:
   id: bit_reflector_u4
-  title: Changes order of bits within a double word
+  title: Bit reflection of a double word
   license: Unlicense
   imports:
     ./bit_reflector_u2

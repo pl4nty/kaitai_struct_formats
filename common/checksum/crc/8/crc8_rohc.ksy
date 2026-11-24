@@ -7,9 +7,9 @@ meta:
   -initial: 0xff
   -check: 0xd0
   -polynomial: 0x7
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes ROHC variant of 8 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the ROHC variant of CRC-8 of an array.
 
 params:
   - id: array

@@ -7,9 +7,9 @@ meta:
   -initial: 0xff
   -check: 0xf7
   -polynomial: 0x31
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes NRSC-5 variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the NRSC-5 variant of CRC-8 of an array.
 
 params:
   - id: array

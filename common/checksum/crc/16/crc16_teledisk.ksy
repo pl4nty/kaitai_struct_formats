@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xfb3
   -polynomial: 0xa097
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes TELEDISK variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the TELEDISK variant of CRC-16 of an array.
 
 params:
   - id: array

@@ -7,8 +7,8 @@ meta:
   -initial: 0xffffffff
   -check: 0xcbf43926
   -polynomial: 0x4c11db7
-  -reflect_in: true
-  -reflect_out: true
+  -reflect-in: true
+  -reflect-out: true
 doc: Computes CRC-32 of an array.
 
 params:

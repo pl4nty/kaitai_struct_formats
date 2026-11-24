@@ -7,9 +7,9 @@ meta:
   -initial: 0xffff
   -check: 0x772b
   -polynomial: 0x5935
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes M17 variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the M17 variant of CRC-16 of an array.
 
 params:
   - id: array

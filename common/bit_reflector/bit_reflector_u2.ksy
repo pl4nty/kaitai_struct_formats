@@ -1,6 +1,6 @@
 meta:
   id: bit_reflector_u2
-  title: Changes order of bits within a word
+  title: Bit reflection of a word
   license: Unlicense
   imports:
     ./bit_reflector_u1

@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x15
   -polynomial: 0x39
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes DARC variant of 8 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the DARC variant of CRC-8 of an array.
 
 params:
   - id: array

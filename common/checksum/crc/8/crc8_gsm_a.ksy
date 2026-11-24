@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x37
   -polynomial: 0x1d
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes GSM-A variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the GSM-A variant of CRC-8 of an array.
 
 params:
   - id: array

@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x6c40df5f0b497347
   -polynomial: 0x42f0e1eba9ea3693
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes ECMA-182 variant of 64 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the ECMA-182 variant of CRC-64 of an array.
 
 params:
   - id: array

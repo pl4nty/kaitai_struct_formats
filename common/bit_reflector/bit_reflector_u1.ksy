@@ -1,6 +1,6 @@
 meta:
   id: bit_reflector_u1
-  title: Changes order of bits within a byte
+  title: Bit reflection of a byte
   license: Unlicense
 doc: Changes order of bits within a byte.
 

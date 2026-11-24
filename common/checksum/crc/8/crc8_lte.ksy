@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xea
   -polynomial: 0x9b
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes LTE variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the LTE variant of CRC-8 of an array.
 
 params:
   - id: array

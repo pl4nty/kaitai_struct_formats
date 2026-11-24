@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x7e
   -polynomial: 0x589
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes DECT-R variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the DECT-R variant of CRC-16 of an array.
 
 params:
   - id: array

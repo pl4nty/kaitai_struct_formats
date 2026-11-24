@@ -1,6 +1,6 @@
 meta:
   id: crc_generic
-  title: Computes CRC checksum of an array.
+  title: Generic CRC
   xref:
     osdev: CRC32
     wikidata: Q245471

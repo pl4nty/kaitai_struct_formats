@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xbdf4
   -polynomial: 0x6f63
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes LJ1200 variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the LJ1200 variant of CRC-16 of an array.
 
 params:
   - id: array

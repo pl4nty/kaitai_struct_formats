@@ -7,8 +7,8 @@ meta:
   -initial: 0x0
   -check: 0x31c3
   -polynomial: 0x1021
-  -reflect_in: false
-  -reflect_out: false
+  -reflect-in: false
+  -reflect-out: false
 doc: Computes CRC-16 of an array.
 
 params:

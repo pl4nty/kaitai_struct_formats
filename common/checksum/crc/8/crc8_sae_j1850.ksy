@@ -7,9 +7,9 @@ meta:
   -initial: 0xff
   -check: 0x4b
   -polynomial: 0x1d
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes SAE-J1850 variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the SAE-J1850 variant of CRC-8 of an array.
 
 params:
   - id: array

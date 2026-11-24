@@ -1,12 +1,14 @@
 meta:
   id: fletcher
-  title: Computes Fletcher checksum of an array.
+  title: Fletcher checksum
   license: Unlicense
   imports:
     - ./generalized_fletcher
 
 doc: |
-  Computes Fletcher checksum of an array.
+  Computes the Fletcher checksum of an array: Fletcher-16 for byteness 1,
+  Fletcher-32 for byteness 2 and Fletcher-64 for byteness 4. The data is
+  summed as little-endian words of `byteness` bytes, zero-padded at the end.
 
   assert fletcher16(b"abcde") == 0xC8F0
   assert fletcher16(b"abcdef") == 0x2057
@@ -27,7 +29,7 @@ params:
 seq:
   - id: generalized_fletcher
     size: 0
-    type: generalized_fletcher(byteness, 0, mask, block_size, data)
+    type: generalized_fletcher(byteness, byteness, 0, mask, block_size, data)
 
 instances:
   block_size:

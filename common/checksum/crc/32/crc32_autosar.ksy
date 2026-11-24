@@ -7,9 +7,9 @@ meta:
   -initial: 0xffffffff
   -check: 0x1697d06a
   -polynomial: 0xf4acfb13
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes AUTOSAR variant of 32 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the AUTOSAR variant of CRC-32 of an array.
 
 params:
   - id: array

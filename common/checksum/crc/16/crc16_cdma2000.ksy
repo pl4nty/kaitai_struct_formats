@@ -7,9 +7,9 @@ meta:
   -initial: 0xffff
   -check: 0x4c06
   -polynomial: 0xc867
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes CDMA2000 variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the CDMA2000 variant of CRC-16 of an array.
 
 params:
   - id: array

@@ -1,9 +1,12 @@
 meta:
   id: checksum_simple_additive_u1
-  title: Computes a simple additive checksum
+  title: Simple 8-bit additive checksum
   license: Unlicense
   endian: le
 doc: |
+  Sum of all bytes of `data` and `initial`, modulo 256. Examples, as
+  calcChecksum(initial, data):
+
   assert calcChecksum(0xFF, b"abcde") == 238
   assert calcChecksum(0xFF, b"abcdef") == 84
   assert calcChecksum(0xFF, b"abcdefgh") == 35

@@ -7,9 +7,9 @@ meta:
   -initial: 0xff
   -check: 0x97
   -polynomial: 0x1d
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes EBU variant of 8 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the EBU variant of CRC-8 of an array.
 
 params:
   - id: array

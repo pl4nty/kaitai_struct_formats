@@ -1,10 +1,11 @@
 meta:
   id: generalized_fletcher
-  title: Computes Fletcher (and variants like Adler32) checksum of an array.
+  title: Generalized Fletcher checksum
   license: Unlicense
 
 doc: |
-  Computes Fletcher checksum of an array.
+  Computes a Fletcher-style checksum (Fletcher-16/32/64, Adler-32) of an
+  array. Use the `fletcher` and `adler32` specs for the usual parameters.
 
   assert fletcher16(b"abcde") == 0xC8F0
   assert fletcher16(b"abcdef") == 0x2057
@@ -20,10 +21,20 @@ doc: |
 params:
   - id: byteness
     type: u1
+  - id: operand_size
+    type: u1
+    doc: |
+      Size of one summed operand in bytes (1, 2 or 4). Operands are
+      little-endian, and a short last operand is padded with zero bytes.
+      Fletcher-N sums N/16-byte words (equal to `byteness`), Adler-32 sums
+      single bytes.
   - id: c0_init
     type: u1
   - id: modulus
     type: u8
+    doc: |
+      Modulus of both sums: `(1 << (byteness * 8)) - 1` for Fletcher, 65521
+      for Adler-32.
   - id: block_size
     type: u8
     doc: |
@@ -46,10 +57,12 @@ instances:
     value: byteness * 8
   mask:
     value: (1 << bitness)  - 1
+  num_operands:
+    value: (data.size + operand_size - 1) / operand_size
   full_blocks:
-    value: data.size / block_size
+    value: num_operands / block_size
   first_block_size:
-    value: data.size % block_size
+    value: num_operands % block_size
   reduction:
     pos: 0
     size: 0
@@ -84,9 +97,9 @@ types:
       init_c1:
         value: "(idx == 0 ? 0 : prev.c1_inner).as<u8>"
       c0_inner:
-        value: "(count != 0 ? (reduction[reduction.size - 1].c0_iter % _root.mask) : init_c0).as<u8>"
+        value: "(count != 0 ? (reduction[reduction.size - 1].c0_iter % _root.modulus) : init_c0).as<u8>"
       c1_inner:
-        value: "(count != 0 ? (reduction[reduction.size - 1].c1_iter % _root.mask) : init_c1).as<u8>"
+        value: "(count != 0 ? (reduction[reduction.size - 1].c1_iter % _root.modulus) : init_c1).as<u8>"
     types:
       iteration:
         params:
@@ -97,7 +110,22 @@ types:
             value: 'idx == 0 ? _parent.init_c0 : (_parent.reduction[idx - 1].as<iteration>.c0_iter).as<u8>'
           prev_c1_iter:
             value: 'idx == 0 ? _parent.init_c1 : (_parent.reduction[idx - 1].as<iteration>.c1_iter).as<u8>'
+          ofs:
+            value: (_parent.base_offset + idx) * _root.operand_size
+          byte0:
+            value: _root.data[ofs].as<u8>
+          byte1:
+            value: '(ofs + 1 < _root.data.size ? _root.data[ofs + 1] : 0).as<u8>'
+          byte2:
+            value: '(ofs + 2 < _root.data.size ? _root.data[ofs + 2] : 0).as<u8>'
+          byte3:
+            value: '(ofs + 3 < _root.data.size ? _root.data[ofs + 3] : 0).as<u8>'
+          operand:
+            value: |
+              _root.operand_size == 1 ? byte0 :
+              _root.operand_size == 2 ? (byte0 | byte1 << 8) :
+              (byte0 | byte1 << 8 | byte2 << 16 | byte3 << 24)
           c0_iter:
-            value: prev_c0_iter + _parent._parent.data[_parent.base_offset + idx]
+            value: prev_c0_iter + operand
           c1_iter:
             value: prev_c1_iter + c0_iter

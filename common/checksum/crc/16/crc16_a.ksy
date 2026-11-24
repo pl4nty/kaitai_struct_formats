@@ -7,9 +7,9 @@ meta:
   -initial: 0xc6c6
   -check: 0xbf05
   -polynomial: 0x1021
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes A variant of 16 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the A variant of CRC-16 of an array.
 
 params:
   - id: array

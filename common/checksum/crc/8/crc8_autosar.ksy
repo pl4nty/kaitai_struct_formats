@@ -7,9 +7,9 @@ meta:
   -initial: 0xff
   -check: 0xdf
   -polynomial: 0x2f
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes AUTOSAR variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the AUTOSAR variant of CRC-8 of an array.
 
 params:
   - id: array

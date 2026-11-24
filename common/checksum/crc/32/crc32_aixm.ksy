@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x3010bf7f
   -polynomial: 0x814141ab
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes AIXM variant of 32 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the AIXM variant of CRC-32 of an array.
 
 params:
   - id: array

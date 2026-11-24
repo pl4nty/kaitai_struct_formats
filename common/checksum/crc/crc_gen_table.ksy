@@ -1,6 +1,6 @@
 meta:
   id: crc_gen_table
-  title: Computes CRC-8 table for a polynomial.
+  title: CRC lookup table
   license: Unlicense
 
 doc: Computes CRC table for a polynomial.

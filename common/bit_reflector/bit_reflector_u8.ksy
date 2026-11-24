@@ -1,11 +1,11 @@
 meta:
   id: bit_reflector_u8
-  title: Changes order of bits within a quad word
+  title: Bit reflection of a quad word
   license: Unlicense
   imports:
     ./bit_reflector_u4
 
-doc: Changes order of bits within a double word.
+doc: Changes order of bits within a quad word.
 
 params:
   - id: needed

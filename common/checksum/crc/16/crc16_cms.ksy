@@ -7,9 +7,9 @@ meta:
   -initial: 0xffff
   -check: 0xaee7
   -polynomial: 0x8005
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes CMS variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the CMS variant of CRC-16 of an array.
 
 params:
   - id: array

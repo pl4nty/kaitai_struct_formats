@@ -7,9 +7,9 @@ meta:
   -initial: 0xffffffffffffffff
   -check: 0xb90956c775a41001
   -polynomial: 0x1b
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes GO-ISO variant of 64 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the GO-ISO variant of CRC-64 of an array.
 
 params:
   - id: array

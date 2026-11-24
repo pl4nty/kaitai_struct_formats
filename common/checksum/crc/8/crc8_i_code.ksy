@@ -7,9 +7,9 @@ meta:
   -initial: 0xfd
   -check: 0x7e
   -polynomial: 0x1d
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes I-CODE variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the I-CODE variant of CRC-8 of an array.
 
 params:
   - id: array

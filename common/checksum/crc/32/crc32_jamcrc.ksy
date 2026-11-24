@@ -7,9 +7,9 @@ meta:
   -initial: 0xffffffff
   -check: 0x340bc6d9
   -polynomial: 0x4c11db7
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes JAMCRC variant of 32 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the JAMCRC variant of CRC-32 of an array.
 
 params:
   - id: array

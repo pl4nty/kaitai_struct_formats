@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xa1
   -polynomial: 0x7
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes ITU variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the ITU variant of CRC-8 of an array.
 
 params:
   - id: array

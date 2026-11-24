@@ -7,9 +7,9 @@ meta:
   -initial: 0xc7
   -check: 0x99
   -polynomial: 0x1d
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes MIFARE-MAD variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the MIFARE-MAD variant of CRC-8 of an array.
 
 params:
   - id: array

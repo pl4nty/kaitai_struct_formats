@@ -7,9 +7,9 @@ meta:
   -initial: 0xffff
   -check: 0xd64e
   -polynomial: 0x1021
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes GENIBUS variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the GENIBUS variant of CRC-16 of an array.
 
 params:
   - id: array

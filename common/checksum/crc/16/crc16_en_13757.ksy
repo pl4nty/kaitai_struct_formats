@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xc2b7
   -polynomial: 0x3d65
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes EN-13757 variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the EN-13757 variant of CRC-16 of an array.
 
 params:
   - id: array

@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xbb3d
   -polynomial: 0x8005
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes ARC variant of 16 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the ARC variant of CRC-16 of an array.
 
 params:
   - id: array

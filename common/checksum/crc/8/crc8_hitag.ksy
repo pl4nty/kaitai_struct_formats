@@ -7,9 +7,9 @@ meta:
   -initial: 0xff
   -check: 0xb4
   -polynomial: 0x1d
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes HITAG variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the HITAG variant of CRC-8 of an array.
 
 params:
   - id: array

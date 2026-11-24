@@ -7,9 +7,9 @@ meta:
   -initial: 0xffffffffffffffff
   -check: 0x995dc9bbdf1939fa
   -polynomial: 0x42f0e1eba9ea3693
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes XZ variant of 64 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the XZ variant of CRC-64 of an array.
 
 params:
   - id: array

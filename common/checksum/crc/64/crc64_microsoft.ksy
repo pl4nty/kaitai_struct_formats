@@ -7,9 +7,9 @@ meta:
   -initial: 0xffffffffffffffff
   -check: 0x75d4b74f024eceea
   -polynomial: 0x259c84cba6426349
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes Microsoft variant of 64 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the Microsoft variant of CRC-64 of an array.
 
 params:
   - id: array

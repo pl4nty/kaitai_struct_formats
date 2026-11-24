@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x3e
   -polynomial: 0x2f
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes OPENSAFETY variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the OPENSAFETY variant of CRC-8 of an array.
 
 params:
   - id: array

@@ -7,9 +7,9 @@ meta:
   -initial: 0xffffffff
   -check: 0xfc891918
   -polynomial: 0x4c11db7
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes BZIP2 variant of 32 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the BZIP2 variant of CRC-32 of an array.
 
 params:
   - id: array

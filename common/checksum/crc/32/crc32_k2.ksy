@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x6425c10
   -polynomial: 0x32583499
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes Koopman 2 variant of 32 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the Koopman 2 variant of CRC-32 of an array.
 
 params:
   - id: array

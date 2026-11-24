@@ -7,9 +7,9 @@ meta:
   -initial: 0xffff
   -check: 0x6f91
   -polynomial: 0x1021
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes MCRF4XX variant of 16 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the MCRF4XX variant of CRC-16 of an array.
 
 params:
   - id: array

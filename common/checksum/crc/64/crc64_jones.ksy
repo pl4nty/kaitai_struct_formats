@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xe9c6d914c4b8d9ca
   -polynomial: 0xad93d23594c935a9
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes Jones variant of 64 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the Jones variant of CRC-64 of an array.
 
 params:
   - id: array

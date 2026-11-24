@@ -1,18 +1,11 @@
 meta:
   id: checksum_simple_xor_u4
-  title: Computes a simple XOR checksum
+  title: Simple 32-bit XOR checksum
   license: Unlicense
   endian: le
 doc: |
-  assert calcChecksum(0xFF, b"abcde") == 238
-  assert calcChecksum(0xFF, b"abcdef") == 84
-  assert calcChecksum(0xFF, b"abcdefgh") == 35
-  assert calcChecksum(0xFF, bytes(range(256))) == 127
-
-  assert calcChecksum(0, b"abcde") == 239
-  assert calcChecksum(0, b"abcdef") == 85
-  assert calcChecksum(0, b"abcdefgh") == 36
-  assert calcChecksum(0, bytes(range(256))) == 128
+  XOR of all 32-bit words of `data` and `initial`.
+  For example, initial 0 and data [1, 2, 4] give 7.
 params:
   - id: initial
     type: u4

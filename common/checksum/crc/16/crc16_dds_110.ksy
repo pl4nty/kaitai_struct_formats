@@ -7,9 +7,9 @@ meta:
   -initial: 0x800d
   -check: 0x9ecf
   -polynomial: 0x8005
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes DDS-110 variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the DDS-110 variant of CRC-16 of an array.
 
 params:
   - id: array

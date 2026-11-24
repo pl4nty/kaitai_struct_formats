@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xbc
   -polynomial: 0xd5
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes DVB-S2 variant of 8 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the DVB-S2 variant of CRC-8 of an array.
 
 params:
   - id: array

@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xbd0be338
   -polynomial: 0xaf
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes XFER variant of 32 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the XFER variant of CRC-32 of an array.
 
 params:
   - id: array

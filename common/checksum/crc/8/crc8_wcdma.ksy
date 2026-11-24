@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x25
   -polynomial: 0x9b
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes WCDMA variant of 8 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the WCDMA variant of CRC-8 of an array.
 
 params:
   - id: array

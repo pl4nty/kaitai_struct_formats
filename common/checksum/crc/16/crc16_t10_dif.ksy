@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xd0db
   -polynomial: 0x8bb7
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes T10-DIF variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the T10-DIF variant of CRC-16 of an array.
 
 params:
   - id: array

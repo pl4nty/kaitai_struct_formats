@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0xa1
   -polynomial: 0x31
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes MAXIM variant of 8 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the MAXIM variant of CRC-8 of an array.
 
 params:
   - id: array

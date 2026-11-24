@@ -7,9 +7,9 @@ meta:
   -initial: 0x1d0f
   -check: 0xe5cc
   -polynomial: 0x1021
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes AUG-CCITT variant of 16 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the AUG-CCITT variant of CRC-16 of an array.
 
 params:
   - id: array

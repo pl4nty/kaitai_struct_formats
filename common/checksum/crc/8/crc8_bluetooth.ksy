@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x26
   -polynomial: 0xa7
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes Bluetooth variant of 8 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the Bluetooth variant of CRC-8 of an array.
 
 params:
   - id: array

@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x6ec2edc4
   -polynomial: 0x8001801b
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes CD-ROM-EDC variant of 32 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the CD-ROM-EDC variant of CRC-32 of an array.
 
 params:
   - id: array

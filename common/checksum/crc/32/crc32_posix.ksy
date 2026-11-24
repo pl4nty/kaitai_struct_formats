@@ -7,9 +7,9 @@ meta:
   -initial: 0x0
   -check: 0x765e7680
   -polynomial: 0x4c11db7
-  -reflect_in: false
-  -reflect_out: false
-doc: Computes POSIX variant of 32 of an array.
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the POSIX variant of CRC-32 of an array.
 
 params:
   - id: array

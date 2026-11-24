@@ -7,9 +7,9 @@ meta:
   -initial: 0xffffffff
   -check: 0xe3069283
   -polynomial: 0x1edc6f41
-  -reflect_in: true
-  -reflect_out: true
-doc: Computes Castagnoli variant of 32 of an array.
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the Castagnoli variant of CRC-32 of an array.
 
 params:
   - id: array
