@@ -524,6 +524,7 @@ types:
           serialized_data:
             pos: data_offset
             size-eos: true
+            if: _io.size > 0
             doc: Interpretation depends on shared_point_numbers, each private_point_numbers flag, and a kind of rle expansion.
             doc-ref: https://docs.microsoft.com/en-us/typography/opentype/spec/otvarcommonformats#a-nameserializeddata-idserializeddataserialized-dataa
       glyph_variation_datum:
