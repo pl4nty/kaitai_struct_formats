@@ -4,3 +4,6 @@ samples:
     expect:
       signature: 0xbaadf00d   # hex dump: 0d f0 ad ba
       contact_count: 5        # hex dump: u4le at offset 12
+      # hex dump: 1f 00 01 60 at offset 20 = PropTag 0x6001001f, PR_NICK_NAME_W in nk2props.h
+      contacts[0].values[0].value_header.tag: nick_name
+      contacts[0].values[0].value_header.type_descriptor.type: unicode_string
