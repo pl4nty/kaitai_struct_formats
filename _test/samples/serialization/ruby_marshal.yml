@@ -11,7 +11,6 @@ samples:
       records.code: ruby_array
       records.body.num_elements.value: 5
       records.body.elements[0].body.num_elements.value: 3
-    xfail: codes enum lacks 'U' (0x55, TYPE_USRMARSHAL, used by Gem::Version), so its class symbol and payload are not consumed and the array desyncs
   - url: https://raw.githubusercontent.com/flatwhite/nexus-2.x/b2c18dca89a1c26bf9f993a0dfd0c958050d5729/testsuite/modern-testsuite/src/test/it-resources/org/sonatype/nexus/testsuite/ruby/repo/latest_specs.4.8.gz
     sha256: 40be413e77c355e6e2c44328253e5f1f870b12a6d9ee34f89a46ddbd4b62c301
     source: flatwhite/nexus-2.x testsuite it-resources ruby/repo/latest_specs.4.8.gz
@@ -21,4 +20,3 @@ samples:
     expect:
       records.code: ruby_array
       records.body.num_elements.value: 4
-    xfail: codes enum lacks 'U' (0x55, TYPE_USRMARSHAL, used by Gem::Version), so its class symbol and payload are not consumed and the array desyncs

@@ -14,4 +14,3 @@ samples:
       motion_count: 0
       morph_count: 0
       camera_count: 70
-    xfail: header magic is fixed 'Vocaloid Motion Data 0002' + 5 NULs, but writers leave garbage after the NUL terminator (here 'JKLM'); the spec also requires 8 trailing reserved bytes while this file ends after a 4-byte light count

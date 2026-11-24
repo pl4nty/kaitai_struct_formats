@@ -23,4 +23,3 @@ samples:
     expect:
       chunk.body.info.body.subchunks[1].body: User Bank
       len(chunk.body.preset_data.body.presets.body.records): 7
-    xfail: INFO strings are decoded as UTF-8, but this file's ICOP copyright string holds a Latin-1 0xA9 (copyright sign), as many 1990s banks do

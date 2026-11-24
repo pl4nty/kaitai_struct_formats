@@ -32,7 +32,6 @@ samples:
   source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 4031760169
-  xfail: generalized_fletcher sums single bytes of data, never assembles byteness-wide words
 - name: f32-abcdef
   data: '616263646566'
   params:
@@ -41,7 +40,6 @@ samples:
   source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 1448095018
-  xfail: generalized_fletcher sums single bytes of data, never assembles byteness-wide words
 - name: f32-abcdefgh
   data: '6162636465666768'
   params:
@@ -50,7 +48,6 @@ samples:
   source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 3957429649
-  xfail: generalized_fletcher sums single bytes of data, never assembles byteness-wide words
 - name: f64-abcde
   data: '6162636465000000'
   params:
@@ -59,7 +56,6 @@ samples:
   source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 14467467625952928454
-  xfail: generalized_fletcher sums single bytes of data, never assembles byteness-wide words
 - name: f64-abcdef
   data: '6162636465660000'
   params:
@@ -68,7 +64,6 @@ samples:
   source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 14467579776138987718
-  xfail: generalized_fletcher sums single bytes of data, never assembles byteness-wide words
 - name: f64-abcdefgh
   data: '6162636465666768'
   params:
@@ -77,4 +72,3 @@ samples:
   source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 3543817411021686982
-  xfail: generalized_fletcher sums single bytes of data, never assembles byteness-wide words

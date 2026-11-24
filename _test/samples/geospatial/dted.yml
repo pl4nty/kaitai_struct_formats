@@ -3,4 +3,3 @@ samples:
     sha256: 023c29e253562845399246493b32c9f8be6fa6b70c687d8980052a3844799250
     source: ImHex-Patterns test data (values from UHL header text)
     license: GPL-2.0 (repository licence)
-    xfail: accuracy fields convert to int unconditionally; MIL-PRF-89020B allows "NA" (not available)

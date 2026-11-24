@@ -4,7 +4,7 @@ samples:
     source: CroatiaControlLtd/asterix decoder sample data
     license: GPL-2.0-or-later
     eof: true
-    xfail: compound.ksy indexes flags.octects[_index/7] for every declared subfield, so a compound item (I062/290, I021/...) whose FSPEC has fewer octets than subfields/7 raises IndexError
+    xfail: asterix_compound.ksy indexes flags.octects[_index/7] for every declared subfield, so a compound item (I062/290, I021/...) whose FSPEC has fewer octets than subfields/7 raises IndexError
     expect:   # manual walk of CAT/LEN block headers (ASTERIX Part 1)
       len(messages): 1
       len(messages[0].data_blocks): 2
@@ -15,7 +15,7 @@ samples:
     source: CroatiaControlLtd/asterix decoder sample data
     license: GPL-2.0-or-later
     eof: true
-    xfail: compound.ksy indexes flags.octects[_index/7] for every declared subfield, so a compound item (I062/290, I021/...) whose FSPEC has fewer octets than subfields/7 raises IndexError
+    xfail: asterix_compound.ksy indexes flags.octects[_index/7] for every declared subfield, so a compound item (I062/290, I021/...) whose FSPEC has fewer octets than subfields/7 raises IndexError
     expect:   # manual walk of CAT/LEN block headers (ASTERIX Part 1)
       len(messages[0].data_blocks): 2
       messages[0].data_blocks[0].cat: 21

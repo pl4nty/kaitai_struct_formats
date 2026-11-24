@@ -8,7 +8,6 @@ samples:
       len(records): 86
       records[0].tag: Dynamic POI
       records[0].short_name: "5066"
-    xfail: favorite type stops after point, but each POI record ends with two more f8 values (gpsbabel destinator.cc writes 16 zero bytes), so the next record starts misaligned and decodes garbage UTF-16
   - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/c8ac4c5b2fe1386b530b6f12efdde0dfd0e71fed/reference/route/destinator_itn.dat
     sha256: 7b7173597e4a480ddd666f69a0c1cd043a738deba0ff27495bc896e9df3e3f4e
     source: gpsbabel reference data; expects from gpsbabel's reference/route/destinator_itn.txt decode

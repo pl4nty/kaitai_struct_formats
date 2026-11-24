@@ -14,4 +14,3 @@ samples:
   source: expected value from Python zlib.adler32
   expect:
     value: 2918612865
-  xfail: high sum (B) is mis-reduced once it exceeds 65521; low half (A) is correct

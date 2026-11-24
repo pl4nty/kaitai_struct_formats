@@ -10,7 +10,6 @@ samples:
     expect:
       manifest.num_files: 1
       signature.type: sha256
-    xfail: signature_type enum maps sha256 to 0x4 and sha512 to 0x8, but php-src phar_internal.h defines PHAR_SIG_SHA256 0x3 and PHAR_SIG_SHA512 0x4
   - url: https://raw.githubusercontent.com/php/php-src/8904d87f04c31b6ada6d8fc38884a2c3b9d45bc1/ext/phar/tests/files/md5.phar
     sha256: ed57ef4ec491f6792d41043a25de6e9bc42951609d7ba87f7ebffb48d5a92dc0
     source: php-src ext/phar/tests/files

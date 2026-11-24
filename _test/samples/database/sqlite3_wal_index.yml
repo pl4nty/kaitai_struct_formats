@@ -13,7 +13,6 @@ samples:
       header.page: 1024
       header.mx_frame: 31
       header.n_page: 13
-    xfail: SQLite writes the WAL index in host byte order, but the spec reads every field as a big-endian bit field (b32/b16), so values from little-endian hosts come out byte-swapped (version 0x18e22d00 instead of 3007000)
   - url: https://raw.githubusercontent.com/tibordp/fillyfoal/a82fb96e1a120623bca981a0d2f7cea382af76f4/tests/fixtures/synthetic/sqlite-shm/be.db-shm
     sha256: 8063490e64192753560ae89b3f53967833bf7f9d4127547ced88476033639eee
     source: fillyfoal test fixture (synthetic big-endian byte swap of t.db-shm); expects from its snapshot formats__sqlite-shm__be.db-shm.snap

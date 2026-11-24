@@ -6,4 +6,3 @@ samples:
     eof: true
     expect:
       len(points): 26
-    xfail: real records are 152 bytes with "TXT" at offset 136, but the spec's point is 164 bytes (12 bytes too many between milliseconds and the TXT signature)

@@ -9,4 +9,3 @@ samples:
       length.val_len: 698
       value_constructed[0].length.val_len: 547
       len(value_constructed): 3           # tbsCertificate, signatureAlgorithm, signature
-    xfail: constructed values use repeat eos without a size limit (no size of length.val_len), so the first child TLV swallows all its siblings and the root SEQUENCE gets 1 child instead of 3

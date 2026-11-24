@@ -5,7 +5,6 @@ samples:
     license: BSD-2-Clause
     extract: { format: base64, field: 1 }
     eof: true
-    xfail: signature (cstring_tuple_packed) parses the signature blob as nested cstrings, which holds only for ECDSA (r, s); an Ed25519 CA signature is 64 raw bytes, so a bogus length is read
     expect:
       cert_type.value: ssh-rsa-cert-v01@openssh.com
       body.serial: 5
@@ -22,7 +21,6 @@ samples:
     license: BSD-2-Clause
     extract: { format: base64, field: 1 }
     eof: true
-    xfail: signature (cstring_tuple_packed) parses the signature blob as nested cstrings, which holds only for ECDSA (r, s); an Ed25519 CA signature is 64 raw bytes, so a bogus length is read
     expect:
       cert_type.value: ssh-ed25519-cert-v01@openssh.com
       body.serial: 8

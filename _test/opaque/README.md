@@ -27,7 +27,6 @@ Rules:
 | Module | Used by |
 |---|---|
 | `numpy_parsed_header` | serialization/numpy_npy |
-| `lytro_lfp_sections_index`, `lytro_lfp_json_parsed_metadata` | image/lytro_lfp |
 | `lookup_object` | game/gbtd_gbr1 |
 | `concat`, `decompress` | filesystem/squashfs |
 | `util/custom_arc4` | security/gdata_quarantine, security/windef_entries, windef_resources, windef_resource_data |

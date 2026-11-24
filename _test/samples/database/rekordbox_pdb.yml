@@ -22,4 +22,3 @@ samples:
       len_page: 4096
       num_tables: 20
       next_unused_page: 46
-    xfail: page_ref.body is read unconditionally, but each table's last page links next_page to its empty_candidate page, which lies past EOF in real exports (e.g. page 48 of a 42-page file), so deep evaluation hits EOF

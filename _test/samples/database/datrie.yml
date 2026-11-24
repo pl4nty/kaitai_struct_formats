@@ -16,7 +16,6 @@ samples:
         format: xz
         then: { format: tar, member: ./usr/share/libthai/thbrk.tri }
     eof: true
-    xfail: da.pool.pool_header requires cell 2 (the root) to have base == 3 (DA_POOL_BEGIN), which holds only for an empty trie; in a populated trie the root base points anywhere (here 36509)
     expect:
       alpha_map.total_ranges: 1
       alpha_map.ranges[0].begin: 0x0e01

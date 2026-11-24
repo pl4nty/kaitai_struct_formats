@@ -17,10 +17,9 @@ samples:
     source: telparia fileFormatSamples (sembiance.com), document/hlp; Windows 3.0 help (minor 15)
     expect:
       len_file: 2880
-    xfail: system.minor is validated against windows_31 only, so Windows 3.0 help files (minor 15) are rejected
   - url: https://sembiance.com/fileFormatSamples/document/hlp/FONTMGR.HLP
     sha256: 0c60c736e7d0c5abdacb7ddc644430e728afb2d2b1dd12296c8ad523584adf88
     source: telparia fileFormatSamples (sembiance.com), document/hlp; Windows 95 help (minor 33)
     expect:
       len_file: 60662
-    xfail: system.minor is validated against windows_31 only, so Windows 95 (HCW 4.0, minor 33) help files are rejected
+    xfail: "meta.encoding is ASCII, but WinHelp system records are ANSI (Windows-1252): byte 0xA9 (copyright sign) in the copyright record fails to decode"

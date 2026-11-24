@@ -3,14 +3,11 @@ samples:
     sha256: e79fd5bb9dd13c063f961cd067a63f2d2110dc4b1f53691b145e31f71b161bf3
     source: wader/fq test data
     license: MIT
-    xfail: block body uses size total_length, which includes the 12-byte type/length/trailer, so every block over-reads (should be total_length - 12)
   - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/pcap/testdata/dhcp_big_endian.pcapng
     sha256: 5c25796f37cdb7cd5f662cb785ac3acdd1c5fcee306b2d5eb2f0b575118c1d4b
     source: wader/fq test data
     license: MIT
-    xfail: spec hard-codes little endian; big-endian sections (byte-order magic 1a2b3c4d) are not supported
   - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/pcap/testdata/many_interfaces.pcapng
     sha256: 9bf6c1b68fa59c9e246ddb9f95d0058945cda3dbec624f9e80ef7f27f8c71484
     source: wader/fq test data
     license: MIT
-    xfail: block body uses size total_length, which includes the 12-byte type/length/trailer, so every block over-reads (should be total_length - 12)

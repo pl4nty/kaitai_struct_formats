@@ -12,7 +12,6 @@ samples:
       records[0].header.type: begin_request
       records[0].header.request_id: 1
       records[0].header.content_length: 8
-    xfail: spec declares meta endian le, but FastCGI header fields (requestId, contentLength, role) are big-endian; contentLength 8 reads as 2048 and overruns the record
   - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/fcgi.pcap.gz
     sha256: 7c3bcba991d97dc7e46f9cc7466bec911e3288c54a58cac05ccb51b9f4b59573
     name: fcgi-frame5-params
@@ -23,4 +22,3 @@ samples:
       len(records): 1
       records[0].header.type: params
       records[0].header.content_length: 1047
-    xfail: spec declares meta endian le, but FastCGI contentLength is big-endian (0x0417 read as 0x1704), so content_data overruns the record

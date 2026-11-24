@@ -7,16 +7,13 @@ samples:
       song_length: 14
       special: 127
       len(patterns): 11  # highest pattern index in the order table (10) + 1
-    xfail: patterns uses repeat-expr song_positions.last.index (order entry 127, usually 0) instead of the highest index + 1, so it reads no patterns and pattern_index.pattern indexes past the list
   - url: https://raw.githubusercontent.com/libxmp/libxmp/5c63c2f7809dc6f17342df738a3dde5ca65221c9/test-dev/openmpt/mod/PatternJump.mod
     sha256: a86295e1fc52d1f3b48536a8f2b58dba3deee3cf8e1d8b76021a52a273d28d48
     source: libxmp test-dev (OpenMPT test case); expects from file(1)
     expect:
       song_name: Jump Commands
-    xfail: byte 951 (restart position) is 0 here, as written by OpenMPT/ProTracker clones and many real modules, but the spec requires it to equal 127
   - url: https://raw.githubusercontent.com/libxmp/libxmp/5c63c2f7809dc6f17342df738a3dde5ca65221c9/test-dev/data/m/sundance.mod
     sha256: b157311fbb1cbd21ea8ab5a29ad19eb36c59cc9a5f851d683976be7ffdb90fc0
     source: libxmp test-dev data; expects from file(1)
     expect:
       song_name: "Sundance "
-    xfail: spec decodes song and sample names as UTF-8, but MOD names are 8-bit Amiga/CP437 text (this file has byte 0x84 in a sample name)

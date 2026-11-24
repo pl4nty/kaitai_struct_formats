@@ -8,4 +8,3 @@ samples:
       waypoints[0].point.lat.raw: 552963000
       waypoints[0].point.lon.raw: -1332431000
       waypoints[0].name: Waterfall Resort
-    xfail: name is a fixed 20-byte NUL-padded field followed by 2 padding bytes (gpsbabel bushnell.cc writes one 32-byte waypoint per file); the spec reads strz with repeat eos, so the padding is parsed as a second, truncated waypoint

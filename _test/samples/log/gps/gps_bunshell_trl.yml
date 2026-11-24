@@ -3,4 +3,3 @@ samples:
     sha256: abd5c24e79bd9bcb02c35b8c87211c4992360a567a8b346caab66f43f9aedb21
     source: GPSBabel 1.5.4 reference test data (Bushnell trail)
     license: GPL-2.0-or-later
-    xfail: spec omits the 20-byte zero-terminated track name header (gpsbabel bushnell_trl.cc reads char h[0x14] first), and the file also ends in a 3-byte trailer, so repeat-eos hits EOF mid-record

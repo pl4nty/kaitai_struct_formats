@@ -3,9 +3,9 @@ samples:
     sha256: da5b8a4ced5d25a584bb21d5c92083a0e25ec5ea9d614f7fc18babab31cd99e5
     source: roginvs/space-rangers-quest test quest (.qm, header 0x423A35D4)
     license: MIT
-    xfail: signature is hardcoded as D3 35 3A and the version read from byte 3 (always 0x42), but the format version lives in byte 0 (0x423A35Dn LE), so .qm v4 / .qmm v6-7 files are rejected
+    xfail: "header after the magic disagrees with qmreader.ts parseBase(): the spec reads a u2+u2 version in every file (qmreader: two int32, .qmm v7 only) and screen size and grid as u1 pairs (qmreader: four int32), so the parameters start at the wrong offset and read a garbage string length"
   - url: https://raw.githubusercontent.com/roginvs/space-rangers-quest/ad86c9bb720a6f7aa11a6d9b04a12e08d7dc3187/src/test/qmreader-1.qmm
     sha256: 50760f7a2ea14c922dc32debba7df9563b0c9d3a1f74d9257403e1e02139019c
     source: roginvs/space-rangers-quest test quest (.qmm, header 0x423A35D7)
     license: MIT
-    xfail: signature is hardcoded as D3 35 3A and the version read from byte 3 (always 0x42), but the format version lives in byte 0 (0x423A35Dn LE), so .qm v4 / .qmm v6-7 files are rejected
+    xfail: "header after the magic disagrees with qmreader.ts parseBase(): the spec reads a u2+u2 version in every file (qmreader: two int32, .qmm v7 only) and screen size and grid as u1 pairs (qmreader: four int32), so the parameters start at the wrong offset and read a garbage string length"

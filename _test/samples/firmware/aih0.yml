@@ -9,7 +9,6 @@ samples:
     extract:
       format: zip
       member: DIR-100_fw_revd_403b18_ALL_de_20151202/DIR100D1_FW403WWB18.bin
-    xfail: header.version is declared as contents "5.00TP" padded with zeros, but real AIH0 headers carry other versions (here "4.03"), so validation fails
     expect:
       header.len_data: 282416
       header.version_str: "4.03"

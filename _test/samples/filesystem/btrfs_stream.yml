@@ -16,4 +16,3 @@ samples:
     eof: true
     expect:
       header.version: 2
-    xfail: spec only knows the v1 TLV layout; in protocol v2 the BTRFS_SEND_A_DATA attribute (encoded_write) has no u16 length and runs to the end of the command, so its bytes are read as a bogus length

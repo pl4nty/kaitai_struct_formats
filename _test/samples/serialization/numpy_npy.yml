@@ -3,7 +3,6 @@ samples:
     sha256: 6bf00ba6caf7db7cca29cd1c181e61b0f701eb41921b2906cf4a63f2150568f8
     name: lstm_s_mul.npy
     source: NVIDIA dl-lowlat-infer test resources (Git LFS); numpy.load gives float32 (96, 1)
-    xfail: type array repeats shape[idx] instead of shape[idx+1], so a (96, 1) array reads 96x96 items and hits EOF
     expect:
       version.major: 1      # numpy.lib.format.read_magic -> (1, 0)
       version.minor: 0
@@ -19,7 +18,6 @@ samples:
     sha256: 13c3cd0866e72d1598ffe111222ab361cfdb9f90686c6b33dec4297fd5449290
     source: ndarray-npy test resources; numpy.load gives int32 (2, 3) = arange(6)
     license: MIT OR Apache-2.0
-    xfail: type array repeats shape[idx] instead of shape[idx+1], so each row of a (2, 3) array has 2 items, not 3
     expect:
       parsed_header.item_type: "<i4"
       parsed_header.shape: [2, 3]

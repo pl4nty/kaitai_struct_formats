@@ -14,7 +14,6 @@ samples:
     source: Astro::UTDF (Perl) test data t/doppler.utdf
     license: Artistic-1.0-Perl OR GPL-1.0-or-later (repository licence)
     eof: true
-    xfail: rx_pad_id is declared b4 but the receive antenna PAD ID is a full byte (byte 48), so it reads 5 instead of 87
     expect:   # Astro::UTDF t/real_data.t expectations for the last record
       len(recs): 2
       recs[1].sic: 3250
