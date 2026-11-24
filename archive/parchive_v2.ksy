@@ -45,7 +45,7 @@ doc: |
   It is recommended that users are warned when they create PAR files with names that are incompatible with Windows, Mac, or Linux systems. That is, file or directory names that are more than 255 characters long, start with a period (.) or a dash (-), or contain one of these characters: < > : " ' ` ? * & | [ ] \ ; or newline (\n).
 
   It is *strongly* recommended that clients query a user before writing to a file whose File Description packet contains an absolute pathname. For Windows, that means one starting with "C:\" or "//" for example. For UNIX, that means one starting with "/" or "//". For Mac, that means one starting with ":". This is to prevent PAR files of unknown origin from cracking a system by overwriting system files.
-doc-ref: http://parchive.sourceforge.net/docs/specifications/parity-volume-spec/article-spec.html
+doc-ref: https://parchive.sourceforge.net/docs/specifications/parity-volume-spec/article-spec.html
 seq:
   - id: packets
     type: packet

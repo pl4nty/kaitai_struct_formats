@@ -54,7 +54,7 @@ doc: |
 doc-ref:
   - https://github.com/torvalds/linux/blob/8d3ae59288f1e7d58d76558a6ee96d533bc5019f/fs/ubifs/ubifs-media.h Git tag "v7.2"
   - https://github.com/torvalds/linux/blob/8d3ae59288f1e7d58d76558a6ee96d533bc5019f/fs/ubifs/key.h Git tag "v7.2"
-  - http://www.linux-mtd.infradead.org/doc/ubifs.pdf
+  - https://www.linux-mtd.infradead.org/doc/ubifs.pdf
 # some instances to access important data structures directly
 instances:
   superblock:

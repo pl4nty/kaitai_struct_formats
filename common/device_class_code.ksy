@@ -8,7 +8,7 @@ doc: >
   Spec:
     Plug and Play BIOS Specification Version 1.0A May 5, 1994, 3.2 Expansion Header for Plug and Play
 doc-ref:
-  - http://download.intel.com/support/motherboards/desktop/sb/pnpbiosspecificationv10a.pdf
+  - https://download.intel.com/support/motherboards/desktop/sb/pnpbiosspecificationv10a.pdf
 seq:
   - id: base_type
     type: u1

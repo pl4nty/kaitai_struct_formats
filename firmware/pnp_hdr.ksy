@@ -17,8 +17,8 @@ doc: >
   A BCV device, typically a SCSI controller, is not directly bootable. Rather, it merely adds its drives to the system by hooking into the BIOS’ INT 13h services and appending drive numbers to any existing drives. Since only drive 80h is bootable, a BCV would only be able to boot one of its drives if it installed before any other drives in the system. For this reason, it is necessary to control the order that all drives are installed into the system, including on-board ATA drives and those controlled by Legacy devices such as older SCSI controllers. The only way to control a BCV device’s drives in the boot order is by allowing the user to specify the order of initialization among ATA, BCV, and Legacy option ROMs. This will be discussed in detail in section 5.0.
   Offsets are all based from the beginning of the Header.
 doc-ref:
-  - http://download.intel.com/support/motherboards/desktop/sb/pnpbiosspecificationv10a.pdf
-  - http://www.scs.stanford.edu/05au-cs240c/lab/specsbbs101.pdf
+  - https://download.intel.com/support/motherboards/desktop/sb/pnpbiosspecificationv10a.pdf
+  - https://www.scs.stanford.edu/05au-cs240c/lab/specsbbs101.pdf
 seq:
   - id: structure_revision
     type: u1

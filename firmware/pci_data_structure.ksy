@@ -8,7 +8,7 @@ meta:
   endian: le
 doc: >
   Spec: BIOS Boot Specification Version 1.01 January 11, 1996, Appendix A: Data Structures, A.4 PCI Data Structure
-doc-ref: http://www.scs.stanford.edu/05au-cs240c/lab/specsbbs101.pdf
+doc-ref: https://www.scs.stanford.edu/05au-cs240c/lab/specsbbs101.pdf
 seq:
   - id: signature
     contents: "PCIR"

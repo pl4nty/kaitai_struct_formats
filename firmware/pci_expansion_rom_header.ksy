@@ -12,8 +12,8 @@ doc: >
     Plug and Play BIOS Specification Version 1.0A May 5, 1994, 3.1 Option ROM Header
     BIOS Boot Specification Version 1.01 January 11, 1996, Appendix A: Data Structures, A.2 PnP Option ROM Header
 doc-ref:
-  - http://download.intel.com/support/motherboards/desktop/sb/pnpbiosspecificationv10a.pdf
-  - http://www.scs.stanford.edu/05au-cs240c/lab/specsbbs101.pdf
+  - https://download.intel.com/support/motherboards/desktop/sb/pnpbiosspecificationv10a.pdf
+  - https://www.scs.stanford.edu/05au-cs240c/lab/specsbbs101.pdf
 seq:
   - id: signature
     contents : [0x55, 0xAA]

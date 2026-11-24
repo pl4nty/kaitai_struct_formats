@@ -8,7 +8,7 @@ meta:
     - /executable/dex
   encoding: UTF-8
   endian: le
-doc-ref: http://web.archive.org/web/20180816094438/https://android.googlesource.com/platform/dalvik.git/+/master/libdex/DexFile.h
+doc-ref: https://web.archive.org/web/20180816094438/https://android.googlesource.com/platform/dalvik.git/+/master/libdex/DexFile.h
 seq:
   - id: magic
     contents: "dey\n"
