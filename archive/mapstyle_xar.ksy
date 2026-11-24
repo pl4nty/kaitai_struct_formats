@@ -1,0 +1,29 @@
+# Imported from https://github.com/gballa/audi_mmi_studio/blob/eb2fb0c3f28b8f65aeb76a4e2cbca784516c02e9/formats/mapstyle_xar.ksy
+# Licence and copyright: see _community/README.md
+meta:
+  id: mapstyle_xar
+  title: Harman / Elektrobit MapStyles Regional Archive
+  file-extension: xar
+  license: Apache-2.0
+  endian: le
+doc: |
+  Harman / Elektrobit regional map styling archive container used in Audi MMI 3G+
+  MapStyles/ and StyleDB/ directories. Distinct from macOS XAR; starts with magic
+  'rax\0'.
+
+seq:
+  - id: magic
+    contents: ['r', 'a', 'x', 0x00]
+    doc: 4-byte magic signature 'rax\0'
+
+  - id: version
+    type: u4
+    doc: Container format version (typically 0x00010000)
+
+  - id: total_file_size
+    type: u4
+    doc: Total size of the archive in bytes
+
+  - id: header_size
+    type: u4
+    doc: Size of the archive header and table of contents
