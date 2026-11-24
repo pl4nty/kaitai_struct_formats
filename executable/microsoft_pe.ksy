@@ -14,8 +14,9 @@ meta:
     - executable
     - windows
   license: CC0-1.0
-  ks-version: 0.7
+  ks-version: 0.9
   endian: le
+  bit-endian: le
 doc-ref: https://learn.microsoft.com/en-us/windows/win32/debug/pe-format
 seq:
   - id: mz
@@ -66,7 +67,7 @@ types:
       resources_table:
         pos: optional_hdr.data_dirs.resource_table.pointer_to_raw_data
         size: optional_hdr.data_dirs.resource_table.size
-        type: resource_directory_table
+        type: resource_directory_table(0, optional_hdr.data_dirs.resource_table.pointer_to_raw_data, optional_hdr.data_dirs.resource_table.virtual_address)
         if: optional_hdr.data_dirs.resource_table.size > 0
       dotnet_header:
         pos: optional_hdr.data_dirs.clr_runtime_header.pointer_to_raw_data
@@ -628,106 +629,6 @@ types:
             encoding: utf-8
             size-eos: true
 
-  resource_directory_table:
-    to-string: |
-      'Res dir table <Named entries: ' + number_of_named_entries.to_s + ', ID entries: ' + number_of_id_entries.to_s + '>'
-    seq:
-      - id: characteristics
-        type: u4
-      - id: time_date_stamp
-        type: u4
-      - id: major_version
-        type: u2
-      - id: minor_version
-        type: u2
-      - id: number_of_named_entries
-        type: u2
-      - id: number_of_id_entries
-        type: u2
-      - id: items
-        repeat: expr
-        repeat-expr: number_of_named_entries + number_of_id_entries
-        type: resource_directory_entry
-    instances:
-      has_entries:
-        value: (number_of_named_entries + number_of_id_entries) > 0
-
-  resource_directory_entry:
-    to-string: |
-      'Res entry <Type: ' + name_type.to_i.to_s + ', Name Addr: ' + name_address.to_s + ', Dir Addr: ' + directory_address.to_s + ', PointerToRawData: ' + pointer_to_raw_data.to_s + ', Data Offset: ' + data_offset.to_s + ', Data Size: ' + data_size.to_s + '>'
-    seq:
-      - id: name_offset
-        type: u4
-      - id: offset_to_data
-        type: u4
-
-    instances:
-      is_name_string:
-        value: (name_offset & 0x80000000) > 0
-      is_directory:
-        value: (offset_to_data & 0x80000000) > 0
-      is_data_entry:
-        value: not is_name_string and not is_directory
-      name_address:
-        value: (name_offset & 0x7FFFFFFF)
-      directory_address:
-        value: (offset_to_data & 0x7FFFFFFF)
-      name_type:
-        enum: directory_entry_type
-        value: >
-           is_name_string ? directory_entry_type::undefined : name_address
-      directory_table:
-        pos: directory_address
-        type: resource_directory_table
-        if: is_directory
-      data_offset:
-        pos: directory_address
-        type: u4
-        if: is_data_entry
-      data_size:
-        pos: directory_address + 4
-        type: u4
-        if: is_data_entry
-      name_string:
-        pos: name_address
-        type: strz
-        terminator: 0
-        eos-error: false
-        encoding: ascii
-        if: is_name_string
-      pointer_to_raw_data:
-        value: >
-          is_data_entry ?
-          data_offset :
-          _root.pe.optional_hdr.data_dirs.resource_table.sections_lookup.section.pointer_to_raw_data + directory_address
-
-    enums:
-      directory_entry_type:
-        0x00: undefined
-        0x01: cursor
-        0x02: bitmap
-        0x03: icon
-        0x04: menu
-        0x05: dialog
-        0x06: string
-        0x07: fontdir
-        0x08: font
-        0x09: accelerator
-        0x0a: rcdata
-        0x0b: messagetable
-        0x0c: group_cursor2
-        0x0e: group_cursor4
-        0x10: version
-        0x11: dlginclude
-        0x13: plugplay
-        0x14: vxd
-        0x15: anicursor
-        0x16: aniicon
-        0x17: html
-        0x18: manifest
-        0xfc: dlginit
-        0xf1: toolbar
-
   dotnet_header:
     to-string: |
       '.NET Header'
@@ -814,3 +715,144 @@ types:
     instances:
       pointer_to_raw_data:
         value: _root.pe.dotnet_header.meta_data.pointer_to_raw_data + offset
+
+  resource_directory_table:
+    doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#resource-directory-table'
+    params:
+      - id: depth
+        type: u4
+      - id: section_file_offset
+        type: u4
+      - id: section_virtual_address
+        type: u4
+    seq:
+      - id: reserved
+        -orig-id: characteristics
+        type: u4
+        doc: Reserved for future use, should be set to zero
+      - id: timestamp
+        type: u4
+        -orig-id: TimeDateStamp
+      - id: version
+        type: version_u2
+      - id: num_named_entries
+        -orig-id: NumberOfNamedEntries
+        type: u2
+      - id: num_id_entries
+        -orig-id: NumberOfIdEntries
+        type: u2
+      - id: named_entries
+        type: resource_directory_entry(depth)
+        repeat: expr
+        repeat-expr: num_named_entries
+      - id: id_entries
+        type: resource_directory_entry(depth)
+        repeat: expr
+        repeat-expr: num_id_entries
+
+  resource_directory_entry:
+    doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#resource-directory-entries'
+    params:
+      - id: depth
+        type: u4
+    seq:
+      - id: resource_type
+        type: u4
+        enum: enum_resource_type
+        if: depth == 0
+      - id: ofs_name
+        type: b31
+        if: depth != 0
+      - id: is_name
+        type: b1
+        if: depth != 0
+        doc: Whether ofs_name is an id or points to a directory-string
+      - id: ofs_data_entry
+        type: b31
+      - id: is_subdirectory
+        type: b1
+        doc: |
+          Whether ofs_data_entry points to a child (directory entry) or a
+          leaf (data entry).
+    instances:
+      subdirectory:
+        io: _root._io
+        pos: ofs_data_entry + _parent.section_file_offset
+        type: resource_directory_table(depth + 1, _parent.section_file_offset, _parent.section_virtual_address)
+        if: is_subdirectory
+        parent: _parent
+      data_entry:
+        io: _root._io
+        pos: ofs_data_entry + _parent.section_file_offset
+        type: resource_data_entry
+        if: not is_subdirectory
+        parent: _parent
+      name:
+        io: _root._io
+        pos: ofs_name + _parent.section_file_offset
+        type: resource_directory_string
+        if: is_name
+        parent: _parent
+    enums:
+      enum_resource_type:
+          1: cursor
+          2: bitmap
+          3: icon
+          4: menu
+          5: dialog
+          6: string
+          7: fontdir
+          8: font
+          9: accelerator
+          10: rcdata
+          11: messagetable
+          12: group_cursor
+          14: group_icon
+          16: version
+          17: dlginclude
+          19: plugplay
+          20: vxd
+          21: anicursor
+          22: aniicon
+          23: html
+          24: manifest
+
+  resource_data_entry:
+    doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#resource-data-entry'
+    seq:
+      - id: data_rva
+        -orig-id: OffsetToData
+        type: u4
+        doc: Relative virtual address of the resource data entry
+      - id: len_resource_data_entry
+        -orig-id: Size
+        type: u4
+      - id: codepage
+        type: u4
+      - id: reserved
+        type: u4
+    instances:
+      body:
+        io: _root._io
+        pos: (data_rva - _parent.section_virtual_address) + _parent.section_file_offset
+        size: len_resource_data_entry
+
+  resource_directory_string:
+    doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#resource-directory-string'
+    seq:
+      - id: len_name
+        -orig-id: Length
+        type: u2
+        doc: Number of UTF-16LE encoded characters
+      - id: name
+        -orig-id: NameString
+        size: len_name * 2
+        type: str
+        encoding: UTF-16LE
+
+  version_u2:
+    seq:
+      - id: major
+        type: u2
+      - id: minor
+        type: u2
