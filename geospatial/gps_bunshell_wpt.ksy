@@ -31,7 +31,11 @@ types:
       - id: flags
         type: flags
       - id: name
+        size: 20
         type: strz
+        doc: NUL-padded; at most 19 characters.
+      - id: padding
+        size: 2
 
   flags:
     seq:
