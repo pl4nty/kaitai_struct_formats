@@ -46,6 +46,9 @@ types:
             'chunk_type::list': list_body
             'chunk_type::avih': avih_body
             'chunk_type::strh': strh_body
+      - id: pad_byte
+        size: block_size % 2
+        doc: RIFF chunks are padded to an even size; the pad byte is not counted in block_size.
   list_body:
     seq:
       - id: list_type
