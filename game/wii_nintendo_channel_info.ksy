@@ -44,6 +44,9 @@ seq:
     type: u4
   - id: number_of_related_web_pages
     type: u4
+    doc: |
+      Wii-Kaitai reads these 8 bytes at 0x40 (together with
+      related_web_pages_offset) as a content descriptor bitmask instead.
   - id: related_web_pages_offset
     type: u4
   - id: picture_offset
@@ -76,14 +79,19 @@ seq:
     type: u4
   - id: unknown_5
     type: u2
+    doc: Title revision, major version.
   - id: unknown_6
     type: u2
+    doc: Title revision, minor version.
   - id: unknown_7
     type: u1
+    doc: Region bitmask.
   - id: wii_shop_channel_button_flag
     type: u1
+    doc: 1 if the title is available on the Wii Shop Channel.
   - id: purchase_button_flag
     type: u1
+    doc: 1 if the title is purchasable.
   - id: release_year
     type: u2
   - id: release_month
@@ -97,6 +105,9 @@ seq:
     type: u1
     repeat: expr
     repeat-expr: 3
+    doc: |
+      Display and audio support flags, one byte each - 16:9 widescreen, 480p
+      progressive scan, enhanced (surround) audio.
   - id: max_players
     type: u1
   - id: wii_remote_flag
@@ -176,6 +187,9 @@ seq:
     size: 82
     type: str
     encoding: UTF-16BE
+    doc: |
+      Wii-Kaitai reads 0x317..0x3BF as a 88-byte peripherals text followed by
+      an 80-byte link/redirect buffer instead of two 82-byte texts.
   - id: peripherals_2_text
     size: 82
     type: str
@@ -186,6 +200,7 @@ seq:
     encoding: UTF-16BE
   - id: unknown_11
     type: u1
+    doc: Rating ID (offset 0x167F).
   - id: distribution_date_text
     size: 82
     type: str
