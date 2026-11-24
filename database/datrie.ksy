@@ -85,10 +85,11 @@ types:
           header:
             seq:
               - id: pool_base
-                -orig-id: DA_POOL_BEGIN
                 type: u4
-                valid:
-                  eq: 3
+                doc: |
+                  Base of the root node, which is cell 2. A new, empty trie
+                  sets it to 3 (`DA_POOL_BEGIN`, the first pool cell), but
+                  inserting keys moves it anywhere in the pool.
               - id: pool_check
                 type: u4
                 valid:
