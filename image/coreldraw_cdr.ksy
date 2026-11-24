@@ -56,8 +56,14 @@ seq:
   - id: riff_chunk
     type: riff_chunk_type
 instances:
+  version_info:
+    pos: 8
+    type: version_info_type
+    doc: |
+      Read directly from the RIFF form type so that chunks can use
+      `_root.version` while `riff_chunk` is still being parsed.
   version:
-    value: riff_chunk.body.version
+    value: version_info.version
     # value: >-
     #   riff_chunk.body.chunks.chunks[0].chunk_id == 'vrsn'
     #     ? riff_chunk.body.chunks.chunks[0].body.as<vrsn_chunk_data>.version
@@ -66,6 +72,32 @@ instances:
     value: _root.version < 600
     doc-ref: https://github.com/LibreOffice/libcdr/blob/4b28c1a10f06e0a610d0a740b8a5839dcec9dae4/src/lib/CDRParser.cpp#L2415-L2418
 types:
+  version_info_type:
+    seq:
+      - id: form_type
+        size: 3
+        type: str
+      - id: c
+        type: u1
+    instances:
+      version:
+        value: >-
+          form_type == "cdr" and c == 0x38
+            ? 801 :
+          c == 0x20
+            ? 300 :
+          c < 0x31
+            ? 0 :
+          c < 0x3a
+            ? 100 * (c - 0x30) :
+          c < 0x41
+            ? 0 :
+          c < 0x49
+            ? 100 * (c - 0x37) :
+          c == 0x49
+            ? 0
+            : 100 * (c - 0x38)
+        doc-ref: https://github.com/LibreOffice/libcdr/blob/4b28c1a10f06e0a610d0a740b8a5839dcec9dae4/src/lib/CDRParser.cpp#L38-L49
   riff_chunk_type:
     seq:
       - id: chunk_id
@@ -116,23 +148,8 @@ types:
         type: chunks_normal
     instances:
       version:
-        value: >-
-          form_type == "cdr" and c == 0x38
-            ? 801 :
-          c == 0x20
-            ? 300 :
-          c < 0x31
-            ? 0 :
-          c < 0x3a
-            ? 100 * (c - 0x30) :
-          c < 0x41
-            ? 0 :
-          c < 0x49
-            ? 100 * (c - 0x37) :
-          c == 0x49
-            ? 0
-            : 100 * (c - 0x38)
-        doc-ref: https://github.com/LibreOffice/libcdr/blob/4b28c1a10f06e0a610d0a740b8a5839dcec9dae4/src/lib/CDRParser.cpp#L38-L49
+        value: _root.version
+        doc: Same as `_root.version`; kept for compatibility.
   chunk:
     -webide-representation: '{chunk_id}'
     seq:
