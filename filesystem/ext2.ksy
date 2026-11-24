@@ -147,6 +147,11 @@ types:
     instances:
       block_size:
         value: 1024 << log_block_size
+      len_inode:
+        value: 'rev_level == 0 ? 128 : inode_size'
+        doc: |
+          Size of an inode table entry: always 128 in revision 0, given by
+          `inode_size` in dynamic revision (e.g. 256 by default in ext4).
       block_group_count:
         value: (blocks_count - first_data_block + blocks_per_group - 1) / blocks_per_group
         doc: |
@@ -204,6 +209,7 @@ types:
           - https://www.nongnu.org/ext2-doc/ext2.html#INODE-TABLE
           - https://web.archive.org/web/20161114202411/http://www.virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-10.html
         pos: inode_table_block * _root.bg1.super_block.block_size
+        size: _root.bg1.super_block.len_inode
         type: inode
         repeat: expr
         repeat-expr: _root.bg1.super_block.inodes_per_group
@@ -270,6 +276,7 @@ types:
         type: u4
     instances:
       body:
+        io: _root._io
         pos: ptr * _root.bg1.super_block.block_size
         size: _root.bg1.super_block.block_size
         type: raw_block
