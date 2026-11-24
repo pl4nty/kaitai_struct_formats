@@ -3,7 +3,6 @@
 samples:
   - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/e1e195beca8e0f24ca0e41c02d1986af13865cd0/reference/foo.an1
     sha256: 43854d0968813cc08ee33fc81baa376ddc1465e433033d9fea9b4f6a7007a636
-    source: gpsbabel/gpsbabel e1e195beca8e reference/foo.an1
     eof: true
     expect:
       num_waypoints: 26

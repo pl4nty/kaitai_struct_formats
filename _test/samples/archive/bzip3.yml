@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/bzip3.hexpat.bz3
     sha256: d08262d37ae9eae5bb1a450a1fbdebce1a248ac9dcd37da4f95e376a9b3b80e9
-    source: ImHex-Patterns test data (block size from header bytes 5-8)
-    license: GPL-2.0 (ImHex-Patterns repository)
     eof: true
     expect:
       header.max_block_size: 33554432

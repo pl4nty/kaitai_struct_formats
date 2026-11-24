@@ -1,7 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/elixpo/rv565/add5a4ffc2b5b792a4d2b4a9c67446378dfcdc05/tests/data/testpattern.rv565
     sha256: 5908de84764962132f31543df0ca2276d10d7744fa2c292caf5fde3f66faa8a7
-    source: elixpo/rv565 test data (version 6); expects from a manual header read against docs/FORMAT.md
     eof: true
     expect:
       version: 6
@@ -10,7 +9,6 @@ samples:
       num_frames: 24
   - url: https://raw.githubusercontent.com/elixpo/rv565/add5a4ffc2b5b792a4d2b4a9c67446378dfcdc05/tests/data/v7/gray4_stored_k3.rv565
     sha256: 34290e3aa5a2789a824340ee9910c6a7a3e475c8a42ee316a56b3a0c959fd7b5
-    source: elixpo/rv565 test data (version 7, stored, K=3); expects from a manual header read and the file name
     eof: true
     expect:
       version: 7
@@ -18,7 +16,6 @@ samples:
       header_v7.keyframe_interval: 3
   - url: https://raw.githubusercontent.com/elixpo/rv565/add5a4ffc2b5b792a4d2b4a9c67446378dfcdc05/tests/data/v7/gray8_zlib_partial_k5.rv565
     sha256: 9874884097651d10bde2fcf5c90357ae54268f4410b29d6c83cbc82961e0395a
-    source: elixpo/rv565 test data (version 7, zlib, partial deltas, K=5); expects from a manual header read and the file name
     eof: true
     expect:
       width: 21

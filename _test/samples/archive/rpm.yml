@@ -1,13 +1,9 @@
 samples:
 - url: https://raw.githubusercontent.com/rpm-software-management/rpm/4c609d887e076bf6b34d0a361e9996a7ee1c5f64/tests/data/RPMS/hello-1.0-1.i386.rpm
   sha256: 7c4f932d7e66cfa3fb2ae756f916527e8ddf48ef8e6e428ac80a3a298a2ab7ab
-  source: rpm test suite RPMS
-  license: GPL-2.0-or-later
   expect:
     lead.package_name: hello-1.0-1
 - url: https://raw.githubusercontent.com/rpm-software-management/rpm/4c609d887e076bf6b34d0a361e9996a7ee1c5f64/tests/data/RPMS/foo-1.0-1.noarch.rpm
   sha256: 3804a71bfbf0982e9d42d3952fc8b3d9258c4f405c0dae5f51b0c9047a055b20
-  source: rpm test suite RPMS
-  license: GPL-2.0-or-later
   expect:
     lead.package_name: foo-1.0-1

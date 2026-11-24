@@ -4,8 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/arkx/mpyq/6bfba18ec403f702666b4109db3d95f3b97b1dc5/test/test.SC2Replay
     sha256: 61c23144e77c3563c37801c8eed9d2dca672b3402b7488431d964d12b07c07da
-    source: arkx/mpyq 6bfba18ec403 test/test.SC2Replay
-    license: BSD-2-Clause
     expect:
       user_data.ofs_mpq_header: 0x400
       ofs_archive: 0x400

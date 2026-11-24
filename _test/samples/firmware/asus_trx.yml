@@ -4,8 +4,6 @@
 samples:
   - url: https://downloads.openwrt.org/releases/19.07.10/targets/brcm47xx/legacy/openwrt-19.07.10-brcm47xx-legacy-asus-wl-500gp-v1-squashfs.trx
     sha256: e8634fc33212f5f203e2b88db3b094e5ab7abc3a313173d1bd54bcc53328a7a7
-    source: OpenWrt 19.07.10 release (versioned path)
-    license: GPL-2.0 (OpenWrt/Linux)
     expect:
       header.pre_header.length: 4395008
       header.version: 1
@@ -13,8 +11,6 @@ samples:
       footer.versions.kernel.major: 0
   - url: https://downloads.openwrt.org/releases/19.07.10/targets/brcm47xx/legacy/openwrt-19.07.10-brcm47xx-legacy-asus-wl-330ge-squashfs.trx
     sha256: 66fa646a075d2174f3ad2482dad478f26d141e7805303aad9e8be3abb33a9d2d
-    source: OpenWrt 19.07.10 release (versioned path)
-    license: GPL-2.0 (OpenWrt/Linux)
     expect:
       header.pre_header.length: 4263936
       footer.product_id: "WL-330gE    "

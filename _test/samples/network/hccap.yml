@@ -1,7 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/openwall/john-samples/a2f3a3ed7819ce94f8280b0bbfc23ba576817cce/WPA-PSK/wpa-Induction.hccap
     sha256: dd9b3832e01f86c10cdff43aed38722119d63ea3fd091aadbc1a4173fb80afac
-    source: openwall john-samples (WPA-PSK), converted from Wireshark wpa-Induction.pcap
     eof: true
     expect:   # manual hex read against hashcat wiki hccap layout
       len(records): 1
@@ -11,7 +10,6 @@ samples:
       records[0].keyver: 2
   - url: https://raw.githubusercontent.com/openwall/john-samples/a2f3a3ed7819ce94f8280b0bbfc23ba576817cce/WPA-PSK/greased.hccap
     sha256: b33c9a6b34dcf33af9a624ad3bfd511890cc8cee08268f32fd15575821440c10
-    source: openwall john-samples (WPA-PSK)
     eof: true
     expect:   # manual hex read against hashcat wiki hccap layout
       len(records): 1

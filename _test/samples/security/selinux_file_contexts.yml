@@ -1,7 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/tibordp/fillyfoal/a82fb96e1a120623bca981a0d2f7cea382af76f4/tests/fixtures/synthetic/selinux-fcontext/file_contexts.bin
     sha256: 66a2f181f14a35d810d98528eb6f17762b0ee9e9320e431383d1ec6605947911
-    source: fillyfoal test fixture (synthetic v5 file, 2 stems, no specs); expects from its snapshot formats__selinux-fcontext__file_contexts.bin.snap
     eof: true
     expect:
       version: 5

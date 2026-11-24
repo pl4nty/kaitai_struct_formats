@@ -3,8 +3,6 @@
 samples:
   - url: https://micropython.org/resources/firmware/ESPRUINO_PICO-20250809-v1.26.0.dfu
     sha256: 5e0792c4bd972b61e898fec4eabcee2c39cd805cb96885027d5647a564293752
-    source: MicroPython v1.26.0 release download (versioned file name)
-    license: MIT (MicroPython)
     eof: true
     expect:
       len_dfu: 276141
@@ -16,8 +14,6 @@ samples:
       crc32: 0xe701c72a
   - url: https://micropython.org/resources/firmware/PYBV11-20250809-v1.26.0.dfu
     sha256: 7b07fb1b66b75f0ce9f16137727319ea87104aa78423b3d419e12af722bbcd03
-    source: MicroPython v1.26.0 release download (versioned file name)
-    license: MIT (MicroPython)
     eof: true
     expect:
       len_dfu: 367749

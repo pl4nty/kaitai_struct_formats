@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/c8ac4c5b2fe1386b530b6f12efdde0dfd0e71fed/reference/destinator_poi.dat
     sha256: 17476a9064ff302c91e0c85234dc9bb7218ad51ea5b5fd6188fa4ef1a285573c
-    source: gpsbabel reference data (before destinator formats were removed); expects from gpsbabel's reference/destinator_poi.txt decode
-    license: GPL-2.0-or-later
     eof: true
     expect:
       len(records): 86
@@ -10,8 +8,6 @@ samples:
       records[0].short_name: "5066"
   - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/c8ac4c5b2fe1386b530b6f12efdde0dfd0e71fed/reference/route/destinator_itn.dat
     sha256: 7b7173597e4a480ddd666f69a0c1cd043a738deba0ff27495bc896e9df3e3f4e
-    source: gpsbabel reference data; expects from gpsbabel's reference/route/destinator_itn.txt decode
-    license: GPL-2.0-or-later
     eof: true
     expect:
       len(records): 46

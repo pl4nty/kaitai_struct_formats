@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/tap/testdata/basic_prog1.tap
     sha256: bcc811ed7a8e66d3bf18b249ba64475ce0f863e87e94569b599b7502470d4c27
-    source: fq test data (values from fq golden dump; the spec groups a header with its data block)
-    license: MIT
     eof: true
     expect:
       blocks[0].header.len_data: 38

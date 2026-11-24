@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/log2timeline/plaso/70faaf25e3ca2e9b602cf3920f8e34fd0e469ea8/test_data/SysEvent.Evt
     sha256: 04e598ab18b531946f5c8a6497bed4590191d69b40dd4108bff949a15cb83441
-    source: plaso test data
-    license: Apache-2.0
     expect:
       header.len_header: 48
       header.magic: LfLe

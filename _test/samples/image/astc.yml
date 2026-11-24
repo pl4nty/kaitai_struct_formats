@@ -4,8 +4,6 @@
 samples:
   - url: https://media.githubusercontent.com/media/SixLabors/ImageSharp.Textures/ef22cd2c7e6e734cb0213c87ca95ee7454cce444/tests/Images/Input/Astc/rgb-6x6.astc
     sha256: 2a24a5364544a1eefd05963d82466523e6b8704c4eab767e43d134d81a9bf877
-    source: SixLabors/ImageSharp.Textures ef22cd2c7e6e tests/Images/Input/Astc/rgb-6x6.astc
-    license: Apache-2.0
     eof: true
     expect:
       block_x: 6

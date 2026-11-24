@@ -2,13 +2,11 @@
 samples:
   - url: https://raw.githubusercontent.com/hardbyte/python-can/a59478192423f6d229d4d5b561d2721e6842aa1d/test/data/test_CanMessage.blf
     sha256: c04d0cb0ed2a34668e643687d9e815e0d5e395746702d2e0b82e286ca6529415
-    source: hardbyte/python-can a59478192423 test/data/test_CanMessage.blf
     expect:
       header.len_file: 420
       header.num_objects: 2
   - url: https://raw.githubusercontent.com/hardbyte/python-can/a59478192423f6d229d4d5b561d2721e6842aa1d/test/data/test_CanFdMessage64.blf
     sha256: d6c4551541fd9ce76bc002275e88969d52d5a0e1bb1dd79f16b4e27ac5d1de9c
-    source: hardbyte/python-can a59478192423 test/data/test_CanFdMessage64.blf
     expect:
       header.len_file: 612
       header.num_objects: 2

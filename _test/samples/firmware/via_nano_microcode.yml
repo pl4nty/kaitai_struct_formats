@@ -5,8 +5,6 @@
 samples:
   - url: https://raw.githubusercontent.com/coreboot/blobs/b5e64d7cf4984dcf8e284c1878d943e88d53de5d/cpu/via/nano/microcode.bin
     sha256: b6761e3fc7052e9182b260466ae43b9d8d63c983ed5903a90b13c237c8649192
-    source: coreboot/blobs b5e64d7cf498 cpu/via/nano/microcode.bin
-    license: LicenseRef-VIA-microcode (redistributable, see microcode.h)
     eof: true
     expect:
       len(updates): 7

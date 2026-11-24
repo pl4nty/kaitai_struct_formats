@@ -1,22 +1,16 @@
 samples:
 - url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/hopper.tif
   sha256: eec7740ad708ec31de3f64e9106de1123508d801ee96056eed30b0900d5ee1e1
-  source: Pillow test suite (Tests/images)
-  license: HPND (Pillow test images)
   expect:
     body.magic: 42
     body.ifd0.num_fields: 20
 - url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/hopper.iccprofile.tif
   sha256: c4656984ee90693d4c5cd8c649260e9ec44a1fa5ccda0dd3e5332ae3e7dbc6b9
-  source: Pillow test suite (Tests/images)
-  license: HPND (Pillow test images)
   expect:
     body.magic: 42
     body.ifd0.num_fields: 14
 - url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/exif-72dpi-int.jpg
   sha256: 9a77846a19a58f29bae67233c99f29fd2361536044176077c1ea4a2507c79b68
-  source: Pillow test suite (Tests/images)
-  license: HPND (Pillow test images)
   name: exif-72dpi-int.jpg-app1
   extract:
     format: slice
@@ -27,8 +21,6 @@ samples:
     body.ifd0.num_fields: 8
 - url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/exif-200dpcm.jpg
   sha256: d0ca03f0042841ce25003dad5502f6a4b396119039829d479e1812c26d6bd40e
-  source: Pillow test suite (Tests/images)
-  license: HPND (Pillow test images)
   name: exif-200dpcm.jpg-app1
   extract:
     format: slice

@@ -4,7 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/antimatter-studios/rust-fs-erofs/980a7282cca7060c741243b0f41e5c9313400e3d/fuzz/corpus/image/plain.img
     sha256: 0ee769d90c3f4fbcbd2a6372fe75e0697b9a6d0d863c123d543ac7b64644a4ba
-    source: antimatter-studios/rust-fs-erofs 980a7282cca7 fuzz/corpus/image/plain.img
     expect:
       superblock.feature_compat: 7
       superblock.blkszbits: 12

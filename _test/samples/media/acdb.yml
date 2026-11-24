@@ -4,7 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/TheMuppets/proprietary_vendor_fairphone_FP3/25ea54c1974f9e6a94a63545c630371f1c3960f7/proprietary/vendor/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
     sha256: 45ab45c52c0411693774a67ed7067eb9692e06f635296400aee741c818a8ac30
-    source: TheMuppets/proprietary_vendor_fairphone_FP3 lineage-21, proprietary/vendor/etc/acdbdata/MTP (Qualcomm; proprietary)
     eof: true
     expect:
       header.name: AVDB
@@ -13,7 +12,6 @@ samples:
       data.entries[0].name: MODIFIED
   - url: https://raw.githubusercontent.com/TheMuppets/proprietary_vendor_fairphone_FP3/25ea54c1974f9e6a94a63545c630371f1c3960f7/proprietary/vendor/etc/acdbdata/MTP/MTP_Global_cal.acdb
     sha256: 9d581325882f02b5a107f1fa017cdd1ff778356332bbbf9e81ea710eae48d910
-    source: TheMuppets/proprietary_vendor_fairphone_FP3 lineage-21, proprietary/vendor/etc/acdbdata/MTP (Qualcomm; proprietary)
     eof: true
     expect:
       header.name: GCDB

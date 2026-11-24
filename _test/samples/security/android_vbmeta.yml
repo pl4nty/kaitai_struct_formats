@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/vbmeta.hexpat.img
     sha256: 1aefc26b1c3081b864b4d6fbcb0f7510f89abf7d2ea0dc9b8bd4e332189f1bf9
-    source: ImHex-Patterns test data
-    license: GPL-2.0 (repository licence)
     expect:
       header.authentication_data_block_size: 576
       header.auxiliary_data_block_size: 1088

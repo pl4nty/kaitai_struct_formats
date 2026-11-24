@@ -4,8 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/walbourn/directxtktest/a3010123ab0134fe3045bae872f6b32d627fde22/ModelTest/cup.sdkmesh
     sha256: f181472d344a522a2b9b4c5d7b355f033970a18f3de359dea584be869e9bd406
-    source: walbourn/directxtktest a3010123ab01 ModelTest/cup.sdkmesh
-    license: MIT
     expect:
       header.version: 101
       header.len_header: 0x1a8
@@ -13,8 +11,6 @@ samples:
       header.len_buffer_data: 57344
   - url: https://raw.githubusercontent.com/walbourn/directxtktest/a3010123ab0134fe3045bae872f6b32d627fde22/PBRModelTest/BrokenCube.sdkmesh
     sha256: c25c063e964e96eaa4d55f7925d460a3310f07f2216a8f6aa52e2efc0b19ad3c
-    source: walbourn/directxtktest a3010123ab01 PBRModelTest/BrokenCube.sdkmesh
-    license: MIT
     expect:
       header.version: 200
       header.len_non_buffer_data: 3072

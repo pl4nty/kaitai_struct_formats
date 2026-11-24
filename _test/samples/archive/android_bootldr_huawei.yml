@@ -5,7 +5,6 @@ samples:
   - url: https://archive.org/download/angler-opp6.171019.012-factory-1576678d/angler-opp6.171019.012-factory-1576678d.zip/angler-opp6.171019.012%2Fbootloader-angler-angler-03.78.img
     sha256: bebd2a0fd08c80f3d4f9b3260b8b4013daf1eb17808a6b6e7d1e5ddbe0081152
     name: bootloader-angler-angler-03.78.img
-    source: archive.org item angler-opp6.171019.012-factory-1576678d (Google factory image; proprietary)
     expect:
       meta_header.version.major: 1
       meta_header.version.minor: 0

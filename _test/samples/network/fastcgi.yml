@@ -4,7 +4,6 @@ samples:
   - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/fcgi.pcap.gz
     sha256: 7c3bcba991d97dc7e46f9cc7466bec911e3288c54a58cac05ccb51b9f4b59573
     name: fcgi-frame4-begin-request
-    source: Wireshark SampleCaptures fcgi.pcap.gz, frame 4 TCP payload (FCGI_BEGIN_REQUEST)
     extract: { format: gzip, then: { format: slice, offset: 368, size: 16 } }
     eof: true
     expect:
@@ -15,7 +14,6 @@ samples:
   - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/fcgi.pcap.gz
     sha256: 7c3bcba991d97dc7e46f9cc7466bec911e3288c54a58cac05ccb51b9f4b59573
     name: fcgi-frame5-params
-    source: Wireshark SampleCaptures fcgi.pcap.gz, frame 5 TCP payload (FCGI_PARAMS, 1047 bytes of name-value pairs)
     extract: { format: gzip, then: { format: slice, offset: 466, size: 1055 } }
     eof: true
     expect:

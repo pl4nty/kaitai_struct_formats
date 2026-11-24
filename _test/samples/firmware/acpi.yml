@@ -3,8 +3,6 @@ samples:
   - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/tests/data/acpi/x86/q35/FACP
     sha256: ffb46ef7584e57c686f789edc7109c7ae23191fad5bd7f96956771cffd454c2b
     name: q35-FACP
-    source: qemu/qemu tests/data/acpi/x86/q35/FACP
-    license: GPL-2.0-or-later
     eof: true
     expect:
       header.signature: FACP
@@ -14,8 +12,6 @@ samples:
   - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/tests/data/acpi/x86/q35/DSDT
     sha256: b5fbc5a9d438ac80308af94efc639248aaeb54e1a4a481130682dcbba450b5ee
     name: q35-DSDT
-    source: qemu/qemu tests/data/acpi/x86/q35/DSDT
-    license: GPL-2.0-or-later
     eof: true
     expect:
       header.signature: DSDT
@@ -25,8 +21,6 @@ samples:
   - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/tests/data/acpi/x86/q35/APIC
     sha256: 730d87a32397365641ca2c58beb3832119c66813e98774fb482571f08668143c
     name: q35-APIC
-    source: qemu/qemu tests/data/acpi/x86/q35/APIC
-    license: GPL-2.0-or-later
     eof: true
     expect:
       header.signature: APIC

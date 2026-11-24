@@ -2,8 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/ppi_coverage.pcap.gz
     sha256: 809ad823c24ff299ad7defacb085ea2387949c882778a916b08fb20481b1f6aa
     name: ppi_coverage-pkt0
-    source: Wireshark test captures, first PPI packet
-    license: GPL-2.0-or-later
     extract: {format: gzip, then: {format: slice, offset: 40, size: 92}}
     expect:
       header.pph_version: 0

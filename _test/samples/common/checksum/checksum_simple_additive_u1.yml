@@ -5,6 +5,5 @@ samples:
   params:
     initial: '7'
     data: _data
-  source: 'expected value: Python (7 + sum(bytes)) & 0xff'
   expect:
     value: 195

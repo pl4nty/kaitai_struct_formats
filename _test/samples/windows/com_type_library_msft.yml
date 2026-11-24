@@ -4,8 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/enthought/comtypes/35025ca3b43d35bc46f19439c89e7fae00cbb625/comtypes/test/TestComServer.tlb
     sha256: 7ddc00b468bedac91bad31c1128388984838f2bc60966798d07e48b83e7fdd29
-    source: enthought/comtypes 35025ca3b43d comtypes/test/TestComServer.tlb
-    license: MIT
     expect:
       header.format_version: 0x00010002
       header.lcid: 0x409
@@ -13,8 +11,6 @@ samples:
       header.num_type_infos: 4
   - url: https://raw.githubusercontent.com/enthought/comtypes/35025ca3b43d35bc46f19439c89e7fae00cbb625/comtypes/test/urlhist.tlb
     sha256: bb646b52b8140f747eb0f44ff2205ae88dc570ce00cab6e00aba3ae2f4866685
-    source: enthought/comtypes 35025ca3b43d comtypes/test/urlhist.tlb
-    license: MIT
     expect:
       header.lcid: 0x409
       header.num_type_infos: 12

@@ -2,14 +2,10 @@
 samples:
   - url: https://raw.githubusercontent.com/mathiasbynens/small/267b39f682598eebb0dafe7590b1504be79b5cad/Mpeg4.mp4
     sha256: eeb1166096256e254eee9418914e6b20268b172a930e9ed46afa6d99574c5356
-    source: mathiasbynens/small (smallest valid MP4)
-    license: MIT
     expect:
       atoms.items[0].atom_type: ftyp
       atoms.items[0].len32: 32
   - url: https://raw.githubusercontent.com/quodlibet/mutagen/48b3463d0ed70ba2b797ac9cc83983066ecf076a/tests/data/has-tags.m4a
     sha256: 70d81f379c6c8e5d73041844c9d5445ac28d6cf311b9b52e3819a1460c8379f1
-    source: mutagen tests/data
-    license: GPL-2.0-or-later
     expect:
       atoms.items[0].atom_type: ftyp

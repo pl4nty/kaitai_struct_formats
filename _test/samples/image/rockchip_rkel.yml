@@ -6,7 +6,6 @@ samples:
   - url: https://raw.githubusercontent.com/BPI-SINOVOIP/BPI-Rockchip-Android11/b5f7fc75ca3c556af33df03fadd4ea1211991acb/device/rockchip/rk356x/rk3566_eink/ota/logo.img
     sha256: b27f10540fca571ad8d211a7363a04f6cccdd2e253587b22dd84cedf05a5cec3
     name: rk3566_eink-logo.img
-    source: BPI-SINOVOIP/BPI-Rockchip-Android11 device/rockchip/rk356x/rk3566_eink/ota/logo.img (13 MB)
     eof: true
     expect:
       header.len_data: 13143392

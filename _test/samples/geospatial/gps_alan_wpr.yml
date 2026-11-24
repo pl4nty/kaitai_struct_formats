@@ -4,7 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/f0f20ea4db9b71238ceb72c4838024699181d657/reference/alanwpr.wpr
     sha256: 18c5a58ff8c26d7e17fbf6dc66f532d4a6ab80d0d41a1a47eca14d1381b7012d
-    source: gpsbabel/gpsbabel f0f20ea4db9b reference/alanwpr.wpr
     expect:
       wpthdr.num: 60
       wpts[wpthdr.idx[0]].name.rstrip(): Home

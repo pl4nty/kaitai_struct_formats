@@ -5,10 +5,6 @@
 samples:
   - fixture: archive/zisofs/file.zf
     sha256: b7d096d56969106fcf5c3878b3dad493be71936725bafa362a55c1b6445e53d2
-    source: >-
-      libarchive commit 413d045c564208ebc2aa8ba7f9b784add62bef73,
-      libarchive/test/test_read_format_iso_zisofs.iso.Z.uu, member "file" of the ISO
-    license: BSD-2-Clause
     recipe: >-
       Not generated, decoded: uudecode -o iso.Z test_read_format_iso_zisofs.iso.Z.uu (GNU sharutils
       4.15.2); uncompress -c iso.Z > zisofs.iso (ncompress 5.0); 7z x zisofs.iso file (7-Zip 23.01),

@@ -1,7 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/pyc/py27.pyc
     sha256: 959f29d8a0a750eb0511a456509696bf4ba8f5462ca39c09cefd474dcc75fcb5
-    source: radare2-testbins (magic from header bytes, 62211 = CPython 2.7)
     eof: true
     expect:
       version_magic: 62211

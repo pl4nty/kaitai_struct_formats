@@ -3,6 +3,5 @@ samples:
 - name: 17-bytes
   data: 0123456789abcdeffedcba9876543210ff
   eof: true
-  source: 'expected value: Python int.from_bytes(byteorder=''little'')'
   expect:
     value: 86793532540733391087250591433957891711745

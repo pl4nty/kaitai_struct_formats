@@ -2,8 +2,6 @@
 samples:
   - url: https://raw.githubusercontent.com/libgit2/libgit2/6f7d8484366d8b23ec4ca0509fcfcb8f13aabc8b/tests/resources/testrepo.git/objects/pack/pack-d7c6adf9f61318f041845b01440d09aa7a91e1b5.pack
     sha256: fc2eaf4b2b5fa2f19c50c37214ae30a7bbf2a2b683470390f6646fc5d0df6b71
-    source: libgit2/libgit2 6f7d8484366d tests/resources/testrepo.git/objects/pack/pack-d7c6adf9f61318f041845b01440d09aa7a91e1b5.pack
-    license: GPL-2.0-only WITH GCC-exception-2.0
     expect:
       version: 2
       num_objects: 6

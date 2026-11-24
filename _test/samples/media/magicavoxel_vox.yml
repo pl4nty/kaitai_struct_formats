@@ -2,13 +2,9 @@
 samples:
   - url: https://raw.githubusercontent.com/ephtracy/voxel-model/3bff8feaa7d94a6237f2c07dc4ca3c3d268ef06c/vox/character/chr_knight.vox
     sha256: 455208399cc7f888629bf4715284ffb5608a0157342e1e8135f460788dddf6f4
-    source: ephtracy/voxel-model (official MagicaVoxel sample models)
-    license: CC-BY-4.0
     eof: true
     expect:
       version: 150
   - url: https://raw.githubusercontent.com/ephtracy/voxel-model/3bff8feaa7d94a6237f2c07dc4ca3c3d268ef06c/vox/anim/deer.vox
     sha256: d6d631fdfd2232ce48002a5b3f94de80125d83717f285086001219a2f2b17699
-    source: ephtracy/voxel-model (animated, multiple models)
-    license: CC-BY-4.0
     eof: true

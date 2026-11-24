@@ -3,8 +3,6 @@
 samples:
   - url: https://raw.githubusercontent.com/libgit2/libgit2/6f7d8484366d8b23ec4ca0509fcfcb8f13aabc8b/tests/resources/testrepo.git/objects/1a/443023183e3f2bfbef8ac923cd81c1018a18fd
     sha256: 9f1cad22c4476f018d33135b8a389f7fab6af70bb78fc37702f738944444a52c
-    source: libgit2/libgit2 6f7d8484366d tests/resources/testrepo.git/objects/1a/443023183e3f2bfbef8ac923cd81c1018a18fd
-    license: GPL-2.0-only WITH GCC-exception-2.0
     eof: true
     expect:
       cmf: 0x78

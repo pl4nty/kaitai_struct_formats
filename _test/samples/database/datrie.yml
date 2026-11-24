@@ -6,8 +6,6 @@ samples:
   - url: https://snapshot.debian.org/archive/debian/20240105T145613Z/pool/main/libt/libthai/libthai-data_0.1.29-2_all.deb
     sha256: fd38d40602834d510a29140bd27fd48485105e834f03dccab1c02e2edaa794dd
     name: thbrk.tri
-    source: Debian libthai-data 0.1.29-2, /usr/share/libthai/thbrk.tri
-    license: LGPL-2.1-or-later
     extract:
       format: slice
       offset: 1020

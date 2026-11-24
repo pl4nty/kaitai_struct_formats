@@ -6,7 +6,6 @@ samples:
     name: _0.cfe
     extract: { format: zip, member: _0.cfe }
     sha256: 794403a682f3d6e83c90b746c7224ad15737a67db33b86d04143c01ebd7ded0c
-    source: apache/lucene 894d24e9b0c7 lucene/backward-codecs/src/test/org/apache/lucene/backward_index/index.10.0.0-cfs.zip
     expect:
       header.codec_name: Lucene90CompoundEntries
       header.version: 0

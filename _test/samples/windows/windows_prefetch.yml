@@ -3,21 +3,18 @@
 samples:
   - url: https://raw.githubusercontent.com/log2timeline/plaso/70faaf25e3ca2e9b602cf3920f8e34fd0e469ea8/test_data/winprefetch/CMD.EXE-087B4001.pf
     sha256: 93ec53e941b285d1d2a11e1224ab2d5c7a1b8ac493ab8dec407f518c5655ae75
-    source: log2timeline/plaso 70faaf25e3ca test_data/winprefetch/CMD.EXE-087B4001.pf
     expect:
       body.header.version: windows_xp
       body.header.len_file: 11986
       body.header.executable_filename: CMD.EXE
   - url: https://raw.githubusercontent.com/log2timeline/plaso/70faaf25e3ca2e9b602cf3920f8e34fd0e469ea8/test_data/winprefetch/PING.EXE-B29F6629.pf
     sha256: cdb6e2de2b02808755aa2591708ebe155ee3483947e230f5fdd6870390fafd26
-    source: log2timeline/plaso 70faaf25e3ca test_data/winprefetch/PING.EXE-B29F6629.pf
     expect:
       body.header.version: 23
       body.header.len_file: 11216
       body.header.executable_filename: PING.EXE
   - url: https://raw.githubusercontent.com/log2timeline/plaso/70faaf25e3ca2e9b602cf3920f8e34fd0e469ea8/test_data/winprefetch/TASKHOST.EXE-3AE259FC.pf
     sha256: 00178686d5e755e596ee164e78473eab3aba382541d0f67f93654ef84d4ed36b
-    source: log2timeline/plaso 70faaf25e3ca test_data/winprefetch/TASKHOST.EXE-3AE259FC.pf
     expect:
       body.header.version: 26
       body.header.len_file: 28766

@@ -4,8 +4,6 @@ samples:
   - url: https://gitlab.com/wireshark/wireshark/-/raw/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/websocket.pcapng.gz
     sha256: 10929bf35a3cf14e0e079d41f021f23c298aba896627258812b7d2e03646add0
     name: websocket-frame8-masked-text
-    source: Wireshark repository test/captures (gitlab, pinned commit), frame 8 (client, masked text frame)
-    license: GPL-2.0-or-later
     extract: { format: gzip, then: { format: slice, offset: 1374, size: 54 } }
     eof: true
     expect:
@@ -17,8 +15,6 @@ samples:
   - url: https://gitlab.com/wireshark/wireshark/-/raw/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/websocket.pcapng.gz
     sha256: 10929bf35a3cf14e0e079d41f021f23c298aba896627258812b7d2e03646add0
     name: websocket-frame9-unmasked-text
-    source: Wireshark repository test/captures (gitlab, pinned commit), frame 9 (server, unmasked text frame)
-    license: GPL-2.0-or-later
     extract: { format: gzip, then: { format: slice, offset: 1526, size: 51 } }
     eof: true
     expect:

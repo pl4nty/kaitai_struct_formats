@@ -4,8 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/ningfei/u3d/5c141d9f0d366357e2b7cf93af2eade284a334be/Samples/TestScenes/box.u3d
     sha256: e226dd6c345a4ebe9c0f0e336d8a605bcf81efa86b33739b7007c1cc748d7bbe
-    source: ningfei/u3d 5c141d9f0d36 Samples/TestScenes/box.u3d
-    license: Apache-2.0
     eof: true
     expect:
       header_block.block_type: file_header
@@ -15,8 +13,6 @@ samples:
       header_block.data.character_encoding: 106
   - url: https://raw.githubusercontent.com/ningfei/u3d/5c141d9f0d366357e2b7cf93af2eade284a334be/Samples/TestScenes/SimpleShapesAnimation.u3d
     sha256: 15b0274b068d290471bbe5b9b4884076351917f9b4046e33fe7b315308a00f28
-    source: ningfei/u3d 5c141d9f0d36 Samples/TestScenes/SimpleShapesAnimation.u3d
-    license: Apache-2.0
     eof: true
     expect:
       header_block.data.len_file: 234744

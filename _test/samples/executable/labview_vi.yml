@@ -4,8 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/ni/labview-icon-editor/9c35871a94aee2527567f827d593aca76b879569/.github/actions/missing-in-project/MissingInProject.vi
     sha256: 2fe07751df84efe3eb2f9720d6eb509d9145cb8760d728d21607fac8f5ff063c
-    source: ni/labview-icon-editor 9c35871a94ae .github/actions/missing-in-project/MissingInProject.vi
-    license: MIT
     expect:
       header.format_version: 3
       header.file_type: LVIN

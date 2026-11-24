@@ -5,8 +5,6 @@ samples:
   - url: https://snapshot.debian.org/archive/debian/20261008T203843Z/pool/main/p/publicsuffix/publicsuffix_20261007.0728-1_all.deb
     sha256: 6f4877a1783020aa2373b21446dac6e4e5247909f5f78119e2b1396ea1a4e1e8
     name: public_suffix_list.dafsa
-    source: Debian publicsuffix 20261007.0728-1 (sha256 of the extracted file 6e64700dfbd2af08effb39da1dd56a20bfad11073afc3d31e3e8477d2c2bf49d)
-    license: MPL-2.0
     extract:
       format: slice
       offset: 1068

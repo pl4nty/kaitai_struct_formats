@@ -1,15 +1,11 @@
 samples:
 - url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/hopper.ico
   sha256: 0d13acbe6f58e6b4359b8c037dd1d890701b07581585f7c40cbd6389b949b333
-  source: Pillow test suite (Tests/images)
-  license: HPND (Pillow test images)
   expect:
     num_images: 1
     images[0].width: 16
 - url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/black_and_white.ico
   sha256: ba58a9d772246884ed6843c5058de986f417ea7f80f391a151fafc07a879c86d
-  source: Pillow test suite (Tests/images)
-  license: HPND (Pillow test images)
   expect:
     images[0].width: 16
     images[0].height: 16

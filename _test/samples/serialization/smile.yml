@@ -4,14 +4,12 @@
 samples:
   - url: https://raw.githubusercontent.com/jolicode/smile-php/3e259b1e39fad552aa9f44dc5211da7d9de599a9/tests/data/json-org-sample1.smile
     sha256: 514d1a87f62efd27a4b7181957c00187fa99b46ae7d3878ed4fbb5018f67b9ea
-    source: jolicode/smile-php 3e259b1e39fa tests/data/json-org-sample1.smile
     expect:
       header.version: 0
       values[0].marker: 0xfa
       len(values[0].body.entries): 2
   - url: https://raw.githubusercontent.com/jolicode/smile-php/3e259b1e39fad552aa9f44dc5211da7d9de599a9/tests/data/test1.smile
     sha256: 003bfc87d0ba98cfbf812ca9296bdd944e664d089b9a6f3c4ed9508032e7616e
-    source: jolicode/smile-php 3e259b1e39fa tests/data/test1.smile
     expect:
       header.has_shared_string_values: true
       header.has_shared_property_names: true

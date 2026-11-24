@@ -3,24 +3,20 @@ samples:
 - name: pi
   data: 182d4454fb210940
   eof: true
-  source: 'expected value: Python struct.unpack(''<d'')'
   expect:
     value.value: 3.141592653589793
 - name: neg
   data: 76830df4f52184be
   eof: true
-  source: 'expected value: Python struct.unpack(''<d'')'
   expect:
     value.value: -1.5e-07
 - name: big
   data: 17c557ca85e1df44
   eof: true
-  source: 'expected value: Python struct.unpack(''<d'')'
   expect:
     value.value: 6.02214076e+23
 - name: one
   data: 000000000000f03f
   eof: true
-  source: 'expected value: Python struct.unpack(''<d'')'
   expect:
     value.value: 1.0

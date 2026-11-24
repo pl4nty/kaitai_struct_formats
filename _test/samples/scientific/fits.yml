@@ -4,8 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/astropy/astropy/465a7ffe0cc9c776bc668a6938d029ffb83b68de/astropy/io/fits/tests/data/test0.fits
     sha256: ea06ee30b28f1ea2e8ca62c5289756763b7f41356d7fa3291dbc346e2ed34e94
-    source: astropy/astropy 465a7ffe0cc9 astropy/io/fits/tests/data/test0.fits
-    license: BSD-3-Clause
     deep: false
     eof: true
     expect:
@@ -18,8 +16,6 @@ samples:
       hdus[1].axes[1].len_axis: 40
   - url: https://raw.githubusercontent.com/astropy/astropy/465a7ffe0cc9c776bc668a6938d029ffb83b68de/astropy/io/fits/tests/data/tb.fits
     sha256: e1891a5453af2ccca16a1a3d83c96785ea628fc659a453df84c90d8539c9f0a7
-    source: astropy/astropy 465a7ffe0cc9 astropy/io/fits/tests/data/tb.fits
-    license: BSD-3-Clause
     deep: false
     eof: true
     expect:

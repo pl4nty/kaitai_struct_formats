@@ -3,8 +3,6 @@
 samples:
   - url: https://raw.githubusercontent.com/libgit2/libgit2/6f7d8484366d8b23ec4ca0509fcfcb8f13aabc8b/tests/resources/testrepo.git/objects/pack/pack-d7c6adf9f61318f041845b01440d09aa7a91e1b5.idx
     sha256: 0420791ae7309cb65baefe769ea53ec92f6b9d8d4339acc39827fcaa070ee0e3
-    source: libgit2/libgit2 6f7d8484366d tests/resources/testrepo.git/objects/pack/pack-d7c6adf9f61318f041845b01440d09aa7a91e1b5.idx
-    license: GPL-2.0-only WITH GCC-exception-2.0
     expect:
       header.version: 2
       len(object_names): 6
@@ -12,8 +10,6 @@ samples:
       offsets[0].ofs_object: 422
   - url: https://raw.githubusercontent.com/libgit2/libgit2/6f7d8484366d8b23ec4ca0509fcfcb8f13aabc8b/tests/resources/testrepo.git/objects/pack/pack-a81e489679b7d3418f9ab594bda8ceb37dd4c695.idx
     sha256: 0bc83ea7a1f123c97b1fd46e22de818b71fc7146700bfb0e545f63b935320411
-    source: libgit2/libgit2 6f7d8484366d tests/resources/testrepo.git/objects/pack/pack-a81e489679b7d3418f9ab594bda8ceb37dd4c695.idx
-    license: GPL-2.0-only WITH GCC-exception-2.0
     expect:
       header.version: 2
       len(object_names): 1628

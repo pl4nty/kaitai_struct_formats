@@ -3,8 +3,6 @@
 samples:
   - url: https://raw.githubusercontent.com/videojs/mux.js/bd82121caa7edef3eddff1c1e821e46bf0072e04/test/segments/test-segment.ts
     sha256: e099516fdac20de701d286471ab4f6125b62019b4671037095601ef59b5e7a44
-    source: videojs/mux.js bd82121caa7e test/segments/test-segment.ts
-    license: Apache-2.0
     eof: true
     expect:
       len(packets): 997

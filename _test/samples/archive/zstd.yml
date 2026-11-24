@@ -3,18 +3,15 @@
 samples:
   - url: https://raw.githubusercontent.com/facebook/zstd/439044eeb3394184e36bba7a6b60498c3bc7f9dc/tests/golden-decompression/rle-first-block.zst
     sha256: dd31b3fa6bb8601710cbde2c625660763bf38adc5255501e3d3a681cc0e4e1a4
-    source: facebook/zstd 439044eeb339 tests/golden-decompression/rle-first-block.zst
     expect:
       len(frames): 1
       frames[0].zstd_frame.frame_header.frame_content_size: 1048576
       len(frames[0].zstd_frame.blocks): 8
   - url: https://raw.githubusercontent.com/facebook/zstd/439044eeb3394184e36bba7a6b60498c3bc7f9dc/tests/golden-decompression/block-128k.zst
     sha256: 6a226ab40e6abcfc4a36baa04bf48f7ee56f166b8a26fbe2adb8fe771dceccba
-    source: facebook/zstd 439044eeb339 tests/golden-decompression/block-128k.zst
     expect:
       len(frames): 1
   - url: https://raw.githubusercontent.com/facebook/zstd/439044eeb3394184e36bba7a6b60498c3bc7f9dc/tests/golden-decompression/empty-block.zst
     sha256: ab5463fa31429bf81ced9f05e99b96b2fe88b1da37235a233f6bc96242332fbc
-    source: facebook/zstd 439044eeb339 tests/golden-decompression/empty-block.zst
     expect:
       len(frames): 1

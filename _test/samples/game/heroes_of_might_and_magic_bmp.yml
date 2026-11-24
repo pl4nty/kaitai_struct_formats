@@ -2,10 +2,6 @@ samples:
   - url: https://archive.org/download/HeroesofMightandMagicIITheSuccessionWars_1020/h2demo.zip
     sha256: 12048c8b03875c81e69534a3813aaf6340975e77b762dc1b79a4ff5514240e3c
     name: HEROES2.AGG-ADVMBW01.BMP
-    source: >-
-      Heroes of Might and Magic II demo (archive.org), entry ADVMBW01.BMP sliced out of
-      DATA/HEROES2.AGG (offset/size from the AGG directory, header values from struct decode)
-    license: New World Computing shareware demo (freely redistributable demo, not open)
     extract:
       format: zip
       member: DATA/HEROES2.AGG

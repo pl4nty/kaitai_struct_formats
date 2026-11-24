@@ -2,8 +2,6 @@
 samples:
   - url: https://raw.githubusercontent.com/TheCBaH/ocaml-unlz4/8db02229baf5bc2f45514618bfd2e07b0708bcf5/test/corpus/f-64k-indep-bcs.lz4
     sha256: 43c81ac7a78ef498647fe73ee650d71842413e30a3c223c08c3838ddbf0dc93d
-    source: TheCBaH/ocaml-unlz4 test corpus (bsid=4, independent blocks, block checksums)
-    license: see repository
     eof: true
     expect:
       frame_descriptor.bd.block_maxsize: 4
@@ -12,16 +10,12 @@ samples:
       frame_descriptor.flag.content_checksum: false
   - url: https://raw.githubusercontent.com/TheCBaH/ocaml-unlz4/8db02229baf5bc2f45514618bfd2e07b0708bcf5/test/corpus/f-256k-csize.lz4
     sha256: 5d7d1df05d02815e2711a6628d3b642c6262f9b04e6478a234d9f95b80f2841d
-    source: TheCBaH/ocaml-unlz4 test corpus (bsid=5, linked blocks, content size 600000)
-    license: see repository
     eof: true
     expect:
       frame_descriptor.bd.block_maxsize: 5
       frame_descriptor.content_size: 600000
   - url: https://raw.githubusercontent.com/TheCBaH/ocaml-unlz4/8db02229baf5bc2f45514618bfd2e07b0708bcf5/test/corpus/f-dict-id.lz4
     sha256: 90d81db5c954cdc15bd49057ab6b3e6fa758e8cd5dc0219a07b9db1ee7ab07b8
-    source: TheCBaH/ocaml-unlz4 test corpus (dictionary id 0x12345678, content checksum)
-    license: see repository
     eof: true
     expect:
       frame_descriptor.dictionary_id: 0x12345678

@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/log2timeline/dfvfs/bf5d2fd3131646306507490d0389783d69b57676/test_data/gpt.raw
     sha256: d5337855c2662f54bc81a8068081e71a74b6313814f29d4c52d7b16e623d9b8c
-    source: dfVFS test data
-    license: Apache-2.0
     expect:
       primary.signature: EFI PART
       primary.backup_lba: 8191

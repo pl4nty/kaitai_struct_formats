@@ -4,13 +4,11 @@
 samples:
   - url: https://raw.githubusercontent.com/captbaritone/webamp/99a31e26f9dbbc4351a9df33179fd99f951eecb1/packages/ani-cursor/src/__tests__/fixtures/piano.ani
     sha256: b659ab7556abf466f39829c0603670841b84536a1905bd4e72eef8fa719efb7b
-    source: captbaritone/webamp 99a31e26f9db packages/ani-cursor/src/__tests__/fixtures/piano.ani
     expect:
       body.form_type: ACON
       len_body: 4054
   - url: https://raw.githubusercontent.com/captbaritone/webamp/99a31e26f9dbbc4351a9df33179fd99f951eecb1/packages/ani-cursor/src/__tests__/fixtures/Super_Mario_Amp_2/eqslid.cur
     sha256: 60b58b8e7b5a2e617ea0ad116d7422abe909b092734d5c847d089a7fa35430b4
-    source: captbaritone/webamp 99a31e26f9db packages/ani-cursor/src/__tests__/fixtures/Super_Mario_Amp_2/eqslid.cur
     expect:
       body.chunks[0].body.len_header: 36
       body.chunks[0].body.num_frames: 8

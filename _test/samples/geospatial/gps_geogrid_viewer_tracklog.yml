@@ -4,7 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/e1e195beca8e0f24ca0e41c02d1986af13865cd0/reference/track/ggv_log-sample.log
     sha256: 573129e0178d4cc075e4b0ae8fd3f36059506e77aeb3743a75ba1f39c732821e
-    source: gpsbabel/gpsbabel e1e195beca8e reference/track/ggv_log-sample.log
     eof: true
     expect:
       version: '1.0'

@@ -2,7 +2,5 @@
 samples:
   - url: https://raw.githubusercontent.com/mathiasbynens/small/267b39f682598eebb0dafe7590b1504be79b5cad/AudioVideoInterleave.avi
     sha256: 15c0c49db8ded980bfbe849a189604e1d54d34e7f6d270d72fc174e112895458
-    source: mathiasbynens/small (smallest valid AVI)
-    license: MIT
     expect:
       file_size: 5678

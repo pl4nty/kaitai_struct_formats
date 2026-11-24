@@ -1,8 +1,6 @@
 samples:
   - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/compression/compress/__input__/apple1.z
     sha256: baf2f5824deabee1e5f66493c4e1b89bdc5596c16b8a427d90434b6cad28626d
-    source: unblob integration test inputs (Git LFS; values from header bytes)
-    license: MIT
     expect:
       block_mode: true
       max_bits: 16

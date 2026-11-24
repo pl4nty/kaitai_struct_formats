@@ -4,8 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/serpent-os/moss/5e9a82bbad81cf16bfcf2c483e3df0b07c799186/test/bash-completion-2.11-1-1-x86_64.stone
     sha256: 13e2bce256b183ee0c721bd6cc438be8dcebf95850c8d851801e4ce000195d94
-    source: serpent-os/moss test/bash-completion-2.11-1-1-x86_64.stone
-    license: MPL-2.0
     eof: true
     expect:
       header.num_payloads: 4
@@ -18,8 +16,6 @@ samples:
       payloads[3].len_usable_data: 872279
   - url: https://raw.githubusercontent.com/serpent-os/moss/5e9a82bbad81cf16bfcf2c483e3df0b07c799186/test/conflicts/pineapple-1-1-1-x86_64.stone
     sha256: 1c8681fda365a0dbb05e598db311e4c951fed2c65e070273940d85541c02ab07
-    source: serpent-os/moss test/conflicts/pineapple-1-1-1-x86_64.stone
-    license: MPL-2.0
     eof: true
     expect:
       header.num_payloads: 4

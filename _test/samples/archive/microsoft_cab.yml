@@ -3,8 +3,6 @@
 samples:
   - url: https://raw.githubusercontent.com/kyz/libmspack/8f2a2a91ae2d12f985a196d481962ca4731f0f4d/libmspack/test/test_files/cabd/normal_2files_1folder.cab
     sha256: 590791307b407a6ec6d885542952b7eb6575defde68e06d25bac4f41a9b634fd
-    source: kyz/libmspack 8f2a2a91ae2d libmspack/test/test_files/cabd/normal_2files_1folder.cab
-    license: LGPL-2.1-only
     expect:
       header.num_folders: 1
       header.num_files: 2
@@ -13,8 +11,6 @@ samples:
       folders[0].compression.method: none
   - url: https://raw.githubusercontent.com/kyz/libmspack/8f2a2a91ae2d12f985a196d481962ca4731f0f4d/libmspack/test/test_files/cabd/mszip_lzx_qtm.cab
     sha256: 0ce0b55fe705b744d41bb361170c0467db30da0c7f9bdd386d5dade71a78e171
-    source: kyz/libmspack 8f2a2a91ae2d libmspack/test/test_files/cabd/mszip_lzx_qtm.cab
-    license: LGPL-2.1-only
     expect:
       header.num_folders: 3
       files[0].name_ansi: mszip.txt

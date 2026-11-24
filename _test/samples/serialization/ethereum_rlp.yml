@@ -4,8 +4,6 @@
 samples:
   - name: longstring
     data: b8384c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6e7365637465747572206164697069736963696e6720656c6974
-    source: ethereum/tests c67e485ff8b5 RLPTests/rlptest.json, "longstring"
-    license: CC0-1.0
     eof: true
     expect:
       item.is_list: false
@@ -13,8 +11,6 @@ samples:
       item.string_payload: Lorem ipsum dolor sit amet, consectetur adipisicing elit
   - name: shortListMax1
     data: f784617364668471776572847a78637684617364668471776572847a78637684617364668471776572847a78637684617364668471776572
-    source: ethereum/tests c67e485ff8b5 RLPTests/rlptest.json, "shortListMax1"
-    license: CC0-1.0
     eof: true
     expect:
       item.is_list: true
@@ -23,8 +19,6 @@ samples:
       item.list_payload.items[10].string_payload: qwer
   - name: listsoflists2
     data: c7c0c1c0c3c0c1c0
-    source: ethereum/tests c67e485ff8b5 RLPTests/rlptest.json, "listsoflists2" ([[], [[]], [[], [[]]]])
-    license: CC0-1.0
     eof: true
     expect:
       len(item.list_payload.items): 3
@@ -33,8 +27,6 @@ samples:
       len(item.list_payload.items[2].list_payload.items[1].list_payload.items): 1
   - name: bigint
     data: a1010000000000000000000000000000000000000000000000000000000000000000
-    source: ethereum/tests c67e485ff8b5 RLPTests/rlptest.json, "bigint" (2**256)
-    license: CC0-1.0
     eof: true
     expect:
       item.len_payload: 33

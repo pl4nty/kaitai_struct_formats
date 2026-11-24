@@ -4,7 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/e1e195beca8e0f24ca0e41c02d1986af13865cd0/reference/ggv_bin-sample-v2.ovl
     sha256: 7bda7d18b70c8c8c67bb5000bbad1d76cfef321d8026a90e7840185a1fd4284a
-    source: gpsbabel/gpsbabel e1e195beca8e reference/ggv_bin-sample-v2.ovl
     eof: true
     expect:
       magic: 'DOMGVCRD Ovlfile V2.0:'
@@ -13,7 +12,6 @@ samples:
       abs(body.entries[2].body.points[0].lon - 11.126680138) < 0.0000001: true
   - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/e1e195beca8e0f24ca0e41c02d1986af13865cd0/reference/ggv_bin-sample-v3.ovl
     sha256: 01ddc1a30e726b95116f1184445eb2debcf132a2de13ea95118d1b710e79280f
-    source: gpsbabel/gpsbabel e1e195beca8e reference/ggv_bin-sample-v3.ovl
     eof: true
     expect:
       magic: 'DOMGVCRD Ovlfile V3.0:'

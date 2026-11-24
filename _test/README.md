@@ -43,8 +43,6 @@ samples:
   - url: https://raw.githubusercontent.com/<owner>/<repo>/<commit-sha>/path/file.png
     sha256: <64 lowercase hex>
     name: optional-unique-name     # default: last URL segment (`data` for inline bytes)
-    source: where it came from     # free text, for humans
-    license: CC0-1.0               # licence of the sample, if known
     extract:                       # optional
       format: zip                  # zip | tar | gzip | bz2 | xz | hex | base64 | slice
       member: path/in/archive      # zip, tar (required)
@@ -84,7 +82,7 @@ Rules for sample URLs:
 - Git LFS files: use `media.githubusercontent.com/media/<owner>/<repo>/<sha>/<path>`;
   `raw.githubusercontent.com` serves the LFS pointer.
 - Pin to an immutable revision (a commit SHA for GitHub raw URLs, never a branch).
-- Prefer small files (under ~5 MB) with a clear licence.
+- Prefer small files (under ~5 MB).
 - Do not link to issue or pull-request pages; link to the file itself.
 - `expect` values must come from an independent source (the format's
   reference tool, a hex dump, the sample's documentation), not from the

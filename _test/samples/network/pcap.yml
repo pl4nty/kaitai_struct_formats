@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/3541bd5d38635e208d7dd47cc6ea2af00dd7ef0c/tests/dns_udp.pcap
     sha256: dcb83420e7512dd4085e790d40a040bc5749decb5e551fb807da5689b990fa65
-    source: tcpdump test suite
-    license: BSD-3-Clause
     eof: true
     expect:
       hdr.version_major: 2
@@ -10,8 +8,6 @@ samples:
       len(packets): 2
   - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/tls-renegotiation.pcap
     sha256: a3472920f5080ac32ab56d86def19dcbb418f25f4e197674d0d2a6a6e59a34ae
-    source: Wireshark test captures
-    license: GPL-2.0-or-later
     eof: true
     expect:
       hdr.network: 1
@@ -19,8 +15,6 @@ samples:
   - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/ppi_coverage.pcap.gz
     sha256: 809ad823c24ff299ad7defacb085ea2387949c882778a916b08fb20481b1f6aa
     name: ppi_coverage.pcap
-    source: Wireshark test captures
-    license: GPL-2.0-or-later
     extract: {format: gzip}
     eof: true
     expect:

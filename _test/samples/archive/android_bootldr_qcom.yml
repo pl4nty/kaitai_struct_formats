@@ -4,7 +4,6 @@
 samples:
   - url: https://archive.org/download/afharchive_90_bootloader-bullhead-bhz31bimg/bootloader-bullhead-bhz31b.img
     sha256: 058ff2f9af22bf62c0dd7dfa3e6c1672eaea10a5e51f9d8f7ee025844933e925
-    source: archive.org item afharchive_90_bootloader-bullhead-bhz31bimg (Google factory image component; proprietary)
     expect:
       num_images: 11
       ofs_img_bodies: 852

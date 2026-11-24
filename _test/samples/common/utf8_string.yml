@@ -1,16 +1,12 @@
 samples:
   - url: https://raw.githubusercontent.com/python/cpython/0fb18b02c8ad56299d6a2910be0bab8ad601ef24/Lib/test/cjkencodings/big5-utf8.txt
     sha256: b4f0b58a20fd68347ccb827e7a62c688e3710572b97ff19ad48a07b186af2ec7
-    source: CPython 3.12.0 codec test data (Chinese text, UTF-8)
-    license: PSF-2.0
     eof: true
     expect:
       len(codepoints): 300                  # len(data.decode('utf-8'))
       codepoints[0].value_as_int: 0x5982    # first character U+5982
   - url: https://raw.githubusercontent.com/python/cpython/0fb18b02c8ad56299d6a2910be0bab8ad601ef24/Lib/test/cjkencodings/gb18030-utf8.txt
     sha256: 97d18ce1d42da357521f5af5803816d3c4bade38950f69cff512a236f763585b
-    source: CPython 3.12.0 codec test data (Chinese text, UTF-8)
-    license: PSF-2.0
     eof: true
     expect:
       len(codepoints): 501

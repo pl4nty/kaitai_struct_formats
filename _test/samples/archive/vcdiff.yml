@@ -3,8 +3,6 @@
 samples:
   - url: https://raw.githubusercontent.com/google/open-vcdiff/868f459a8d815125c2457f8c74b12493853100f9/testdata/allocates_4gb.vcdiff
     sha256: 77a202052626067a5d229cf7d6ae044f59cd5adbcec123b2a4f2830f1d06916e
-    source: google/open-vcdiff 868f459a8d81 testdata/allocates_4gb.vcdiff
-    license: Apache-2.0
     eof: true
     expect:
       version: 0x53

@@ -5,7 +5,6 @@ samples:
   params:
     byteness: '1'
     data: _data
-  source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 51440
 - name: f16-abcdef
@@ -13,7 +12,6 @@ samples:
   params:
     byteness: '1'
     data: _data
-  source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 8279
 - name: f16-abcdefgh
@@ -21,7 +19,6 @@ samples:
   params:
     byteness: '1'
     data: _data
-  source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 1575
 - name: f32-abcde
@@ -29,7 +26,6 @@ samples:
   params:
     byteness: '2'
     data: _data
-  source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 4031760169
 - name: f32-abcdef
@@ -37,7 +33,6 @@ samples:
   params:
     byteness: '2'
     data: _data
-  source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 1448095018
 - name: f32-abcdefgh
@@ -45,7 +40,6 @@ samples:
   params:
     byteness: '2'
     data: _data
-  source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 3957429649
 - name: f64-abcde
@@ -53,7 +47,6 @@ samples:
   params:
     byteness: '4'
     data: _data
-  source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 14467467625952928454
 - name: f64-abcdef
@@ -61,7 +54,6 @@ samples:
   params:
     byteness: '4'
     data: _data
-  source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 14467579776138987718
 - name: f64-abcdefgh
@@ -69,6 +61,5 @@ samples:
   params:
     byteness: '4'
     data: _data
-  source: Wikipedia, Fletcher's checksum, Test vectors (little-endian words, zero-padded)
   expect:
     value: 3543817411021686982

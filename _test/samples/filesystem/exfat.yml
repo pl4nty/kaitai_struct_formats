@@ -3,7 +3,6 @@
 samples:
   - url: https://raw.githubusercontent.com/exfatprogs/exfatprogs/e5f9b14500298b02b9d9daba0267a5ea48cac85a/tests/duplicated_name/exfat.img.tar.xz
     sha256: 5fd6589545db4fb2599636568878b82a776657ad2527cc012c292a0620c8143e
-    source: exfatprogs/exfatprogs e5f9b1450029 tests/duplicated_name/exfat.img.tar.xz
     extract: { format: xz, then: { format: tar, member: exfat.img } }
     expect:
       boot_sector.len_volume: 10240

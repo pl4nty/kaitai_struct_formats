@@ -5,7 +5,6 @@ samples:
   - url: https://ftp.dlink.de/dir/dir-100/driver_software/DIR-100_fw_revd_403b18_ALL_de_20151202.zip
     sha256: 382409781cdfbda54f312ff9f8b7beec4ae58158a6370f55583bf5280850eac3
     name: DIR100D1_FW403WWB18.bin
-    source: ftp.dlink.de dir/dir-100/driver_software (D-Link firmware; proprietary)
     extract:
       format: zip
       member: DIR-100_fw_revd_403b18_ALL_de_20151202/DIR100D1_FW403WWB18.bin

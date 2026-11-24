@@ -5,7 +5,6 @@ samples:
   - url: https://sembiance.com/fileFormatSamples/font/osXDataForkFont/Basaltic%23C80001_ResourceFork.bin
     sha256: 97343fa5cc08252f69b38d309987dbf1fda5fdf8cab8716354fbf70b48a27b41
     name: Basaltic_ResourceFork.bin
-    source: telparia fileFormatSamples (sembiance.com), font/osXDataForkFont
     expect:
       header.ofs_data_blocks: 256
       header.ofs_resource_map: 33676
@@ -15,7 +14,6 @@ samples:
   - url: https://sembiance.com/fileFormatSamples/font/osXDataForkFont/Casablanca%23C80001_ResourceFork.bin
     sha256: 3389208587d65108ef35e1c75d4574550e581f464ce48d0dff974183b47f5f55
     name: Casablanca_ResourceFork.bin
-    source: telparia fileFormatSamples (sembiance.com), font/osXDataForkFont
     expect:
       header.ofs_resource_map: 34659
       header.len_data_blocks: 34403
@@ -24,7 +22,6 @@ samples:
   - url: https://sembiance.com/fileFormatSamples/font/osXDataForkFont/WantedPoster%23C80001_ResourceFork.bin
     sha256: a909e80944c6ce5e10b50b0a222051fdf4fcafaf304f7585f73fcc34084d7126
     name: WantedPoster_ResourceFork.bin
-    source: telparia fileFormatSamples (sembiance.com), font/osXDataForkFont
     expect:
       header.ofs_resource_map: 32832
       header.len_data_blocks: 32576

@@ -1,7 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/mrdoob/three.js/2a20741396839e86a30f46a8a5b0de573fa154bf/examples/models/mmd/vmds/wavefile_v2.vmd
     sha256: 9cf9264ccbefcc2c4c10175bbc66270b1de2a392a08d11bd0b3d233b6b737cbf
-    source: three.js examples (removed in r172); expects from a manual header/count read against the VMD format docs
     eof: true
     expect:
       motion_count: 14160
@@ -9,7 +8,6 @@ samples:
       camera_count: 0
   - url: https://raw.githubusercontent.com/mrdoob/three.js/2a20741396839e86a30f46a8a5b0de573fa154bf/examples/models/mmd/vmds/wavefile_camera.vmd
     sha256: 43f6bf0279daff148f53495b6fa7b511e5913196c8b0725e1bc4866ceba3c8c1
-    source: three.js examples (removed in r172); expects from a manual header/count read
     expect:
       motion_count: 0
       morph_count: 0

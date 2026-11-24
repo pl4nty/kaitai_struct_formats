@@ -4,8 +4,6 @@ samples:
   - url: https://raw.githubusercontent.com/rhboot/efivar/349e5ffff281ee1f7155194344a839ef314d45d5/tests/machine1/data/db-d719b2cb-3d3a-4596-a3bc-dad00e67656f
     sha256: 41b2d5cbeb19a01dd19927418d4064769f949cc8d5c9f8544f8749239e4d8cc3
     name: db-machine1
-    source: rhboot/efivar test data (machine1 db variable)
-    license: LGPL-2.1-or-later
     eof: true
     expect:
       len(signatures): 3
@@ -15,8 +13,6 @@ samples:
   - url: https://raw.githubusercontent.com/rhboot/efivar/349e5ffff281ee1f7155194344a839ef314d45d5/tests/machine1/data/dbx-d719b2cb-3d3a-4596-a3bc-dad00e67656f
     sha256: 3f16e608a9cd23f9228a8926749600012568d92d343111fafc6b16c0a49e9f1e
     name: dbx-machine1
-    source: rhboot/efivar test data (machine1 dbx variable)
-    license: LGPL-2.1-or-later
     eof: true
     expect:
       len(signatures): 2
@@ -26,8 +22,6 @@ samples:
   - url: https://raw.githubusercontent.com/rhboot/efivar/349e5ffff281ee1f7155194344a839ef314d45d5/tests/machine1/data/KEK-8be4df61-93ca-11d2-aa0d-00e098032b8c
     sha256: c8c16ce9fcdb97a915356e6c67a750437be53a22f587cd98d419aa2c1c919123
     name: KEK-machine1
-    source: rhboot/efivar test data (machine1 KEK variable)
-    license: LGPL-2.1-or-later
     eof: true
     expect:
       len(signatures): 2

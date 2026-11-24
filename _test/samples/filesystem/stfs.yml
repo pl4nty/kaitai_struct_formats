@@ -4,7 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/landaire/acceleration/97f9ae6e0469d60c9320d5ea6010f133acb35e45/crates/stfs/tests/fixtures/live_120k_a.stfs
     sha256: 47e38036a73112f5f0c07504e722250f7bf9f7b2727f7231d5dbdb292c7aa545
-    source: landaire/acceleration crates/stfs/tests/fixtures/live_120k_a.stfs (Microsoft avatar item; proprietary)
     expect:
       header.magic: live
       metadata_size: 44302
@@ -16,7 +15,6 @@ samples:
       metadata.display_names[0]: Trials and Tribulations T-Shirt
   - url: https://raw.githubusercontent.com/landaire/acceleration/97f9ae6e0469d60c9320d5ea6010f133acb35e45/crates/stfs/tests/fixtures/live_256k.stfs
     sha256: 3a16330f841a26b63036c27441d024fff77f63649748dcfebe65a00aa4200d11
-    source: landaire/acceleration crates/stfs/tests/fixtures/live_256k.stfs (Microsoft avatar item; proprietary)
     expect:
       header.magic: live
       metadata.content_size: 217088

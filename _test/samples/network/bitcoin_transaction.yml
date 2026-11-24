@@ -2,8 +2,6 @@ samples:
   - url: https://blockstream.info/api/tx/a1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d/raw
     sha256: 12d2af01bdbba868fc970bafdf52c7fba4dbbd872ec1a64ef562aa0f71d3c6e7
     name: pizza-tx-a1075db5.bin
-    source: raw Bitcoin mainnet transaction a1075db5... (the 2010 "pizza" transaction), served by blockstream.info Esplora API; content is fixed by its txid
-    license: public domain (blockchain data)
     eof: true
     expect:
       version: 1

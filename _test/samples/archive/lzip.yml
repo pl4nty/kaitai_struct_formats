@@ -1,8 +1,6 @@
 samples:
   - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/compression/lzip/__input__/lorem.txt.lz
     sha256: b92a810e9381f7103ba177c36e39033984153347a4be0104aa824c571b3bf366
-    source: unblob integration test inputs (Git LFS; values from header bytes)
-    license: MIT
     expect:
       len(members): 1
       members[0].header.version: 1

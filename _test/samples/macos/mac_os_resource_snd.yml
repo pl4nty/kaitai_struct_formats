@@ -5,7 +5,6 @@ samples:
   - url: https://sembiance.com/fileFormatSamples/archive/rsrc/Excellent%20clue%21%20SOUND
     sha256: f9ac1b5d1dbeeccbbae808b451a52c7d752fb015ebe11230c448b9fc83f8e438
     name: excellent-clue-snd-15800
-    source: sembiance.com fileFormatSamples archive/rsrc, resource 'snd ' 15800
     extract: { format: slice, offset: 283, size: 99114 }
     expect:
       format: 1

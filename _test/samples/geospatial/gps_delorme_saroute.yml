@@ -3,6 +3,5 @@
 samples:
   - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/3054af94a308f2fafdac7e2f2862ea0f6b335666/reference/track/i65.anr
     sha256: c8532a3ed42cf09b755aa6f495a8499868c9a5d6eb254fd0193c53b30e425ad9
-    source: gpsbabel/gpsbabel 3054af94a308 (tag gpsbabel_1_8_0) reference/track/i65.anr
     expect:
       name_record_body.name: Home to 8520 Northwe

@@ -2,24 +2,18 @@
 samples:
   - url: https://raw.githubusercontent.com/RoaringBitmap/CRoaring/1e4a304aebdd8de78c93f251b9fc002c717505b9/tests/testdata/64map32bitvals.bin
     sha256: 3e767bc7ca1016f1f1f757da3d650adb997d7ecff9195ee7306dc7029ef739a7
-    source: RoaringBitmap/CRoaring tests/testdata (portable 64-bit format; pyroaring reads 10 values 0..9)
-    license: Apache-2.0
     eof: true
     expect:
       num_buckets: 1
       buckets[0].key: 0
   - url: https://raw.githubusercontent.com/RoaringBitmap/CRoaring/1e4a304aebdd8de78c93f251b9fc002c717505b9/tests/testdata/64mapspreadvals.bin
     sha256: 1d40bfe6531faa13217d3df4301a1e6a6392416ee91628520d63ded1f3babc0e
-    source: RoaringBitmap/CRoaring tests/testdata (pyroaring reads 100 values, max 38654705673)
-    license: Apache-2.0
     eof: true
     expect:
       num_buckets: 10
       buckets[9].key: 9
   - url: https://raw.githubusercontent.com/RoaringBitmap/CRoaring/1e4a304aebdd8de78c93f251b9fc002c717505b9/tests/testdata/64maprunbitsetvals.bin
     sha256: ecfb01a252c7b5f96340cd9b7b601b891b88a2bbc8eb826f15e3838b26313fe1
-    source: RoaringBitmap/CRoaring tests/testdata (run + bitset containers; pyroaring reads 6108 values)
-    license: Apache-2.0
     eof: true
     expect:
       num_buckets: 6

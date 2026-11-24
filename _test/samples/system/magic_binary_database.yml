@@ -7,8 +7,6 @@ samples:
   - url: https://snapshot.debian.org/archive/debian/20240301T214050Z/pool/main/f/file/libmagic-mgc_5.45-3_amd64.deb
     sha256: 31b5c32ce7ccf700afc08955510e3071e2b21993fcd62a27ce04f30c343e63a4
     name: magic.mgc-amd64
-    source: Debian libmagic-mgc 1:5.45-3 amd64, /usr/lib/file/magic.mgc
-    license: BSD-2-Clause
     extract:
       format: slice
       offset: 1028
@@ -23,8 +21,6 @@ samples:
   - url: https://snapshot.debian.org/archive/debian/20240302T211138Z/pool/main/f/file/libmagic-mgc_5.45-3_s390x.deb
     sha256: ea11ee1e5d1c8180d6e9e96385d2bf1808f7b823df0348a6528364c5c6f3ea72
     name: magic.mgc-s390x
-    source: Debian libmagic-mgc 1:5.45-3 s390x, /usr/lib/file/magic.mgc
-    license: BSD-2-Clause
     extract:
       format: slice
       offset: 1024

@@ -2,16 +2,12 @@
 samples:
   - url: https://raw.githubusercontent.com/liballeg/allegro5/8796dd2d243b1027e7f65a0657f694dbf8d6ec5d/addons/allegrogl/examp/demofont.dat
     sha256: ab854f16335147d978272f41f4ef2fe0fb04bac258628fcfe90d41ea0c72d353
-    source: Allegro 4.4 AllegroGL example datafile (values from header bytes)
-    license: Giftware
     eof: true
     expect:
       pack_magic: unpacked
       num_objects: 3
   - url: https://raw.githubusercontent.com/liballeg/allegro5/8796dd2d243b1027e7f65a0657f694dbf8d6ec5d/addons/loadpng/examples/exdata.dat
     sha256: e8c99fd4cb3769915bdfb229b7cb99904984c51f895c0d6bfd67f63f8624e072
-    source: Allegro 4.4 loadpng example datafile (values from header bytes)
-    license: Giftware
     eof: true
     expect:
       num_objects: 2

@@ -1,18 +1,15 @@
 samples:
   - url: https://raw.githubusercontent.com/behnam/python-lfp-reader/d1a5081008ea6379b3ad8f340db3bf442e8cc0e1/samples/IMG_0002-dm.lfp
     sha256: ded821a95026b50af1bec8ea3f9c3407d591262da46fa7676d306b9cfe063ad1
-    source: behnam/python-lfp-reader samples (depth-map LFP); expects from file(1) and a manual section read
     expect:
       sections[0].contents.type: LFP
       sections[1].contents.type: LFM
   - url: https://raw.githubusercontent.com/behnam/python-lfp-reader/d1a5081008ea6379b3ad8f340db3bf442e8cc0e1/samples/IMG_0001-stk.lfp
     sha256: 640dbd5a7ef89c8aadfd18f576df85ae1a8bde0e13478c5afb9d4d11c8ad18e4
-    source: behnam/python-lfp-reader samples (focal-stack LFP); expects from file(1)
     expect:
       sections[0].contents.type: LFP
   - url: https://raw.githubusercontent.com/behnam/python-lfp-reader/d1a5081008ea6379b3ad8f340db3bf442e8cc0e1/samples/IMG_0001.lfp
     sha256: acb560d5a9edd25b20823a906b4d2eb0b10aeef0e78646892ff938806eac3798
-    source: behnam/python-lfp-reader samples (raw camera LFP, 16 MB); file(1) "Lytro Light Field Picture, version 1"; refs read with strings(1)
     expect:
       sections[0].contents.type: LFP
       sections[1].contents.type: LFM

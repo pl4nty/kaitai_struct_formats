@@ -1,21 +1,15 @@
 samples:
   - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/chromium_pak.hexpat/kSamplePakContentsV4.pak
     sha256: 90d64170ed79ff76dfe8e3533b472d1fa36816097759b1618d63ff89f9ec2ef8
-    source: ImHex-Patterns test data
-    license: GPL-2.0 (repository licence)
     expect:
       version: 4
       num_resources_v4: 4
   - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/chromium_pak.hexpat/kSampleCompressPakContentsV5.pak
     sha256: 54ae093a07192c54286a6ca17f3041d259d6fd8bef05bdfa0a94061a31daba96
-    source: ImHex-Patterns test data
-    license: GPL-2.0 (repository licence)
     expect:
       version: 5
   - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/chromium_pak.hexpat/kSamplePakContents2x.pak
     sha256: 19ab15b5bf60a6895d21c2df9bd7ad0f923ca3d6758e48528cbf8177f15152ed
-    source: ImHex-Patterns test data
-    license: GPL-2.0 (repository licence)
     expect:
       version: 4
       num_resources_v4: 1

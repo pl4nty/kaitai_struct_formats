@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/GPSBabel/gpsbabel/1d6a0626bc003cfb2519a0f9b864bf944db34ffe/reference/track/gnav_trl.trl
     sha256: dabb83ae250526ae5cb7051f0bdf524bd596323b34d113ec4aa83d21170c0c04
-    source: GPSBabel 1.5.4 reference test data (expected output reference/track/gnav_trl~trl.csv)
-    license: GPL-2.0-or-later
     eof: true
     expect:
       len(points): 747                    # 747 rows in gnav_trl~trl.csv

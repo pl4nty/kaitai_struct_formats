@@ -3,7 +3,6 @@
 samples:
   - url: https://raw.githubusercontent.com/Frostie314159/awdl-frame-parser/de6c54e1aef0d01a964628a44754f1c688f07ac6/test_bins/mif.bin
     sha256: 4195e61e482240e8829894a9ec127d8803432b37dc53c63eb13c517f1a2acd6f
-    source: Frostie314159/awdl-frame-parser de6c54e1aef0 test_bins/mif.bin
     eof: true
     expect:
       version.major: 1
