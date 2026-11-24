@@ -1,0 +1,123 @@
+# Imported from https://github.com/wpyoga/s7-200-smart-project-file/blob/6803dc0fd0240472457eae4245fd69e37b6a549f/kaitai/pid_config_2.ksy
+# Licence and copyright: see _community/README.md
+meta:
+  id: pid_config_2
+  title: 'S7-200 SMART project: PID configuration 2'
+  license: MIT
+  imports:
+    - smart_types
+  endian: le
+
+seq:
+  # - size: 0x62f89
+  # - size: 0x427a4
+  # - size: 0xc5e5
+  # - size: 0x3d917
+  # - size: 0xc382
+  - size: 0xa06ae
+
+  - id: marker
+    type: u1
+    valid: 0x1b
+
+  - id: version
+    type: u2
+    valid:
+      any-of: [2, 1]
+
+  - type: u2
+    valid: 0
+
+  - id: marker_3
+    type: u2
+
+  - size: 92
+    if: version == 2 and marker_3 == 1
+
+  - size: 11
+    if: version == 2 and marker_3 == 0
+
+  - size: 7
+    if: version == 1 and marker_3 == 0
+
+  - id: marker_2
+    type: u1
+    valid: 0x1b
+
+  - id: marker_4
+    type: u1
+
+  - type: u1
+    valid: 2
+    if: version == 2
+
+  - id: num_pid
+    type: u4
+    if: version == 2
+
+  - id: pid
+    type: pid
+    repeat: expr
+    repeat-expr: num_pid
+    if: version == 2
+
+  - type: smart_types::nulls(100)
+    if: version == 2
+
+
+types:
+  pid:
+    seq:
+      - id: marker
+        type: u1
+
+      - type: u1
+        valid: 2
+
+      - type: smart_types::nulls(8)
+
+      - id: bidi_gain
+        type: f4
+      - id: bidi_integral
+        type: f4
+      - id: bidi_derivative
+        type: f4
+
+      - id: enable_control_range
+        type: u4
+      - id: enable_reverse_control_range
+        type: u4
+      - id: control_range
+        type: f4
+      - id: reverse_control_range
+        type: f4
+
+      - type: smart_types::nulls(84)
+
+      - id: enable_dead_zone
+        type: u4
+      - id: dead_zone
+        type: f4
+
+      - id: enable_reverse_dead_zone
+        type: u4
+      - id: reverse_dead_zone
+        type: f4
+
+      - type: u1
+
+      - type: smart_types::nulls(8)
+
+      - type: u4
+
+      - type: u4
+        valid: 0
+
+      - id: digital_cycle_time
+        type: f4
+
+      - size: 11
+        repeat: expr
+        repeat-expr: 8
+
+      - type: smart_types::nulls(100)
