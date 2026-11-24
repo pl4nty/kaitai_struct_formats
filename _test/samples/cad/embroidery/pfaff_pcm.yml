@@ -1,17 +1,9 @@
 samples:
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/pfaff_pcm/samples/random1-me.pcm
   sha256: 025ed71a6a1a806264554d5c8c28216393d91952304d756eda9d9f7c725449c2
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/pfaff_pcm/samples/random2-me.pcm
   sha256: 9973d208312eb801924872b7e64c6057236ff5901ec14337c55fd3281b595a2f
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/pfaff_pcm/samples/random2-wilcom.PCM
   sha256: 0f8d592e240ca7410dc8113fc327f6657da04b659ae0e2368405afdaa01e224b
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/pfaff_pcm/samples/random3-me.pcm
   sha256: 2158d382a6939d130fed355fa7f28b363039eefa6defc235bb8f8efc42a21f7f
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT

@@ -1,23 +1,15 @@
 samples:
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/janome_jef/samples/random1-janome.jef
   sha256: 7600ec71faad2e044b63015f23ae1085de88d53e838d1a039c671ddd83e017f2
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
   expect:
     header.flags: 20
     header.hoop_code: 3
     header.color_count: 10
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/janome_jef/samples/random1-me.jef%2B
   sha256: 26e5da1041a9dc8ed6eff6d4bdafd9ed881d6a6d63c16d46b1d6970f0904c69e
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/janome_jef/samples/random1-premier.jef
   sha256: bc29d7080a2c1a3365913428176126dd38b0d440c8c8ae18eec63e552a0d3295
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/janome_jef/samples/spiralbox-janome.jef
   sha256: 1505db88d3c81534a331fa63c8f78a5ebb4c33007ddad0e135aff3170b742080
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
   expect:
     header.color_count: 16

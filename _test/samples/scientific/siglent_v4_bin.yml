@@ -1,13 +1,7 @@
 samples:
 - url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/bin/SDS814X-zoom-z1.bin
   sha256: 528ce4d0ce42b559f9bcc97db2c06c4ac3e4fc30fa35466be55d4dabc9c27364
-  source: RigolWFM test files (real oscilloscope captures)
-  license: BSD-3-Clause
 - url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/bin/SDS814X-3v0-probe1x.bin
   sha256: 6804c02a8c2f32b2240230a34c90d03e2a9a3dc0218d820277084696ee879c70
-  source: RigolWFM test files (real oscilloscope captures)
-  license: BSD-3-Clause
 - url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/bin/SDS814X-math-c1.bin
   sha256: c03b6a254a84c6f00e5e8138a2d7b8480c20135176a4b159b9717490b8d5dd8e
-  source: RigolWFM test files (real oscilloscope captures)
-  license: BSD-3-Clause

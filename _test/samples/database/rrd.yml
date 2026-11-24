@@ -1,13 +1,7 @@
 samples:
 - url: https://raw.githubusercontent.com/frazew/rrdmerge/dfb2c0ed1125ef5bd74800c948ab344efa351a4f/fixtures/merge_from/availability-86400.rrd
   sha256: 31374a080bb322bd1b938da8389e876c3619d7c39a5e8973fbcf7e613586dc3f
-  source: frazew/rrdmerge sample files
-  license: Apache-2.0
 - url: https://raw.githubusercontent.com/frazew/rrdmerge/dfb2c0ed1125ef5bd74800c948ab344efa351a4f/fixtures/merge_from/ping-perf.rrd
   sha256: 5e6bc28d664be87fcc11d219a167b8baaa8a57040bba06afc5542ba595219e49
-  source: frazew/rrdmerge sample files
-  license: Apache-2.0
 - url: https://raw.githubusercontent.com/frazew/rrdmerge/dfb2c0ed1125ef5bd74800c948ab344efa351a4f/fixtures/merge_from/port-id155.rrd
   sha256: 03cfc0a3ed9cbbf940953d6a90c515f3f89990a49ef1e86272fd872fa77abc1c
-  source: frazew/rrdmerge sample files
-  license: Apache-2.0

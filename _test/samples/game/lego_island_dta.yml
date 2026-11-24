@@ -1,5 +1,3 @@
 samples:
 - url: https://raw.githubusercontent.com/isledecomp/isle/6c5adc000c941b602b0de7f53d8f061848d025d7/docs/samples/BLDRINF.DTA
   sha256: 0391af17bc78f2e88ba250eed9fda6d0c0bc816e2183808874b5704082c6fb7b
-  source: isledecomp/isle sample files
-  license: LGPL-3.0

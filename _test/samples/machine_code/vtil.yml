@@ -1,5 +1,3 @@
 samples:
 - url: https://raw.githubusercontent.com/vtil-project/VTIL-Kaitai/50d6cdc16c63698a6044b5f1a7ce66395c4560ec/tests/hello_world.vtil
   sha256: 0e5cbe3cbb9ff5fd8067c3d4e04be38a7f9f6e70a77989982f37783262abbcc2
-  source: vtil-project/VTIL-Kaitai sample files
-  license: BSD-3-Clause

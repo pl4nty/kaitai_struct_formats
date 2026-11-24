@@ -1,9 +1,5 @@
 samples:
 - url: https://raw.githubusercontent.com/1j01/anypalette.js/eaf17cca78203bf2e68298137859f3f23cc46520/tests/regression-data/writing/KDE40.colors.out.aco
   sha256: 3c6583dc6409125f4f7a72d4efe265c318f20eb5f9f47ac22eadfbd75f20b6d6
-  source: 1j01/anypalette.js sample files
-  license: MIT
 - url: https://raw.githubusercontent.com/1j01/anypalette.js/eaf17cca78203bf2e68298137859f3f23cc46520/tests/regression-data/writing/ios.sketchpalette.out.aco
   sha256: 4e4ca41175d28121a7d0d0ab115d826b54ae2f21c9b816b4652db93a32642495
-  source: 1j01/anypalette.js sample files
-  license: MIT

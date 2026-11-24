@@ -1,9 +1,5 @@
 samples:
 - url: https://raw.githubusercontent.com/fookatchu/pyphotonfile/453fc197a67d3d2424e908a9daed645c92fe1553/tests/testfiles/Smilie.photon
   sha256: da56da9dda828850f228a0a404c4b66b5158c592e5999a799190ad5f53b25d41
-  source: fookatchu/pyphotonfile sample files
-  license: GPL-3.0
 - url: https://raw.githubusercontent.com/fookatchu/pyphotonfile/453fc197a67d3d2424e908a9daed645c92fe1553/tests/testfiles/newfile.photon
   sha256: ddbcef5b0cb7aed5fb182213121d1cc65b1d6d06f96672f0438bd18841dd348b
-  source: fookatchu/pyphotonfile sample files
-  license: GPL-3.0

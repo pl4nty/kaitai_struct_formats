@@ -1,8 +1,6 @@
 samples:
 - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/hopper.dds
   sha256: c1151911223972f8dde04ece308c37ad1ae5940726f349b952ff11c267d76c11
-  source: Pillow test images
-  license: MIT-CMU
   expect:
     magic: 'DDS '
     dds_header.size: 124
@@ -11,13 +9,7 @@ samples:
     dds_header.mip_map_count: 8
 - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/bc1.dds
   sha256: bd95e2ba7a87d79e94487c6744a3217f833f63b9dd49afba786c9595cbe2b310
-  source: Pillow test images
-  license: MIT-CMU
 - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/DXGI_FORMAT_R8G8B8A8_UNORM_SRGB.dds
   sha256: 855736b9427be90209d748f66a0bb5d7c8c7f86cc0d1e4e45819e985a2238cbe
-  source: Pillow test images
-  license: MIT-CMU
 - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/dxt5-argb-8bbp-interpolatedalpha_MipMaps-1.dds
   sha256: 7336bb02a3193f9d4b1f6c8b431d64697d60d52c0b452603d8ef0250e7386402
-  source: Pillow test images
-  license: MIT-CMU

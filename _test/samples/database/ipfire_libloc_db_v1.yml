@@ -1,6 +1,4 @@
 samples:
 - url: https://raw.githubusercontent.com/tbu-/libloc-rs/213a347e2f79112182f0863bf909a0f878756b4c/example-location.db
   sha256: d714dbb8baa1b3e79311c145a00e1907b5b4fdd56e3930fcb1e5ca09d8bb5cea
-  source: tbu-/libloc-rs sample files
-  license: Apache-2.0
   xfail: 'spec bug: instance named "as" is a Python keyword, so the generated Python parser does not compile'

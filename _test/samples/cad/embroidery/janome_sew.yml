@@ -1,17 +1,9 @@
 samples:
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/janome_sew/samples/random1-me.sew
   sha256: fc5404e4f9a7cb9963bb43be5d2ee7683cfe97501daf4d6e4d2d6f99d6fb2d42
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/janome_sew/samples/random1-wilcom.SEW
   sha256: f9e0cda3c9a5597517c757cc78805826eeb97cb7f3f39a243a920b97a081243a
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/janome_sew/samples/random2-premier.sew
   sha256: e191d45644b40cec7f2f61a7e7ac74e26c71bdc7b59963ae5826ac7248b6ce58
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/janome_sew/samples/spiralb0.sew
   sha256: e0d78ad38a5bbeaf247770a956a05b8710d224681ff5b648be76f5350f9742ba
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT

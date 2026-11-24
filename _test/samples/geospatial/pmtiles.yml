@@ -1,8 +1,6 @@
 samples:
 - url: https://raw.githubusercontent.com/protomaps/PMTiles/aec8fa1341222fdddb3318e9ffa8e18e19b312f7/js/test/data/test_fixture_1.pmtiles
   sha256: f3f65093582c81625cdfab11b3d1a27c2fb6aadcf8bd9802b2ad694d4d7cdca5
-  source: PMTiles reference test fixtures
-  license: BSD-3-Clause
   expect:
     header.signature: PMTiles
     header.spec_version: 3
@@ -13,9 +11,5 @@ samples:
     header.tile_data_offset: 399
 - url: https://raw.githubusercontent.com/protomaps/PMTiles/aec8fa1341222fdddb3318e9ffa8e18e19b312f7/js/test/data/test_fixture_2.pmtiles
   sha256: 7ee80a53000bfb15a5d54162bc3161094239e775fef180fffb2d3ff607e46c1a
-  source: PMTiles reference test fixtures
-  license: BSD-3-Clause
 - url: https://raw.githubusercontent.com/protomaps/PMTiles/aec8fa1341222fdddb3318e9ffa8e18e19b312f7/spec/v3/stamen_toner%28raster%29CC-BY%2BODbL_z3.pmtiles
   sha256: b96efe3ea10b98632c0c0dc229d000b604ebdad6b2f1321ea11d9de931df1ce5
-  source: PMTiles spec sample
-  license: CC-BY-3.0 AND ODbL-1.0

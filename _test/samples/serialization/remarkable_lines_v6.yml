@@ -1,9 +1,5 @@
 samples:
 - url: https://raw.githubusercontent.com/YakBarber/rmconvert_exploratory/27ef5a27d154d6250ad238fb58a262aaef5f39ba/remarkable_test_notebooks/213001cb-42c0-4628-8ed0-8320c15da2a8/110b4d92-e42e-4b78-a0cb-ebd40862f2f0.rm
   sha256: 23a8261275ac704c13d6a8974b2b54a1fa337308466b62af39a7abb1f027ea21
-  source: YakBarber/rmconvert_exploratory sample files
-  license: MIT
 - url: https://raw.githubusercontent.com/YakBarber/rmconvert_exploratory/27ef5a27d154d6250ad238fb58a262aaef5f39ba/remarkable_test_notebooks/213001cb-42c0-4628-8ed0-8320c15da2a8/1cf6d7c9-a4c3-4fad-a24c-84b8aebdc9fb.rm
   sha256: 242bce856a49daafc84dd99eb60b8e9680529a6e2d2b3d35808c4f0810e9dfd6
-  source: YakBarber/rmconvert_exploratory sample files
-  license: MIT

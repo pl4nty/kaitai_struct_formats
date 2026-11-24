@@ -1,17 +1,9 @@
 samples:
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/data_stitch_stx/samples/random1-wilcom.STX
   sha256: ef6b749a567fba47cd0e3e4481923e5297a0eab8fb6aa65c0640be8fab92af32
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/data_stitch_stx/samples/random2-wilcom.STX
   sha256: 91f1d1158772fc37cfee4edd2ad6aec1f4ea6d6637a851e82d8d200353fb12a5
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/data_stitch_stx/samples/random3-wilcom.STX
   sha256: 4b75377af68d36aa32ccfb1234dbdc4e37de8b1e394c4d4e0125cf1244ca2fee
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/data_stitch_stx/samples/scene-wilcom.STX
   sha256: efb4131c29f92235128d19cfca72e67fc1d3568a1bf94e4784c84a1d86733711
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT

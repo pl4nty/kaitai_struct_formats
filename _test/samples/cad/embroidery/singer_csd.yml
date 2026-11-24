@@ -1,17 +1,9 @@
 samples:
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/singer_csd/samples/random1-wilcom.CSD
   sha256: ba3466980040aaa1f3068de8eb07917188d903f4c1d1b14aab43c2a928ab7a1a
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/singer_csd/samples/random2-wilcom.CSD
   sha256: e04ca8f1dd6d44b89b960926eb537e11bde0dc7f5c8ae43b145d13fe696016e6
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/singer_csd/samples/random3-wilcom.CSD
   sha256: 04999c3e33f02c69efdaaf751a31d6d66611556a28cce34223f60a80ff1a95b2
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/singer_csd/samples/scene-wilcom.CSD
   sha256: e9cff43f08ea085ca28d6687087986a71566285b20a4507e11d2db6dd6495fb1
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT

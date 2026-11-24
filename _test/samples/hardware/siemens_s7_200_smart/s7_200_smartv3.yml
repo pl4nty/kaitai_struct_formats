@@ -1,9 +1,5 @@
 samples:
 - url: https://raw.githubusercontent.com/wpyoga/s7-200-smart-project-file/6803dc0fd0240472457eae4245fd69e37b6a549f/template/smart-3.0/template-3.0.smartv3
   sha256: d48c9d412435310bb55eda49b7831c4cc31fff1f9a3ea5d95cd757c3538b99b9
-  source: wpyoga/s7-200-smart-project-file sample files
-  license: MIT
 - url: https://raw.githubusercontent.com/wpyoga/s7-200-smart-project-file/6803dc0fd0240472457eae4245fd69e37b6a549f/template/smart-3.2/template-3.2.smartV3
   sha256: 332dd05f5ca26091a7a2ac39392264b91837faf705f206df32803cf6c5dccd8a
-  source: wpyoga/s7-200-smart-project-file sample files
-  license: MIT

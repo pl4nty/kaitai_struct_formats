@@ -1,5 +1,3 @@
 samples:
 - url: https://raw.githubusercontent.com/Thell/bdo-housecraft/3af0b47113c4709afab148ae2d3fa83748e08ac6/data/houseinfo/gamecommondata/binary/mansionlandinfo.bss
   sha256: 426ea933be14ee2f7baf65253e0fa19464a288dc2d349ecc6e2e6a0d506edabd
-  source: Thell/bdo-housecraft sample files
-  license: Unlicense

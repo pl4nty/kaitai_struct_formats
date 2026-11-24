@@ -1,5 +1,3 @@
 samples:
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/color_rgb/samples/scene-colors.rgb
   sha256: b2d0dd61d7d77daef51ec773379a690788b99630fbaa2bd9273fb680444a5701
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT

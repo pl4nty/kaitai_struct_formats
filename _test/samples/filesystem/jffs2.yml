@@ -1,13 +1,9 @@
 samples:
 - url: https://raw.githubusercontent.com/armijnhemel/binaryanalysis-ng/d72f0d9c5c4e5484878f357d07690e68334365db/test/testdata/unpackers/jffs2/test-little.jffs2
   sha256: d2f5b27ba067303c3770e1dff96354900e91ca103d37f1af23eb4c76b7c66682
-  source: armijnhemel/binaryanalysis-ng sample files
-  license: GPL-3.0
   expect:
     magic: le
 - url: https://raw.githubusercontent.com/armijnhemel/binaryanalysis-ng/d72f0d9c5c4e5484878f357d07690e68334365db/test/testdata/unpackers/jffs2/test-big.jffs2
   sha256: 81ea75e2e7a1c2f0d622beebccd35d0867249e66ecba47249b8c30b4e19e92ff
-  source: armijnhemel/binaryanalysis-ng sample files
-  license: GPL-3.0
   expect:
     magic: be

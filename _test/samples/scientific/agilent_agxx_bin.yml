@@ -1,17 +1,11 @@
 samples:
 - url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/bin/agilent_1.bin
   sha256: 0a02556a49ac699e08454defba16771368ebde8b1eaa05d7d3038dbde2a9c66e
-  source: RigolWFM test files (real oscilloscope captures)
-  license: BSD-3-Clause
   expect:
     file_header.cookie: AG
     file_header.file_size: 8164
     file_header.n_waveforms: 1
 - url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/bin/agilent_3.bin
   sha256: 999cf0e0e218df14300c64e536ebf0eb78ade83b397f1475b8dac2e923e53cd9
-  source: RigolWFM test files (real oscilloscope captures)
-  license: BSD-3-Clause
 - url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/bin/agilent_4.bin
   sha256: 36cd92f438cea7fa10cdc14c9ab8c8bc6245b673ed9e66616434efd7d79bb9f6
-  source: RigolWFM test files (real oscilloscope captures)
-  license: BSD-3-Clause

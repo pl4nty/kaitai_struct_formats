@@ -1,12 +1,8 @@
 samples:
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/tajima_dst/samples/random1-me.dst
   sha256: 86a187e3422370e1343fed72e5bb98e309a3ce9a5fc196f072bfd26d05d20c2d
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/tajima_dst/samples/random1-premier.dst
   sha256: 5bcc7dcfad897592f65d0bc7581ad6cee219a026d2b23f52e722748b7d2f3a30
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
   expect:
     header.label: H
     int(header.stitch_count): 245
@@ -14,9 +10,5 @@ samples:
     num_records: 248
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/tajima_dst/samples/random1-wilcom.DST
   sha256: e025e5f9654cac8c4c8a75479100ed2366c574e1c4ad9a1d00f28c9417d6b8ab
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/tajima_dst/samples/spiralbox-wilcom.DST
   sha256: 7e82090159faf2dd0acaeec104da66a902886d4b614cf1ce2757587d3461dbaf
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT

@@ -1,17 +1,9 @@
 samples:
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/brother_pes/samples/random1-brother-v1.pes
   sha256: ecf7b6c1aff1035a15f8e1da23c9b7250253b1d24d211acd569e3b2a93fff4f4
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/brother_pes/samples/random1-brother-v2.pes
   sha256: 6600bdf7900f9dbafbc624df6ad5e5626782296a35854229f56222fbd498b38b
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/brother_pes/samples/random1-brother-v3.pes
   sha256: bd2bc73f4d087bab50c8cf1bf236f166309df2cdc8f46861d608acb8de4902df
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT
 - url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/brother_pes/samples/random1-brother-v4.pes
   sha256: 46965f42519095afdc9f647074b1d62c07c1a93e605f5eed8e31bf2f502aae91
-  source: EmbroidePy/samples, as redistributed in broideryfab/embroidery-ksy
-  license: MIT

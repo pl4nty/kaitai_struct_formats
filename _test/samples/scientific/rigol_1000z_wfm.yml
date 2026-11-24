@@ -1,8 +1,6 @@
 samples:
 - url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DS1054Z-A.wfm
   sha256: bf673f4ee827f06ef3d145233bec975aa1301009ef143a76aea6191faf899653
-  source: RigolWFM test files (real oscilloscope captures)
-  license: BSD-3-Clause
   expect:
     preheader.model_number: DS1054Z
     preheader.firmware_version: 00.04.04.SP4
@@ -11,13 +9,7 @@ samples:
     header.ch[3].volt_per_division: 5.0
 - url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DS1054Z-ch1SquareCH2Uart.wfm
   sha256: 15467dd9c4bce8b4b7646d1ecfe7ecea19a2ec952536a98514dacf78b9f6044b
-  source: RigolWFM test files (real oscilloscope captures)
-  license: BSD-3-Clause
 - url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DZ1104Z-A.wfm
   sha256: d5e7c9f249eb8b80568a1a49c4d0901ec8ce71229f79f101cf71403cdbffc5e3
-  source: RigolWFM test files (real oscilloscope captures)
-  license: BSD-3-Clause
 - url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/MSO1104.wfm
   sha256: 88cb9ac6b0e53d737257e503de0a902abd628ee0a6bed8f575222484fdb7e114
-  source: RigolWFM test files (real oscilloscope captures)
-  license: BSD-3-Clause
