@@ -23,8 +23,8 @@ doc: |
   This spec parses the whole header, including attribute values. The data
   of each non-record variable is available as raw bytes via the `data`
   instance of the variable; record variable data is interleaved and must
-  be assembled by the application using `begin`, `len_data` and the record
-  size (sum of `len_data` of all record variables).
+  be assembled by the application using `ofs_data`, `len_data` and the
+  record size (sum of `len_data` of all record variables).
 
   The netCDF-4 format is an HDF5 file and is not covered; neither is the
   CDF-5 (version 5, "64-bit data") variant introduced by PnetCDF.
@@ -214,12 +214,14 @@ types:
         type: u4
         enum: nc_type
       - id: len_data
+        -orig-id: vsize
         type: u4
         doc: |
-          `vsize`: space allocated for the variable's data in bytes (padded to a
+          Space allocated for the variable's data in bytes (padded to a
           multiple of 4); for a record variable, the space per record.
           0xffffffff is used for variables too large to fit.
-      - id: begin
+      - id: ofs_data
+        -orig-id: begin
         type:
           switch-on: _root.version
           cases:
@@ -232,7 +234,7 @@ types:
         doc: True if the first dimension is the record dimension.
       data:
         io: _root._io
-        pos: begin
+        pos: ofs_data
         size: len_data
         if: not is_record_var and len_data != 0xffffffff
         doc: |
