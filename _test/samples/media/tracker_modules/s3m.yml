@@ -1,0 +1,16 @@
+# counts read from the S3M header at offset 0x20
+samples:
+  - url: https://raw.githubusercontent.com/libxmp/libxmp/5c63c2f7809dc6f17342df738a3dde5ca65221c9/test-dev/data/format_s3m_schism.s3m
+    sha256: 4aeffe2d9df32b9542dbfb5a5af8f97a1a5d26b7d3c1f6f0b4b81ba925a319fe
+    source: libxmp test-dev/data (Schism Tracker)
+    license: MIT
+    expect:
+      num_orders: 2
+      num_instruments: 1
+      num_patterns: 1
+  - url: https://raw.githubusercontent.com/libxmp/libxmp/5c63c2f7809dc6f17342df738a3dde5ca65221c9/test-dev/data/f/play_s3m_marker_sequence.s3m
+    sha256: 28dd0d760e982ff8bdf6e22bde11d3c9a48e748ade5e39187846d1c7ce4d8251
+    source: libxmp test-dev/data/f
+    license: MIT
+    expect:
+      num_instruments: 31

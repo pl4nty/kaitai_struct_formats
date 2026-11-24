@@ -1,0 +1,10 @@
+samples:
+  - url: https://archive.org/download/HOMMCDROM/HOMMCDROM.ISO/HEROES%2FDDATA%2FHEROES.AGG
+    sha256: 10f8c29aac3aac235c02de8cc0f8568e2be30ed785ccd0ca92fd570a8046017a
+    name: HEROES.AGG
+    source: Heroes of Might and Magic (1995) CD-ROM ISO on archive.org (item HOMMCDROM), member HEROES/DDATA/HEROES.AGG, 20 MB; proprietary, linked not vendored. Entry table and trailing 15-byte name table struct-decoded per the rewiki AGG page
+    expect:
+      num_files: 679
+      entries[0].offset: 9508
+      entries[0].size: 261126
+      filenames[0].str: overmain.bmp

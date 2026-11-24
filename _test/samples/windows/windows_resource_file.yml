@@ -1,0 +1,8 @@
+samples:
+  - url: https://raw.githubusercontent.com/squeek502/resinator/bee07836774bd1e5adf4fe5b199c87ddcebd4c4d/test/data/reference.res
+    sha256: 5f15e7b6da8f16e92f580986e03939d56f349ba8b00323fedbca32b1c64064f1
+    source: resinator test data, rc.exe-compiled .res (resource count from walking the DataSize/HeaderSize chain)
+    license: 0BSD
+    eof: true
+    expect:
+      len(resources): 33

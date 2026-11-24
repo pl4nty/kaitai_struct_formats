@@ -1,0 +1,18 @@
+samples:
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat048.raw
+    sha256: 17481bd2955d046efc5aac1022b4f5879ab02456060c419503aded54bf2e5efd
+    source: CroatiaControlLtd/asterix decoder sample data
+    license: GPL-2.0-or-later
+    eof: true
+    expect:   # manual read of CAT/LEN header (ASTERIX Part 1)
+      cat: 48
+      len: 48
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat034.raw
+    sha256: a5d24d471cc0fac2554924cbd6aacbf532be96204b4fb335f6275b9a1a0e5766
+    source: CroatiaControlLtd/asterix decoder sample data
+    license: GPL-2.0-or-later
+    eof: true
+    xfail: uap_type only appends items whose FSPEC bit is set (switch has no default), but the iNNN instances index data.items by UAP position, so i060 etc. read past the compacted list
+    expect:
+      cat: 34
+      len: 16

@@ -1,0 +1,24 @@
+samples:
+  - url: https://media.githubusercontent.com/media/fox-it/dissect.hypervisor/9736c31a0761d96eb81d22a3ba675c07b67f1d26/tests/_data/disk/vdi/basic.vdi.gz
+    sha256: 90373f35031056713dc31b2db98e45b7950bc8c4ac9ff83960ff8538c36f7235
+    name: basic.vdi
+    source: dissect.hypervisor test data (QEMU-created dynamic VDI)
+    license: AGPL-3.0-only
+    extract: {format: gzip}
+    expect:   # file(1) + manual hex read of the VDI 1.1 header
+      header.version.major: 1
+      header.version.minor: 1
+      header.header_main.disk_size: 10485760
+      header.header_main.block_data_size: 1048576
+      header.header_main.blocks_in_image: 10
+      header.header_main.blocks_allocated: 9
+  - url: https://media.githubusercontent.com/media/fox-it/dissect.target/72f4ddc31da62d413cb2c46b213f7e085317a808/tests/_data/containers/vdi/small.vdi.gz
+    sha256: 115cd7f5af01083a1bf49e6dffea1da91e5fd11f8518a867ccf890687812d54c
+    name: small.vdi
+    source: dissect.target test data (VirtualBox-created dynamic VDI)
+    license: AGPL-3.0-only
+    extract: {format: gzip}
+    expect:   # file(1) + manual hex read of the VDI 1.1 header
+      header.header_main.disk_size: 2097152
+      header.header_main.blocks_in_image: 2
+      header.header_main.blocks_allocated: 0

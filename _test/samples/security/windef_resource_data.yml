@@ -1,0 +1,14 @@
+# Windows Defender quarantine ResourceData file from fox-it/dissect.target's test data (Git LFS).
+# Expect values read from a hex dump after RC4-decrypting the file independently with the
+# well-known Defender quarantine key (the test fixture's payload is the literal DUMMY_PAYLOAD,
+# followed by further stream data such as a Zone.Identifier stream).
+samples:
+  - url: https://media.githubusercontent.com/media/fox-it/dissect.target/72f4ddc31da62d413cb2c46b213f7e085317a808/tests/_data/plugins/os/windows/defender/quarantine/ResourceData/A6/A6C8322B8A19AEED96EFBD045206966DA4C9619D
+    sha256: 07e454654a394cf5b27eed2e4268322f860f9eed27bb97a7d443552b34181976
+    name: A6C8322B8A19AEED96EFBD045206966DA4C9619D-resourcedata
+    source: fox-it/dissect.target tests/_data/plugins/os/windows/defender/quarantine/ResourceData
+    license: AGPL-3.0
+    expect:
+      encryptedfile.len_binarysd: 240
+      encryptedfile.len_mal_file: 13
+      encryptedfile.mal_file: DUMMY_PAYLOAD

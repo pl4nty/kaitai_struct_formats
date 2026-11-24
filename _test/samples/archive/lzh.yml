@@ -1,0 +1,22 @@
+samples:
+  - url: https://raw.githubusercontent.com/apache/commons-compress/17796875a060734aeb2bfd4c2d3ea0a5aa546c22/src/test/resources/test-msdos-l0.lha
+    sha256: 3ce46e52dad94ba8fb81d916923c4a3b741e532eb4b3fc7bd2bd507e50150d6b
+    source: 'Apache Commons Compress test resources: LHA level 0'
+    license: Apache-2.0
+    expect:
+      entries[0].file_record.header.header1.method_id: -lhd-
+  - url: https://raw.githubusercontent.com/apache/commons-compress/17796875a060734aeb2bfd4c2d3ea0a5aa546c22/src/test/resources/test-msdos-l1.lha
+    sha256: 2cc53c7c9328efeaca29e8c7d7fd3a4ac6f9f95301660ba5ca26f77ed3029a10
+    source: 'Apache Commons Compress test resources: LHA level 1'
+    license: Apache-2.0
+  - url: https://raw.githubusercontent.com/apache/commons-compress/17796875a060734aeb2bfd4c2d3ea0a5aa546c22/src/test/resources/test-msdos-l2.lha
+    sha256: 925127df4e266e78ffef1e404046f52eb53f4209c63a605bfa3f5fe70ef395c6
+    source: 'Apache Commons Compress test resources: LHA level 2'
+    license: Apache-2.0
+  - url: https://raw.githubusercontent.com/apache/commons-compress/17796875a060734aeb2bfd4c2d3ea0a5aa546c22/src/test/resources/test-macos-l0-lh5.lha
+    sha256: efc07b8d69859dc990ffdce4cbfc187ff9f28a9a063d1fb06a08c35c9007cd58
+    source: 'Apache Commons Compress test resources: LHA level 0, lh5'
+    license: Apache-2.0
+    expect:
+      entries[0].file_record.header.header1.method_id: -lh5-
+      entries[0].file_record.header.filename: lorem-ipsum.txt

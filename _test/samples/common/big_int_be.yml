@@ -1,0 +1,8 @@
+# Library type: inline vector.
+samples:
+- name: 17-bytes
+  data: 0123456789abcdeffedcba9876543210ff
+  eof: true
+  source: 'expected value: Python int.from_bytes(byteorder=''big'')'
+  expect:
+    value: 387165715252267762517082974638883082495

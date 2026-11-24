@@ -1,0 +1,21 @@
+samples:
+  - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/java/Hello.class
+    sha256: 8f4f8bcd93724a6217132b34c118d886bf7fa24346009825202a0f1126b179fd
+    source: radare2-testbins (values from struct-decoded header)
+    eof: true
+    expect:
+      version_major: 50
+      constant_pool_count: 51
+  - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/java/HiKt.class
+    sha256: bc2d187fc52b4f86ec5029bb3e2dc8734753577f41b625e4c7d05ee4eceea760
+    source: radare2-testbins (values from struct-decoded header) (Kotlin-compiled)
+    eof: true
+    expect:
+      version_major: 50
+      constant_pool_count: 36
+  - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/java/MainActivity.class
+    sha256: b769d351989348152420f6317848e57391bf78b54f079b9cf54ff0df13b1e7e7
+    source: radare2-testbins (values from struct-decoded header)
+    eof: true
+    expect:
+      constant_pool_count: 525

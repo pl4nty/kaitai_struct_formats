@@ -1,0 +1,9 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/archive/dlink/fpkg/__input__/test.pkg
+    sha256: 69b81f334036fffc7c3df652bd875c5008f4e9d129a493e096566f049f0f637c
+    source: onekey-sec/unblob integration test input archive/dlink/fpkg test.pkg (Git LFS)
+    license: MIT
+    eof: true
+    expect:   # unblob extracts apple.txt, banana.txt, cherry.txt; magic from hex read
+      header.magic: FPKG
+      len(files): 3

@@ -1,0 +1,21 @@
+# Generated: no public real-world time stamp file was found. Record layout and type values are
+# from sudoers_timestamp(5) for sudo 1.9.15p5 (TS_VERSION 2: a TS_LOCKEXCL record, then the
+# TS_TTY entry); auth_uid is the user's uid (id -u) and ttydev is the pty's device number
+# (stat: major 136, minor 0).
+samples:
+  - fixture: log/sudoers_ts/30033
+    sha256: c82b55a1e3ddeee1de0cda7efaa7af64e190cd7f4495f87e7edba25271e86554
+    recipe: >-
+      sudo 1.9.15p5 (Ubuntu 24.04 package), default sudoers timestamp settings, in a container:
+      useradd -m ksfuser (uid 30033); echo 'ksfuser ALL=(ALL) ALL' > /etc/sudoers.d/ksfuser;
+      su ksfuser -c "script -qc 'echo PASSWORD | sudo -S -v' /dev/null"; then copy /run/sudo/ts/30033.
+    eof: true
+    expect:
+      len(records): 2
+      records[0].version: 2
+      records[0].len_record: 56
+      records[0].payload.type: lockexcl
+      records[1].version: 2
+      records[1].payload.type: tty
+      records[1].payload.auth_uid: 30033
+      records[1].payload.ttydev: 0x8800

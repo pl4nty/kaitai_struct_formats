@@ -1,0 +1,11 @@
+samples:
+  - url: https://raw.githubusercontent.com/libyal/dtformats/308ce8c38df2eb95a71b6e832b3f9803f0c4b169/test_data/5afe4de1b92fc382.customDestinations-ms
+    sha256: c1c77214698293fcfd9fb4cae296a3faa88191092ff381e97fd947cb62bba217
+    name: customDestinations-first-lnk
+    source: libyal dtformats test data; first embedded shell link starts at offset 36 (values from struct-decoded header)
+    license: Apache-2.0
+    extract: { format: slice, offset: 36 }
+    expect:
+      header.len_header: 4c000000
+      header.file_attrs: 32
+      header.target_file_size: 11776

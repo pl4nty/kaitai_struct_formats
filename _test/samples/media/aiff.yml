@@ -1,0 +1,8 @@
+samples:
+  - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/riff/testdata/sox.aiff
+    sha256: 5be3a6a6a6787cbf33cffac703ec0e4535e7cc67f7776b25e3dc1ed474e4e3ba
+    source: wader/fq test data
+    license: MIT
+    expect:
+      header.len_data: 8900
+      aiff_type: aiff

@@ -1,0 +1,12 @@
+samples:
+  - url: https://raw.githubusercontent.com/Zhuagenborn/Plants-vs.-Zombies-Online-Battle/42a2cc613560f31a28559ed85e8d807201dd8121/game/userdata/users.dat
+    sha256: 43c9656ae3e39d3aee00a07b14fff7d6ba27258e3c2fdea3fa460cfd893f7e26
+    name: pvz_users.dat
+    source: Zhuagenborn/Plants-vs.-Zombies-Online-Battle game/userdata (values from od hex dump)
+    license: Plants vs. Zombies save data (repo is MIT)
+    eof: true
+    expect:
+      version: 14
+      num_users: 1
+      users[0].name: Test
+      users[0].id: 1

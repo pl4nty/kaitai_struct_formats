@@ -1,0 +1,26 @@
+# Generated: no public progress file was found. Expects: the game's version (Taisei v1.4.4), the
+# CRC-32 of the command bytes seeded with 0xB16B00B5 (zlib.crc32(data[12:], 0xB16B00B5)), and
+# the command order written by progress_save() in src/progress.c for a fresh profile.
+samples:
+  - fixture: game/taisei_progress/progress.dat
+    sha256: 58009c33643b32c77f3594e0e0a5ba0c7f5294b0b1a0d1a4336487b301b95398
+    recipe: >-
+      Taisei v1.4.4 (tag commit 6a484e6e61cc51a22a9943762dc2ff6883914f38) built with meson 1.3.2 and
+      gcc 13.3 against SDL 3.2.12 (taisei-project/SDL taisei-3.2.12) with -Dr_default=null
+      -Da_default=null -Dpackage_data=disabled; run headless on a fresh profile with
+      SDL_VIDEO_DRIVER=dummy TAISEI_RENDERER=null TAISEI_AUDIO_BACKEND=null
+      TAISEI_STORAGE_PATH=./storage taisei, stopped with SIGTERM at the menu; the saved
+      storage/progress.zst was decompressed with zstd 1.5.5 (zstd -dc), since this spec describes
+      the uncompressed stream.
+    eof: true
+    expect:
+      checksum: 0x3bd0f8aa
+      len(cmds): 6
+      cmds[0].id: game_version
+      cmds[0].payload.major: 1
+      cmds[0].payload.minor: 4
+      cmds[0].payload.patch: 4
+      cmds[1].id: hiscore
+      cmds[1].payload: 0
+      cmds[2].id: hiscore_64bit
+      cmds[3].id: game_settings

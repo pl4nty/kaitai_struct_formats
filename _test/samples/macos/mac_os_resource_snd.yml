@@ -1,0 +1,18 @@
+# A format 1 'snd ' resource (ID 15800, "Excellent clue! SOUND") sliced out of a raw resource
+# fork from telparia's fileFormatSamples. Offset and length from the python rsrcfork library;
+# expect values read by hand from a hex dump against Inside Macintosh: Sound (Sound Manager).
+samples:
+  - url: https://sembiance.com/fileFormatSamples/archive/rsrc/Excellent%20clue%21%20SOUND
+    sha256: f9ac1b5d1dbeeccbbae808b451a52c7d752fb015ebe11230c448b9fc83f8e438
+    name: excellent-clue-snd-15800
+    source: sembiance.com fileFormatSamples archive/rsrc, resource 'snd ' 15800
+    extract: { format: slice, offset: 283, size: 99114 }
+    expect:
+      format: 1
+      num_data_formats: 1
+      num_sound_commands: 1
+      sound_commands[0].is_data_offset: true
+      sound_commands[0].param2: 20
+      sound_commands[0].sound_header.num_samples: 99072
+      sound_commands[0].sound_header.loop_start: 99070
+      sound_commands[0].sound_header.midi_note: 60

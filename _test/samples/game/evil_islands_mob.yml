@@ -1,0 +1,7 @@
+samples:
+  - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/Universal-Mod/maps/ZoneMainMenuNew.mob
+    sha256: a9d8b35129d23c9d4c26545c7b577bb8cec546720cf10771b824ae0d146fdb3b
+    source: Kyr4l/ei-universal-mod (Evil Islands mod map); first node header struct-decoded
+    expect:
+      root_node.type_id: 0xa000
+      root_node.size: 21519

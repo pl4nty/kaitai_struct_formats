@@ -1,0 +1,30 @@
+samples:
+  - url: https://raw.githubusercontent.com/EarthScope/libmseed/deb2146d3c0bffb5f86f070a24ccdf683fffffa6/test/data/reference-testdata-int32.mseed3
+    sha256: 4ff46befee548d770e6fef4faab42633e26bc407735c7b86f0192558082a4960
+    source: libmseed test data
+    license: Apache-2.0
+    eof: true
+    expect:   # pymseed (libmseed bindings)
+      len(data_record): 5
+      data_record[0].source_identifier: FDSN:XX_TEST__B_H_Z
+      data_record[0].data_payload_encoding: encoding_32_bit_integer
+      data_record[0].number_of_samples: 113
+      data_record[0].crc_of_the_record: 1811693711
+  - url: https://raw.githubusercontent.com/EarthScope/libmseed/deb2146d3c0bffb5f86f070a24ccdf683fffffa6/test/data/reference-testdata-float32.mseed3
+    sha256: 477afb828c39b62a4d22a84c618c84fd506f92a2f344a9d34caca954ae4e93ea
+    source: libmseed test data
+    license: Apache-2.0
+    eof: true
+    expect:   # pymseed (libmseed bindings)
+      len(data_record): 5
+      data_record[0].sample_rate_or_period: 40.0
+      data_record[4].number_of_samples: 48
+  - url: https://raw.githubusercontent.com/EarthScope/libmseed/deb2146d3c0bffb5f86f070a24ccdf683fffffa6/test/data/reference-testdata-text.mseed3
+    sha256: c1f58b852239758ad2c5f366ab26c4f8c9ee3fdff026252f0b0f8a7a0ef33f62
+    source: libmseed test data
+    license: Apache-2.0
+    eof: true
+    expect:   # pymseed (libmseed bindings)
+      len(data_record): 1
+      data_record[0].source_identifier: FDSN:XX_TEST__L_O_G
+      data_record[0].length_of_data_payload: 235

@@ -1,0 +1,11 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/archive/netgear/chk/__input__/sample.chk
+    sha256: 18e9a759fc06d2c99e531188b39f4482d06a7b772393e225fd06550fe16321ee
+    source: onekey-sec/unblob integration test input archive/netgear/chk sample.chk (Git LFS)
+    license: MIT
+    eof: true
+    expect:   # hex read (big-endian header); unblob extracts kernel + rootfs
+      header.len_header: 58
+      header.rest_of_header.len_kernel: 14
+      header.rest_of_header.len_rootfs: 14
+      header.rest_of_header.board_id: U12H072T00_NETGEAR

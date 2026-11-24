@@ -1,0 +1,26 @@
+# Library type: inline IEEE 754 vectors, checked against Python struct.
+samples:
+- name: pi
+  data: 400921fb54442d18
+  eof: true
+  source: 'expected value: Python struct.unpack(''>d'')'
+  expect:
+    value.value: 3.141592653589793
+- name: neg
+  data: be8421f5f40d8376
+  eof: true
+  source: 'expected value: Python struct.unpack(''>d'')'
+  expect:
+    value.value: -1.5e-07
+- name: big
+  data: 44dfe185ca57c517
+  eof: true
+  source: 'expected value: Python struct.unpack(''>d'')'
+  expect:
+    value.value: 6.02214076e+23
+- name: one
+  data: 3ff0000000000000
+  eof: true
+  source: 'expected value: Python struct.unpack(''>d'')'
+  expect:
+    value.value: 1.0

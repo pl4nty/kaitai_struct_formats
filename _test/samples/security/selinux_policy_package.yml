@@ -1,0 +1,8 @@
+samples:
+  - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/selinuxpp.hexpat.pp
+    sha256: f2dd869c1224c6587b9eb1e6d30856c567154993f1b74f3b3c6a91d539bac7f7
+    source: ImHex-Patterns test data
+    license: GPL-2.0 (repository licence)
+    expect:
+      version: 1
+      num_sections: 2

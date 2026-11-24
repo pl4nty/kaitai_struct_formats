@@ -1,0 +1,31 @@
+# Generated: no small public super image was found (factory images are GBs). Expects come from
+# lpdump (same build) on the image: metadata 10.0, max size 4096, 2 slots, partitions system
+# (16 sectors at 2048) and vendor (8 sectors at 4096), groups default and main, block device
+# super of 4194304 bytes.
+samples:
+  - fixture: filesystem/android_super/super.img.gz
+    sha256: f637331add9f43f65bdb9bdc411564dffc99b32aaa99d824966cd008f431003c
+    recipe: >-
+      lpmake built from LonelyFool/lpunpack_and_lpmake 7ec860cfa95ed83dec579ab0459aad1c35ad48e4
+      (AOSP liblp sources, ./make.sh with clang 18): lpmake --metadata-size 4096 --super-name super
+      --metadata-slots 2 --device super:4194304 --group main:2097152
+      --partition system:readonly:8192:main --partition vendor:readonly:4096:main -F --output super.img;
+      then gzip -9n super.img (gzip 1.12), undone by 'extract'.
+    extract: { format: gzip }
+    expect:
+      root.primary_geometry.metadata_max_size: 4096
+      root.primary_geometry.metadata_slot_count: 2
+      root.primary_metadata[0].major_version: 10
+      root.primary_metadata[0].minor_version: 0
+      root.primary_metadata[0].partitions.num_entries: 2
+      root.primary_metadata[0].groups.num_entries: 2
+      root.primary_metadata[0].block_devices.num_entries: 1
+      root.primary_metadata[0].partitions.table[0].name: system
+      root.primary_metadata[0].partitions.table[0].attr_readonly: true
+      root.primary_metadata[0].partitions.table[1].name: vendor
+      root.primary_metadata[0].extents.table[0].num_sectors: 16
+      root.primary_metadata[0].extents.table[0].target_data: 2048
+      root.primary_metadata[0].groups.table[1].name: main
+      root.primary_metadata[0].groups.table[1].maximum_size: 2097152
+      root.primary_metadata[0].block_devices.table[0].size: 4194304
+      root.backup_metadata[1].partitions.table[1].name: vendor

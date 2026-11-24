@@ -1,0 +1,16 @@
+samples:
+  - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/pc-bios/dtb/bamboo.dtb
+    sha256: 36a49d253e2bd907a54ca5e61965438b65fac0cf152c9b11f83c0c965203f218
+    source: QEMU pc-bios device tree blobs
+    license: GPL-2.0-or-later
+    expect:
+      total_size: 3211        # == file size
+      version: 17
+      min_compatible_version: 16
+  - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/pc-bios/dtb/petalogix-ml605.dtb
+    sha256: 37bda496b0b4216cce70626492b43d9aaf0d5fcdefcce45efa09d5c583770c69
+    source: QEMU pc-bios device tree blobs
+    license: GPL-2.0-or-later
+    expect:
+      total_size: 9882
+      version: 17

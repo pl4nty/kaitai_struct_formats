@@ -1,0 +1,7 @@
+samples:
+  - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/fbx.hexpat.fbx
+    sha256: 05a9b57f012c8846290b3f4dad772ff6fecd15b3c98b16920fb186563a11d221
+    source: ImHex-Patterns test data (version from header bytes 0x17-0x1a)
+    license: GPL-2.0 (ImHex-Patterns repository)
+    expect:
+      header.version: 7400

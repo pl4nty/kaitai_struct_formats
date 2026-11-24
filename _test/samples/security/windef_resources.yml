@@ -1,0 +1,11 @@
+# Windows Defender quarantine Resources file from fox-it/dissect.target's test data (Git LFS).
+# The file is named after the SHA-1 it stores (file_id), which is also the ResourceData name.
+samples:
+  - url: https://media.githubusercontent.com/media/fox-it/dissect.target/72f4ddc31da62d413cb2c46b213f7e085317a808/tests/_data/plugins/os/windows/defender/quarantine/Resources/A6/A6C8322B8A19AEED96EFBD045206966DA4C9619D
+    sha256: ba9478f98ca925a9ce5c0dc47ad1e72672eb09e89a19a354bcfccb803857ac4b
+    name: A6C8322B8A19AEED96EFBD045206966DA4C9619D-resources
+    source: fox-it/dissect.target tests/_data/plugins/os/windows/defender/quarantine/Resources
+    license: AGPL-3.0
+    eof: true
+    expect:
+      data1.file_id: a6c8322b8a19aeed96efbd045206966da4c9619d

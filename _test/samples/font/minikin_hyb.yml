@@ -1,0 +1,9 @@
+samples:
+  - url: https://media.githubusercontent.com/media/rousseauuv/Dump/54f446cc126d58149f4734412f003004bc799213/system/system/usr/hyphen-data/hyph-en-us.hyb
+    sha256: 03727cd6f4aa71b203c4c74ca6987ac7d87f13037337ac6f4b6996c2a0dc5f8c
+    source: Android system image dump (Git LFS), /system/usr/hyphen-data; expects from a manual header read against minikin doc/hyb_file_format.md
+    expect:
+      version: 0
+      ofs_alphabet: 24
+      ofs_trie: 96
+      file_size: 59802

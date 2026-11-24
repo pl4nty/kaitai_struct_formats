@@ -1,0 +1,16 @@
+# Generated: no public real-world framed .sz file was found. Expects follow framing_format.txt
+# (stream identifier chunk "sNaPpY", then one compressed chunk for a 66-byte input) and the
+# hex dump of the tool's output.
+samples:
+  - fixture: archive/snappy/hello.sz
+    sha256: bf48cbba031d90239bfc1aae10a5fc34f50ff1f19abd93314d878a48d41067b3
+    recipe: >-
+      python-snappy 0.7.3 (cramjam 2.14.0), Python 3:
+      printf 'Hello, Kaitai Struct! Hello, Kaitai Struct! Hello, Kaitai Struct!\n' > in.txt;
+      python -m snappy -c in.txt hello.sz
+    expect:
+      len(chunks): 2
+      chunks[0].identifier: stream_identifier
+      chunks[0].body.len_chunk.value: 6
+      chunks[0].body.data: sNaPpY
+      chunks[1].identifier: compressed

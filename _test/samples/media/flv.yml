@@ -1,0 +1,17 @@
+samples:
+  - url: https://samples.ffmpeg.org/FLV/zelda.flv
+    sha256: d7153290fcdae628aa0569c083a96d42f19142094a4da6ec3ca8bcb69bf575b3
+    source: FFmpeg samples archive (samples.ffmpeg.org/FLV); flv1 160x120 + adpcm_swf audio per ffprobe
+    eof: true
+    expect:
+      preheader.version: 1
+      preheader.len_header: 9
+      preheader.flags.audio: true
+      preheader.flags.video: true
+  - url: https://samples.ffmpeg.org/FLV/flv2mpg_error.flv
+    sha256: 62cc9512ace9d49a616113b2e0f9acbf559d3fb85bb534d384a52b912e37b71c
+    source: FFmpeg samples archive (samples.ffmpeg.org/FLV); flv1 320x240 per ffprobe
+    eof: true
+    expect:
+      preheader.version: 1
+      preheader.len_header: 9

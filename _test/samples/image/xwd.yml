@@ -1,0 +1,25 @@
+samples:
+  - url: https://sembiance.com/fileFormatSamples/image/xwd/input.xwd
+    sha256: d56b679ef1138b36e0fbaffaeec64bcbfcf15acde83426ac6edb5f17a909d65c
+    source: telparia fileFormatSamples (sembiance.com; Wayback was unreachable from here, sha256 pins content); expects from file(1)
+    expect:
+      hdr.file_version: 7
+      hdr.pixmap_width: 70
+      hdr.pixmap_height: 46
+      hdr.pixmap_depth: 24
+  - url: https://sembiance.com/fileFormatSamples/image/xwd/welcome.xwd
+    sha256: 062b194f523fd59146e2869ddbe95741e486c7c4498643fb922766dff164c2c0
+    source: telparia fileFormatSamples (sembiance.com); expects from file(1)
+    expect:
+      hdr.pixmap_width: 621
+      hdr.pixmap_height: 449
+      hdr.number_of_colors: 256
+      hdr.window_x: 126
+  - url: https://sembiance.com/fileFormatSamples/image/xwd/screen.xwd
+    sha256: 031318c379c3e7e394586a98059377b35194a50075d7046cceba0cd61b0f9727
+    source: telparia fileFormatSamples (sembiance.com; 1-bit screen dump); expects from file(1)
+    expect:
+      hdr.pixmap_width: 1152
+      hdr.pixmap_height: 900
+      hdr.pixmap_depth: 1
+      len(color_map): 2

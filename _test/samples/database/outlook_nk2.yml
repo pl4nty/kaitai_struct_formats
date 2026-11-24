@@ -1,0 +1,8 @@
+samples:
+  - url: https://raw.githubusercontent.com/log2timeline/plaso/70faaf25e3ca2e9b602cf3920f8e34fd0e469ea8/test_data/Outlook.NK2
+    sha256: 813b17dbc8400754ae75c92ec6d4e1fe8f938bf079b47de8ae09e6e576afa285
+    source: plaso test data
+    license: Apache-2.0
+    expect:
+      signature: 0xbaadf00d   # hex dump: 0d f0 ad ba
+      contact_count: 5        # hex dump: u4le at offset 12

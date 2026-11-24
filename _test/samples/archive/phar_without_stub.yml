@@ -1,0 +1,32 @@
+# PHP test phars; the PHP stub (through "__HALT_COMPILER(); ?>\r\n") is sliced off as the spec requires.
+# File counts and signature types from PHP's own Phar class (count(), getSignature()).
+samples:
+  - url: https://raw.githubusercontent.com/php/php-src/8904d87f04c31b6ada6d8fc38884a2c3b9d45bc1/ext/phar/tests/files/sha256.phar
+    sha256: dbf9544e9a21e93e843155f49749f43e7660e971c559509aecd903232dac4834
+    source: php-src ext/phar/tests/files
+    license: PHP-3.01
+    extract: { format: slice, offset: 29 }
+    eof: true
+    expect:
+      manifest.num_files: 1
+      signature.type: sha256
+    xfail: signature_type enum maps sha256 to 0x4 and sha512 to 0x8, but php-src phar_internal.h defines PHAR_SIG_SHA256 0x3 and PHAR_SIG_SHA512 0x4
+  - url: https://raw.githubusercontent.com/php/php-src/8904d87f04c31b6ada6d8fc38884a2c3b9d45bc1/ext/phar/tests/files/md5.phar
+    sha256: ed57ef4ec491f6792d41043a25de6e9bc42951609d7ba87f7ebffb48d5a92dc0
+    source: php-src ext/phar/tests/files
+    license: PHP-3.01
+    extract: { format: slice, offset: 29 }
+    eof: true
+    expect:
+      manifest.num_files: 1
+      signature.type: md5
+  - url: https://raw.githubusercontent.com/php/php-src/8904d87f04c31b6ada6d8fc38884a2c3b9d45bc1/ext/phar/tests/files/frontcontroller.phar
+    sha256: a020aad9bb4b94abf1c51bde8216cdf1d58eb2911dcc81bdedbb976e10939f54
+    source: php-src ext/phar/tests/files
+    license: PHP-3.01
+    extract: { format: slice, offset: 100 }
+    eof: true
+    expect:
+      manifest.num_files: 4
+      len(files): 4
+      signature.type: sha1

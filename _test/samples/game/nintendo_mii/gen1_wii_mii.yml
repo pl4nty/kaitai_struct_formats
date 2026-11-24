@@ -1,0 +1,21 @@
+samples:
+  - url: https://raw.githubusercontent.com/HEYimHeroic/MiiDataFiles/73d63981a248498a70b460d731b2561363ce22c2/Mii%20data%20files/All/Guest%20A%20(Buggy)/Guest%20A.miigx
+    sha256: bf05116ce4d38f9ad10d186e852e8748a8f26a62784794bc2e9b047a836b0351
+    name: GuestA.miigx
+    source: HEYimHeroic/MiiDataFiles, Wii guest Mii A as RCD (values from manual hex read per wiibrew Mii_Data)
+    license: Nintendo game data (not freely licensed)
+    eof: true
+    expect:
+      mii_name.rstrip('\x00'): no name
+      favorite_color: 4
+      body_height: 64
+      body_weight: 64
+  - url: https://raw.githubusercontent.com/HEYimHeroic/MiiDataFiles/73d63981a248498a70b460d731b2561363ce22c2/Mii%20data%20files/All/Guest%20B%20(Bee)/Guest%20B.miigx
+    sha256: 13714c0f5c788a1f7eb8e4ce56f13fe0ff0ad78cb8d8b89c1ea5eca779635786
+    name: GuestB.miigx
+    source: HEYimHeroic/MiiDataFiles, Wii guest Mii B as RCD (values from manual hex read per wiibrew Mii_Data)
+    license: Nintendo game data (not freely licensed)
+    eof: true
+    expect:
+      favorite_color: 5
+      body_height: 64

@@ -1,0 +1,33 @@
+# Library type: inline vectors.
+samples:
+- name: '0x12345678'
+  data: '00'
+  params:
+    needed: 'True'
+    n: '305419896'
+  source: 'expected value: Python string bit reversal'
+  expect:
+    value: 510274632
+- name: '0x80000001'
+  data: '00'
+  params:
+    needed: 'True'
+    n: '2147483649'
+  source: 'expected value: Python string bit reversal'
+  expect:
+    value: 2147483649
+- name: '0xff'
+  data: '00'
+  params:
+    needed: 'True'
+    n: '255'
+  source: 'expected value: Python string bit reversal'
+  expect:
+    value: 4278190080
+- name: not-needed
+  data: '00'
+  params:
+    needed: 'False'
+    n: '305419896'
+  expect:
+    value: 305419896

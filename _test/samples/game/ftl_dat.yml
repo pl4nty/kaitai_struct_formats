@@ -1,0 +1,9 @@
+samples:
+  - url: https://raw.githubusercontent.com/itb-community/ftldat-rs/af29bff0e363ef28092222c77e9291a4002fc5bc/tests-resources/test.dat
+    sha256: 5d1731d87922cd593913b83ffef0a37ae33cc475d6d83511c92eefcbc587aeac
+    source: itb-community/ftldat-rs test resources (FTLDat archive; offsets table and entry headers struct-decoded)
+    license: GPL-3.0
+    expect:
+      num_files: 3
+      files[0].meta.len_file: 7
+      files[2].meta.filename: test3.txt

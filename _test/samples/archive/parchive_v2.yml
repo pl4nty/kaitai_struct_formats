@@ -1,0 +1,6 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/archive/par2/__input__/foo.erofs.img.par2
+    sha256: ec6b3ce93cd3dbecf78e67740c4c7592bd2563004f319d63606e984deaadd816
+    source: unblob integration test inputs (Git LFS; values from header bytes)
+    license: MIT
+    eof: true

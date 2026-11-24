@@ -1,0 +1,20 @@
+samples:
+  - url: https://raw.githubusercontent.com/python/cpython/187da85d248a884d47da2ae14573676a5af3240e/Lib/test/audiodata/pluck-pcm16.wav
+    sha256: 0c7b9ee51db4a46087da7530ade979f38e5de7a2e068b5a58cc9cc543aa8e394
+    source: CPython test suite (Lib/test/audiodata)
+    license: PSF-2.0
+    expect:
+      chunk_id: riff
+      chunk.len: 13362
+  - url: https://raw.githubusercontent.com/python/cpython/187da85d248a884d47da2ae14573676a5af3240e/Lib/test/audiodata/pluck-pcm8.wav
+    sha256: 5b7af05fa928568dc9dbf39845da83a48720e019214a0f250aa5e8de0ebec4bb
+    source: CPython test suite (Lib/test/audiodata)
+    license: PSF-2.0
+    expect:
+      chunk.len: 6748
+  - url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/hopper.webp
+    sha256: 3ad1cd060bff97c8090ca68efe9e25724e830bf5383397ffe7f448d5b825c6ad
+    source: Pillow test suite (Tests/images)
+    license: HPND (Pillow test images)
+    expect:
+      chunk_id: riff

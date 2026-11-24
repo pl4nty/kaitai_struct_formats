@@ -1,0 +1,11 @@
+samples:
+  - url: https://raw.githubusercontent.com/tibordp/fillyfoal/a82fb96e1a120623bca981a0d2f7cea382af76f4/tests/fixtures/synthetic/lime/memory.lime
+    sha256: bf49aadb41fa679aa99d487aa0f92ed93f53db9dbfde700f88388c28698a6291
+    source: fillyfoal test fixture (synthetic LiME capture, 2 ranges); expects from its snapshot formats__lime__memory.lime.snap
+    license: GPL-3.0-or-later
+    eof: true
+    expect:
+      len(records): 2
+      records[0].header.version: 1
+      records[0].header.range.start: 0x1000
+      records[1].header.range.end_closed: 0x1001ff

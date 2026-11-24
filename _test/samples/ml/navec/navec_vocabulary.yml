@@ -1,0 +1,12 @@
+# expects from the navec library itself (Navec.load: 250002 words, last two <unk>, <pad>)
+samples:
+  - url: https://storage.yandexcloud.net/natasha-navec/packs/navec_news_v1_1B_250K_300d_100q.tar
+    sha256: f07270833d78523edc5781538d67038e95b43975e4a7ae757c693b687f9cbfca
+    name: navec_news_v1-vocab.bin
+    source: natasha/navec release pack navec_news_v1_1B_250K_300d_100q.tar (26 MB, the sample named in the spec doc), member vocab.bin (gzip)
+    license: MIT
+    extract: { format: tar, member: vocab.bin, then: { format: gzip } }
+    eof: true
+    expect:
+      header.count: 250002
+      len(counts): 250002

@@ -1,0 +1,19 @@
+# Generated: no public real-world TOC0 image was found. Expects come from mkimage's own listing
+# ("Contents: 3 items", Size 8192, Key at 0x90 len 0x538) and the TOC0_MAGIC/name in u-boot
+# tools/sunxi_toc0.c.
+samples:
+  - fixture: filesystem/sunxi_toc0/spl.toc0
+    sha256: 5da8cfa2250bbc7691c14d2c4e0803433805d0bcbaec965782a1363b6be7a0b9
+    recipe: >-
+      u-boot-tools 2025.10 (Ubuntu 2025.10-0ubuntu0.24.04.4), OpenSSL 3.0.13:
+      openssl genrsa -out root_key.pem 2048;
+      python3 -c "import sys;sys.stdout.buffer.write(bytes([0,0,0xa0,0xe1])*64)" > spl.bin (64 ARM NOPs);
+      mkimage -T sunxi_toc0 -d spl.bin spl.toc0. The RSA key is random, so a rerun gives other bytes.
+    xfail: header.name is strz but TOC0_MAIN_INFO_NAME is an unterminated u1[8] (u-boot include/sunxi_image.h @5588691f), so it eats TOC0_MAGIC's first byte; item name is also a u4 there, not str(64)
+    expect:
+      header.name: TOC0.GLH
+      header.signature: 0x89119800
+      header.items_count: 3
+      header.total_length: 8192
+      items[0].data_offset: 0x90
+      items[0].data_len: 0x538

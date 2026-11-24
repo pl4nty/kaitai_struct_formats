@@ -1,0 +1,18 @@
+samples:
+  - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/hopper.psd
+    sha256: 108d58d6470f4787e8d16893d965a211efce0b28abdcb11e1b18af8081b96370
+    source: Pillow test images (values from Pillow)
+    license: MIT-CMU
+    expect:
+      header.num_channels: 3
+      header.width: 128
+      header.height: 128
+      header.depth: 8
+  - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/rgba.psd
+    sha256: 03e541834ca6f27dd6d7040de936be7878793f22e406910131a9c60567851898
+    source: Pillow test images (values from Pillow)
+    license: MIT-CMU
+    expect:
+      header.num_channels: 4
+      header.width: 100
+      header.height: 100

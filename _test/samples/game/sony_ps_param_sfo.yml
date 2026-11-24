@@ -1,0 +1,6 @@
+samples:
+  - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/sfo.hexpat
+    sha256: 214b44ef1da3a0b80a43401170a6364d77363892944bf47bb9ad37e96dd8ccaa
+    name: param.sfo
+    source: ImHex-Patterns test data (values from header bytes)
+    license: GPL-2.0 (repository licence)

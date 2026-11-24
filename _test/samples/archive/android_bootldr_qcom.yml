@@ -1,0 +1,12 @@
+# Nexus 5X "bullhead" bootloader from the Android File Host archive on archive.org
+# (archive.org's recorded sha1 d968ccd6... matches). Header read by hand: 11 images, bodies at
+# 0x354, bootloader_size 0x482eb0 (= file size - 0x354, as releasetools.py asserts); first image "sbl1".
+samples:
+  - url: https://archive.org/download/afharchive_90_bootloader-bullhead-bhz31bimg/bootloader-bullhead-bhz31b.img
+    sha256: 058ff2f9af22bf62c0dd7dfa3e6c1672eaea10a5e51f9d8f7ee025844933e925
+    source: archive.org item afharchive_90_bootloader-bullhead-bhz31bimg (Google factory image component; proprietary)
+    expect:
+      num_images: 11
+      ofs_img_bodies: 852
+      bootloader_size: 4730544
+      img_headers[0].name: sbl1

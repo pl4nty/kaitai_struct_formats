@@ -1,0 +1,27 @@
+samples:
+  - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/msgpack/testdata/types.msgpack
+    sha256: 24e62f370f6ad108915b162d796cff39e2b56fd57e4e9b62d72829e58b7a9222
+    source: wader/fq msgpack testdata (golden dump types.fqtest)
+    license: MIT
+    eof: true
+    expect:
+      b1: 0x87
+      is_fix_map: true
+      num_map_elements: 7
+      map_elements[0].key.str_value: array
+  - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/msgpack/testdata/arrays.msgpack
+    sha256: 8fd883e7aded16238c4c0ecf8630b4c58f85f10e8a370767478c7f847d37814b
+    source: wader/fq msgpack testdata (golden dump arrays.fqtest)
+    license: MIT
+    eof: true
+    expect:
+      is_fix_array: true
+      num_array_elements: 6
+  - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/msgpack/testdata/strs.msgpack
+    sha256: 8fbaf964cf915433ae133292b3850485bcb82e5b5983fdf3663af67e41683dd6
+    source: wader/fq msgpack testdata (golden dump strs.fqtest)
+    license: MIT
+    eof: true
+    expect:
+      b1: 0xdc
+      num_array_elements: 34

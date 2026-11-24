@@ -1,0 +1,15 @@
+samples:
+  - url: https://raw.githubusercontent.com/log2timeline/dfvfs/bf5d2fd3131646306507490d0389783d69b57676/test_data/ext2.raw
+    sha256: a6c2f0e39afe6c6ab432ca5465349fcefe8dc944398e97b2d957d3f89dbb5d80
+    source: dfVFS test data
+    license: Apache-2.0
+    expect:
+      bg1.super_block.inodes_count: 1024
+      bg1.super_block.blocks_count: 4096
+      bg1.super_block.block_size: 1024
+  - url: https://raw.githubusercontent.com/log2timeline/dfvfs/bf5d2fd3131646306507490d0389783d69b57676/test_data/ext4.raw
+    sha256: d88dd5f6774526a94ad74e061c6a4245fef302e03c917277fb4043e30ed8b434
+    source: dfVFS test data (ext4, read with the ext2 spec)
+    license: Apache-2.0
+    expect:
+      bg1.super_block.inodes_count: 1024

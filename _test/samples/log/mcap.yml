@@ -1,0 +1,17 @@
+samples:
+  - url: https://media.githubusercontent.com/media/foxglove/mcap/8d8dfed511fc9986e3b0f27d9c64a40bb76b41ed/testdata/mcap/demo.mcap
+    sha256: b90a0af442bfc6aaf31d7ae0a361f04d2a4eecca7168f9917391b74697af5c8c
+    name: demo.mcap
+    source: foxglove/mcap testdata (Git LFS)
+    license: MIT
+    eof: true
+  - url: https://media.githubusercontent.com/media/foxglove/mcap/8d8dfed511fc9986e3b0f27d9c64a40bb76b41ed/tests/conformance/data/OneMessage/OneMessage-ch-chx-mx-pad-rch-rsh-st-sum.mcap
+    sha256: f380e836539fa2bab3d2de4b052aaef82fac40d7a506d994a283f480345daf62
+    source: foxglove/mcap conformance suite (Git LFS)
+    license: MIT
+    eof: true
+  - url: https://media.githubusercontent.com/media/foxglove/mcap/8d8dfed511fc9986e3b0f27d9c64a40bb76b41ed/tests/conformance/data/NoData/NoData-pad-st-sum.mcap
+    sha256: b5a32905482d1e5c120712614a4923e489303ef55399a2bfe98821613220ab72
+    source: foxglove/mcap conformance suite (Git LFS)
+    license: MIT
+    eof: true

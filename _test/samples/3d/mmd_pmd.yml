@@ -1,0 +1,9 @@
+samples:
+  - url: https://raw.githubusercontent.com/mrdoob/three.js/2a20741396839e86a30f46a8a5b0de573fa154bf/examples/models/mmd/miku/miku_v2.pmd
+    sha256: 45a5a2fb897266a1b371b30cf53ed9435d375ddea9fce7f095bba2739b9bdae5
+    source: three.js examples (removed in r172); expects from a manual header read against the PMD format docs
+    license: see three.js examples/models/mmd/miku/readme (MMD model distribution terms)
+    expect:
+      header.version: 1065353216  # spec reads the float32 version 1.0 as u4 bits
+      header.model_name: 初音ミク
+      vertex_count: 12354

@@ -1,0 +1,29 @@
+samples:
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat062cat065.raw
+    sha256: 2916c2c01ee66d316d51bf125e28f4133a38abb7b19ee5eef1a0d7f6aaf1a53d
+    source: CroatiaControlLtd/asterix decoder sample data
+    license: GPL-2.0-or-later
+    eof: true
+    xfail: compound.ksy indexes flags.octects[_index/7] for every declared subfield, so a compound item (I062/290, I021/...) whose FSPEC has fewer octets than subfields/7 raises IndexError
+    expect:   # manual walk of CAT/LEN block headers (ASTERIX Part 1)
+      len(data_blocks): 2
+      data_blocks[0].cat: 62
+      data_blocks[1].cat: 65
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat034.raw
+    sha256: a5d24d471cc0fac2554924cbd6aacbf532be96204b4fb335f6275b9a1a0e5766
+    source: CroatiaControlLtd/asterix decoder sample data
+    license: GPL-2.0-or-later
+    eof: true
+    xfail: uap_type only appends items whose FSPEC bit is set (switch has no default), but the iNNN instances index data.items by UAP position, so i060 etc. read past the compacted list
+    expect:
+      len(data_blocks): 1
+      data_blocks[0].cat: 34
+      data_blocks[0].len: 16
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat048.raw
+    sha256: 17481bd2955d046efc5aac1022b4f5879ab02456060c419503aded54bf2e5efd
+    source: CroatiaControlLtd/asterix decoder sample data
+    license: GPL-2.0-or-later
+    eof: true
+    expect:   # manual read of CAT/LEN header (ASTERIX Part 1)
+      data_blocks[0].cat: 48
+      data_blocks[0].len: 48

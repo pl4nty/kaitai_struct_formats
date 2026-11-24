@@ -1,0 +1,32 @@
+# Jaeger agent emitBatch ONEWAY messages (Thrift compact protocol over UDP) from the Wireshark
+# sample capture jaeger-compact.pcap; each sample is one UDP payload sliced out of the pcap.
+# Expect values from tshark's Thrift dissector.
+samples:
+  - url: https://wiki.wireshark.org/uploads/c5eb22240c76f97801c6120017196bcd/jaeger-compact.pcap
+    sha256: 24bc545d19723d94a54fb2127ced8d2e97ba9b9f32c20db315ad4b9cc94c586e
+    name: jaeger-compact-frame1
+    source: Wireshark SampleCaptures (Thrift), frame 1 UDP payload
+    extract:
+      format: gzip
+      then: { format: slice, offset: 82, size: 4894 }
+    eof: true
+    xfail: version_and_type is split as two nibbles, but the compact protocol packs type in bits 5-7 and version in bits 0-4 (0x81 gives version 8, type 1); also compact_field.field_delta reads extended_delta on STOP fields, where it is never parsed
+    expect:
+      message.protocol_id: 0x82
+      message.version: 1
+      message.msg_type: 4
+      message.seq_id.value: 8281
+      message.name.value: emitBatch
+  - url: https://wiki.wireshark.org/uploads/c5eb22240c76f97801c6120017196bcd/jaeger-compact.pcap
+    sha256: 24bc545d19723d94a54fb2127ced8d2e97ba9b9f32c20db315ad4b9cc94c586e
+    name: jaeger-compact-frame2
+    source: Wireshark SampleCaptures (Thrift), frame 2 UDP payload
+    extract:
+      format: gzip
+      then: { format: slice, offset: 5034, size: 4280 }
+    eof: true
+    xfail: version_and_type is split as two nibbles, but the compact protocol packs type in bits 5-7 and version in bits 0-4 (0x81 gives version 8, type 1); also compact_field.field_delta reads extended_delta on STOP fields, where it is never parsed
+    expect:
+      message.msg_type: 4
+      message.seq_id.value: 8282
+      message.name.value: emitBatch

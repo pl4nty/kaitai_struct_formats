@@ -1,0 +1,27 @@
+# Xara native (.xar, CXN) and web (.web, CXW) documents from telparia's fileFormatSamples.
+# Expect values read by hand from a hex dump against the XAR format document (TAG_FILEHEADER:
+# file type, file size, weblink, refinement flags, producer strings).
+samples:
+  - url: https://sembiance.com/fileFormatSamples/image/xara/TextCurve.xar
+    sha256: 9baa3cdbc686bcfe6ec0951a19fae73771729a895c99ba6866db0e186f4cb13e
+    source: sembiance.com fileFormatSamples image/xara
+    expect:
+      records[0].tag: file_header
+      records[0].len_data: 45
+      records[0].data.filetype: CXN
+      records[0].data.producer: Xara Xtreme
+      records[0].data.producer_build: 0.4480 (Xara)
+  - url: https://sembiance.com/fileFormatSamples/image/xara/Watch4.xar
+    sha256: a7027f78e5a16d5b5ad5317b5480f938cb7ef49ab66787706036f7dc532ee16c
+    source: sembiance.com fileFormatSamples image/xara
+    expect:
+      records[0].tag: file_header
+      records[0].data.filetype: CXN
+      records[0].data.producer_version: "3.0"
+  - url: https://sembiance.com/fileFormatSamples/image/xara/balloon.web
+    sha256: 9e2b0c22a1eb6c60cb80f0c3d08987080b542c0c98064e1d0dea5c1f35d18f83
+    source: sembiance.com fileFormatSamples image/xara (Xara Webster file)
+    expect:
+      records[0].data.filetype: CXW
+      records[0].data.producer: Xara Webster
+      records[0].data.producer_version: "1.0"
