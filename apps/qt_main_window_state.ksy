@@ -214,19 +214,23 @@ types:
         if: _parent._parent.has_geometry
     instances:
       is_floating:
-        value: geom0 & 1 != 0
+        value: _parent._parent.has_geometry and geom0 & 1 != 0
+        doc: |
+          The toolbar is a window of its own, with the geometry below.
+          Always false in the Qt 4.3.0 layout, which could not restore
+          floating toolbars and where geom0 is an unused legacy value.
       floating_x:
         value: ((geom0 >> 1) & 0xffff) - 0x7fff
-        if: is_floating and _parent._parent.has_geometry
+        if: is_floating
       floating_y:
         value: (geom1 & 0xffff) - 0x7fff
-        if: is_floating and _parent._parent.has_geometry
+        if: is_floating
       floating_width:
         value: (geom0 >> 17) & 0xffff
-        if: is_floating and _parent._parent.has_geometry
+        if: is_floating
       floating_height:
         value: (geom1 >> 16) & 0xffff
-        if: is_floating and _parent._parent.has_geometry
+        if: is_floating
   qstring:
     seq:
       - id: len_bytes
