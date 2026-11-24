@@ -3,8 +3,6 @@ meta:
   title: Microsoft Windows `wProcessorRevision` field of various structures, describing processor revision
   license: Unlicense
   endian: le
-  ks-opaque-types: true
-  -affected-by: 703
   imports:
     - /windows/windows_processor_architecture
 doc-ref:
