@@ -5,6 +5,17 @@ meta:
   license: GPL-3.0-only
   endian:   be
  
+doc: |
+  AVL data packet sent by Teltonika GPS trackers using Codec 8 (0x08).
+
+  Over TCP, a session starts with the device sending its IMEI as a u2
+  length followed by that many ASCII digits; the server answers with a
+  single byte, 0x01 to accept the device or 0x00 to reject it. The device
+  then sends AVL data packets as described here, and after each packet the
+  server acknowledges with the number of records it accepted (a 4-byte
+  big-endian integer in Teltonika's documentation). Over UDP, packets are
+  wrapped in an additional header instead.
+doc-ref: https://wiki.teltonika-gps.com/view/Codec
 seq:
   - id:     preamble
     size:   4
