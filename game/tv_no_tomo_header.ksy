@@ -9,18 +9,24 @@ meta:
 seq:
   - id: magic
     contents: "HDPK"
+    doc: HDPK container signature.
   - id: type
     contents: "001B"
+    doc: TV-guide package type code.
   - id: file_length
     type: u4
+    doc: Producer-declared complete file size.
   - id: pointer_table_offset
     type: u4
+    doc: 0x20-relative common-pointer table offset.
   - id: pointer_table_size
     type: u4
+    doc: Number of common pointer-table entries.
   - id: unknown
     type: u4
   - id: footer_size
     type: u4
+    doc: Producer-declared footer length.
   - id: unknown1
     type: u4
   - id: unknown2
@@ -41,45 +47,62 @@ seq:
     type: u4
   - id: header_size
     type: u4
+    doc: Producer-declared size of the header/directory region.
   - id: unknown11
     type: u4
   - id: padding
     size: 12
   - id: number_of_channels
     type: u4
+    doc: Number of 12-byte channel entries.
   - id: channel_table_offset
     type: u4
+    doc: 0x20-relative channel-table offset.
   - id: number_of_regions
     type: u4
+    doc: Number of 16-byte region entries.
   - id: region_table_offset
     type: u4
+    doc: 0x20-relative region-table offset.
   - id: number_of_genres
     type: u4
+    doc: Number of 8-byte genre entries.
   - id: genre_table_offset
     type: u4
+    doc: 0x20-relative genre-table offset.
   - id: number_of_audio_types
     type: u4
+    doc: Number of audio-type entries.
   - id: audio_type_table_offset
     type: u4
+    doc: 0x20-relative audio-type table offset.
   - id: number_of_resolution_types
     type: u4
+    doc: Number of resolution-type entries.
   - id: resolution_type_table_offset
     type: u4
+    doc: 0x20-relative resolution-type table offset.
   - id: number_of_bilingual_tables
     type: u4
+    doc: Number of bilingual-label entries.
   - id: bilingual_table_offset
     type: u4
+    doc: 0x20-relative bilingual table offset.
   - id: number_of_unknown_tables
     type: u4
     doc: Despite being named unknown, it points to a text that translates to "subtitle"
   - id: unknown_table_offset
     type: u4
+    doc: 0x20-relative subtitle-label table offset.
   - id: number_of_copyright_tables
     type: u4
+    doc: Number of copyright-label entries (not yet structurally typed).
   - id: copyright_table_offset
     type: u4
+    doc: 0x20-relative copyright-label table offset.
   - id: support_text_offset
     type: u4
+    doc: 0x20-relative reference to support/help text.
     
 instances:
   pointer_table:
