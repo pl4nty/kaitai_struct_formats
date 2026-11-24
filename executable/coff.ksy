@@ -224,3 +224,18 @@ types:
         type: u1
       - id: auxiliary_count
         type: u1
+    instances:
+      is_long_name:
+        value: name[0] == 0 and name[1] == 0 and name[2] == 0 and name[3] == 0
+        doc: |
+          Names longer than 8 bytes are stored in the string table; `name`
+          then holds four zero bytes and the offset of the string.
+      ofs_long_name:
+        value: name[4] | (name[5] << 8) | (name[6] << 16) | (name[7] << 24)
+        if: is_long_name
+        doc: Offset of the name in the string table, counted from its length field.
+      long_name:
+        io: _root._io
+        pos: '_root.ofs_symbol_table + _root.num_symbols * (_root.is_bigobj ? 20 : 18) + ofs_long_name'
+        type: strz
+        if: is_long_name
