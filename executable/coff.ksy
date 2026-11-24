@@ -11,17 +11,36 @@ doc-ref: https://wiki.osdev.org/COFF
 seq:
   - id: header
     type: header
+    if: not is_bigobj
+  - id: bigobj_header
+    type: bigobj_header
+    if: is_bigobj
   - id: optional_header
     type: optional_header
-    if: header.len_optional_header != 0
+    if: not is_bigobj and header.len_optional_header != 0
   - id: section_headers
     type: section_header
     repeat: expr
-    repeat-expr: header.num_sections
+    repeat-expr: num_sections
 instances:
+  first_word:
+    pos: 0
+    type: u4
+  is_bigobj:
+    value: first_word == 0xffff_0000
+    doc: |
+      Microsoft "big object" format (`/bigobj`, MinGW `-Wa,-mbig-obj`): Sig1 =
+      0 and Sig2 = 0xffff, where a regular header has its machine type and
+      number of sections.
+  num_sections:
+    value: 'is_bigobj ? bigobj_header.num_sections : header.num_sections'
+  ofs_symbol_table:
+    value: 'is_bigobj ? bigobj_header.ofs_symbol_table : header.ofs_symbol_table'
+  num_symbols:
+    value: 'is_bigobj ? bigobj_header.num_symbols : header.num_symbols'
   symbol_table_and_string_table:
-    pos: header.ofs_symbol_table
-    type: symbol_table_and_string_table(header.num_symbols)
+    pos: ofs_symbol_table
+    type: symbol_table_and_string_table(num_symbols)
 types:
   header:
     seq:
@@ -41,6 +60,37 @@ types:
           any-of: [0, 28]
       - id: flags
         type: u2
+  bigobj_header:
+    doc: ANON_OBJECT_HEADER_BIGOBJ (winnt.h)
+    doc-ref: https://learn.microsoft.com/en-us/cpp/build/reference/bigobj-increase-number-of-sections-in-dot-obj-file
+    seq:
+      - id: sig1
+        contents: [0, 0]
+      - id: sig2
+        contents: [0xff, 0xff]
+      - id: version
+        type: u2
+      - id: machine
+        type: u2
+      - id: time_and_date
+        type: u4
+      - id: class_id
+        size: 16
+        doc: '{D1BAA1C7-BAEE-4ba9-AF20-FAF66AA4DCB8} for big object files'
+      - id: len_data
+        type: u4
+      - id: flags
+        type: u4
+      - id: len_metadata
+        type: u4
+      - id: ofs_metadata
+        type: u4
+      - id: num_sections
+        type: u4
+      - id: ofs_symbol_table
+        type: u4
+      - id: num_symbols
+        type: u4
   optional_header:
     seq:
       - id: magic
@@ -162,7 +212,12 @@ types:
       - id: value
         type: u4
       - id: section_number
-        type: u2
+        type:
+          switch-on: _root.is_bigobj
+          cases:
+            true: s4
+            false: u2
+        doc: 32-bit in big object files, where symbol records are 20 bytes long
       - id: symbol_type
         type: u2
       - id: storage_class
