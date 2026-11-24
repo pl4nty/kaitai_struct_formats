@@ -1,7 +1,6 @@
 meta:
   id: scala_signature
-  xref:
-    wikidata: Q460584
+  title: Scala signature
   license: Apache-2.0
   #imports:
   #  - /common/vlq_base128_be
