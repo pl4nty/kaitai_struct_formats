@@ -60,21 +60,17 @@ instances:
   clock_seq:
     value: ((clock_seq_hi_variant & 0x3f) << 8) | clock_seq_low
     doc: 14-bit clock sequence (RFC 4122 variant, versions 1, 2 and 6).
-  first_half:
-    pos: 0
-    type: u8
-    doc: Bytes 0-7 as one integer, used to compute the timestamps in 64 bits.
   timestamp_v1:
-    value: (((first_half & 0x0fff) << 48) | (((first_half >> 16) & 0xffff) << 32) | (first_half >> 32)).as<u8>
+    value: ((time_hi_and_version & 0x0fff).as<u8> << 48) | (time_mid.as<u8> << 32) | time_low
     doc: |
       60-bit timestamp of version 1 UUIDs: 100-nanosecond intervals since
       1582-10-15 00:00:00 UTC (subtract 0x01B21DD213814000 to get 100 ns
       units since the Unix epoch).
   timestamp_v6:
-    value: (((first_half >> 16) << 12) | (first_half & 0x0fff)).as<u8>
+    value: (time_low.as<u8> << 28) | (time_mid.as<u8> << 12) | (time_hi_and_version & 0x0fff)
     doc: 60-bit Gregorian timestamp of version 6 UUIDs (same units as `timestamp_v1`).
   unix_ts_ms_v7:
-    value: (first_half >> 16).as<u8>
+    value: (time_low.as<u8> << 16) | time_mid
     doc: 48-bit Unix timestamp in milliseconds of version 7 UUIDs.
 enums:
   variants:
