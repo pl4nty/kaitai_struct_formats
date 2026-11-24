@@ -51,7 +51,7 @@ instances:
 types:
   compressed_file:
     seq:
-      - id: signature
+      - id: magic
         contents: [0x4d, 0x41, 0x4d]
       - id: signature_flags
         type: u1
@@ -104,7 +104,7 @@ types:
       - id: version
         type: u4
         enum: format_version
-      - id: signature
+      - id: magic
         contents: SCCA
       - id: unknown1
         type: u4
