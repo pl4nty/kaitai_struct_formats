@@ -254,6 +254,11 @@ types:
       - id: osd2
         size: 12
     instances:
+      uses_extents:
+        value: (flags & 0x80000) != 0
+        doc: |
+          EXT4_EXTENTS_FL: `block` holds an ext4 extent tree instead of
+          block pointers. Extent trees are not parsed by this spec.
       is_fast_symlink:
         value: '(mode & 0xf000) == 0xa000 and blocks == (file_acl != 0 ? _root.bg1.super_block.block_size / 512 : 0)'
         doc: |
@@ -265,7 +270,7 @@ types:
         io: 'block[0].body._io'
         pos: 0
         type: dir
-        if: (mode & 0xf000) == 0x4000
+        if: (mode & 0xf000) == 0x4000 and not uses_extents
         doc: |
           Directory entries in the first block, only for directories
           (S_IFDIR); for other inodes, e.g. fast symlinks, `block` does not
@@ -280,7 +285,7 @@ types:
         pos: ptr * _root.bg1.super_block.block_size
         size: _root.bg1.super_block.block_size
         type: raw_block
-        if: ptr != 0 and not _parent.is_fast_symlink
+        if: ptr != 0 and not _parent.is_fast_symlink and not _parent.uses_extents
         doc: |
           Block contents. Pointer 0 means no block is allocated (end of
           file or a hole), and a fast symlink stores its target in the
