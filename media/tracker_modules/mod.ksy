@@ -13,7 +13,7 @@ meta:
   xref:
     wikidata: Q1370814
   license: Unlicense
-  encoding: UTF-8
+  encoding: ISO-8859-1 # 8-bit Amiga (Latin-1) or DOS text; Latin-1 decodes any byte
   endian: le
 doc: |
   An old tracker music file format.
