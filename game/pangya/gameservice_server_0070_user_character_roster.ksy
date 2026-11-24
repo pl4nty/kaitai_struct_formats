@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/0070.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/server 0070
-#pragma.parseAs GameserviceServerPacket
 meta:
   id: gameservice_server_0070_user_character_roster
   title: GameService Server User Character Roster

@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/client/00d4.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/client 00d3
-#pragma.parseAs GameserviceClientPacket
 meta:
   id: gameservice_client_00d4_locker_pang_transact
   title: GameService Client Locker Pang Transact

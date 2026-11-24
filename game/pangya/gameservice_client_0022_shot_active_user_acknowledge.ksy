@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/client/0022.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/client 0022
-#pragma.parseAs GameserviceClientPacket
 meta:
   id: gameservice_client_0022_shot_active_user_acknowledge
   title: GameService Client Shot Active User Acknowledge

@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/loginservice/client/0008.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples loginservice/client 0008
-#pragma.parseAs LoginserviceClientPacket
 meta:
   id: loginservice_client_0008_select_character
   title: LoginService Client Select Character

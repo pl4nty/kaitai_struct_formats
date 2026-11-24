@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/007d.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/server 007d
-#pragma.parseAs GameserviceServerPacket
 meta:
   id: gameservice_server_007d_user_team_change_announce
   title: GameService Server User Team Change Announce

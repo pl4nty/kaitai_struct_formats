@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/messageservice/server/002f.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples messageservice/server 002f
-#pragma.parseAs MessageserviceServerPacket
 meta:
   id: messageservice_server_002f_credential_declaration_response
   title: MessageService Server Credential Declaration Response

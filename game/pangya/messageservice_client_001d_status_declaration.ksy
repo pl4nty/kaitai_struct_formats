@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/messageservice/client/001d.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples messageservice/client 001d
-#pragma.parseAs MessageserviceClientPacket
 meta:
   id: messageservice_client_001d_status_declaration
   title: MessageService Client Status Declaration

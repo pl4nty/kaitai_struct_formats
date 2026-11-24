@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/015c.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/server 015c
-#pragma.parseAs GameserviceServerPacket
 meta:
   id: gameservice_server_015c_user_course_records_response
   title: GameService Server User Course Records Response

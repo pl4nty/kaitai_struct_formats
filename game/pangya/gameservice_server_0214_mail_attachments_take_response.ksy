@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/0214.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/server 0214
-#pragma.parseAs GameserviceServerPacket
 meta:
   id: gameservice_server_0214_mail_attachments_take_response
   title: GameService Server Mail Attachments Take Response

@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/01f7.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/server 01f7
-#pragma.parseAs GameserviceServerPacket
 meta:
   id: gameservice_server_01f7_unknown_tourney_related_announce
   title: GameService Server 01F7 Unknown Announce (Tourney Related)

@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/loginservice/server/0002.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples loginservice/server 0002
-#pragma.parseAs LoginserviceServerPacket
 meta:
   id: loginservice_server_0002_game_server_list
   title: LoginService Server Game Server List Packet

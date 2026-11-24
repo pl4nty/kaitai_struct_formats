@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/client/009c.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/client 009c
-#pragma.parseAs GameserviceClientPacket
 meta:
   id: gameservice_client_009c_unknown_opponent_related_request
   title: GameService Client 009C Unknown Request (VS Mode Opponent Related)

@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/client/00b9.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/client 00b9
-#pragma.parseAs GameserviceClientPacket
 meta:
   id: gameservice_client_00b9_custom_asset_request
   title: GameService Client Custom Asset Request

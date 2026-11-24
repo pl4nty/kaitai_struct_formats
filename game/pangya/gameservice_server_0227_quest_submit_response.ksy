@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/0227.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/server 0227
-#pragma.parseAs GameserviceServerPacket
 meta:
   id: gameservice_server_0227_quest_submit_response
   title: GameService Server Quest Submit Response

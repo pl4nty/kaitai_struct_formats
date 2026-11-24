@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/messageservice/client/0017.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples messageservice/client 0017
-#pragma.parseAs MessageserviceClientPacket
 meta:
   id: messageservice_client_0017_user_id_lookup
   title: MessageService Client User ID Lookup Packet

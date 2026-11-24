@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/016f.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/server 016f
-#pragma.parseAs GameserviceServerPacket
 meta:
   id: gameservice_server_016f_locker_item_withdraw_response
   title: GameService Server Locker Item Withdraw Response

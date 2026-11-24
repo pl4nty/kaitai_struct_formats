@@ -1,7 +1,5 @@
 # Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/client/00a2.ksy
 # Licence and copyright: see _community/README.md
-#pragma.examples gameservice/client 00a2
-#pragma.parseAs GameserviceClientPacket
 meta:
   id: gameservice_client_00a2_unknown_cookies_related
   title: GameService Client 00A2 Unknown (Cookies Related)
