@@ -41,41 +41,16 @@ doc: |
   Special records that may follow the last extension are not parsed.
 doc-ref: https://fits.gsfc.nasa.gov/standard40/fits_standard40aa-le.pdf
 seq:
-  - id: primary_hdu
-    type: hdu(0)
+  - id: hdus
+    type: hdu
+    repeat: until
+    repeat-until: _.is_last
+    doc: The primary HDU, followed by the extension HDUs, if any.
 instances:
   block_size:
     value: 2880
-  extensions:
-    type: extension_chain(primary_hdu.len_hdu)
-    doc: Linked list of the extension HDUs, if any.
 types:
-  extension_chain:
-    params:
-      - id: ofs_hdu
-        type: u8
-    instances:
-      has_hdu:
-        value: |
-          ofs_hdu + 8 <= _root._io.size and magic == [0x58, 0x54, 0x45, 0x4e, 0x53, 0x49, 0x4f, 0x4e]
-      magic:
-        io: _root._io
-        pos: ofs_hdu
-        size: 8
-        if: ofs_hdu + 8 <= _root._io.size
-      hdu:
-        io: _root._io
-        pos: ofs_hdu
-        type: hdu(ofs_hdu)
-        if: has_hdu
-      next:
-        type: extension_chain(ofs_hdu + hdu.len_hdu)
-        if: has_hdu
   hdu:
-    params:
-      - id: ofs_hdu
-        type: u8
-        doc: Offset of the HDU in the file.
     seq:
       - id: cards
         size: 80
@@ -105,11 +80,9 @@ types:
         value: cards[2].integer_value.value
         doc: Number of axes of the data array, 0 for no data.
       axes:
-        pos: ofs_hdu + 3 * 80
-        type: 'axis(_index == 0 ? 1 : axes[_index - 1].product)'
+        type: 'axis(_index, _index == 0 ? 1 : axes[_index - 1].product)'
         repeat: expr
         repeat-expr: num_axes
-        if: num_axes > 0
         doc: The `NAXIS1` to `NAXISn` keyword records, which follow `NAXIS`.
       pcount:
         value: 'is_primary ? 0 : cards[3 + num_axes].integer_value.value'
@@ -121,19 +94,34 @@ types:
           num_axes == 0 ? 0
             : (bitpix < 0 ? -bitpix : bitpix) / 8 * gcount * (pcount + axes.last.product)
         doc: Size of the data, without the padding.
-      len_hdu:
-        value: len_header + len_data + (_root.block_size - len_data % _root.block_size) % _root.block_size
+      next_keyword:
+        pos: _io.pos
+        size: 8
+        type: str
+        if: _io.size - _io.pos >= 8
+        doc: |
+          Keyword of the record following this HDU, used right after
+          parsing the HDU to tell whether an extension follows.
+      is_last:
+        value: _io.size - _io.pos < 8 or next_keyword != "XTENSION"
+        doc: |
+          True if no extension follows, i.e. at the end of the file or
+          before special records.
   axis:
+    doc: |
+      One axis of the data array. It holds no data of its own, only
+      values derived from the header of the HDU.
     params:
+      - id: idx
+        type: s4
+        doc: Index of the axis, 0 for `NAXIS1`.
       - id: product_before
         type: s8
         doc: Product of the lengths of the previous axes (1 for the first axis).
-    seq:
-      - id: card
-        size: 80
-        type: card
-        doc: The `NAXISn` keyword record.
     instances:
+      card:
+        value: _parent.cards[3 + idx]
+        doc: The `NAXISn` keyword record.
       len_axis:
         value: card.integer_value.value
       product:
