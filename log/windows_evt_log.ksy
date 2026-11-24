@@ -16,7 +16,8 @@ doc: |
   operating systems (2000, XP, 2003). They are used as binary log
   files by several major Windows subsystems and
   applications. Typically, several of them can be found in
-  `%WINDIR%\system32\config` directory:
+  `%WINDIR%/system32/config` directory (`/` standing for the Windows
+  path separator):
 
   * Application = `AppEvent.evt`
   * System = `SysEvent.evt`

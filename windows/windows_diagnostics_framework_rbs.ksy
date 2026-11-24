@@ -10,7 +10,7 @@ meta:
   endian: le
 doc: |
   The file format used by Windows Diagnostics Framework (including so called telemetery).
-  If you have Windows with "telemetry" (Windows 10 and Windows 7,8,8.1 with the updates containing telemetry), you can find these files in %ProgramData%\Microsoft\Diagnosis directory.
+  If you have Windows with "telemetry" (Windows 10 and Windows 7,8,8.1 with the updates containing telemetry), you can find these files in %ProgramData%/Microsoft/Diagnosis directory (`/` standing for the Windows path separator).
 doc-ref: https://github.com/bluec0re/windows-rbs-parser
 seq:
   - id: header
