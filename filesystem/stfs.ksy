@@ -314,13 +314,15 @@ types:
         type: strz
         encoding: UTF-16BE
         repeat: expr
-        repeat-expr: 0x10
+        repeat-expr: 18
+        doc: One per locale (18 locales).
       - id: descriptions
         size: 0x80
         type: strz
         encoding: UTF-16BE
         repeat: expr
-        repeat-expr: 0x10
+        repeat-expr: 18
+        doc: One per locale (18 locales).
       - id: publisher
         size: 0x80
         type: strz
@@ -338,6 +340,9 @@ types:
         type: u4
       - id: thumbnail_image
         size: thumbnail_size
+      - id: thumbnail_image_padding
+        size: 'len_image_area - thumbnail_size'
+        doc: The thumbnail is stored in a fixed-size area.
       - id: display_names_ex
         size: 0x80
         type: strz
@@ -347,6 +352,9 @@ types:
         if: 'metadata_version == metadata_version::two'
       - id: title_thumbnail_image
         size: title_thumbnail_size
+      - id: title_thumbnail_image_padding
+        size: 'len_image_area - title_thumbnail_size'
+        doc: The title thumbnail is stored in a fixed-size area.
       - id: descriptions_ex
         size: 0x80
         type: strz
@@ -355,6 +363,12 @@ types:
         repeat-expr: 6
         if: 'metadata_version == metadata_version::two'
     instances:
+      len_image_area:
+        value: 'metadata_version == metadata_version::two ? 0x3d00 : 0x4000'
+        doc: |
+          Size of each of the two thumbnail areas. Metadata version 2
+          shrinks them to make room for 6 more display names and
+          descriptions.
       descriptor_type:
         pos: 0x03A9
         type: u4
