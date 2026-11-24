@@ -111,7 +111,9 @@ types:
         type: b8
 enums:
   ts_type:
-    1: global
+    1:
+      id: global_record
+      -orig-id: TS_GLOBAL
     2: tty
     3: ppid
     4: lockexcl
