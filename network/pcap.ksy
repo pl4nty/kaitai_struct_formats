@@ -14,6 +14,7 @@ meta:
     - /network/ethernet_frame
     - /network/packet_ppi
     - /network/ieee802_11_prism
+    - /hardware/usb/pcap/usbmon
 doc: |
   PCAP (named after libpcap / winpcap) is a popular format for saving
   network traffic grabbed by network sniffers. It is typically
@@ -111,6 +112,8 @@ types:
             'linktype::ppi': packet_ppi
             'linktype::ethernet': ethernet_frame
             'linktype::ieee802_11_prism': ieee802_11_prism
+            'linktype::usb_linux_mmapped': usbmon(64)
+            'linktype::usb_linux': usbmon(48)
         doc-ref: 'https://wiki.wireshark.org/Development/LibpcapFileFormat#Packet_Data'
 enums:
   linktype:
