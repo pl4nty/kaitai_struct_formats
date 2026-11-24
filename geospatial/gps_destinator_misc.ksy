@@ -67,7 +67,6 @@ types:
         type: f8
       - id: point
         type: point
-
       - id: unknown3
         type: f8
       - id: unknown4
@@ -91,3 +90,7 @@ types:
         type: f8
       - id: point
         type: point
+      - id: unknown3
+        type: f8
+      - id: unknown4
+        type: f8
