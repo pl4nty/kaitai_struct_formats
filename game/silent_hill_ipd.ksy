@@ -1,26 +1,58 @@
-# Imported from https://github.com/SlickAmogus/silent-hill-decomp/blob/9e598dc3a7dc8dd237cae43d1611cd780af6f728/tools/kaitai_scripts/ipd.ksy
+# Imported from https://github.com/shdecompilations/silent-hill-decomp/blob/eb96675c5cb51fe87a66db1df20490c30e5ded6d/docs/file_formats/ipd.ksy
 meta:
   id: silent_hill_ipd
   title: Silent Hill 1 Map Model Format
   file-extension: ipd
   license: GPL-3.0-only
+  imports:
+    - silent_hill_lm
   encoding: ASCII
   endian: le
+  bit-endian: le
 
 doc: |
   IPD is the 3D model format containing instanced map models and collision data
   used in Silent Hill (PSX).
+  
+  Local map prop models are stored in an embedded PLM (LM) block, while global
+  props reference models in a separate `***_GLB.PLM` file.
+
+  The first few meshes of the embedded PLM contain texture names and are
+  skipped.
 
 seq:
   - id: header
-    type: ipd_header
+    type: header
+
+instances:
+  lm:
+    pos: header.lm_header_offset
+    type: silent_hill_lm(header.lm_header_offset)
+
+  model_infos:
+    pos: header.model_infos_offset
+    type: model_info
+    repeat: expr
+    repeat-expr: header.model_info_count
+
+  model_buffers:
+    pos: header.model_buffers_offset
+    type: model_buffer
+    repeat: expr
+    repeat-expr: header.model_buffer_count
+
+  model_order:
+    pos: header.model_order_offset
+    type: u1
+    repeat: expr
+    repeat-expr: header.model_order_size
+
+  collision:
+    pos: header.collision_offset
+    type: collision
 
 types:
-  # ===
-  # IPD
-  # ===
-
-  ipd_header:
+  header:
     seq:
       - id: magic
         contents: [0x14]
@@ -28,27 +60,27 @@ types:
       - id: is_initialized
         type: u1
 
-      - id: level_grid_x
+      - id: chunk_x
         type: s1
 
-      - id: level_grid_y
+      - id: chunk_z
         type: s1
 
       - id: lm_header_offset
         type: u4
 
-      - id: model_count
+      - id: model_info_count
         type: u1
 
       - id: model_buffer_count
         type: u1
 
-      - id: model_order_count
+      - id: model_order_size
         type: u1
 
       - size: 9
 
-      - id: model_info_offset
+      - id: model_infos_offset
         type: u4
 
       - id: model_buffers_offset
@@ -59,33 +91,18 @@ types:
 
       - id: unk_1d
         size: 51
+        doc: TODO Actual texture data array?
 
-      - id: model_order_list_offset
+      - id: model_order_offset
         type: u4
 
-      - id: collision_data
-        type: ipd_collision_data
-
     instances:
-      lm_header:
-        pos: lm_header_offset
-        type: lm_header(lm_header_offset)
+      collision_offset:
+        value: 0x54
 
-      model_infos:
-        pos: model_info_offset
-        type: ipd_model_info
-        repeat: expr
-        repeat-expr: model_count
-
-      model_buffers:
-        pos: model_buffers_offset
-        type: ipd_model_buffer
-        repeat: expr
-        repeat-expr: model_buffer_count
-
-  ipd_model_info:
+  model_info:
     seq:
-      - id: is_global_plm
+      - id: is_external
         type: u1
 
       - size: 3
@@ -94,337 +111,113 @@ types:
         size: 8
         type: strz
 
-      - id: model_header_offset
+      - id: model_header
         type: u4
+        doc: |
+          Always 0 in files. The engine loads it by name from
+          global PLM headers if `is_external` is `true`,
+          otherwise from the IPD's LM header.
 
-  ipd_model_buffer:
+  model_buffer:
     seq:
       - id: model_instance_count
         type: u1
 
-      - id: field_1
+      - id: billboard_instance_count
         type: u1
 
-      - id: subcell_count
+      - id: subchunk_range_count
         type: u1
 
       - size: 1
 
       - id: min_x
         type: s2
+        doc: Q7.8.
 
       - id: max_x
         type: s2
+        doc: Q7.8.
 
       - id: min_z
         type: s2
+        doc: Q7.8.
 
       - id: max_z
         type: s2
+        doc: Q7.8.
 
       - id: model_instances_offset
         type: u4
 
-      - id: field_10_offset
+      - id: billboard_instances_offset
         type: u4
-        doc: Q7.8
+        doc: Q7.8.
 
-      - id: subcell_positions_offset
+      - id: subchunk_ranges_offset
         type: u4
-        doc: Q7.8
-
-  ipd_collision_data:
-    seq:
-      - id: position_x
-        type: s4
-        doc: Q23.8
-
-      - id: position_z
-        type: s4
-        doc: Q23.8
-
-      - id: split_vertex_count
-        type: b8
-
-      - id: surface_count
-        type: b8
-
-      - id: subcell_count
-        type: b8
-
-      - id: ptr_18_count
-        type: b8
-
-      - id: split_vertices_offset
-        type: u4
-
-      - id: surfaces_offset
-        type: u4
-
-      - id: subcells_offset
-        type: u4
-
-      - id: ptrs_18_offset
-        type: u4
-
-      - id: subcell_size
-        type: s2
-
-      - id: subcell_x_count
-        type: u1
-
-      - id: subcell_z_count
-        type: u1
-
-      - id: subcell_ranges_offset
-        type: u4
-
-      - id: field_24
-        type: u2
-
-      - id: field_26
-        type: u2
-
-      - id: ptr_28
-        type: u4
-
-      - id: ptr_2c
-        type: u4
-
-      - id: subcell_check_count
-        type: u1
-
-      - size: 3
-
-      - id: field_34
-        size: 256
+        doc: Q7.8.
 
     instances:
-      split_vertices:
-        pos: split_vertices_offset
-        type: svector_3
+      model_instances:
+        pos: model_instances_offset
+        type: model_instance
         repeat: expr
-        repeat-expr: split_vertex_count
-        doc: TODO Wrong offset.
+        repeat-expr: model_instance_count
 
-      surfaces:
-        pos: surfaces_offset
-        type: ipd_coll_surface
+      billboard_instances:
+        pos: billboard_instances_offset
+        type: billboard_instance
         repeat: expr
-        repeat-expr: surface_count
-        doc: Q7.8. TODO Wrong offset.
+        repeat-expr: billboard_instance_count
 
-      subcells:
-        pos: subcells_offset
-        type: ipd_subcell
+      subchunk_ranges:
+        pos: subchunk_ranges_offset
+        type: subchunk_range
         repeat: expr
-        repeat-expr: subcell_count
-        doc: TODO Wrong offset.
+        repeat-expr: subchunk_range_count
 
-      ptrs_18:
-        pos: ptrs_18_offset
-        type: ipd_coll_data_18
-        repeat: expr
-        repeat-expr: ptr_18_count
-        doc: TODO Wrong offset.
+    types:
+      model_instance:
+        seq:
+          - id: model_info_idx
+            type: u4
+            doc: Becomes `model_header` from `model_info` when loaded.
 
-      subcell_ranges:
-        pos: subcell_ranges_offset
-        type: ipd_coll_subcell_range
-        repeat: expr
-        repeat-expr: subcell_size
-        doc: TODO Wrong offset. Also which field has the count??
+          - id: transform
+            type: matrix
 
-  # =========
-  # COLLISION
-  # =========
+        instances:
+          model_info:
+            value: _root.model_infos[model_info_idx]
 
-  ipd_coll_surface:
-    seq:
-      - id: field_0
-        type: s2
-        doc: Q7.8.
+      billboard_instance:
+        seq:
+          - id: offset
+            type: svector_3
 
-      - id: field_2
-        type: s2
-        doc: Q7.8.
+          - id: idx
+            type: s1
 
-      - id: field_4
-        type: s2
-        doc: Q7.8.
+          - size: 1
 
-      - id: ground_type
-        type: b5
+      subchunk_range:
+        seq:
+          - id: min_x
+            type: s2
+            doc: Q7.8.
 
-      - id: disable_height
-        type: b3
+          - id: max_x
+            type: s2
+            doc: Q7.8.
 
-      - id: field_5_8
-        type: b3
+          - id: min_z
+            type: s2
+            doc: Q7.8.
 
-      - id: field_6_11
-        type: b4
-
-      - id: tilt_angle_x
-        type: s2
-        doc: Q7.8.
-
-      - id: tilt_angle_z
-        type: s2
-        doc: Q7.8.
-
-  ipd_subcell:
-    seq:
-      - id: field_0_0
-        type: b14
-        doc: Q7.8.
-
-      - id: field_0_14
-        type: b2
-
-      - id: field_2_0
-        type: b14
-        doc: Q7.8.
-
-      - id: field_2_14
-        type: b2
-
-      - id: field_4
-        type: s2
-        doc: Q7.8.
-
-      - id: split_vertex_idx_0
-        type: u1
-
-      - id: split_vertex_idx_1
-        type: u1
-
-      - id: surface_idx_0
-        type: u1
-
-      - id: surface_idx_1
-        type: u1
-
-  ipd_coll_data_18:
-    seq:
-      - id: ground_type
-        type: b5
-
-      - id: disable_height
-        type: b3
-
-      - id: field_0_8
-        type: b4
-
-      - id: field_0_12
-        type: b3
-
-      - id: field_0_15
-        type: b1
-
-      - id: offset
-        type: svector_3
-        doc: Q7.8.
-
-      - id: field_8
-        type: u2
-        doc: Q7.8.
-
-  ipd_coll_subcell_range:
-    seq:
-      - id: field_0
-        type: s2
-
-      - id: field_2
-        type: s2
-  
-  # ========
-  # PLM (LM)
-  # ========
-
-  lm_header:
-    params:
-      - id: base_offset
-        type: u4
-
-    seq:
-      - id: magic
-        contents: [0x30]
-
-      - id: version
-        type: u1
-
-      - id: is_loaded
-        type: u1
-
-      - id: material_count
-        type: u1
-
-      - id: materials_offset
-        type: u4
-
-      - id: model_count
-        type: u1
-
-      - size: 3
-
-      - id: model_headers_offset
-        type: u4
-
-      - id: model_order_offset
-        type: u4
-
-    instances:
-      materials:
-        pos: base_offset + materials_offset
-        type: material
-        repeat: expr
-        repeat-expr: material_count
-
-      models:
-        pos: base_offset + model_headers_offset
-        type: model_header(base_offset)
-        repeat: expr
-        repeat-expr: model_count
-
-      model_order:
-        pos: base_offset + model_order_offset
-        type: u1
-        repeat: expr
-        repeat-expr: model_count
-
-  material:
-    seq:
-      - id: name
-        size: 8
-        type: strz
-
-      - id: offset_texture
-        type: u4
-
-      - id: field_c
-        type: u1
-
-      - id: unk_d
-        type: u1
-
-      - id: field_e
-        type: u1
-
-      - id: field_f
-        type: u1
-
-      - id: field_10
-        type: u2
-
-      - id: field_12
-        type: u2
-
-      - id: field_14
-        type: u2
-
-      - id: field_16
-        type: u2
+          - id: max_z
+            type: s2
+            doc: Q7.8.
 
   model_header:
     params:
@@ -525,10 +318,6 @@ types:
         repeat: expr
         repeat-expr: normal_count
 
-  # ======
-  # Common
-  # ======
-
   primitive:
     seq:
       - id: u0
@@ -576,6 +365,226 @@ types:
       - id: unk_10
         size: 4
 
+  collision:
+    seq:
+      - id: position_x
+        type: s4
+        doc: Q23.8
+
+      - id: position_z
+        type: s4
+        doc: Q23.8
+
+      - id: polygon_split_vertex_count
+        type: b8
+
+      - id: polygon_surface_count
+        type: b8
+
+      - id: polygon_count
+        type: b8
+
+      - id: cylinder_count
+        type: b8
+
+      - id: polygon_split_vertices_offset
+        type: u4
+
+      - id: polygon_surfaces_offset
+        type: u4
+
+      - id: polygons_offset
+        type: u4
+
+      - id: cylinders_offset
+        type: u4
+
+      - id: cell_size
+        type: s2
+
+      - id: cell_count_x
+        type: u1
+
+      - id: cell_count_z
+        type: u1
+
+      - id: shape_allocs_offset
+        type: u4
+
+      - id: shape_lut_size
+        type: u2
+
+      - id: surface_lut_size
+        type: u2
+
+      - id: shape_lut_offset
+        type: u4
+
+      - id: surface_lut_offset
+        type: u4
+
+      - id: shape_pass_counter
+        type: u1
+        doc: Used by engine.
+
+      - size: 3
+
+      - id: shape_pass_stamp_buffer
+        size: 256
+        doc: Used by engine.
+
+    instances:
+      polygon_split_vertices:
+        pos: _root.header.collision_offset + polygon_split_vertices_offset
+        type: svector_3
+        repeat: expr
+        repeat-expr: polygon_split_vertex_count
+        doc: Q7.8.
+
+      polygon_surfaces:
+        pos: _root.header.collision_offset + polygon_surfaces_offset
+        type: polygon_surface
+        repeat: expr
+        repeat-expr: polygon_surface_count
+
+      polygons:
+        pos: _root.header.collision_offset + polygons_offset
+        type: polygon
+        repeat: expr
+        repeat-expr: polygon_count
+
+      cylinders:
+        pos: _root.header.collision_offset + cylinders_offset
+        type: cylinder
+        repeat: expr
+        repeat-expr: cylinder_count
+
+      shape_ranges:
+        pos: _root.header.collision_offset + shape_allocs_offset
+        type: shape_range
+        repeat: expr
+        repeat-expr: (cell_count_x * cell_count_z) + 1
+        doc: TODO Unsure if `+ 1` is necessary, looks like one extra entry?
+
+      polygon_lut:
+        pos: _root.header.collision_offset + shape_lut_offset
+        type: u1
+        repeat: expr
+        repeat-expr: shape_lut_size
+
+      surface_lut:
+        pos: _root.header.collision_offset + surface_lut_offset
+        type: u1
+        repeat: expr
+        repeat-expr: surface_lut_size
+
+    types:
+      polygon_surface:
+        seq:
+          - id: offset
+            type: svector_3
+
+          - id: floor_type
+            type: b5
+
+          - id: disable_height
+            type: b3
+
+          - id: field_6_8
+            type: b3
+
+          - id: trigger_flag_idx
+            type: b4
+
+          - id: slope_gradient_x
+            type: s2
+            doc: Q7.8.
+
+          - id: slope_gradient_z
+            type: s2
+            doc: Q7.8.
+
+        instances:
+          slope_gradient_x_flt:
+            value: slope_gradient_x / (1 << 8).as<f4>
+
+          slope_gradient_z_flt:
+            value: slope_gradient_z / (1 << 8).as<f4>
+
+      polygon:
+        seq:
+          - id: offset_x
+            type: b14
+            doc: Q7.8.
+
+          - id: trigger_flag_idx_low
+            type: b2
+
+          - id: offset_y
+            type: b14
+            doc: Q7.8.
+
+          - id: trigger_flag_idx_high
+            type: b2
+
+          - id: offset_z
+            type: s2
+            doc: Q7.8.
+
+          - id: split_vertex_idx_0
+            type: u1
+
+          - id: split_vertex_idx_1
+            type: u1
+
+          - id: surface_idx_0
+            type: u1
+
+          - id: surface_idx_1
+            type: u1
+
+          - size: 2
+
+        instances:
+          offset_x_flt:
+            value: offset_x / (1 << 8).as<f4>
+
+          offset_y_flt:
+            value: offset_y / (1 << 8).as<f4>
+
+          offset_z_flt:
+            value: offset_z / (1 << 8).as<f4>
+
+          trigger_flags:
+            value: (trigger_flag_idx_low << 2) | trigger_flag_idx_high
+
+      cylinder:
+        seq:
+          - id: floor_type
+            type: b5
+
+          - id: disable_height
+            type: b3
+
+          - id: trigger_flag_idx
+            type: b4
+
+          - id: offset
+            type: svector_3
+            doc: Q7.8.
+
+          - id: radius
+            type: u2
+            doc: Q7.8.
+
+      shape_range:
+        seq:
+          - id: polygon_lut_idx
+            type: s2
+
+          - id: surface_lut_idx
+            type: s2
+
   svector_2:
     seq:
       - id: x
@@ -595,6 +604,16 @@ types:
       - id: z
         type: s2
 
+    instances:
+      x_flt:
+        value: x / (1 << 8).as<f4>
+
+      y_flt:
+        value: y / (1 << 8).as<f4>
+
+      z_flt:
+        value: z / (1 << 8).as<f4>
+
   normal:
     seq:
       - id: x
@@ -608,3 +627,17 @@ types:
 
       - id: count
         type: u1
+
+  matrix:
+    seq:
+      - id: rotation
+        type: s2
+        repeat: expr
+        repeat-expr: 9
+
+      - size: 2
+
+      - id: translation
+        type: s4
+        repeat: expr
+        repeat-expr: 3
