@@ -686,7 +686,7 @@ types:
       found:
         value: "virtual_address >= section.virtual_address and virtual_address <= section.virtual_address + section.size_of_raw_data"
       next_idx:
-        value: "idx + (idx < _root.pe.coff_hdr.number_of_sections ? 1 : 0)"
+        value: "idx + (idx + 1 < _root.pe.coff_hdr.number_of_sections ? 1 : 0)"
       has_next:
         value: next_idx > idx
   sections_lookup:
