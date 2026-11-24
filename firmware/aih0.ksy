@@ -24,7 +24,9 @@ types:
         size: 16
       - id: version
         size: 16
-        contents: ["5.00TP", 0,0,0,0,0,0,0,0,0,0]
+        doc: |
+          NUL-padded version string, such as "5.00TP" or "4.03"; see
+          `version_str`.
     instances:
       version_str:
         io: _parent.header._io
