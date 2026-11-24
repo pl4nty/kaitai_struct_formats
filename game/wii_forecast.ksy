@@ -11,8 +11,10 @@ seq:
     doc: Always 0.
   - id: filesize
     type: u4
+    doc: Size of the whole file, after decompressing.
   - id: crc32
     type: u4
+    doc: CRC-32 checksum of everything after this field.
   - id: opening_timestamp
     type: u4
     doc: Timestamp is minutes since 2000.
@@ -22,18 +24,30 @@ seq:
   - id: country_code
     type: u1
     enum: country_code
+    doc: The country this file is for.
   - id: unknown_1
     type: u1
     repeat: expr
     repeat-expr: 3
+    doc: Padding. Never read.
   - id: language_code
     type: u1
     enum: language_code
+    doc: |
+      Language of the text in the file. Must match the console's language, or
+      the channel rejects the file. So there is one file per language. The
+      channel only supports these seven. If the console is set to any other
+      language, the channel treats it as English (and switches the console's
+      own language setting to English too).
   - id: region_flag
     type: u1
     enum: region_flag
+    doc: |
+      Picks the default units when the user hasn't saved a choice: fahrenheit
+      = Fahrenheit and mph, celsius or japan = Celsius and km/h.
   - id: unknown_2
     type: u1
+    doc: Must be 0 or 1. Checked, but nothing uses it. WiiLink writes 1.
   - id: padding
     type: u1
   - id: message_offset
@@ -68,6 +82,12 @@ seq:
   - id: location_table_offset
     type: u4
 instances:
+  opening_unix:
+    value: (opening_timestamp + 15778080) * 60
+    doc: The time the file was made as a normal Unix time (seconds since 1970).
+  closing_unix:
+    value: (closing_timestamp + 15778080) * 60
+    doc: The time the file expires as a normal Unix time (seconds since 1970).
   long_forecast_table:
     pos: long_forecast_table_offset
     type: long_forecast_table
@@ -484,40 +504,57 @@ types:
     seq:
       - id: weather_icon_code_1
         type: u2
+        doc: |
+          The code the other tables use for this weather. Must be unique.
+          0xFFFF, 0x7FFF and 999 all mean "no weather".
       - id: weather_icon_code_2
         type: u2
+        doc: |
+          Which icon to draw. The low 15 bits are the icon number (1-33
+          Japanese icons, 101-126 international). The top bit means "night
+          version". The channel also uses the icon number to pick rain and
+          thunder sound effects (see `plays_rain_sound`).
       - id: weather_text_offset
         type: u4
+        doc: |
+          Where the weather's name starts (UTF-16BE text, e.g. "Sunny"). Can't
+          be 0.
   uv_index_table:
     seq:
       - id: uv_index_code
         type: u1
+        doc: The code used by uv_index in day_block. Must be unique.
       - id: unknown
         type: u1
         repeat: expr
         repeat-expr: 3
       - id: uv_index_text_offset
         type: u4
+        doc: Where the text starts (UTF-16BE).
   laundry_index_table:
     seq:
       - id: laundry_index_code
         type: u1
+        doc: The code used by laundry_index in day_block. Must be unique.
       - id: unknown
         type: u1
         repeat: expr
         repeat-expr: 3
       - id: laundry_index_text_offset
         type: u4
+        doc: Where the text starts (UTF-16BE).
   pollen_count_table:
     seq:
       - id: pollen_count_code
         type: u1
+        doc: The code used by pollen_count in day_block. Must be unique.
       - id: unknown
         type: u1
         repeat: expr
         repeat-expr: 3
       - id: pollen_count_text_offset
         type: u4
+        doc: Where the text starts (UTF-16BE).
   location_table:
     seq:
       - id: country_code
@@ -529,18 +566,30 @@ types:
         type: u2
       - id: city_text_offset
         type: u4
+        doc: Where the city name starts (UTF-16BE). Can't be 0.
       - id: region_text_offset
         type: u4
+        doc: |
+          Where the region name starts (UTF-16BE). 0 means unused. For cities
+          in Japan, shown in Japanese, the channel puts this in front of the
+          city name.
       - id: country_text_offset
         type: u4
+        doc: Where the country name starts (UTF-16BE). 0 means unused.
       - id: latitude_coordinates
         type: u2
+        doc: Where the city sits on the globe.
       - id: longitude_coordinates
         type: u2
+        doc: Where the city sits on the globe.
       - id: location_zoom_1
         type: u1
+        doc: |
+          How important the city is on the globe, 0 to 9. Higher means shown
+          first and from further away. 9 is always shown.
       - id: location_zoom_2
         type: u1
+        doc: 0 to 3. Checked but nothing uses it. WiiLink always writes 3.
       - id: unknown
         type: u2
 enums:
