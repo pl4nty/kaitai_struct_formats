@@ -199,8 +199,8 @@ types:
       local_header:
         pos: ofs_local_header
         type: pk_section
-  # https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT - 4.3.16
   end_of_central_dir:
+    doc-ref: https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT - 4.3.16
     seq:
       - id: disk_of_end_of_central_dir
         type: u2
