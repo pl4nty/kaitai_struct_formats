@@ -7,7 +7,7 @@ samples:
     sha256: ffca88fd00be542926f9e55663a3da27d62f2e2a15ca532b114d76a075b4d46e
     eof: true
     params:
-      vendor: '0x131'  # cypress_semiconductor
+      vendor: '0x131'  # cypress_semiconductor: only vendor group the spec implements; Cypress RAM commands match this Broadcom file
     expect:
       len(commands): 367
       commands[0].opcode.command: 0x4c

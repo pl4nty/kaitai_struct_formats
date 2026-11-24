@@ -24,4 +24,4 @@ samples:
     expect:
       lock_status: 4
       version: 100
-      codepage.len_value: 10  # "Sfhit-JIS" and a zero byte
+      codepage.len_value: 10  # "Sfhit-JIS" (sic, literal file bytes) and a zero byte

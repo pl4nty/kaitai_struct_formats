@@ -68,7 +68,10 @@ samples:
 Library types with no file form (CRCs, checksums, number encodings) can use
 inline bytes instead of a download: `data: <hex byte pairs>` replaces `url`,
 `sha256` and `extract`. Use it only for canonical test vectors (e.g. the CRC
-catalogue's `123456789` check input), never for real-world files.
+catalogue's `123456789` check input), never for real-world files. One
+exception: a short excerpt re-packed from a pinned real file that the runner
+cannot extract itself (e.g. u-blox words stored byte-swapped). The comment
+must give the source URL, its sha256, the offsets and the re-packing steps.
 
 Formats with no public real-world file can use a small generated file
 committed under `_test/fixtures/<spec path>/`: `fixture: <path relative to

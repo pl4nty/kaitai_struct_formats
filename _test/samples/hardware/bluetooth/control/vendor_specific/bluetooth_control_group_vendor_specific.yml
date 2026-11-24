@@ -10,7 +10,7 @@ samples:
     extract: { format: slice, offset: 3, size: 44 }
     eof: true
     params:
-      vendor: '0x131'  # cypress_semiconductor
+      vendor: '0x131'  # cypress_semiconductor: only vendor group the spec implements; Cypress RAM commands match this Broadcom file
       command: '0x4c'
     expect:
       payload.payload.address: 0x90000
