@@ -1,12 +1,12 @@
 meta:
-  id: fixed
+  id: asterix_fixed
   title: ASTERIX fixed-length data field
   license: GPL-3.0-only
   ks-version: 0.9
   endian: be
 
 doc: |
-  Implementantion of ASTERIX format.
+  Implementation of ASTERIX format.
 
   From Eurocontrol Asterix web page at
   https://www.eurocontrol.int/asterix

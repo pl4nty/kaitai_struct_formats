@@ -1,16 +1,16 @@
 meta:
-  id: cat_062
+  id: asterix_cat_062
   title: ASTERIX category 062
   license: GPL-3.0-only
   ks-version: 0.9
   imports:
-    - field_spec
-    - explicit
-    - cat_062_catalog
+    - asterix_field_spec
+    - asterix_explicit
+    - asterix_cat_062_catalog
   endian: be
 
 doc: |
-  Implementantion of ASTERIX format.
+  Implementation of ASTERIX format.
 
   From Eurocontrol Asterix web page at
   https://www.eurocontrol.int/asterix
@@ -27,7 +27,7 @@ doc-ref: |
 
 seq:
   - id: fspec
-    type: field_spec
+    type: asterix_field_spec
 
   - id: data
     type: uap_type(fspec, [10,-1,15,70,105,100,185,210,60,245,380,40,80,290,200,295,136,130,135,220,390,270,300,110,120,510,500,340].as<s2[]>.as<str>)
@@ -49,7 +49,7 @@ types:
     params:
 
       - id: fspec
-        type: field_spec
+        type: asterix_field_spec
 
       - id: uap
         type: str
@@ -59,17 +59,17 @@ types:
         type:
           switch-on: fspec.octects[_index/7].bits[_index % 7]
           cases:
-            true: cat_062_catalog(uap_list[ _index ])
+            true: asterix_cat_062_catalog(uap_list[ _index ])
         repeat: expr
         repeat-expr: loop_range
 
 
       - id: ire #,"E","1","Reserved Expansion Field","N.A."),
-        type: explicit("RE",true)
+        type: asterix_explicit("RE",true)
         if: fspec.size >= 34 and fspec.octects[4].bits[5]
 
       - id: isp #,"E","1","Special Purpose Field","N.A."),
-        type: explicit("SP",true)
+        type: asterix_explicit("SP",true)
         if: fspec.size >= 35 and fspec.octects[4].bits[6]
 
 

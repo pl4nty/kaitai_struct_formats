@@ -9,7 +9,7 @@ meta:
   endian: be
 
 doc: |
-  Implementantion of ASTERIX format.
+  Implementation of ASTERIX format.
 
   From Eurocontrol Asterix web page at
 

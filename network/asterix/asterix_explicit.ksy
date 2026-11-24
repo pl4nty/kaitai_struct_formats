@@ -1,21 +1,21 @@
 meta:
-  id: repetitive
-  title: ASTERIX repetitive data field
+  id: asterix_explicit
+  title: ASTERIX explicit data field
   license: GPL-3.0-only
   ks-version: 0.9
   endian: be
 
 doc: |
-  Implementantion of ASTERIX format.
+  Implementation of ASTERIX format.
 
   From Eurocontrol Asterix web page at
   https://www.eurocontrol.int/asterix
 
-  Repetitive Standard Field format.
+  Explicit Standard Field format.
 
-  The repetitive field format is a variable lenght format.
+  The explicit field format is a variable length format.
 
-  It uses three parameters:
+  It uses two parameters:
 
   item, which is just the item name, as I001/010 or I062/390. It is just
   informative, and is not used during parsing, but permits to consult the item
@@ -24,33 +24,24 @@ doc: |
   flag: this is a bool parameter, which determines if there have to be parsed or
   just skipped, mainly used by compound. In Catalog files, the flag is always true
 
-  f_size, which is the size of the repetitive parts.
-
 params:
   - id: name
     type: str
   - id: flag
     type: b1
-  - id: f_size
-    type: u1
 
 seq:
-  - id: rep_idx
+  - id: len
     type: u1
     if: flag
 
   - id: val
-    size: f_size
-    repeat: expr
-    repeat-expr: rep_idx
+    size: len - 1
     if: flag
 
 instances:
   tot_size:
-    value: >
-      flag ?
-      (1 +
-      (rep_idx > 0 ? val.size * f_size : 0)) : 0
+    value: 'flag ? len : 0'
 
   type:
-    value: '"Repetitive"'
+    value: '"Explicit"'

@@ -1,19 +1,19 @@
 meta:
-  id: extended
+  id: asterix_extended
   title: ASTERIX extended data field
   license: GPL-3.0-only
   ks-version: 0.9
   endian: be
 
 doc: |
-  Implementantion of ASTERIX format.
+  Implementation of ASTERIX format.
 
   From Eurocontrol Asterix web page at
   https://www.eurocontrol.int/asterix
 
   Extended Standard Field format.
 
-  The extended field format is a variable lenght format.
+  The extended field format is a variable length format.
 
   It uses four parameters:
 

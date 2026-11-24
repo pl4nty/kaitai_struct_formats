@@ -1,19 +1,19 @@
 meta:
-  id: cat_048_catalog
+  id: asterix_cat_048_catalog
   title: ASTERIX category 048 data item catalog
   license: GPL-3.0-only
   ks-version: 0.9
   imports:
 #    - field
-    - fixed
-    - explicit
-    - extended
-    - repetitive
-    - compound
+    - asterix_fixed
+    - asterix_explicit
+    - asterix_extended
+    - asterix_repetitive
+    - asterix_compound
   endian: be
 
 doc: |
-  Implementantion of ASTERIX format.
+  Implementation of ASTERIX format.
 
   From Eurocontrol Asterix web page at
   https://www.eurocontrol.int/asterix
@@ -38,33 +38,33 @@ seq:
     type:
       switch-on: item_ref_num
       cases:
-        0:      fixed("I000",true,1)
-        10:      fixed("I010",true,2)
-        20:   extended("I020",true,1,1)
-        30:   extended("I030",true,1,1)
-        40:      fixed("I040",true,4)
-        42:      fixed("I042",true,4)
-        50:      fixed("I050",true,2)
-        55:      fixed("I055",true,1)
-        60:      fixed("I060",true,2)
-        65:      fixed("I065",true,1)
-        70:      fixed("I070",true,2)
-        80:      fixed("I080",true,2)
-        90:      fixed("I090",true,2)
-        100:      fixed("I100",true,4)
-        110:      fixed("I110",true,2)
-        120:   compound("I120","FFFF"+"FFF",[1,7,0,0,0,0,0],[0,0,0,0,0,0,0])
-        130:   compound("I130","FFFF"+"FFF",[1,1,1,1,1,1,1],[0,0,0,0,0,0,0])
-        140:      fixed("I140",true,3)
-        161:      fixed("I161",true,2)
-        170:   extended("I170",true,1,1)
-        200:      fixed("I200",true,4)
-        210:      fixed("I210",true,4)
-        220:      fixed("I220",true,3)
-        240:      fixed("I240",true,6)
-        250: repetitive("I250",true,8)
-        230:      fixed("I230",true,2)
-        260:      fixed("I260",true,7)
+        0:      asterix_fixed("I000",true,1)
+        10:      asterix_fixed("I010",true,2)
+        20:   asterix_extended("I020",true,1,1)
+        30:   asterix_extended("I030",true,1,1)
+        40:      asterix_fixed("I040",true,4)
+        42:      asterix_fixed("I042",true,4)
+        50:      asterix_fixed("I050",true,2)
+        55:      asterix_fixed("I055",true,1)
+        60:      asterix_fixed("I060",true,2)
+        65:      asterix_fixed("I065",true,1)
+        70:      asterix_fixed("I070",true,2)
+        80:      asterix_fixed("I080",true,2)
+        90:      asterix_fixed("I090",true,2)
+        100:      asterix_fixed("I100",true,4)
+        110:      asterix_fixed("I110",true,2)
+        120:   asterix_compound("I120","FFFF"+"FFF",[1,7,0,0,0,0,0],[0,0,0,0,0,0,0])
+        130:   asterix_compound("I130","FFFF"+"FFF",[1,1,1,1,1,1,1],[0,0,0,0,0,0,0])
+        140:      asterix_fixed("I140",true,3)
+        161:      asterix_fixed("I161",true,2)
+        170:   asterix_extended("I170",true,1,1)
+        200:      asterix_fixed("I200",true,4)
+        210:      asterix_fixed("I210",true,4)
+        220:      asterix_fixed("I220",true,3)
+        240:      asterix_fixed("I240",true,6)
+        250: asterix_repetitive("I250",true,8)
+        230:      asterix_fixed("I230",true,2)
+        260:      asterix_fixed("I260",true,7)
 
 
         #i048_010 #,"F","2","Data Source Identifier","N.A."),

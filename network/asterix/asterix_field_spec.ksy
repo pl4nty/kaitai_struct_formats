@@ -1,12 +1,12 @@
 meta:
-  id: field_spec
+  id: asterix_field_spec
   title: ASTERIX field specification
   license: GPL-3.0-only
   ks-version: 0.9
   endian: be
 
 doc: |
-  Implementantion of ASTERIX format.
+  Implementation of ASTERIX format.
 
   From Eurocontrol Asterix web page at
   https://www.eurocontrol.int/asterix

@@ -1,16 +1,16 @@
 meta:
-  id: cat_001
+  id: asterix_cat_001
   title: ASTERIX category 001
   license: GPL-3.0-only
   ks-version: 0.9
   imports:
-    - field_spec
-    - explicit
-    - cat_001_catalog
+    - asterix_field_spec
+    - asterix_explicit
+    - asterix_cat_001_catalog
   endian: be
 
 doc: |
-  Implementantion of ASTERIX format.
+  Implementation of ASTERIX format.
 
   From Eurocontrol Asterix web page at
   https://www.eurocontrol.int/asterix
@@ -28,7 +28,7 @@ doc-ref: |
 
 seq:
   - id: fspec
-    type: field_spec
+    type: asterix_field_spec
 
   - id: data
     type:
@@ -38,15 +38,15 @@ seq:
         false: uap_type(fspec, [10,20,161,40,42,200,70,90,141,130,131,120,170,210,50,80,100,60,30].as<s2[]>.as<str>)
 
   - id: isp #("SP","E","1","SP-Data Item Special Purpose Field","N.A."),
-    type: explicit("SP",true)
+    type: asterix_explicit("SP",true)
     if: fspec.octects.size > 2 and fspec.octects[2].bits[5]
 
   - id: irfs #("RFS","E","1","RE-Data Item Reserved Expansion Field","N.A."),
-    type: explicit("RFS",true)
+    type: asterix_explicit("RFS",true)
     if: fspec.octects.size > 2 and fspec.octects[2].bits[6]
 
   - id: i150
-    type: cat_001_catalog(150)
+    type: asterix_cat_001_catalog(150)
     if: is_track and fspec.octects.size > 3 and fspec.octects[3].bits[1]
 
 
@@ -77,7 +77,7 @@ types:
     params:
 
       - id: fspec
-        type: field_spec
+        type: asterix_field_spec
 
       - id: uap
         type: str
@@ -87,7 +87,7 @@ types:
         type:
           switch-on: fspec.octects[_index/7].bits[_index % 7]
           cases:
-            true: cat_001_catalog(uap_list[ _index ])
+            true: asterix_cat_001_catalog(uap_list[ _index ])
         repeat: expr
         repeat-expr: loop_range
 
