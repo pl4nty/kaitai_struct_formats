@@ -1,0 +1,35 @@
+# Imported from https://github.com/cff29546/pzdataspec/blob/3d39699f74bb13c9269d2f625e7883648a95da5e/data_spec/spec/251/entity/3_sprite_config.ksy
+# Licence and copyright: see _community/README.md
+meta:
+  id: sprite_config
+  title: 'Project Zomboid save: sprite config entity component'
+  license: MIT
+  imports:
+    - common
+  endian: be
+params:
+  - id: context
+    type: any
+  - id: world_version
+    type: u4
+seq:
+  # zombie.entity.components.spriteconfig.SpriteConfig.save / load
+  - id: has_script
+    type: u1
+  - id: script
+    type: script_ref
+    if: has_script != 0
+  - id: script_version
+    type: u8
+    if: has_script != 0
+  - id: was_master
+    type: u1
+    if: has_script != 0
+types:
+  script_ref:
+    seq:
+      - id: present
+        type: u1
+      - id: id
+        type: u2
+        if: present != 0
