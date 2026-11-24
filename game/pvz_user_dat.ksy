@@ -310,61 +310,87 @@ seq:
     repeat: expr
     repeat-expr: num_zen_plants
 
-  # Achievements
+  # Achievements, Zombatars and the rest: only in later builds; others
+  # end the file after the Zen Garden plants.
   - id: home_lawn_security
     type: u2
+    if: not _io.eof
   - id: nobel_peas_prize
     type: u2
+    if: not _io.eof
   - id: better_off_dead
     type: u2
+    if: not _io.eof
   - id: china_shop
     type: u2
+    if: not _io.eof
   - id: spudow
     type: u2
+    if: not _io.eof
   - id: explodonator
     type: u2
+    if: not _io.eof
   - id: morticulturalist
     type: u2
+    if: not _io.eof
   - id: dont_pea_in_the_pool
     type: u2
+    if: not _io.eof
   - id: roll_some_heads
     type: u2
+    if: not _io.eof
   - id: grounded
     type: u2
+    if: not _io.eof
   - id: zombologist
     type: u2
+    if: not _io.eof
   - id: penny_pincher
     type: u2
+    if: not _io.eof
   - id: sunny_days
     type: u2
+    if: not _io.eof
   - id: popcorn_party
     type: u2
+    if: not _io.eof
   - id: good_morning
     type: u2
+    if: not _io.eof
   - id: no_fungus_among_us
     type: u2
+    if: not _io.eof
   - id: beyond_the_grave
     type: u2
+    if: not _io.eof
   - id: immortal
     type: u2
+    if: not _io.eof
   - id: towering_wisdom
     type: u2
+    if: not _io.eof
   - id: mustache_mode
     type: u2
+    if: not _io.eof
   - id: zombatar_license_accepted
     type: u1
+    if: not _io.eof
   - id: num_zombatars
     type: u4
+    if: not _io.eof
 
   # Zombatars
   - id: zombatars
     type: zombatar
     repeat: expr
     repeat-expr: num_zombatars
+    if: not _io.eof
   - id: unknown_tail
     size: 0x14
+    if: not _io.eof
   - id: dont_display_saved_jpeg_to_desktop_message
     type: u1
+    if: not _io.eof
 
 types:
   zen_plant:
