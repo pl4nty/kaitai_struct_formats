@@ -11,9 +11,9 @@ doc: |
   (PropTag), whose lower 16 bits are the property type. Each name is the
   canonical MS-OXPROPS name (PidTag...) with the prefix dropped, in snake
   case; the canonical name is kept in `-orig-id` and the property type in
-  `doc`. Where several canonical properties share an identifier with
-  different types, the one MFCMAPI ranks first is used and the others are
-  listed in `doc`.
+  `doc`. Where several canonical properties share an identifier, the one
+  with the highest MFCMAPI sort rank is used and the others are listed in
+  `doc`.
 
   Covers the tagged properties (identifiers below 0x8000). Identifiers from
   0x8000 up are named properties, mapped per message store, and are not
