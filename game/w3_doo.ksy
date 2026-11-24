@@ -4,7 +4,7 @@ meta:
   file-extension: doo
   license: LicenseRef-All-Rights-Reserved
   imports:
-    - /image/w3id
+    - w3id
   endian: le
 params:
   - id: use_skin

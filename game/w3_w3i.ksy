@@ -4,7 +4,7 @@ meta:
   file-extension: w3i
   license: LicenseRef-All-Rights-Reserved
   imports:
-    - /image/w3id
+    - w3id
     - w3str
     - w3char
   endian: le

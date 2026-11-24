@@ -11,8 +11,8 @@ doc: |
   A streamed audio track -- background music, not a one-shot sample.
   DSP-ADPCM, planar PCM16 or planar PCM8, split into fixed-size interleaved
   blocks so a player can start from anywhere without decoding the whole
-  file, unlike RWAV/FWAV/CWAV (`nw4r/rwav.ksy`, `nw4c/bxwav.ksy`) which hold
-  one undivided sample. Inside a BRSAR (`nw4r/brsar.ksy`), a BRSTM is the
+  file, unlike RWAV/FWAV/CWAV (`nw4r_rwav`, `bxwav`) which hold
+  one undivided sample. Inside a BRSAR (`brsar`), a BRSTM is the
   `sound type == STRM` case: unlike a BRSEQ/BRBNK pairing, a streamed sound
   carries its own finished waveform and needs no instrument bank at all --
   the tradeoff for that simplicity is file size, since a streamed track
@@ -55,7 +55,7 @@ doc: |
     packed `32 bytes of coefficients + 14 bytes of trailer` each.
 
   The DATA chunk itself opens with 24 bytes of zero padding before the
-  first channel's samples -- the same convention as `nw4c/bxwav.ksy`'s
+  first channel's samples -- the same convention as `bxwav`'s
   `data_block`, confirmed here byte for byte against a real file (tag,
   length, 24 zero bytes, then real ADPCM nibbles at exactly
   `data_offset + 8 + 24`).
@@ -106,7 +106,7 @@ types:
       A fixed-marker reference used inside HEAD/INFO's own body: a 4-byte
       marker, observed as `0x01000000` in every real file and everything
       mobipeg writes, followed by a 4-byte offset relative to that chunk's
-      own start. Unlike `nw4c/bxwav.ksy`'s `reference`, the marker here is
+      own start. Unlike `bxwav`'s `reference`, the marker here is
       never anything else, so it is not modelled as an enum.
     seq:
       - id: marker
@@ -403,8 +403,8 @@ types:
           0xfffe: le
           0xfeff: be
     doc: |
-      Sixteen predictor coefficients, the same table `nw4r/rwav.ksy`'s
-      `adpcm_info` and `nw4c/bxwav.ksy`'s `dsp_adpcm_info` carry, without
+      Sixteen predictor coefficients, the same table `nw4r_rwav`'s
+      `adpcm_info` and `bxwav`'s `dsp_adpcm_info` carry, without
       the surrounding decoder-state fields those two keep -- a stream
       resumes mid-file from block boundaries via ADPC/SEEK, not from a
       single saved `yn1`/`yn2` pair, so there is nothing here to save.

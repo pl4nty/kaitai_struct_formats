@@ -4,7 +4,7 @@ meta:
   title: Warcraft III object modification file
   license: LicenseRef-All-Rights-Reserved
   imports:
-    - /image/w3id
+    - w3id
     - w3str
   endian: le
 params:

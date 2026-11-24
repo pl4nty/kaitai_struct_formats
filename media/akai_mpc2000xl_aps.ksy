@@ -3,7 +3,7 @@ meta:
   id: akai_mpc2000xl_aps
   file-extension: aps
   license: LicenseRef-All-Rights-Reserved
-  imports: mpc2000xl_pgm
+  imports: akai_mpc2000xl_pgm
   bit-endian: le
 
 # Known producers currently evidenced:
@@ -90,7 +90,7 @@ types:
         type: u2le
       - id: sound_generation_mode
         type: u1
-        enum: mpc2000xl_pgm::sound_generation_mode
+        enum: akai_mpc2000xl_pgm::sound_generation_mode
       - id: velocity_range_lower
         type: u1
       - id: also_play_use_note_1
@@ -101,7 +101,7 @@ types:
         type: u1
       - id: voice_overlap_mode
         type: u1
-        enum: mpc2000xl_pgm::voice_overlap_mode
+        enum: akai_mpc2000xl_pgm::voice_overlap_mode
       - id: mute_assign_1
         type: u1
       - id: mute_assign_2
@@ -114,7 +114,7 @@ types:
         type: u1
       - id: decay_mode
         type: u1
-        enum: mpc2000xl_pgm::decay_mode
+        enum: akai_mpc2000xl_pgm::decay_mode
       - id: cutoff
         type: u1
       - id: resonance
@@ -135,13 +135,13 @@ types:
         type: u1
       - id: slider_parameter
         type: u1
-        enum: mpc2000xl_pgm::slider_parameter
+        enum: akai_mpc2000xl_pgm::slider_parameter
       - id: velocity_to_pitch
         type: u1
   drum:
     seq:
       - id: pad_mixers
-        type: mpc2000xl_pgm::pad_mixer
+        type: akai_mpc2000xl_pgm::pad_mixer
         repeat: expr
         repeat-expr: 64
         
@@ -217,7 +217,7 @@ types:
         type: str
         encoding: ASCII
       - id: slider
-        type: mpc2000xl_pgm::slider
+        type: akai_mpc2000xl_pgm::slider
       - id: program_change
         type: u1
       - size: 5
@@ -230,7 +230,7 @@ types:
       - size: 1
       
       - id: pad_mixers
-        type: mpc2000xl_pgm::pad_mixer
+        type: akai_mpc2000xl_pgm::pad_mixer
         repeat: expr
         repeat-expr: 64
       

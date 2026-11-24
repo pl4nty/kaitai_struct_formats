@@ -4,7 +4,7 @@ meta:
   file-extension: wpm
   license: LicenseRef-All-Rights-Reserved
   imports:
-    - /image/w3id
+    - w3id
   endian: le
 seq:
   - id: file_id

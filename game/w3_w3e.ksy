@@ -4,7 +4,7 @@ meta:
   file-extension: w3e
   license: LicenseRef-All-Rights-Reserved
   imports:
-    - /image/w3id
+    - w3id
   endian: le
 seq:
   - id: file_id

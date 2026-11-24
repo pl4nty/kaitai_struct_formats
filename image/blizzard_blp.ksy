@@ -4,7 +4,7 @@ meta:
   file-extension: blp
   license: LicenseRef-All-Rights-Reserved
   imports:
-    - w3id
+    - /game/w3id
   endian: le
 seq:
   - id: header

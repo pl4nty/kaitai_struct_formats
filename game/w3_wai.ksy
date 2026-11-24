@@ -5,7 +5,7 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   imports:
     - w3str
-    - /image/w3id
+    - w3id
     - w3_w3o
   endian: le
 seq:
