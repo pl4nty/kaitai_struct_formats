@@ -49,9 +49,10 @@ types:
         -unit: °
       - id: speed
         type: f8
-        -unit: mi/h
+        -unit: mph
       - id: unix_timestamp
         type: u4
+        doc: Seconds since the Unix epoch
       - id: reserved2
         type: u4
         doc: Zero in all observed files
@@ -60,7 +61,10 @@ enums:
   fix:
     0:
       id: dupe
-      doc: duplicate of the previous record
+      doc: |
+        Duplicate of the previous record. This meaning is not confirmed by
+        GPSBabel, which leaves the fix unset for any value other than
+        1, 2, 3 and 5.
     1: none
     2: two_d
     3: three_d
