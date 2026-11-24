@@ -12,7 +12,11 @@ doc: |
   that many words of payload, ending with an empty "HE" section. Known
   tags: TL (timeline), V2 (video), VC (video codec), pc (RSA-1280
   signature), cc (64 bytes), A0/A2/A3/A8/A9/AP/AV/AM (audio), KI (keyframe
-  index), LM, VF. Interleaved audio/video chunks follow the header.
+  index), LM (MediaLock DRM enable), VF (VerifyFrames), P. (frame-rate
+  numerator/denominator). Interleaved audio/video chunks follow the
+  header.
+
+  Used by the Nintendo Channel, Wii no Ma, WiiLink and in-game FMV.
 seq:
   - id: magic
     contents: "MO"
@@ -66,18 +70,21 @@ types:
           A0 -> None
           A2 -> FastAudio
           A3 -> FastAudio Stereo
-          A8 -> ADPCM
-          A9 -> ADPCM Stereo
+          A8 -> IMA ADPCM
+          A9 -> IMA ADPCM Stereo
           AM -> Multitrack
-          AP -> PCM
+          AP -> PCM S16
           AV -> Vorbis
           KI -> Keyframe Index
-          cc -> 64 bytes, seemingly unused
+          cc -> 64 bytes, seemingly unused (Wii-Kaitai: RSA-512 clip certificate)
+          LM -> MediaLock DRM enable
+          VF -> VerifyFrames
           HE -> end of header (empty)
   timeline:
     seq:
       - id: fps
         type: u4
+        doc: Frames per second.
       - id: chunk_count
         type: u4
       - id: unknown_5
@@ -96,6 +103,11 @@ types:
         size: 160
         doc: RSA-1280 with Barrett reduction.
   chunk:
+    doc: |
+      One interleaved audio/video frame chunk. Retail files may contain
+      audio-less "skip frame" chunks (all-0xFF P-frames) where
+      `chunk_size == video_chunk_size + 4`. Video data is a MobiClip
+      bitstream, read MSB-first over 16-bit little-endian words.
     seq:
       - id: chunk_size
         type: u4
