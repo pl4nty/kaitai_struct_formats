@@ -1,4 +1,5 @@
 # Imported from https://github.com/HenryOfCarim/GameFilesTemplates/blob/f61646c9173f4f9052e2fa8421c17e4bea7776b9/albam/engines/hexn/edgemodel.ksy
+# Version 15 header and buffer_weights fix from https://github.com/Brachi/albam/blob/HEAD/albam/engines/hexn/structs/edgemodel.ksy
 meta:
   id: hexane_edgemodel
   title: Hexane Engine Model Format
@@ -18,13 +19,15 @@ types:
       - {id: version, type: u4}
       - {id: num_models, type: u4}
       - {id: num_meshes, type: u4}
+      # Version 15 has a 144-byte header against 17/18's 208: the same fields
+      # in the same order, minus the ones guarded by `version >= 17` below.
       - {id: ofs_meshes_start, type: u4}
-      - {id: ofs_meshes_end, type: u4}
-      - {id: ofs_meshes_info, type: u4}
+      - {id: ofs_meshes_end, type: u4, if: version >= 17}
+      - {id: ofs_meshes_info, type: u4, if: version >= 17}
       - {id: num_bones, type: u4}
       - {id: ofs_bones, type: u4}
-      - {id: reserved_01, type: u4}
-      - {id: reserved_02, type: u4}
+      - {id: reserved_01, type: u4, if: version >= 17}
+      - {id: reserved_02, type: u4, if: version >= 17}
       - {id: reserved_03, type: u4}
       - {id: unk_matrix_1, type: f4, repeat: expr, repeat-expr: 8}
       - {id: unk_matrix_2, type: matrix4x4}
@@ -32,17 +35,19 @@ types:
       - {id: ofs_unk_01, type: u4}
       - {id: ofs_unk_02, type: u4}
       - {id: reserved_04, type: u4}
-      - {id: ofs_models_start, type: u4, repeat: expr, repeat-expr: 5} # TODO: better name
-      - {id: ofs_models_end, type: u4, repeat: expr, repeat-expr: 5}  # TODO: better name
-      - {id: reserved_05, type: u4}
-      - {id: reserved_06, type: u4}
+      - {id: ofs_models_start, type: u4, repeat: expr, repeat-expr: 5, if: version >= 17} # TODO: better name
+      - {id: ofs_models_end, type: u4, repeat: expr, repeat-expr: 5, if: version >= 17}  # TODO: better name
+      - {id: reserved_05, type: u4, if: version >= 17}
+      - {id: reserved_06, type: u4, if: version >= 17}
 
   mesh_header:
     seq:
       - {id: num_groups, type: u4}
       - {id: ofs_data, type: u4}
-      - {id: lod, type: u4}
+      # Version 15 stores ofs_materials before the lod word, 17/18 after it.
+      - {id: lod_v17, type: u4, if: _root.header.version >= 17}
       - {id: ofs_materials, type: u4}
+      - {id: lod_v15, type: u4, if: _root.header.version < 17}
       - {id: matrix_4x2_unk, type: f4, repeat: expr, repeat-expr: 8}
       - {id: matrix_4x4_unk, type: matrix4x4}
       - {id: unk_ofs_1, type: u4}
@@ -54,6 +59,8 @@ types:
       - {id: unk_ofs_6, type: u4}
       - {id: reserved_01, type: u4}
     instances:
+      lod:
+        value: "_root.header.version >= 17 ? lod_v17 : lod_v15"
       mesh:
         {pos: ofs_data, type: edgemesh}
       materials:
@@ -61,9 +68,14 @@ types:
 
   materials_table:
     seq:
-      # TODO: rest of materials if needed
       - {id: offsets, type: u4, repeat: expr, repeat-expr: _parent._parent.header.num_material_per_mesh}
-      - {id: first_material, type: str, terminator: 0, encoding: ASCII}
+      # offsets[i] each point to their own null-terminated .matb path. The
+      # strings are contiguous, so they are read sequentially.
+      - {id: all_materials, type: str, terminator: 0, encoding: ASCII,
+         repeat: expr, repeat-expr: _parent._parent.header.num_material_per_mesh}
+    instances:
+      first_material:
+        value: all_materials[0]
 
   vec3:
     seq:
@@ -117,4 +129,4 @@ types:
       buffer_vertices:
         {pos: ofs_buffer_vertices, size: size_buffer_vertices}
       buffer_weights:
-        {pos: ofs_buffer_vertices, size: size_buffer_vertices}
+        {pos: ofs_buffer_weights, size: size_buffer_weights}
