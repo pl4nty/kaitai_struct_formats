@@ -80,7 +80,8 @@ types:
         doc: Altitude in metres.
   loghdr:
     seq:
-      - id: id
+      - id: magic
+        -orig-id: id
         contents: [0x00, 0x12, 0xcb, 0x38]
         doc: '`TRL_HDR_ID`, 0x38CB1200.'
       - id: num
