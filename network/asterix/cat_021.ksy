@@ -1,5 +1,6 @@
 meta:
   id: cat_021
+  title: ASTERIX category 021
   license: GPL-3.0-only
   ks-version: 0.9
   imports:

@@ -1,5 +1,6 @@
 meta:
   id: packet_ppi
+  title: PPI (Per-Packet Information) packet
   license: CC0-1.0
   imports:
     - /network/ethernet_frame

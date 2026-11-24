@@ -1,5 +1,6 @@
 meta:
   id: msix
+  title: PCI MSI-X capability
   license: 0BSD
   endian: le
 

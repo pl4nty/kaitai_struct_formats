@@ -1,5 +1,6 @@
 meta:
   id: repetitive
+  title: ASTERIX repetitive data field
   license: GPL-3.0-only
   ks-version: 0.9
   endian: be

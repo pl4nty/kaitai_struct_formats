@@ -1,5 +1,6 @@
 meta:
   id: wdk20
+  title: WDK 2.0 filesystem image
   license: MIT
   encoding: ASCII
   endian: be

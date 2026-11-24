@@ -1,5 +1,6 @@
 meta:
   id: af
+  title: PCI advanced features capability
   license: 0BSD
   endian: le
 

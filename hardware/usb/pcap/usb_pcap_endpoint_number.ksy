@@ -1,5 +1,6 @@
 meta:
   id: usb_pcap_endpoint_number
+  title: USB pcap endpoint number
   license: Unlicense
   endian: le
 seq:

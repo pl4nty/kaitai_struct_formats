@@ -1,5 +1,6 @@
 meta:
   id: compound
+  title: ASTERIX compound data field
   license: GPL-3.0-only
   ks-version: 0.9
   imports:

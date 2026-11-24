@@ -1,5 +1,6 @@
 meta:
   id: cat_048_catalog
+  title: ASTERIX category 048 data item catalog
   license: GPL-3.0-only
   ks-version: 0.9
   imports:

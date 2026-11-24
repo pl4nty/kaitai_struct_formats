@@ -1,5 +1,6 @@
 meta:
   id: field_spec
+  title: ASTERIX field specification
   license: GPL-3.0-only
   ks-version: 0.9
   endian: be

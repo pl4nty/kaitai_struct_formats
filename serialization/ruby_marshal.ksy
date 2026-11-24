@@ -1,5 +1,6 @@
 meta:
   id: ruby_marshal
+  title: Ruby Marshal
   license: CC0-1.0
   endian: le
 doc: |

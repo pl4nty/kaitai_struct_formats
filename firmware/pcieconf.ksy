@@ -1,5 +1,6 @@
 meta:
   id: pcieconf
+  title: PCI configuration space
   license: 0BSD
   imports:
     - pcieconf/bar_list

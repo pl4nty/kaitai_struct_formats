@@ -1,5 +1,6 @@
 meta:
   id: cat_000
+  title: ASTERIX category 000
   license: GPL-3.0-only
   endian: be
 

@@ -1,5 +1,6 @@
 meta:
   id: cat_062_catalog
+  title: ASTERIX category 062 data item catalog
   license: GPL-3.0-only
   ks-version: 0.9
   imports:

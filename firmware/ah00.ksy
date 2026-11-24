@@ -1,5 +1,6 @@
 meta:
   id: ah00
+  title: Netgear AH00 firmware image
   license: MIT
   encoding: ASCII
   endian: be

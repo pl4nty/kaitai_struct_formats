@@ -1,5 +1,6 @@
 meta:
   id: git_commit_graph
+  title: Git commit graph
   license: Unlicense
   encoding: UTF-8
   endian: le

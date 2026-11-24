@@ -1,5 +1,6 @@
 meta:
   id: asterix_record
+  title: ASTERIX record
   license: GPL-3.0-only
   ks-version: 0.9
   imports:
