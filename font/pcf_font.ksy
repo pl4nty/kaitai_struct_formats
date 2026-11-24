@@ -58,7 +58,11 @@ types:
     instances:
       body:
         pos: ofs_body
-        size: len_body
+        size: 'ofs_body + len_body > _root._io.size ? _root._io.size - ofs_body : len_body'
+        doc: |
+          Table body. Writers such as bdftopcf record a larger size for
+          the last table (usually BDF accelerators) than the file holds,
+          so, like FreeType, the size is clamped to the end of the file.
         type:
           switch-on: type
           cases:
