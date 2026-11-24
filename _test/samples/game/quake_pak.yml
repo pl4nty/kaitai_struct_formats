@@ -2,8 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/joshuaskelly/vgio/e71bcf4ef6553adf0b51f4379f72bc5a82a60176/vgio/quake/tests/test_data/test.pak
     sha256: 3efdc60fbcfeb819a0f4bca6ebdc3f954b06ebd750c23ab6aec9e47a4e709ad5
     name: vgio_quake_test.pak
-    source: joshuaskelly/vgio Quake test data (values from struct-decoded header and directory)
-    license: MIT
     expect:
       ofs_index: 63164
       len_index: 128
@@ -12,8 +10,6 @@ samples:
       index.entries[1].size: 58428
   - url: https://sembiance.com/fileFormatSamples/archive/quakePAK/PAK0_6.PAK
     sha256: db7de98cfd59e5f10388bc33341742a04e9f650e0297adb85788c54e3b22f829
-    source: telparia fileFormatSamples (quakePAK), a Quake mod PAK (values from struct-decoded header and directory)
-    license: unknown (third-party game mod data)
     expect:
       ofs_index: 206998
       len(index.entries): 8

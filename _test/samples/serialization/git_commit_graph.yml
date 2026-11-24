@@ -4,16 +4,12 @@ samples:
   - url: https://raw.githubusercontent.com/GitoxideLabs/gitoxide/9abb53183a296185fc4e98376bc4ab895f39c2fe/gix-commitgraph/tests/fixtures/generated-archives/octopus_merges.tar
     sha256: e76820940038624165ae61c9ecf26eeb22ae651207c3e0dbe473c21f886fd368
     name: octopus_merges-commit-graph
-    source: GitoxideLabs/gitoxide gix-commitgraph tests/fixtures/generated-archives/octopus_merges.tar (7 commits, 2 octopus merges)
-    license: MIT OR Apache-2.0
     extract: { format: tar, member: .git/objects/info/commit-graph }
     eof: true
     xfail: spec is an incomplete reverse-engineering stub (records of 4-byte tag + fixed-size body, header tag "CGBF"); real files start "CGPH" + version/hash/chunk-count bytes and a 12-byte chunk table, so record tags quickly become binary garbage
   - url: https://raw.githubusercontent.com/GitoxideLabs/gitoxide/9abb53183a296185fc4e98376bc4ab895f39c2fe/gix-commitgraph/tests/fixtures/generated-archives/two_parents.tar
     sha256: 1923e61c1b7b169d56abfdf1f056a7a9ad653889c77ebff9338f9d6116620049
     name: two_parents-commit-graph
-    source: GitoxideLabs/gitoxide gix-commitgraph tests/fixtures/generated-archives/two_parents.tar (3 commits)
-    license: MIT OR Apache-2.0
     extract: { format: tar, member: .git/objects/info/commit-graph }
     eof: true
     xfail: spec is an incomplete reverse-engineering stub (records of 4-byte tag + fixed-size body, header tag "CGBF"); real files start "CGPH" + version/hash/chunk-count bytes and a 12-byte chunk table, so record tags quickly become binary garbage

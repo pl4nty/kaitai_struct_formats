@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/trwyant/perl-Astro-UTDF/99ba09579418aeb7dd0212f033c0009c3db21198/t/data.utd
     sha256: 0e6fedf2f2c7c7fb2ebad13b7f5b19e8fe7fcbf86889116c74fdb7348eb9b3b2
-    source: Astro::UTDF (Perl) test data t/data.utd
-    license: Artistic-1.0-Perl OR GPL-1.0-or-later (repository licence)
     eof: true
     expect:   # Astro::UTDF t/utdf.t expectations for the last record
       len(recs): 2
@@ -11,8 +9,6 @@ samples:
       recs[1].tx_pad_id: 42
   - url: https://raw.githubusercontent.com/trwyant/perl-Astro-UTDF/99ba09579418aeb7dd0212f033c0009c3db21198/t/doppler.utdf
     sha256: 9ca1463b0e86ba2941dab4e49499dd5b560197d1cca78b420a04ad0fae0a3a6b
-    source: Astro::UTDF (Perl) test data t/doppler.utdf
-    license: Artistic-1.0-Perl OR GPL-1.0-or-later (repository licence)
     eof: true
     xfail: rx_pad_id is declared b4 but the receive antenna PAD ID is a full byte (byte 48), so it reads 5 instead of 87
     expect:   # Astro::UTDF t/real_data.t expectations for the last record

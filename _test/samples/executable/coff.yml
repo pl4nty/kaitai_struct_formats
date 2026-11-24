@@ -2,7 +2,6 @@
 samples:
   - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/coff/coff2.obj
     sha256: 24fa342994ed03b0acf0f1f07bed539dc0b8d6dd169290b22e906604ac17903d
-    source: radareorg/radare2-testbins coff/coff2.obj (MSVC i386 object; file(1) "Intel 80386 COFF object file, 9 sections, 35 symbols")
     expect:
       header.magic: 4c01
       header.num_sections: 9
@@ -10,13 +9,11 @@ samples:
       section_headers[0].name: .drectve
   - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/coff/coff.obj
     sha256: d126ef4df02ee376b7cb45fc1bbafd4539c5492b63148af2fdc733d96c2b276e
-    source: radareorg/radare2-testbins coff/coff.obj (x86-64 object; objdump "pe-x86-64", 2 sections)
     expect:
       header.magic: '6486'
       header.num_sections: 2
   - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/coff/VC40APPC_SETARGV.OBJ
     sha256: f7f26dabf98fbaedc207759d167643c275f30c430f3931738e46bd4851abe070
-    source: radareorg/radare2-testbins coff (Visual C++ 4.0 PowerPC object; file(1) "MS Windows COFF PowerPC object file")
     expect:
       header.magic: f001
       header.num_sections: 3

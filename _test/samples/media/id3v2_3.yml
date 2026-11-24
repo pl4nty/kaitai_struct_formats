@@ -2,14 +2,10 @@
 samples:
   - url: https://raw.githubusercontent.com/quodlibet/mutagen/48b3463d0ed70ba2b797ac9cc83983066ecf076a/tests/data/id3v23_unsynch.id3
     sha256: 423c43f361aad088c9bd00e2955f59b27f1e596074efdacbe47bb7f56a63ad5d
-    source: mutagen tests/data
-    license: GPL-2.0-or-later
     expect:
       tag.header.version_major: 3
       tag.header.size.value: 176
   - url: https://raw.githubusercontent.com/quodlibet/mutagen/48b3463d0ed70ba2b797ac9cc83983066ecf076a/tests/data/silence-44-s.mp3
     sha256: 13e44044a8d59d4d6a184a40740f280c66487f721c14701fff4f82dc097cc055
-    source: mutagen tests/data
-    license: GPL-2.0-or-later
     expect:
       tag.header.size.value: 1304

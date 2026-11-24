@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/dacre-denny/webgl-quake-mdl/824edd9b54c97319d1480f2f02ded32ebd338a38/data/ogre.mdl
     sha256: d7e65c136645747dacb3901e61a4117bc9cdd062669d0f64fa562872d2bd0d4e
-    source: Quake 1 ogre model as shipped in dacre-denny/webgl-quake-mdl (values from struct-decoded header)
-    license: id Software Quake asset (not freely licensed)
     eof: true
     expect:
       header.version: 6
@@ -10,8 +8,6 @@ samples:
       header.num_verts: 169
   - url: https://raw.githubusercontent.com/dacre-denny/webgl-quake-mdl/824edd9b54c97319d1480f2f02ded32ebd338a38/data/soldier.mdl
     sha256: 1e70eb11aad02793a8fb90ece4a17328605cf9165c7305049ff30fcc21b3ce75
-    source: Quake 1 soldier model as shipped in dacre-denny/webgl-quake-mdl (values from struct-decoded header)
-    license: id Software Quake asset (not freely licensed)
     eof: true
     expect:
       header.skin_width: 300

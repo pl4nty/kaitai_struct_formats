@@ -53,7 +53,7 @@ FIXTURES_DIR = os.path.join(REPO, "_test", "fixtures")
 MAX_DOWNLOAD = 64 * 1024 * 1024
 USER_AGENT = "ksf-sample-tests/1.0"
 
-SAMPLE_KEYS = {"url", "sha256", "data", "fixture", "recipe", "name", "source", "license", "extract", "deep",
+SAMPLE_KEYS = {"url", "sha256", "data", "fixture", "recipe", "name", "extract", "deep",
                "eof", "expect", "params", "xfail", "skip", "timeout"}
 EXTRACT_KEYS = {"format", "member", "offset", "size", "field", "then"}
 ARCHIVES = ("zip", "tar")

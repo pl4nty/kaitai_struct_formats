@@ -1,13 +1,11 @@
 samples:
   - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/Universal-Mod/lang-packs/eng/res/textslmp.res
     sha256: ab582c505e14a0198bc8911f8917f1eb22cfde97e707f780a1dc890e415375ca
-    source: Kyr4l/ei-universal-mod (Evil Islands mod text archive); values struct-decoded per aspadm/EIrepack wiki
     expect:
       num_files: 163
       len_nametable: 2232
   - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/extra-assets/reference-assets/cotls-vanilla/figures_res/unanhoco.anm
     sha256: b745539cb4c2b3b1964c0d17186264bb00e08ad108e46e0202a2f1b229a66b17
     name: unanhoco.anm-as-res
-    source: Kyr4l/ei-universal-mod (Evil Islands mod repo; vanilla game asset, proprietary, linked not vendored); unit .anm files are RES archives
     expect:
       num_files: 7

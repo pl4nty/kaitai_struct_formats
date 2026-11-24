@@ -4,8 +4,6 @@ samples:
   - url: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.3-h27087fc_1.tar.bz2
     sha256: b801e8cf4b2c9a30bce5616746c6c2a4e36427f045b46d9fc08a4ed40a9f7065
     name: linux
-    source: conda-forge ncurses-6.3-h27087fc_1 (anaconda.org), share/terminfo/l/linux
-    license: X11 (ncurses)
     extract: { format: bz2, then: { format: tar, member: share/terminfo/l/linux } }
     eof: true
     expect:

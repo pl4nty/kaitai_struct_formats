@@ -1,16 +1,12 @@
 samples:
   - url: https://raw.githubusercontent.com/Timic3/rw-parser/00e9a744db516230fe73e92ea68895b423507fa0/tests/assets/wuzimu.dff
     sha256: 5898aaaf23e62a62e9da863c26124fcc1ff65e530865eb7d623d76dd84ee4259
-    source: rw-parser test assets, GTA San Andreas clump (values from struct-decoded chunk header)
-    license: game asset, not freely licensed
     expect:
       code: 0x10
       size: 82451
       library_id_stamp: 0x1803ffff
   - url: https://raw.githubusercontent.com/Timic3/rw-parser/00e9a744db516230fe73e92ea68895b423507fa0/tests/assets/infernus.txd
     sha256: 07cbb06c0ecfb8e3265da9674be7d1184dd711b6bf6b26c03db1c2c400f0374b
-    source: rw-parser test assets, GTA San Andreas texture dictionary (values from struct-decoded chunk header)
-    license: game asset, not freely licensed
     expect:
       code: 0x16
       size: 9628

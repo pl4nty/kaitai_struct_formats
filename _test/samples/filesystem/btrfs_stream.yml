@@ -2,16 +2,12 @@
 samples:
   - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/filesystem/btrfs_stream/__input__/sample.v1.none.bin
     sha256: 39c6a9135c9201ef45330afad676a6a53f202f2fc48eb706cb0616204a901392
-    source: onekey-sec/unblob integration test input filesystem/btrfs_stream sample.v1.none.bin (Git LFS)
-    license: MIT
     extract: { format: slice, offset: 16, size: 5253991 }
     eof: true
     expect:   # version byte from hex read
       header.version: 1
   - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/filesystem/btrfs_stream/__input__/sample.v2.zlib.bin
     sha256: 345866e806307b13fad42d110de958936f542df88e71802fad67c750f6ef7733
-    source: onekey-sec/unblob integration test input filesystem/btrfs_stream sample.v2.zlib.bin (Git LFS)
-    license: MIT
     extract: { format: slice, offset: 16, size: 168079 }
     eof: true
     expect:

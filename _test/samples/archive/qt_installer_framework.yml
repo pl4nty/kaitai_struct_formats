@@ -2,8 +2,6 @@ samples:
   - url: https://download.qt.io/archive/qt-installer-framework/4.1.1/QtInstallerFramework-windows-x86-4.1.1.exe
     sha256: 85ef9117b66dae00d98553c46a20a44c80eb6e6c8b3f30d51383a95ed2c89c46
     name: QtInstallerFramework-windows-x86-4.1.1.exe
-    source: Qt Installer Framework 4.1.1 offline installer (itself built with IFW), download.qt.io archive (57 MB)
-    license: GPL-3.0 WITH Qt-GPL-exception-1.0
     params:
       magic_cookie_offset: "_data.rindex(bytes.fromhex('f868d6991c0a63c2'))"
     expect:   # hand read of the trailer following IFW src/libs/installer/binarycontent.cpp (readBinaryContent)

@@ -2,8 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/HEYimHeroic/MiiDataFiles/73d63981a248498a70b460d731b2561363ce22c2/Mii%20data%20files/All/Guest%20A%20(Buggy)/Guest%20A.cfsd
     sha256: f16451b0bdb006fbfc074b6c24a40e9e48c0845ff725f18efbb2e596762a51c2
     name: GuestA.cfsd
-    source: HEYimHeroic/MiiDataFiles, 3DS guest Mii A as CFSD (values from manual hex read per 3dbrew Mii format)
-    license: Nintendo game data (not freely licensed)
     expect:
       mii_name.rstrip('\x00'): no name
       body_height: 64
@@ -11,8 +9,6 @@ samples:
   - url: https://raw.githubusercontent.com/HEYimHeroic/MiiDataFiles/73d63981a248498a70b460d731b2561363ce22c2/Mii%20data%20files/Wii%20U/WaraWara%20Plaza/mii01miiverse01/mii01miiverse01.ffsd
     sha256: 677c0ca085f320d109b11f9cd9e44cf27b509650fa12a7ba9c45f56e8b9b412d
     name: mii01miiverse01.ffsd
-    source: HEYimHeroic/MiiDataFiles, Wii U WaraWara Plaza Mii as FFSD (values from manual hex read per 3dbrew Mii format)
-    license: Nintendo game data (not freely licensed)
     expect:
       mii_name.rstrip('\x00'): NINTENDO
       body_height: 70

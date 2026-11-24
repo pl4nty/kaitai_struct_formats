@@ -2,8 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/tls-renegotiation.pcap
     sha256: a3472920f5080ac32ab56d86def19dcbb418f25f4e197674d0d2a6a6e59a34ae
     name: tls-renegotiation-clienthello
-    source: Wireshark test captures, ClientHello body of frame 4 (after record and handshake headers)
-    license: GPL-2.0-or-later
     extract: {format: slice, offset: 377, size: 90}
     eof: true
     expect:

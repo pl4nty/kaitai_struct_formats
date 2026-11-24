@@ -1,20 +1,17 @@
 samples:
   - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/mz/chkdsk.exe
     sha256: cc5e3e324a8fd7a265c80434c446239a39176b1a821a80b02d1a461858d79baa
-    source: radare2-testbins (values from struct-decoded header)
     expect:
       header.mz.last_page_extra_bytes: 306
       header.mz.num_pages: 82
       header.mz.num_relocations: 1
   - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/mz/unzip.exe
     sha256: 738844a436a8b0cd8aa544becd13341936f52836cd1ef887efd4ee48809a9646
-    source: radare2-testbins (values from struct-decoded header)
     expect:
       header.mz.num_pages: 177
       header.mz.num_relocations: 0
   - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/mz/INSTALL.EXE
     sha256: 9f7af6d5cfe7a75fe5cbe70dc662e3d51cd5c121831481473af0065670ae238f
-    source: radare2-testbins (values from struct-decoded header)
     expect:
       header.mz.num_pages: 34
       header.mz.num_relocations: 1

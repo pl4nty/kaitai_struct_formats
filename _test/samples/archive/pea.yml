@@ -1,7 +1,6 @@
 samples:
   - url: https://sembiance.com/fileFormatSamples/archive/peaZip/example.pea
     sha256: c4c708665432393726b84147fffa7b2c46c3bf92c599635c7b90e17e2af62de9
-    source: telparia fileFormatSamples (sembiance.com), archive/peaZip
     # header bytes ea 01 01 read by hand (signature, PEA_FILEFORMAT_VER, PEA_FILEFORMAT_REV)
     expect:
       archive_header.format_version: 1

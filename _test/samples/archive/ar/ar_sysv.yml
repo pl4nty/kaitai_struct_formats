@@ -1,13 +1,9 @@
 samples:
   - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/ar.hexpat.ar
     sha256: 891edb53f7533949298384e442642c2204eac4ffe3fc8f8a73b1e2ea07187c43
-    source: ImHex-Patterns test data (one 12-byte member, from header bytes)
-    license: GPL-2.0 (ImHex-Patterns repository)
     eof: true
     expect:
       len(members): 1
   - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/archive/ar/__input__/gnu_multi_names.ar
     sha256: 3aee5062fe584e07862f99d75a4a28613cff6b261d49eab336d59273268fa6d8
-    source: unblob integration test inputs (Git LFS; values from header bytes)
-    license: MIT
     eof: true

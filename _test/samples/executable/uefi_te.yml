@@ -2,8 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/intel/FSP/dbbe74b94666d495573c4057e10af5b6d2d21e44/BraswellFspBinPkg/FspBin/BSWFSP.fd
     sha256: 90c9a4b525d9ba6fa861f1e9ff76170078eda8a7055f5a76d2d204b0ecab144f
     name: BSWFSP-te-0x144.te
-    source: Intel FSP Braswell binary; TE image from the first EFI_SECTION_TE (type 0x12) at file offset 0x140 (4-byte section header skipped)
-    license: Intel FSP binary license (FSP_License.pdf in repository)
     extract: {format: slice, offset: 0x144, size: 1624}
     expect:   # manual hex read of the TE header and FFS section header (PI spec vol. 1)
       te_hdr.machine: i386
@@ -14,8 +12,6 @@ samples:
   - url: https://raw.githubusercontent.com/intel/FSP/dbbe74b94666d495573c4057e10af5b6d2d21e44/BraswellFspBinPkg/FspBin/BSWFSP.fd
     sha256: 90c9a4b525d9ba6fa861f1e9ff76170078eda8a7055f5a76d2d204b0ecab144f
     name: BSWFSP-te-0x123c.te
-    source: Intel FSP Braswell binary; TE image from the EFI_SECTION_TE at file offset 0x1238
-    license: Intel FSP binary license (FSP_License.pdf in repository)
     extract: {format: slice, offset: 0x123c, size: 68168}
     expect:   # manual hex read
       te_hdr.num_sections: 2

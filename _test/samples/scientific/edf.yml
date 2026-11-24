@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/holgern/pyedflib/870e42b20a3fd1cc4fa1bbbf60f8f934ee36e71d/pyedflib/tests/data/test_subsecond.edf
     sha256: ac1cc70b0b9b345c7b5006f0f27d98656b1d891c2c02505b6c18ed399f077379
-    source: pyedflib test data (EDF+C with annotation signal)
-    license: BSD-3-Clause
     eof: true
     expect:   # pyedflib + header text
       header.ns: 2          # 1 data signal + EDF Annotations
@@ -11,8 +9,6 @@ samples:
       header.version: "0"
   - url: https://physionet.org/files/eegmmidb/1.0.0/S001/S001R01.edf
     sha256: 4743b736131a7e147c150e8b37711029b6cda5e356c4b3e8261a03cdcaaf8b0c
-    source: PhysioNet EEG Motor Movement/Imagery Database v1.0.0, S001R01
-    license: ODC-By-1.0
     eof: true
     expect:   # pyedflib + header text
       header.ns: 65         # 64 EEG + EDF Annotations

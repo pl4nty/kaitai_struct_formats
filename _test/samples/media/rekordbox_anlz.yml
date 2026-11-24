@@ -1,23 +1,17 @@
 samples:
   - url: https://raw.githubusercontent.com/dylanljones/pyrekordbox/50b4604d98dfd52740aa9e76d80c3a32dfa451ba/.testdata/export/PIONEER/USBANLZ/P016/0000875E/ANLZ0000.DAT
     sha256: b938b44af10da3d33ff7c352fb605be353219f009be35ab0c3a3313508bbcacf
-    source: pyrekordbox test data (rekordbox USB export); expects from a manual header read
-    license: MIT
     eof: true
     expect:
       len_header: 28
       len_file: 5324
   - url: https://raw.githubusercontent.com/dylanljones/pyrekordbox/50b4604d98dfd52740aa9e76d80c3a32dfa451ba/.testdata/export/PIONEER/USBANLZ/P016/0000875E/ANLZ0000.EXT
     sha256: e5fbc932a0f22869bc66f6f8228fabc912fb159c4fdcee3ae34b6e8b98465de8
-    source: pyrekordbox test data (rekordbox USB export); expects from a manual header read
-    license: MIT
     eof: true
     expect:
       len_file: 86386
   - url: https://raw.githubusercontent.com/dylanljones/pyrekordbox/50b4604d98dfd52740aa9e76d80c3a32dfa451ba/.testdata/export/PIONEER/USBANLZ/P016/0000875E/ANLZ0000.2EX
     sha256: b29e8255602869c7cf00812d58f9d847dabce3caad6694456006364b66050e33
-    source: pyrekordbox test data (rekordbox USB export, 3-band waveform file); expects from a manual header read
-    license: MIT
     eof: true
     expect:
       len_file: 81410

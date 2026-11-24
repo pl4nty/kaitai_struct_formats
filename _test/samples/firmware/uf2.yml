@@ -2,7 +2,6 @@ samples:
   - url: https://media.githubusercontent.com/media/dpaola2/Harmony/a3992c8739e2586b183803b5e69eeae1fff5a12f/firmware/samd-validation/artifacts/update-bootloader-tangara-bc1632d.uf2
     sha256: 42cf0e0e4e7dab8b899555e8d169bae996718a79a632d95d02e4da3243880288
     name: update-bootloader-tangara.uf2
-    source: SAMD bootloader updater (Git LFS object)
     eof: true
     expect:
       first_block.target_address: 0x2000

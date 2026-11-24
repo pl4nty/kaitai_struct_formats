@@ -2,8 +2,6 @@
 samples:
   - url: https://media.githubusercontent.com/media/KhronosGroup/KTX-Software/983695c105618462b8e96458b378222e99faec98/tests/resources/ktx/etc1.ktx
     sha256: 48a8b5441e0018a39590116de834b226a2ec4de29517b097880390f9f4141a34
-    source: KhronosGroup/KTX-Software tests/resources (Git LFS)
-    license: Apache-2.0
     eof: true
     expect:
       endian_ktx.type: 0
@@ -12,8 +10,6 @@ samples:
       endian_ktx.mipmap_levels_num: 1
   - url: https://media.githubusercontent.com/media/KhronosGroup/KTX-Software/983695c105618462b8e96458b378222e99faec98/tests/resources/ktx/r8g8b8_srgb_mip.ktx
     sha256: 144a9af1beb84939c74424062ee1ce53fcd64e6c36b32e71ffa79e2722dd84dd
-    source: KhronosGroup/KTX-Software tests/resources (Git LFS)
-    license: Apache-2.0
     eof: true
     expect:
       endian_ktx.type: 5121
@@ -22,8 +18,6 @@ samples:
       len(endian_ktx.mipmap_levels): 7
   - url: https://media.githubusercontent.com/media/KhronosGroup/KTX-Software/983695c105618462b8e96458b378222e99faec98/tests/resources/ktx/orient_up_metadata.ktx
     sha256: da74ead1bac6259a5110e8cbcd85610852780cc7b6b6c2c2ae72061c2a28d71f
-    source: KhronosGroup/KTX-Software tests/resources (Git LFS)
-    license: Apache-2.0
     eof: true
     expect:
       endian_ktx.len_key_value_data: 28

@@ -3,8 +3,6 @@ samples:
   - url: https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/plain/regulatory.bin?id=c0b2d4b1b27a10479206b6a48445c0cdbabc1ff5
     sha256: 9c159ea894dcfdfbc6d3c3a5fcbd929c5e96aac09d4d2f455bda34531781455d
     name: regulatory.bin
-    source: wireless-regdb (git.kernel.org, pinned commit c0b2d4b1)
-    license: ISC
     expect:
       version: 19
       states_count: 182

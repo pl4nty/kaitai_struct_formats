@@ -4,8 +4,6 @@ samples:
   - url: https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/mediatek/mt7662.bin?id=9a364ea424155016663bfddcb37a64af4a1fb927
     sha256: f7e52492f58088cae50e51a54cca68e4abc5b74f7d0b6b731dbb4c04465a94b6
     name: mt7662.bin
-    source: linux-firmware mediatek/mt7662.bin (MT7612/MT7662 Wi-Fi, mt76x2 driver)
-    license: LicenseRef-ralink_a_mediatek_company_firmware (redistributable)
     eof: true
     expect:
       image_header.ilm_len: 64448
@@ -14,8 +12,6 @@ samples:
   - url: https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/mediatek/mt7610u.bin?id=9a364ea424155016663bfddcb37a64af4a1fb927
     sha256: 5a4268e9021bb587426ba624b425f1e660bfc82cd63b36ad3ce6fb9ce6751760
     name: mt7610u.bin
-    source: linux-firmware mediatek/mt7610u.bin (MT7610U USB Wi-Fi, mt76x0 driver)
-    license: LicenseRef-ralink_a_mediatek_company_firmware (redistributable)
     eof: true
     expect:
       image_header.ilm_len: 68780

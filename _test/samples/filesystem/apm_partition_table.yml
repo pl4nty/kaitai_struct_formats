@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/log2timeline/dfvfs/bf5d2fd3131646306507490d0389783d69b57676/test_data/apm.dmg
     sha256: 897f487f4971e72c762e00460935e3b25176cda35620b508b490f65a7e0118ff
-    source: dfVFS test data
-    license: Apache-2.0
     expect:
       partition_lookup.number_of_partitions: 3
       partition_lookup.partition_type: Apple_partition_map

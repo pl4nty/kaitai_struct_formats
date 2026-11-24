@@ -4,8 +4,6 @@ samples:
   - url: https://raw.githubusercontent.com/linuxhw/EDID/9c0c1bffc9c0f1cb2044115149a5ecb1652803f8/Digital/Dell/DELA0A1/DD62185FBFC7
     sha256: 76b119d5cbd9df512a50a570bbab9b33574d94f8a91910679bf567fcd1b4acd4
     name: DELL-E2214Hv-DD62185FBFC7
-    source: linuxhw/EDID (Dell E2214Hv, digital)
-    license: CC-BY-4.0
     extract: { format: slice, offset: 20, size: 384, then: { format: hex } }
     eof: true
     expect:
@@ -17,8 +15,6 @@ samples:
   - url: https://raw.githubusercontent.com/linuxhw/EDID/9c0c1bffc9c0f1cb2044115149a5ecb1652803f8/Analog/Dell/DELA007/0D35D05A6269
     sha256: 815a8178cf6935749d216d0273b9e1eed6eaee5accf135e52dde4e0c4d41f098
     name: DELL-2001FP-0D35D05A6269
-    source: linuxhw/EDID (Dell 2001FP, analog input)
-    license: CC-BY-4.0
     extract: { format: slice, offset: 20, size: 384, then: { format: hex } }
     eof: true
     expect:

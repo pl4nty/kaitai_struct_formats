@@ -2,7 +2,6 @@ samples:
   - url: https://archive.org/download/FalloutDemo/falldemo.zip/falldemo%2FFalldemo.dat
     sha256: fc6777ba24f1243f17b93e4d17d3b341ceffefb8c98d6ab07097e29978a95e01
     name: Falldemo.dat
-    source: Fallout (1997) Interplay demo, archive.org item FalloutDemo, zip member falldemo/Falldemo.dat (22 MB); proprietary, linked not vendored. Header and first folder struct-decoded (big-endian) per the Fallout 1 DAT layout on the Vault/fodev wikis
     expect:
       folder_count: 29
       folder_names[1].str: ART\BACKGRND

@@ -1,8 +1,6 @@
 samples:
   - url: https://sembiance.com/fileFormatSamples/archive/starWarsBattlefrontGameDataArchive/gt1jn.lvl
     sha256: 601ebe6680c873111b5492d3a6144a50e803eed8bafe4e64b590a3fbd6e7c115
-    source: telparia fileFormatSamples (starWarsBattlefrontGameDataArchive), SWBF munged level (values from od hex dump; first child chunk is lvl_)
-    license: Star Wars Battlefront game/mod data (not freely licensed)
     eof: true
     expect:
       len_body: 1721212

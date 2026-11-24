@@ -1,13 +1,9 @@
 samples:
   - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/mifare-1k.hexpat.bin
     sha256: 6fbd01d7df176ce9b5a5d6d1ee0f667ec038ecbd93eab86fdb07b8507664ca51
-    source: ImHex-Patterns test data
-    license: GPL-2.0 (repository licence)
     expect:
       len(sectors): 16
   - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/mifare-4k.hexpat.bin
     sha256: 3d370822344c8b52944e04e539549e96112e9a91086cced70e1d65ad4ac23b2e
-    source: ImHex-Patterns test data
-    license: GPL-2.0 (repository licence)
     expect:
       len(sectors): 40

@@ -1,7 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/resources/universal-mod/res-unpacked/databaseadb_res/unanhoco.adb
     sha256: 8d5840e059fc7cb3765b7ccf4f0374471a42ee406746a7f00315052851b1bdc0
-    source: Kyr4l/ei-universal-mod (unpacked vanilla Evil Islands databaseadb.res member; proprietary, linked not vendored); header struct-decoded, 660 = 44 + 7*88 per aspadm/EIrepack wiki
     eof: true
     expect:
       num_animations: 7
@@ -9,7 +8,6 @@ samples:
       'animations[0].name.rstrip("\x00")': udeath
   - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/resources/universal-mod/res-unpacked/databaseadb_res/unanwiba.adb
     sha256: 26ecdc6cf8d460b1562c90e2b5bd766b3ae4f2c5a25803c7583c5cb235d9c94c
-    source: Kyr4l/ei-universal-mod (unpacked vanilla databaseadb.res member)
     eof: true
     expect:
       num_animations: 6

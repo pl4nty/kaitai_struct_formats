@@ -8,8 +8,6 @@ samples:
   - url: https://raw.githubusercontent.com/syssi/esphome-jbd-bms/a2a3bbf4871c1bc94174782d62189e219db9295c/docs/pdus/JBD-SP04S034-L4S-200A-B-U.txt
     sha256: da3b83037a4f802789d0cc4dde77e19111556e56de9f8922884d3bce8a5e70eb
     name: jbd-read-basic-info-request
-    source: syssi/esphome-jbd-bms docs/pdus/JBD-SP04S034-L4S-200A-B-U.txt line 1 (request)
-    license: Apache-2.0
     extract: { format: slice, offset: 4, size: 20, then: { format: hex } }
     eof: true
     expect:
@@ -20,8 +18,6 @@ samples:
   - url: https://raw.githubusercontent.com/syssi/esphome-jbd-bms/a2a3bbf4871c1bc94174782d62189e219db9295c/docs/pdus/JBD-SP04S034-L4S-200A-B-U.txt
     sha256: da3b83037a4f802789d0cc4dde77e19111556e56de9f8922884d3bce8a5e70eb
     name: jbd-basic-info-response
-    source: syssi/esphome-jbd-bms docs/pdus/JBD-SP04S034-L4S-200A-B-U.txt line 1 (response)
-    license: Apache-2.0
     extract: { format: slice, offset: 29, size: 107, then: { format: hex } }
     eof: true
     expect:
@@ -36,8 +32,6 @@ samples:
   - url: https://raw.githubusercontent.com/syssi/esphome-jbd-bms/a2a3bbf4871c1bc94174782d62189e219db9295c/docs/pdus/JBD-SP04S034-L4S-200A-B-U.txt
     sha256: da3b83037a4f802789d0cc4dde77e19111556e56de9f8922884d3bce8a5e70eb
     name: jbd-cell-voltages-response
-    source: syssi/esphome-jbd-bms docs/pdus/JBD-SP04S034-L4S-200A-B-U.txt line 3 (response)
-    license: Apache-2.0
     extract: { format: slice, offset: 303, size: 44, then: { format: hex } }
     eof: true
     expect:
@@ -48,8 +42,6 @@ samples:
   - url: https://raw.githubusercontent.com/syssi/esphome-jbd-bms/a2a3bbf4871c1bc94174782d62189e219db9295c/docs/pdus/JBD-SP04S034-L4S-200A-B-U.txt
     sha256: da3b83037a4f802789d0cc4dde77e19111556e56de9f8922884d3bce8a5e70eb
     name: jbd-hardware-response
-    source: syssi/esphome-jbd-bms docs/pdus/JBD-SP04S034-L4S-200A-B-U.txt line 5 (response)
-    license: Apache-2.0
     extract: { format: slice, offset: 451, size: 95, then: { format: hex } }
     eof: true
     expect:

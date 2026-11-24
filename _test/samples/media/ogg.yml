@@ -2,16 +2,12 @@
 samples:
   - url: https://raw.githubusercontent.com/quodlibet/mutagen/48b3463d0ed70ba2b797ac9cc83983066ecf076a/tests/data/multipagecomment.ogg
     sha256: 9213c263965b54d539a9033aad60c17ab4427312aac3a3c9db4202cb75b8df75
-    source: mutagen tests/data (Vorbis)
-    license: GPL-2.0-or-later
     eof: true
     expect:
       len(pages): 34
       pages[0].bitstream_serial: 1002429366
   - url: https://raw.githubusercontent.com/quodlibet/mutagen/48b3463d0ed70ba2b797ac9cc83983066ecf076a/tests/data/sample.oggtheora
     sha256: 2b46769d223db23cf14e1924e39c69c2c0ddd125ce9bfe32f4ead43ff8c119b0
-    source: mutagen tests/data (Theora)
-    license: GPL-2.0-or-later
     eof: true
     expect:
       len(pages): 14

@@ -1,7 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/mrdoob/three.js/6d91309bfcf9c2779f32dd98b61fcc5415a74912/examples/models/md2/ogro/ogro.md2
     sha256: 281523ecd28a072e210e313c2873d1ddb84cb72ecf1ab38bc9f677e007fd368b
-    source: three.js example models (values from struct-decoded header)
     expect:
       version: 8
       num_frames: 199
@@ -9,7 +8,6 @@ samples:
       vertices_per_frame: 358
   - url: https://raw.githubusercontent.com/mrdoob/three.js/6d91309bfcf9c2779f32dd98b61fcc5415a74912/examples/models/md2/ratamahatta/w_bfg.md2
     sha256: fb7820d5cf14409490411a2682af87009eda72d94720f2db423fefa2fbee0460
-    source: three.js example models (values from struct-decoded header)
     expect:
       skin_width_px: 308
       num_frames: 198

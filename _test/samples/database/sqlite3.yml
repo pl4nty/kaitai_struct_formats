@@ -1,7 +1,5 @@
 samples:
 - url: https://raw.githubusercontent.com/apache/tika/39d27b43befe2776ec17137c51dfafd1ab5bc42d/tika-parsers/tika-parsers-extended/tika-parser-sqlite3-module/src/test/resources/test-documents/testSQLITE3.db
   sha256: d975ae56a2d2c2dea5170941b4509eda3b4a7ad6b0f49e7960e444275c992d37
-  source: Apache Tika test documents
-  license: Apache-2.0
   expect:
     header.page_size: 1024

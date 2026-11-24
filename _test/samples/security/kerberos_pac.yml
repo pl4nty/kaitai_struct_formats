@@ -4,8 +4,6 @@ samples:
   - url: https://raw.githubusercontent.com/jcmturner/gokrb5/855dbc707a37a21467aef6c0245fcf3328dc39ed/test/testdata/test_vectors.go
     sha256: fb2ed1a3089aa99a0a46b7d728cca6f31c5e35dddc287f1ac0278a8de7b6cca3
     name: gokrb5_MarshaledPAC_AD_WIN2K_PAC
-    source: gokrb5 test vectors, MarshaledPAC_AD_WIN2K_PAC (PAC from a Windows KDC, TEST.GOKRB5 realm)
-    license: Apache-2.0
     extract: { format: slice, offset: 31753, size: 1600, then: { format: hex } }
     expect:                                  # header walked by hand per MS-PAC 2.3/2.4
       pac.c_buffers: 5
@@ -15,8 +13,6 @@ samples:
   - url: https://raw.githubusercontent.com/jcmturner/gokrb5/855dbc707a37a21467aef6c0245fcf3328dc39ed/test/testdata/test_vectors.go
     sha256: fb2ed1a3089aa99a0a46b7d728cca6f31c5e35dddc287f1ac0278a8de7b6cca3
     name: gokrb5_MarshaledPAC_AuthorizationData_MS
-    source: gokrb5 test vectors, PAC inside MarshaledPAC_AuthorizationData_MS (MS-PAC sample; the ASN.1 AD-IF-RELEVANT wrapper is sliced off)
-    license: Apache-2.0
     extract: { format: slice, offset: 24835, size: 2688, then: { format: hex } }
     expect:
       pac.c_buffers: 4
@@ -27,8 +23,6 @@ samples:
   - url: https://raw.githubusercontent.com/jcmturner/gokrb5/855dbc707a37a21467aef6c0245fcf3328dc39ed/test/testdata/test_vectors.go
     sha256: fb2ed1a3089aa99a0a46b7d728cca6f31c5e35dddc287f1ac0278a8de7b6cca3
     name: gokrb5_MarshaledPAC_Kerb_Validation_Info_MS
-    source: gokrb5 test vectors, MarshaledPAC_Kerb_Validation_Info_MS (bare KERB_VALIDATION_INFO, no PACTYPE header)
-    license: Apache-2.0
     extract: { format: slice, offset: 27571, size: 2400, then: { format: hex } }
     expect:
       pac.direct_logon_info.logon_count: 4180      # gokrb5 kerb_validation_info_test.go

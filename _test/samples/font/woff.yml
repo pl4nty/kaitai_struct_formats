@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/fonts/chromacheck-sbix.woff
     sha256: f3fc6bc76fb5c99ef09498a0b77537789d7e6d4100311e6597e8f8851a5a7206
-    source: Pillow test fonts (values from header bytes)
-    license: MIT-CMU
     eof: true
     expect:
       preheader.len_file: 740

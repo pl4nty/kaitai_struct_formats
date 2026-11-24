@@ -4,7 +4,6 @@
 samples:
   - url: https://raw.githubusercontent.com/assimp/assimp/93fe5d82fb206e850a21809bf45800ae00b17fc7/test/models-nonbsd/MMD/Alicia_blade.pmx
     sha256: 90fe040b70cead1f0c73d9c304f6d61f5c1e8189a2643e88b9170b435b9c77d5
-    source: assimp test/models-nonbsd/MMD/Alicia_blade.pmx (dwango Niconi Rittai-chan; see readme.txt beside it, not BSD-licensed)
     eof: true
     xfail: header.model_name (type text) switches on _root.header.encoding while header is still being parsed, so _root.header is not yet assigned (fails for every file); should use _parent.encoding or a param
     expect:

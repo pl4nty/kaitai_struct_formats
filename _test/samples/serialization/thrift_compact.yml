@@ -5,7 +5,6 @@ samples:
   - url: https://wiki.wireshark.org/uploads/c5eb22240c76f97801c6120017196bcd/jaeger-compact.pcap
     sha256: 24bc545d19723d94a54fb2127ced8d2e97ba9b9f32c20db315ad4b9cc94c586e
     name: jaeger-compact-frame1
-    source: Wireshark SampleCaptures (Thrift), frame 1 UDP payload
     extract:
       format: gzip
       then: { format: slice, offset: 82, size: 4894 }
@@ -20,7 +19,6 @@ samples:
   - url: https://wiki.wireshark.org/uploads/c5eb22240c76f97801c6120017196bcd/jaeger-compact.pcap
     sha256: 24bc545d19723d94a54fb2127ced8d2e97ba9b9f32c20db315ad4b9cc94c586e
     name: jaeger-compact-frame2
-    source: Wireshark SampleCaptures (Thrift), frame 2 UDP payload
     extract:
       format: gzip
       then: { format: slice, offset: 5034, size: 4280 }

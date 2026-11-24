@@ -1,6 +1,4 @@
 samples:
   - url: https://raw.githubusercontent.com/GPSBabel/gpsbabel/1d6a0626bc003cfb2519a0f9b864bf944db34ffe/reference/track/energympro.cpo
     sha256: 8580a11314eb7ee981a8dbbfe612c4e44a5facbcc9dc176e9aee54b5fb8564e5
-    source: GPSBabel 1.5.4 reference test data (expected output reference/track/energympro.gpx)
-    license: GPL-2.0-or-later
     xfail: footer is 78 bytes in gpsbabel's tw_workout (17 reserved bytes after VersionVerNum), but the spec's footer is 61 bytes, so point_count/lap_count are read from the wrong offset

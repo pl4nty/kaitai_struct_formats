@@ -1,8 +1,6 @@
 samples:
   - url: https://raw.githubusercontent.com/zeldamods/aamp/abed50947491ef47714c6e3dd9a715b85070d243/test_data/master_field.bksky
     sha256: 79fe2c1f6912f377cae8fd88d5c77d44f0fb96079ff87f5e3dc7902935160674
-    source: zeldamods/aamp test data (header values struct-decoded per zeldamods.org/wiki/AAMP#Header)
-    license: MIT
     expect:
       header.version: 2
       header.file_size: 352
@@ -10,8 +8,6 @@ samples:
       header.num_parameters: 21
   - url: https://raw.githubusercontent.com/zeldamods/aamp/abed50947491ef47714c6e3dd9a715b85070d243/test_data/DamageReactionTable.bxml
     sha256: 1187960f3fbdfcb241844a7b0345063cd5c5169d18d973d2fcc719a520e4c6ed
-    source: zeldamods/aamp test data (header values struct-decoded per zeldamods.org/wiki/AAMP#Header)
-    license: MIT
     eof: true
     expect:
       header.file_size: 2052

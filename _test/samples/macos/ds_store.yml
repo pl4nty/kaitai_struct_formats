@@ -2,7 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/gehaxelt/Python-dsstore/859781b834244774cb509e96ccc29ee646f72739/samples/.DS_Store.ctf
     sha256: 427f5653283f581d0fc98b9147c1e6296620cd25c170f3143f76cde78d3c1087
     name: DS_Store.ctf
-    source: Python-dsstore sample
     expect:
       buddy_allocator_header.magic: Bud1
       buddy_allocator_header.ofs_bookkeeping_info_block: 4096

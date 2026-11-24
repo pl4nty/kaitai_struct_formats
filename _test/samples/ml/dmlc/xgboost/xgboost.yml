@@ -3,8 +3,6 @@
 samples:
   - url: https://raw.githubusercontent.com/dmitryikh/leaves/25d19a787328d95da30a16e531808c0e1f0f7237/testdata/xgagaricus.model
     sha256: 41c0910698464a233410b10150242c7f8b287e5be2a6c228ced342526f229505
-    source: dmitryikh/leaves testdata (agaricus demo, binary:logistic, max_depth 2, 3 rounds)
-    license: MIT
     eof: true
     expect:
       name_obj_.str: binary:logistic
@@ -12,8 +10,6 @@ samples:
       len(gbm_.trees): 3
   - url: https://raw.githubusercontent.com/dmitryikh/leaves/25d19a787328d95da30a16e531808c0e1f0f7237/testdata/xgdermatology.model
     sha256: e1db768ace0e4131e436bc0de3bfb16f0f8f53b0e680ea2338863ee448c8e0d7
-    source: dmitryikh/leaves testdata (dermatology, multi:softmax, num_class 6, 5 rounds)
-    license: MIT
     eof: true
     expect:
       name_obj_.str: multi:softmax
@@ -21,8 +17,6 @@ samples:
       len(gbm_.trees): 30
   - url: https://raw.githubusercontent.com/dmitryikh/leaves/25d19a787328d95da30a16e531808c0e1f0f7237/testdata/xgblin_agaricus.model
     sha256: dab9a0173b082f2dfc6a3ecfb597a8ebbe7a56fc0d3de695d83bbec311d54da9
-    source: dmitryikh/leaves testdata (agaricus, gblinear booster)
-    license: MIT
     eof: true
     expect:
       name_gbm_.str: gblinear

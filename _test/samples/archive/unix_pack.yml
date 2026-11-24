@@ -2,19 +2,16 @@
 samples:
   - url: https://sembiance.com/fileFormatSamples/archive/pack/xsnow.z
     sha256: 648246cbd757f3850508425b87572da64c04eb3098ab04587cb9f17f3bd28ac0
-    source: telparia fileFormatSamples (sembiance.com), archive/pack
     eof: true
     expect:
       len_uncompressed: 11758
   - url: https://sembiance.com/fileFormatSamples/archive/pack/permlint.SMT.z
     sha256: fa45b023e8179447b4e4c1b17a0d9a6f35b248b17a63aa61083384f78b2cee6d
-    source: telparia fileFormatSamples (sembiance.com), archive/pack
     eof: true
     expect:
       len_uncompressed: 1572
   - url: https://sembiance.com/fileFormatSamples/archive/pack/test_C1_pack.z
     sha256: 6afba1d98c7e1acce43733364b17750a0f73f1bd57eecac59b9b3d52e2d156ad
-    source: telparia fileFormatSamples (sembiance.com), archive/pack
     eof: true
     expect:
       len_uncompressed: 152089

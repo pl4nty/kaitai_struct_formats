@@ -6,7 +6,6 @@ samples:
     num_digits: '4'
     bits_per_digit: '4'
     is_le: 'False'
-  source: packed BCD of 1234
   expect:
     as_int: 1234
 - name: packed-le
@@ -15,7 +14,6 @@ samples:
     num_digits: '4'
     bits_per_digit: '4'
     is_le: 'True'
-  source: packed BCD, least significant digit first
   expect:
     as_int: 4321
 - name: unpacked-be
@@ -24,6 +22,5 @@ samples:
     num_digits: '2'
     bits_per_digit: '8'
     is_le: 'False'
-  source: unpacked BCD of 97
   expect:
     as_int: 97

@@ -2,8 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/someip_sd_coverage.pcap.gz
     sha256: 8fee5080081039ca546c0b943d481e5700e68d3ab8cf0ab04387dd1a08e920f1
     name: someip_sd_coverage-udp0
-    source: Wireshark test captures, UDP payload of frame 1
-    license: GPL-2.0-or-later
     extract: {format: gzip, then: {format: slice, offset: 82, size: 76}}
     eof: true
     expect:

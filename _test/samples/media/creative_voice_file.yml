@@ -1,7 +1,6 @@
 samples:
   - url: https://samples.ffmpeg.org/voc/pcm_u8_1/30smthg1.voc
     sha256: 31eb54b542b037d48c09a6672d54dfa8a141eff2fbc21d6e967faf28aaae6f60
-    source: samples.ffmpeg.org; expects from ffprobe (pcm_u8) and a manual header read
     eof: true
     expect:
       header_size: 26
@@ -10,7 +9,6 @@ samples:
       blocks[0].body.codec: pcm_8bit_unsigned
   - url: https://fate-suite.ffmpeg.org/creative/BBC_4BIT.VOC
     sha256: 8c5e4f00d31ee6320ba17e68434f46fa5eaa30ff51f1c8389ecfbebb416f6433
-    source: FFmpeg FATE suite; expects from ffprobe (adpcm_sbpro_4) and a manual header read
     eof: true
     expect:
       version: 0x010a
@@ -18,7 +16,6 @@ samples:
       blocks[0].body.codec: adpcm_4bit
   - url: https://samples.ffmpeg.org/A-codecs/libsndfile-samples/voc-pcm16.voc
     sha256: 8d2c3e5acf1db09d7b35da1e4b723328c36ce35aee7fe99d9d8fa4ad22d878dc
-    source: samples.ffmpeg.org (written by libsndfile); expects from ffprobe (pcm_s16le, 11025 Hz) and a manual header read
     eof: true
     expect:
       version: 0x0114

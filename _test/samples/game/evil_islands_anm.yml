@@ -2,7 +2,6 @@ samples:
   - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/extra-assets/reference-assets/cotls-vanilla/figures_res/unanhoco.anm
     sha256: b745539cb4c2b3b1964c0d17186264bb00e08ad108e46e0202a2f1b229a66b17
     name: unanhoco-cidle01-tl5.anm
-    source: Kyr4l/ei-universal-mod (Evil Islands mod repo; vanilla game asset, proprietary, linked not vendored); the game's .anm is a nested RES archive, sliced to member cidle01/tl5 (outer entry at 16, inner entry at 33504, 1444 bytes); values struct-decoded per aspadm/EIrepack wiki
     extract: { format: slice, offset: 33520, size: 1444 }
     expect:
       num_rotation_frames: 51

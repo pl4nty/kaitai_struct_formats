@@ -6,7 +6,6 @@ samples:
   - url: https://raw.githubusercontent.com/cfig/android_image_res/24b0660fb6859fe738599b1e0a1faf1aa9381613/10.0.0_coral-qq1d.200205.002/dtbo.img.xz
     sha256: d13b811f3d58049fb5e646c40fe8495754a55b2a69085568bfe9a6c71fda3fc7
     name: coral-qq1d.200205.002-dtbo.img
-    source: cfig/android_image_res (Pixel 4 XL "coral" Android 10 factory image)
     extract: { format: xz }
     expect:
       header.total_size: 3245425
@@ -16,7 +15,6 @@ samples:
   - url: https://raw.githubusercontent.com/cfig/android_image_res/24b0660fb6859fe738599b1e0a1faf1aa9381613/9.0.0_blueline_pq1a.181105.017.a1/dtbo.img.xz
     sha256: 8ed56ec0b862442291494148ab5623d197f7fe21e688a327142056c360223aad
     name: blueline-pq1a.181105.017.a1-dtbo.img
-    source: cfig/android_image_res (Pixel 3 "blueline" Android 9 factory image; xz of a tar holding dtbo.img)
     extract: { format: xz, then: { format: tar, member: dtbo.img } }
     expect:
       header.total_size: 1745520

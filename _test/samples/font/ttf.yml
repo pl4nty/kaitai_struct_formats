@@ -2,29 +2,21 @@
 samples:
   - url: https://raw.githubusercontent.com/fonttools/fonttools/f3f799e1b6c090096d7dc9a6ca22f26dd25a4c81/Tests/ttLib/data/I.ttf
     sha256: 7e6a7be1269a608c3cf847cb174dd0b17a82f8f4993a3571f43bff38a85244a6
-    source: fontTools Tests/ttLib/data
-    license: MIT
     expect:
       offset_table.num_tables: 20
       "[t.value.num_glyphs for t in directory_table if t.tag == 'maxp'][0]": 2
       "[t.value.units_per_em for t in directory_table if t.tag == 'head'][0]": 2048
   - url: https://raw.githubusercontent.com/fonttools/fonttools/f3f799e1b6c090096d7dc9a6ca22f26dd25a4c81/Tests/qu2cu/data/NotoSansArabic-Regular.quadratic.subset.ttf
     sha256: 210685eb80b08599b12395965fadfb4c0e1ff57becbb8c3a9666f529603692e4
-    source: fontTools Tests/qu2cu/data (Noto subset)
-    license: OFL-1.1
     expect:
       offset_table.num_tables: 13
       "[t.value.num_glyphs for t in directory_table if t.tag == 'maxp'][0]": 12
   - url: https://raw.githubusercontent.com/fonttools/fonttools/f3f799e1b6c090096d7dc9a6ca22f26dd25a4c81/Tests/ttx/data/TestTTF.ttf
     sha256: c4e8ce309f44a131d061d73b2580e922a7f5ecc8d7109797ac0ff58bf8723b7b
-    source: fontTools Tests/ttx/data
-    license: MIT
     expect:
       offset_table.num_tables: 15
   - url: https://raw.githubusercontent.com/fonttools/fonttools/f3f799e1b6c090096d7dc9a6ca22f26dd25a4c81/Tests/ttLib/data/Test-Regular.ttf
     sha256: da663703b00ed25ff8f29987a5a75dc9d2992ea9db9af914a3019ef3ba73dfe7
-    source: fontTools Tests/ttLib/data
-    license: MIT
     expect:
       offset_table.num_tables: 13
       "[t.value.num_glyphs for t in directory_table if t.tag == 'maxp'][0]": 54

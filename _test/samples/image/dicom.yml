@@ -1,19 +1,13 @@
 samples:
 - url: https://raw.githubusercontent.com/pydicom/pydicom/1ae0656114959d072cf9f4abe990db973e397355/src/pydicom/data/test_files/CT_small.dcm
   sha256: 3dd31e5cc835b3f2cdd46c9da1982f59251e78518fefa8163d914631c66437d6
-  source: pydicom test files
-  license: see pydicom test_files README (public test data)
   expect:
     file_header.magic: DICM
 - url: https://raw.githubusercontent.com/pydicom/pydicom/1ae0656114959d072cf9f4abe990db973e397355/src/pydicom/data/test_files/MR_small.dcm
   sha256: 3f27d1c22f1a66e80d7bb7c911e8610fd0bb70325a76746a7adb1c0ddefcf2bb
-  source: pydicom test files
-  license: see pydicom test_files README (public test data)
   expect:
     file_header.magic: DICM
 - url: https://raw.githubusercontent.com/pydicom/pydicom/1ae0656114959d072cf9f4abe990db973e397355/src/pydicom/data/test_files/rtplan.dcm
   sha256: 18585dbbd6f7c5d1b7e749d6976d72251802ad89d65bccd31c03006f95aab89b
-  source: pydicom test files
-  license: see pydicom test_files README (public test data)
   expect:
     file_header.magic: DICM

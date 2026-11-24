@@ -1,14 +1,12 @@
 samples:
   - url: https://raw.githubusercontent.com/hothgremlin/civ5maps/6403e78b65d4d5c8e1722fbe01142fb524025fdb/RushToCrimea.Civ5Map
     sha256: 2ac03701cd040d544fffdb2433b05af40cecaabef35c97ff84312526b143c002
-    source: hothgremlin/civ5maps (version nibble and width/height struct-decoded per civfanatics format thread)
     expect:
       header.version: 12
       header.width: 60
       header.height: 40
   - url: https://raw.githubusercontent.com/hothgremlin/civ5maps/6403e78b65d4d5c8e1722fbe01142fb524025fdb/Sinjar.Civ5Map
     sha256: 7157b695fb4e58505627dd158c165febd9668a9eb719f8a2712d1ab0cef4682b
-    source: hothgremlin/civ5maps (width/height struct-decoded)
     expect:
       header.width: 40
       header.height: 26

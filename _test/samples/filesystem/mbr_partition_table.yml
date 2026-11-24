@@ -1,16 +1,12 @@
 samples:
   - url: https://raw.githubusercontent.com/log2timeline/dfvfs/bf5d2fd3131646306507490d0389783d69b57676/test_data/mbr.raw
     sha256: 94e2ddff3cae988c24ccb04f5e8302d161b4195a1e6ff60084225c44fb6076ba
-    source: dfVFS test data
-    license: Apache-2.0
     expect:
       partitions[0].partition_type: 0x83
       partitions[0].lba_start: 1
       partitions[1].partition_type: 0x05   # extended
   - url: https://raw.githubusercontent.com/ReFirmLabs/binwalk/26713972e3f9f52dc37d4a421c4554b0bd9e82ef/tests/inputs/mbr.bin
     sha256: a4c5f0e4b653cf1c224d62cd8420757543161b73c996efbeda654ae7df2ef09a
-    source: binwalk test inputs
-    license: MIT
     expect:
       partitions[0].partition_type: 0x83
       partitions[0].num_sectors: 9

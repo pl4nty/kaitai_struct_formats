@@ -4,8 +4,6 @@ samples:
   - url: https://repo.maven.apache.org/maven2/joda-time/joda-time/2.12.7/joda-time-2.12.7.jar
     sha256: 385282b005818cfaccdbe8bd2429811e7e641782f2b88932a6b8ff51d668f616
     name: Europe_London
-    source: Joda-Time 2.12.7 jar from Maven Central, member org/joda/time/tz/data/Europe/London
-    license: Apache-2.0
     extract:
       format: zip
       member: org/joda/time/tz/data/Europe/London
@@ -19,8 +17,6 @@ samples:
   - url: https://repo.maven.apache.org/maven2/joda-time/joda-time/2.12.7/joda-time-2.12.7.jar
     sha256: 385282b005818cfaccdbe8bd2429811e7e641782f2b88932a6b8ff51d668f616
     name: Etc_GMT+5
-    source: Joda-Time 2.12.7 jar from Maven Central, member org/joda/time/tz/data/Etc/GMT+5
-    license: Apache-2.0
     extract:
       format: zip
       member: org/joda/time/tz/data/Etc/GMT+5

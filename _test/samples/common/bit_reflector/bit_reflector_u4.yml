@@ -5,7 +5,6 @@ samples:
   params:
     needed: 'True'
     n: '305419896'
-  source: 'expected value: Python string bit reversal'
   expect:
     value: 510274632
 - name: '0x80000001'
@@ -13,7 +12,6 @@ samples:
   params:
     needed: 'True'
     n: '2147483649'
-  source: 'expected value: Python string bit reversal'
   expect:
     value: 2147483649
 - name: '0xff'
@@ -21,7 +19,6 @@ samples:
   params:
     needed: 'True'
     n: '255'
-  source: 'expected value: Python string bit reversal'
   expect:
     value: 4278190080
 - name: not-needed

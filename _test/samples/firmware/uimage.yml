@@ -4,8 +4,6 @@ samples:
   - url: https://downloads.openwrt.org/releases/23.05.5/targets/ramips/rt305x/openwrt-23.05.5-ramips-rt305x-allnet_all5002-squashfs-sysupgrade.bin
     sha256: 08c5596374a4910f45a284e15bfb7c417615d7ea968069d386efdefe883f7cff
     name: openwrt-rt305x-kernel.uimage
-    source: OpenWrt 23.05.5 release (versioned path; sha256 also in the release sha256sums); kernel uImage sliced off the sysupgrade image
-    license: GPL-2.0 (OpenWrt/Linux)
     extract: { format: slice, offset: 0, size: 1733831 }
     eof: true
     expect:
@@ -19,8 +17,6 @@ samples:
       header.data_crc: 0x2fca77c5
   - url: https://downloads.openwrt.org/releases/23.05.5/targets/kirkwood/generic/openwrt-23.05.5-kirkwood-generic-cloudengines_pogoe02-initramfs-uImage
     sha256: aad03fd52973516df96e46f03be68c23b2d730ca236528e30f606fc80e1d9b27
-    source: OpenWrt 23.05.5 release (versioned path)
-    license: GPL-2.0 (OpenWrt/Linux)
     eof: true
     expect:
       header.len_image: 5030142
