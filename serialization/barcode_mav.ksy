@@ -1,4 +1,5 @@
 # Imported from https://github.com/NeoRail/train-barcode-kaitai-spec/blob/66a13883559fc7de6964570ede9252fa8eadca5a/mav/mav.ksy
+# Envelope signature, enums and field notes from https://github.com/pjuhasz/mav_train_ticket/tree/12bbcf3534f86f7c8acf59029f657630cb06a82f/kaitai
 meta:
   id: barcode_mav
   title: MÁV domestic ticket barcode
@@ -6,7 +7,13 @@ meta:
   encoding: UTF-8
   endian: be
 
-doc: MÁV ticket barcodes versions 4-6.
+doc: |
+  MÁV (Hungarian State Railways) and Volánbusz ticket barcodes, versions
+  4-6 (versions 2 and 3 are also seen in the wild). The barcode is an
+  envelope made of a short header, the compressed ticket data and a
+  trailing digital signature (56 bytes from version 5, 256 bytes before).
+  The pjuhasz/mav_train_ticket decoder describes the compressed blob as
+  gzip; this spec unpacks it with zlib.
 
 seq:
   - id: version
@@ -22,9 +29,12 @@ seq:
     type: str
     if: version > 4
   - id: content
-    size-eos: true
+    size: '_io.size - _io.pos - (version >= 5 ? 56 : 256)'
     type: compressed_content
     process: zlib
+  - id: signature
+    size: 'version >= 5 ? 56 : 256'
+    doc: Digital signature over the barcode contents.
 
 types:
   compressed_content:
@@ -135,11 +145,17 @@ types:
             2: u2
             3: u2
             _: b24
+        doc: Raw value; in versions 2 and 3 this counts days, not minutes.
+    instances:
+      length_minutes:
+        value: '_root.version > 3 ? minutes : minutes * 1440 - 1'
+        doc: Validity length in minutes for all versions.
   trip_block:
     seq:
       - id: ticket_name
         type: u4
-        doc: Mapping of values to actual ticket types is still unknown.
+        enum: ticket_kind
+        doc: Ticket type tag; known values are listed in the enum.
       - id: departure_station
         type: station_id
       - id: destination_station
@@ -152,12 +168,15 @@ types:
         type: station_id
         repeat: expr
         repeat-expr: 15
-      - id: class
+      - id: travel_class
         size: 1
         type: str
       - id: specimen
         type: u1
-        doc: 0x1 for production tickets, 0x0 for specimens
+        doc: |
+          0x1 for production tickets, 0x0 for specimens. The
+          pjuhasz/mav_train_ticket decoder reads this byte as the number of
+          trips instead.
       - id: departure_time
         type: mav_timestamp
       - id: validity_length
@@ -166,6 +185,7 @@ types:
         type: u1
       - id: discount_name
         type: u4
+        enum: discount
 
   supplement_block:
     seq:
@@ -173,11 +193,12 @@ types:
         type: station_id
       - id: destination_station
         type: station_id
-      - id: class
+      - id: travel_class
         size: 1
         type: str
       - id: ticket_name
         type: u4
+        enum: ticket_kind
       - id: valid_from
         type: mav_timestamp
       - id: validity_length
@@ -186,6 +207,7 @@ types:
         type: u1
       - id: discount_name
         type: u4
+        enum: discount
 
   reservation_block:
     seq:
@@ -195,7 +217,8 @@ types:
         type: station_id
       - id: ticket_name
         type: u4
-        doc: Mapping of values to actual ticket types still unknown.
+        enum: ticket_kind
+        doc: Ticket type tag; known values are listed in the enum.
       - id: departure_time
         type: mav_timestamp
       - id: operator
@@ -206,6 +229,7 @@ types:
         type: str
       - id: unknown
         size: 1
+        doc: Number of passengers, according to the pjuhasz/mav_train_ticket decoder.
       - id: coach_number
         size: 3
         type: str
@@ -215,16 +239,22 @@ types:
         type: u2
       - id: reserved
         size: 28
+        doc: |
+          Four more coach/seat ranges of 7 bytes each (coach number, two
+          seat numbers), according to the pjuhasz/mav_train_ticket decoder.
 
   pass_block:
     seq:
       - id: pass_name
         type: u4
-        doc: Mapping of values to actual ticket types still unknown.
+        enum: ticket_kind
+        doc: Pass type tag; known values are listed in the enum.
       - id: discount_name_1
         type: u4
+        enum: discount
       - id: discount_name_2
         type: u4
+        enum: discount
       - id: valid_from
         type: mav_timestamp
       - id: valid_until
@@ -241,3 +271,32 @@ enums:
     0xc785b60c: paper_bkk_pass
     0x338797fe: electronic_pdf_from_web
     0xf8b405cd: thermal_paper_from_ticket_inspector
+    0xbaabd261: hologram_paper_from_volanbusz_driver
+  ticket_kind:
+    0xf1694467: surcharge
+    0x73b2da6d: seat_reservation
+    0x639fe49e: train_ticket
+    0x1271cee2: bike_ticket
+    0xd9338c49: dog_pass
+    0x9364de3e: smart_ticket
+    0x1378587b: x30_day_pass
+    0x294b183d: baz_county_pass
+    0x9b591ad2: budapest_72_hour_pass
+    0xb35523bc: hajdu_bihar_county_pass
+    0x2d31b61f: heves_county_pass
+    0xb438e7a5: nograd_county_pass
+    0x2487fa34: pest_county_pass
+    0xf2afd8fb: pest_county_pass2
+    0x2402e074: all_country_pass
+    0x66e219a3: tram_train_ticket
+    0x9194c6e8: airport_bus_ticket
+  discount:
+    0xd4e77f4b: full_price
+    0x1c89f297: x50pct_start_club_card
+    0xc29c077e: x50pct_by_age
+    0xca918a13: x50pct_by_age2
+    0xc99ee756: x50pct_employee_voucher
+    0x0344c689: x50pct_employee_voucher2
+    0x4f1584ed: pass_full_price
+    0x13213fca: pass_student_id
+    0xffd50016: penalty_fee
