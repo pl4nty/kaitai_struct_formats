@@ -196,10 +196,12 @@ types:
     seq:
       - id: paraptr
         type: u2
+        doc: Parapointer to the pattern; 0 means the pattern is empty and not stored.
     instances:
       body:
         pos: paraptr * 0x10
         type: pattern
+        if: paraptr != 0
   pattern:
     seq:
       - id: size
