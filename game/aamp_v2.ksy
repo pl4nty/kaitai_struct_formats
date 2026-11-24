@@ -78,18 +78,23 @@ seq:
   - id: header
     type: header
     doc-ref: https://zeldamods.org/wiki/AAMP#Header
+  - id: pio_type
+    size: header.pio_offset
+    type: strz
+    encoding: UTF-8
+    doc: Parameter IO type, typically "xml"
   - id: parameter_lists
-    type: parameter_list
+    type: parameter_list(_index)
     repeat: expr
     repeat-expr: header.num_lists
     doc-ref: https://zeldamods.org/wiki/AAMP#Parameter_list
   - id: parameter_objects
-    type: parameter_object
+    type: parameter_object(_index)
     repeat: expr
     repeat-expr: header.num_objects
     doc-ref: https://zeldamods.org/wiki/AAMP#Parameter_object
   - id: parameters
-    type: parameter
+    type: parameter(_index)
     repeat: expr
     repeat-expr: header.num_parameters
     doc-ref: https://zeldamods.org/wiki/AAMP#Parameter
@@ -105,6 +110,13 @@ seq:
     repeat-expr: header.num_unknown_uints
     doc: Purpose is unknown. May be unused.
     doc-ref: https://zeldamods.org/wiki/AAMP#Section_order
+instances:
+  ofs_parameter_lists:
+    value: 0x30 + header.pio_offset
+  ofs_parameter_objects:
+    value: ofs_parameter_lists + 12 * header.num_lists
+  ofs_parameters:
+    value: ofs_parameter_objects + 8 * header.num_objects
 types:
   header:
     seq:
@@ -122,10 +134,14 @@ types:
         doc-ref: https://zeldamods.org/wiki/AAMP#Header
       - id: file_size
         type: u4
-      - id: pio_verision
+      - id: pio_version
         type: u4
       - id: pio_offset
         type: u4
+        doc: |
+          Offset of the root parameter list (the parameter IO), relative to
+          the end of this header (0x30). The parameter IO type string fills
+          the gap.
       - id: num_lists
         type: u4
       - id: num_objects
@@ -139,12 +155,11 @@ types:
       - id: num_unknown_uints
         type: u4
         doc: number of uint32s after the string section
-      - id: pio_type
-        size: 4
-        type: strz
-        encoding: UTF-8
-        doc: typically "xml"
   parameter_list:
+    params:
+      - id: idx
+        type: u4
+        doc: Index of this list in `_root.parameter_lists`
     seq:
       - id: name_crc32
         type: u4
@@ -164,7 +179,32 @@ types:
       - id: num_child_objects
         type: u2
         doc: Number of child objects
+    instances:
+      ofs_start:
+        value: _root.ofs_parameter_lists + 12 * idx
+      ofs_child_lists:
+        value: ofs_start + child_lists_offset * 4
+        doc: Absolute offset of the first child list
+      idx_first_child_list:
+        value: (ofs_child_lists - _root.ofs_parameter_lists) / 12
+        doc: |
+          Index of the first child list in `_root.parameter_lists`; the
+          children are the next `num_child_lists` entries (meaningless when
+          there are none)
+      ofs_child_objects:
+        value: ofs_start + child_objects_offset * 4
+        doc: Absolute offset of the first child object
+      idx_first_child_object:
+        value: (ofs_child_objects - _root.ofs_parameter_objects) / 8
+        doc: |
+          Index of the first child object in `_root.parameter_objects`; the
+          children are the next `num_child_objects` entries (meaningless when
+          there are none)
   parameter_object:
+    params:
+      - id: idx
+        type: u4
+        doc: Index of this object in `_root.parameter_objects`
     seq:
       - id: name_crc32
         type: u4
@@ -178,7 +218,23 @@ types:
       - id: num_child_params
         type: u2
         doc: Number of child parameters
+    instances:
+      ofs_start:
+        value: _root.ofs_parameter_objects + 8 * idx
+      ofs_child_params:
+        value: ofs_start + child_offset * 4
+        doc: Absolute offset of the first child parameter
+      idx_first_child_param:
+        value: (ofs_child_params - _root.ofs_parameters) / 8
+        doc: |
+          Index of the first child parameter in `_root.parameters`; the
+          children are the next `num_child_params` entries (meaningless when
+          there are none)
   parameter:
+    params:
+      - id: idx
+        type: u4
+        doc: Index of this parameter in `_root.parameters`
     seq:
       - id: name_crc32
         type: u4
@@ -193,6 +249,14 @@ types:
         type: b8
         enum: parameter_type
         doc-ref: https://zeldamods.org/wiki/AAMP#ParameterType
+    instances:
+      ofs_start:
+        value: _root.ofs_parameters + 8 * idx
+      ofs_data:
+        value: ofs_start + data_offset * 4
+        doc: |
+          Absolute offset of the value (in the data or string section). For
+          buffer types, the number of elements is the u4 just before it.
 enums:
   parameter_type:
     0:  bool
