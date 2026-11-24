@@ -106,10 +106,15 @@ types:
         pos: symbol_name_table_offset
         type: u4
       symbol_table:
+        doc: |
+          COFF symbol records. `number_of_symbols` counts the 18-byte
+          auxiliary records too, which are read as part of the symbol they
+          follow (see `coff_symbol.aux_symbols`).
         pos: pointer_to_symbol_table
         type: coff_symbol
-        repeat: expr
-        repeat-expr: number_of_symbols
+        repeat: until
+        repeat-until: _io.pos >= symbol_name_table_offset
+        if: number_of_symbols > 0
     enums:
       # Don't forget to update the `machine_type` enum in `executable/uefi_te.ksy` when
       # you modify this one.
@@ -234,6 +239,11 @@ types:
         type: u1
       - id: number_of_aux_symbols
         type: u1
+      - id: aux_symbols
+        size: 18
+        repeat: expr
+        repeat-expr: number_of_aux_symbols
+        doc: Auxiliary symbol records; their layout depends on `storage_class`.
     instances:
       #effective_name:
       #  value: name_zeroes == 0 ? name_from_offset : '"fixme"'
