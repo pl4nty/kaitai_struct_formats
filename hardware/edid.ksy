@@ -129,9 +129,10 @@ types:
 
       - id: year_raw
         type: u1
-        valid:
-          min: 0x10
-          max: 0xff
+        doc: |
+          Year minus 1990. EDID 1.4 requires at least 0x10 (2006), but
+          earlier versions allow any year from 1990, and real EDID 1.3
+          displays use them.
 
     instances:
       model_year_flag:
