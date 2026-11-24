@@ -48,6 +48,14 @@ params:
     doc: |
       Endianness used by this BCD representation. True means little-endian, false is
       for big-endian.
+
+      This is the order of individual digits, not of bytes. With 4 bits
+      per digit, little-endian means that the least significant digit
+      comes first even within a byte (i.e. 1234 is stored as `43 21`).
+      The common "little-endian bytes, big-endian nibbles" layout (1234
+      stored as `34 12`) is not supported by this type; parse each byte
+      as a separate 2-digit big-endian BCD number and combine them
+      instead.
 seq:
   - id: digits
     type:
