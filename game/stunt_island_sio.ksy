@@ -11,7 +11,7 @@ meta:
   id: stunt_island_sio
   title: Stunt Island SLICE point cloud (`.SIO`)
   file-extension: sio
-  license: LicenseRef-All-Rights-Reserved
+  license: MIT OR Apache-2.0
   ks-version: 0.11
   endian: le
 doc: |

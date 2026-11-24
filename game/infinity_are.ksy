@@ -8,7 +8,7 @@ meta:
   id: infinity_are
   title: ARE v1
   file-extension: are
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   ks-version: "0.11"
   endian: le
   bit-endian: le

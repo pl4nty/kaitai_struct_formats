@@ -2,7 +2,7 @@
 meta:
   id: polkadot_metadata_type_fields
   title: MetadataTypeFields
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   imports:
     - polkadot_scale
   endian: le

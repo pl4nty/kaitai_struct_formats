@@ -8,7 +8,7 @@ meta:
   id: infinity_wmp
   title: WMAP v1
   file-extension: wmp
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   ks-version: "0.11"
   endian: le
   bit-endian: le

@@ -8,7 +8,7 @@ meta:
   id: infinity_spl
   title: SPL v1
   file-extension: spl
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   imports:
     - infinity_itm
     - infinity_eff

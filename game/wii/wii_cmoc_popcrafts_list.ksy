@@ -1,11 +1,12 @@
-# Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/channels/check_mii_out/popcrafts_list.ksy
+# Imported from https://github.com/RiiConnect24/Kaitai-Files/blob/86568af7c4f29040c178ab627c68be707a829829/Kaitais/CMOC/popcrafts_list.ksy
+# Modified in https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/channels/check_mii_out/popcrafts_list.ksy
 meta:
   id: wii_cmoc_popcrafts_list
   title: Mii Artisan Rankings
   file-extension:
     - ces
     - dec
-  license: LicenseRef-All-Rights-Reserved
+  license: AGPL-3.0-only
   endian: be
 doc: |
   popcrafts_list holds the top Miis, a category that's selectable through the

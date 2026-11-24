@@ -3,7 +3,7 @@ meta:
   id: qnx_ifs
   title: QNX 6 Image FileSystem (IFS)
   file-extension: ifs
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: le
 
 doc: |

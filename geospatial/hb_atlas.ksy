@@ -3,7 +3,7 @@ meta:
   id: hb_atlas
   title: Harman Becker Orion Atlas Spatial Tile Container
   file-extension: atlas
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: le
 
 doc: |

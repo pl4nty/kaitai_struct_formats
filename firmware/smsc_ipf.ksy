@@ -3,7 +3,7 @@ meta:
   id: smsc_ipf
   title: SMSC MOST Intelligent Network Interface Controller Programming File
   file-extension: ipf
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: be
 doc: SMSC IPF binary container for flashing OS81050/OS81110 MOST bus controllers.
 seq:

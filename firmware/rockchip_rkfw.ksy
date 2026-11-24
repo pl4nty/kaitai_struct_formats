@@ -1,4 +1,5 @@
 # Imported from https://github.com/armijnhemel/binaryanalysis-ng/blob/d72f0d9c5c4e5484878f357d07690e68334365db/src/bang/parsers/firmware/rockchip/rockchip.ksy
+# Upstream meta/license: "BSD" (rkflashtool is BSD-2-Clause)
 meta:
   id: rockchip_rkfw
   title: Rockchip formats

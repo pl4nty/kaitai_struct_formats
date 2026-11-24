@@ -4,7 +4,7 @@ meta:
   title: Torus Games Hunk Archive Container
   application: Torus Games engine (Monster High New Ghoul in School and others)
   file-extension: hnk
-  license: LicenseRef-All-Rights-Reserved
+  license: MIT OR WTFPL
   endian: le
 
 doc: |

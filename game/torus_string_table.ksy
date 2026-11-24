@@ -2,7 +2,7 @@
 meta:
   id: torus_string_table
   title: TSE String Table
-  license: LicenseRef-All-Rights-Reserved
+  license: MIT OR WTFPL
   endian: le
 
 doc: |

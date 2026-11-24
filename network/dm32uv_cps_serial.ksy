@@ -1,4 +1,5 @@
 # Imported from https://github.com/awkaplan/dm32uv-re/blob/024a0a9ad269f725d24534d355b0f5c975ddb292/specs/ksy/cps_serial.ksy
+# Required Notice: Copyright 2026 Alex Kaplan (https://github.com/awkaplan/dm32uv-re)
 # Follows infamy/DM32-Protocol-Spec (github.com/infamy/DM32-Protocol-Spec, MIT License,
 # Copyright (c) 2025 DM-32UV Protocol Documentation Contributors), 03-COMMANDS.md, for the
 # framing, the V-frame table and the session order; no text is copied. Where the stock firmware's

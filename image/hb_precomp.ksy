@@ -3,7 +3,7 @@ meta:
   id: hb_precomp
   title: Harman Becker Precomp Instrument Cluster Graphic
   file-extension: precomp
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: be
 doc: |
   Harman Becker instrument cluster graphics format used in Audi MMI 3G+ HN+ / HN+R

@@ -3,7 +3,7 @@ meta:
   id: hb_fpga
   title: Harman Becker System FPGA Bitstream Container
   file-extension: hbbin
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: le
 doc: |
   Harman Becker tagged chunk container encapsulating Xilinx FPGA bitstream

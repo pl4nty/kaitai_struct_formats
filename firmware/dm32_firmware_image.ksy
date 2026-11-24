@@ -1,4 +1,5 @@
 # Imported from https://github.com/awkaplan/dm32uv-re/blob/024a0a9ad269f725d24534d355b0f5c975ddb292/specs/ksy/dm32_firmware_image.ksy
+# Required Notice: Copyright 2026 Alex Kaplan (https://github.com/awkaplan/dm32uv-re)
 meta:
   id: dm32_firmware_image
   title: Baofeng DM-32UV program-flash image (HR_C7000 SoC, firmware DM32.00.01.048)

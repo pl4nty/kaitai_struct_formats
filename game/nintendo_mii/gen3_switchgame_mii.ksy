@@ -1,5 +1,6 @@
 # Imported from https://github.com/TheGreatRambler/Mii_to_UMii/blob/64caebae9613dcca464d38709ade7c510caa5bb0/ksy/gen3_switchgame.ksy
 # Field names for the former unknown bytes from https://github.com/WiiLink24/MiiContestChannelServer/blob/HEAD/mii/gen3_switchgame.ksy
+# Portions Copyright (c) 2024, WiiLink (BSD-2-Clause)
 meta:
   id: gen3_switchgame_mii
   title: Switch game Mii character data

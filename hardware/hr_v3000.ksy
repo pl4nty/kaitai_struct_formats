@@ -1,4 +1,5 @@
 # Imported from https://github.com/awkaplan/dm32uv-re/blob/024a0a9ad269f725d24534d355b0f5c975ddb292/specs/ksy/hr_v3000.ksy
+# Required Notice: Copyright 2026 Alex Kaplan (https://github.com/awkaplan/dm32uv-re)
 meta:
   id: hr_v3000
   title: Hongrui HR_V3000 vocoder, UART control/data frames

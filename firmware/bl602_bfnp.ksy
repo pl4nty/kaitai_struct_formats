@@ -2,7 +2,7 @@
 meta:
   id: bl602_bfnp
   file-extension: bin
-  license: LicenseRef-All-Rights-Reserved
+  license: Apache-2.0
   endian: le
 
 seq:

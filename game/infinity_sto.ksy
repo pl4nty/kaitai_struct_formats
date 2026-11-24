@@ -7,7 +7,7 @@
 meta:
   id: infinity_sto
   file-extension: sto
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   endian: le
   bit-endian: le
 doc: |

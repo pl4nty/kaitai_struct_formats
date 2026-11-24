@@ -1,5 +1,6 @@
 # Imported from https://github.com/TheGreatRambler/Mii_to_UMii/blob/64caebae9613dcca464d38709ade7c510caa5bb0/ksy/gen3_switch.ksy
 # Special type, region and checksum fields from https://github.com/WiiLink24/MiiContestChannelServer/blob/HEAD/mii/gen3_switch.ksy
+# Portions Copyright (c) 2024, WiiLink (BSD-2-Clause)
 meta:
   id: gen3_switch_mii
   title: Switch Mii character data

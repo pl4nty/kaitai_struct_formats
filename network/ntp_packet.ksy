@@ -5,9 +5,15 @@ meta:
   file-extension: ntp
   xref:
     rfc: 5905
-  license: CC0-1.0
+  license: LicenseRef-All-Rights-Reserved
   endian: be
+doc: |
+  NTPv4 packet header (RFC 5905, section 7.3) with optional extension
+  fields (RFC 7822). The optional MAC (key identifier and digest) that may
+  follow the extension fields is not modelled separately.
 
+  This spec originates from an LLM benchmark output
+  (narfindustries/llm-tests-langsec) and was reviewed against RFC 5905.
 seq:
   - id: li_vn_mode
     type: u1

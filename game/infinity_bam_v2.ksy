@@ -8,7 +8,7 @@ meta:
   id: infinity_bam_v2
   title: BAM v2
   file-extension: bam
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   ks-version: "0.11"
   endian: le
 doc: |

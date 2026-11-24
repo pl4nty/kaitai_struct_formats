@@ -3,7 +3,7 @@ meta:
   id: adi_ldr
   title: Analog Devices Blackfin DSP Loader Executable
   file-extension: ldr
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: le
 doc: Analog Devices VisualDSP++ LDR boot stream format for ADSP-BF5xx Blackfin DSPs.
 seq:

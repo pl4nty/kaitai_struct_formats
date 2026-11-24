@@ -3,7 +3,7 @@ meta:
   id: mapstyle_xar
   title: Harman / Elektrobit MapStyles Regional Archive
   file-extension: xar
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: le
 doc: |
   Harman / Elektrobit regional map styling archive container used in Audi MMI 3G+

@@ -2,7 +2,7 @@
 meta:
   id: torus_texture_header
   title: TSE Texture Header (PC, Little Endian)
-  license: LicenseRef-All-Rights-Reserved
+  license: MIT OR WTFPL
   endian: le
 
 doc: |

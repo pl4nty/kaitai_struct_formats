@@ -8,7 +8,7 @@ meta:
   id: infinity_dlg
   title: DLG v1
   file-extension: dlg
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   ks-version: "0.11"
   endian: le
   bit-endian: le

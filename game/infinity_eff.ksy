@@ -9,7 +9,7 @@ meta:
   id: infinity_eff
   title: EFF v1 and v2
   file-extension: eff
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   ks-version: "0.11"
   endian: le
   bit-endian: le

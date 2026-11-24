@@ -2,7 +2,7 @@
 meta:
   id: polkadot_scale
   title: Simple Concatenated Aggregate Little-Endian
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   endian: le
   bit-endian: be
 types:

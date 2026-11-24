@@ -9,7 +9,7 @@ meta:
   id: stunt_island_map
   title: Stunt Island terrain patch table (`MAP.BIN`)
   file-extension: bin
-  license: LicenseRef-All-Rights-Reserved
+  license: MIT OR Apache-2.0
   ks-version: 0.11
   endian: le
 doc: |

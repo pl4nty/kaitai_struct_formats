@@ -2,7 +2,7 @@
 meta:
   id: torus_font_descriptor
   title: TSE Font Descriptor (PC, Little Endian)
-  license: LicenseRef-All-Rights-Reserved
+  license: MIT OR WTFPL
   endian: le
 
 doc: |

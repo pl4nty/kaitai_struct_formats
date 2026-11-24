@@ -2,7 +2,7 @@
 meta:
   id: polkadot_pallet_storage
   title: PalletStorage
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   imports:
     - polkadot_scale
     - polkadot_storage_definition

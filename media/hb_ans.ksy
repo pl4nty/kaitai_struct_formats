@@ -3,7 +3,7 @@ meta:
   id: hb_ans
   title: Harman Becker Speech Prompts Audio Container (ANS)
   file-extension: ans
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: le
 
 doc: |

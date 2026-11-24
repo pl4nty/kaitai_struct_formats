@@ -8,7 +8,7 @@ meta:
   id: infinity_pro
   title: PRO v1
   file-extension: pro
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   endian: le
   bit-endian: le
 

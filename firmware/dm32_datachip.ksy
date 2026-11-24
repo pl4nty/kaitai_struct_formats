@@ -1,4 +1,5 @@
 # Imported from https://github.com/awkaplan/dm32uv-re/blob/024a0a9ad269f725d24534d355b0f5c975ddb292/specs/ksy/dm32_datachip.ksy
+# Required Notice: Copyright 2026 Alex Kaplan (https://github.com/awkaplan/dm32uv-re)
 meta:
   id: dm32_datachip
   title: DM-32UV 16 MB data chip (Winbond W25Q128) - region map

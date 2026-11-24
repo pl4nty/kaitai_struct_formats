@@ -8,7 +8,7 @@ meta:
   id: infinity_tlk
   title: TLK v1
   file-extension: tlk
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   ks-version: "0.11"
   endian: le
   bit-endian: le

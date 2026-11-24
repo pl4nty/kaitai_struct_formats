@@ -1,9 +1,10 @@
-# Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/system/config.ksy
+# Imported from https://github.com/RiiConnect24/Kaitai-Files/blob/86568af7c4f29040c178ab627c68be707a829829/Kaitais/config.ksy
+# Modified in https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/system/config.ksy
 meta:
   id: wii_sysconf
   application: Wii Menu
   file-extension: dat
-  license: LicenseRef-All-Rights-Reserved
+  license: AGPL-3.0-only
   endian: be
 seq:
   - id: header0

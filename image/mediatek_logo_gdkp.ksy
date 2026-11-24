@@ -1,4 +1,5 @@
 # Imported from https://github.com/armijnhemel/binaryanalysis-ng/blob/d72f0d9c5c4e5484878f357d07690e68334365db/src/bang/parsers/image/gdkp/gdkp.ksy
+# Upstream meta/license: "LGPL-1.0-or-later" (no such licence; recorded here as LGPL-2.0-or-later)
 meta:
   id: mediatek_logo_gdkp
   title: Android logo.bin for MediaTek devices

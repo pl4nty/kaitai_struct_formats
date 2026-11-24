@@ -8,7 +8,7 @@
 meta:
   id: infinity_itm
   file-extension: itm
-  license: LicenseRef-All-Rights-Reserved
+  license: GPL-3.0-only
   imports:
     - infinity_eff
     - infinity_sto

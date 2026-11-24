@@ -9,7 +9,7 @@ meta:
   id: stunt_island_scenery
   title: Stunt Island BSP scenery graph (`SCENERY.scn`)
   file-extension: scn
-  license: LicenseRef-All-Rights-Reserved
+  license: MIT OR Apache-2.0
   ks-version: 0.11
   endian: le
 doc: |

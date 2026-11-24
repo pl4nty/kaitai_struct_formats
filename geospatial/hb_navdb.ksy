@@ -3,7 +3,7 @@ meta:
   id: hb_navdb
   title: Harman Becker Navigation Fast Lookup Database (FLDB)
   file-extension: db
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: le
 
 doc: |

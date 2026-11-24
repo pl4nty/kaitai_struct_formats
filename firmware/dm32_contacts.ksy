@@ -1,4 +1,5 @@
 # Imported from https://github.com/awkaplan/dm32uv-re/blob/024a0a9ad269f725d24534d355b0f5c975ddb292/specs/ksy/dm32_contacts.ksy
+# Required Notice: Copyright 2026 Alex Kaplan (https://github.com/awkaplan/dm32uv-re)
 meta:
   id: dm32_contacts
   title: DM-32UV DMR contact database (data-chip region at V-frame 0x0F)

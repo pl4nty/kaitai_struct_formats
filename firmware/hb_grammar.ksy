@@ -3,7 +3,7 @@ meta:
   id: hb_grammar
   title: Harman Becker Binary Grammar Resource
   file-extension: hbgr
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: le
 doc: Harman Becker compiled binary grammar resource for acoustic prompts and TTS.
 seq:

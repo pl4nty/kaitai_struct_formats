@@ -10,7 +10,7 @@ meta:
   id: stunt_island_flm
   title: Stunt Island film time slice (`.FLM`)
   file-extension: flm
-  license: LicenseRef-All-Rights-Reserved
+  license: MIT OR Apache-2.0
   ks-version: 0.11
   endian: le
 doc: |

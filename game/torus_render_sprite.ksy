@@ -2,7 +2,7 @@
 meta:
   id: torus_render_sprite
   title: TSE RenderSprite (PC, Little Endian)
-  license: LicenseRef-All-Rights-Reserved
+  license: MIT OR WTFPL
   endian: le
 
 doc: |

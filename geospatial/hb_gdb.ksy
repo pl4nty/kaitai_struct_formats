@@ -3,7 +3,7 @@ meta:
   id: hb_gdb
   title: Harman Becker Geographic Routing Database
   file-extension: gdb
-  license: Apache-2.0
+  license: MIT OR Apache-2.0
   endian: be
 doc: Harman Becker proprietary compressed road routing network graph.
 seq:

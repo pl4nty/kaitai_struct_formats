@@ -1,8 +1,9 @@
-# Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/channels/news/news_file.ksy
+# Imported from https://github.com/RiiConnect24/Kaitai-Files/blob/86568af7c4f29040c178ab627c68be707a829829/Kaitais/news_file.ksy
+# Modified in https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/channels/news/news_file.ksy
 meta:
   id: wii_news
   application: News Channel
-  license: LicenseRef-All-Rights-Reserved
+  license: AGPL-3.0-only
   endian: be
 
 doc: |
