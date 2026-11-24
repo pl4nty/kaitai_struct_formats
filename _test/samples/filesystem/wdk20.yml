@@ -1,0 +1,21 @@
+# WDK 2.0 web filesystem inside D-Link DIR-100 rev D firmware 4.03b18 (second AIH0 block at
+# 282464; its 48-byte header is followed by the WDK image of 185545 bytes plus 3 bytes of
+# padding). Expect values read by hand from a hex dump against firmware-mod-kit's unwdk.py.
+samples:
+  - url: https://ftp.dlink.de/dir/dir-100/driver_software/DIR-100_fw_revd_403b18_ALL_de_20151202.zip
+    sha256: 382409781cdfbda54f312ff9f8b7beec4ae58158a6370f55583bf5280850eac3
+    name: DIR100D1_FW403WWB18-wdk
+    source: ftp.dlink.de dir/dir-100/driver_software (D-Link firmware; proprietary)
+    extract:
+      format: zip
+      member: DIR-100_fw_revd_403b18_ALL_de_20151202/DIR100D1_FW403WWB18.bin
+      then: { format: slice, offset: 282512, size: 185545 }
+    eof: true
+    expect:
+      header.num_files: 77
+      header.len_data: 184033
+      header.len_inodes: 1512
+      header.version: WDK 2.0
+      inodes.inodes[0].name: message.js
+      inodes.inodes[0].len_data: 21049
+      inodes.inodes[1].name: adv_app.htm
