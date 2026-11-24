@@ -1,9 +1,18 @@
 # Imported from https://github.com/RiiConnect24/Kaitai-Files/blob/86568af7c4f29040c178ab627c68be707a829829/Kaitais/mobiclip.ksy
+# Generic tag-section header model as in https://github.com/spotlightishere/kaitais/blob/HEAD/mobiclip.ksy
+# and https://github.com/quatric/Wii-Kaitai/blob/HEAD/media/mobiclip.ksy
 meta:
   id: mobiclip
   file-extension: mo
   license: AGPL-3.0-only
   endian: le
+doc: |
+  Wii Mobiclip video container (.mo, MOC5). The header is a sequence of
+  tag sections, each a 2-character tag, a u2 length in 32-bit words and
+  that many words of payload, ending with an empty "HE" section. Known
+  tags: TL (timeline), V2 (video), VC (video codec), pc (RSA-1280
+  signature), cc (64 bytes), A0/A2/A3/A8/A9/AP/AV/AM (audio), KI (keyframe
+  index), LM, VF. Interleaved audio/video chunks follow the header.
 seq:
   - id: magic
     contents: "MO"
@@ -12,65 +21,47 @@ seq:
   - id: header_size
     type: u4
     doc: Add 8 for the actual header size.
-  - id: chunk_type_id
-    contents: "TL"
-  - id: subchunk_count
-    type: u2
-  - id: fps
-    type: u4
-  - id: chunk_count
-    type: u4
-  - id: unknown_5
-    type: u2
-  - id: unknown_6
-    type: u2
-  - id: v2
-    contents: "V2"
-  - id: unknown_7
-    type: u2
-  - id: width
-    type: u4
-  - id: height
-    type: u4
-  - id: pc
-    contents: [112, 99, 40, 0]
-  - id: rsa_signature
-    size: 160
-    doc: RSA-1280 with Barrett reduction.
-  - id: audio_and_frame_headers
-    type: audio_and_frame_header
-    repeat: expr
-    repeat-expr: 2
+  - id: tag_sections
+    type: tag_section
+    repeat: until
+    repeat-until: _.tag == "HE"
 instances:
-  audio_and_frame_header:
-    type: audio_and_frame_header
-  video_header:
-    pos: header_size + 4
-    type: video_header
+  timeline:
+    value: tag_sections[0].payload.as<timeline>
+    if: tag_sections[0].tag == "TL"
+    doc: The timeline section, which comes first in known files.
   chunk:
     pos: header_size + 8
     type: chunk
     repeat: expr
-    repeat-expr: chunk_count
+    repeat-expr: timeline.chunk_count
+    if: tag_sections[0].tag == "TL"
 types:
-  audio_and_frame_header:
+  tag_section:
+    -webide-representation: "{tag}"
     seq:
-      - id: chunk_marker
+      - id: tag
         size: 2
         type: str
-        encoding: ASCII
-      - id: chunk_header
+        encoding: ISO-8859-1
+      - id: word_len
+        type: u2
+        doc: Length of the payload in 32-bit words.
+      - id: payload
+        size: word_len * 4
         type:
-          switch-on: chunk_marker
+          switch-on: tag
           cases:
+            "'TL'": timeline
+            "'V2'": video
+            "'pc'": rsa_signature
             "'A2'": audio_chunk_standard
             "'A3'": audio_chunk_standard
+            "'A8'": audio_chunk_standard
             "'A9'": audio_chunk_standard
             "'AM'": audio_chunk_multitrack
             "'AP'": audio_chunk_standard
-            "'AV'": audio_chunk_vorbis
             "'KI'": keyframe_index
-            "'PÆ'": audio_chunk_standard
         doc: |
           A0 -> None
           A2 -> FastAudio
@@ -81,11 +72,29 @@ types:
           AP -> PCM
           AV -> Vorbis
           KI -> Keyframe Index
-          PÆ -> ???
-  video_header:
+          cc -> 64 bytes, seemingly unused
+          HE -> end of header (empty)
+  timeline:
     seq:
-      - id: data_start
-        contents: [72, 69, 0, 0]
+      - id: fps
+        type: u4
+      - id: chunk_count
+        type: u4
+      - id: unknown_5
+        type: u2
+      - id: unknown_6
+        type: u2
+  video:
+    seq:
+      - id: width
+        type: u4
+      - id: height
+        type: u4
+  rsa_signature:
+    seq:
+      - id: rsa_signature
+        size: 160
+        doc: RSA-1280 with Barrett reduction.
   chunk:
     seq:
       - id: chunk_size
@@ -102,36 +111,23 @@ types:
         if: chunk_size - video_chunk_size - 8 > 0
   audio_chunk_standard:
     seq:
-      - id: stream_type
-        type: u2
       - id: frequency
         type: u4
       - id: channel_number
         type: u4
   audio_chunk_multitrack:
     seq:
-      - id: header_length
-        type: u2
       - id: audio_stream_count
         type: u4
       - id: audio_stream_features
         type: audio_chunk_standard
         repeat: expr
         repeat-expr: audio_stream_count
-  audio_chunk_vorbis:
-    seq:
-      - id: header
-        size: 3554
   keyframe_index:
     seq:
-      - id: entry_count
-        type: u2
       - id: keyframe
         type: keyframe
-        repeat: expr
-        repeat-expr: entry_count / 2
-      - id: unknown
-        size: 68
+        repeat: eos
   keyframe:
     seq:
       - id: chunk_offset
