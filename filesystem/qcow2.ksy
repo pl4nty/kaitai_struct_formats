@@ -343,7 +343,7 @@ types:
         type: b29
       - id: extra_data_compatible
         type: b1
-      - id: auto
+      - id: is_auto
         type: b1
         doc: The bitmap must reflect all changes of the virtual disk.
       - id: in_use
