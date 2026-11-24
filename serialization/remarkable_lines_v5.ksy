@@ -40,8 +40,10 @@ types:
     seq:
       - id: brush_type
         type: s4
+        enum: brush
       - id: color
         type: s4
+        enum: color
       - id: unknown_line_attribute
         type: s4
         doc: suspected to be 'selected' flag
@@ -71,3 +73,18 @@ types:
         type: f4
       - id: pressure
         type: f4
+enums:
+  color:
+    0: black
+    1: gray
+    2: white
+  brush:
+    6: eraser
+    8: eraser_select
+    12: paintbrush
+    13: mechanical_pencil
+    14: pencil
+    15: ballpoint
+    16: marker
+    17: fineliner
+    18: highlighter

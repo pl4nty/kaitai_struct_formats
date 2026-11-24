@@ -4,7 +4,7 @@ meta:
   file-extension: mid
   license: LicenseRef-All-Rights-Reserved
   imports:
-    - standard_midi_file_with_running_status
+    - standard_midi_file
   bit-endian: le
 
 # Known producers currently evidenced:
@@ -12,9 +12,9 @@ meta:
     
 seq:
   - id: hdr
-    type: standard_midi_file_with_running_status::header
+    type: standard_midi_file::header
   - id: tracks
-    type: standard_midi_file_with_running_status::track
+    type: standard_midi_file::track
     repeat: expr
     repeat-expr: hdr.num_tracks
         

@@ -6,6 +6,13 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   imports: /archive/quicklz_rcmp
   endian: le
+doc: |
+  Monster Games resource archive (Excite Truck, Excitebots: Trick Racing).
+  The fixed header is 0x80 bytes. The payload may be QuickLZ-compressed
+  (`rcmp`). In uncompressed Excite Truck archives a table of `num_file`
+  0x44-byte little-endian TOC records follows the header directly: a
+  32-byte NUL-padded name, the file size at +0x28 and the file offset at
+  +0x2c. A big-endian variant of the container uses the magic `RST0`.
 seq:
   - id: header
     type: header

@@ -2,13 +2,17 @@
 meta:
   id: brfnt
   title: NW4R BRFNT bitmap font
-  file-extension: brfnt
+  file-extension:
+    - brfnt
+    - brfna
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
   A pre-rendered bitmap font: glyphs baked into GX texture sheets, plus
   the tables that map a character code to a cell and give it a width.
-  Magic `RFNT`.
+  Magic `RFNT`. Archived fonts (`.brfna`) use the same magic and layout;
+  their `TGLP` texture sheets may be stored compressed, flagged by bit
+  0x8000 of `sheet_format`.
 
   Rendering one character takes all four section types. `CMAP` turns the
   code into a glyph index, `CWDH` gives that index its advance widths, and

@@ -5,11 +5,15 @@ meta:
   license: AGPL-3.0-only
   endian: le
 doc: |
-  Nintendo DS Mobiclip video (.mods). A 0x30-byte header (magic `MODSN3`,
+  Nintendo DS Mobiclip video (.mods), used for example by the cutscenes of
+  Ghost Trick: Phantom Detective. A 0x30-byte header (magic `MODSN3`,
   video codec, frame count, dimensions, frame rate, audio parameters and
   the keyframe index location) is followed by an `HE` end-of-header tag
-  and the frame data. `mobiclip_mods` models the header with the full
-  6-byte magic.
+  and the frame data.
+
+  The video uses the YCgCo colour space (not YCbCr). Audio is not stored in
+  separate chunks: each video chunk carries its audio as trailing bytes.
+  Chunk payloads and frame offsets are 4-byte aligned for the DS hardware.
 seq:
   - id: magic
     contents: "MODS"
@@ -41,12 +45,18 @@ seq:
     type: u4
   - id: audio_offset
     type: u4
-    doc: Offset of the audio data.
+    doc: |
+      Offset of the audio codec information, just past the interleaved
+      frame data. For SX codebook audio (codec 1) this is where the
+      3124-byte per-channel codebook is stored.
   - id: keyframe_index_offset
     type: u4
     doc: Offset of the keyframe index table.
   - id: keyframe_count
     type: u4
+  - id: end_of_header
+    contents: "HE"
+    doc: End-of-header tag at offset 0x30.
 instances:
   keyframe_table:
     pos: keyframe_index_offset

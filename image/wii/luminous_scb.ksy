@@ -8,8 +8,8 @@ meta:
 doc: |
   Luminous Arc 2 screen backgrounds are three same-stem files: `.scb`
   (this tile map), `.imb` (tile pixels) and `.plb` (raw BGR555 palette).
-  `.scb` and `.imb` may be raw or LZE-compressed (see `luminous_lze.ksy`); the
-  palette is raw. nintoolbox renders them with `wimgt DECODE image.scb`.
+  `.scb` and `.imb` may be raw or LZE-compressed; the
+  palette is raw.
 
   Verified layouts: 16-colour, 4-bit tiles (32-byte palette, 32 bytes/tile) or
   256-colour, 8-bit tiles (512-byte palette, 64 bytes/tile). Palette index 0
