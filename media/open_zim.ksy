@@ -242,6 +242,10 @@ types:
                 doc: pointer to the directory entry of the redirect target
         enums:
           namespace:
+            # Files with major version 6 and minor version 1 or later use the
+            # "new namespace scheme", which only uses C, M, W and X (see the
+            # docs of those members); the other members belong to the old
+            # scheme.
             0x2D: # "-"
               id: layout
               doc: |
@@ -255,7 +259,10 @@ types:
               doc: article meta data - see Article Format
             0x43: # "C"
               id: user_content
-              doc: User content entries - see Article Format
+              doc: |
+                User content entries - see Article Format. In the new namespace
+                scheme, all user content (articles, images, layout files) is in
+                this namespace.
             0x48: # "H"
               id: unkn_h
               doc: Unknown
@@ -276,10 +283,15 @@ types:
               doc: categories, article list - see Category Handling
             0x57: # "W"
               id: category_list_per_article
-              doc: categories per article, category list - see Category Handling
+              doc: |
+                Old scheme: categories per article, category list - see Category
+                Handling. New namespace scheme: "well known" entries, such as
+                mainPage and favicon, pointing into the C namespace.
             0x58: # "X"
               id: fulltext_index
-              doc: fulltext index - see ZIM Index Format
+              doc: |
+                Fulltext index - see ZIM Index Format. In the new namespace
+                scheme, all search indexes (fulltext and title) are here.
             0x5A: # "Z"
               id: fulltext_index_z
               doc-ref: https://github.com/openzim/libzim/blob/e4fe0d2854bfd4a7f6699d8c2a6fd9a00ed51588/src/search.cpp#L267
