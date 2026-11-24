@@ -8,10 +8,10 @@ samples:
     license: Apache-2.0
     extract: { format: slice, offset: 31753, size: 1600, then: { format: hex } }
     expect:                                  # header walked by hand per MS-PAC 2.3/2.4
-      pac.c_buffers: 5
+      pac.num_buffers: 5
       pac.version: 0
       pac.buffers[0].ul_type: pac_type_logon_info
-      pac.buffers[0].cb_buffer_size: 552
+      pac.buffers[0].len_buffer: 552
   - url: https://raw.githubusercontent.com/jcmturner/gokrb5/855dbc707a37a21467aef6c0245fcf3328dc39ed/test/testdata/test_vectors.go
     sha256: fb2ed1a3089aa99a0a46b7d728cca6f31c5e35dddc287f1ac0278a8de7b6cca3
     name: gokrb5_MarshaledPAC_AuthorizationData_MS
@@ -19,8 +19,8 @@ samples:
     license: Apache-2.0
     extract: { format: slice, offset: 24835, size: 2688, then: { format: hex } }
     expect:
-      pac.c_buffers: 4
-      pac.buffers[0].offset: 72
+      pac.num_buffers: 4
+      pac.buffers[0].ofs_buffer: 72
       pac.buffers[0].buffer.logon_count: 4180      # buffer bytes == MarshaledPAC_Kerb_Validation_Info_MS; gokrb5 kerb_validation_info_test.go
       pac.buffers[0].buffer.user_id: 2914711
       pac.buffers[0].buffer.group_count: 26

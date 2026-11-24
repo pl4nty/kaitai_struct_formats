@@ -7,5 +7,5 @@ samples:
     license: ISC
     expect:
       version: 19
-      states_count: 182
-      authentication_size: 256
+      num_countries: 182
+      len_authentication: 256

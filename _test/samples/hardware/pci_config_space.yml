@@ -2,7 +2,7 @@
 # 'extract: hex' cannot skip the dump's offset labels. Expects come from lspci 3.10.0
 # ('lspci -F <dump> -s <slot> -vvnn') run on the same text dump.
 samples:
-  - fixture: firmware/pcieconf/ich10-uhci-af.bin
+  - fixture: hardware/pci_config_space/ich10-uhci-af.bin
     sha256: a4f71183d0682d4e840b59af3da7f6dce9647c003308f74464eeac6f32c0d56c
     source: pciutils f3bf645929ff3224f1abc0ebb2b2f3e947b238d4 tests/cap-pci-af, device 00:1d.0 (Intel ICH10 UHCI)
     license: GPL-2.0-or-later
@@ -17,7 +17,7 @@ samples:
       layout_specific.subsystem_id: 0x4f53
       layout_specific.capabilities_pointer.masked_pointer: 0x50
       layout_specific.capabilities_list.id: af
-  - fixture: firmware/pcieconf/ich10-hda.bin
+  - fixture: hardware/pci_config_space/ich10-hda.bin
     sha256: 9298cb7c259612407373086f5af1d2dc0cebeb87ebeba94340b57ab44dafc13d
     source: pciutils f3bf645929ff3224f1abc0ebb2b2f3e947b238d4 tests/tree-asus-p6t6, device 00:1b.0 (Intel ICH10 HD Audio)
     license: GPL-2.0-or-later
@@ -32,7 +32,7 @@ samples:
       layout_specific.capabilities_list.id: pm
       layout_specific.capabilities_list.body.pmc.version: 2
       layout_specific.capabilities_list.next.id: msi
-  - fixture: firmware/pcieconf/x58-root-port1.bin
+  - fixture: hardware/pci_config_space/x58-root-port1.bin
     sha256: f774e40a0f30675dfe0131308bf405c50d8957a7eb107133a9264179642899ae
     source: pciutils f3bf645929ff3224f1abc0ebb2b2f3e947b238d4 tests/tree-asus-p6t6, device 00:01.0 (Intel X58 PCIe root port, a PCI-PCI bridge)
     license: GPL-2.0-or-later
@@ -47,7 +47,7 @@ samples:
       layout_specific.secondary_bus_number: 1
       layout_specific.subordinate_bus_number: 1
       layout_specific.capabilities_pointer.masked_pointer: 0x40
-  - fixture: firmware/pcieconf/virtio-fs.bin
+  - fixture: hardware/pci_config_space/virtio-fs.bin
     sha256: dd142f1973e2cacdf7a1b90d2d50637082563975a1975a097d4b9ef43a63a969
     source: pciutils f3bf645929ff3224f1abc0ebb2b2f3e947b238d4 tests/cap-vendor-virtio, device 00:04.0 (virtio file system)
     license: GPL-2.0-or-later

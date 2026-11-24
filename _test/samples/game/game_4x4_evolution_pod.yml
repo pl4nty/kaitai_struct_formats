@@ -6,5 +6,5 @@ samples:
     expect:
       header.num_files: 24
       header.description: -=Created with PODTool=-
-      details_directory[0].length: 16111
-      details_directory[0].offset: 1140
+      files[0].len_file_data: 16111
+      files[0].ofs_file_data: 1140

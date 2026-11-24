@@ -6,10 +6,10 @@ samples:
     license: unknown (no licence file in repo)
     eof: true
     expect:
-      dir.size: 2036
-      dir.sec_cnt: 14
+      dir.len_dir: 2036
+      dir.num_sections: 14
       dir.version: 200
-      dir.fswd: 56835
+      dir.len_file_without_dir: 56835
   - url: https://raw.githubusercontent.com/ByBurton/StrongholdCrusaderAIV/526c2be09126fea5fee9f2706d26283222061dda/AI%20Villages/Mah%20Castle/wolf1.aiv
     sha256: 17f97a260a42cdac93d429a5c11852b7e59227e611d0ada1ae9a69bb17874257
     name: wolf1.aiv
@@ -17,5 +17,5 @@ samples:
     license: unknown (no licence file in repo)
     eof: true
     expect:
-      dir.size: 2036
-      dir.sec_cnt: 14
+      dir.len_dir: 2036
+      dir.num_sections: 14
