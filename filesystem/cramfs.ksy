@@ -103,15 +103,18 @@ types:
         io: _root._io
         pos: offset
         type: chunked_data_inode
+        if: type == file_type::reg_file
       as_symlink:
         io: _root._io
         pos: offset
         type: chunked_data_inode
+        if: type == file_type::symlink
       as_dir:
         io: _root._io
         pos: offset
         size: size
         type: dir_inode
+        if: type == file_type::dir
     enums:
       file_type:
         1: fifo
