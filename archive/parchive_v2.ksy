@@ -377,7 +377,7 @@ types:
               - id: name
                 size-eos: true
                 type: str
-                encoding: UTF-16
+                encoding: UTF-16LE
           ascii_comment:
             doc: |
               The ASCII comment packet contains - would you believe it - a comment in ASCII
@@ -403,7 +403,7 @@ types:
               - id: comment
                 size-eos: true
                 type: str
-                encoding: UTF-16
+                encoding: UTF-16LE
           input_file_slice:
             doc: |
               The input file slice packet is used if the user wants to include the input file

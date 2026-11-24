@@ -11,7 +11,7 @@ meta:
   imports:
     - /common/ndarray_descriptor
     - /common/ndarray
-  ks-opaque-types: true
+  ks-opaque-types: true  # ksylint: disable=KSY210
   encoding: UTF-8
   endian: le
 doc: |

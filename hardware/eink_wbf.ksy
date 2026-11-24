@@ -7,7 +7,8 @@ meta:
   license: GPL-2.0
   #imports:
   #  - /common/bcd
-  ks-opaque-types: true  # https://github.com/KOLANICH-tools/inkwave.py/blob/master/inkwave/kaitai/eink_wbf_wav_addrs_collection.py
+  # Opaque type implemented in https://github.com/KOLANICH-tools/inkwave.py/blob/master/inkwave/kaitai/eink_wbf_wav_addrs_collection.py
+  ks-opaque-types: true  # ksylint: disable=KSY210
   endian: le
   bit-endian: le
   -affected-by:
