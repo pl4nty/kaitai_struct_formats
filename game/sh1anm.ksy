@@ -16,9 +16,13 @@ doc: |
   The header contains base translations for all bones, as well as a magic value
   that is the offset to the first frame.
 
+  Some ANMs for the player character contain only a list of frames which are
+  appended to a base ANM.
+
 seq:
   - id: magic
     type: s2
+    doc: Offset of the first frame (keyframe).
 
   - id: num_rotations
     type: u1
@@ -105,6 +109,16 @@ types:
         type: s1
       - id: z
         type: s1
+    instances:
+      x_scaled:
+        value: (x << _root.scale_log2) / 128.0
+        doc: X translation in model units, scaled by `scale_log2`.
+      y_scaled:
+        value: (y << _root.scale_log2) / 128.0
+        doc: Y translation in model units, scaled by `scale_log2`.
+      z_scaled:
+        value: (z << _root.scale_log2) / 128.0
+        doc: Z translation in model units, scaled by `scale_log2`.
 
   rotation:
     doc: 3x3 matrix, signed fixed point with 7 fraction bits
