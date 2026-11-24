@@ -88,15 +88,23 @@ types:
       - id: payload
         size-eos: true
         type:
-          switch-on: 'payload_unit_start_indicator and transport_scrambling_control == 0 ? 1 : 0'
+          switch-on: is_unit_start_decodable
           cases:
-            1: unit_start_payload
+            true: unit_start_payload
         if: has_payload
     instances:
       has_adaptation_field:
         value: adaptation_field_control & 0b10 != 0
       has_payload:
         value: adaptation_field_control & 0b01 != 0
+      is_unit_start_decodable:
+        value: >-
+          payload_unit_start_indicator and transport_scrambling_control == 0
+          and not transport_error_indicator
+        doc: |
+          The payload starts a PES packet or holds the start of a PSI
+          section, in the clear and not flagged as damaged by the
+          demodulator.
   adaptation_field:
     seq:
       - id: len_body
