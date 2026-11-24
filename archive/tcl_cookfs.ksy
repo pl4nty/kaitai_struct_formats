@@ -57,6 +57,10 @@ instances:
     pos: ofs_index
     size: suffix.len_index
     type: stored_index
+    if: suffix.len_index > 0
+    doc: |
+      File system index. Like an empty page, an empty index is stored as
+      zero bytes, without a compression byte.
   page_md5s:
     pos: ofs_md5s
     size: 16
