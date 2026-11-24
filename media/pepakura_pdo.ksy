@@ -1,442 +1,375 @@
 meta:
   id: pepakura_pdo
-  title: Pepakura PDO v3
+  title: Pepakura Designer 3 papercraft model
   application:
     - Pepakura Designer
-    - Pepakura Reader
+    - Pepakura Viewer
   file-extension: pdo
   license: LicenseRef-All-Rights-Reserved
-  encoding: UTF-8
   endian: le
 doc: |
-  A proprietary format of popular software for creation of (ki|o)rigami.
-  Files for testing: https://github.com/daeken/PepakuraReverse/tree/master/pdos
-doc-ref:
-  - https://github.com/daeken/PepakuraReverse
+  Pepakura Designer unfolds a 3D model into flat parts that can be printed,
+  cut out and glued together into a paper model. A .pdo file stores the 3D
+  geometry together with its unfolded 2D layout, the textures and the
+  settings of the printed pages.
+
+  This spec covers the files written by Pepakura Designer 3, which start
+  with the line `version 3`. The format was reverse engineered; the meaning
+  of most of the fields is unknown.
+
+  Test files: <https://github.com/daeken/PepakuraReverse/tree/master/pdos>
+doc-ref: https://github.com/daeken/PepakuraReverse/blob/master/Readme.md
 seq:
-  - id: signature
+  - id: magic
     contents: "version 3\n"
   - id: lock_status
     type: u4
-    enum: lock_status # 4 is unlocked, 5 is locked, all others undefined
-  - id: unknown0
+    enum: lock_status
+  - id: unknown1
     type: u4
   - id: version
     type: u4
-
   - id: creator
-    type: wstr
-    if: _root.lock_status == lock_status::locked
-    doc: This will be empty for en-us, "Pepakura Designer 3" elsewhere
+    type: text
+    if: is_locked
+    doc: |
+      Name of the program that wrote the file, e.g. "Pepakura Designer 3".
+      Unlike every other string of a locked file, this one is stored as is,
+      because it precedes `key`.
   - id: key
     type: u4
-    if: _root.lock_status == lock_status::locked
-
+    if: is_locked
+    doc: Number added to every byte of every following string (modulo 256).
   - id: locale
-    type: wstr
-    doc: Empty for en-us
+    type: text
+    doc: Empty in files written by the English version.
   - id: codepage
-    type: wstr
-
-  - id: unknown1
+    type: text
+    doc: |
+      Name of the character encoding of the strings, as the program spells
+      it, e.g. "Sfhit-JIS" (sic).
+  - id: unknown2
     type: u4
   - id: hexstring
-    type: wstr
-
-  - id: unknown2
-    type: bool
-    if: _root.lock_status == lock_status::locked
+    type: text
   - id: unknown3
-    type: bool
-    if: _root.lock_status == lock_status::locked
-
+    type: u1
+    repeat: expr
+    repeat-expr: 2
+    if: is_locked
   - id: unknown4
     type: f8
     repeat: expr
     repeat-expr: 4
-
-  - id: geometry_count
+  - id: num_geometries
     type: u4
-  - id: geometry
+  - id: geometries
     type: geometry
     repeat: expr
-    repeat-expr: geometry_count
-
-  - id: textures_count
+    repeat-expr: num_geometries
+  - id: num_textures
     type: u4
   - id: textures
     type: texture
     repeat: expr
-    repeat-expr: textures_count
-
-  - id: some_flag
-    type: bool
-  - id: if_some_flag
-    type: if_some_flag
-    if: some_flag.value
-
-  - id: unknown3_2
-    type: bool
+    repeat-expr: num_textures
+  - id: has_layout
+    type: u1
+  - id: layout
+    type: layout
+    if: has_layout != 0
+  - id: unknown5
+    type: u1
     repeat: expr
     repeat-expr: 5
-  - id: unknown4_2
-    type: u4
-  - id: unknown5
-    type: bool
   - id: unknown6
     type: u4
-    repeat: expr
-    repeat-expr: 4
-
-  - id: some_flag_2
-    type: u4
   - id: unknown7
-    type: f8
-    repeat: expr
-    repeat-expr: 2
-    if: some_flag_2 == 0x0b
-
+    type: u1
   - id: unknown8
     type: u4
     repeat: expr
-    repeat-expr: 3
-
+    repeat-expr: 4
   - id: unknown9
+    type: u4
+  - id: unknown10
     type: f8
     repeat: expr
-    repeat-expr: 6
-
-  - id: unknowna
+    repeat-expr: 2
+    if: unknown9 == 11
+  - id: unknown11
+    type: u4
+    repeat: expr
+    repeat-expr: 3
+  - id: unknown12
     type: f8
     repeat: expr
-    repeat-expr: 6
-
-  - id: unknownb
-    type: bool
-
-  - id: unknownc
+    repeat-expr: 12
+  - id: unknown13
+    type: u1
+  - id: unknown14
     type: f8
-
-
-  - id: unknownd
-    type: wstr
-    if: _root.lock_status == lock_status::locked
-  - id: unknowne
-    type: wstr
-    if: _root.lock_status == lock_status::locked
-
-  - id: eof
-    contents: [0x0F, 0x27, 0, 0]
-
+  - id: unknown15
+    type: text
+    repeat: expr
+    repeat-expr: 2
+    if: is_locked
+  - id: footer
+    contents: [0x0f, 0x27, 0, 0]
+instances:
+  is_locked:
+    value: lock_status == lock_status::locked
 types:
-  bool:
+  text:
+    doc: |
+      String in the encoding named by `codepage`.
+
+      In a locked file `key` has been added to every byte of every string
+      that follows `key` (modulo 256), so it must be subtracted again before
+      decoding the bytes.
     seq:
-      - id: value_
-        type: u1
-    instances:
-      value:
-        value: value_!=0
-  wstr:
-    seq:
-      - id: len
+      - id: len_value
         type: u4
-      - id: content
-        size: len
-        type: str
-        doc: |
-          For "locked" files, the value _root.key gets subtracted from each byte to
-          "decrypt" it.
+      - id: value
+        size: len_value
   geometry:
     seq:
       - id: name
-        type: wstr
-      - id: unknown0
-        type: bool
-
-      - id: vertices_count
+        type: text
+      - id: unknown1
+        type: u1
+      - id: num_vertices
         type: u4
       - id: vertices
-        type: coord_3
+        type: vec3
         repeat: expr
-        repeat-expr: vertices_count
-
-      - id: shapes_count
+        repeat-expr: num_vertices
+      - id: num_shapes
         type: u4
       - id: shapes
         type: shape
         repeat: expr
-        repeat-expr: shapes_count
-
-      - id: unknown1_count
+        repeat-expr: num_shapes
+      - id: num_edges
         type: u4
-      - id: unknown1
-        type: unknown_t_0
+      - id: edges
+        type: edge
         repeat: expr
-        repeat-expr: unknown1_count
+        repeat-expr: num_edges
     types:
       shape:
+        doc: A face of the 3D model and its position on the paper.
         seq:
-          - id: unknown0
-            type: u4
+          - id: unknown1
+            type: s4
           - id: part
             type: u4
-            doc: The part number in Pepakura
-          - id: unknown1
+            doc: Number of the part of the unfolded model the face belongs to.
+          - id: unknown2
             type: f8
             repeat: expr
             repeat-expr: 4
-
-          - id: points_count
+          - id: num_points
             type: u4
           - id: points
             type: point
             repeat: expr
-            repeat-expr: points_count
-
-        types:
-          point:
-            seq:
-              - id: index
-                type: u4
-                doc: Index into Vertices
-              - id: coord
-                type: coord_2
-                doc: 2D coordinates
-              - id: unknown0
-                type: f8
-                repeat: expr
-                repeat-expr: 2
-
-              - id: unknown1
-                type: bool
-
-              - id: unknown2
-                type: f8
-                repeat: expr
-                repeat-expr: 3
-
-              - id: unknown3
-                type: u4
-                repeat: expr
-                repeat-expr: 3
-
-              - id: edge_color
-                type: rgb_f4
-
-      unknown_t_0:
+            repeat-expr: num_points
+      point:
         seq:
-          - id: unknown0
+          - id: idx_vertex
+            type: u4
+            doc: Index into `vertices` of the geometry.
+          - id: coord
+            type: vec2
+            doc: Position of the point on the paper.
+          - id: unknown1
+            type: f8
+            repeat: expr
+            repeat-expr: 2
+          - id: unknown2
+            type: u1
+          - id: unknown3
+            type: f8
+            repeat: expr
+            repeat-expr: 3
+          - id: unknown4
+            type: u4
+            repeat: expr
+            repeat-expr: 3
+          - id: edge_color
+            type: rgb
+      edge:
+        seq:
+          - id: unknown1
             type: u4
             repeat: expr
             repeat-expr: 4
-
-          - id: unknown1
-            type: bool
+          - id: unknown2
+            type: u1
             repeat: expr
             repeat-expr: 2
-
-          - id: unknown2
+          - id: unknown3
             type: u4
-
-
   texture:
     seq:
       - id: name
-        type: wstr
-      - id: unknown0
-        type: f4
-        repeat: expr
-        repeat-expr: 4
+        type: text
       - id: unknown1
         type: f4
         repeat: expr
-        repeat-expr: 4
-      - id: unknown2
-        type: f4
-        repeat: expr
-        repeat-expr: 4
-      - id: unknown3
-        type: f4
-        repeat: expr
-        repeat-expr: 4
-
+        repeat-expr: 20
       - id: has_image
-        type: bool
+        type: u1
       - id: image
         type: image
-        if: has_image.value
-
+        if: has_image != 0
     types:
       image:
         seq:
           - id: width
             type: u4
-            doc: In pixels
+            doc: In pixels.
           - id: height
             type: u4
-            doc: In pixels
-
-          - id: compressed_size
+            doc: In pixels.
+          - id: len_pixels
             type: u4
-          - id: image_data
-            size: compressed_size
+          - id: pixels
+            size: len_pixels
             process: zlib
-            repeat: eos
-
-  if_some_flag:
+            doc: |
+              `width * height` pixels of 3 bytes each (red, green, blue),
+              without any padding of the rows.
+  layout:
     seq:
-      - id: unknown0
-        type: f8
-
       - id: unknown1
-        type: bool
-
+        type: f8
       - id: unknown2
+        type: u1
+      - id: unknown3
         type: f8
         repeat: expr
         repeat-expr: 4
-
-      - id: unknown3_count
+      - id: num_parts
         type: u4
-      - id: unknown3
-        type: unknown_t_1
+      - id: parts
+        type: part
         repeat: expr
-        repeat-expr: unknown3_count
-
-      - id: strings_count
+        repeat-expr: num_parts
+      - id: num_labels
         type: u4
-      - id: strings
-        type: text
+      - id: labels
+        type: label
         repeat: expr
-        repeat-expr: strings_count
-        doc: This holds text strings for rendering on the page
-
-      - id: unknown4_count
+        repeat-expr: num_labels
+        doc: Text rendered on the pages.
+      - id: num_unknown4
         type: u4
       - id: unknown4
-        type: unknown_t_3
+        type: blob
         repeat: expr
-        repeat-expr: unknown4_count
-
-      - id: unknown5_count
+        repeat-expr: num_unknown4
+      - id: num_unknown5
         type: u4
       - id: unknown5
-        type: unknown_t_3
+        type: blob
         repeat: expr
-        repeat-expr: unknown5_count
-
+        repeat-expr: num_unknown5
     types:
-      unknown_t_1:
+      part:
         seq:
-          - id: unknown0
-            type: u4
-
           - id: unknown1
-            type: f8
-            repeat: expr
-            repeat-expr: 4
-
+            type: u4
           - id: unknown2
-            type: wstr
-            if: _root.lock_status == lock_status::locked
-
-          - id: unknown3_count
-            type: u4
-          - id: unknown3
-            type: unknown_t_2
-            repeat: expr
-            repeat-expr: unknown3_count
-        types:
-          unknown_t_2:
-            seq:
-              - id: unknown0
-                type: bool
-
-              - id: unknown1
-                type: u4
-
-              - id: have_unknown2
-                type: bool
-              - id: unknown2
-                type: u4
-                repeat: expr
-                repeat-expr: 2
-                if: have_unknown2.value
-
-              - id: have_unknown3
-                type: bool
-
-              - id: unknown3
-                type: u4
-                repeat: expr
-                repeat-expr: 2
-                if: have_unknown3.value
-      unknown_t_3:
-        seq:
-          - id: unknown0
             type: f8
             repeat: expr
             repeat-expr: 4
-
+          - id: unknown3
+            type: text
+            if: _root.is_locked
+          - id: num_lines
+            type: u4
+          - id: lines
+            type: line
+            repeat: expr
+            repeat-expr: num_lines
+      line:
+        seq:
           - id: unknown1
+            type: u1
+          - id: unknown2
+            type: u4
+          - id: has_unknown3
+            type: u1
+          - id: unknown3
             type: u4
             repeat: expr
             repeat-expr: 2
-
-          - id: unknown2_compressed_size
+            if: has_unknown3 != 0
+          - id: has_unknown4
+            type: u1
+          - id: unknown4
             type: u4
-
-          - id: unknown2
-            size: unknown2_compressed_size
-            process: zlib
-      text:
-        doc: A string for rendering on the page
+            repeat: expr
+            repeat-expr: 2
+            if: has_unknown4 != 0
+      label:
         seq:
-          - id: unknown0
+          - id: unknown1
             type: f8
             repeat: expr
             repeat-expr: 5
-
-          - id: unknown1
+          - id: unknown2
             type: u4
             repeat: expr
             repeat-expr: 2
-
           - id: font
-            type: wstr
-
-          - id: lines_count
+            type: text
+          - id: num_lines
             type: u4
           - id: lines
-            type: wstr
+            type: text
             repeat: expr
-            repeat-expr: lines_count
-  rgb_f4:
+            repeat-expr: num_lines
+      blob:
+        seq:
+          - id: unknown1
+            type: f8
+            repeat: expr
+            repeat-expr: 4
+          - id: unknown2
+            type: u4
+            repeat: expr
+            repeat-expr: 2
+          - id: len_data
+            type: u4
+          - id: data
+            size: len_data
+            process: zlib
+  rgb:
     seq:
-      - id: r
+      - id: red
         type: f4
-      - id: g
+      - id: green
         type: f4
-      - id: b
+      - id: blue
         type: f4
-  coord_2:
+  vec2:
     seq:
       - id: x
         type: f8
       - id: y
         type: f8
-  coord_3:
+  vec3:
     seq:
-      - id: xy
-        type: coord_2
+      - id: x
+        type: f8
+      - id: y
+        type: f8
       - id: z
         type: f8
-    instances:
-      x:
-        value: xy.x
-      y:
-        value: xy.y
 enums:
-  lock_status: #all others undefined
+  lock_status:
     4: unlocked
-    5: locked 
+    5: locked
