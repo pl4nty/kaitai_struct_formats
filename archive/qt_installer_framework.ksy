@@ -6,6 +6,8 @@ meta:
   xref:
     wikidata: Q201904
   license: GPL-3.0-only WITH Qt-GPL-exception-1.0
+  imports:
+    - /executable/qt_resource
   encoding: UTF-8
   endian: le
 
@@ -100,6 +102,9 @@ types:
 
     types:
       marker_identifier:
+        doc: |
+          The low 4 bytes of the u8 magic marker; the high 4 bytes are 0.
+          Komac only accepts the installer marker 0x12023233.
         seq:
           - id: type
             type: u1
@@ -168,7 +173,7 @@ types:
               
               - id: meta_resource_segments
                 -orig-id: metaResourceSegments
-                type: range
+                type: meta_resource_range
                 repeat: expr
                 repeat-expr: _parent._parent.meta_resources_count
               
@@ -188,6 +193,27 @@ types:
                 type: operations
                 
             types:
+              meta_resource_range:
+                doc: |
+                  A meta resource: a binary Qt resource file (`qres`) with
+                  the installer's configuration (`/installer-config/config.xml`,
+                  where Komac reads the product name, version, publisher,
+                  target directory and product UUID), control script,
+                  translations and so on.
+                doc-ref: https://github.com/devicie/Komac-anthelion/blob/f9b303df556625ef39215e9c66e08ca037829866/src/analysis/installers/qt_ifw.rs
+                seq:
+                  - id: start_read
+                    type: s8
+                  - id: size
+                    type: s8
+                instances:
+                  start:
+                    value: _root.header.binary_descriptor.end_of_exectuable + start_read
+                  resource:
+                    io: _root._io
+                    pos: start
+                    size: size
+                    type: qt_resource
               operations:
                 seq:
                   - id: count

@@ -13,3 +13,8 @@ samples:
       header.binary_descriptor.segments_descriptor.collections.count: 2
       header.binary_descriptor.segments_descriptor.collections.collections[0].name.value: org.qtproject.ifw.binaries
       header.binary_descriptor.segments_descriptor.collections.collections[1].name.value: org.qtproject.ifw
+      # meta resource range and qres header read by hand as Komac's qt_ifw.rs does
+      header.binary_descriptor.segments_descriptor.meta_resource_segments[0].size: 45846
+      header.binary_descriptor.segments_descriptor.meta_resource_segments[0].resource.version: 1
+      header.binary_descriptor.segments_descriptor.meta_resource_segments[0].resource.ofs_tree: 45678
+      header.binary_descriptor.segments_descriptor.meta_resource_segments[0].resource.ofs_name_table: 45294

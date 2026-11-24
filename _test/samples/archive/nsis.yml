@@ -1,0 +1,57 @@
+# Installers from Sembiance's file format samples and the Notepad++ release.
+# Slice offsets are the first 512-byte aligned offset at or after the end of
+# the PE image whose bytes 4..19 are the first header signature, as the NSIS
+# stub searches. Expects were read by hand from the first header and, for the
+# non-solid deflate sample, from the header inflated with Python's zlib (wbits
+# -15) and decoded following NSIS fileform.h v311 and Komac's nsis module.
+samples:
+  - url: https://sembiance.com/fileFormatSamples/archive/nullsoftInstallerPackage/Setup.exe
+    sha256: ddc52adcbdaad9fb764609d29c98ad8484933a9c47c0ff596716089014de2936
+    name: nsis_Setup.exe
+    extract:
+      format: slice
+      offset: 64512
+    expect:
+      first_header.len_header: 265818
+      body.is_solid: false
+      body.header_block.compression: deflate
+      body.header_block.header.len_header_struct: 300
+      body.header_block.header.install_reg_rootkey: hkey_local_machine
+      len(body.header_block.header.pages): 6
+      len(body.header_block.header.sections): 3
+      body.header_block.header.sections[0].code: 401
+      body.header_block.header.sections[1].code: 4069
+      body.header_block.header.sections[2].code: 4070
+      len(body.header_block.header.entries): 4128
+      body.header_block.header.entries[0].opcode: push_pop
+      body.header_block.header.language_tables[0].lang_id: 1033
+  - url: https://sembiance.com/fileFormatSamples/archive/nullsoftInstallerPackage/atitool_0.0.22.exe
+    sha256: 057437267fa348e96cb729e5282b1c6cb1ddfc50b4709e36e51b52ee473b5912
+    extract:
+      format: slice
+      offset: 47616
+    expect:
+      first_header.len_header: 19373
+      body.is_solid: true
+      body.solid_compression: lzma
+  - url: https://sembiance.com/fileFormatSamples/archive/nullsoftInstallerPackage/privoxy_setup_3_0_6.exe
+    sha256: 6ad9d6a2e3b6d46614e93e9e2613183a09bb5e99c27c56372c1a45b4507d11da
+    extract:
+      format: slice
+      offset: 36864
+    expect:
+      first_header.len_header: 25353
+      body.is_solid: true
+      body.solid_compression: bzip2
+  # Authenticode signature follows the installer data (len_all_data is
+  # 6283438 of the 6294024 bytes after the slice offset).
+  - url: https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.7/npp.8.7.Installer.exe
+    sha256: 3ff0b334954a8ff845756aa09ce4ffb9b7780250cd7d84c1dce97c02ad399db5
+    extract:
+      format: slice
+      offset: 190464
+    expect:
+      first_header.len_header: 1197316
+      first_header.len_all_data: 6283438
+      body.is_solid: true
+      body.solid_compression: lzma

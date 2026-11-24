@@ -917,17 +917,18 @@ types:
       - id: depth
         type: u4
     seq:
-      - id: resource_type
-        type: u4
-        enum: enum_resource_type
-        if: depth == 0
       - id: ofs_name
         type: b31
-        if: depth != 0
+        doc: |
+          Offset of the name (a directory string) from the start of the
+          resource section if `is_name` is set, otherwise the integer ID:
+          the resource type at depth 0, the resource ID at depth 1 and the
+          language ID at depth 2.
       - id: is_name
         type: b1
-        if: depth != 0
-        doc: Whether ofs_name is an id or points to a directory-string
+        doc: |
+          Whether ofs_name points to a directory-string or is an id. Named
+          entries can appear at every depth, including resource types.
       - id: ofs_data_entry
         type: b31
       - id: is_subdirectory
@@ -936,6 +937,11 @@ types:
           Whether ofs_data_entry points to a child (directory entry) or a
           leaf (data entry).
     instances:
+      resource_type:
+        value: ofs_name
+        enum: enum_resource_type
+        if: depth == 0 and not is_name
+        doc: The resource type, for an entry of the root directory with an integer ID.
       subdirectory:
         io: _root._io
         pos: ofs_data_entry + _parent.section_file_offset

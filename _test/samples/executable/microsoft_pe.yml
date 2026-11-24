@@ -18,3 +18,14 @@ samples:
     expect:
       pe.coff_hdr.number_of_sections: 8
       pe.optional_hdr.windows.subsystem: 3
+  # BOINC 7.16.16 setup launcher: its root resource directory has a named
+  # entry ("GIF") before the integer IDs, as listed by pefile 2024.8.26.
+  - url: https://boinc.berkeley.edu/dl/boinc_7.16.16_windows_x86_64.exe
+    sha256: 3f52c167449259ec038da180d16e5e9178b5e2e24730f2a23e1d85ac8da4ea54
+    expect:
+      pe.resources_table.num_named_entries: 1
+      pe.resources_table.named_entries[0].is_name: true
+      pe.resources_table.named_entries[0].name.name: GIF
+      pe.resources_table.num_id_entries: 7
+      pe.resources_table.id_entries[0].resource_type: bitmap
+      pe.resources_table.id_entries[5].resource_type: version
