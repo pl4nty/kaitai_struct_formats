@@ -68,7 +68,7 @@ types:
     meta:
       bit-endian: le
     seq:
-      - id: static
+      - id: is_static
         -orig-id: FMAP_AREA_STATIC
         type: b1
         doc: Static area; only static areas are covered by the FMAP checksum tool.
