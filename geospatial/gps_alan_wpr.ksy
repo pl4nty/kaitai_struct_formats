@@ -41,7 +41,8 @@ seq:
 types:
   wpthdr:
     seq:
-      - id: id
+      - id: magic
+        -orig-id: id
         contents: [0x00, 0xa6, 0x38, 0x5c]
         doc: '`WPT_HDR_ID`, 0x5C38A600.'
       - id: num
@@ -81,7 +82,8 @@ types:
         type: s1
   rtehdr:
     seq:
-      - id: id
+      - id: magic
+        -orig-id: id
         contents: [0x00, 0x59, 0x7f, 0xd8]
         doc: '`RTE_HDR_ID`, 0xD87F5900.'
       - id: num
