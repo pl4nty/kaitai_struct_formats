@@ -9,6 +9,7 @@ meta:
   imports:
     - /network/ipv4_packet
     - /network/ipv6_packet
+    - /network/arp_packet
 doc: |
   Ethernet frame is a OSI data link layer (layer 2) protocol data unit
   for Ethernet networks. In practice, many other networks and/or
@@ -46,6 +47,7 @@ seq:
       cases:
         'ether_type_enum::ipv4': ipv4_packet
         'ether_type_enum::ipv6': ipv6_packet
+        'ether_type_enum::arp': arp_packet
 instances:
   ether_type:
     value: |
