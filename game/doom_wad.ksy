@@ -30,7 +30,7 @@ types:
         type: str
         size: 8
         encoding: ASCII
-        pad-right: 0
+        terminator: 0
     instances:
       contents:
         io: _root._io
@@ -101,14 +101,17 @@ types:
         type: str
         size: 8
         encoding: ASCII
+        terminator: 0
       - id: lower_texture_name
         type: str
         size: 8
         encoding: ASCII
+        terminator: 0
       - id: normal_texture_name
         type: str
         size: 8
         encoding: ASCII
+        terminator: 0
       - id: sector_id
         type: s2
   vertexes:
@@ -169,10 +172,12 @@ types:
         type: str
         size: 8
         encoding: ASCII
+        terminator: 0
       - id: ceil_flat
         type: str
         size: 8
         encoding: ASCII
+        terminator: 0
       - id: light
         type: s2
         doc: |
@@ -244,7 +249,7 @@ types:
           - id: name
             type: str
             size: 8
-            pad-right: 0
+            terminator: 0
             encoding: ASCII
             doc: Name of a texture, only `A-Z`, `0-9`, `[]_-` are valid
           - id: masked
@@ -289,7 +294,7 @@ types:
         type: str
         size: 8
         encoding: ASCII
-        pad-right: 0
+        terminator: 0
         repeat: expr
         repeat-expr: num_patches
 instances:
