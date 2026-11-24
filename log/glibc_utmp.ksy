@@ -60,8 +60,8 @@ types:
   timeval:
     seq:
       - id: sec
-        type: u4
-        doc: Seconds
+        type: s4
+        doc: Seconds (int32_t in glibc's `ut_tv`, even on 64-bit platforms)
       - id: usec
         type: s4
         doc: Microseconds
