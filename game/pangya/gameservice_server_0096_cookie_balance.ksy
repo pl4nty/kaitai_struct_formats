@@ -1,0 +1,25 @@
+# Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/0096.ksy
+# Licence and copyright: see _community/README.md
+#pragma.examples gameservice/server 0096
+#pragma.parseAs GameserviceServerPacket
+meta:
+  id: gameservice_server_0096_cookie_balance
+  title: GameService Server Cookie Balance
+  license: ISC
+  imports:
+    - pstring
+  encoding: ASCII
+  endian: le
+
+doc: |
+  This is the response to [GameService Client 0x0002
+  Hello](/packets/gameservice/client/0002.ksy)
+  and [GameService Client 0x003D Cookie Balance
+  Request](/packets/gameservice/client/003d.ksy).
+
+seq:
+  - id: unknown_a
+    size: 8
+    doc: |
+      One of these longs is the cookie balance, but no examples with a non-zero
+      balance currently are available.

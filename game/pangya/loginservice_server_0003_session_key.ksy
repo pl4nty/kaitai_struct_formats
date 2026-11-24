@@ -1,0 +1,28 @@
+# Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/loginservice/server/0003.ksy
+# Licence and copyright: see _community/README.md
+#pragma.examples loginservice/server 0003
+#pragma.parseAs LoginserviceServerPacket
+meta:
+  id: loginservice_server_0003_session_key
+  title: LoginService Server Session Key
+  license: ISC
+  imports:
+    - pstring
+  encoding: ASCII
+  endian: le
+
+doc: |
+  This packet is sent shortly after choosing a game server to use with
+  [LoginService Client 0x0003 Select
+  Server](/packets/loginservice/client/0003.ksy),
+  and contains the session key the client must use to initiate connection with
+  said game server in [GameService Client 0x0002
+  Hello](/packets/gameservice/client/0002.ksy).
+
+seq:
+  - id: unknown_a
+    size: 4
+    doc: Possibly padding?
+  - id: session_key
+    type: pstring
+    doc: In PangyaTH, this is assigned sequentially!

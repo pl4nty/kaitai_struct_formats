@@ -1,0 +1,44 @@
+# Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/0095.ksy
+# Licence and copyright: see _community/README.md
+#pragma.examples gameservice/server 0095
+#pragma.parseAs GameserviceServerPacket
+meta:
+  id: gameservice_server_0095_money_update
+  title: GameService Server Money Update
+  license: ISC
+  imports:
+    - pstring
+  encoding: ASCII
+  endian: le
+
+doc: |
+  Subtype 0x0102 appears for an unknown reason after every [GameService Client
+  0x0004 Sub-server Connect](/packets/gameservice/client/0004.ksy).
+  
+  Subtype 0x0111 updates the player's pang amount after sending [GameService
+  Client 0x003c Note Send](/packets/gameservice/client/003c.ksy).
+  
+seq:
+  - id: subtype
+    type: u2
+  - id: payload
+    type:
+      switch-on: subtype
+      cases:
+        0x0102: update_money_0102_unknown
+        0x0111: update_money_0111_update_money
+
+types:
+  update_money_0102_unknown:
+    seq:
+      - id: unknown_b
+        size: 1
+  update_money_0111_update_money:
+    seq:
+      - id: unknown_c
+        size: 4
+      - id: pang_amount
+        type: u4
+        doc: Player's new pang balance.
+      - id: unknown_d
+        size: 4

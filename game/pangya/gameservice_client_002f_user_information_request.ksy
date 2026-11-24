@@ -1,0 +1,68 @@
+# Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/client/002f.ksy
+# Licence and copyright: see _community/README.md
+#pragma.examples gameservice/client 002f
+#pragma.parseAs GameserviceClientPacket
+meta:
+  id: gameservice_client_002f_user_information_request
+  title: GameService Client User Information Request
+  license: ISC
+  imports:
+    - pstring
+  encoding: ASCII
+  endian: le
+
+doc: |
+  This packet requests information on another user, typically when the 'User Info'
+  screen is opened.
+  
+  The responses are, if a (valid) `user_id` has been specified:
+  
+  * [GameService Server 0x0157 User Name
+    Response](/packets/gameservice/server/0157.ksy) (if `request_type == 0x05`),
+  * [GameService Server 0x015E User Character
+    Response](/packets/gameservice/server/015e.ksy) (if `request_type == 0x05`),
+  * [GameService Server 0x0156 User Equipment
+    Response](/packets/gameservice/server/0156.ksy) (if `request_type == 0x05`),
+  * [GameService Server 0x0158 User Statistics
+    Response](/packets/gameservice/server/0158.ksy),
+  * [GameService Server 0x015D User Guild
+    Response](/packets/gameservice/server/015d.ksy) (if `request_type == 0x05`),
+  * [GameService Server 0x015C User Course Records
+    Response](/packets/gameservice/server/015c.ksy) (Natural Wind mode records),
+  * [GameService Server 0x015C User Course Records
+    Response](/packets/gameservice/server/015c.ksy) (Grand Prix mode records),
+  * [GameService Server 0x015B Unknown Response (User Information
+    Related)](/packets/gameservice/server/015b.ksy),
+  * [GameService Server 0x015A Unknown Response (User Information
+    Related)](/packets/gameservice/server/015a.ksy),
+  * [GameService Server 0x0159 User Trophies
+    Response](/packets/gameservice/server/0159.ksy),
+  * [GameService Server 0x015C User Course Records
+    Response](/packets/gameservice/server/015c.ksy) (Original mode records),
+  * [GameService Server 0x0257 User Grand Prix Trophy
+    Response](/packets/gameservice/server/0257.ksy), and
+  * [GameService Server 0x0089 User Information
+    Response](/packets/gameservice/server/0089.ksy).
+  
+  The response is, if `user_id == 0x00000000` (or potentially if otherwise
+  invalid):
+  
+  * [GameService Server 0x0089 User Information
+    Response](/packets/gameservice/server/0089.ksy).
+  
+  **Aliases:**
+  * `hsreina/pangya-server`: `PLAYER_REQUEST_INFO`
+  * `eantoniobr/UGPangya`: `PLAYER_REQUEST_PLAYERINFO`
+
+seq:
+  - id: user_id
+    type: u4
+    doc: ID of target.
+  - id: request_type
+    type: u1
+    enum: request_type
+
+enums:
+  request_type:
+    0x00: total
+    0x05: season

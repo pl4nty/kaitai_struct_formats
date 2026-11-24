@@ -1,0 +1,30 @@
+# Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/client/00ba.ksy
+# Licence and copyright: see _community/README.md
+#pragma.examples gameservice/client 00ba
+#pragma.parseAs GameserviceClientPacket
+meta:
+  id: gameservice_client_00ba_room_invite_send
+  title: GameService Client Room Invite Send
+  license: ISC
+  imports:
+    - pstring
+  encoding: ASCII
+  endian: le
+
+doc: |
+  This packet is an invitation to another player to join a particular gameroom.
+  
+  It is sent in tandem with [GameService Client 0x0029 Room Invite
+  Send](/packets/gameservice/client/0029.ksy).
+  
+  The responses are:
+  * [GameService Server 0x0083 Room Invite](/packets/gameservice/server/0083.ksy)
+    (to the invitee), and
+  * [GameService Server 0x012F Room Invite Send
+    Response](/packets/gameservice/server/012f.ksy) (to the inviter).
+
+seq:
+  - id: user_nickname_invitee
+    type: pstring
+  - id: user_id_invitee
+    type: u4

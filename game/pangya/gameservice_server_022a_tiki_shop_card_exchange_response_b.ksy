@@ -1,0 +1,27 @@
+# Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/022a.ksy
+# Licence and copyright: see _community/README.md
+#pragma.examples gameservice/server 022a
+#pragma.parseAs GameserviceServerPacket
+meta:
+  id: gameservice_server_022a_tiki_shop_card_exchange_response_b
+  title: GameService Server Tiki Shop Card Exchange Response B
+  license: ISC
+  imports:
+    - pstring
+  encoding: ASCII
+  endian: le
+
+doc: |
+  This packet acknowledges converting cards in the Card Exchange section of Tiki's
+  Shop.
+  
+  This is one of the responses to [GameService Client 0x0155 Tiki Shop Card
+  Exchange](/packets/gameservice/client/0155.ksy).
+
+seq:
+  - id: unknown_a
+    size: 4
+    doc: All 0x00?
+  - id: card_id
+    type: u4
+    doc: From pangya_xx.iff/Card.iff. The item ID of the new card from the exchange.
