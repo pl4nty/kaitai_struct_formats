@@ -115,7 +115,7 @@ types:
         io: _root._io
         pos: ptr
         size: size
-        process: kaitai.compress.zlib(15, "raw")
+        process: kaitai.compress.deflate
         if: not is_end and compression == compression::deflate
       block_lz4:
         io: _root._io
