@@ -1,0 +1,28 @@
+# Imported from https://github.com/oasis-tcs/mqtt/blob/e7991292d28922784781677570733da6b144b30b/mqtt-sn-2.0/prose/share/kaitai/mqtt_sn_pingreq.ksy
+# Derived from records/packets/pingreq.yaml by bin/spec_records.py -- edit the record, not this file.
+meta:
+  id: mqtt_sn_pingreq
+  title: MQTT-SN v2.0 PINGREQ packet
+  license: LicenseRef-OASIS-IPR-Policy
+  endian: be
+  bit-endian: be
+seq:
+  - id: length
+    type: packet_length
+  - id: packet_type
+    type: u1
+    valid: 12
+  - id: packet_identifier
+    type: u2
+types:
+  packet_length:
+    doc: 'The Length field: 1 byte, or 0x01 followed by a 2 byte length (section 2.1.2).'
+    seq:
+      - id: first
+        type: u1
+      - id: extended
+        type: u2
+        if: first == 1
+    instances:
+      value:
+        value: 'first == 1 ? extended : first'
