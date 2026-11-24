@@ -36,10 +36,10 @@ seq:
 types:
   header:
     seq:
-      - id: signature1
+      - id: magic1
         contents: [0x03, 0xd9, 0xa2, 0x9a]
         doc: u4 0x9AA2D903.
-      - id: signature2
+      - id: magic2
         contents: [0x65, 0xfb, 0x4b, 0xb5]
         doc: u4 0xB54BFB65.
       - id: flags
