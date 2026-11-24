@@ -55,11 +55,6 @@ types:
         type: f4
         -unit: 0.001 s
         doc: again decimal
-      - id: is_connected_to_satellite
-        type: u1
-        repeat: expr
-        repeat-expr: 12
-        doc: likely bools
       - id: signal_strength
         type: u2
         -unit: arb. unts
