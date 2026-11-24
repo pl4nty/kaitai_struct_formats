@@ -92,7 +92,10 @@ types:
   padding:
     seq:
       - id: padding
-        size: _root.tag.header.size.value - _io.pos
+        size: _parent.header.size.value + 10 - _io.pos
+        doc: |
+          Rest of the tag: header.size counts everything after the 10-byte
+          header, so the tag ends at header.size + 10.
 
   # Section 3.4. ID3v2 footer
   footer:
