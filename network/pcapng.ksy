@@ -364,7 +364,8 @@ types:
           - id: records
             -orig-id: Name Resolution Records
             type: record
-            repeat: eos
+            repeat: until
+            repeat-until: _.type == record::record_type::end
           - id: options
             -orig-id: Options (variable)
             type: options
