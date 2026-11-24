@@ -27,6 +27,7 @@ doc: |
   other than the filesystem block size.
 doc-ref:
   - https://github.com/torvalds/linux/blob/8d7fe9885c62fc9a95bf55d9db244d9672a8aadc/fs/erofs/erofs_fs.h
+  - https://github.com/torvalds/linux/blob/8d7fe9885c62fc9a95bf55d9db244d9672a8aadc/fs/erofs/inode.c
   - https://github.com/torvalds/linux/blob/8d7fe9885c62fc9a95bf55d9db244d9672a8aadc/Documentation/filesystems/erofs.rst
 instances:
   superblock:
@@ -165,8 +166,20 @@ types:
       startblk_lo:
         value: 'is_extended ? header.as<inode_extended>.u : header.as<inode_compact>.u'
         doc: For flat inodes, the starting block number of the data.
+      is_nlink_1:
+        -orig-id: EROFS_I_NLINK_1_BIT
+        value: (i_format >> 4) & 1 != 0
+        doc: |
+          In a compact non-directory inode, the link count is 1 and `nb` holds
+          the high 16 bits of the start block / block count instead. (In a
+          directory the same bit means that the `.` dirent is omitted.)
+      has_nb_hi:
+        value: is_extended or (file_type != file_types::directory and is_nlink_1)
+        doc: Whether `nb` holds the high bits of the start block / block count.
+      nlink:
+        value: 'is_extended ? header.as<inode_extended>.nlink : has_nb_hi ? 1 : nb'
       startblk:
-        value: '_root.is_48bit ? (nb.as<u8> << 32) | startblk_lo : startblk_lo'
+        value: 'has_nb_hi ? (nb.as<u8> << 32) | startblk_lo : startblk_lo'
       len_xattr_ibody:
         value: 'xattr_icount == 0 ? 0 : 12 + 4 * (xattr_icount - 1)'
       xattr_ibody:
@@ -222,7 +235,9 @@ types:
       - id: nb
         -orig-id: i_nb
         type: u2
-        doc: nlink, or with 48BIT the high 16 bits of the start block / block count.
+        doc: |
+          nlink, or (in non-directory inodes with EROFS_I_NLINK_1_BIT set) the
+          high 16 bits of the start block / block count.
       - id: size
         -orig-id: i_size
         type: u4
@@ -261,6 +276,7 @@ types:
       - id: nb
         -orig-id: i_nb
         type: u2
+        doc: High 16 bits of the start block / block count.
       - id: size
         -orig-id: i_size
         type: u8
