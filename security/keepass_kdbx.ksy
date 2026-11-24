@@ -37,10 +37,10 @@ doc-ref:
   - https://github.com/keepassxreboot/keepassxc/blob/develop/src/format/Kdbx4Reader.cpp
   - https://github.com/keepassxreboot/keepassxc/blob/develop/src/streams/HmacBlockStream.cpp
 seq:
-  - id: signature1
+  - id: magic1
     contents: [0x03, 0xd9, 0xa2, 0x9a]
     doc: 0x9AA2D903 (little-endian)
-  - id: signature2
+  - id: magic2
     contents: [0x67, 0xfb, 0x4b, 0xb5]
     doc: 0xB54BFB67 (little-endian), KeePass 2.x
   - id: version_minor
