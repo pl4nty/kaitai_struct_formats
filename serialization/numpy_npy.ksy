@@ -21,26 +21,19 @@ meta:
   ks-opaque-types: true
   endian: le
 doc: |
-  Serialization format used by numpy. An lot of bad mistakes have been made when
-  designing this format:
-    * it uses dicts in python syntax:
-      * in order to parse the array one has to have a parser for python language
-        syntax. This cripples interoperability: noone wants to create a parser for
-        python syntax or bring whole python to just parse a `numpy` array.
-      * it is tempting to `exec` these dicts, which could have been a security
-        issue.
-      * they had to use `ast.parse` and manual walking of the tree in order to
-        avoid the issu that in past. Fortunately now in python there is
-        `ast.literal_eval`, which evaluates expressions of primitive types without
-        RCE.
-    The schema of the dicts is fixed, the values in the dicts are integers, the better solution would be to put these numbers as standardized variable-length integers or use something like JSON.
-    * it relies on pickle for serializing non-primitive objects, which is a remote
-      code execution. If one needs `pickle`, he is already fucked up, and pickle
-      is definetily capable to serialize numpy arrays, so there is no benefits to
-      embed `pickle` into this format. The better solution is to state that
-      serializing anything except arrays of literal types is out of scope of the
-      format.
-  
+  Serialization format used by NumPy to store a single array: a magic string,
+  a format version, a header and the raw array data.
+
+  Some properties of the format matter when parsing it:
+
+  * The header is a Python dict literal (with the keys `descr`,
+    `fortran_order` and `shape`), so a full reader needs a parser for a subset
+    of Python literal syntax. NumPy itself reads it with `ast.literal_eval`;
+    evaluating it with `eval` would allow code execution.
+  * Arrays of Python objects are stored with `pickle`, and unpickling
+    untrusted data allows arbitrary code execution. Such arrays are out of
+    scope of this spec.
+
   Testing:
     import numpy as np
     import numpy_npy
@@ -51,11 +44,9 @@ doc: |
     p=numpy_npy.NumpyNpy.from_bytes(b.getvalue())
   
   Warning: This spec cannot currently be used to parse structured arrays and
-  arrays of fixed-length strings , such as "S10". They are currently out of scope.
-  Behavior when the file being parsed contains them is undefined. Because of
-  limitations of KS no errors will be emitted, just the stream will be parsed
-  incorrectly with unpredictable effect and probably even a vulnerability.
-  
+  arrays of fixed-length strings, such as "S10"; they are out of scope. No
+  error is raised for them: the array data is parsed incorrectly.
+
 doc-ref: 
   - https://github.com/numpy/numpy/blob/067cb067cb17a20422e51da908920a4fbb3ab851/doc/neps/nep-0001-npy-format.rst
   - https://docs.scipy.org/doc/numpy/reference/generated/numpy.lib.format.html
