@@ -148,6 +148,14 @@ types:
         0xaa64:
           id: arm64
           doc: ARM64 little endian
+        0xa641:
+          id: arm64ec
+          doc: ABI that enables interoperability between native ARM64 and emulated x64 code.
+        0xa64e:
+          id: arm64x
+          doc: |
+            Binary format that allows both native ARM64 and ARM64EC code to coexist in the
+            same file.
         0x1c4:
           id: arm_nt
           -orig-id: IMAGE_FILE_MACHINE_ARMNT
@@ -188,9 +196,19 @@ types:
           id: powerpc_fp
           -orig-id: IMAGE_FILE_MACHINE_POWERPCFP
           doc: Power PC with floating point support
+        0x160:
+          id: r3000_be
+          -orig-id: IMAGE_FILE_MACHINE_R3000BE
+          doc: MIPS I compatible 32-bit big endian
+        0x162:
+          id: r3000
+          doc: MIPS I compatible 32-bit little endian
         0x166:
           id: r4000
-          doc: MIPS little endian
+          doc: MIPS III compatible 64-bit little endian
+        0x168:
+          id: r10000
+          doc: MIPS IV compatible 64-bit little endian
         0x5032:
           id: riscv32
           doc: RISC-V 32-bit address space
