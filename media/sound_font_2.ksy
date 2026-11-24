@@ -3,7 +3,7 @@ meta:
   title: SoundFont 2
   file-extension: sf2
   license: MIT
-  encoding: UTF-8 # though stated ASCII in the spec, UTF-8 is likely to be used as well
+  encoding: ISO-8859-1 # the spec says ASCII, but 8-bit text (e.g. a Latin-1 copyright sign) is common; Latin-1 decodes any byte
   endian: le
 seq:
   - id: chunk
