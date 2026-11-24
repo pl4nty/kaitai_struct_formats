@@ -12,7 +12,9 @@ meta:
 
 doc: |
   Base file format used by the Source Engine to store nav mesh data for maps. This
-  KSY file does *not* account for derivative implementations.
+  KSY file does *not* account for derivative implementations, except for the
+  per-area attribute mask that Team Fortress 2 (subversion 2) appends to each
+  area.
 
   Code for the base NAV file format can be found in `game/server/nav_file.cpp`,
   which is located in the Source SDK 2013 repository (located at
@@ -419,6 +421,13 @@ types:
           ID of area to inherit visibility bind information from. Only exists in NAV
           version 16 and later.
       # Custom data can be appended here.
+      - id: tf2_attribute_flag
+        type: u4
+        if: '_root.version >= 10 and _root.subversion == 2'
+        doc: |
+          Team Fortress 2 (subversion 2) only: bit mask of TF-specific area
+          attributes (spawn rooms, setup gates, capture point blocking, etc.),
+          see the `tf2_attribute_bit` enum.
     types:
       nav_area_attribute_field:
         meta:
@@ -461,6 +470,38 @@ types:
         0x20000000: nav_mesh_func_cost
         0x40000000: nav_mesh_has_elevator # Area is in an elevator's path.
         0x80000000: nav_mesh_nav_blocker # Area is blocked by nav blocker ( Alas, needed to hijack a bit in the attributes to get within a cache line [7/24/2008 tom]).
+      # Enum in code: TFNavAttributeType (Team Fortress 2)
+      tf2_attribute_bit:
+        0x00000000: tf_nav_invalid  # also look for nav_mesh_nav_blocker (w/ nav_debug_blocked convar).
+        0x00000001: tf_nav_blocked  # blocks nav area (for some tf-specific reason).
+        0x00000002: tf_nav_spawn_room_red  # marks a nav area as if it was in a spawn room for red team.
+        0x00000004: tf_nav_spawn_room_blue  # marks a nav area as if it was in a spawn room for blu team.
+        0x00000008: tf_nav_spawn_room_exit  # marks an exit from a spawn room.
+        0x00000010: tf_nav_has_ammo  # attribute that is applied when an ammo pack is on a nav area.
+        0x00000020: tf_nav_has_health  # attribute that is applied when a health pack is on a nav area.
+        0x00000040: tf_nav_control_point  # attribute that is applied when a control point is on a nav area.
+        0x00000080: tf_nav_blue_sentry_danger  # marks that a red sentry is visible to the nav area.
+        0x00000100: tf_nav_red_sentry_danger  # marks that a red sentry is visible to the nav area.
+        0x00000800: tf_nav_blue_setup_gate  # blocks nav area to red team until the setup period is over.
+        0x00001000: tf_nav_red_setup_gate  # blocks nav area to blue team until the setup period is over.
+        0x00002000: tf_nav_blocked_after_point_capture  # area becomes blocked after a capture point is capped. (the capture point is specified through the `tf_nav_with_x_point` attributes.)
+        0x00004000: tf_nav_blocked_until_point_capture  # area is blocked until a capture point is capped, then is unblocked. (the capture point is specified through the `tf_nav_with_x_point` attributes.)
+        0x00008000: tf_nav_blue_one_way_door  # blocks nav area for red team.
+        0x00010000: tf_nav_red_one_way_door  # blocks nav area for blu team.
+        0x00020000: tf_nav_with_second_point  # selects the second capture point.
+        0x00040000: tf_nav_with_third_point  # attribute modifier that selects the nth capture point (to be utilized by other attributes).
+        0x00080000: tf_nav_with_fourth_point  # attribute modifier that selects the nth capture point (to be utilized by other attributes).
+        0x00100000: tf_nav_with_fifth_point  # attribute modifier that selects the nth capture point (to be utilized by other attributes).
+        0x00200000: tf_nav_sniper_spot  # indicates a good place for a sniper to lurk. (currently unused!)
+        0x00400000: tf_nav_sentry_spot  # indicates a good place to build a sentry (currently unused!)
+        0x00800000: tf_nav_escape_route  # for raid mode. (currently unused!)
+        0x01000000: tf_nav_escape_route_visible  # all areas that have visibility to the escape route. (currently unused!)
+        0x02000000: tf_nav_no_spawning  # don't spawn bots in this area
+        0x04000000: tf_nav_rescue_closet  # for respawning friends in raid mode. (currently unused!)
+        0x08000000: tf_nav_bomb_can_drop_here  # the bomb can be dropped here and reached by the invaders in mvm
+        0x10000000: tf_nav_door_never_blocks  # prevents the nav area from being blocked if an overlapping door closes.
+        0x20000000: tf_nav_door_always_blocks  # always blocks the nav area if an overlapping door closes.
+        0x40000000: tf_nav_unblockable  # prevents an area from being unlocked.
   # Class: NavLadder
   nav_ladder:
     doc: |
