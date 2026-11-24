@@ -61,7 +61,7 @@ types:
         type: b4
         enum: antenna_geom
       - id: rx_pad_id
-        type: b4
+        type: u1
       - id: system_unique_modes
         type: u2
       - id: validity
