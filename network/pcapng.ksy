@@ -50,8 +50,11 @@ types:
     seq:
       - id: options
         type: option
-        repeat: until
-        repeat-until: _.type.type == type::end_of_options
+        repeat: eos
+        doc: |
+          Options are optional: a block may have none, or a list that ends
+          with `end_of_options` (which may itself be left out). They are
+          always the last field of the block body.
     types:
       option:
         seq:
