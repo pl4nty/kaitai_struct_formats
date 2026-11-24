@@ -16,13 +16,15 @@ doc: |
   hierarchical database that is used to store system settings (global
   configuration, per-user, per-application configuration, etc).
 
-  Typically, registry files are stored in:
+  Typically, registry files are stored in the following locations
+  (written with `/` here in place of the Windows path separator, a
+  backslash):
 
-  * System-wide: several files in `%SystemRoot%\System32\Config\`
+  * System-wide: several files in `%SystemRoot%/System32/Config/`
   * User-wide:
-    * `%USERPROFILE%\Ntuser.dat`
-    * `%USERPROFILE%\Local Settings\Application Data\Microsoft\Windows\Usrclass.dat` (localized, Windows 2000, Server 2003 and Windows XP)
-    * `%USERPROFILE%\AppData\Local\Microsoft\Windows\Usrclass.dat` (non-localized, Windows Vista and later)
+    * `%USERPROFILE%/Ntuser.dat`
+    * `%USERPROFILE%/Local Settings/Application Data/Microsoft/Windows/Usrclass.dat` (localized, Windows 2000, Server 2003 and Windows XP)
+    * `%USERPROFILE%/AppData/Local/Microsoft/Windows/Usrclass.dat` (non-localized, Windows Vista and later)
 
   Note that one typically can't access files directly on a mounted
   filesystem with a running Windows OS.
