@@ -13,6 +13,7 @@ meta:
   imports:
     - /network/ethernet_frame
     - /network/packet_ppi
+    - /network/ieee802_11_prism
 doc: |
   PCAP (named after libpcap / winpcap) is a popular format for saving
   network traffic grabbed by network sniffers. It is typically
@@ -109,6 +110,7 @@ types:
           cases:
             'linktype::ppi': packet_ppi
             'linktype::ethernet': ethernet_frame
+            'linktype::ieee802_11_prism': ieee802_11_prism
         doc-ref: 'https://wiki.wireshark.org/Development/LibpcapFileFormat#Packet_Data'
 enums:
   linktype:
