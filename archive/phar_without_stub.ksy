@@ -91,13 +91,13 @@ enums:
       id: sha1
       -orig-id: PHAR_SIG_SHA1
       doc: Indicates a SHA-1 hash.
-    0x4:
+    0x3:
       id: sha256
       -orig-id: PHAR_SIG_SHA256
       doc: |
         Indicates a SHA-256 hash. Available since API version 1.1.0,
         PHP_Archive 0.12.0 and phar extension 1.1.0.
-    0x8:
+    0x4:
       id: sha512
       -orig-id: PHAR_SIG_SHA512
       doc: |
@@ -115,6 +115,14 @@ enums:
         Note: In older versions of the phar extension, this value was used
         for an undocumented and unimplemented "PGP" signature type
         (`PHAR_SIG_PGP`).
+    0x11:
+      id: openssl_sha256
+      -orig-id: PHAR_SIG_OPENSSL_SHA256
+      doc: Indicates an OpenSSL signature over a SHA-256 hash.
+    0x12:
+      id: openssl_sha512
+      -orig-id: PHAR_SIG_OPENSSL_SHA512
+      doc: Indicates an OpenSSL signature over a SHA-512 hash.
 types:
   serialized_value:
     seq:
