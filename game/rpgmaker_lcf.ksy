@@ -95,9 +95,11 @@ types:
       is_struct:
         value: |
           _root.is_database ? (id.value == 0x15 or id.value == 0x16 or id.value == 0x1d)
-            : _root.is_save ? (id.value != 0x67 and id.value != 0x6c and id.value != 0x6e and id.value != 0x72)
+            : _root.is_save ? (id.value >= 0x64 and id.value <= 0x71 and id.value != 0x67 and id.value != 0x6c and id.value != 0x6e)
             : false
-        doc: True if the data is a nested structure (chunk list).
+        doc: |
+          True if the data is a nested structure (chunk list). Chunks with
+          an ID not known to liblcf are left raw.
   chunk_list:
     doc: A structure, as a list of chunks ending with a chunk ID of 0.
     seq:
