@@ -12,8 +12,10 @@ doc: |
   The structure of the Stronghold Crusader AI Village file format is similar to
   the one of the map file format. It consists of a directory, specifying
   properties of the following data sections. Some sections are compressed using
-  blast compression, an implementation of which can be found at
+  blast compression (PKWARE Data Compression Library "implode"), an
+  implementation of which can be found at
   https://github.com/ladislav-zezula/StormLib/tree/master/src/pklib.
+  Compressed sections are not decompressed by this spec.
 seq:
   - id: dir
     type: dir
@@ -42,7 +44,8 @@ seq:
   - id: parr
     type: s4
     repeat: expr
-    repeat-expr: _root.dir.uncompr_size[11]/4 # always 10 or 50
+    repeat-expr: _root.dir.len_uncompressed[11] / 4
+    doc: Always 10 or 50 entries.
   - id: tarr
     type: u4
     repeat: expr
@@ -50,24 +53,36 @@ seq:
   - id: pause
     type: u4
 types:
-  dir:  # directory
+  dir:
+    doc: Directory describing the data sections that follow it.
     seq:
-      - id: size    # always 2036
+      - id: len_dir
+        -orig-id: size
         type: u4
-      - id: fswd    # file size without directory
+        doc: Size of the directory; always 2036.
+      - id: len_file_without_dir
+        -orig-id: fswd
         type: u4
-      - id: sec_cnt # always 14
+        doc: File size without the directory.
+      - id: num_sections
+        -orig-id: sec_cnt
         type: u4
-      - id: version # always 200
+        doc: Number of sections; always 14.
+      - id: version
         type: u4
+        doc: Always 200.
       - id: padding0
-        contents: [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-      - id: uncompr_size
+        contents: [
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+          0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+        ]
+      - id: len_uncompressed
+        -orig-id: uncompr_size
         type: u4
         repeat: expr
         repeat-expr: 100
-      - id: compr_size
+      - id: len_compressed
+        -orig-id: compr_size
         type: u4
         repeat: expr
         repeat-expr: 100
@@ -75,7 +90,8 @@ types:
         type: u4
         repeat: expr
         repeat-expr: 100
-      - id: is_compr
+      - id: is_compressed
+        -orig-id: is_compr
         type: u4
         repeat: expr
         repeat-expr: 100
@@ -85,20 +101,25 @@ types:
         repeat-expr: 100
       - id: padding1
         contents: [0x00, 0x00, 0x00, 0x00]
-  uncompr_sec:  # uncompressed section
+  uncompr_sec:
+    doc: Uncompressed section number `i`.
     params:
       - id: i
-        type: u4
+        type: s4
     seq:
       - id: data
-        size: _root.dir.uncompr_size[i]
-  compr_sec:    # compressed section
+        size: _root.dir.len_uncompressed[i]
+  compr_sec:
+    doc: Compressed section.
     seq:
-      - id: uncompr_size
+      - id: len_uncompressed
+        -orig-id: uncompr_size
         type: u4
-      - id: compr_size
+      - id: len_compressed
+        -orig-id: compr_size
         type: u4
       - id: crc32
         type: u4
       - id: data
-        size: compr_size
+        size: len_compressed
+        doc: Blast-compressed section data.
