@@ -13,8 +13,12 @@ doc: |
   The header contains a table of objects, each with a name, ID, and offset to
   its body. Each body contains vertex and primitive data.
 
-  Note that the vertices are stored untransformed; the anm format is necessary
-  to render the model correctly.
+  Object names store bone indices in the first two characters and bone names
+  in the remaining characters. Note that the vertices are stored
+  untransformed; the anm format is necessary to render the model correctly.
+
+  The base layout is shared with the generic LM model format (see
+  `silent_hill_lm`).
 
 seq:
   - id: magic
