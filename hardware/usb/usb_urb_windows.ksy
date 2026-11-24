@@ -1,11 +1,17 @@
 meta:
   id: usb_urb_windows
+  title: Windows USB request block (URB) function codes
   license: Unlicense
-  endian: le
+doc: |
+  Codes of the operations that a USB client driver on Windows can request
+  from the USB driver stack in a USB request block (URB), the
+  `URB_FUNCTION_*` constants of `usb.h`. This spec only holds the enum for
+  use by other specs.
+doc-ref:
+  - https://msdn.microsoft.com/en-us/library/windows/hardware/ff540409(v=vs.85).aspx
+  - https://raw.githubusercontent.com/reactos/reactos/master/sdk/include/psdk/usb.h
 enums:
   urb_function:
-    # http://msdn.microsoft.com/en-us/library/windows/hardware/ff540409(v=vs.85).aspx
-    # https://raw.githubusercontent.com/reactos/reactos/master/sdk/include/psdk/usb.h
     0x0000: select_configuration
     0x0001: select_interface
     0x0002: abort_pipe
@@ -35,8 +41,8 @@ enums:
     0x001a: class_device
     0x001b: class_interface
     0x001c: class_endpoint
-    0x001d: reserve_0x001d
-    0x001e: sync_reset_pipe_1e
+    0x001d: reserved_0x001d
+    0x001e: sync_reset_pipe_and_clear_stall
     0x001f: class_other
     0x0020: vendor_other
     0x0021: get_status_from_other
@@ -49,13 +55,18 @@ enums:
     0x0028: get_descriptor_from_interface
     0x0029: set_descriptor_to_interface
     0x002a: get_ms_feature_descriptor
-    0x0030: sync_reset_pipe_30
-    0x0031: sync_clear_stall
-    0x0032: control_transfer_ex
-    0x0033: reserved_0x0033
-    0x0034: reserved_0x0034
     0x002b: reserved_0x002b
     0x002c: reserved_0x002c
     0x002d: reserved_0x002d
     0x002e: reserved_0x002e
     0x002f: reserved_0x002f
+    0x0030: sync_reset_pipe
+    0x0031: sync_clear_stall
+    0x0032: control_transfer_ex
+    0x0033: reserved_0x0033
+    0x0034: reserved_0x0034
+    0x0035: open_static_streams
+    0x0036: close_static_streams
+    0x0037: bulk_or_interrupt_transfer_using_chained_mdl
+    0x0038: isoch_transfer_using_chained_mdl
+    0x003d: get_isoch_pipe_transfer_path_delays
