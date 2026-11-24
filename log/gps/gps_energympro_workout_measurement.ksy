@@ -171,8 +171,15 @@ types:
       - id: product
         size: 15
         type: strz
+      - id: reserved1
+        type: u1
       - id: version
-        type: u2
+        type: u1
+      - id: reserved2
+        size: 19
+        doc: |
+          17 reserved bytes, plus 2 bytes that pad gpsbabel's tw_workout
+          struct to a multiple of 4 (sizeof is 80).
 
   stuff:
     seq:
