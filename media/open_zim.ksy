@@ -317,13 +317,13 @@ types:
           - id: blobs_ptrs_compressed_lzma2
             size: info.ptr_size * blob_count_plus_one
             type: blobs_ptrs(blob_count)
-            process: kaitai.compress.lzma(2)
+            process: kaitai.compress.lzma_xz
             if: info.compression == compression::lzma2
           - id: blobs_ptrs_compressed_zstd
             size: info.ptr_size * blob_count_plus_one
             type: blobs_ptrs(blob_count)
             process: kaitai.compress.zstd
-            if: info.compression == compression::lzma2
+            if: info.compression == compression::zstd
           - id: blobs_ptrs_uncompressed
             type: blobs_ptrs(blob_count)
             if: info.compression == compression::none or info.compression == compression::default
@@ -339,7 +339,7 @@ types:
             pos: first_blob_offset
             size: info.ptr_size + _root.minimal_xz_lzma_size # max(8, 4) + minimal_xz_lzma_size
             type: blob_ptr_u
-            process: kaitai.compress.lzma(2)
+            process: kaitai.compress.lzma_xz
             if: info.compression == compression::lzma2
           first_blob_ptr_compressed_zstd:
             io: _root._io
