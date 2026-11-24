@@ -1,25 +1,33 @@
 meta:
   id: usbd_status_windows
-  title: usbd_status
+  title: Windows USB driver status code (USBD_STATUS)
   license: LicenseRef-All-Rights-Reserved
   endian: le
   bit-endian: le
-
+doc: |
+  Status that the Windows USB driver stack reports for a USB request block
+  (URB). It is a 32-bit little-endian number: the 2 most significant bits
+  give the general outcome, the rest is a code that tells the reason.
 doc-ref:
   - https://raw.githubusercontent.com/reactos/reactos/master/sdk/include/psdk/usb.h
   - https://docs.microsoft.com/en-us/previous-versions/windows/hardware/drivers/ff539136(v=vs.85)
-
 seq:
-  - id: error
-    type: b1
-  - id: pending
-    type: b1
-  - id: reserved
-    type: b2
   - id: code
     type: b28
     enum: code
+  - id: reserved
+    type: b2
+  - id: state
+    type: b2
+    enum: state
 enums:
+  state:
+    0: success
+    1: pending
+    2: error
+    3:
+      id: halted
+      doc: An error that stalled the endpoint.
   code:
     0x0000001:
       id: crc
