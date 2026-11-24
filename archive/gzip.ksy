@@ -67,6 +67,14 @@ seq:
     doc: |
       Compressed body of a file archived. Note that we don't make an
       attempt to decompress it here.
+
+      Only a file with a single member is described correctly. RFC 1952
+      allows several members to be concatenated, but the end of a
+      deflate stream can only be found by decompressing it, so this spec
+      takes everything up to the last 8 bytes of the file as the body of
+      the first member. For a multi-member file, `body` then also
+      contains the following members, and `body_crc32` and
+      `len_uncompressed` are those of the last member.
   - id: body_crc32
     -orig-id: CRC32
     type: u4
