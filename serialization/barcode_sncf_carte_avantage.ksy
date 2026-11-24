@@ -1,0 +1,42 @@
+# Imported from https://github.com/NeoRail/train-barcode-kaitai-spec/blob/66a13883559fc7de6964570ede9252fa8eadca5a/sncf/sncf-carte-avantage.ksy
+# Licence and copyright: see _community/README.md
+meta:
+  id: barcode_sncf_carte_avantage
+  title: SNCF Carte Avantage barcode
+  license: CC0-1.0
+  encoding: UTF-8
+
+doc: Barcode used for SNCF Carte Avantage/Carte Liberté
+
+seq:
+  - id: magic
+    contents: [0x68, 0x30, 0x46, 0x56]
+  - id: unknown_1
+    contents: [0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30]
+  - id: unknown_2
+    contents: [0x31, 0x31, 0x31, 0x31]
+  - id: unknown_3
+    contents: [0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30]
+  - id: purchase_date
+    size: 10
+    type: str
+    doc: "Format: dd'/'MM'/'yyyy"
+  - id: unknown_4
+    size: 10
+    type: str
+    doc: "Format: dd'/'MM'/'yyyy, fixed '31/12/2999'."
+  - id: card_number
+    size: 19
+    type: str
+  - id: unknown_5
+    contents: [0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58, 0x58]
+  - id: class
+    size: 1
+    type: str
+  - id: tariff_code
+    size: 4
+    type: str
+  - id: unknown_6
+    size: 10
+    type: str
+    doc: "Format: dd'/'MM'/'yyyy, fixed '01/01/2020'."
