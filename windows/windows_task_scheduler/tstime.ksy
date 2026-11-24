@@ -7,7 +7,7 @@ meta:
   title: Task Scheduler TSTIME
   license: MIT
   imports:
-    - filetime
+    - ../windows_filetime
   endian: le
 
 seq:
@@ -16,4 +16,4 @@ seq:
   - id: pad
     size: 7
   - id: filetime
-    type: filetime
+    type: windows_filetime

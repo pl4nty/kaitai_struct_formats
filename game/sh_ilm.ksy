@@ -2,6 +2,7 @@
 # Licence and copyright: see _community/README.md
 meta:
   id: sh_ilm
+  title: Silent Hill skeletal model format
   file-extension: ilm
   license: MIT
   encoding: ASCII

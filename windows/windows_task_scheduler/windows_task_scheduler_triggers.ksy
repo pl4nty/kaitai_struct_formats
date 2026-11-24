@@ -13,7 +13,7 @@ meta:
     - aligned_u1
     - aligned_u4
     - bstr
-    - filetime
+    - ../windows_filetime
     - tstime
     - tstimeperiod
     - job_schedule

@@ -8,7 +8,7 @@ meta:
   license: MIT
   imports:
     - bstr
-    - filetime
+    - ../windows_filetime
     - tstime
   endian: le
 

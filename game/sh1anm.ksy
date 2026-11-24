@@ -2,6 +2,7 @@
 # Licence and copyright: see _community/README.md
 meta:
   id: sh1anm
+  title: Silent Hill animation format
   file-extension: anm
   license: MIT
   endian: le
