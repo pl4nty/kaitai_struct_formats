@@ -112,11 +112,11 @@ types:
         value: ((ptr & 0xFF) + ((ptr >> 8) & 0xFF) + ((ptr >> 16) & 0xFF)) & 0xFF
 
   checksummer:
-    meta:
-      license: Unlicense
     -affected-by: *checksumming_feature_request
     doc: |
       A checksummer type.
+
+      This type is licensed under the Unlicense.
     params:
       - id: init_value
         type: u1
@@ -176,9 +176,8 @@ types:
             value: "(((is_full ? start_own : _parent.ranges[idx - 1].checksum) + stop) & 0xFF).as<u1>"
 
   xwia:
-    meta:
-      title: extra waveform info
     -orig-id: check_xwia
+    doc: Extra waveform info
     seq:
       - id: len
         type: u1

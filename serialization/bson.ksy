@@ -121,10 +121,7 @@ types:
           - id: content
             size: len
       crypto:
-        meta:
-          application:
-            - libmongocrypt
-            - mongocryptd
+        doc: Used by libmongocrypt and mongocryptd.
         doc-ref:
           - https://github.com/mongodb/specifications/tree/master/source/client-side-encryption/
         seq:

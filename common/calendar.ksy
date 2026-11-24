@@ -52,9 +52,7 @@ types:
       second:
         value: second_in_hour % seconds_per_minute
   cobol_date:
-    meta:
-      xref:
-        iso: "1989:1985"
+    doc-ref: ISO 1989:1985
     -web-ide-representation: "{date}"
     params:
       - id: days_since_epoch

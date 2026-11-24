@@ -199,9 +199,7 @@ types:
           - id: code
             type: rot5_str
   game_state:
-    meta:
-      file-extension: sav
-    doc: Save file format
+    doc: Save file format (file extension `.sav`)
     seq:
       - id: game_id
         type: usual_str
