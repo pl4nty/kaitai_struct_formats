@@ -83,12 +83,15 @@ types:
       - id: cpu
         -orig-id: get_CPUe
         type: cpu_type
-      - id: num_kdf_iterations
+      - id: kdf_iteration_multiplier
         -orig-id: niter
         type: u1
         doc: |
-          Iteration multiplier for the key derivation function of the
-          triple-cipher schemes. Reserved (0) in older revisions.
+          Cost setting for the key derivation function of the triple-cipher
+          schemes, not an iteration count: PBKDF2 runs
+          `kdf_iteration_multiplier * 100000 + 25000` iterations, and scrypt
+          picks its memory and parallelism from it. Reserved (0) in older
+          revisions.
   stream_header:
     -orig-id: pea_stream_hdr
     seq:
@@ -186,8 +189,10 @@ types:
   crypto_subheader:
     -orig-id: TFCAHdr
     doc: |
-      Fortuna-style (FCA) crypto header. The signature and flags bytes are
-      zeroed, the information is in the stream header instead.
+      Header of the "file crypt/authenticate" (FCA) units of
+      W. Ehrhardt's crypto library, which PEA uses for its keyed schemes.
+      The signature and flags bytes are zeroed, the information is in the
+      stream header instead.
     seq:
       - id: fca_sig
         -orig-id: FCAsig
@@ -201,6 +206,11 @@ types:
       - id: password_verifier
         -orig-id: PW_Ver
         type: u2
+        doc: |
+          Derived from the key material, to reject a wrong password early.
+          For the triple-cipher schemes it is zero in the first two
+          subheaders, and the third one holds the XOR of the three
+          verifiers.
 enums:
   control_algo:
     0x00:
@@ -248,6 +258,7 @@ enums:
     0x30:
       id: hmac
       -orig-id: HMAC
+      doc: AES-128 in CTR mode, authenticated with HMAC-SHA1. Encrypts too.
     0x31:
       id: aes128_eax
       -orig-id: EAX
