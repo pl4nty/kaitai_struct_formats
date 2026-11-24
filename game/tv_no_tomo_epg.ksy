@@ -8,44 +8,64 @@ meta:
 seq:
   - id: magic
     contents: "HDPK"
+    doc: HDPK container signature.
   - id: type
     contents: "001B"
+    doc: TV-guide package type code.
   - id: file_length
     type: u4
+    doc: Producer-declared complete file size.
   - id: pointer_table_offset
     type: u4
+    doc: 0x20-relative offset of the common pointer table.
   - id: pointer_table_size
     type: u4
+    doc: Number of 4-byte common-pointer entries.
   - id: unknown
     type: u4
+    doc: Unrecovered common HDPK header word at 0x14.
   - id: footer_size
     type: u4
+    doc: Producer-declared footer byte length.
   - id: unknown1
     type: u4
+    doc: Unrecovered common HDPK header word.
   - id: unknown2
     type: u4
+    doc: Unrecovered common HDPK header word.
   - id: unknown3
     type: u4
+    doc: Unrecovered common HDPK header word.
   - id: unknown4
     type: u4
+    doc: Unrecovered common HDPK header word.
   - id: unknown5
     type: u4
+    doc: Unrecovered common HDPK header word.
   - id: unknown6
     type: u4
+    doc: Unrecovered common HDPK header word.
   - id: unknown7
     type: u4
+    doc: Unrecovered common HDPK header word.
   - id: region_code
     type: u2
+    doc: Geographic/program-guide region code.
   - id: unk
     type: u2
+    doc: Unrecovered 16-bit field paired with region_code.
   - id: number_of_channels
     type: u4
+    doc: Number of 12-byte channel directory entries.
   - id: channel_table_offset
     type: u4
+    doc: 0x20-relative offset of the channel directory.
   - id: number_of_unk
     type: u4
+    doc: Number of timed auxiliary-directory entries.
   - id: offset_to_unk
     type: u4
+    doc: 0x20-relative offset of the timed auxiliary directory.
     
 instances:
   pointer_table:
@@ -72,12 +92,16 @@ types:
       - id: broadcast_type
         type: u2
         enum: broadcast_type
+        doc: Broadcast medium/type code.
       - id: channel_number
         type: u2
+        doc: Display/channel number within the regional guide.
       - id: program_data_count
         type: u4
+        doc: Number of program-pointer entries belonging to this channel.
       - id: offset_to_program_pointer
         type: u4
+        doc: 0x20-relative offset of this channel's program-pointer array.
     
     instances:
       pointer_to_program:
@@ -90,8 +114,10 @@ types:
     seq:
       - id: program_id
         type: u4
+        doc: Program identifier used by the guide.
       - id: offset_to_program
         type: u4
+        doc: 0x20-relative offset of the corresponding program_data_table.
         
     instances:
       pointer_to_program:
@@ -102,29 +128,42 @@ types:
     seq:
       - id: start_timestamp
         type: u4
+        doc: Program start timestamp.
       - id: end_timestamp
         type: u4
+        doc: Program end timestamp.
       - id: text_offset
         type: u4
+        doc: |
+          0x20-relative reference to program text in the companion string
+          data.
       - id: genre
         type: u2
+        doc: Genre code.
       - id: audio_type
         type: u2
+        doc: Audio-type code.
       - id: resolution
         type: u4
+        doc: Resolution/service code.
       - id: position
         type: u4
+        doc: Program position/order field.
         
   unknown_table:
     seq:
       - id: start_timestamp
         type: u4
+        doc: Start timestamp of this auxiliary interval.
       - id: end_timestamp
         type: u4
+        doc: End timestamp of this auxiliary interval.
       - id: unk1
         type: u4
+        doc: Number of nested 16-byte auxiliary records.
       - id: unk2
         type: u4
+        doc: 0x20-relative offset of the nested auxiliary-record array.
         
     instances:
       unk_table:
@@ -148,6 +187,7 @@ types:
     seq:
       - id: value
         type: u4
+        doc: 0x20-relative target offset.
         
     instances:
       target:
