@@ -1,0 +1,25 @@
+# BOINC 7.16.16, an InstallShield setup launcher. The slice is the overlay:
+# from the end of the last PE section (1377280) to the 6 zero bytes that pad
+# it before the Authenticode signature (13457952). Header and file entries read by hand from a hex dump,
+# following Komac's installshield module.
+samples:
+  - url: https://boinc.berkeley.edu/dl/boinc_7.16.16_windows_x86_64.exe
+    sha256: 3f52c167449259ec038da180d16e5e9178b5e2e24730f2a23e1d85ac8da4ea54
+    extract:
+      format: slice
+      offset: 1377280
+      size: 12080666
+    eof: true
+    expect:
+      header.magic: InstallShield
+      header.num_files: 4
+      files[0].name: setup.bmp
+      files[0].len_data: 97545
+      files[1].name: 0x0409.ini
+      files[1].len_data: 4612
+      files[2].name: BOINC.msi
+      files[2].len_data: 11975869
+      files[3].name: Setup.ini
+      files[3].len_data: 1346
+      files[3].flags: 6
+      files[3].is_encoded: true

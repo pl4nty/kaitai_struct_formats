@@ -1,0 +1,17 @@
+# HLAE 2.185.2, a WiX Burn bundle. The .wixburn section's PointerToRawData
+# (727552) and the section fields were read with a hex dump following WiX
+# v7 section.cpp; the cabinet file counts are from `7z l`.
+samples:
+  - url: https://github.com/advancedfx/advancedfx/releases/download/v2.185.2/HLAE_Setup.exe
+    sha256: 2d017377fa68f20b809ffd424f89652792850d2b41f842d28833a0bced18fc75
+    params:
+      ofs_burn_section: "_data.index(bytes.fromhex('0043f10002000000'))"
+    expect:
+      burn_section.len_stub: 777216
+      burn_section.container_format: cabinet
+      burn_section.num_containers: 2
+      burn_section.len_containers[0]: 190928
+      burn_section.len_containers[1]: 6721030
+      bootstrapper_application_container.header.num_files: 21
+      attached_containers.is_present: true
+      attached_containers.cabinet.header.num_files: 28

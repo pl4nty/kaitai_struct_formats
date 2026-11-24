@@ -1,0 +1,25 @@
+# TeraCopy 4.0.0.28 installer. Footer and file table read by hand from a hex
+# dump, following Komac's advanced module and SabreTools' AdvancedInstaller
+# models.
+samples:
+  - url: https://codesector.nyc3.cdn.digitaloceanspaces.com/teracopy4.0.0.28.exe
+    sha256: 7c46f86afe55c6ae81c92a079b7df2c632ca7b46c914a84e7bdf39b5f5774bf9
+    params:
+      ofs_footer: "_data.rindex(b'ADVINSTSFX') - 64"
+    expect:
+      footer.ofs_footer: 15307264
+      footer.num_files: 3
+      footer.version: 100
+      footer.hex_string: 5DBDF80D864D47DC9C7E8A763B7ABA50
+      files[0].name: 92F06D5\FILES.7z
+      files[0].type_major: 8
+      files[0].type_minor: 6
+      files[0].xor_flag: 2
+      files[0].len_data: 9803562
+      files[1].name: 92F06D5\teracopy4.0.0.28.7z
+      files[1].type_major: 3
+      files[1].type_minor: 7
+      files[2].name: teracopy4.0.0.28.ini
+      files[2].len_data: 1284
+      # the XOR is undone: FILES.7z starts with the 7z signature
+      files[0].head[0:6]: 377abcaf271c

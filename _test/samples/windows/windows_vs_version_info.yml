@@ -1,0 +1,45 @@
+# RT_VERSION resources sliced out of installers. The offsets and sizes are the
+# resource data entries' (RVA converted to a file offset) and the expects are
+# the VS_FIXEDFILEINFO and string tables as read by pefile 2024.8.26.
+samples:
+  # Notepad++ 8.7 installer (NSIS)
+  - url: https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.7/npp.8.7.Installer.exe
+    sha256: 3ff0b334954a8ff845756aa09ce4ffb9b7780250cd7d84c1dce97c02ad399db5
+    extract:
+      format: slice
+      offset: 188496
+      size: 664
+    eof: true
+    expect:
+      root.body.key: VS_VERSION_INFO
+      root.body.fixed_file_info.file_version_major: 8
+      root.body.fixed_file_info.file_version_minor: 7
+      root.body.fixed_file_info.file_os: windows32
+      root.body.fixed_file_info.file_type: app
+      root.body.children[0].body.key: StringFileInfo
+      root.body.children[0].body.children[0].body.key: 040904b0
+      len(root.body.children[0].body.children[0].body.children): 6
+      root.body.children[0].body.children[0].body.children[0].body.key: CompanyName
+      root.body.children[0].body.children[0].body.children[0].body.string_value: Don HO don.h@free.fr
+      root.body.children[0].body.children[0].body.children[2].body.string_value: 8.7.0.0
+      root.body.children[1].body.key: VarFileInfo
+      root.body.children[1].body.children[0].body.translations[0].language_id: 0x0409
+      root.body.children[1].body.children[0].body.translations[0].code_page: 0x04b0
+  # TeraCopy 4.0.0.28 installer (Advanced Installer)
+  - url: https://codesector.nyc3.cdn.digitaloceanspaces.com/teracopy4.0.0.28.exe
+    sha256: 7c46f86afe55c6ae81c92a079b7df2c632ca7b46c914a84e7bdf39b5f5774bf9
+    extract:
+      format: slice
+      offset: 3977096
+      size: 1044
+    eof: true
+    expect:
+      root.body.fixed_file_info.file_version_major: 4
+      root.body.fixed_file_info.file_version_build: 0
+      root.body.fixed_file_info.file_version_revision: 28
+      root.body.fixed_file_info.file_flags_mask: 0x3f
+      root.body.fixed_file_info.file_flags.debug: true
+      root.body.fixed_file_info.file_type: dll
+      len(root.body.children[0].body.children[0].body.children): 10
+      root.body.children[0].body.children[0].body.children[7].body.key: OriginalFileName
+      root.body.children[0].body.children[0].body.children[7].body.string_value: teracopy4.0.0.28.exe
