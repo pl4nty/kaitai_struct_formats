@@ -39,7 +39,7 @@ types:
         type: u2
         if: len_payload_primary == 126
       - id: len_payload_extended_2
-        type: u4
+        type: u8
         if: len_payload_primary == 127
       - id: mask_key
         size: 4
