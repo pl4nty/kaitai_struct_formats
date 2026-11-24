@@ -268,13 +268,52 @@ types:
   utf8_cp_info:
     -orig-id: CONSTANT_Utf8_info
     doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.7
+    doc: |
+      Class files store strings in "modified UTF-8": U+0000 is encoded as
+      C0 80, and supplementary characters as two 3-byte encoded UTF-16
+      surrogates (ED A0..BF xx ED B0..BF xx). Such strings are not valid
+      UTF-8, so `value` is only provided when the raw bytes contain neither
+      form; `value_raw` always holds the bytes.
     seq:
       - id: str_len
         type: u2
-      - id: value
-        type: str
+      - id: data
         size: str_len
-        encoding: UTF-8
+        type: modified_utf8_scan
+    instances:
+      value_raw:
+        value: data.raw
+      value:
+        value: data.raw.to_s("UTF-8")
+        if: not data.has_modified_forms
+    types:
+      modified_utf8_scan:
+        seq:
+          - id: raw
+            size-eos: true
+        instances:
+          units:
+            pos: 0
+            type: unit(_io.size - _io.pos >= 2)
+            repeat: until
+            repeat-until: _.is_modified_form or _io.eof
+            if: raw.size > 0
+          has_modified_forms:
+            value: raw.size > 0 and units.last.is_modified_form
+        types:
+          unit:
+            params:
+              - id: has_next
+                type: bool
+            seq:
+              - id: b
+                type: u1
+              - id: b2
+                type: u1
+                if: b == 0xed and has_next
+            instances:
+              is_modified_form:
+                value: b == 0xc0 or (b == 0xed and has_next and b2 >= 0xa0)
   method_handle_cp_info:
     -orig-id: CONSTANT_MethodHandle_info
     doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.8
