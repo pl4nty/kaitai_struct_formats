@@ -7,8 +7,9 @@ meta:
       - fmt/693 # Mach-O 64bit
     wikidata: Q2627217
   license: MIT
-  ks-version: 0.9
+  ks-version: '0.10'
   imports:
+    - /common/vlq_base128_le
     - /serialization/asn1/asn1_der
 doc-ref:
   - https://www.stonedcoder.org/~kd/lib/MachORuntime.pdf
@@ -369,52 +370,6 @@ types:
       reserved1:
         value: value >> 8
         doc: Reserved (unused) bits.
-  uleb128:
-    -webide-representation: "{value:dec}"
-    seq:
-      - id: b1
-        type: u1
-      - id: b2
-        type: u1
-        if: "b1 & 0x80 != 0"
-      - id: b3
-        type: u1
-        if: "b1 & 0x80 != 0 and b2 & 0x80 != 0"
-      - id: b4
-        type: u1
-        if: "b1 & 0x80 != 0 and b2 & 0x80 != 0 and b3 & 0x80 != 0"
-      - id: b5
-        type: u1
-        if: "b1 & 0x80 != 0 and b2 & 0x80 != 0 and b3 & 0x80 != 0 and b4 & 0x80 != 0"
-      - id: b6
-        type: u1
-        if: "b1 & 0x80 != 0 and b2 & 0x80 != 0 and b3 & 0x80 != 0 and b4 & 0x80 != 0 and b5 & 0x80 != 0"
-      - id: b7
-        type: u1
-        if: "b1 & 0x80 != 0 and b2 & 0x80 != 0 and b3 & 0x80 != 0 and b4 & 0x80 != 0 and b5 & 0x80 != 0 and b6 & 0x80 != 0"
-      - id: b8
-        type: u1
-        if: "b1 & 0x80 != 0 and b2 & 0x80 != 0 and b3 & 0x80 != 0 and b4 & 0x80 != 0 and b5 & 0x80 != 0 and b6 & 0x80 != 0 and b7 & 0x80 != 0"
-      - id: b9
-        type: u1
-        if: "b1 & 0x80 != 0 and b2 & 0x80 != 0 and b3 & 0x80 != 0 and b4 & 0x80 != 0 and b5 & 0x80 != 0 and b6 & 0x80 != 0 and b7 & 0x80 != 0 and b8 & 0x80 != 0"
-      - id: b10
-        type: u1
-        if: "b1 & 0x80 != 0 and b2 & 0x80 != 0 and b3 & 0x80 != 0 and b4 & 0x80 != 0 and b5 & 0x80 != 0 and b6 & 0x80 != 0 and b7 & 0x80 != 0 and b8 & 0x80 != 0 and b9 & 0x80 != 0"
-    instances:
-      value:
-        value: >
-          ((b1  % 128) <<  0) + ((b1 & 0x80 == 0) ? 0 :
-          ((b2  % 128) <<  7) + ((b2 & 0x80 == 0) ? 0 :
-          ((b3  % 128) << 14) + ((b3 & 0x80 == 0) ? 0 :
-          ((b4  % 128) << 21) + ((b4 & 0x80 == 0) ? 0 :
-          ((b5  % 128) << 28) + ((b5 & 0x80 == 0) ? 0 :
-          ((b6  % 128) << 35) + ((b6 & 0x80 == 0) ? 0 :
-          ((b7  % 128) << 42) + ((b7 & 0x80 == 0) ? 0 :
-          ((b8  % 128) << 49) + ((b8 & 0x80 == 0) ? 0 :
-          ((b9  % 128) << 56) + ((b8 & 0x80 == 0) ? 0 :
-          ((b10 % 128) << 63))))))))))
-        -webide-parse-mode: eager
   segment_command_64:
     meta:
       endian:
@@ -556,9 +511,9 @@ types:
                   #  type: u8
                   #  if: "'eh' in augmentation_string"
                   - id: code_alignment_factor
-                    type: uleb128
+                    type: vlq_base128_le
                   - id: data_alignment_factor
-                    type: uleb128
+                    type: vlq_base128_le
                   - id: return_address_register
                     type: u1
                   - id: augmentation
@@ -567,7 +522,7 @@ types:
               augmentation_entry:
                 seq:
                   - id: length
-                    type: uleb128
+                    type: vlq_base128_le
                   - id: fde_pointer_encoding
                     type: u1
                     if: _parent.aug_str.next.chr == 82
@@ -672,7 +627,7 @@ types:
               - id: opcode_and_immediate
                 type: u1
               - id: uleb
-                type: uleb128
+                type: vlq_base128_le
                 if: >
                   opcode == opcode::set_segment_and_offset_uleb or
                   opcode == opcode::add_address_uleb or
@@ -680,7 +635,7 @@ types:
                   opcode == opcode::do_rebase_add_address_uleb or
                   opcode == opcode::do_rebase_uleb_times_skipping_uleb
               - id: skip
-                type: uleb128
+                type: vlq_base128_le
                 if: "opcode == opcode::do_rebase_uleb_times_skipping_uleb"
             instances:
               opcode:
@@ -707,7 +662,7 @@ types:
           - id: opcode_and_immediate
             type: u1
           - id: uleb
-            type: uleb128
+            type: vlq_base128_le
             if: >
               opcode == bind_opcode::set_dylib_ordinal_uleb or
               opcode == bind_opcode::set_append_sleb or
@@ -716,7 +671,7 @@ types:
               opcode == bind_opcode::do_bind_add_address_uleb or
               opcode == bind_opcode::do_bind_uleb_times_skipping_uleb
           - id: skip
-            type: uleb128
+            type: vlq_base128_le
             if: "opcode == bind_opcode::do_bind_uleb_times_skipping_uleb"
           - id: symbol
             type: strz
@@ -739,7 +694,7 @@ types:
         -webide-representation: "{children_count} children, term_size={terminal_size.value}"
         seq:
           - id: terminal_size
-            type: uleb128
+            type: vlq_base128_le
           - id: terminal
             size: terminal_size.value
           - id: children_count
@@ -756,7 +711,7 @@ types:
                 type: strz
                 encoding: ASCII
               - id: node_offset
-                type: uleb128
+                type: vlq_base128_le
             instances:
               value:
                 pos: node_offset.value
