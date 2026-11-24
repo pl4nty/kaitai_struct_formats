@@ -314,13 +314,13 @@ types:
         type: b1
       - id: inherit_rotation
         type: b1
-        doc: Rotation inherits from another bone	
+        doc: Rotation inherits from another bone
       - id: inherit_translation
         type: b1
-        doc: Translation inherits from another bone	
+        doc: Translation inherits from another bone
       - id: has_fixed_axis
         type: b1
-        doc: The bone's shaft is fixed in a direction	
+        doc: The bone's shaft is fixed in a direction
       - id: has_local_axes
         type: b1
       - id: physics_after_deform
