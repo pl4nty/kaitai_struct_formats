@@ -2,8 +2,7 @@ meta:
   id: ar_gnu_thin
   title: GNU binutils thin ar archive
   application: ar
-  file-extension:
-    - a
+  file-extension: a
   license: CC0-1.0
   imports:
     - space_padded_number

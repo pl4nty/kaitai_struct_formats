@@ -2,8 +2,7 @@ meta:
   id: gps_destinator_trk
   title: Destinator track
   application: Destinator
-  file-extension:
-    - dat
+  file-extension: dat
   tags:
     - geospatial
   license: GPL-2.0-or-later

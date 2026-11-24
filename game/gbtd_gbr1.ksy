@@ -2,8 +2,7 @@ meta:
   id: gbtd_gbr1
   title: GBM file
   application: Gameboy Map Builder, GBMB
-  file-extension:
-    - gbm
+  file-extension: gbm
   tags:
     - game
   license: MIT
