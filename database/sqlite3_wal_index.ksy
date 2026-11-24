@@ -103,7 +103,7 @@ types:
   index_block:
     seq:
       - id: page_mapping
-        type: page_mapping_one
+        type: page_mapping
       - id: hash_table
         type: hash_table
   page_mapping:
