@@ -172,7 +172,7 @@ types:
     seq:
       - id: pes_header
         type: pes_header
-        if: is_pes
+        if: is_pes and _io.size >= 6
       - id: psi
         type: psi_payload
         if: not is_pes and _io.size > 0
@@ -202,10 +202,13 @@ types:
           unbounded (allowed for video).
       - id: optional_header
         type: pes_optional_header
-        if: has_optional_header
+        if: has_optional_header and _io.size - _io.pos >= 3
       - id: data
         size-eos: true
-        doc: Start of the elementary stream data.
+        doc: |
+          Start of the elementary stream data; or the rest of the PES
+          header, if it is cut by the end of the TS packet and continues
+          in the next packet of this PID.
     instances:
       has_optional_header:
         value: |
@@ -252,6 +255,8 @@ types:
       - id: fields
         size: len_fields
         type: pes_optional_fields(pts_dts_flags)
+        if: len_fields <= _io.size - _io.pos
+        doc: Absent if cut by the end of the TS packet.
   pes_optional_fields:
     params:
       - id: pts_dts_flags
@@ -293,6 +298,12 @@ types:
         value: (bits_32_30 << 30) | (bits_29_15 << 15) | bits_14_0
         doc: In units of 1/90000 s.
   psi_payload:
+    doc: |
+      Payload holding the start of at least one PSI section. Only the
+      first section that starts in this packet is decoded, as far as it
+      is contained in the packet: a section may start anywhere in the
+      payload, so that even its header can be cut by the end of the
+      packet and continue in the next packet of this PID.
     seq:
       - id: len_previous_section_end
         -orig-id: pointer_field
@@ -302,24 +313,41 @@ types:
           before the first section that starts in this packet.
       - id: previous_section_end
         size: len_previous_section_end
+        if: has_table_id
       - id: table_id
         type: u1
         enum: table_id
+        if: has_table_id
         doc: 0xFF means stuffing until the end of the packet.
       - id: section
         type: section_header
-        if: table_id != table_id::stuffing
+        if: has_section_header
+      - id: long_header
+        type: long_section_header
+        if: has_long_header
       - id: section_data
         size: section.len_section - 5
         type: long_section_data(table_id)
-        if: |
-          table_id != table_id::stuffing and section.section_syntax_indicator
-          and section.len_section >= 9
-          and section.len_section - 5 <= _io.size - _io.pos
+        if: is_section_complete
         doc: |
           Present only when the whole section is in this packet; otherwise
           it continues in the next packets of this PID. Further sections or
           0xFF stuffing may follow.
+    instances:
+      ofs_section:
+        value: len_previous_section_end + 1
+        doc: Offset of table_id in the payload.
+      has_table_id:
+        value: ofs_section < _io.size
+        doc: False if the pointer field points outside of the packet (invalid).
+      has_section_header:
+        value: has_table_id and table_id != table_id::stuffing and ofs_section + 3 <= _io.size
+      has_long_header:
+        value: has_section_header and section.section_syntax_indicator and ofs_section + 8 <= _io.size
+      is_section_complete:
+        value: >-
+          has_long_header and section.len_section >= 9
+          and ofs_section + 3 + section.len_section <= _io.size
   long_section_data:
     params:
       - id: table_id
@@ -343,31 +371,28 @@ types:
         doc: Set for the long section form with version and CRC.
       - id: private_indicator
         type: b1
-      - id: reserved1
+      - id: reserved
         type: b2
       - id: len_section
         type: b12
         doc: Number of bytes of the section after this field.
+  long_section_header:
+    doc: Additional header fields of sections with section_syntax_indicator set.
+    seq:
       - id: table_id_extension
         type: u2
-        if: section_syntax_indicator
         doc: transport_stream_id in a PAT, program_number in a PMT.
-      - id: reserved2
+      - id: reserved
         type: b2
-        if: section_syntax_indicator
       - id: version_number
         type: b5
-        if: section_syntax_indicator
       - id: current_next_indicator
         type: b1
-        if: section_syntax_indicator
         doc: Unset if the table is not yet applicable.
       - id: section_number
         type: u1
-        if: section_syntax_indicator
       - id: last_section_number
         type: u1
-        if: section_syntax_indicator
   pat:
     doc: Program association table.
     seq:
