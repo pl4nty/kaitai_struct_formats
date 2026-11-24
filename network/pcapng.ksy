@@ -69,6 +69,9 @@ types:
               switch-on: type.type
               cases:
                 'type::comment': str
+          - id: padding
+            size: (4 - length % 4) % 4
+            doc: Pads the value to a 32-bit boundary.
         types:
           type_descriptor:
             seq:
@@ -120,6 +123,9 @@ types:
         -orig-id: Packet Data
         size: captured_packet_size
         #type:
+      - id: padding
+        size: (4 - captured_packet_size % 4) % 4
+        doc: Pads the packet data to a 32-bit boundary.
   block:
     seq:
       - id: type
@@ -373,6 +379,9 @@ types:
               - id: value
                 -orig-id: Record Value
                 size: size
+              - id: padding
+                size: (4 - size % 4) % 4
+                doc: Pads the value to a 32-bit boundary.
             enums:
               record_type:
                 0x0000:
