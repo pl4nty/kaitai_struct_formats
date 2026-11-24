@@ -230,6 +230,11 @@ types:
     seq:
       - id: version_made_by
         type: u2
+        doc: |
+          Lower byte: ZIP specification version supported by the software
+          that made the archive (major * 10 + minor). Upper byte: host
+          system, see `host_system`.
+        doc-ref: https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT - 4.4.2
       - id: version_needed_to_extract
         type: u2
       - id: flags
@@ -273,6 +278,10 @@ types:
       local_header:
         pos: ofs_local_header
         type: pk_section
+      host_system:
+        value: version_made_by >> 8
+        enum: host_system
+        doc: Host system the archive was made on (upper byte of `version_made_by`)
   end_of_central_dir:
     doc-ref: https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT - 4.3.16
     seq:
@@ -382,6 +391,8 @@ types:
             'extra_codes::aex_encryption': aex_encryption
             'extra_codes::xceed_unicode': xceed_unicode
             'extra_codes::alzip_code_page': alzip_code_page
+            'extra_codes::minizip_ng_hash': minizip_ng_hash
+            'extra_codes::keyvaluepairs': keyvaluepairs
             'extra_codes::zip64': zip64(_parent.zip64_has_len_uncompressed, _parent.zip64_has_len_compressed, _parent.zip64_has_ofs_local_header, _parent.zip64_has_disk_start)
     types:
       aex_encryption:
@@ -539,6 +550,50 @@ types:
         seq:
           - id: code_page
             type: u4
+      minizip_ng_hash:
+        doc-ref: https://github.com/zlib-ng/minizip-ng/blob/3da04514/doc/mz_extrafield.md
+        seq:
+          - id: algorithm
+            type: u2
+            enum: minizip_ng_hash_algorithms
+          - id: len_digest
+            type: u2
+          - id: digest
+            size: len_digest
+        enums:
+          minizip_ng_hash_algorithms:
+            10: md5
+            20: sha1
+            22: sha224
+            23: sha256
+            24: sha384
+            25: sha512
+      keyvaluepairs:
+        doc-ref: https://github.com/sozip/keyvaluepairs-spec/blob/master/zip_keyvalue_extra_field_specification.md
+        seq:
+          - id: signature
+            contents: KeyValuePairs
+          - id: num_pairs
+            type: u1
+          - id: pairs
+            type: key_value_pair
+            repeat: expr
+            repeat-expr: num_pairs
+        types:
+          key_value_pair:
+            seq:
+              - id: len_key
+                type: u2
+              - id: key
+                size: len_key
+                type: str
+                encoding: UTF-8
+              - id: len_value
+                type: u2
+              - id: value
+                size: len_value
+                type: str
+                encoding: UTF-8
 enums:
   compression:
     0: none
@@ -579,12 +634,26 @@ enums:
     0x0017: strong_encryption_header
     0x0018: record_management_controls
     0x0019: pkcs7_enc_recip_cert_list
+    0x0020: reserved_for_timestamp
+    0x0021: policy_decryption_key
+    0x0022: smartcrypt_key_provider
+    0x0023: smartcrypt_policy_key_data
     0x0065: ibm_s390_uncomp
     0x0066: ibm_s390_comp
+    # https://github.com/zlib-ng/minizip-ng/blob/3da04514/doc/mz_extrafield.md
+    0x10c5: minizip_ng_sign
+    # https://github.com/PixarAnimationStudios/USD/blob/4d8a92af5a26f7f/pxr/usd/usd/zipFile.cpp#L451
+    0x1986: usd
+    0x1a51: minizip_ng_hash
     0x4690: poszip_4690
     0x5455: extended_timestamp
     0x554e: xceed_unicode
+    # https://github.com/sozip/keyvaluepairs-spec/blob/master/zip_keyvalue_extra_field_specification.md
+    0x564b: keyvaluepairs
     0x5855: infozip_unix_old
+    # https://www.artpol-software.com/ZipArchive/KB/0610242300.aspx
+    0x5a4c: ziparchive_unicode
+    0x5a4d: ziparchive_seekable
     0x6542: beos
     0x7075: infozip_unicode_path
     0x756e: asi_unix
@@ -595,11 +664,33 @@ enums:
     0xa220: microsoft_open_packaging_growth_hint
     # http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/00cd9dc3c2b5/src/share/classes/java/util/jar/JarOutputStream.java#l46
     0xcafe: java_jar
+    0xcdcd: minizip_ng_central_directory
     # https://android.googlesource.com/platform/tools/apksig/+/87d6acee83378201b/src/main/java/com/android/apksig/ApkSigner.java#74
     # https://developer.android.com/studio/command-line/zipalign
     0xd935: zip_align
     0xe57a: alzip_code_page
     0xfd4a: sms_qdos
+  host_system:
+    0: msdos
+    1: amiga
+    2: openvms
+    3: unix
+    4: vm_cms
+    5: atari_st
+    6: os2_hpfs
+    7: macintosh
+    8: z_system
+    9: cp_m
+    10: windows_ntfs
+    11: mvs
+    12: vse
+    13: acorn_risc
+    14: vfat
+    15: alternate_mvs
+    16: beos
+    17: tandem
+    18: os_400
+    19: os_x
   section_types:
     0x0201: central_dir_entry
     0x0403: local_file
