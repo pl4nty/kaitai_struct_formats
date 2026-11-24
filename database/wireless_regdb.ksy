@@ -51,8 +51,8 @@ seq:
   - id: num_countries
     -orig-id: reg_country_num
     type: u4
-  - id: authentication_size
-    -orig-id: signature_len
+  - id: len_authentication
+    -orig-id: signature_length
     type: u4
     doc: length (in bytes) of the signature at the end of the file
 instances:
@@ -62,8 +62,8 @@ instances:
     repeat: expr
     repeat-expr: num_countries
   authentication:
-    pos: _io.size - authentication_size
-    size: authentication_size
+    pos: _io.size - len_authentication
+    size: len_authentication
     doc: |
       Digital signature: an OpenSSL-compatible signature of the SHA-1 hash of
       the rest of the file.
@@ -90,26 +90,28 @@ types:
         doc: in mBi (100 * dBi)
   rule:
     seq:
-      - id: freq_range_ptr
+      - id: ofs_freq_range
+        -orig-id: freq_range_ptr
         type: u4
-      - id: power_rule_ptr
+      - id: ofs_power_rule
+        -orig-id: power_rule_ptr
         type: u4
       - id: flags
         type: flags
     instances:
       power_rule:
-        pos: power_rule_ptr
+        pos: ofs_power_rule
         type: power_rule
       freq_range:
-        pos: freq_range_ptr
+        pos: ofs_freq_range
         type: freq_range
   rule_ptr:
     seq:
-      - id: ptr
+      - id: ofs_rule
         type: u4
     instances:
       rule:
-        pos: ptr
+        pos: ofs_rule
         type: rule
   flags:
     seq:
@@ -159,13 +161,14 @@ types:
 
   rules_collection:
     seq:
-      - id: count
+      - id: num_rule_ptrs
         -orig-id: reg_rule_num
         type: u4
-      - id: ptrs
+      - id: rule_ptrs
+        -orig-id: reg_rule_ptrs
         type: rule_ptr
         repeat: expr
-        repeat-expr: count
+        repeat-expr: num_rule_ptrs
 
   country:
     -orig-id: regdb_file_reg_country
@@ -181,11 +184,12 @@ types:
       - id: dfs_region
         type: b2
         enum: dfs_region
-      - id: reg_collection_ptr
-        type: u4 # regdb_file_reg_rules_collection
+      - id: ofs_rules
+        -orig-id: reg_collection_ptr
+        type: u4
     instances:
       rules:
-        pos: reg_collection_ptr
+        pos: ofs_rules
         type: rules_collection
 enums:
   dfs_region:
