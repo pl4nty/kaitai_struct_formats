@@ -37,9 +37,9 @@ types:
     seq:
       - id: prefix
         type: u1
-      - id: len_len
+      - id: len_payload_long
         type:
-          switch-on: num_len_len_bytes
+          switch-on: len_len_payload
           cases:
             1: b8
             2: b16
@@ -66,12 +66,12 @@ types:
         value: prefix >= 0xc0
       is_long:
         value: (prefix >= 0xb8 and prefix < 0xc0) or prefix >= 0xf8
-      num_len_len_bytes:
+      len_len_payload:
         value: 'is_list ? prefix - 0xf7 : prefix - 0xb7'
         doc: Number of length bytes following the prefix (only for long forms).
       len_payload:
         value: |
-          (is_long ? len_len : (is_list ? prefix - 0xc0 : prefix - 0x80)).as<u8>
+          (is_long ? len_payload_long : (is_list ? prefix - 0xc0 : prefix - 0x80)).as<u8>
         doc: Length of the payload in bytes (not meaningful for single bytes).
   rlp_list:
     seq:
