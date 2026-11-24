@@ -21,10 +21,21 @@ doc-ref:
   - "https://github.com/ObKo/OpenSR/blob/rework/QM/QM.cpp https://github.com/ObKo/OpenSR/blob/rework/include/OpenSR/QM/QM.h"
   - "https://github.com/VirRus77/Space-Rangers-Quests/blob/master/SpaceRangersQuests.Model/FileQuest.cs"
 seq:
-  - id: signature
-    contents: [0xD3, 0x35, 0x3A]
   - id: format_version_num
     type: u1
+    doc: |
+      Low byte of the little-endian magic 0x423A35Dn, where n is the
+      format version (2, 3, 4 for .qm, 6, 7 for .qmm).
+  - id: signature
+    size: 3
+    valid:
+      any-of:
+        - '[0x35, 0x3A, 0x42]'
+        - '[0x6B, 0x9F, 0x06]'
+    doc: |
+      Rest of the magic. TGE writes 0x069F6BD7 instead of 0x423A35D7 for
+      a version 7 quest resaved from an older one that keeps the old
+      TGE behaviour.
   - id: version
     type: version
   - id: changelog
