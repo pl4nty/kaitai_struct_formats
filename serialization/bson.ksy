@@ -8,16 +8,26 @@ meta:
   license: CC0-1.0
   endian: le
 doc: |
-  BSON, short for Binary JSON, is a binary-encoded serialization of JSON-like documents. Like JSON, BSON supports the embedding of documents and arrays within other documents and arrays. BSON also contains extensions that allow representation of data types that are not part of the JSON spec. For example, BSON has a Date type and a BinData type.
-  BSON can be compared to binary interchange formats, like Protocol Buffers. BSON is more "schemaless" than Protocol Buffers, which can give it an advantage in flexibility but also a slight disadvantage in space efficiency (BSON has overhead for field names within the serialized data).
+  BSON, short for Binary JSON, is a binary-encoded serialization of JSON-like
+  documents. Like JSON, BSON supports the embedding of documents and arrays within
+  other documents and arrays. BSON also contains extensions that allow
+  representation of data types that are not part of the JSON spec. For example,
+  BSON has a Date type and a BinData type.
+  BSON can be compared to binary interchange formats, like Protocol Buffers. BSON
+  is more "schemaless" than Protocol Buffers, which can give it an advantage in
+  flexibility but also a slight disadvantage in space efficiency (BSON has
+  overhead for field names within the serialized data).
   BSON was designed to have the following three characteristics:
-    * Lightweight. Keeping spatial overhead to a minimum is important for any data representation format, especially when used over the network.
-    * Traversable. BSON is designed to be traversed easily. This is a vital property in its role as the primary data representation for MongoDB.
-    * Efficient. Encoding data to BSON and decoding from BSON can be performed very quickly in most languages due to the use of C data types.
+    * Lightweight. Keeping spatial overhead to a minimum is important for any data
+      representation format, especially when used over the network.
+    * Traversable. BSON is designed to be traversed easily. This is a vital
+      property in its role as the primary data representation for MongoDB.
+    * Efficient. Encoding data to BSON and decoding from BSON can be performed
+      very quickly in most languages due to the use of C data types.
 seq:
   - id: len
     type: s4
-    doc: "Total number of bytes comprising the document."
+    doc: Total number of bytes comprising the document.
   - id: fields
     size: len - 5
     type: elements_list
@@ -32,7 +42,9 @@ types:
         type: string
       - id: scope
         type: bson
-        doc: "mapping from identifiers to values, representing the scope in which the string should be evaluated."
+        doc: |
+          mapping from identifiers to values, representing the scope in which the string
+          should be evaluated.
   elements_list:
     seq:
       - id: elements
@@ -59,9 +71,9 @@ types:
       - id: str
         type: strz
         encoding: UTF-8
-        doc: "MUST NOT contain '\\x00', hence it is not full UTF-8."
+        doc: MUST NOT contain '\x00', hence it is not full UTF-8.
   f16:
-    doc: "128-bit IEEE 754-2008 decimal floating point"
+    doc: 128-bit IEEE 754-2008 decimal floating point
     seq:
       - id: str
         type: b1
@@ -76,14 +88,14 @@ types:
     seq:
       - id: epoch_time
         type: u4
-        doc: "seconds since the Unix epoch"
+        doc: seconds since the Unix epoch
       - id: machine_id
         type: u3
       - id: process_id
         type: u2
       - id: counter
         type: u3
-        doc: "counter, starting with a random value."
+        doc: counter, starting with a random value.
   db_pointer:
     seq:
       - id: namespace
@@ -91,14 +103,21 @@ types:
       - id: id
         type: object_id
   timestamp:
-    doc: "Special internal type used by MongoDB replication and sharding. First 4 bytes are an increment, second 4 are a timestamp."
+    doc: |
+      Special internal type used by MongoDB replication and sharding. First 4 bytes
+      are an increment, second 4 are a timestamp.
     seq:
       - id: increment
         type: u4
       - id: timestamp
         type: u4
   bin_data:
-    doc: "The BSON \"binary\" or \"BinData\" datatype is used to represent arrays of bytes. It is somewhat analogous to the Java notion of a ByteArray. BSON binary values have a subtype. This is used to indicate what kind of data is in the byte array. Subtypes from zero to 127 are predefined or reserved. Subtypes from 128-255 are user-defined."
+    doc: |
+      The BSON "binary" or "BinData" datatype is used to represent arrays of bytes. It
+      is somewhat analogous to the Java notion of a ByteArray. BSON binary values have
+      a subtype. This is used to indicate what kind of data is in the byte array.
+      Subtypes from zero to 127 are predefined or reserved. Subtypes from 128-255 are
+      user-defined.
     seq:
       - id: len
         type: s4
@@ -114,7 +133,12 @@ types:
             'subtype::crypto': crypto
     types:
       byte_array_deprecated:
-        doc: "The BSON \"binary\" or \"BinData\" datatype is used to represent arrays of bytes. It is somewhat analogous to the Java notion of a ByteArray. BSON binary values have a subtype. This is used to indicate what kind of data is in the byte array. Subtypes from zero to 127 are predefined or reserved. Subtypes from 128-255 are user-defined."
+        doc: |
+          The BSON "binary" or "BinData" datatype is used to represent arrays of bytes. It
+          is somewhat analogous to the Java notion of a ByteArray. BSON binary values have
+          a subtype. This is used to indicate what kind of data is in the byte array.
+          Subtypes from zero to 127 are predefined or reserved. Subtypes from 128-255 are
+          user-defined.
         seq:
           - id: len
             type: s4
@@ -226,8 +250,7 @@ types:
         0x7f: max_key #Special type which compares higher than all other possible BSON element values.
         -1: min_key #Special type which compares lower than all other possible BSON element values.
   u3:
-    doc: |
-      Implements unsigned 24-bit (3 byte) integer.
+    doc: Implements unsigned 24-bit (3 byte) integer.
     seq:
       - id: b1
         type: u1

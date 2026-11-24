@@ -91,13 +91,15 @@ types:
       - id: num_feature
         type: u4
         doc: |
-          Number of features in training data, this parameter will be automatically detected by learner.
+          Number of features in training data, this parameter will be automatically
+          detected by learner.
           number of features
           default: 0
       - id: num_class
         type: u4
         doc: |
-          Number of class option for multi-class classifier. By default equals 0 and corresponds to binary classifier.
+          Number of class option for multi-class classifier. By default equals 0 and
+          corresponds to binary classifier.
           number of classes, if it is multi-class classification
           default: 0
           lower bound: 0

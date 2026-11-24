@@ -208,7 +208,9 @@ types:
         size-eos: true
         process: zlib
         if: _root.codec == codec::zlib
-        doc: Inflated, the residuals of the changed bands' ranges, line by line, concatenated.
+        doc: |
+          Inflated, the residuals of the changed bands' ranges, line by line,
+          concatenated.
       - id: residuals_stored
         size-eos: true
         if: _root.codec == codec::stored

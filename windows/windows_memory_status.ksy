@@ -4,7 +4,8 @@ meta:
   license: Unlicense
   endian: le
 doc: |
-  A structure describing amount of memory available in system in some moment of time.
+  A structure describing amount of memory available in system in some moment of
+  time.
 doc-ref:
   - https://github.com/reactos/reactos/blob/6b6a045766c2b22a68139a9cb702f5510eed97e8/sdk/include/psdk/winbase.h#L1215-L1225
   - https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-globalmemorystatusex

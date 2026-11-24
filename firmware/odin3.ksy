@@ -12,9 +12,17 @@ meta:
   license: MIT
   endian: le
 doc: |
-  [Samsung Odin](https://en.wikipedia.org/wiki/Odin_(firmware_flashing_software)) is a proprietary piece of software developed by Samsung and used to flash firmware into Samsung devices. Odin utility has a Loke counterpart in the device bootloader. This ksy documents the message format of the protocol they talk to each other.
-  The protocol was reverse engineered by Benjamin Dobell who have created a MIT-licensed utility Heimdall, on which source code this ksy is based.
-  If you wanna test and augment this spec keep in mind that a lot of websites spreading leaked versions of Odin utility were created with the sole purpose of spreading malware glued with the tool. The most trustworthy website I know is the one belonging to chainfire, a well-known dev on Android scene.
+  [Samsung Odin](https://en.wikipedia.org/wiki/Odin_(firmware_flashing_software))
+  is a proprietary piece of software developed by Samsung and used to flash
+  firmware into Samsung devices. Odin utility has a Loke counterpart in the device
+  bootloader. This ksy documents the message format of the protocol they talk to
+  each other.
+  The protocol was reverse engineered by Benjamin Dobell who have created a
+  MIT-licensed utility Heimdall, on which source code this ksy is based.
+  If you wanna test and augment this spec keep in mind that a lot of websites
+  spreading leaked versions of Odin utility were created with the sole purpose of
+  spreading malware glued with the tool. The most trustworthy website I know is
+  the one belonging to chainfire, a well-known dev on Android scene.
 
   Examples of the packets can be downloaded by the links:
     * https://github.com/Benjamin-Dobell/Heimdall/files/1414758/ODIN_flash_capture.zip
@@ -38,8 +46,11 @@ params:
   - id: was_previous_item_session_initiation
     type: bool
     doc: |
-      the previous item was sessio initiation, so we get a response in the format that is different
-      `not packet.meta.endpoint_number.is_input and o.type == odin3.Odin3.PacketType.session and o.content.regular_session.request == odin3.Odin3.Session.Request.begin_session`
+      the previous item was sessio initiation, so we get a response in the format that
+      is different
+      `not packet.meta.endpoint_number.is_input and o.type ==
+      odin3.Odin3.PacketType.session and o.content.regular_session.request ==
+      odin3.Odin3.Session.Request.begin_session`
       of the previous packet
 
 seq:

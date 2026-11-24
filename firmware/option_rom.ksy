@@ -10,8 +10,11 @@ meta:
   imports:
     - /firmware/pci_expansion_rom_header
   endian: le
-doc: >
-  Optionrom is a legacy BIOS module. They are used for various purposes such as initializing devices, providing antibootkit features, boot managers, PXE boot, RAID managers, etc ... These modules are usually stored in PCI device's and motherboard onboard flash memory, retrieved and executed by BIOS when booting.
+doc: |
+  Optionrom is a legacy BIOS module. They are used for various purposes such as
+  initializing devices, providing antibootkit features, boot managers, PXE boot,
+  RAID managers, etc ... These modules are usually stored in PCI device's and
+  motherboard onboard flash memory, retrieved and executed by BIOS when booting.
   There are several ways to obtain them:
     * You can get them online:
       * https://www.bios-mods.com/resources/index.php?dir=Option+Roms%2F
@@ -26,7 +29,8 @@ doc: >
         * https://www.bios-mods.com/
         * http://www.win-raid.com/
         * https://forums.mydigitallife.info/
-        * motherboard and notebook vendors' websites where they provide BIOS updates
+        * motherboard and notebook vendors' websites where they provide BIOS
+          updates
       * by downloading from motherboard onboard flash
         * using universal [flashrom](https://www.flashrom.org) tool for Linux
         * using vendors' tools for DOS
@@ -34,7 +38,11 @@ doc: >
         * cbrom and modbin for Award/Phoenix
         * mibcp and mmtool for AMI
         * binwalk
-    * You can read them from boards in your PC through PCI configuration space. On Linux you can use [sysfs](https://www.kernel.org/doc/Documentation/filesystems/sysfs-pci.txt), on Windows - [rweverything (for now it's offline)](https://web.archive.org/http://rweverything.com/download/).
+    * You can read them from boards in your PC through PCI configuration space. On
+      Linux you can use
+      [sysfs](https://www.kernel.org/doc/Documentation/filesystems/sysfs-pci.txt),
+      on Windows - [rweverything (for now it's
+      offline)](https://web.archive.org/http://rweverything.com/download/).
 seq:
   - id: option_rom_header
     type: pci_expansion_rom_header

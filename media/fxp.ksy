@@ -17,7 +17,7 @@ seq:
   - id: len_chunk
     -orig-id: byteSize
     type: s4
-    doc: 'Size of this chunk exclusive of `fmt_magic` + `len_chunk` itself.'
+    doc: Size of this chunk exclusive of `fmt_magic` + `len_chunk` itself.
   - id: fx_magic
     size: 4
     type: str
@@ -28,16 +28,16 @@ seq:
   - id: fmt_version
     -orig-id: version
     type: u4
-    doc: 'Format version, always equal to 1.'
+    doc: Format version, always equal to 1.
   - id: fx_fourcc
     -orig-id: fxID
     size: 4
     type: str
     encoding: ASCII
-    doc: 'VST FourCC as registered with Steinberg Media Technologies GmbH.'
+    doc: VST FourCC as registered with Steinberg Media Technologies GmbH.
   - id: fx_version
     type: u4
-    doc: 'Version of the VST plugin whose preset this is.'
+    doc: Version of the VST plugin whose preset this is.
   - id: num_fx_params
     -orig-id: numParams
     type: u4
@@ -50,7 +50,7 @@ seq:
     size: 28
     type: str
     encoding: ASCII
-    doc: 'Preset name'
+    doc: Preset name
   - id: preset_content
     -orig-id: content
     type:

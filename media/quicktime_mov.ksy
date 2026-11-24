@@ -441,8 +441,7 @@ types:
 
   fixed_point_8_dot_8:
     -orig-id: ShortFixed # https://opensource.apple.com/source/CarbonHeaders/CarbonHeaders-18.1/MacTypes.h.auto.html
-    doc: |
-      16-bit signed fixed-point number with 8 integer bits and 8 fraction bits.
+    doc: 16-bit signed fixed-point number with 8 integer bits and 8 fraction bits.
     -webide-representation: '{value:dec}'
     seq:
       - id: value_raw
@@ -516,12 +515,10 @@ types:
 
       - id: t_x
         type: fixed_point_16_dot_16
-        doc: |
-          Element in the 3rd row, 1st column (horizontal translation component).
+        doc: Element in the 3rd row, 1st column (horizontal translation component).
       - id: t_y
         type: fixed_point_16_dot_16
-        doc: |
-          Element in the 3rd row, 2nd column (vertical translation component).
+        doc: Element in the 3rd row, 2nd column (vertical translation component).
       - id: w
         type: fixed_point_2_dot_30
         doc: |
@@ -580,8 +577,7 @@ types:
             eos-error: false
             encoding: UTF-8
             if: not _io.eof
-            doc: |
-              This field is probably incorrect sometimes (GDCL muxer seems to have a bug here)
+            doc: This field is probably incorrect sometimes (GDCL muxer seems to have a bug here)
   elst_body:
     doc: Edit list atom
     seq:

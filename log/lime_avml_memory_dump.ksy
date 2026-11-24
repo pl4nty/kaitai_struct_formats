@@ -9,7 +9,8 @@ meta:
   license: MIT
 
 doc: |
-  Just a file format for memory dumps. It may be better to use it instead of raw sparse files, when it is needed to transfer a dump.
+  Just a file format for memory dumps. It may be better to use it instead of raw
+  sparse files, when it is needed to transfer a dump.
   It is also damn simple, so third-party apps may also adopt it.
 
   LiME is a GPL-licensed Linux kernel module for acquiring memory dumps.
@@ -52,8 +53,7 @@ types:
 
       - id: payload
         size: header.range.size
-        doc: |
-          When the format is avml, then it is [snappy-compressed](https://github.com/google/snappy/blob/master/format_description.txt) memory. BTW, we need a spec for it.
+        doc: When the format is avml, then it is [snappy-compressed](https://github.com/google/snappy/blob/master/format_description.txt) memory. BTW, we need a spec for it.
 
     instances:
       format_identifier:

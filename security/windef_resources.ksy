@@ -8,10 +8,14 @@ meta:
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
   Resources files store metadata of quarantine files of Windows Defender.
-  The parser was created analyzing different files from the Resources subdirectory in the Windows Defender quarantine directory.
-  The file consists of three encrypted parts. The first part contains the size of the other two parts.
-  The second parts contains a SHA1 that is also the name of the Resources file and can be used to identify the matching ResourceData file.
-  The third pard contains a GUID that can be used to identify the matching Entries file.
+  The parser was created analyzing different files from the Resources subdirectory
+  in the Windows Defender quarantine directory.
+  The file consists of three encrypted parts. The first part contains the size of
+  the other two parts.
+  The second parts contains a SHA1 that is also the name of the Resources file and
+  can be used to identify the matching ResourceData file.
+  The third pard contains a GUID that can be used to identify the matching Entries
+  file.
 doc-ref: https://github.com/ernw/quarantine-formats/blob/master/docs/Windows_Defender.md
 seq:
   - id: header

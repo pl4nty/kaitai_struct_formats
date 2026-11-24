@@ -85,7 +85,7 @@ types:
                 value: valuez[0]
                 if: valid
       filler:
-        doc: "only to create _io"
+        doc: only to create _io
         seq:
           - id: data
             size: _io.size
@@ -181,7 +181,7 @@ types:
                 type: u1
               - id: chunk
                 type: u1
-                doc: "c3 c2 c1 c0"
+                doc: c3 c2 c1 c0
             instances:
               valid:
                 value: inv_chunk ^ chunk == 0b1111
@@ -198,7 +198,7 @@ types:
 
               val:
                 value: (bits[2].n << 2) | (bits[1].n << 1) | bits[0].n
-                doc: "c3 c2 c1"
+                doc: c3 c2 c1
               inv_shift_val:
                 value: (bits[0].n << 2) | (bits[1].n << 1) | bits[2].n
 

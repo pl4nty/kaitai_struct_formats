@@ -80,7 +80,7 @@ types:
     seq:
       - id: header1
         type: header1
-        doc: >
+        doc: |
           Level-neutral header, same for all LHA levels. Subsequent
           fields order and meaning varies, based on LHA level
           specified in this header.

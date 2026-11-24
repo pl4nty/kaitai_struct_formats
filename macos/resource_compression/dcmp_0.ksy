@@ -11,44 +11,54 @@ doc: |
   Compressed resource data in `'dcmp' (0)` format,
   as stored in compressed resources with header type `8` and decompressor ID `0`.
 
-  The `'dcmp' (0)` decompressor resource is included in the System file of System 7.0 and later.
-  This compression format is used for most compressed resources in System 7.0's files.
-  This decompressor is also included with and used by some other Apple applications,
+  The `'dcmp' (0)` decompressor resource is included in the System file of System
+  7.0 and later.
+  This compression format is used for most compressed resources in System 7.0's
+  files.
+  This decompressor is also included with and used by some other Apple
+  applications,
   such as ResEdit.
 
   This compression format supports some basic general-purpose compression schemes,
   including backreferences to previous data,
   run-length encoding,
   and delta encoding.
-  It also includes some types of compression tailored specifically to Mac OS resources,
-  including a set of single-byte codes that correspond to entries in a hard-coded lookup table,
+  It also includes some types of compression tailored specifically to Mac OS
+  resources,
+  including a set of single-byte codes that correspond to entries in a hard-coded
+  lookup table,
   and a specialized kind of delta encoding for segment loader jump tables.
 
   Almost all parts of this compression format operate on units of 2 or 4 bytes.
   As a result,
   it is nearly impossible to store data with an odd length in this format.
   To work around this limitation,
-  odd-length resources are padded with an extra byte before compressing them with this format.
+  odd-length resources are padded with an extra byte before compressing them with
+  this format.
   This extra byte is ignored after decompression,
-  as the real (odd) length of the resource is stored in the compressed resource header.
+  as the real (odd) length of the resource is stored in the compressed resource
+  header.
 
-  The `'dcmp' (1)` compression format (see dcmp_1.ksy) is very similar to this format,
-  with the main difference that it operates mostly on single bytes rather than two-byte units.
+  The `'dcmp' (1)` compression format (see dcmp_1.ksy) is very similar to this
+  format,
+  with the main difference that it operates mostly on single bytes rather than
+  two-byte units.
 doc-ref: 'https://github.com/dgelessus/python-rsrcfork/blob/f891a6e/src/rsrcfork/compress/dcmp0.py'
 seq:
   - id: chunks
     type: chunk
     repeat: until
     repeat-until: _.tag == 0xff
-    doc: |
-      The sequence of chunks that make up the compressed data.
+    doc: The sequence of chunks that make up the compressed data.
 types:
   chunk:
     doc: |
       A single chunk of compressed data.
-      Each chunk in the compressed data expands to a sequence of bytes in the uncompressed data,
+      Each chunk in the compressed data expands to a sequence of bytes in the
+      uncompressed data,
       except when `tag == 0xff`,
-      which marks the end of the data and does not correspond to any bytes in the uncompressed data.
+      which marks the end of the data and does not correspond to any bytes in the
+      uncompressed data.
 
       Most chunks are stateless and always expand to the same data,
       regardless of where the chunk appears in the sequence.
@@ -99,15 +109,15 @@ types:
 
           The data that this chunk expands to is stored literally in the body (`literal`).
           Optionally,
-          the literal data may also be stored for use by future backreference chunks (`do_store`).
+          the literal data may also be stored for use by future backreference chunks
+          (`do_store`).
 
           The length of the literal data is stored as a number of two-byte units.
           This means that the literal data always has an even length in bytes.
         params:
           - id: tag
             type: u1
-            doc: |
-              The tag byte preceding this chunk body.
+            doc: The tag byte preceding this chunk body.
         seq:
           - id: len_literal_div2_separate
             type: u1
@@ -122,26 +132,26 @@ types:
               because smaller lengths can be encoded into the tag byte.
           - id: literal
             size: len_literal
-            doc: |
-              The literal data.
+            doc: The literal data.
         instances:
           do_store:
             value: (tag & 0x10) != 0
             doc: |
               Whether this literal should be stored for use by future backreference chunks.
 
-              See the documentation of the `backreference_body` type for details about backreference chunks.
+              See the documentation of the `backreference_body` type for details about
+              backreference chunks.
           len_literal_div2_in_tag:
             value: tag & 0x0f
             doc: |
               The part of the tag byte that indicates the length of the literal data,
               in two-byte units.
               If this value is 0,
-              the length is stored in a separate byte after the tag byte and before the literal data.
+              the length is stored in a separate byte after the tag byte and before the
+              literal data.
           is_len_literal_div2_separate:
             value: len_literal_div2_in_tag == 0
-            doc: |
-              Whether the length of the literal is stored separately from the tag.
+            doc: Whether the length of the literal is stored separately from the tag.
           len_literal_div2:
             value: |
               is_len_literal_div2_separate
@@ -168,8 +178,7 @@ types:
         params:
           - id: tag
             type: u1
-            doc: |
-              The tag byte preceding this chunk body.
+            doc: The tag byte preceding this chunk body.
         seq:
           - id: index_separate_minus
             type:
@@ -191,7 +200,8 @@ types:
               In other words,
               for tag bytes 0x20 and 0x21,
               the index is actually 9 bits large,
-              with the low 8 bits stored separately and the highest bit stored in the lowest bit of the tag byte.
+              with the low 8 bits stored separately and the highest bit stored in the lowest
+              bit of the tag byte.
 
               This field is only present if the tag byte is 0x20 through 0x22.
               For higher tag bytes,
@@ -201,8 +211,7 @@ types:
         instances:
           is_index_separate:
             value: tag >= 0x20 and tag <= 0x22
-            doc: |
-              Whether the index is stored separately from the tag.
+            doc: Whether the index is stored separately from the tag.
           index_in_tag:
             value: tag - 0x23
             doc: |
@@ -222,14 +231,17 @@ types:
             doc: |
               The index of the referenced literal chunk.
 
-              Stored literals are assigned index numbers in the order in which they appear in the compressed data,
+              Stored literals are assigned index numbers in the order in which they appear in
+              the compressed data,
               starting at 0.
-              Non-stored literals are not counted in the numbering and cannot be referenced using backreferences.
+              Non-stored literals are not counted in the numbering and cannot be referenced
+              using backreferences.
               Once an index is assigned to a stored literal,
               it is never changed or unassigned for the entire length of the compressed data.
 
               As the name indicates,
-              a backreference can only reference stored literal chunks found *before* the backreference,
+              a backreference can only reference stored literal chunks found *before* the
+              backreference,
               not ones that come after it.
       table_lookup_body:
         doc: |
@@ -238,12 +250,12 @@ types:
 
           This chunk always expands to two bytes (`value`),
           determined from the tag byte using a fixed lookup table (`lookup_table`).
-          This lookup table is hardcoded in the decompressor and always the same for all compressed data.
+          This lookup table is hardcoded in the decompressor and always the same for all
+          compressed data.
         params:
           - id: tag
             type: u1
-            doc: |
-              The tag byte preceding this chunk body.
+            doc: The tag byte preceding this chunk body.
         seq: []
         instances:
           lookup_table:
@@ -309,7 +321,8 @@ types:
       extended_body:
         doc: |
           The body of an extended chunk.
-          The meaning of this chunk depends on the extended tag byte stored in the chunk data.
+          The meaning of this chunk depends on the extended tag byte stored in the chunk
+          data.
         seq:
           - id: tag
             type: u1
@@ -325,8 +338,7 @@ types:
                 0x03: repeat_body(tag)
                 0x04: delta_encoding_16_bit_body
                 0x06: delta_encoding_32_bit_body
-            doc: |
-              The chunk's body.
+            doc: The chunk's body.
         types:
           jump_table_body:
             doc: |
@@ -348,16 +360,15 @@ types:
 
               Note that this generates one jump table entry without an address before it,
               meaning that this address needs to be generated by the preceding chunk.
-              All following jump table entries are generated with the addresses encoded in this chunk.
+              All following jump table entries are generated with the addresses encoded in
+              this chunk.
             seq:
               - id: segment_number_raw
                 type: dcmp_variable_length_integer
-                doc: |
-                  Raw variable-length integer representation of `segment_number`.
+                doc: Raw variable-length integer representation of `segment_number`.
               - id: num_addresses_raw
                 type: dcmp_variable_length_integer
-                doc: |
-                  Raw variable-length integer representation of `num_addresses`.
+                doc: Raw variable-length integer representation of `num_addresses`.
               - id: addresses_raw
                 type: dcmp_variable_length_integer
                 repeat: expr
@@ -366,15 +377,18 @@ types:
                   The addresses for each generated jump table entry,
                   stored as variable-length integers.
 
-                  The first address is stored literally and must be in the range `0x0 <= x <= 0xffff`,
+                  The first address is stored literally and must be in the range `0x0 <= x <=
+                  0xffff`,
                   i. e. an unsigned 16-bit integer.
 
                   All following addresses are stored as deltas relative to the previous address.
                   Each of these deltas is stored plus 6;
-                  this value needs to be subtracted before (or after) adding it to the previous address.
+                  this value needs to be subtracted before (or after) adding it to the previous
+                  address.
 
                   Each delta (after subtracting 6) should be positive,
-                  and adding it to the previous address should not result in a value larger than `0xffff`,
+                  and adding it to the previous address should not result in a value larger than
+                  `0xffff`,
                   i. e. there should be no 16-bit unsigned integer wraparound.
                   These conditions are always met in all known jump table chunks,
                   so it is not known how the original decompressor behaves otherwise.
@@ -402,17 +416,14 @@ types:
             params:
               - id: tag
                 type: u1
-                doc: |
-                  The extended tag byte preceding this chunk body.
+                doc: The extended tag byte preceding this chunk body.
             seq:
               - id: to_repeat_raw
                 type: dcmp_variable_length_integer
-                doc: |
-                  Raw variable-length integer representation of `to_repeat`.
+                doc: Raw variable-length integer representation of `to_repeat`.
               - id: repeat_count_m1_raw
                 type: dcmp_variable_length_integer
-                doc: |
-                  Raw variable-length integer representation of `repeat_count_m1`.
+                doc: Raw variable-length integer representation of `repeat_count_m1`.
             instances:
               byte_count:
                 value: |
@@ -429,7 +440,8 @@ types:
                   The value to repeat.
 
                   Although it is stored as a variable-length integer,
-                  this value must fit into an unsigned big-endian integer that is as long as `byte_count`,
+                  this value must fit into an unsigned big-endian integer that is as long as
+                  `byte_count`,
                   i. e. either 8 or 16 bits.
               repeat_count_m1:
                 value: repeat_count_m1_raw.value
@@ -454,12 +466,10 @@ types:
             seq:
               - id: first_value_raw
                 type: dcmp_variable_length_integer
-                doc: |
-                  Raw variable-length integer representation of `first_value`.
+                doc: Raw variable-length integer representation of `first_value`.
               - id: num_deltas_raw
                 type: dcmp_variable_length_integer
-                doc: |
-                  Raw variable-length integer representation of `num_deltas`.
+                doc: Raw variable-length integer representation of `num_deltas`.
               - id: deltas
                 type: s1
                 repeat: expr
@@ -496,12 +506,10 @@ types:
             seq:
               - id: first_value_raw
                 type: dcmp_variable_length_integer
-                doc: |
-                  Raw variable-length integer representation of `first_value`.
+                doc: Raw variable-length integer representation of `first_value`.
               - id: num_deltas_raw
                 type: dcmp_variable_length_integer
-                doc: |
-                  Raw variable-length integer representation of `num_deltas`.
+                doc: Raw variable-length integer representation of `num_deltas`.
               - id: deltas_raw
                 type: dcmp_variable_length_integer
                 repeat: expr
@@ -517,8 +525,7 @@ types:
             instances:
               first_value:
                 value: first_value_raw.value
-                doc: |
-                  The first value in the sequence.
+                doc: The first value in the sequence.
               num_deltas:
                 value: num_deltas_raw.value
                 doc: |

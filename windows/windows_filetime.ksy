@@ -5,8 +5,7 @@ meta:
   imports:
     - /common/calendar
   endian: le
-doc: |
-  Microsoft Windows FILETIME structure
+doc: Microsoft Windows FILETIME structure
 doc-ref: https://learn.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-filetime
 -webide-representation: "{date} {time}"
 -affected-by: upstream kaitai_struct_webide issue 155

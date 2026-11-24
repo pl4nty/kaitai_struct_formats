@@ -16,9 +16,13 @@ meta:
     - member_metadata
     - space_padded_number
 doc: |
-  The BSD variant of the Unix ar archive format (see the `ar_generic` spec for general info about the ar format). This variant is also used on Darwin-based systems (mainly Apple's macOS and iOS).
+  The BSD variant of the Unix ar archive format (see the `ar_generic` spec for
+  general info about the ar format). This variant is also used on Darwin-based
+  systems (mainly Apple's macOS and iOS).
   
-  BSD archives support member names that contain spaces or are longer than 16 bytes by storing the name as part of the member data rather than in the fixed-size name field.
+  BSD archives support member names that contain spaces or are longer than 16
+  bytes by storing the name as part of the member data rather than in the
+  fixed-size name field.
 doc-ref: |
   https://en.wikipedia.org/w/index.php?title=Ar_(Unix)&oldid=880452895#File_format_details
   https://docs.oracle.com/cd/E36784_01/html/E36873/ar.h-3head.html
@@ -38,7 +42,9 @@ types:
     doc: |
       A regular (or "short") member name, stored directly in the name field.
       
-      Note: Since regular names in BSD archives are terminated using spaces, file names that contain spaces cannot be stored as regular names. Such names must be stored as long names, even if they are not longer than 16 bytes.
+      Note: Since regular names in BSD archives are terminated using spaces, file
+      names that contain spaces cannot be stored as regular names. Such names must be
+      stored as long names, even if they are not longer than 16 bytes.
     seq:
       - id: name
         terminator: 0x20
@@ -64,7 +70,9 @@ types:
         doc: The ASCII bytes "#1/", indicating a long member name.
       is_long:
         value: first_three_bytes == long_name_magic
-        doc: Whether this is a reference to a long name (stored at the start of the archive data) or a regular name.
+        doc: |
+          Whether this is a reference to a long name (stored at the start of the archive
+          data) or a regular name.
       parsed:
         pos: 0
         type:
@@ -104,17 +112,24 @@ types:
       - id: padding
         contents: "\n"
         if: size_with_long_name % 2 != 0
-        doc: An extra newline is added as padding after members with an odd data size. This ensures that all members are 2-byte-aligned.
+        doc: |
+          An extra newline is added as padding after members with an odd data size. This
+          ensures that all members are 2-byte-aligned.
     instances:
       name:
         value: 'name_internal.is_long ? long_name : name_internal.parsed.as<regular_member_name>.name'
         doc: |
-          The name of the archive member. Because the encoding of member names varies across systems, the name is exposed as a byte array.
+          The name of the archive member. Because the encoding of member names varies
+          across systems, the name is exposed as a byte array.
           
-          Names are usually unique within an archive, but this is not required - the `ar` command even provides various options to work with archives containing multiple identically named members.
+          Names are usually unique within an archive, but this is not required - the `ar`
+          command even provides various options to work with archives containing multiple
+          identically named members.
       size_with_long_name:
         value: size_raw.value
-        doc: The size of the member's data. The long member name (if any) counts toward this size value, but the trailing padding byte (if any) does not.
+        doc: |
+          The size of the member's data. The long member name (if any) counts toward this
+          size value, but the trailing padding byte (if any) does not.
       size:
         value: 'name_internal.is_long ? size_with_long_name - name_internal.parsed.as<long_member_name>.name_size.value : size_with_long_name'
         doc: The size of the member's data, excluding any long member name.

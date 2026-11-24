@@ -5,8 +5,7 @@ meta:
   imports:
     - /windows/windows_processor_architecture
   endian: le
-doc: |
-  Decodes the info about Windows processor revision.
+doc: Decodes the info about Windows processor revision.
 doc-ref:
   - https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-system_info
   - https://learn.microsoft.com/en-us/previous-versions/ms942639(v=msdn.10)

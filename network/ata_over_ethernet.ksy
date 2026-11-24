@@ -17,13 +17,22 @@ meta:
 doc: |
   Body of an Ethernet frame of type ETH_P_AOE (0x88A2).
 
-  As the name implies, this protocol encapsulates ATA commands into Ethernet frames. I see no issue to encapsulate the same payload into packets of 3-7 ISO/OSI levels, if needed (and for working authentication & encryption SSH/dTLS can be used).
+  As the name implies, this protocol encapsulates ATA commands into Ethernet
+  frames. I see no issue to encapsulate the same payload into packets of 3-7
+  ISO/OSI levels, if needed (and for working authentication & encryption SSH/dTLS
+  can be used).
 
-  The protocol contains no security (all its "security" relies on the fact that MAC address cannot be spoofed, which is wrong), the messages claiming security are for convenience and not for security. It is said explicitly that AoE should be used on a dedicated interface.
+  The protocol contains no security (all its "security" relies on the fact that
+  MAC address cannot be spoofed, which is wrong), the messages claiming security
+  are for convenience and not for security. It is said explicitly that AoE should
+  be used on a dedicated interface.
 
-  To generate sample files with queries an `aoetools` package, a loopback interface and wireshark/tcpdump can be used. To generate the files with real ATA transactions and responses, a real impl is needed.
+  To generate sample files with queries an `aoetools` package, a loopback
+  interface and wireshark/tcpdump can be used. To generate the files with real ATA
+  transactions and responses, a real impl is needed.
 
-  Here are some samples: https://github.com/kaitai-io/kaitai_struct_formats/files/6343404/aoe.zip
+  Here are some samples:
+  https://github.com/kaitai-io/kaitai_struct_formats/files/6343404/aoe.zip
 
 doc-ref:
   - https://web.archive.org/web/20151208175927if_/http://brantleycoilecompany.com/AoEr11.pdf
@@ -56,7 +65,8 @@ types:
         size: 6
   server_addr:
     doc: |
-      A message is considered targeted to the server if for each address component either of the conditions satisfied:
+      A message is considered targeted to the server if for each address component
+      either of the conditions satisfied:
         1. the component is equal to the component of the server address
         2. the component is broadcast.
     seq:
@@ -93,7 +103,8 @@ types:
       - id: server_addr
         type: server_addr
         doc: |
-          Each AoE server has an address and ignores all the messages not targeted to it (see the doc for the type for more info).
+          Each AoE server has an address and ignores all the messages not targeted to it
+          (see the doc for the type for more info).
           Each response by a server must contain its address.
       - id: command
         -orig-id: cmd
@@ -102,9 +113,13 @@ types:
       - id: tag
         type: u4
         doc: |
-          Links requests to responses and is copied verbatim into the response from the corresponding request..
-          In the impl it is timeval::tv_usec with the MSB overridden to 1 if the software that generated it in userspace and 0 if it is in kernelspace. Can it be exploited?
-          Servers should broadcast Query Config Information responses with zero tag when they are ready to process commands.
+          Links requests to responses and is copied verbatim into the response from the
+          corresponding request..
+          In the impl it is timeval::tv_usec with the MSB overridden to 1 if the software
+          that generated it in userspace and 0 if it is in kernelspace. Can it be
+          exploited?
+          Servers should broadcast Query Config Information responses with zero tag when
+          they are ready to process commands.
 
     instances:
       is_command_vendor_specific:
@@ -151,7 +166,9 @@ types:
           id: target_is_reserved
           -orig-id:
             - Target is reserved
-          doc: The server refuses to execute command because it was reserved to a specific mac address.
+          doc: |
+            The server refuses to execute command because it was reserved to a specific mac
+            address.
 
     types:
       version_and_flags:
@@ -162,7 +179,8 @@ types:
               max: 1
             doc: |
               The version of the protocol used.
-              The offset and size of this field is guaranteed to be stable across format versions.
+              The offset and size of this field is guaranteed to be stable across format
+              versions.
           - id: is_response
             -orig-id:
               - R
@@ -182,7 +200,9 @@ types:
             valid: 0
   issue_ata:
     doc: |
-      The resposes to these commands are generated after commands execution (asynchronous commands are executed immediately), and ATA registers are copied into the corresponding fields.
+      The resposes to these commands are generated after commands execution
+      (asynchronous commands are executed immediately), and ATA registers are copied
+      into the corresponding fields.
     seq:
       - id: header
         type: header
@@ -286,7 +306,9 @@ types:
                   - AOEAFL_DEV
                   - Device
                 type: b1
-                doc: as defined in the ATA Device/Head register and is only evaluated when the E bit is set.
+                doc: |
+                  as defined in the ATA Device/Head register and is only evaluated when the E bit
+                  is set.
               - id: reserved_20
                 -orig-id: Z
                 type: b1
@@ -302,7 +324,9 @@ types:
                   - Async
                 type: b1
                 doc: |
-                  Asynchronous requests, that can be queued into cache memory and then responded immediately with the same data as in input. Async write requests are not responded at all. In tha case of power loss or failure the cache can be lost.
+                  Asynchronous requests, that can be queued into cache memory and then responded
+                  immediately with the same data as in input. Async write requests are not
+                  responded at all. In tha case of power loss or failure the cache can be lost.
               - id: is_write
                 -orig-id:
                   - W
@@ -314,7 +338,9 @@ types:
   query_config:
     -orig-id: Conf
     doc: |
-      In a command message the fields Buffer Count, , and AoE must be set to zero by the client and ignored by the server. The remaining fields may be used to query and set the server’s config string.
+      In a command message the fields Buffer Count, , and AoE must be set to zero by
+      the client and ignored by the server. The remaining fields may be used to query
+      and set the server’s config string.
     seq:
       - id: header
         type: header
@@ -322,7 +348,8 @@ types:
         #type: str
         size: header.config_string_length
         doc: |
-          When querying, may be filled with 0xED, which is not ASCII, so I guess it is just a byte array rather than a string.
+          When querying, may be filled with 0xED, which is not ASCII, so I guess it is
+          just a byte array rather than a string.
 
     types:
       header:
@@ -350,7 +377,9 @@ types:
               - Sector Count
               - scnt
             type: u1
-            doc: Maximum count of sectors the server can handle in a single ATA command request. 0 means 2 due to historical reasons.
+            doc: |
+              Maximum count of sectors the server can handle in a single ATA command request.
+              0 means 2 due to historical reasons.
           - id: version_and_command
             -orig-id:
               - aoeccmd
@@ -405,7 +434,9 @@ types:
                 - set
                 - AOECCMD_SET
                 - Qset
-              doc: If server's config string is not initialized, initializes it and responds OK. If it is already initialized, returns `config_string_present` error.
+              doc: |
+                If server's config string is not initialized, initializes it and responds OK. If
+                it is already initialized, returns `config_string_present` error.
             4:
               id: override_config_string
               -orig-id:
@@ -414,15 +445,20 @@ types:
                 - AOECCMD_FSET
                 - Qfset
               doc: |
-                Overrides the config string with a new one, server responds with the **entire** old config string.
+                Overrides the config string with a new one, server responds with the **entire**
+                old config string.
 
 
   mac_mask_ordered_set:
     doc: |
-      Modifies MAC address masks ordered set. Servers are required to process directives one-by-one in the same order they get them, and if there is an error, rollback and return the response with dir_count equal to the ordinal of the errored directive, and response body must be the same as in the request.
+      Modifies MAC address masks ordered set. Servers are required to process
+      directives one-by-one in the same order they get them, and if there is an error,
+      rollback and return the response with dir_count equal to the ordinal of the
+      errored directive, and response body must be the same as in the request.
       In the case of success server returns its masks set in the response.
 
-      If MAC adddress masks set is not empty, a server would only accept messages from the MAC addrs in it. Don't rely on it for security, MAC addrs are easily faked.
+      If MAC adddress masks set is not empty, a server would only accept messages from
+      the MAC addrs in it. Don't rely on it for security, MAC addrs are easily faked.
 
     seq:
       - id: header
@@ -445,7 +481,10 @@ types:
           - id: count
             -orig-id: Dir Count
             type: u1
-            doc: It was planned that the protocol will never support more than 255 entries in its MAC mask set. Though servers are not required to support 255 addrs and would return mask_list_full in the case of adding more than supported.
+            doc: |
+              It was planned that the protocol will never support more than 255 entries in its
+              MAC mask set. Though servers are not required to support 255 addrs and would
+              return mask_list_full in the case of adding more than supported.
       directive:
         seq:
           - id: reserved
@@ -502,13 +541,13 @@ types:
         1:
           id: set_respecting_restrictions
           -orig-id: Set reserve list
-          doc: |
-            advisory locks the supplied macs, if not locked
+          doc: advisory locks the supplied macs, if not locked
         2:
           id: set_ignoring_restrictions
           -orig-id: Force set reserve list
           doc: |
-            advisory locks the supplied macs unconditionally. Unlocking is by providing an empty set.
+            advisory locks the supplied macs unconditionally. Unlocking is by providing an
+            empty set.
 
 enums:
   command:
@@ -518,27 +557,23 @@ enums:
         - Issue ATA Command
         - AOECMD_ATA
         - ATAcmd
-      doc: |
-        All the ATA commandts data must fit into a single message.
+      doc: All the ATA commandts data must fit into a single message.
     1:
       id: query_config
       -orig-id:
         - Query Config Information
         - AOECMD_CFG
         - Config
-      doc: |
-        retrieves/sets server config string
+      doc: retrieves/sets server config string
 
     2:
       id: mac_mask_ordered_set
       -orig-id:
         - Mac Mask List
-      doc: |
-        Use only for convenience. Disallows access from macs not in set.
+      doc: Use only for convenience. Disallows access from macs not in set.
 
     3:
       id: reserve_list
       -orig-id:
         - Reserve / Release
-      doc: |
-        An implementation of advisory locks.
+      doc: An implementation of advisory locks.

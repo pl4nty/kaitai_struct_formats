@@ -24,7 +24,8 @@ doc: |
     top of it for signed ints
     <https://avro.apache.org/docs/1.12.0/specification/#primitive-types-1>
 
-  More information on this encoding is available at <https://en.wikipedia.org/wiki/LEB128>
+  More information on this encoding is available at
+  <https://en.wikipedia.org/wiki/LEB128>
 
   This particular implementation supports integer values up to 64 bits (i.e. the
   maximum unsigned value supported is `2**64 - 1`), which implies that serialized
@@ -85,7 +86,8 @@ types:
   group:
     -webide-representation: '{value}'
     doc: |
-      One byte group, clearly divided into 7-bit "value" chunk and 1-bit "continuation" flag.
+      One byte group, clearly divided into 7-bit "value" chunk and 1-bit
+      "continuation" flag.
     params:
       - id: idx
         type: s4

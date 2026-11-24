@@ -12,7 +12,8 @@ doc: |
   The main tasks of the Service Discovery Protocol are communicating the
   availability of functional entities called services in the in-vehicle
   communication as well as controlling the send behavior of event messages.
-  This allows sending only event messages to receivers requiring them (Publish/Subscribe).
+  This allows sending only event messages to receivers requiring them
+  (Publish/Subscribe).
   The solution described here is also known as SOME/IP-SD
   (Scalable service-Oriented MiddlewarE over IP - Service Discovery).
 doc-ref: https://www.autosar.org/fileadmin/standards/foundation/19-11/AUTOSAR_PRS_SOMEIPServiceDiscoveryProtocol.pdf

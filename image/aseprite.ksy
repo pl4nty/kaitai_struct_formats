@@ -56,7 +56,9 @@ types:
         size: 8
       - id: transparent_index
         type: u1
-        doc: Palette entry used as transparent color in non-background layers of indexed sprites
+        doc: |
+          Palette entry used as transparent color in non-background layers of indexed
+          sprites
       - id: reserved2
         size: 3
       - id: num_colors

@@ -150,7 +150,8 @@ types:
           (id_chars[2] >= 97 and id_chars[2] <= 122) or
           (id_chars[3] >= 97 and id_chars[3] <= 122)
         doc: |
-          Check if chunk_id contains lowercase characters ([a-z], ASCII 97 = a, ASCII 122 = z).
+          Check if chunk_id contains lowercase characters ([a-z], ASCII 97 = a, ASCII
+          122 = z).
 enums:
   fourcc:
   # little-endian

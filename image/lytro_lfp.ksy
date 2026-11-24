@@ -96,7 +96,7 @@ types:
             size: 80
             type: strz
             if: size != 0
-            doc: "Usually contains SHA-1 checksum"
+            doc: Usually contains SHA-1 checksum
           - id: data
             size: size
             type:

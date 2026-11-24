@@ -18,7 +18,8 @@ doc: |
   Repository: https://github.com/henrythasler/wasm-kaitai-struct
 
   * Naming of entities follows the official specification.
-  * All integers are encoded using the LEB128 variable-length integer encoding (see vlq_base128_le.ksy).
+  * All integers are encoded using the LEB128 variable-length integer encoding
+    (see vlq_base128_le.ksy).
   * The schema follows the KSY Style Guide
   * Requires ks-version 0.9+ because of attribute value validation
   * types appear in the order in which they are required
@@ -73,7 +74,9 @@ types:
         doc: Section content
 
   custom_section:
-    doc: (id 0) - Custom section whose content is application-specific and not defined by the WebAssembly specification.
+    doc: |
+      (id 0) - Custom section whose content is application-specific and not defined by
+      the WebAssembly specification.
     doc-ref: https://www.w3.org/TR/wasm-core-1/#binary-customsec
     seq:
       - id: name
@@ -192,10 +195,14 @@ types:
         enum: valtype
       - id: is_mutable
         type: u1
-        doc: the `is_` prefix avoids conflicts with the C++ keyword `mutable` in generated code
+        doc: |
+          the `is_` prefix avoids conflicts with the C++ keyword `mutable` in generated
+          code
 
   function_section:
-    doc: (id 3) - Vector of type indices (see `Type Section`) for all functions in the `Code Section`
+    doc: |
+      (id 3) - Vector of type indices (see `Type Section`) for all functions in the
+      `Code Section`
     doc-ref: https://www.w3.org/TR/wasm-core-1/#binary-funcsec
     seq:
       - id: num_typeidx

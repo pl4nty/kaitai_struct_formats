@@ -8,7 +8,11 @@ meta:
   encoding: UTF-8
   endian: be
 
-doc: Joda-Time is a time manipulation library for Java. It stores info about timezones in own binary format. The timezones are embedded into the jars (can be downloaded from https://github.com/JodaOrg/joda-time/releases/) and can be unpacked from them.
+doc: |
+  Joda-Time is a time manipulation library for Java. It stores info about
+  timezones in own binary format. The timezones are embedded into the jars (can be
+  downloaded from https://github.com/JodaOrg/joda-time/releases/) and can be
+  unpacked from them.
 doc-ref: https://github.com/JodaOrg/joda-time/blob/e37246fb936b2c242812235dff53c749e18ec200/src/main/java/org/joda/time/tz/DateTimeZoneBuilder.java#L110
 seq:
   - id: encoding

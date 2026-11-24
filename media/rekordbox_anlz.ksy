@@ -29,12 +29,10 @@ seq:
   - contents: "PMAI"
   - id: len_header
     type: u4
-    doc: |
-      The number of bytes of this header section.
+    doc: The number of bytes of this header section.
   - id: len_file
     type: u4
-    doc: |
-      The number of bytes in the entire file.
+    doc: The number of bytes in the entire file.
   - size: len_header - _io.pos
   - id: sections
     type: tagged_section
@@ -53,16 +51,13 @@ types:
       - id: fourcc
         type: s4
         # enum: section_tags  # Can't use this line until KSC supports switching on possibly-null enums in Java.
-        doc: |
-          A tag value indicating what kind of section this is.
+        doc: A tag value indicating what kind of section this is.
       - id: len_header
         type: u4
-        doc: |
-          The size, in bytes, of the header portion of the tag.
+        doc: The size, in bytes, of the header portion of the tag.
       - id: len_tag
         type: u4
-        doc: |
-          The size, in bytes, of this entire tag, counting the header.
+        doc: The size, in bytes, of this entire tag, counting the header.
       - id: body
         size: len_tag - 12
         type:
@@ -93,8 +88,7 @@ types:
       - type: u4  # @flesniak says this is always 0x80000
       - id: len_beats
         type: u4
-        doc: |
-          The number of beat entries which follow.
+        doc: The number of beat entries which follow.
       - id: beats
         type: beat_grid_beat
         repeat: expr
@@ -102,8 +96,7 @@ types:
         doc: The entries of the beat grid.
 
   beat_grid_beat:
-    doc: |
-      Describes an individual beat in a beat grid.
+    doc: Describes an individual beat in a beat grid.
     seq:
       - id: beat_number
         type: u2
@@ -129,25 +122,21 @@ types:
       - id: type
         type: u4
         enum: cue_list_type
-        doc: |
-          Identifies whether this tag stores ordinary or hot cues.
+        doc: Identifies whether this tag stores ordinary or hot cues.
       - size: 2
       - id: len_cues
         type: u2
-        doc: |
-          The length of the cue list.
+        doc: The length of the cue list.
       - id: memory_count
         type: u4
-        doc: |
-          Unsure what this means.
+        doc: Unsure what this means.
       - id: cues
         type: cue_entry
         repeat: expr
         repeat-expr: len_cues
 
   cue_entry:
-    doc: |
-      A cue list entry. Can either represent a memory cue or a loop.
+    doc: A cue list entry. Can either represent a memory cue or a loop.
     seq:
       - contents: "PCPT"
       - id: len_header
@@ -162,8 +151,7 @@ types:
       - id: status
         type: u4
         enum: cue_entry_status
-        doc: |
-          If zero, this entry should be ignored.
+        doc: If zero, this entry should be ignored.
       - type: u4  # Seems to always be 0x10000
       - id: order_first
         type: u2
@@ -176,8 +164,7 @@ types:
       - id: type
         type: u1
         enum: cue_entry_type
-        doc: |
-          Indicates whether this is a memory cue or a loop.
+        doc: Indicates whether this is a memory cue or a loop.
       - size: 3  # seems to always be 1000
       - id: time
         type: u4
@@ -201,12 +188,10 @@ types:
       - id: type
         type: u4
         enum: cue_list_type
-        doc: |
-          Identifies whether this tag stores ordinary or hot cues.
+        doc: Identifies whether this tag stores ordinary or hot cues.
       - id: len_cues
         type: u2
-        doc: |
-          The length of the cue comment list.
+        doc: The length of the cue comment list.
       - size: 2
       - id: cues
         type: cue_extended_entry
@@ -231,8 +216,7 @@ types:
       - id: type
         type: u1
         enum: cue_entry_type
-        doc: |
-          Indicates whether this is a memory cue or a loop.
+        doc: Indicates whether this is a memory cue or a loop.
       - size: 3  # seems to always be 1000
       - id: time
         type: u4
@@ -258,28 +242,25 @@ types:
         type: str
         encoding: UTF-16BE
         if: len_entry > 43
-        doc: |
-          The comment assigned to this cue by the DJ, if any, with a trailing NUL.
+        doc: The comment assigned to this cue by the DJ, if any, with a trailing NUL.
       - id: color_code
         type: u1
         if: (len_entry - len_comment) > 44
         doc: |
-          A lookup value for a color table? We use this to index to the hot cue colors shown in rekordbox.
+          A lookup value for a color table? We use this to index to the hot cue colors
+          shown in rekordbox.
       - id: color_red
         type: u1
         if: (len_entry - len_comment) > 45
-        doc: |
-          The red component of the hot cue color to be displayed.
+        doc: The red component of the hot cue color to be displayed.
       - id: color_green
         type: u1
         if: (len_entry - len_comment) > 46
-        doc: |
-          The green component of the hot cue color to be displayed.
+        doc: The green component of the hot cue color to be displayed.
       - id: color_blue
         type: u1
         if: (len_entry - len_comment) > 47
-        doc: |
-          The blue component of the hot cue color to be displayed.
+        doc: The blue component of the hot cue color to be displayed.
       - size: len_entry - 48 - len_comment  # The remainder after the color
         if: (len_entry - len_comment) > 48
 
@@ -322,8 +303,7 @@ types:
       - id: data
         size: len_preview
         if: _parent.len_tag > _parent.len_header
-        doc: |
-          The actual bytes of the waveform preview.
+        doc: The actual bytes of the waveform preview.
 
   wave_scroll_tag:
     doc: |
@@ -332,8 +312,7 @@ types:
     seq:
       - id: len_entry_bytes
         type: u4
-        doc: |
-          The size of each entry, in bytes. Seems to always be 1.
+        doc: The size of each entry, in bytes. Seems to always be 1.
       - id: len_entries
         type: u4
         doc: |
@@ -351,8 +330,7 @@ types:
     seq:
       - id: len_entry_bytes
         type: u4
-        doc: |
-          The size of each entry, in bytes. Seems to always be 6.
+        doc: The size of each entry, in bytes. Seems to always be 6.
       - id: len_entries
         type: u4
         doc: |
@@ -370,8 +348,7 @@ types:
     seq:
       - id: len_entry_bytes
         type: u4
-        doc: |
-          The size of each entry, in bytes. Seems to always be 2.
+        doc: The size of each entry, in bytes. Seems to always be 2.
       - id: len_entries
         type: u4
         doc: |
@@ -388,12 +365,10 @@ types:
     seq:
       - id: len_entry_bytes
         type: u4
-        doc: |
-          The size of each entry, in bytes. Seems to always be 24.
+        doc: The size of each entry, in bytes. Seems to always be 24.
       - id: len_entries
         type: u2
-        doc: |
-          The number of phrases.
+        doc: The number of phrases.
       - id: style
         type: u2
         # enum: phrase_style   Can't use this line until KSC supports switching on possibly-null enums in Java.
@@ -419,17 +394,14 @@ types:
         repeat-expr: len_entries
 
   song_structure_entry:
-    doc: |
-      A song structure entry, represents a single phrase.
+    doc: A song structure entry, represents a single phrase.
     seq:
       - id: phrase_number
         type: u2
-        doc: |
-          The absolute number of the phrase, starting at one.
+        doc: The absolute number of the phrase, starting at one.
       - id: beat_number
         type: u2
-        doc: |
-          The beat number at which the phrase starts.
+        doc: The beat number at which the phrase starts.
       - id: phrase_id
         type:
           switch-on: _parent.style
@@ -437,17 +409,14 @@ types:
             1: phrase_up_down       # 'phrase_style::up_down'
             2: phrase_verse_bridge  # 'phrase_style::verse_bridge'
             _: phrase_verse_bridge
-        doc: |
-          Identifier of the phrase label.
+        doc: Identifier of the phrase label.
       - size: _parent.len_entry_bytes - 9
       - id: fill_in
         type: u1
-        doc: |
-          If nonzero, fill-in is present.
+        doc: If nonzero, fill-in is present.
       - id: fill_in_beat_number
         type: u2
-        doc: |
-          The beat number at which fill-in starts.
+        doc: The beat number at which fill-in starts.
 
   phrase_up_down:
     seq:

@@ -19,7 +19,8 @@ doc: |
   * LinkedIn Pinot
   * and many others
 
-  Roaring bitmaps are designed to store sets of 32-bit unsigned integers efficiently.
+  Roaring bitmaps are designed to store sets of 32-bit unsigned integers
+  efficiently.
   They use a two-level structure: the 32-bit integers are split into
   16-bit "chunks" (most significant bits + least significant bits).
   Each chunk is stored in a container, of which there are three types:
@@ -83,22 +84,26 @@ seq:
     repeat-expr: num_containers
     doc: |
       The actual container data. The type is determined by:
-      - If run containers are allowed and the run_bitset indicates this container is a run container, use run_container (type 1)
-      - Otherwise, if the container's cardinality is <= 4096, use array_container (type 2)
+      - If run containers are allowed and the run_bitset indicates this container is a
+        run container, use run_container (type 1)
+      - Otherwise, if the container's cardinality is <= 4096, use array_container
+        (type 2)
       - Otherwise, use bitset_container (type 3)
 
 instances:
   has_runs:
     value: magic == cookie::with_runs
     doc: |
-      Computed field that indicates whether this Roaring bitmap may contain run containers.
+      Computed field that indicates whether this Roaring bitmap may contain run
+      containers.
 
   num_containers:
     value: >
       has_runs ? (header.as<header_with_runs>.num_containers_minus_1 + 1) : header.as<header_no_runs>.num_containers
     doc: |
       Computed field that returns the number of containers in the bitmap.
-      For backwards compatibility, the encoding differs depending on whether run containers are present.
+      For backwards compatibility, the encoding differs depending on whether run
+      containers are present.
 
 types:
   header_no_runs:
@@ -116,8 +121,10 @@ types:
   header_with_runs:
     doc: |
       Header format for bitmaps that may use run containers.
-      The 16-bit cookie's most significant bits store the number of containers minus 1.
-      A run container bitset follows, with a 1 bit indicating the container is a run container.
+      The 16-bit cookie's most significant bits store the number of containers
+      minus 1.
+      A run container bitset follows, with a 1 bit indicating the container is a run
+      container.
     seq:
       - id: num_containers_minus_1
         type: u2
@@ -125,12 +132,14 @@ types:
       - id: run_bitset
         size: (num_containers_minus_1 + 1 + 7) / 8
         doc: |
-          Bitset indicating which containers are run containers (1 bit) vs array/bitset (0 bit).
+          Bitset indicating which containers are run containers (1 bit) vs array/bitset (0
+          bit).
           The least significant bit of the first byte corresponds to the first container.
 
   container_meta:
     doc: |
-      Metadata for a single container, consisting of its key (16 most significant bits)
+      Metadata for a single container, consisting of its key (16 most significant
+      bits)
       and its cardinality minus 1 (to allow encoding full 65536 cardinality).
     seq:
       - id: key
@@ -158,8 +167,7 @@ types:
         doc: Array of runs (start value and length pairs)
 
   run:
-    doc: |
-      A run of consecutive integers, represented by a starting value and a length.
+    doc: A run of consecutive integers, represented by a starting value and a length.
     seq:
       - id: start_idx
         type: u2
@@ -188,12 +196,12 @@ types:
   bitset_container:
     doc: |
       Bitset container using a 65536-bit bitset (8KB) to represent which
-      values are present. Used when the container has many values (cardinality > 4096).
+      values are present. Used when the container has many values (cardinality >
+      4096).
     seq:
       - id: bitset
         size: 8 * 1024
-        doc: |
-          A dense 8KB bitset (2^16 bits).
+        doc: A dense 8KB bitset (2^16 bits).
 
 enums:
   cookie:

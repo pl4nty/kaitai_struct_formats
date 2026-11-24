@@ -236,7 +236,9 @@ types:
         type: str
         encoding: UTF-8
   chain_partition_descriptor:
-    doc: A descriptor containing a pointer to signed integrity data stored on another partition.
+    doc: |
+      A descriptor containing a pointer to signed integrity data stored on another
+      partition.
     seq:
       - id: roolback_index_location
         type: u4

@@ -8,7 +8,8 @@ meta:
   bit-endian: le
 
 doc: |
-  Windows platform Binary table is a file format enablind vendors to preinstall eiter needed essential software, or malware and spyware.
+  Windows platform Binary table is a file format enablind vendors to preinstall
+  eiter needed essential software, or malware and spyware.
 doc-ref: https://download.microsoft.com/download/8/A/2/8A2FB72D-9B96-4E2D-A559-4A27CF905A80/windows-platform-binary-table.docx
 
 seq:

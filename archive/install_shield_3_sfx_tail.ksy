@@ -39,7 +39,8 @@ types:
           Path name for this file,
           encrypted using a relatively simple algorithm.
           The path name can be decrypted bytewise using the formula
-          `byte_rot_right((path_encrypted[i] ^ path_encryption_key[7-(i%8)]), 7-(i%8)) ^ path_encryption_key[i%8]`,
+          `byte_rot_right((path_encrypted[i] ^ path_encryption_key[7-(i%8)]), 7-(i%8)) ^
+          path_encryption_key[i%8]`,
           where `i` is the (0-based) index of the byte in question.
       - id: modified
         type: dos_datetime_backwards

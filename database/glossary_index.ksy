@@ -9,7 +9,8 @@ meta:
   endian: le
 
 doc: |
-  'glossary' is a tool written in Rust to index flat files delimited by line breaks.
+  'glossary' is a tool written in Rust to index flat files delimited by line
+  breaks.
   In fact the index can be used for any binary files.
 
 doc-ref: https://github.com/waltonseymour/glossary/blob/7cfc390d20afd7373749aa94e0b4ce0f30709f97/src/write.rs

@@ -23,7 +23,8 @@ meta:
   endian: le
 
 doc: |
-  This is a part of an abstraction layer for multidimensional arrays and tensors, as used in, for example, `numpy`.
+  This is a part of an abstraction layer for multidimensional arrays and tensors,
+  as used in, for example, `numpy`.
   Configure it with an `ndarray_descriptor`, and parse with it a buffer.
 
 params:

@@ -16,7 +16,8 @@ doc: |
 
   Major users of DMX sound library include:
 
-  * Original Doom game engine (and games based on it: Heretic, Hexen, Strife, Chex Quest)
+  * Original Doom game engine (and games based on it: Heretic, Hexen, Strife, Chex
+    Quest)
   * Raptor: Call of the Shadows
 doc-ref:
   - http://www.fit.vutbr.cz/~arnost/muslib/op2_form.zip
@@ -65,8 +66,7 @@ types:
         type: s2
         doc: Base note offset
   op_settings:
-    doc: |
-      OPL2 settings for one operator (carrier or modulator)
+    doc: OPL2 settings for one operator (carrier or modulator)
     seq:
       - id: trem_vibr
         type: u1

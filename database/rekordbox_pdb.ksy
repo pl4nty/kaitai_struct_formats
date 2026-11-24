@@ -82,8 +82,7 @@ seq:
     type: table
     repeat: expr
     repeat-expr: num_tables
-    doc: |
-      Describes and links to the tables present in the database.
+    doc: Describes and links to the tables present in the database.
 
 types:
   table:
@@ -95,8 +94,7 @@ types:
       - id: type
         type: u4
         enum: page_type
-        doc: |
-          Identifies the kind of rows that are found in this table.
+        doc: Identifies the kind of rows that are found in this table.
       - id: empty_candidate
         type: u4
       - id: first_page
@@ -124,8 +122,7 @@ types:
     seq:
       - id: index
         type: u4
-        doc: |
-          Identifies the desired page number.
+        doc: Identifies the desired page number.
     instances:
       body:
         io: _root._io
@@ -151,8 +148,7 @@ types:
       - id: type
         type: u4
         enum: page_type
-        doc: |
-          Identifies the type of information stored in the rows of this page.
+        doc: Identifies the type of information stored in the rows of this page.
       - id: next_page
         type: page_ref
         doc: |
@@ -189,8 +185,7 @@ types:
           index at end of page.
       - id: used_size
         type: u2
-        doc: |
-          The number of bytes that are in use in the page heap.
+        doc: The number of bytes that are in use in the page heap.
       - type: u2
         doc: |
           @flesniak said: "(0->1: 2)"
@@ -260,8 +255,7 @@ types:
     instances:
       base:
         value: '_root.len_page - (group_index * 0x24)'
-        doc: |
-          The starting point of this group of row indices.
+        doc: The starting point of this group of row indices.
       row_present_flags:
         pos: base - 4
         type: u2
@@ -276,8 +270,7 @@ types:
         type: row_ref(_index)
         repeat: expr
         repeat-expr: '(group_index < (_parent.num_groups - 1)) ? 16 : ((_parent.num_rows - 1) % 16 + 1)'
-        doc: |
-          The row offsets in this group.
+        doc: The row offsets in this group.
 
   row_ref:
     doc: |
@@ -329,26 +322,22 @@ types:
             'page_type::playlist_entries': playlist_entry_row
             'page_type::tracks': track_row
         if: present
-        doc: |
-          The actual content of the row, as long as it is present.
+        doc: The actual content of the row, as long as it is present.
         -webide-parse-mode: eager
     -webide-representation: '{body.name.body.text}{body.title.body.text} ({body.id})'
 
   album_row:
-    doc: |
-      A row that holds an album name and ID.
+    doc: A row that holds an album name and ID.
     seq:
       - type: u2
-        doc: |
-          Some kind of magic word? Usually 0x80, 0x00.
+        doc: Some kind of magic word? Usually 0x80, 0x00.
       - id: index_shift
         type: u2
         doc: TODO name from @flesniak, but what does it mean?
       - type: u4
       - id: artist_id
         type: u4
-        doc: |
-          Identifies the artist associated with the album.
+        doc: Identifies the artist associated with the album.
       - id: id
         type: u4
         doc: |
@@ -367,13 +356,11 @@ types:
       name:
         pos: _parent.row_base + ofs_name
         type: device_sql_string
-        doc: |
-          The name of this album.
+        doc: The name of this album.
         -webide-parse-mode: eager
 
   artist_row:
-    doc: |
-      A row that holds an artist name and ID.
+    doc: A row that holds an artist name and ID.
     seq:
       - id: subtype
         type: u2
@@ -408,8 +395,7 @@ types:
       name:
         pos: '_parent.row_base + (subtype == 0x64? ofs_name_far : ofs_name_near)'
         type: device_sql_string
-        doc: |
-          The name of this artist.
+        doc: The name of this artist.
         -webide-parse-mode: eager
 
   artwork_row:
@@ -430,8 +416,7 @@ types:
     -webide-representation: '{path.body.text}'
 
   color_row:
-    doc: |
-      A row that holds a color name and the associated ID.
+    doc: A row that holds a color name and the associated ID.
     seq:
       - size: 5
       - id: id
@@ -442,12 +427,10 @@ types:
       - type: u1
       - id: name
         type: device_sql_string
-        doc: |
-          The variable-length string naming the color.
+        doc: The variable-length string naming the color.
 
   genre_row:
-    doc: |
-      A row that holds a genre name and the associated ID.
+    doc: A row that holds a genre name and the associated ID.
     seq:
       - id: id
         type: u4
@@ -456,12 +439,10 @@ types:
           and linked from other rows (such as tracks).
       - id: name
         type: device_sql_string
-        doc: |
-          The variable-length string naming the genre.
+        doc: The variable-length string naming the genre.
 
   key_row:
-    doc: |
-      A row that holds a musical key and the associated ID.
+    doc: A row that holds a musical key and the associated ID.
     seq:
       - id: id
         type: u4
@@ -470,16 +451,13 @@ types:
           and linked from other rows (such as tracks).
       - id: id2
         type: u4
-        doc: |
-          Seems to be a second copy of the ID?
+        doc: Seems to be a second copy of the ID?
       - id: name
         type: device_sql_string
-        doc: |
-          The variable-length string naming the key.
+        doc: The variable-length string naming the key.
 
   label_row:
-    doc: |
-      A row that holds a label name and the associated ID.
+    doc: A row that holds a label name and the associated ID.
     seq:
       - id: id
         type: u4
@@ -488,8 +466,7 @@ types:
           and linked from other rows (such as tracks).
       - id: name
         type: device_sql_string
-        doc: |
-          The variable-length string naming the label.
+        doc: The variable-length string naming the label.
 
   playlist_tree_row:
     doc: |
@@ -505,8 +482,7 @@ types:
       - size: 4
       - id: sort_order
         type: u4
-        doc: |
-          The order in which the entries of this playlist are sorted.
+        doc: The order in which the entries of this playlist are sorted.
       - id: id
         type: u4
         doc: |
@@ -519,29 +495,24 @@ types:
           than a playlist.
       - id: name
         type: device_sql_string
-        doc: |
-          The variable-length string naming the playlist.
+        doc: The variable-length string naming the playlist.
     instances:
       is_folder:
         value: raw_is_folder != 0
         -webide-parse-mode: eager
 
   playlist_entry_row:
-    doc: |
-      A row that associates a track with a position in a playlist.
+    doc: A row that associates a track with a position in a playlist.
     seq:
       - id: entry_index
         type: u4
-        doc: |
-          The position within the playlist represented by this entry.
+        doc: The position within the playlist represented by this entry.
       - id: track_id
         type: u4
-        doc: |
-          The track found at this position in the playlist.
+        doc: The track found at this position in the playlist.
       - id: playlist_id
         type: u4
-        doc: |
-          The playlist to which this entry belongs.
+        doc: The playlist to which this entry belongs.
 
   track_row:
     doc: |
@@ -550,8 +521,7 @@ types:
       albums, keys, etc.
     seq:
       - type: u2
-        doc: |
-          Some kind of magic word? Usually 0x24, 0x00.
+        doc: Some kind of magic word? Usually 0x24, 0x00.
       - id: index_shift
         type: u2
         doc: TODO name from @flesniak, but what does it mean?
@@ -560,8 +530,7 @@ types:
         doc: TODO what do the bits mean?
       - id: sample_rate
         type: u4
-        doc: |
-          Playback sample rate of the audio file.
+        doc: Playback sample rate of the audio file.
       - id: composer_id
         type: u4
         doc: |
@@ -569,11 +538,9 @@ types:
           known.
       - id: file_size
         type: u4
-        doc: |
-          The length of the audio file, in bytes.
+        doc: The length of the audio file, in bytes.
       - type: u4
-        doc: |
-          Some ID? Purpose as yet unknown.
+        doc: Some ID? Purpose as yet unknown.
       - type: u2
         doc: |
           From @flesniak: "always 19048?"
@@ -582,8 +549,7 @@ types:
           From @flesniak: "always 30967?"
       - id: artwork_id
         type: u4
-        doc: |
-          References a row in the artwork table if there is album art.
+        doc: References a row in the artwork table if there is album art.
       - id: key_id
         type: u4
         doc: |
@@ -606,12 +572,10 @@ types:
           known remixer.
       - id: bitrate
         type: u4
-        doc: |
-          Playback bit rate of the audio file.
+        doc: Playback bit rate of the audio file.
       - id: track_number
         type: u4
-        doc: |
-          The position of the track within an album.
+        doc: The position of the track within an album.
       - id: tempo
         type: u4
         doc: |
@@ -645,16 +609,13 @@ types:
           is known to be part of a multi-disc album.
       - id: play_count
         type: u2
-        doc: |
-          The number of times this track has been played.
+        doc: The number of times this track has been played.
       - id: year
         type: u2
-        doc: |
-          The year in which this track was released.
+        doc: The year in which this track was released.
       - id: sample_depth
         type: u2
-        doc: |
-          The number of bits per sample of the audio file.
+        doc: The number of bits per sample of the audio file.
       - id: duration
         type: u2
         doc: |
@@ -670,8 +631,7 @@ types:
           assigned a color.
       - id: rating
         type: u1
-        doc: |
-          The number of stars to display for the track, 0 to 5.
+        doc: The number of stars to display for the track, 0 to 5.
       - type: u2
         doc: |
           From @flesniak: "always 1?"
@@ -696,8 +656,7 @@ types:
       texter:
         pos: _parent.row_base + ofs_strings[1]
         type: device_sql_string
-        doc: |
-          A string of unknown purpose, which @flesnik named.
+        doc: A string of unknown purpose, which @flesnik named.
         -webide-parse-mode: eager
       unknown_string_2:
         pos: _parent.row_base + ofs_strings[2]
@@ -723,8 +682,7 @@ types:
       message:
         pos: _parent.row_base + ofs_strings[5]
         type: device_sql_string
-        doc: |
-          A string of unknown purpose, which @flesnik named.
+        doc: A string of unknown purpose, which @flesnik named.
         -webide-parse-mode: eager
       kuvo_public:
         pos: _parent.row_base + ofs_strings[6]
@@ -747,38 +705,32 @@ types:
       unknown_string_5:
         pos: _parent.row_base + ofs_strings[8]
         type: device_sql_string
-        doc: |
-          A string of unknown purpose.
+        doc: A string of unknown purpose.
         -webide-parse-mode: eager
       unknown_string_6:
         pos: _parent.row_base + ofs_strings[9]
         type: device_sql_string
-        doc: |
-          A string of unknown purpose, usually empty.
+        doc: A string of unknown purpose, usually empty.
         -webide-parse-mode: eager
       date_added:
         pos: _parent.row_base + ofs_strings[10]
         type: device_sql_string
-        doc: |
-          A string containing the date this track was added to the collection.
+        doc: A string containing the date this track was added to the collection.
         -webide-parse-mode: eager
       release_date:
         pos: _parent.row_base + ofs_strings[11]
         type: device_sql_string
-        doc: |
-          A string containing the date this track was released, if known.
+        doc: A string containing the date this track was released, if known.
         -webide-parse-mode: eager
       mix_name:
         pos: _parent.row_base + ofs_strings[12]
         type: device_sql_string
-        doc: |
-          A string naming the remix of the track, if known.
+        doc: A string naming the remix of the track, if known.
         -webide-parse-mode: eager
       unknown_string_7:
         pos: _parent.row_base + ofs_strings[13]
         type: device_sql_string
-        doc: |
-          A string of unknown purpose, usually empty.
+        doc: A string of unknown purpose, usually empty.
         -webide-parse-mode: eager
       analyze_path:
         pos: _parent.row_base + ofs_strings[14]
@@ -792,38 +744,32 @@ types:
       analyze_date:
         pos: _parent.row_base + ofs_strings[15]
         type: device_sql_string
-        doc: |
-          A string containing the date this track was analyzed by rekordbox.
+        doc: A string containing the date this track was analyzed by rekordbox.
         -webide-parse-mode: eager
       comment:
         pos: _parent.row_base + ofs_strings[16]
         type: device_sql_string
-        doc: |
-          The comment assigned to the track by the DJ, if any.
+        doc: The comment assigned to the track by the DJ, if any.
         -webide-parse-mode: eager
       title:
         pos: _parent.row_base + ofs_strings[17]
         type: device_sql_string
-        doc: |
-          The title of the track.
+        doc: The title of the track.
         -webide-parse-mode: eager
       unknown_string_8:
         pos: _parent.row_base + ofs_strings[18]
         type: device_sql_string
-        doc: |
-          A string of unknown purpose, usually empty.
+        doc: A string of unknown purpose, usually empty.
         -webide-parse-mode: eager
       filename:
         pos: _parent.row_base + ofs_strings[19]
         type: device_sql_string
-        doc: |
-          The file name of the track audio file.
+        doc: The file name of the track audio file.
         -webide-parse-mode: eager
       file_path:
         pos: _parent.row_base + ofs_strings[20]
         type: device_sql_string
-        doc: |
-          The file path of the track audio file.
+        doc: The file path of the track audio file.
         -webide-parse-mode: eager
 
   device_sql_string:
@@ -848,8 +794,7 @@ types:
     -webide-representation: '{body.text}'
 
   device_sql_short_ascii:
-    doc: |
-      An ASCII-encoded string up to 127 bytes long.
+    doc: An ASCII-encoded string up to 127 bytes long.
     params:
       - id: mangled_length
         type: u1
@@ -862,44 +807,36 @@ types:
         type: str
         encoding: ASCII
         if: '(mangled_length % 2 > 0) and (length >= 0)'  # Skip invalid strings
-        doc: |
-          The content of the string.
+        doc: The content of the string.
     instances:
       length:
         value: '((mangled_length - 1) / 2) - 1'
-        doc: |
-          The un-mangled length of the string, in bytes.
+        doc: The un-mangled length of the string, in bytes.
         -webide-parse-mode: eager
 
   device_sql_long_ascii:
-    doc: |
-      An ASCII-encoded string preceded by a two-byte length field.
+    doc: An ASCII-encoded string preceded by a two-byte length field.
     seq:
       - id: length
         type: u2
-        doc: |
-          Contains the length of the string in bytes.
+        doc: Contains the length of the string in bytes.
       - id: text
         size: length
         type: str
         encoding: ASCII
-        doc: |
-          The content of the string.
+        doc: The content of the string.
 
   device_sql_long_utf16be:
-    doc: |
-      A UTF-16BE-encoded string preceded by a two-byte length field.
+    doc: A UTF-16BE-encoded string preceded by a two-byte length field.
     seq:
       - id: length
         type: u2
-        doc: |
-          Contains the length of the string in bytes, including two trailing nulls.
+        doc: Contains the length of the string in bytes, including two trailing nulls.
       - id: text
         size: length - 4
         type: str
         encoding: UTF-16BE
-        doc: |
-          The content of the string.
+        doc: The content of the string.
 
 enums:
   page_type:
@@ -910,28 +847,22 @@ enums:
         genre, artwork ID, playing time, etc.
     1:
       id: genres
-      doc: |
-        Holds rows naming musical genres, for reference by tracks and searching.
+      doc: Holds rows naming musical genres, for reference by tracks and searching.
     2:
       id: artists
-      doc: |
-        Holds rows naming artists, for reference by tracks and searching.
+      doc: Holds rows naming artists, for reference by tracks and searching.
     3:
       id: albums
-      doc: |
-        Holds rows naming albums, for reference by tracks and searching.
+      doc: Holds rows naming albums, for reference by tracks and searching.
     4:
       id: labels
-      doc: |
-        Holds rows naming music labels, for reference by tracks and searching.
+      doc: Holds rows naming music labels, for reference by tracks and searching.
     5:
       id: keys
-      doc: |
-        Holds rows naming musical keys, for reference by tracks and searching.
+      doc: Holds rows naming musical keys, for reference by tracks and searching.
     6:
       id: colors
-      doc: |
-        Holds rows naming color labels, for reference  by tracks and searching.
+      doc: Holds rows naming color labels, for reference  by tracks and searching.
     7:
       id: playlist_tree
       doc: |
@@ -948,27 +879,23 @@ enums:
       id: unknown_10
     11:
       id: unknown_11
-      doc: |
-        The rows all seem to have history file names in them, such as "HISTORY 001".
+      doc: The rows all seem to have history file names in them, such as "HISTORY 001".
     12:
       id: unknown_12
     13:
       id: artwork
-      doc: |
-        Holds rows pointing to album artwork images.
+      doc: Holds rows pointing to album artwork images.
     14:
       id: unknown_14
     15:
       id: unknown_15
     16:
       id: columns
-      doc: |
-        TODO figure out and explain
+      doc: TODO figure out and explain
     17:
       id: unknown_17
     18:
       id: unknown_18
     19:
       id: history
-      doc: |
-        Holds rows listing tracks played in performance sessions.
+      doc: Holds rows listing tracks played in performance sessions.

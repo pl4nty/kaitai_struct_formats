@@ -4,7 +4,8 @@ meta:
   license: Unlicense  # Also https://github.com/richgel999/lzham_codec/blob/master/LICENSE
   endian: le
 doc: |
-  LZHAM is an archiver that tries to implement high and slow compression and fast decompression
+  LZHAM is an archiver that tries to implement high and slow compression and fast
+  decompression
 doc-ref: https://github.com/richgel999/lzham_codec
 seq:
   - id: header

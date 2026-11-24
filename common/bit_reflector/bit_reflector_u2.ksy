@@ -5,8 +5,7 @@ meta:
   imports:
     ./bit_reflector_u1
 
-doc: |
-  Changes order of bits within a word.
+doc: Changes order of bits within a word.
 
 params:
   - id: needed

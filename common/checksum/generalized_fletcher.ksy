@@ -28,11 +28,13 @@ params:
     type: u8
     doc: |
       Nakassis optimization: modular division not on every iteration.
-      Maximum amount of iterations without modular division in pessimistic approach can be computed using
+      Maximum amount of iterations without modular division in pessimistic approach
+      can be computed using
 
       from math import sqrt, floor
 
-      def getMaxIterCountWithoutModulo(b: int = 0xFFFFFFFF, a: int = 0, accumulatorBitness: int) -> int:
+      def getMaxIterCountWithoutModulo(b: int = 0xFFFFFFFF, a: int = 0,
+      accumulatorBitness: int) -> int:
         b = 65521
         maxMask = (1 << accumulatorBitness) - 1
         return floor((-2*a + b + sqrt(4*a**2 - 4*a*b + b**2 + 8*b*maxMask))/(2*b) - 2)

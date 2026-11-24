@@ -24,7 +24,8 @@ doc: |
   The data is decompressed using code in a `'dcmp'` resource.
   Some decompressors used by Apple are included in the System file,
   but applications can also include custom decompressors.
-  The header of the compressed data indicates the ID of the `'dcmp'` resource used to decompress the data,
+  The header of the compressed data indicates the ID of the `'dcmp'` resource used
+  to decompress the data,
   along with some parameters for the decompressor.
 doc-ref:
   - 'http://www.alysis.us/arctechnology.htm'
@@ -33,16 +34,17 @@ doc-ref:
 seq:
   - id: header
     type: header
-    doc: |
-      The header of the compressed data.
+    doc: The header of the compressed data.
   - id: compressed_data
     size-eos: true
     doc: |
       The compressed resource data.
 
-      The format of this data is completely dependent on the decompressor and its parameters,
+      The format of this data is completely dependent on the decompressor and its
+      parameters,
       as specified in the header.
-      For details about the compressed data formats implemented by Apple's decompressors,
+      For details about the compressed data formats implemented by Apple's
+      decompressors,
       see the specs in the resource_compression subdirectory.
 types:
   header:
@@ -120,11 +122,9 @@ types:
               It has the value `0x01` in all known compressed resources.
           - id: len_decompressed
             type: u4
-            doc: |
-              The byte length of the data after decompression.
+            doc: The byte length of the data after decompression.
       type_specific_part_type_8:
-        doc: |
-          The type-specific part of a compressed resource header with header type `8`.
+        doc: The type-specific part of a compressed resource header with header type `8`.
         seq:
           - id: working_buffer_fractional_size
             type: u1
@@ -132,23 +132,27 @@ types:
               The ratio of the compressed data size to the uncompressed data size,
               times 256.
 
-              This parameter affects the amount of memory allocated by the Resource Manager during decompression,
+              This parameter affects the amount of memory allocated by the Resource Manager
+              during decompression,
               but does not have a direct effect on the decompressor
               (except that it will misbehave if insufficient memory is provided).
-              Alternative decompressors that decompress resources into a separate buffer rather than in-place can generally ignore this parameter.
+              Alternative decompressors that decompress resources into a separate buffer
+              rather than in-place can generally ignore this parameter.
           - id: expansion_buffer_size
             type: u1
             doc: |
-              The maximum number of bytes that the compressed data might "grow" during decompression.
+              The maximum number of bytes that the compressed data might "grow" during
+              decompression.
 
-              This parameter affects the amount of memory allocated by the Resource Manager during decompression,
+              This parameter affects the amount of memory allocated by the Resource Manager
+              during decompression,
               but does not have a direct effect on the decompressor
               (except that it will misbehave if insufficient memory is provided).
-              Alternative decompressors that decompress resources into a separate buffer rather than in-place can generally ignore this parameter.
+              Alternative decompressors that decompress resources into a separate buffer
+              rather than in-place can generally ignore this parameter.
           - id: decompressor_id
             type: s2
-            doc: |
-              The ID of the `'dcmp'` resource that should be used to decompress this resource.
+            doc: The ID of the `'dcmp'` resource that should be used to decompress this resource.
           - id: reserved
             type: u2
             valid: 0
@@ -157,13 +161,11 @@ types:
               It has the value `0` in all known compressed resources,
               so it is most likely reserved.
       type_specific_part_type_9:
-        doc: |
-          The type-specific part of a compressed resource header with header type `9`.
+        doc: The type-specific part of a compressed resource header with header type `9`.
         seq:
           - id: decompressor_id
             type: s2
-            doc: |
-              The ID of the `'dcmp'` resource that should be used to decompress this resource.
+            doc: The ID of the `'dcmp'` resource that should be used to decompress this resource.
           - id: decompressor_specific_parameters_with_io
             size: 4
             type: bytes_with_io
@@ -175,7 +177,8 @@ types:
             value: decompressor_specific_parameters_with_io.data
             doc: |
               Decompressor-specific parameters.
-              The exact structure and meaning of this field is different for each decompressor.
+              The exact structure and meaning of this field is different for each
+              decompressor.
 
               This field always has the same length,
               but decompressors don't always use the entirety of the field,

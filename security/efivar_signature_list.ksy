@@ -18,7 +18,8 @@ doc: |
 
   Note:
 
-  * `d719b2cb-3d3a-4596-a3bc-dad00e67656f` is defined as `EFI_IMAGE_SECURITY_DATABASE_GUID`
+  * `d719b2cb-3d3a-4596-a3bc-dad00e67656f` is defined as
+    `EFI_IMAGE_SECURITY_DATABASE_GUID`
   * `8be4df61-93ca-11d2-aa0d-00e098032b8c` is defined as `EFI_GLOBAL_VARIABLE`
 
   Each file contains an EFI attribute (32-bit integer) followed by a list of
@@ -70,7 +71,9 @@ types:
         doc-ref: EFI_CERT_SHA256_GUID
       is_cert_rsa2048_key:
         value: signature_type == [0xe8, 0x66, 0x57, 0x3c, 0x9c, 0x26, 0x34, 0x4e, 0xaa, 0x14, 0xed, 0x77, 0x6e, 0x85, 0xb3, 0xb6]
-        doc: RSA-2048 key (only the modulus since the public key exponent is known to be 0x10001)
+        doc: |
+          RSA-2048 key (only the modulus since the public key exponent is known to be
+          0x10001)
         doc-ref: EFI_CERT_RSA2048_GUID
       is_cert_rsa2048_sha256:
         value: signature_type == [0x90, 0x61, 0xb3, 0xe2, 0x9b, 0x87, 0x3d, 0x4a, 0xad, 0x8d, 0xf2, 0xe7, 0xbb, 0xa3, 0x27, 0x84]
@@ -102,15 +105,21 @@ types:
         doc-ref: EFI_CERT_SHA512_GUID
       is_cert_sha256_x509:
         value: signature_type == [0x92, 0xa4, 0xd2, 0x3b, 0xc0, 0x96, 0x79, 0x40, 0xb4, 0x20, 0xfc, 0xf9, 0x8e, 0xf1, 0x03, 0xed]
-        doc: SHA256 hash of an X.509 certificate's To-Be-Signed contents, and a time of revocation
+        doc: |
+          SHA256 hash of an X.509 certificate's To-Be-Signed contents, and a time of
+          revocation
         doc-ref: EFI_CERT_X509_SHA256_GUID
       is_cert_sha384_x509:
         value: signature_type == [0x6e, 0x87, 0x76, 0x70, 0xc2, 0x80, 0xe6, 0x4e, 0xaa, 0xd2, 0x28, 0xb3, 0x49, 0xa6, 0x86, 0x5b]
-        doc: SHA384 hash of an X.509 certificate's To-Be-Signed contents, and a time of revocation
+        doc: |
+          SHA384 hash of an X.509 certificate's To-Be-Signed contents, and a time of
+          revocation
         doc-ref: EFI_CERT_X509_SHA384_GUID
       is_cert_sha512_x509:
         value: signature_type == [0x63, 0xbf, 0x6d, 0x44, 0x02, 0x25, 0xda, 0x4c, 0xbc, 0xfa, 0x24, 0x65, 0xd2, 0xb0, 0xfe, 0x9d]
-        doc: SHA512 hash of an X.509 certificate's To-Be-Signed contents, and a time of revocation
+        doc: |
+          SHA512 hash of an X.509 certificate's To-Be-Signed contents, and a time of
+          revocation
         doc-ref: EFI_CERT_X509_SHA512_GUID
       is_cert_der_pkcs7:
         value: signature_type == [0x9d, 0xd2, 0xaf, 0x4a, 0xdf, 0x68, 0xee, 0x49, 0x8a, 0xa9, 0x34, 0x7d, 0x37, 0x56, 0x65, 0xa7]

@@ -18,12 +18,17 @@ meta:
   endian: le
 
 doc: |
-  This is a file format used in Sony PSP custom firmwares to compress ISO images, that are on-the-fly decompressed by the kernel, to allow to place more software onto a flash card. Some games tolerate such procedure well, other ones have lags in some points, another ones become completely unenjoyable.
+  This is a file format used in Sony PSP custom firmwares to compress ISO images,
+  that are on-the-fly decompressed by the kernel, to allow to place more software
+  onto a flash card. Some games tolerate such procedure well, other ones have lags
+  in some points, another ones become completely unenjoyable.
   AFAIK this format is not used for compressing and mounting ISO images for PCs.
-  The `doc`s in this format were mostly copied from the readmes available in `doc-ref`s.
+  The `doc`s in this format were mostly copied from the readmes available in
+  `doc-ref`s.
 
   The original CSO format was created by BOOSTER.
-  This document includes an experimental v2 format of CSO, proposed by Unknown W. Brackets.
+  This document includes an experimental v2 format of CSO, proposed by Unknown W.
+  Brackets.
   A CSO file consists of a file header, index section, and data section.
 doc-ref:
   - https://github.com/unknownbrackets/maxcso/blob/master/README_CSO.md
@@ -56,12 +61,24 @@ types:
       ptr:
         value: (raw & 0x7FFFFFFF) << _root.header.index_shift
         doc: |
-          The lower 31 bits of each index entry, when shifted left by `index_shift`, indicate the position within the file of the block's compressed data.  The length of the block is the difference between this entry's offset and the following index entry's offset value.
-          Note that this size may be larger than the compressed or uncompressed data, if `index_shift` is greater than 0.  The space between blocks may be padded with any byte, but NUL is recommended.
-          Note also that this means index entries must be incrementing.  Reordering or deduplication of blocks is not supported.
-          zso v1: The lower 31 bits of each index entry, when shifted left by `index_shift`, indicate the position within the file of the block's compressed data.  The length of the block is the difference between this entry's offset and the following index entry's offset value.
-          Note that this size may be larger than the compressed or uncompressed data, if `index_shift` is greater than 0.  The space between blocks may be padded with any byte, but NUL is recommended.
-          Note also that this means index entries must be incrementing.  Reordering or deduplication of blocks is not supported.
+          The lower 31 bits of each index entry, when shifted left by `index_shift`,
+          indicate the position within the file of the block's compressed data.  The
+          length of the block is the difference between this entry's offset and the
+          following index entry's offset value.
+          Note that this size may be larger than the compressed or uncompressed data, if
+          `index_shift` is greater than 0.  The space between blocks may be padded with
+          any byte, but NUL is recommended.
+          Note also that this means index entries must be incrementing.  Reordering or
+          deduplication of blocks is not supported.
+          zso v1: The lower 31 bits of each index entry, when shifted left by
+          `index_shift`, indicate the position within the file of the block's compressed
+          data.  The length of the block is the difference between this entry's offset and
+          the following index entry's offset value.
+          Note that this size may be larger than the compressed or uncompressed data, if
+          `index_shift` is greater than 0.  The space between blocks may be padded with
+          any byte, but NUL is recommended.
+          Note also that this means index entries must be incrementing.  Reordering or
+          deduplication of blocks is not supported.
       msb:
         value: raw >> 31 == 1
       size:

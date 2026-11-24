@@ -8,7 +8,8 @@ meta:
   license: CC0-1.0
   endian: be
 doc: |
-  Mozilla ARchive file is Mozilla's own archive format to distribute software updates.
+  Mozilla ARchive file is Mozilla's own archive format to distribute software
+  updates.
   Test files can be found on Mozilla's FTP site, for example:
 
   <http://ftp.mozilla.org/pub/firefox/nightly/partials/>

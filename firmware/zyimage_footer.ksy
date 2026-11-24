@@ -13,8 +13,11 @@ meta:
   This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.
 
 doc: |
-  The free open source tool has been created by [S-trace](https://4pda.ru/forum/index.php?showuser=1718487), who brought OpenWRT support to Keenetic devices.
-  The purpose of this footer is to prevent users from accidentially flashing an incompatible or corrupt firmware into own devices.
+  The free open source tool has been created by
+  [S-trace](https://4pda.ru/forum/index.php?showuser=1718487), who brought OpenWRT
+  support to Keenetic devices.
+  The purpose of this footer is to prevent users from accidentially flashing an
+  incompatible or corrupt firmware into own devices.
 doc-ref: https://github.com/openwrt/openwrt/blob/master/tools/firmware-utils/src/zyimage.c
 
 instances:

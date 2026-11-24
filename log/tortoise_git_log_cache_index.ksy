@@ -11,7 +11,9 @@ meta:
   endian: le
 
 doc: |
-  TortoiseGit is a GUI frontend for git SCM. It caches some data to `tortoisegit.data` file in `.git` dir. `tortoisegit.index is an index for that file.
+  TortoiseGit is a GUI frontend for git SCM. It caches some data to
+  `tortoisegit.data` file in `.git` dir. `tortoisegit.index is an index for that
+  file.
 
 doc-ref:
   - https://gitlab.com/tortoisegit/tortoisegit/raw/master/src/TortoiseProc/gitlogcache.h
@@ -24,7 +26,7 @@ seq:
   - id: version
     -orig-id: m_Version
     type: u4
-    doc: "current one is 0x11"
+    doc: current one is 0x11
   - id: item_count
     -orig-id: m_ItemCount
     type: u4

@@ -10,7 +10,10 @@ meta:
   encoding: ASCII
   endian: le
 doc: |
-  Converted from https://github.com/williballenthin/python-vb/blob/master/vb/__init__.py with addition of some structures described in various reverse-engineered documentation
+  Converted from
+  https://github.com/williballenthin/python-vb/blob/master/vb/__init__.py with
+  addition of some structures described in various reverse-engineered
+  documentation
   
   # an external script converting raw virtual addresses to offsets in a file is needed, save it as resolve_offset.py
   from kaitaistruct import KaitaiStruct, KaitaiStream

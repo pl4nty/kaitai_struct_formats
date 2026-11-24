@@ -7,8 +7,10 @@ meta:
   endian: le
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
-  Scan History files are created by Windows Defender to store metadata about scans that found malware.
-  They contain a list of entries which hold, for example, check sumsums and scan times.
+  Scan History files are created by Windows Defender to store metadata about scans
+  that found malware.
+  They contain a list of entries which hold, for example, check sumsums and scan
+  times.
 doc-ref: https://github.com/ernw/quarantine-formats/blob/master/docs/Windows_Defender.md
 seq:
   - id: entry

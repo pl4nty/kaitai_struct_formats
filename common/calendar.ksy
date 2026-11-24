@@ -6,13 +6,13 @@ meta:
   license: Unlicense
   endian: le
 -affected-by: upstream kaitai_struct_webide issue 155
-doc: |
-  A set of types to compute a date from epoch offsets in days.
+doc: A set of types to compute a date from epoch offsets in days.
 types:
   split_day_time:
     -web-ide-representation: "{day} {time}"
     doc: |
-      This type is intended to facilitate splitting day from time within a day in a timestamp in seconds.
+      This type is intended to facilitate splitting day from time within a day in a
+      timestamp in seconds.
       The day can be passed to `epoch_date` then.
     params:
       - id: second_since_epoch
@@ -34,7 +34,9 @@ types:
   time:
     -web-ide-representation: "{hour}:{minute}:{second}"
     doc:
-      Splits a timestamp within a day (in seconds) into clock time. Timezones are not taken into account.
+      |
+      Splits a timestamp within a day (in seconds) into clock time. Timezones are not
+      taken into account.
     params:
       - id: seconds_since_day
         type: u4

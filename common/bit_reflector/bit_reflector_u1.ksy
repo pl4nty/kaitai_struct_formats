@@ -2,8 +2,7 @@ meta:
   id: bit_reflector_u1
   title: Changes order of bits within a byte
   license: Unlicense
-doc: |
-  Changes order of bits within a byte.
+doc: Changes order of bits within a byte.
 
 params:
   - id: needed

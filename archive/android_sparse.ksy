@@ -13,9 +13,11 @@ doc: |
   for for example firmware updates to save on bandwidth. Files in sparse
   format first have to be converted back to their original format.
 
-  A tool to create images for testing can be found in the Android source code tree:
+  A tool to create images for testing can be found in the Android source code
+  tree:
 
-  <https://android.googlesource.com/platform/system/core/+/e8d02c50d7/libsparse> - `img2simg.c`
+  <https://android.googlesource.com/platform/system/core/+/e8d02c50d7/libsparse> -
+  `img2simg.c`
 
   Note: this is not the same as the Android sparse data image format.
 doc-ref:
@@ -70,7 +72,8 @@ types:
           CRC32 checksum of the original data
 
           In practice always 0; if checksum writing is requested, a CRC32 chunk is written
-          at the end of the file instead. The canonical `libsparse` implementation does this
+          at the end of the file instead. The canonical `libsparse` implementation does
+          this
           and other implementations tend to follow it, see
           <https://gitlab.com/teskje/android-sparse-rs/-/blob/57c2577/src/write.rs#L112-114>
     instances:

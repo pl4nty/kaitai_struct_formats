@@ -5,8 +5,7 @@ meta:
   encoding: ASCII
   endian: le
 
-doc: |
-  Allwinner (sunxi) TOC0 images.
+doc: Allwinner (sunxi) TOC0 images.
 
 doc-ref: https://linux-sunxi.org/TOC0
 
@@ -40,7 +39,9 @@ types:
       - id: name
         -orig-id: TOC0_NAME
         type: strz
-        doc: there exist impls where it occupies 8 bytes, and there exist ones where 16. I hypothesize that it is just 8-byte aligned.
+        doc: |
+          there exist impls where it occupies 8 bytes, and there exist ones where 16. I
+          hypothesize that it is just 8-byte aligned.
       - id: alignment
         type: align_power_of_2(8)
       - id: signature
@@ -65,11 +66,15 @@ types:
       - id: total_length
         -orig-id: TOC0_LENGTH
         type: u4
-        doc: Total length of the TOC0 image. This must be a multiple of the storage block size (e.g. 512B or 8KiB).
+        doc: |
+          Total length of the TOC0 image. This must be a multiple of the storage block
+          size (e.g. 512B or 8KiB).
       - id: boot_device
         -orig-id: TOC0_BOOT_MEDIA
         type: u1
-        doc: The first byte is the boot device, written by SBROM. The meaning of the other three bytes is unknown.
+        doc: |
+          The first byte is the boot device, written by SBROM. The meaning of the other
+          three bytes is unknown.
         #enum: boot_device_type
       - id: unkn0
         size: 3
@@ -78,7 +83,9 @@ types:
         type: u4
         repeat: until
         repeat-until: _ == 0x3B45494D  # "MIE;"
-        doc: contrary to the doc in the wiki and the open sources, the distance between terminator is not fixed and it seems it can be arbitrary.
+        doc: |
+          contrary to the doc in the wiki and the open sources, the distance between
+          terminator is not fixed and it seems it can be arbitrary.
     enums:
       encryption:
         0: plain
@@ -167,7 +174,9 @@ types:
       - id: sig_len
         -orig-id: SIG_LEN
         type: u4
-        doc: Length of signature (signed by KEY0), in bytes. In practice, only 2048-bit signatures are supported.
+        doc: |
+          Length of signature (signed by KEY0), in bytes. In practice, only 2048-bit
+          signatures are supported.
       - id: key0
         size: 512
         doc: KEY0 modulus, followed by KEY0 exponent

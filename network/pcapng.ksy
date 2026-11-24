@@ -11,8 +11,7 @@ meta:
   license: Unlicense
   encoding: UTF-8
   endian: le
-doc: |
-  Pcap-NG is a new format for captures superseding pcap.
+doc: Pcap-NG is a new format for captures superseding pcap.
 doc-ref:
   - https://xml2rfc.tools.ietf.org/cgi-bin/xml2rfc.cgi?url=https://raw.githubusercontent.com/pcapng/pcapng/master/draft-tuexen-opsawg-pcapng.xml&modeAsFormat=html/ascii&type=ascii
   - https://wiki.wireshark.org/Development/PcapNg
@@ -36,8 +35,7 @@ types:
         type: u2
         doc: backward-compatible changes. Currently 0.
   timestamp:
-    doc: |
-      In units specified by if_tsresol.
+    doc: In units specified by if_tsresol.
     seq:
       - id: high
         -orig-id: Timestamp (High)
@@ -220,13 +218,11 @@ types:
             4:
               id: ipv4_address
               -orig-id: if_IPv4addr
-              doc: |
-                address first, then mask
+              doc: address first, then mask
             5:
               id: ipv6_address
               -orig-id: if_IPv6addr
-              doc: |
-                address first, then prefix length
+              doc: address first, then prefix length
             6:
               id: mac_address
               -orig-id: if_MACaddr
@@ -236,13 +232,11 @@ types:
             8:
               id: speed
               -orig-id: if_speed
-              doc: |
-                in bits per second
+              doc: in bits per second
             9:
               id: timestamp_resolution
               -orig-id: if_tsresol
-              doc: |
-                negative powers either of 10 or 2, depending on the first bit
+              doc: negative powers either of 10 or 2, depending on the first bit
             10:
               id: time_zone
               -orig-id: if_tzone

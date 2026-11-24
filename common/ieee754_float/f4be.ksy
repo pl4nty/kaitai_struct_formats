@@ -9,7 +9,8 @@ meta:
     - ./ieee754_float
   endian: be
 doc: |
-  YOU LIKELY DON'T NEED THIS. `f4` is implemented in all modern hardware and programming languages natively. It is here mainly for testing purposes.
+  YOU LIKELY DON'T NEED THIS. `f4` is implemented in all modern hardware and
+  programming languages natively. It is here mainly for testing purposes.
   See the doc for `float` on the drawbacks of this impl.
 seq:
   - id: sign

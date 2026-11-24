@@ -19,7 +19,8 @@ meta:
 doc: |
   Archive format used by InstallShield 3 installers.
   File data can optionally be compressed using the PKWARE DCL Implode algorithm.
-  This is not to be confused with the old ZIP Implode compression algorithm of the same name.
+  This is not to be confused with the old ZIP Implode compression algorithm of the
+  same name.
 doc-ref:
   - https://github.com/OpenRA/OpenRA/blob/fe146cb77a25091ed342e38104292ac3cb19019b/OpenRA.Mods.Common/FileSystem/InstallShieldPackage.cs
   - https://github.com/OmniBlade/isextract/blob/5adb0af87fb0aaad0b436db0b7e7356947af3ee2/src/isextract.cpp
@@ -55,7 +56,8 @@ instances:
       are not stored explicitly as directory entries -
       they are implied by the directory entries for their subdirectories.
 
-      The format technically allows directory entries that don't contain any files or directories,
+      The format technically allows directory entries that don't contain any files or
+      directories,
       but in practice this isn't used.
   toc_files:
     pos: header.ofs_toc_files
@@ -149,7 +151,8 @@ types:
         valid:
           expr: is_extended or _ == 0
         doc: |
-          A simple checksum based on the sum of the compressed sizes of all files in this archive part.
+          A simple checksum based on the sum of the compressed sizes of all files in this
+          archive part.
           Only used in extended format -
           otherwise this field is 0
           and no checksum is stored or verified.
@@ -223,7 +226,8 @@ types:
         value: flags.is_split or flags.is_split_contiguous
         doc: |
           Whether any of the flags for split archive format are set,
-          indicating that additional fields in the archive header and file TOC are filled out.
+          indicating that additional fields in the archive header and file TOC are filled
+          out.
           As explained in the documentation for is_split,
           this does *not* mean that the archive actually has multiple parts!
     types:
@@ -309,10 +313,12 @@ types:
       in the same format as used in Windows executable VERSIONINFO resources.
 
       The version number parts are ordered major.minor.build.private -
-      the strange order of the fields is because Windows normally treats this version format
+      the strange order of the fields is because Windows normally treats this version
+      format
       as two little-endian 32-bit integers:
       the first one with major in the high 16 bits and minor in the low 16 bits,
-      and the second one with build in the high 16 bits and private in the low 16 bits.
+      and the second one with build in the high 16 bits and private in the low 16
+      bits.
     doc-ref: https://docs.microsoft.com/en-us/windows/win32/menurc/versioninfo-resource
     -webide-representation: '{major}.{minor}.{build}.{private}'
     seq:
@@ -335,7 +341,8 @@ types:
             : _ == 0
         doc: |
           Number of the archive part in which the last part of this file's data is stored.
-          Can be the same as `start_part` if this file's data is not split over multiple parts.
+          Can be the same as `start_part` if this file's data is not split over multiple
+          parts.
           Only used in extended format -
           otherwise this field is 0
           and the file's data is not split.
@@ -393,7 +400,8 @@ types:
             ? (_ > 0 and _ < end_part)
             : _ == end_part
         doc: |
-          Number of the split archive part in which the first part of this file's data is stored.
+          Number of the split archive part in which the first part of this file's data is
+          stored.
           Only used in extended format -
           otherwise this field is 0
           and the file's data is not split.
@@ -438,7 +446,8 @@ types:
 
           For files with no version number,
           this field is set to version 0.0.0.0 (all zero bytes).
-          The `has_version` flag does *not* reliably indicate if this field is valid or not -
+          The `has_version` flag does *not* reliably indicate if this field is valid or
+          not -
           even with the flag set to false this field often contains a non-zero version,
           so it's better to check this field directly instead of the flag.
       - id: reserved_2

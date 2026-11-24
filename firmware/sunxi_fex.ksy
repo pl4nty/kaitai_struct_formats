@@ -7,7 +7,8 @@ meta:
 
 doc: |
   Something like vendor-specific FDT residing in `soc-cfg` part of 0 image.
-  It mostly mirrors content of `soc@<unit-address>` key in the FDT blob, **but not fully**!
+  It mostly mirrors content of `soc@<unit-address>` key in the FDT blob, **but not
+  fully**!
   Some data is unique to this blob, and some data is unique to `dtb` blob.
   The format used ther is called "fex"
 
@@ -121,7 +122,7 @@ types:
                   - id: idx
                     -orig-id: port_num
                     type: u4
-                    doc: "Index of this port in `allwinner,pname`"
+                    doc: Index of this port in `allwinner,pname`
                   - id: muxsel
                     -orig-id:
                       - allwinner,muxsel

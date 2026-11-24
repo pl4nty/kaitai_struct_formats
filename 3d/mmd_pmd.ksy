@@ -7,8 +7,7 @@ meta:
   encoding: Shift_JIS
   endian: le
 
-doc: |
-  PMD is the older format for storing MikuMikuDance (MMD) model data.
+doc: PMD is the older format for storing MikuMikuDance (MMD) model data.
 
 seq:
   - id: header

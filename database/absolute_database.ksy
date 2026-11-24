@@ -112,7 +112,9 @@ types:
         if: signature == "ABSP"
 
   disk_page:
-    doc: TABSDiskPageHeader, as declared in ABSTypes.pas; the "ABSP" signature precedes it
+    doc: |
+      TABSDiskPageHeader, as declared in ABSTypes.pas; the "ABSP" signature precedes
+      it
     seq:
       - id: state
         type: u4
@@ -120,7 +122,8 @@ types:
       - id: page_type
         type: u2
         enum: page_type
-        doc: types 11 and 12 are two B-tree index flavors with identical
+        doc: |
+          types 11 and 12 are two B-tree index flavors with identical
           leaf entry layout; the engine-level distinction is unconfirmed
           (see spec doc)
       - id: next_page_no
@@ -197,7 +200,8 @@ types:
         doc: bit i (LSB of byte i/8) set — slot i holds a live record
       - id: pad
         size: base - len_slot_bitmap
-        doc: equals the record tail reserve (the same constant that
+        doc: |
+          equals the record tail reserve (the same constant that
           pads every record's schema fields up to the slot stride)
       - id: slots
         size: len_slots

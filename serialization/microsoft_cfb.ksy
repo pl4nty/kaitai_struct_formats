@@ -12,20 +12,30 @@ meta:
     - /windows/windows_filetime
   endian: le
 doc: |
-  Due to restrictions of Kaitai Struct we cannot fully parse CFB file format. In particular,
-  index of an entry in a FAT corresponds to a sector in the parsed file, while a value in that FAT entry
-  corresponds to an index of the next FAT entry in a given stream. The latter means that loading of
-  full user data streams or directory streams becomes cumbersome or impossible at all (when we need
-  to reference FAT entries at arbitrary indices in arbitrary sectors). Instead, we load as much as
-  possible leaving binding of the loaded FAT entries outside of this KSY file. Below is a list of
+  Due to restrictions of Kaitai Struct we cannot fully parse CFB file format. In
+  particular,
+  index of an entry in a FAT corresponds to a sector in the parsed file, while a
+  value in that FAT entry
+  corresponds to an index of the next FAT entry in a given stream. The latter
+  means that loading of
+  full user data streams or directory streams becomes cumbersome or impossible at
+  all (when we need
+  to reference FAT entries at arbitrary indices in arbitrary sectors). Instead, we
+  load as much as
+  possible leaving binding of the loaded FAT entries outside of this KSY file.
+  Below is a list of
   parsed entities:
     * DIFAT: fully loaded (with recursive references to subsequent DIFATs);
     * FAT: fully loaded and bound to corresponding DIFAT entries;
     * MiniFAT: fully loaded (see comment for mini_fat below);
-    * MiniStream: only the first sector is loaded (subsequent sectors should be loaded according to FAT
-      and parts within this stream should be bound to directory entries according to MiniFAT);
-    * DirectoryStream: only the first sector is loaded (subsequent sectors should be loaded according to FAT);
-    * UserStreams: only the first sector for each user stream is loaded and bound to corresponding
+    * MiniStream: only the first sector is loaded (subsequent sectors should be
+      loaded according to FAT
+      and parts within this stream should be bound to directory entries according
+      to MiniFAT);
+    * DirectoryStream: only the first sector is loaded (subsequent sectors should
+      be loaded according to FAT);
+    * UserStreams: only the first sector for each user stream is loaded and bound
+      to corresponding
       directory entry (subsequent sectors should be loaded according to FAT).
 seq:
   - id: header
@@ -45,9 +55,12 @@ instances:
     size: len_sector
     type: mini_fat_entries_type
     doc: |
-      Since the size of the mini stream is restricted to the mini_stream_cutoff_size value (which is normally 0x1000)
-      and the size of the mini stream sector is normally 0x40, then this mini_fat stream should contain at most
-      0x1000 / 0x40 = 0x40 entries, which means that full Mini FAT fits into only one sector (1 sector >= 0x80 entries).
+      Since the size of the mini stream is restricted to the mini_stream_cutoff_size
+      value (which is normally 0x1000)
+      and the size of the mini stream sector is normally 0x40, then this mini_fat
+      stream should contain at most
+      0x1000 / 0x40 = 0x40 entries, which means that full Mini FAT fits into only one
+      sector (1 sector >= 0x80 entries).
 enums:
   sector_type:
     0xffffffff: free
@@ -71,10 +84,14 @@ types:
         enum: version_type
       - id: byte_order
         contents: [0xfe, 0xff]
-        doc: In theory, specifies a byte order. In practice, no other values besides FE FF (which imply little endian order) are used.
+        doc: |
+          In theory, specifies a byte order. In practice, no other values besides FE FF
+          (which imply little endian order) are used.
       - id: sector_shift
         type: u2
-        doc: For major version 3, must be 0x9 (sector size = 512 bytes). For major version 4, must be 0xc (sector size = 4096 bytes).
+        doc: |
+          For major version 3, must be 0x9 (sector size = 512 bytes). For major version 4,
+          must be 0xc (sector size = 4096 bytes).
       - id: mini_sector_shift
         type: u2
         doc: This field must be 0x6 (mini sector size = 64 bytes).
@@ -92,7 +109,9 @@ types:
         doc: Starting sector number for directory stream.
       - id: transaction_seq
         type: u4
-        doc: A transaction sequence number, which is incremented each time the file is saved if transactions are implemented, 0 otherwise.
+        doc: |
+          A transaction sequence number, which is incremented each time the file is saved
+          if transactions are implemented, 0 otherwise.
       - id: mini_stream_cutoff_size
         type: u4
         doc: This value must be equal to 0x1000.
@@ -208,10 +227,14 @@ types:
       - id: sector
         type: u4
         enum: sector_type
-        doc: For stream object, number of starting sector. For a root storage object, first sector of the mini stream, if the mini stream exists.
+        doc: |
+          For stream object, number of starting sector. For a root storage object, first
+          sector of the mini stream, if the mini stream exists.
       - id: size
         type: u8
-        doc: For stream object, size of user-defined data in bytes. For a root storage object, size of the mini stream.
+        doc: |
+          For stream object, size of user-defined data in bytes. For a root storage
+          object, size of the mini stream.
     instances:
       mini_stream:
         io: _root._io

@@ -163,7 +163,7 @@ types:
             type: b1
             repeat: expr
             repeat-expr: 6
-            doc: '+x -x +y -y +z -z'
+            doc: +x -x +y -y +z -z
       surfaces:
         seq:
           - id: surfaces

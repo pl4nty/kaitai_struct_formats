@@ -9,7 +9,8 @@ meta:
   endian: le
 
 doc: |
-  Scala signatures are stored as "modified UTF" strings (see ByteCodecs.scala) in ScalaSignature.bytes (which is a string).
+  Scala signatures are stored as "modified UTF" strings (see ByteCodecs.scala) in
+  ScalaSignature.bytes (which is a string).
   To get the blob to be parsed with this KS spec, you
     1. Get annotation of a Scala class of type `ScalaSignature`
     2. get a Unicode string from its `bytes` property
@@ -17,7 +18,8 @@ doc: |
     4. Apply `decode` from ByteCodecs.scala to the raw bytes
 
   Sample files can be downloaded at https://github.com/kaitai-io/kaitai_struct_formats/files/5103413/scalaSignatures.zip
-  ... or generated with script https://gist.github.com/KOLANICH/f7e961d5bdf3f087567da6fdda43c4a1
+  ... or generated with script
+  https://gist.github.com/KOLANICH/f7e961d5bdf3f087567da6fdda43c4a1
 
 
 doc-ref:
@@ -63,7 +65,8 @@ types:
     types:
       group:
         doc: |
-          One byte group, clearly divided into 7-bit "value" chunk and 1-bit "continuation" flag.
+          One byte group, clearly divided into 7-bit "value" chunk and 1-bit
+          "continuation" flag.
         seq:
           - id: b
             type: u1
@@ -261,7 +264,8 @@ types:
             value: _io.pos < _io.size
             doc: |
               In Scala impl the parser is stateful.
-              We don't have access to this state in KS. So we use the heuristic. The type has different length depending on his value.
+              We don't have access to this state in KS. So we use the heuristic. The type has
+              different length depending on his value.
           private_within:
             value: index.value
             if: has_private_within
@@ -360,18 +364,15 @@ types:
             repeat: eos
 
       super_type:
-        doc: |
-          See the example for [[scala.reflect.api.Trees#SuperExtractor]]
+        doc: See the example for [[scala.reflect.api.Trees#SuperExtractor]]
         seq:
           - id: this_type
             type: type_ref
-            doc: |
-              The type of the qualifier
+            doc: The type of the qualifier
 
           - id: super_type
             type: type_ref
-            doc: |
-              The type of the selector.
+            doc: The type of the selector.
 
       compound_type:
         seq:

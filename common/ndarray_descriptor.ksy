@@ -9,7 +9,8 @@ meta:
   endian: le
 
 doc: |
-  This is a part of an abstraction layer for multidimensional arrays and tensors, as used in, for example, `numpy`.
+  This is a part of an abstraction layer for multidimensional arrays and tensors,
+  as used in, for example, `numpy`.
   Using this structure one can specify the shape and item type of an array.
 
 params:
@@ -21,7 +22,9 @@ params:
 
 types:
   encode_type:
-    doc: used to encode endianness, type and size of a scalar into a value of `item_type`. Then this value can be used in `switch-on.cases`.
+    doc: |
+      used to encode endianness, type and size of a scalar into a value of
+      `item_type`. Then this value can be used in `switch-on.cases`.
     params:
       - id: endianness
         type: u1
@@ -37,7 +40,9 @@ types:
         enum: item_type
 
   decode_type:
-    doc: used to decode endianness, type and size of a scalar from a value of `item_type`. The decoded values can be used to configure native implementations.
+    doc: |
+      used to decode endianness, type and size of a scalar from a value of
+      `item_type`. The decoded values can be used to configure native implementations.
     params:
       - id: value
         type: u1

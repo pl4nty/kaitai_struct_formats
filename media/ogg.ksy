@@ -100,8 +100,7 @@ types:
         type: u1
         repeat: expr
         repeat-expr: num_segments
-        doc: |
-          Table of lengths of segments.
+        doc: Table of lengths of segments.
       - id: segments
         size: len_segments[_index]
         repeat: expr

@@ -315,7 +315,7 @@ enums:
       doc: 'StreamList (FNV-1a hash tag): one sound stream.'
     0x5e262256:
       id: sound_bank_list
-      doc: 'SoundBankList (FNV-1a hash tag).'
+      doc: SoundBankList (FNV-1a hash tag).
     0x5f4c564c:
       id: lvl_upper
       doc: "'LVL_'. One mip level of a texture face."

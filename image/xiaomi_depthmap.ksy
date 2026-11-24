@@ -26,7 +26,9 @@ seq:
     doc: the depthmap
 types:
   info:
-    doc: Header of the file. Contains the raw length and many fields I still don't undestand
+    doc: |
+      Header of the file. Contains the raw length and many fields I still don't
+      undestand
     seq:
       - id: unknown1
         type: u2

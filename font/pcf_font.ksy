@@ -126,8 +126,7 @@ types:
               - id: is_string
                 -orig-id: isStringProp
                 type: u1
-                doc: |
-                  Designates if value is an integer (zero) or a string (non-zero).
+                doc: Designates if value is an integer (zero) or a string (non-zero).
               - id: value_or_ofs_value
                 type: u4
                 doc: |
@@ -140,8 +139,7 @@ types:
                 io: _parent.strings._io
                 pos: ofs_name
                 type: strz
-                doc: |
-                  Name of the property addressed in the strings buffer.
+                doc: Name of the property addressed in the strings buffer.
                 -webide-parse-mode: eager
               str_value:
                 io: _parent.strings._io
@@ -155,8 +153,7 @@ types:
               int_value:
                 value: value_or_ofs_value
                 if: is_string == 0
-                doc: |
-                  Value of the property, if this is an integer value.
+                doc: Value of the property, if this is an integer value.
                 -webide-parse-mode: eager
 
               # As of Kaitai Struct 0.9, `value` fails with:
@@ -174,8 +171,7 @@ types:
             cases:
               true: be
               false: le
-        doc: |
-          Table containing uncompressed glyph bitmaps.
+        doc: Table containing uncompressed glyph bitmaps.
         doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#the-bitmap-table'
         seq:
           - id: format
@@ -233,8 +229,7 @@ types:
             cases:
               true: be
               false: le
-        doc: |
-          Table containing scalable widths of characters.
+        doc: Table containing scalable widths of characters.
         doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#the-scalable-widths-table'
         -webide-representation: '{num_glyphs:dec} glyphs'
         seq:
@@ -256,8 +251,7 @@ types:
             cases:
               true: be
               false: le
-        doc: |
-          Table containing character names for every glyph.
+        doc: Table containing character names for every glyph.
         doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#the-glyph-names-table'
         -webide-representation: '{num_glyphs:dec} glyphs'
         seq:
@@ -269,16 +263,14 @@ types:
             type: string_ref
             repeat: expr
             repeat-expr: num_glyphs
-            doc: |
-              Glyph names are represented as string references in strings buffer.
+            doc: Glyph names are represented as string references in strings buffer.
           - id: len_strings
             -orig-id: string_size
             type: u4
           - id: strings
             size: len_strings
             type: bytes_with_io
-            doc: |
-              Strings buffer which contains all glyph names.
+            doc: Strings buffer which contains all glyph names.
         types:
           string_ref:
             -webide-representation: '{value}'

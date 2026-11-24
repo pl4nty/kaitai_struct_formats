@@ -9,9 +9,11 @@ meta:
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
   Avira quarantine files are created by the Avira Antivirus software.
-  They store suspected malware and its metadata, usually under /ProgramData/Avira/Antivirus/INFECTED. The file extension usually is .qua.
+  They store suspected malware and its metadata, usually under
+  /ProgramData/Avira/Antivirus/INFECTED. The file extension usually is .qua.
   The parser was created by analyzing different quarantine files.
-  Avira qurantine files consist of an unencrypted metadata part and the encrypted suspected malware.
+  Avira qurantine files consist of an unencrypted metadata part and the encrypted
+  suspected malware.
 doc-ref: https://github.com/ernw/quarantine-formats/blob/master/docs/Avira_Antivirus.md
 seq:
   - id: magic
@@ -41,7 +43,9 @@ seq:
     size: 'len_filename < 2 ? len_filename : len_filename - 2'
     type: str
     encoding: UTF-16LE
-    doc: The original filename where the malware was detected. Sometimes seems to be a process name.
+    doc: |
+      The original filename where the malware was detected. Sometimes seems to be a
+      process name.
   - id: padding1
     size: 2
     contents: [0x00, 0x00]

@@ -7,10 +7,14 @@ meta:
   endian: le
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
-  ResourceData files store suspected malware and metadata and are created by Windows Defender.
-  The parser was created analyzing different files from the ResourceData subdirectory in the Windows Defender quarantine directory.
-  The file is encrypted. It contains a binary security descriptor and the suspected malware.
-  The name of the file is the same as the matching Resources file which contains more information about this suspected malware.
+  ResourceData files store suspected malware and metadata and are created by
+  Windows Defender.
+  The parser was created analyzing different files from the ResourceData
+  subdirectory in the Windows Defender quarantine directory.
+  The file is encrypted. It contains a binary security descriptor and the
+  suspected malware.
+  The name of the file is the same as the matching Resources file which contains
+  more information about this suspected malware.
 doc-ref: https://github.com/ernw/quarantine-formats/blob/master/docs/Windows_Defender.md
 seq:
   - id: encryptedfile
@@ -216,7 +220,8 @@ types:
       - id: flags
         size: 2
         doc: |
-          Documentation says that this is an access mask, but there is no documentation about the different flags
+          Documentation says that this is an access mask, but there is no documentation
+          about the different flags
         doc-ref: https://docs.microsoft.com/en-us/windows/win32/secauthz/access-mask
   access_mask_standard_rights:
     seq:

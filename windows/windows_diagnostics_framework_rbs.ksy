@@ -9,8 +9,12 @@ meta:
   encoding: UTF-8
   endian: le
 doc: |
-  The file format used by Windows Diagnostics Framework (including so called telemetery).
-  If you have Windows with "telemetry" (Windows 10 and Windows 7,8,8.1 with the updates containing telemetry), you can find these files in %ProgramData%/Microsoft/Diagnosis directory (`/` standing for the Windows path separator).
+  The file format used by Windows Diagnostics Framework (including so called
+  telemetery).
+  If you have Windows with "telemetry" (Windows 10 and Windows 7,8,8.1 with the
+  updates containing telemetry), you can find these files in
+  %ProgramData%/Microsoft/Diagnosis directory (`/` standing for the Windows path
+  separator).
 doc-ref: https://github.com/bluec0re/windows-rbs-parser
 seq:
   - id: header
@@ -40,15 +44,15 @@ types:
         type: str
       - id: unkn0
         size: 8
-        doc: "Doesn't match any data inside of JSON"
+        doc: Doesn't match any data inside of JSON
       - id: items_collection_size
         type: u4
       - id: items_collection_size_again
         type: u4
-        doc: "Usisally matches items_collection_size"
+        doc: Usisally matches items_collection_size
       - id: unkn1
         type: u4
-        doc: "usually 0"
+        doc: usually 0
       - id: reserved_space_size
         type: u4
       - id: unkn2
@@ -61,7 +65,7 @@ types:
         -orig-id: num_elements2
         type: u4
         if: "version < 5"
-        doc: "Usisally matches elements_count"
+        doc: Usisally matches elements_count
       - id: unkn3
         type: u2
       - id: unkn4
@@ -77,7 +81,9 @@ types:
       - id: data
         size: header.size
         process: "kaitai.compress.zlib(-1, 15)"
-        doc: "JSON-serialized data, though JSON looks not very valid. Some info about the data in JSON may be found in the documents by the links in -doc-ref."
+        doc: |
+          JSON-serialized data, though JSON looks not very valid. Some info about the data
+          in JSON may be found in the documents by the links in -doc-ref.
         doc-ref:
           - "https://autoriteitpersoonsgegevens.nl/sites/default/files/atoms/files/public_version_dutch_dpa_informal_translation_summary_of_investigation_report.pdf"
           - "https://github.com/MicrosoftDocs/windows-itpro-docs/tree/master/windows/privacy"
@@ -98,7 +104,7 @@ types:
             type: u4
           - id: unkn3
             type: u4
-            doc: "bluec0re suspects it is the type"
+            doc: bluec0re suspects it is the type
           - id: unkn4
             type:
               switch-on: "_root.header.version >=5"

@@ -17,8 +17,7 @@ seq:
   - id: direction
     type: u4be
     enum: direction_enum
-    doc: |
-      packet direction
+    doc: packet direction
     doc-ref: https://github.com/the-tcpdump-group/libpcap/blob/master/pcap/bluetooth.h#L44
   - id: hci_packet_type
     type: u1

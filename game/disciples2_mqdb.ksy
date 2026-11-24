@@ -28,7 +28,7 @@ seq:
     type: mqdb_header
   - id: table_of_contents_offset
     type: u4
-    doc: 'Offset to the table of contents entries from the beginning of file'
+    doc: Offset to the table of contents entries from the beginning of file
   - id: records
     type: mqrc
     repeat: eos
@@ -42,7 +42,7 @@ types:
         type: u4
       - id: version
         contents: [9, 0, 0, 0]
-        doc: 'Game expects 9 when reading and always writes 9 when creating files'
+        doc: Game expects 9 when reading and always writes 9 when creating files
       - id: unknown2
         size: 12
   mqrc_header:
@@ -53,16 +53,16 @@ types:
         type: u4
       - id: id
         type: u4
-        doc: 'Unique record ID'
+        doc: Unique record ID
       - id: size
         type: u4
-        doc: 'Records contents size in bytes'
+        doc: Records contents size in bytes
       - id: allocated_size
         type: u4
-        doc: 'Total size in bytes allocated for record contents'
+        doc: Total size in bytes allocated for record contents
       - id: used
         type: u4
-        doc: 'Meaning assumed'
+        doc: Meaning assumed
       - id: unknown2
         type: u4
   mqrc:
@@ -85,7 +85,7 @@ types:
         encoding: ASCII
       - id: id
         type: u4
-        doc: 'Record ID this name belongs to'
+        doc: Record ID this name belongs to
   names_list:
     seq:
       - id: entries_count
@@ -103,16 +103,16 @@ types:
     seq:
       - id: id
         type: u4
-        doc: 'Unique record ID'
+        doc: Unique record ID
       - id: size
         type: u4
-        doc: 'Records contents size in bytes'
+        doc: Records contents size in bytes
       - id: allocated_size
         type: u4
-        doc: 'Total size in bytes allocated for record contents'
+        doc: Total size in bytes allocated for record contents
       - id: offset
         type: u4
-        doc: 'Offset to the record from the beginning of file, in bytes'
+        doc: Offset to the record from the beginning of file, in bytes
   table_of_contents:
     seq:
       - id: entries_count
@@ -124,4 +124,4 @@ types:
       - id: padding
         type: u1
         repeat: eos
-        doc: 'Table of contents record data is written in chunks of 1024 bytes'
+        doc: Table of contents record data is written in chunks of 1024 bytes

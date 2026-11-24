@@ -88,7 +88,8 @@ types:
           Timestamp of a packet in seconds since 1970-01-01 00:00:00 UTC (UNIX timestamp).
 
           In practice, some captures are not following that (e.g. because the device lacks
-          a real-time clock), so this field might represent time since device boot, start of
+          a real-time clock), so this field might represent time since device boot, start
+          of
           capture, or other arbitrary epoch.
       - id: ts_usec
         type: u4

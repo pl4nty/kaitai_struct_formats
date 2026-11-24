@@ -23,8 +23,11 @@ doc: |
   * System-wide: several files in `%SystemRoot%/System32/Config/`
   * User-wide:
     * `%USERPROFILE%/Ntuser.dat`
-    * `%USERPROFILE%/Local Settings/Application Data/Microsoft/Windows/Usrclass.dat` (localized, Windows 2000, Server 2003 and Windows XP)
-    * `%USERPROFILE%/AppData/Local/Microsoft/Windows/Usrclass.dat` (non-localized, Windows Vista and later)
+    * `%USERPROFILE%/Local Settings/Application
+      Data/Microsoft/Windows/Usrclass.dat` (localized, Windows 2000, Server 2003
+      and Windows XP)
+    * `%USERPROFILE%/AppData/Local/Microsoft/Windows/Usrclass.dat` (non-localized,
+      Windows Vista and later)
 
   Note that one typically can't access files directly on a mounted
   filesystem with a running Windows OS.
@@ -71,7 +74,9 @@ types:
         doc: Logical sector size of the underlying disk in bytes divided by 512
       - id: unknown1
         size: 64
-        doc: Sometimes contains the last part of the filename in UTF-16 LE most of the time with an end-of-string character, but not always. Unused bytes are 0.
+        doc: |
+          Sometimes contains the last part of the filename in UTF-16 LE most of the time
+          with an end-of-string character, but not always. Unused bytes are 0.
       - id: unknown2
         size: 396
         doc: Can contain remnant data, Padding used for the checksum?
@@ -173,10 +178,14 @@ types:
             type: u4
           - id: number_of_volatile_sub_keys
             type: u4
-            doc: The offset value is in bytes and relative from the start of the hive bin data / Refers to a sub keys list or contains -1 (0xffffffff) if empty.
+            doc: |
+              The offset value is in bytes and relative from the start of the hive bin data /
+              Refers to a sub keys list or contains -1 (0xffffffff) if empty.
           - id: sub_keys_list_offset
             type: u4
-            doc: The offset value is in bytes and relative from the start of the hive bin data / Refers to a sub keys list or contains -1 (0xffffffff) if empty.
+            doc: |
+              The offset value is in bytes and relative from the start of the hive bin data /
+              Refers to a sub keys list or contains -1 (0xffffffff) if empty.
           - id: volatile_sub_keys_list_offset
             type: u4
           - id: number_of_values

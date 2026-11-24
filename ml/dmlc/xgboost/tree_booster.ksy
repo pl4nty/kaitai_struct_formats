@@ -75,7 +75,8 @@ types:
         doc: |
           Number of output groups to be predicted, used for multi-class classification.
           How many output group a single instance can produce.
-          This affects the behavior of number of output we have: suppose we have n instance and k group, output will be k * n.
+          This affects the behavior of number of output we have: suppose we have n
+          instance and k group, output will be k * n.
           lower_bound: 1
           default : 1
       - id: size_leaf_vector
@@ -128,7 +129,9 @@ types:
             doc: number of child that is leaf node known up to now
       feature_vector:
         -orig-id: FVec
-        doc: dense feature vector that can be taken by RegTree and can be construct from sparse feature vector.
+        doc: |
+          dense feature vector that can be taken by RegTree and can be construct from
+          sparse feature vector.
         doc-ref: https://github.com/dmlc/xgboost/blob/master/include/xgboost/tree_model.h#L439L484
         seq:
           - id: data
@@ -179,7 +182,8 @@ types:
             type: u4
             doc: |
               Size of leaf vector, reserved for vector tree
-              leaf vector size, used for vector tree used to store more than one dimensional information in tree
+              leaf vector size, used for vector tree used to store more than one dimensional
+              information in tree
               lower_bound: 0
               default: 0
           - id: reserved
@@ -194,7 +198,8 @@ types:
             -orig-id: parent_
             type: u4
             doc: |
-              pointer to parent, highest bit is used to indicate whether it's a left child or not
+              pointer to parent, highest bit is used to indicate whether it's a left child or
+              not
               name `parent_` cannot be used, incompatible to JS target
           - id: cleft_
             type: u4

@@ -21,13 +21,25 @@ meta:
   ks-opaque-types: true
   endian: le
 doc: |
-  Serialization format used by numpy. An lot of bad mistakes have been made when designing this format:
+  Serialization format used by numpy. An lot of bad mistakes have been made when
+  designing this format:
     * it uses dicts in python syntax:
-      * in order to parse the array one has to have a parser for python language syntax. This cripples interoperability: noone wants to create a parser for python syntax or bring whole python to just parse a `numpy` array.
-      * it is tempting to `exec` these dicts, which could have been a security issue.
-      * they had to use `ast.parse` and manual walking of the tree in order to avoid the issu that in past. Fortunately now in python there is `ast.literal_eval`, which evaluates expressions of primitive types without RCE.
+      * in order to parse the array one has to have a parser for python language
+        syntax. This cripples interoperability: noone wants to create a parser for
+        python syntax or bring whole python to just parse a `numpy` array.
+      * it is tempting to `exec` these dicts, which could have been a security
+        issue.
+      * they had to use `ast.parse` and manual walking of the tree in order to
+        avoid the issu that in past. Fortunately now in python there is
+        `ast.literal_eval`, which evaluates expressions of primitive types without
+        RCE.
     The schema of the dicts is fixed, the values in the dicts are integers, the better solution would be to put these numbers as standardized variable-length integers or use something like JSON.
-    * it relies on pickle for serializing non-primitive objects, which is a remote code execution. If one needs `pickle`, he is already fucked up, and pickle is definetily capable to serialize numpy arrays, so there is no benefits to embed `pickle` into this format. The better solution is to state that serializing anything except arrays of literal types is out of scope of the format.
+    * it relies on pickle for serializing non-primitive objects, which is a remote
+      code execution. If one needs `pickle`, he is already fucked up, and pickle
+      is definetily capable to serialize numpy arrays, so there is no benefits to
+      embed `pickle` into this format. The better solution is to state that
+      serializing anything except arrays of literal types is out of scope of the
+      format.
   
   Testing:
     import numpy as np
@@ -38,7 +50,11 @@ doc: |
     np.save(b, a, allow_pickle=False)
     p=numpy_npy.NumpyNpy.from_bytes(b.getvalue())
   
-  Warning: This spec cannot currently be used to parse structured arrays and arrays of fixed-length strings , such as "S10". They are currently out of scope. Behavior when the file being parsed contains them is undefined. Because of limitations of KS no errors will be emitted, just the stream will be parsed incorrectly with unpredictable effect and probably even a vulnerability.
+  Warning: This spec cannot currently be used to parse structured arrays and
+  arrays of fixed-length strings , such as "S10". They are currently out of scope.
+  Behavior when the file being parsed contains them is undefined. Because of
+  limitations of KS no errors will be emitted, just the stream will be parsed
+  incorrectly with unpredictable effect and probably even a vulnerability.
   
 doc-ref: 
   - https://github.com/numpy/numpy/blob/067cb067cb17a20422e51da908920a4fbb3ab851/doc/neps/nep-0001-npy-format.rst
@@ -63,7 +79,8 @@ seq:
     type: strz
     encoding: ASCII
     doc: |
-      Contains a Python literal expression of a dictionary. DO NOT `exec` it! If you use python, use `ast.literal_eval`.
+      Contains a Python literal expression of a dictionary. DO NOT `exec` it! If you
+      use python, use `ast.literal_eval`.
       The dictionary contains three keys:
           "descr" : dtype.descr
               An object that can be passed as an argument to the numpy.dtype() constructor to create the array's dtype.
@@ -72,12 +89,19 @@ seq:
               Since Fortran-contiguous arrays are a common form of non-C-contiguity, we allow them to be written directly to disk for efficiency.
           "shape" : tuple of int
               The shape of the array.
-      For repeatability and readability, this dictionary is formatted using pprint.pformat() so the keys are in alphabetic order. A writer SHOULD implement this if possible. A reader MUST NOT depend on this.
+      For repeatability and readability, this dictionary is formatted using
+      pprint.pformat() so the keys are in alphabetic order. A writer SHOULD implement
+      this if possible. A reader MUST NOT depend on this.
   - id: data_initial
     size-eos: true
     type: ndarray(-1)
     doc: |
-      Following the header comes the array data. If the dtype contains Python objects (i.e. dtype.hasobject is True), then the data is a Python pickle of the array. Otherwise the data is the contiguous (either C- or Fortran-, depending on fortran_order) bytes of the array. Consumers can figure out the number of bytes by multiplying the number of elements given by the shape (noting that shape=() means there is 1 element) by dtype.itemsize.
+      Following the header comes the array data. If the dtype contains Python objects
+      (i.e. dtype.hasobject is True), then the data is a Python pickle of the array.
+      Otherwise the data is the contiguous (either C- or Fortran-, depending on
+      fortran_order) bytes of the array. Consumers can figure out the number of bytes
+      by multiplying the number of elements given by the shape (noting that shape=()
+      means there is 1 element) by dtype.itemsize.
 instances:
   data:
     value: data_initial.data
@@ -219,7 +243,7 @@ types:
             '"|g"': f12le
         repeat: expr
         repeat-expr: _root.parsed_header.shape.as<u8[]>[idx]
-        doc: "S<n> for n > 1 is currently out of scope"
+        doc: S<n> for n > 1 is currently out of scope
   ndarray:
     params:
       - id: idx

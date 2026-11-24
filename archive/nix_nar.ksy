@@ -14,10 +14,10 @@ seq:
     type: padded_str
     valid:
       expr: _.body == 'nix-archive-1'
-    doc: "Magic string, must be 'nix-archive-1'."
+    doc: Magic string, must be 'nix-archive-1'.
   - id: root_node
     type: node
-    doc: "The root of the archive, which is always a single node."
+    doc: The root of the archive, which is always a single node.
 
 types:
   padded_str:
@@ -35,18 +35,18 @@ types:
         size: (8 - (len_str % 8)) % 8
 
   node:
-    doc: "A single filesystem node (file, directory, or symlink)."
+    doc: A single filesystem node (file, directory, or symlink).
     seq:
       - id: open_paren
         type: padded_str
         valid:
           expr: _.body == '('
-        doc: "Must be '(', a token starting the node definition."
+        doc: Must be '(', a token starting the node definition.
       - id: type_key
         type: padded_str
         valid:
           expr: _.body == 'type'
-        doc: "Must be 'type'."
+        doc: Must be 'type'.
       - id: type_val
         type: padded_str
         valid:
@@ -65,10 +65,10 @@ types:
         valid:
           expr: _.body == ')'
         if: "type_val.body != 'directory'"
-        doc: "Must be ')', a token ending the node definition."
+        doc: Must be ')', a token ending the node definition.
 
   type_directory:
-    doc: "A directory node, containing a list of entries."
+    doc: A directory node, containing a list of entries.
     seq:
       - id: entries
         type: dir_entry
@@ -76,13 +76,13 @@ types:
         repeat-until: _.kind.body == ')'
     types:
       dir_entry:
-        doc: "A single entry within a directory, or a terminator."
+        doc: A single entry within a directory, or a terminator.
         seq:
           - id: kind
             type: padded_str
             valid:
               expr: _.body == 'entry' or _.body == ')'
-            doc: "Must be 'entry' (for a child node) or '' (for terminator)."
+            doc: Must be 'entry' (for a child node) or '' (for terminator).
           - id: open_paren
             type: padded_str
             valid:
@@ -104,7 +104,7 @@ types:
           - id: node
             type: node
             if: 'kind.body == "entry"'
-            doc: "The child node, present only if kind is 'entry'."
+            doc: The child node, present only if kind is 'entry'.
           - id: close_paren
             type: padded_str
             valid:
@@ -115,7 +115,7 @@ types:
             value: kind.body == ')'
 
   type_regular:
-    doc: "A regular file node."
+    doc: A regular file node.
     seq:
       # Read attributes (like 'executable') until we hit 'contents'
       - id: attributes
@@ -128,24 +128,24 @@ types:
     instances:
       is_executable:
         value: 'attributes[0].key.body == "executable"'
-        doc: "True if the file has the 'executable' attribute."
+        doc: True if the file has the 'executable' attribute.
     types:
       reg_attribute:
-        doc: "An attribute of the file, e.g., 'executable' or 'contents'."
+        doc: An attribute of the file, e.g., 'executable' or 'contents'.
         seq:
           - id: key
             type: padded_str
             valid:
               expr: _.body == 'executable' or _.body == 'contents'
-            doc: "Attribute key, e.g., 'executable' or 'contents'."
+            doc: Attribute key, e.g., 'executable' or 'contents'.
           - id: value
             type: padded_str
             valid:
               expr: _.body == ''
             if: 'key.body == "executable"'
-            doc: "Must be '' if key is 'executable'."
+            doc: Must be '' if key is 'executable'.
       file_content:
-        doc: "The raw data of the file, prefixed by length."
+        doc: The raw data of the file, prefixed by length.
         seq:
           - id: len_contents
             type: u8
@@ -165,13 +165,13 @@ types:
             value: _io.pos
 
   type_symlink:
-    doc: "A symbolic link node."
+    doc: A symbolic link node.
     seq:
       - id: target_key
         type: padded_str
         valid:
           expr: _.body == 'target'
-        doc: "Must be 'target'."
+        doc: Must be 'target'.
       - id: target_val
         type: padded_str
-        doc: "The destination path of the symlink."
+        doc: The destination path of the symlink.

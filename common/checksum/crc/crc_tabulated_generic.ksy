@@ -6,8 +6,7 @@ meta:
     - /common/bit_reflector/bit_reflector_u8
     - /common/bit_reflector/bit_reflector_u1
 
-doc: |
-  Computes CRC checksum of an array. Uses a precomputed table for substitution.
+doc: Computes CRC checksum of an array. Uses a precomputed table for substitution.
 
 params:
   - id: bit_length

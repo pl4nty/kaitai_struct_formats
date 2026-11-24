@@ -8,8 +8,10 @@ meta:
   encoding: ASCII
   endian: le
 doc: |
-  MiniSEED 3 is a binary data format defined by the International Federation of Digital 
-  Seismograph Networks (FDSN) for data collection, archiving and exchange of seismological data. 
+  MiniSEED 3 is a binary data format defined by the International Federation of
+  Digital 
+  Seismograph Networks (FDSN) for data collection, archiving and exchange of
+  seismological data. 
 doc-ref: https://docs.fdsn.org/projects/miniseed3
 seq:
   - id: data_record

@@ -3,7 +3,9 @@ meta:
   title: Fixed-size ASCII number field
   license: CC0-1.0
   encoding: ASCII
-doc: A number that is stored as ASCII text in a fixed-size field, padded using spaces.
+doc: |
+  A number that is stored as ASCII text in a fixed-size field, padded using
+  spaces.
 params:
   - id: size
     type: u1
@@ -22,4 +24,6 @@ instances:
   value:
     value: text.to_i(base)
     if: text != ""
-    doc: The number, parsed as an integer. If the field is blank (all spaces), this instance is null. All other non-numeric contents are an error.
+    doc: |
+      The number, parsed as an integer. If the field is blank (all spaces), this
+      instance is null. All other non-numeric contents are an error.

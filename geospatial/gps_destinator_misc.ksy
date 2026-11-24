@@ -12,8 +12,7 @@ meta:
   encoding: UTF-16LE
   endian: le
 
-doc: |
-  Destinator formats
+doc: Destinator formats
 
 doc-ref:
   - https://web.archive.org/web/20160310115940/http://mozoft.com/d3log.html

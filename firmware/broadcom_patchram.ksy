@@ -5,9 +5,15 @@ meta:
   endian: le
 doc: |
   Patches for Broadcom chips firmware in ROM.
-  This spec describes the format of the blobs that are sent to the chip, that encode.
-  The blobs are uploded into chip RAM using WRITE_RAM to a special offsets in chip RAM in DOWNLOAD_MINIDRIVER mode, then when the chip is launched using LAUNCH_RAM.
-  The hcd files contain raw HCI commands to be sent to chips, the offsets are already there. They should be parsed with another spec, hardware/bluetooth/bluetooth_hcd, the commands should be emulated and this spec should be applied to the result.
+  This spec describes the format of the blobs that are sent to the chip, that
+  encode.
+  The blobs are uploded into chip RAM using WRITE_RAM to a special offsets in chip
+  RAM in DOWNLOAD_MINIDRIVER mode, then when the chip is launched using
+  LAUNCH_RAM.
+  The hcd files contain raw HCI commands to be sent to chips, the offsets are
+  already there. They should be parsed with another spec,
+  hardware/bluetooth/bluetooth_hcd, the commands should be emulated and this spec
+  should be applied to the result.
 doc-ref:
   - https://raw.githubusercontent.com/seemoo-lab/internalblue/master/doc/internalblue_thesis_dennis_mantz.pdf
   - https://github.com/MarkMendelsohn/brcm_patchram/blob/master/brcm_patchram_plus.c#L634
@@ -37,7 +43,12 @@ types:
         seq:
           - id: next_tlv_record_addr
             type: u4
-            doc: "When the TLV parser in the Download_Minidriver state processes the type 0x02 it initiates a reboot. However, in an early state of the boot process parsing the TLV list is continued at the address specified in the value of the TLV. In case of the bcm4335c5.hcd this is actually just the address of the next TLV object in the list."
+            doc: |
+              When the TLV parser in the Download_Minidriver state processes the type 0x02 it
+              initiates a reboot. However, in an early state of the boot process parsing the
+              TLV list is continued at the address specified in the value of the TLV. In case
+              of the bcm4335c5.hcd this is actually just the address of the next TLV object in
+              the list.
           - id: unkn0
             size: 6
             doc: Zero bytes?
@@ -73,11 +84,11 @@ enums:
       id: reboot
       doc: |
         Issue a reboot and continues processing the list after the reset.
-        In the analyzed firmware patch (bcm4335c5.hcd) this typeis used exactly once and relatively early in the list before any of the type 0x08 objects.
+        In the analyzed firmware patch (bcm4335c5.hcd) this typeis used exactly once and
+        relatively early in the list before any of the type 0x08 objects.
     0x08:
       id: patch_dword
-      doc: |
-        Patch 32-bit word in ROM.
+      doc: Patch 32-bit word in ROM.
     0x0a:
       id: patch_memory
       doc: Patch  arbitray  length  of  bytes in RAM.

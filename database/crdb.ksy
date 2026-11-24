@@ -42,7 +42,9 @@ seq:
   - id: states_ptr
     -orig-id: countries_ptr
     type: u4
-    doc: The list is sorted alphabetically to allow binary searching (should it become really huge).
+    doc: |
+      The list is sorted alphabetically to allow binary searching (should it become
+      really huge).
   - id: states_count
     -orig-id: countries_count
     type: u4
@@ -64,7 +66,8 @@ types:
   freq_range:
     doc: |
       everything is in in kHz
-      Values of zero mean "not applicable", i.e. the regulatory does not limit a certain value.
+      Values of zero mean "not applicable", i.e. the regulatory does not limit a
+      certain value.
     seq:
       - id: start
         type: u4

@@ -10,7 +10,8 @@ meta:
   encoding: ASCII
   endian: le
 doc: |
-  Binary serialization for a kind of subset of JSON, but that can be human-readable and editable in text editors indicating byte positions.
+  Binary serialization for a kind of subset of JSON, but that can be
+  human-readable and editable in text editors indicating byte positions.
   Used in BitTorrent protocol.
 
   Sample: d6:kaitail2:isi146e9:% awesomeee

@@ -1185,7 +1185,9 @@ enums:
     1144:
       id: file_depends_num
       -orig-id: RPMTAG_FILEDEPENDSN
-      doc: Number of file dependencies in `::depends_dict`, starting from `::file_depends_idx`
+      doc: |
+        Number of file dependencies in `::depends_dict`, starting from
+        `::file_depends_idx`
     1145:
       id: depends_dict
       -orig-id: RPMTAG_DEPENDSDICT

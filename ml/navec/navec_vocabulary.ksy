@@ -8,7 +8,8 @@ meta:
   bit-endian: le
 
 doc: |
-  Vocabulary files of navec word embedding library. Shipped in compressed form, must be decompressed first.
+  Vocabulary files of navec word embedding library. Shipped in compressed form,
+  must be decompressed first.
   Sample files can be extracted from https://storage.yandexcloud.net/natasha-navec/packs/navec_news_v1_1B_250K_300d_100q.tar
 
 doc-ref:
@@ -27,7 +28,8 @@ seq:
     type: str
     doc: |
       Words splitted by line breaks.
-      Count of words must match `header.count`. The 2 last words must be `<unk>` (some vector of non-zeros) and `<pad>` (must have all zeros) in this order.
+      Count of words must match `header.count`. The 2 last words must be `<unk>` (some
+      vector of non-zeros) and `<pad>` (must have all zeros) in this order.
 
 types:
   header:

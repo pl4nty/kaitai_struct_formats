@@ -15,10 +15,13 @@ meta:
     - https://github.com/kaitai-io/kaitai_compress
 
 doc: |
-  A file format to store encyclopaedias of articles written in MediaWiki markup language.
-  Files for test: https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/ , but they now use ZStd.
+  A file format to store encyclopaedias of articles written in MediaWiki markup
+  language.
+  Files for test: https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/ , but
+  they now use ZStd.
   Here is an old one: https://web.archive.org/web/20190830024935if_/https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/wikipedia_ay_all_nopic_2019-05.zim .
-  Also: https://raw.githubusercontent.com/openzim/libzim/master/test/data/small.zim
+  Also:
+  https://raw.githubusercontent.com/openzim/libzim/master/test/data/small.zim
 
 doc-ref:
   - https://www.openzim.org/wiki/ZIM_file_format
@@ -58,7 +61,8 @@ seq:
     type: u8
     doc: |
       position of the MIME type list (also header size)
-      The MIME type list always follows directly after the header, so the mimeListPos also defines the end and size of the ZIM file header.
+      The MIME type list always follows directly after the header, so the mimeListPos
+      also defines the end and size of the ZIM file header.
       The MIME types in this list are zero terminated strings.
   - id: main_page_idx
     -orig-id: mainPage
@@ -69,7 +73,9 @@ seq:
   - id: md5_ptr
     -orig-id: checksumPos
     type: u8
-    doc: pointer to the md5 checksum of this file without the checksum itself. This points always 16 bytes before the end of the file.
+    doc: |
+      pointer to the md5 checksum of this file without the checksum itself. This
+      points always 16 bytes before the end of the file.
 instances:
   mime_list:
     pos: mime_list_ptr
@@ -81,17 +87,26 @@ instances:
     repeat-expr: article_count
     doc: |
       The URL pointer list is a list of 8 byte offsets to the directory entries.
-      The directory entries are always ordered by URL. Ordering is simply done by comparing the URL strings.
+      The directory entries are always ordered by URL. Ordering is simply done by
+      comparing the URL strings.
       Since directory entries have variable sizes this is needed for random access.
-      Zimlib caches directory entries and references the cached entries via the URL pointers.
+      Zimlib caches directory entries and references the cached entries via the URL
+      pointers.
   title_pointer_list:
     pos: title_pointer_list_ptr
     type: title_index
     repeat: expr
     repeat-expr: article_count
     doc: |
-      The title pointer list is a list of article indices ordered by title. The title pointer list actually points to entries in the URL pointer list. Note that the title pointers are only 4 bytes. They are not offsets in the file but article numbers. To get the offset of an article from the title pointer list, you have to look it up in the URL pointer list.
-      The indirection from titles via URLs to directory entries has two reasons: the pointer list is only half in size as 4 bytes are enough for each entry accessing directory entries by title also makes use of cached directory entries which are referenced by the URL pointers, as implemented in zimlib.
+      The title pointer list is a list of article indices ordered by title. The title
+      pointer list actually points to entries in the URL pointer list. Note that the
+      title pointers are only 4 bytes. They are not offsets in the file but article
+      numbers. To get the offset of an article from the title pointer list, you have
+      to look it up in the URL pointer list.
+      The indirection from titles via URLs to directory entries has two reasons: the
+      pointer list is only half in size as 4 bytes are enough for each entry accessing
+      directory entries by title also makes use of cached directory entries which are
+      referenced by the URL pointers, as implemented in zimlib.
   cluster_pointer_list:
     pos: cluster_pointer_list_ptr
     type: cluster_ptr
@@ -128,7 +143,8 @@ types:
         type: u2
         doc: |
           Major version of the ZIM file format (5 or 6)
-          Major version is updated when an incompatible change is integrated in the format (a lib made for a version N will probably not be able to read a version N+1)
+          Major version is updated when an incompatible change is integrated in the format
+          (a lib made for a version N will probably not be able to read a version N+1)
           There are currently 2 major versions:
             The version 5
             The version 6 (the same that version 5 + potential extended cluster)
@@ -137,7 +153,8 @@ types:
         type: u2
         doc: |
           Minor version of the ZIM file format
-          Minor version is updated when an compatible change is integrated (a lib made for a minor version n will be able to read a version n+1)
+          Minor version is updated when an compatible change is integrated (a lib made for
+          a minor version n will be able to read a version n+1)
   title_index:
     seq:
       - id: index
@@ -176,7 +193,9 @@ types:
             doc: defines to which namespace this directory entry belongs
           - id: revision
             type: u4
-            doc: (optional) identifies a revision of the contents of this directory entry, needed to identify updates or revisions in the original history
+            doc: |
+              (optional) identifies a revision of the contents of this directory entry, needed
+              to identify updates or revisions in the original history
           - id: body
             type:
               switch-on: mime_idx == 0xffff
@@ -188,7 +207,9 @@ types:
             doc: string with the URL as refered in the URL pointer list
           - id: title
             type: strz
-            doc: string with an title as refered in the Title pointer list or empty; in case it is empty, the URL is used as title
+            doc: |
+              string with an title as refered in the Title pointer list or empty; in case it
+              is empty, the URL is used as title
           - id: parameter
             size: parameter_size
             doc: (not used) extra parameters
@@ -223,7 +244,9 @@ types:
           namespace:
             0x2D: # "-"
               id: layout
-              doc: eg. the LayoutPage, CSS, favicon.png (48x48), JavaScript and images not related to the articles
+              doc: |
+                eg. the LayoutPage, CSS, favicon.png (48x48), JavaScript and images not related
+                to the articles
             0x41: # "A"
               id: article
               doc: articles - see Article Format
@@ -389,7 +412,11 @@ types:
                 enum: compression
                 valid:
                   expr: _ != compression::lzma2 and _ != compression::zstd and _ != compression::bzip2 and _ != compression::zlib
-                doc: LZMA and ZStd are not supported because of behavior of lack of support of streaming processors in KS. bzip2 and zlib are not supported because they are not supported in the official lib (though in principle they probably can be supported).
+                doc: |
+                  LZMA and ZStd are not supported because of behavior of lack of support of
+                  streaming processors in KS. bzip2 and zlib are not supported because they are
+                  not supported in the official lib (though in principle they probably can be
+                  supported).
             instances:
               ptr_size:
                 value: "is_ptr_u8 ? 8 : 4"

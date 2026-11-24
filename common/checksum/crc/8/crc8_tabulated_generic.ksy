@@ -5,8 +5,7 @@ meta:
   imports:
     - /common/bit_reflector/bit_reflector_u1
 
-doc: |
-  Computes CRC-8 of an array.
+doc: Computes CRC-8 of an array.
 
 params:
   - id: initial

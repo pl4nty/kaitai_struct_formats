@@ -11,8 +11,7 @@ meta:
   license: CC0-1.0
   encoding: ASCII
   endian: be
-doc: |
-  Bitmap font format for the GRUB 2 bootloader.
+doc: Bitmap font format for the GRUB 2 bootloader.
 doc-ref: https://grub.gibibit.com/New_font_format
 seq:
   - id: magic

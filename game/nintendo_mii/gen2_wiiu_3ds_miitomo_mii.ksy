@@ -62,7 +62,9 @@ seq:
     type: b4
   - id: mingle
     type: b1
-    doc: More info needed. Does this mean IS Mingled or IS NOT Mingled, such as on the Wii?
+    doc: |
+      More info needed. Does this mean IS Mingled or IS NOT Mingled, such as on the
+      Wii?
   - id: face_makeup
     type: b4
   - id: face_wrinkles

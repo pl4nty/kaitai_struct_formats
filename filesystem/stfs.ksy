@@ -28,12 +28,12 @@ instances:
 types:
   # \ Uncommon Data Types
   u3: # Unsigned int24
-    doc: 'Unsigned 24-bit integer'
+    doc: Unsigned 24-bit integer
     seq:
       - id: value
         type: b24
   s3: # Signed int24
-    doc: 'Signed 24-bit integer'
+    doc: Signed 24-bit integer
     seq:
       - id: a
         type: b24

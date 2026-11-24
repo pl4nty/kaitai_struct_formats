@@ -33,12 +33,10 @@ types:
     seq:
       - id: recognition_sentinel
         contents: UHL
-        doc: |
-          Recognition sentinel ("UHL")
+        doc: Recognition sentinel ("UHL")
       - id: fixed_by_standard
         contents: "1"
-        doc: |
-          Fixed by standard ("1")
+        doc: Fixed by standard ("1")
       - id: longitude_of_origin
         type: angle(3,0)
         doc: |
@@ -53,12 +51,10 @@ types:
           seconds). H is the Hemisphere of the data.
       - id: longitude_interval_seconds
         type: ascii_int
-        doc: |
-          Longitude data interval in tenths of seconds.
+        doc: Longitude data interval in tenths of seconds.
       - id: latitude_interval_seconds
         type: ascii_int
-        doc: |
-          Latitude data interval in tenths of seconds.
+        doc: Latitude data interval in tenths of seconds.
       - id: absolute_vertical_accuracy
         size: 4
         type: str
@@ -69,13 +65,11 @@ types:
       - id: security_code
         size: 3
         type: str
-        doc: |
-          Security code. (Left Justified)
+        doc: Security code. (Left Justified)
       - id: unique_reference
         size: 12
         type: str
-        doc: |
-          Unique reference number
+        doc: Unique reference number
       - id: number_of_longitude_lines
         type: ascii_int
         doc: |
@@ -97,8 +91,7 @@ types:
       - id: reserved
         size: 24
         type: str
-        doc: |
-          Unused portion for future use.
+        doc: Unused portion for future use.
   dsi_header:
     doc: |
       Data Set Identification (DSI) Record. The DSI is used for magnetic |
@@ -107,18 +100,15 @@ types:
     seq:
       - id: recognition_sentinel
         contents: DSI
-        doc: |
-          Recognition Sentinel ("DSI").
+        doc: Recognition Sentinel ("DSI").
       - id: security_classification_code
         type: u1
         enum: security_classification_enum
-        doc: |
-          Security Classification Code
+        doc: Security Classification Code
       - id: security_control_and_release_markings
         size: 2
         type: str
-        doc: |
-          Security Control and Release Markings. For DoD use only.
+        doc: Security Control and Release Markings. For DoD use only.
       - id: security_handling_description
         size: 27
         type: str
@@ -128,8 +118,7 @@ types:
       - id: reserved_for_future_use1
         size: 26
         type: str
-        doc: |
-          Reserved for future use. (Blank filled).
+        doc: Reserved for future use. (Blank filled).
       - id: nima_series_designator_for_product_level
         size: 5
         type: str
@@ -145,31 +134,25 @@ types:
       - id: reserved_for_future_use2
         size: 8
         type: str
-        doc: |
-          Reserved for future use. (Blank filled).
+        doc: Reserved for future use. (Blank filled).
       - id: data_edition_number
         size: 2
         type: str
-        doc: |
-          Data Edition Number (01-99).
+        doc: Data Edition Number (01-99).
       - id: match_merge_version
         size: 1
         type: str
-        doc: |
-          Match/Merge Version (A-Z).
+        doc: Match/Merge Version (A-Z).
       - id: maintenance_date
         type: date
-        doc: |
-          Match/Merge Date. Zero filled until used. (YYMM)
+        doc: Match/Merge Date. Zero filled until used. (YYMM)
       - id: match_merge_date
         type: date
-        doc: |
-          Match/Merge Date. Zero filled until used. (YYMM)
+        doc: Match/Merge Date. Zero filled until used. (YYMM)
       - id: maintenance_description
         size: 4
         type: str
-        doc: |
-          Maintenance Description Code. Zero filled until used. (0000 or ANNN)
+        doc: Maintenance Description Code. Zero filled until used. (0000 or ANNN)
       - id: producer_code
         size: 8
         type: str
@@ -179,13 +162,11 @@ types:
       - id: reserved_for_future_use3
         size: 16
         type: str
-        doc: |
-          Reserved for future use. (Blank filled).
+        doc: Reserved for future use. (Blank filled).
       - id: product_specification
         size: 9
         type: str
-        doc: |
-          Product Specification. (Alphanumeric field) (AAAAAAAAA)
+        doc: Product Specification. (Alphanumeric field) (AAAAAAAAA)
       - id:  product_specification_number
         size: 2
         type: str
@@ -194,32 +175,26 @@ types:
           digit is the Change Number.
       - id:  product_specification_date
         type: date
-        doc: |
-          Date of Product Specification.
+        doc: Date of Product Specification.
       - id:  vertical_datum
         size: 3
         type: str
-        doc: |
-          Vertical Datum (MSL, E96)
+        doc: Vertical Datum (MSL, E96)
       - id:  horizontal_datum_code
         size: 5
         type: str
-        doc: |
-          Horizontal Datum Code (Current Version World Geodetic System) (WGS84).
+        doc: Horizontal Datum Code (Current Version World Geodetic System) (WGS84).
       - id:  digitizing_collection_system
         size: 10
         type: str
-        doc: |
-          Digitizing/Collection System. (Free text).
+        doc: Digitizing/Collection System. (Free text).
       - id:  compilation_date
         type: date
-        doc: |
-          Compilation Date. (Most descriptive year/month) (YYMM).
+        doc: Compilation Date. (Most descriptive year/month) (YYMM).
       - id:  reserved_for_future_use4
         size: 22
         type: str
-        doc: |
-          Reserved for future use. (Blank filled).
+        doc: Reserved for future use. (Blank filled).
       - id: latitude_of_origin
         type: angle(2,1)
         doc: |
@@ -311,23 +286,19 @@ types:
       - id:  reserved_for_nima_use_only
         size: 101
         type: str
-        doc: |
-          Reserved for NIMA use only. (Free text or Blank filled.)
+        doc: Reserved for NIMA use only. (Free text or Blank filled.)
       - id:  reserved_for_producing_nation_use_only
         size: 100
         type: str
-        doc: |
-          Reserved for producing nation use only. (Free text or blank filled.)
+        doc: Reserved for producing nation use only. (Free text or blank filled.)
       - id:  reserved_for_free_text_comments
         size: 155
         type: str
-        doc: |
-          Reserved for free text comments. (Free text or Blank filled.)
+        doc: Reserved for free text comments. (Free text or Blank filled.)
     instances:
       partial_cell_indicator:
         value: '(partial_cell_indicator_text.to_i == 0) ? 100 : partial_cell_indicator_text.to_i'
-        doc: |
-          Partial Cell Indicator (% of data coverage)
+        doc: Partial Cell Indicator (% of data coverage)
   acc_header:
     doc: |
       Accuracy Description (ACC) Record. The ACC is used for magnetic tape and |
@@ -337,8 +308,7 @@ types:
     seq:
       - id: recognition_sentinel
         contents: ACC
-        doc: |
-          Recognition Sentinel ("ACC").
+        doc: Recognition Sentinel ("ACC").
       - id: absolute_horizontal_accuracy
         type: ascii_int_maybe
         doc: |
@@ -362,18 +332,15 @@ types:
       - id: reserved_for_future_use1
         size: 4
         type: str
-        doc: |
-          Reserved for future use. (Blank filled.)
+        doc: Reserved for future use. (Blank filled.)
       - id: reserved_for_nima_use_only1
         size: 1
         type: str
-        doc: |
-          Reserved for NIMA use only.
+        doc: Reserved for NIMA use only.
       - id: reserved_for_future_use2
         size: 31
         type: str
-        doc: |
-          Reserved for future use. (Blank filled.)
+        doc: Reserved for future use. (Blank filled.)
       - id: multiple_accuracy_outline_flag
         size: 2
         type: str
@@ -388,13 +355,11 @@ types:
       - id: reserved_for_nima_use_only2
         size: 18
         type: str
-        doc: |
-          Reserved for NIMA use only.
+        doc: Reserved for NIMA use only.
       - id: reserved_for_future_use3
         size: 69
         type: str
-        doc: |
-          Reserved for future use.
+        doc: Reserved for future use.
   acc_subregion:
     doc: |
       Start of Accuracy Sub region Description. Repeat to maximum of nine |
@@ -453,8 +418,7 @@ types:
     seq:
       - id: recognition_sentinal
         contents: [0xAA]
-        doc: |
-          Recognition Sentinel.
+        doc: Recognition Sentinel.
       - id: data_block_count
         type: b24
         doc: |
@@ -476,16 +440,14 @@ types:
         type: fixed_binary
         repeat: expr
         repeat-expr: _parent.uhl.number_of_latitude_points.value
-        doc: |
-          True elevation value of point N of meridian in meters (Fixed Binary).
+        doc: True elevation value of point N of meridian in meters (Fixed Binary).
       - id: checksum
         type: s4
         doc: |
           Algebraic addition of contents of block. Sum is computed as an 
           integer summation of 8-bit values (Fixed Binary).
   fixed_binary:
-    doc: |
-      Fixed Binary denotes signed magnitude, right-justified binary integers.
+    doc: Fixed Binary denotes signed magnitude, right-justified binary integers.
     seq:
       - id: is_negative
         type: b1
@@ -564,8 +526,7 @@ types:
       value:
         value: '(degrees.to_i + minutes.to_i/60.0 + seconds.to_i/3600.0 + (has_decimal_point==1?tenths_of_seconds.to_i/36000.0 : 0)) * (hemisphere == "N"? 1 : -1)'
         if: has_value
-        doc: |
-          Degree decimal floating point representation
+        doc: Degree decimal floating point representation
   date:
     seq:
       - id: year_text

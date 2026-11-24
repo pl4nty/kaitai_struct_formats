@@ -73,7 +73,9 @@ types:
         doc: ID of the user's terminal session, if present (when type is TS_TTY)
       - id: start_time
         type: timespec
-        doc: start time of the session leader for records of type TS_TTY or of the parent process for records of type TS_PPID
+        doc: |
+          start time of the session leader for records of type TS_TTY or of the parent
+          process for records of type TS_PPID
       - id: ts
         type: timespec
         doc: actual time stamp, from a monotonic time source

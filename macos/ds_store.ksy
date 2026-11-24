@@ -10,8 +10,7 @@ meta:
   ks-version: 0.9
   encoding: UTF-8
   endian: be
-doc: |
-  Apple macOS '.DS_Store' file format.
+doc: Apple macOS '.DS_Store' file format.
 doc-ref:
   - https://en.wikipedia.org/wiki/.DS_Store
   - https://metacpan.org/dist/Mac-Finder-DSStore/view/DSStoreFormat.pod

@@ -122,7 +122,9 @@ types:
         doc: Number of spatial streams (0 = unknown)
       - id: rssi_combined
         type: u1
-        doc: RSSI (Received Signal Strength Indication), combined from all active antennas / channels
+        doc: |
+          RSSI (Received Signal Strength Indication), combined from all active antennas /
+          channels
       - id: rssi_ant_ctl
         type: u1
         repeat: expr

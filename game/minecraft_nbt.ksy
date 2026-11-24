@@ -15,7 +15,8 @@ meta:
   encoding: UTF-8
   endian: be
 doc: |
-  A structured binary format native to Minecraft for saving game data and transferring
+  A structured binary format native to Minecraft for saving game data and
+  transferring
   it over the network (in multiplayer), such as player data
   ([`<player>.dat`](https://minecraft.wiki/w/Player.dat_format); contains
   e.g. player's inventory and location), saved worlds
@@ -42,12 +43,14 @@ doc: |
 
   If it says:
 
-    * `application/x-gzip` or `application/gzip` (since `file-5.37`), you can decompress it by
+    * `application/x-gzip` or `application/gzip` (since `file-5.37`), you can
+      decompress it by
       * `gunzip -c input-gzip.nbt > output.nbt` or
       * `python3 -c "import sys, gzip; sys.stdout.buffer.write(
         gzip.decompress(sys.stdin.buffer.read()) )" < input-gzip.nbt > output.nbt`
     * `application/zlib`, you can use
-      * `openssl zlib -d -in input-zlib.nbt -out output.nbt` (does not work on most systems)
+      * `openssl zlib -d -in input-zlib.nbt -out output.nbt` (does not work on
+        most systems)
       * `python3 -c "import sys, zlib; sys.stdout.buffer.write(
         zlib.decompress(sys.stdin.buffer.read()) )" < input-zlib.nbt > output.nbt`
     * something else (especially `image/x-pcx` and `application/octet-stream`),
@@ -69,7 +72,8 @@ doc: |
   decoder. But decoding in standard UTF-8 is still better than nothing, and
   it usually works fine.
 
-  All Unicode code points with incompatible representations in MUTF-8 and UTF-8 are
+  All Unicode code points with incompatible representations in MUTF-8 and UTF-8
+  are
   U+0000 (_NUL_), U+D800-U+DFFF (_High_ and _Low Surrogates_) and U+10000-U+10FFFF
   (all _Supplementary_ Planes; includes e.g. emoticons, pictograms).
   A _MUTF-8_-encoded string containing these code points cannot be successfully

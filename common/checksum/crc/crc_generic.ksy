@@ -9,8 +9,7 @@ meta:
     - /common/bit_reflector/bit_reflector_u8
     - /common/bit_reflector/bit_reflector_u1
 
-doc: |
-  Computes CRC checksum of an array.
+doc: Computes CRC checksum of an array.
 
 doc-ref:
   - https://web.archive.org/web/20220805131344if_/http://www.ross.net/crc/download/crc_v3.txt

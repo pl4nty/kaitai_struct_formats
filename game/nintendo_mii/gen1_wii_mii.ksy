@@ -18,7 +18,8 @@ meta:
   endian: be
   bit-endian: be
 doc: |
-  A Mii is a customizable avatar used on several Nintendo video game consoles and mobile apps.
+  A Mii is a customizable avatar used on several Nintendo video game consoles and
+  mobile apps.
   This is the format used most commonly on the Wii console.
 doc-ref:
   - https://wiibrew.org/wiki/Mii_Data#Mii_format
@@ -64,13 +65,18 @@ seq:
     type: u1
     repeat: expr
     repeat-expr: 4
-    doc: Unique identifier for the console the Mii was created on. Consists of a checksum of the first 3 bytes of the console's mac address, followed by the last 3 bytes of the console's mac address
+    doc: |
+      Unique identifier for the console the Mii was created on. Consists of a checksum
+      of the first 3 bytes of the console's mac address, followed by the last 3 bytes
+      of the console's mac address
   - id: face_type
     type: b3
     doc: Face shape. Ranges from 0 to 7. Not ordered the same as visible in editor.
   - id: face_color
     type: b3
-    doc: Skin color. Ranges from 0 to 5. Not ordered the same as visible in editor. A map of the internal values in correlation to the Mii editor is at /maps.txt/{skin}.
+    doc: |
+      Skin color. Ranges from 0 to 5. Not ordered the same as visible in editor. A map
+      of the internal values in correlation to the Mii editor is at /maps.txt/{skin}.
   - id: facial_feature
     type: b4
     doc: Facial feature. Ranges from 0 to 11.
@@ -78,7 +84,9 @@ seq:
     doc: Currently unknown data.
   - id: is_not_mingled
     type: b1
-    doc: Whether the Mii was allowed to travel to other consoles via WiiConnect24. 0 = yes, 1 = no.
+    doc: |
+      Whether the Mii was allowed to travel to other consoles via WiiConnect24. 0 =
+      yes, 1 = no.
   - type: b1
     doc: Currently unknown data.
   - id: is_downloaded
@@ -102,7 +110,9 @@ seq:
     doc: Currently unknown data.
   - id: eyebrow_rotation
     type: b4
-    doc: Eyebrow rotation. Ranges from 0 to 11, down to up. Note that some eye types have a default rotation.
+    doc: |
+      Eyebrow rotation. Ranges from 0 to 11, down to up. Note that some eye types have
+      a default rotation.
   - type: b6
     doc: Currently unknown data.
   - id: eyebrow_color
@@ -185,7 +195,9 @@ seq:
     doc: Beard type. Ranges from 0 to 3.
   - id: facial_hair_color
     type: b3
-    doc: Facial hair color. Ranges from 0 to 7. Not ordered the same as visible in editor.
+    doc: |
+      Facial hair color. Ranges from 0 to 7. Not ordered the same as visible in
+      editor.
   - id: facial_hair_size
     type: b4
     doc: Mustache size. Ranges from 0 to 8, small to large.

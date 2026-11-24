@@ -52,7 +52,8 @@ instances:
       (ether_type_or_tpid == ether_type_enum::ieee_802_1ad_tpid or ether_type_or_tpid == ether_type_enum::ieee_802_1q_tpid) ? ether_type_after_q_tag : ether_type_or_tpid
     doc: |
       Ether type can be specified in several places in the frame.
-      If first two bytes after the mac address bears special marker (0x8100 or 0x88a8),
+      If first two bytes after the mac address bears special marker (0x8100 or
+      0x88a8),
       then it is not the real ether frame yet,
       an additional payload ('customer tci' and/or 'service tci') is expected
       and real ether type is upcoming next.

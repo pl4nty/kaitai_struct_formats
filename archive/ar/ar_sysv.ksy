@@ -17,9 +17,14 @@ meta:
     - member_metadata
     - space_padded_number
 doc: |
-  The System V variant of the Unix ar archive format (see the `ar_generic` spec for general info about the ar format). This variant is also used on Linux and Windows systems.
+  The System V variant of the Unix ar archive format (see the `ar_generic` spec
+  for general info about the ar format). This variant is also used on Linux and
+  Windows systems.
   
-  System V archives support member names that contain spaces by terminating the name field using a slash instead of a space. File names longer than 16 bytes are supported by storing the name in a special archive member called "//" and only storing a byte offset in the member name field.
+  System V archives support member names that contain spaces by terminating the
+  name field using a slash instead of a space. File names longer than 16 bytes are
+  supported by storing the name in a special archive member called "//" and only
+  storing a byte offset in the member name field.
 doc-ref: |
   https://en.wikipedia.org/w/index.php?title=Ar_(Unix)&oldid=880452895#File_format_details
   https://docs.oracle.com/cd/E36784_01/html/E36873/ar.h-3head.html
@@ -37,7 +42,9 @@ seq:
 instances:
   long_name_list_name:
     value: '[0x2f, 0x2f, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20]'
-    doc: The name of the special "long name list" member. This is a byte array containing "//" (two slashes) right-padded using 14 spaces (in ASCII).
+    doc: |
+      The name of the special "long name list" member. This is a byte array containing
+      "//" (two slashes) right-padded using 14 spaces (in ASCII).
   long_name_list_index:
     value: |
       members.size > 0 and members[0].name_internal.raw == long_name_list_name ? 0
@@ -45,13 +52,20 @@ instances:
       : members.size > 2 and members[2].name_internal.raw == long_name_list_name ? 2
       : -1
     doc: |
-      The index of the special "long name list" member in the members array, or `-1` if this archive doesn't contain a long name list.
+      The index of the special "long name list" member in the members array, or `-1`
+      if this archive doesn't contain a long name list.
       
-      Note: the long name list is only recognized if it is one of the first three archive members. This is because it it always appears immediately after the symbol table (or if there is no symbol table, at the very beginning of the archive). Windows archives can contain two symbol table members, so the long name list can be at most the third member.
+      Note: the long name list is only recognized if it is one of the first three
+      archive members. This is because it it always appears immediately after the
+      symbol table (or if there is no symbol table, at the very beginning of the
+      archive). Windows archives can contain two symbol table members, so the long
+      name list can be at most the third member.
   long_name_list:
     value: members[long_name_list_index]
     if: long_name_list_index != -1
-    doc: A special archive member that holds a list of long names used by other archive members. (Optional, only present if the archive has members with long names.)
+    doc: |
+      A special archive member that holds a list of long names used by other archive
+      members. (Optional, only present if the archive has members with long names.)
 types:
   regular_member_name:
     doc: A regular (or "short") member name, stored directly in the name field.
@@ -75,7 +89,11 @@ types:
         terminator: 0x2f
         doc: The member name stored in the long name list, terminated by a slash.
   special_member_name:
-    doc: A "special" member name that does not follow the usual format. This kind of name is used for special members that do not represent a normal file, such as the symbol table (named "/", or on 64-bit Solaris "/SYM64/") and the long name list (named "//").
+    doc: |
+      A "special" member name that does not follow the usual format. This kind of name
+      is used for special members that do not represent a normal file, such as the
+      symbol table (named "/", or on 64-bit Solaris "/SYM64/") and the long name list
+      (named "//").
     seq:
       - id: name
         terminator: 0x20
@@ -85,7 +103,9 @@ types:
     seq:
       - id: raw
         size: 16
-        doc: The name of the archive member as a 16-byte array, including any padding spaces at the end.
+        doc: |
+          The name of the archive member as a 16-byte array, including any padding spaces
+          at the end.
     instances:
       ascii_zero:
         value: 0x30
@@ -110,7 +130,10 @@ types:
             1: long_member_name
             2: special_member_name
   member_data:
-    doc: Dummy type representing a member's data. This type is used instead of a normal byte array to allow "looking into" it using instances (this is needed to handle long member names).
+    doc: |
+      Dummy type representing a member's data. This type is used instead of a normal
+      byte array to allow "looking into" it using instances (this is needed to handle
+      long member names).
     seq:
       - id: data
         size-eos: true
@@ -140,7 +163,9 @@ types:
       - id: padding
         contents: "\n"
         if: size % 2 != 0
-        doc: An extra newline is added as padding after members with an odd data size. This ensures that all members are 2-byte-aligned.
+        doc: |
+          An extra newline is added as padding after members with an odd data size. This
+          ensures that all members are 2-byte-aligned.
     instances:
       name:
         value: |
@@ -148,12 +173,17 @@ types:
           : name_internal.is_long ? name_internal.parsed.as<long_member_name>.name
           : name_internal.parsed.as<special_member_name>.name
         doc: |
-          The name of the archive member. Because the encoding of member names varies across systems, the name is exposed as a byte array.
+          The name of the archive member. Because the encoding of member names varies
+          across systems, the name is exposed as a byte array.
           
-          Names are usually unique within an archive, but this is not required - the `ar` command even provides various options to work with archives containing multiple identically named members.
+          Names are usually unique within an archive, but this is not required - the `ar`
+          command even provides various options to work with archives containing multiple
+          identically named members.
       size:
         value: size_raw.value
-        doc: The size of the member's data. The trailing padding byte (if any) does not count toward the data size.
+        doc: |
+          The size of the member's data. The trailing padding byte (if any) does not count
+          toward the data size.
       data:
         value: data_internal.data
         doc: The member's data.

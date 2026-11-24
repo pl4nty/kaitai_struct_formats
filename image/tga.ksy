@@ -15,6 +15,7 @@ meta:
   encoding: ASCII
   endian: le
 doc:
+  |
   TGA (AKA Truevision TGA, AKA TARGA), is a raster image file format
   created by Truevision. It supports up to 32 bits per pixel (three
   8-bit RGB channels + 8-bit alpha channel), color mapping and
@@ -136,13 +137,19 @@ types:
         type: u4
       - id: color_corr_ofs
         type: u4
-        doc: Number of bytes from the beginning of the file to the color correction table if present
+        doc: |
+          Number of bytes from the beginning of the file to the color correction table if
+          present
       - id: postage_stamp_ofs
         type: u4
-        doc: Number of bytes from the beginning of the file to the postage stamp image if present
+        doc: |
+          Number of bytes from the beginning of the file to the postage stamp image if
+          present
       - id: scan_line_ofs
         type: u4
-        doc: Number of bytes from the beginning of the file to the scan lines table if present
+        doc: |
+          Number of bytes from the beginning of the file to the scan lines table if
+          present
       - id: attributes
         type: u1
         doc: Specifies the alpha channel

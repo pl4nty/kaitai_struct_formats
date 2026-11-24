@@ -6,8 +6,7 @@ meta:
   imports:
     - /security/ssh_public_key
   endian: be
-doc: |
-  OpenSSH Certificates are simple certs used by OpenSSH.
+doc: OpenSSH Certificates are simple certs used by OpenSSH.
 doc-ref: 'https://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/src/usr.bin/ssh/PROTOCOL.certkeys?rev=1.17&content-type=text/plain'
 seq:
   - id: cert_type

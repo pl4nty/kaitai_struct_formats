@@ -6,8 +6,7 @@ meta:
   license: GPL-2.0-or-later
   encoding: ASCII
   endian: le
-doc: |
-  File format used in Energympro GPS fitness tracker
+doc: File format used in Energympro GPS fitness tracker
 
 doc-ref:
   - https://www.gpsbabel.org/htmldoc-development/fmt_energympro.html

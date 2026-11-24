@@ -14,10 +14,14 @@ doc: |
   which created the file. Note that the daylight saving time (DST) shifts
   also change the UTC time offset.
 
-  For example, if you pack two files A and B into a ZIP archive, file A last modified
-  at 2020-03-29 00:59 UTC+00:00 (GMT) and file B at 2020-03-29 02:00 UTC+01:00 (BST),
-  the file modification times saved in MS-DOS format in the ZIP file will vary depending
-  on whether the computer packing the files is set to GMT or BST at the time of ZIP creation.
+  For example, if you pack two files A and B into a ZIP archive, file A last
+  modified
+  at 2020-03-29 00:59 UTC+00:00 (GMT) and file B at 2020-03-29 02:00 UTC+01:00
+  (BST),
+  the file modification times saved in MS-DOS format in the ZIP file will vary
+  depending
+  on whether the computer packing the files is set to GMT or BST at the time of
+  ZIP creation.
 
     - If set to GMT:
         - file A: 2020-03-29 00:59 (UTC+00:00)

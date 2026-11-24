@@ -3,8 +3,7 @@ meta:
   title: Computes CRC-8 table for a polynomial.
   license: Unlicense
 
-doc: |
-  Computes CRC table for a polynomial.
+doc: Computes CRC table for a polynomial.
 
 params:
   - id: bit_length

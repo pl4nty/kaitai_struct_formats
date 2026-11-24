@@ -11,8 +11,7 @@ meta:
     wikidata: Q28455556
   license: Unlicense
   endian: be
-doc: |
-  A binary format capable of serialization of superset of JSON.
+doc: A binary format capable of serialization of superset of JSON.
 seq:
   - id: ib
     type: ib
@@ -161,7 +160,10 @@ types:
         27: f8
         31: chain_break
   tag:
-    doc: Marks the underlying CBOR structure to be transformed by decoder into the corresponding object. Should not cause security issues by itself since non-private tags are standardized and there is no dangerous tags there.
+    doc: |
+      Marks the underlying CBOR structure to be transformed by decoder into the
+      corresponding object. Should not cause security issues by itself since
+      non-private tags are standardized and there is no dangerous tags there.
     params:
       - id: ib
         type: ib

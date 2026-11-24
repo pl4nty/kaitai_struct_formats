@@ -4,7 +4,7 @@ meta:
   application: x86 architecture
   license: Unlicense
   endian: le
-doc: >
+doc: |
   Spec:
     Plug and Play BIOS Specification Version 1.0A May 5, 1994, 3.2 Expansion Header for Plug and Play
 doc-ref:
@@ -13,10 +13,10 @@ seq:
   - id: base_type
     type: u1
     enum: base 
-    doc: "Indicates the general device type"
+    doc: Indicates the general device type
   - id: sub_type
     type: u1
-    doc: "Device Sub-Type, its definition is dependent upon the Base-Type code."
+    doc: Device Sub-Type, its definition is dependent upon the Base-Type code.
     # enum:
       # switch-on: base_type
       # cases:
@@ -41,7 +41,7 @@ seq:
         # 'base::processing_accelerators': sub_processing_accelerators
   - id: if_type
     type: u1
-    doc: "the specific device programming interface"
+    doc: the specific device programming interface
 enums:
   base:
     0x00: legacy

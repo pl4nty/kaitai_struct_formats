@@ -45,8 +45,7 @@ types:
           If this value is 0, the timestamp multiplier shall be 1000 milliseconds.
       - id: reserved
         size: 44
-        doc: |
-          These bytes are reserved for future expansion. They shall be 0.
+        doc: These bytes are reserved for future expansion. They shall be 0.
   image_data:
     params:
       - id: i

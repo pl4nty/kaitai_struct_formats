@@ -7,8 +7,10 @@ meta:
   encoding: UTF-8
   endian: be
 doc: |
-  UTDF file format as described in NASA's "Ground Network Tracking and Acquisition Data Handbook" (453-HDBK-GN).
-  Files are composed of 75-byte messages containing groundstation metadata, pointing data, and Tx/Rx frequencies used for doppler tracking.
+  UTDF file format as described in NASA's "Ground Network Tracking and Acquisition
+  Data Handbook" (453-HDBK-GN).
+  Files are composed of 75-byte messages containing groundstation metadata,
+  pointing data, and Tx/Rx frequencies used for doppler tracking.
   
 seq:
   - id: recs

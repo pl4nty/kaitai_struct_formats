@@ -5,8 +5,7 @@ meta:
   imports:
     - /windows/windows_suite_mask
   endian: le
-doc: |
-  A structure describing Windows OS edition.
+doc: A structure describing Windows OS edition.
 doc-ref:
   - https://github.com/reactos/reactos/blob/01eb9ba8de4bed03cd67049b158acb3faec5dc8b/sdk/include/xdk/rtltypes.h#L236-L296
   - https://learn.microsoft.com/en-us/windows-hardware/drivers/install/combining-platform-extensions-with-operating-system-versions

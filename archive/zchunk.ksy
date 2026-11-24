@@ -276,8 +276,7 @@ types:
           # field and use `valid/in-enum: true` to achieve the same effect, but
           # it's not implemented.
           expr: len_checksum != 0
-        doc: |
-          Raw integer, don't read this field - access `value` instead.
+        doc: Raw integer, don't read this field - access `value` instead.
     instances:
       value:
         value: raw.value
@@ -324,7 +323,8 @@ types:
         meta:
           bit-endian: be
         doc: |
-          One byte group, clearly divided into 7-bit "value" chunk and 1-bit "continuation" flag.
+          One byte group, clearly divided into 7-bit "value" chunk and 1-bit
+          "continuation" flag.
         -webide-representation: '{value}'
         params:
           - id: idx

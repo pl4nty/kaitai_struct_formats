@@ -15,7 +15,8 @@ meta:
   encoding: UTF-8
   endian: le
 doc: |
-  Serialization format used by HuggingFace to allow safe deserialization of pytorch models.
+  Serialization format used by HuggingFace to allow safe deserialization of
+  pytorch models.
   To parse it properly you need a parser for JSON.
 
   Samples: https://github.com/KOLANICH/kaitai_struct_samples/tree/safetensors/serialization/safetensors
@@ -31,7 +32,8 @@ seq:
     type: strz
     encoding: ASCII
     doc: |
-      {"__metadata__":{"string": "string"},"tensor_name":{"dtype":"U8","shape":[6],"data_offsets":[0,6]}}
+      {"__metadata__":{"string":
+      "string"},"tensor_name":{"dtype":"U8","shape":[6],"data_offsets":[0,6]}}
   - id: tensors
     size-eos: true
     type: tensors

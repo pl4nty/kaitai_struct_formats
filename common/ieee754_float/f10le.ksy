@@ -10,7 +10,8 @@ meta:
   endian: be
 doc: |
   see the doc for `ieee754_float`.
-  ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ifffffff eeeeeeee seeeeeee
+  ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ifffffff eeeeeeee
+  seeeeeee
 seq:
   - id: frac_lo_lo
     type: u4le

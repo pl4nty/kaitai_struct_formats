@@ -419,8 +419,10 @@ types:
         repeat: expr
         repeat-expr: "file_size / _root.superblock.block_size + (frag_index==0xFFFFFFFF and (file_size.as<f4> / _root.superblock.block_size.as<f4>) > file_size / _root.superblock.block_size ? 1 : 0)"
         doc: |
-          A list of block sizes. If this file ends in a fragment, the size of this list is the number of full data
-          blocks needed to store file_size bytes. If this file does not have a fragment, the size of the list is the 
+          A list of block sizes. If this file ends in a fragment, the size of this list is
+          the number of full data
+          blocks needed to store file_size bytes. If this file does not have a fragment,
+          the size of the list is the 
           number of blocks needed to store file_size bytes, rounded up.
       - id: blocks
         size: 0
@@ -452,8 +454,10 @@ types:
         repeat: expr
         repeat-expr: "file_size / _root.superblock.block_size + (frag_index==0xFFFFFFFF and (file_size.as<f4> / _root.superblock.block_size.as<f4>) > file_size / _root.superblock.block_size ? 1 : 0)"
         doc: |
-          A list of block sizes. If this file ends in a fragment, the size of this list is the number of full data
-          blocks needed to store file_size bytes. If this file does not have a fragment, the size of the list is the 
+          A list of block sizes. If this file ends in a fragment, the size of this list is
+          the number of full data
+          blocks needed to store file_size bytes. If this file does not have a fragment,
+          the size of the list is the 
           number of blocks needed to store file_size bytes, rounded up.
       - id: blocks
         size: 0

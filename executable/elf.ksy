@@ -134,8 +134,7 @@ types:
       info_link:
         -orig-id: SHF_INFO_LINK
         value: value & 0x40 != 0
-        doc: |
-          Section header's `sh_info` field holds a section header table index
+        doc: Section header's `sh_info` field holds a section header table index
       link_order:
         -orig-id: SHF_LINK_ORDER
         value: value & 0x80 != 0
@@ -730,7 +729,9 @@ types:
             if: |
               linked_section_idx != section_header_idx_special::undefined.to_i
               and linked_section_idx < _root.header.num_section_headers
-            doc: may reference a later section header, so don't try to access too early (use only lazy `instances`)
+            doc: |
+              may reference a later section header, so don't try to access too early (use only
+              lazy `instances`)
             doc-ref: https://refspecs.linuxfoundation.org/elf/gabi4+/ch4.sheader.html#sh_link
           name:
             io: _root.header.section_names._io
@@ -2998,8 +2999,7 @@ enums:
     0x6464e550:
       id: sunw_unwind
       -orig-id: PT_SUNW_UNWIND
-      doc: |
-        Equivalent to `PT_SUNW_EH_FRAME` (`ph_type::gnu_eh_frame`)
+      doc: Equivalent to `PT_SUNW_EH_FRAME` (`ph_type::gnu_eh_frame`)
       doc-ref: https://docs.oracle.com/en/operating-systems/solaris/oracle-solaris/11.4/linkers-libraries/program-header.html#GUID-49F99618-9CDC-4A08-A94C-E2AA264AA01A__CHAPTER6-69880
     0x6474e550:
       id: gnu_eh_frame
@@ -3574,7 +3574,9 @@ enums:
         cause a syntax error in Python (it is a keyword).
     2:
       id: weak
-      doc: like `symbol_binding::global_symbol`, but their definitions have lower precedence
+      doc: |
+        like `symbol_binding::global_symbol`, but their definitions have lower
+        precedence
     # 10: lo_os
     10:
       id: os10
@@ -3634,7 +3636,8 @@ enums:
       doc: |
         reserved for OS-specific semantics
 
-        `STT_GNU_IFUNC` is a GNU extension to ELF format that adds support for "indirect functions"
+        `STT_GNU_IFUNC` is a GNU extension to ELF format that adds support for "indirect
+        functions"
     11:
       id: os11
       doc: reserved for OS-specific semantics

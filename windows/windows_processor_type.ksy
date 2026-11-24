@@ -3,8 +3,7 @@ meta:
   title: Microsoft Windows `dwProcessorType` field of various structures, describing processor concrete type
   license: Unlicense
   endian: le
-doc: |
-  Contains the info about Windows processor types.
+doc: Contains the info about Windows processor types.
 doc-ref:
   - https://learn.microsoft.com/en-us/previous-versions/ms942639(v=msdn.10)
   - https://github.com/reactos/reactos/blob/4363e74ddcb26a528c2723ab0afe5af3443bde6f/sdk/include/xdk/winnt_old.h#L423-L447

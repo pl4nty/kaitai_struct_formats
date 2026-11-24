@@ -163,7 +163,9 @@ types:
         doc: Length of bignum body, divided by 2.
       - id: body
         size: len_div_2.value * 2
-        doc: Bytes that represent the number, see ruby-lang.org docs for reconstruction algorithm.
+        doc: |
+          Bytes that represent the number, see ruby-lang.org docs for reconstruction
+          algorithm.
   ruby_struct:
     doc-ref: 'https://docs.ruby-lang.org/en/2.4.0/marshal_rdoc.html#label-Struct'
     seq:

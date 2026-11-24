@@ -199,8 +199,7 @@ types:
         value: type_raw.to_s('ASCII')
       is_ancillary:
         value: type_raw[0] & 0x20 != 0
-        doc: |
-          false = critical chunk, true = ancillary chunk
+        doc: false = critical chunk, true = ancillary chunk
       is_private:
         value: type_raw[1] & 0x20 != 0
         doc: |

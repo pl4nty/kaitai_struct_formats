@@ -6,11 +6,22 @@ meta:
     wikidata: Q1994657
   license: Unlicense
 doc: |
-  An extremily widespread format of floating-point numbers used in most of hardware implementations of floating-point numbers.
-  Unfortunately not all the standardized formats are supported natively in hardware, programming languages and software, especially in old ones. For example Kaitai Struct itself doesn't support anything except `f4` and `f8` natively.
-  This is an implementation of these formats purely in Kaitai Struct. It makes no guarantees of precision, correctness, efficiency or anything else. It is just something that is better than nothing.
-  This file contains common logic converting integers representing different parts of floating point numbers into a floating point number implemented in your language. Typically it is `f8`.
-  In order to use this, parse the parts of your floating point number and create an instance with a `pos` and `type` (at the time of this format creation KS had no support for typed value instances), passing the parsed parts, their bit-sizes and exponent bias as params.
+  An extremily widespread format of floating-point numbers used in most of
+  hardware implementations of floating-point numbers.
+  Unfortunately not all the standardized formats are supported natively in
+  hardware, programming languages and software, especially in old ones. For
+  example Kaitai Struct itself doesn't support anything except `f4` and `f8`
+  natively.
+  This is an implementation of these formats purely in Kaitai Struct. It makes no
+  guarantees of precision, correctness, efficiency or anything else. It is just
+  something that is better than nothing.
+  This file contains common logic converting integers representing different parts
+  of floating point numbers into a floating point number implemented in your
+  language. Typically it is `f8`.
+  In order to use this, parse the parts of your floating point number and create
+  an instance with a `pos` and `type` (at the time of this format creation KS had
+  no support for typed value instances), passing the parsed parts, their bit-sizes
+  and exponent bias as params.
 params:
   - id: bias
     type: u2

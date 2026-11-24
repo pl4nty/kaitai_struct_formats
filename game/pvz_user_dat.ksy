@@ -5,8 +5,7 @@ meta:
   license: CC0-1.0
   encoding: ASCII
   endian: le
-doc: |
-  https://github.com/Freed-Wu/pvz.nvim provides tools to (de)serialize it.
+doc: https://github.com/Freed-Wu/pvz.nvim provides tools to (de)serialize it.
 doc-ref: https://plantsvszombies.fandom.com/wiki/User_file_format
 seq:
   - id: version
@@ -25,8 +24,7 @@ seq:
     valid:
       max: 0x7FFFFFFF
       min: 1
-    doc: |
-      Current level in Adventure Mode (1–50, extended levels 51–0x7FFFFFFF)
+    doc: Current level in Adventure Mode (1–50, extended levels 51–0x7FFFFFFF)
   - id: money_div_10
     type: u4
     doc: Money divided by 10

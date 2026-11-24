@@ -10,8 +10,7 @@ meta:
   encoding: UTF-16LE
   endian: le
 
-doc: |
-  Destinator GPS tracks format for versions 3.0.75_103, 5.1.80 and 6.0.0.24556
+doc: Destinator GPS tracks format for versions 3.0.75_103, 5.1.80 and 6.0.0.24556
 
 doc-ref:
   - https://web.archive.org/web/20160310115940/http://mozoft.com/d3log.html

@@ -136,7 +136,9 @@ types:
         doc: Vertical pixel count of the following embedded RGB thumbnail. May be zero.
       - id: thumbnail
         size: thumbnail_x * thumbnail_y * 3
-        doc: Uncompressed 24 bit RGB (8 bits per color channel) raster thumbnail data in the order R0, G0, B0, ... Rn, Gn, Bn
+        doc: |
+          Uncompressed 24 bit RGB (8 bits per color channel) raster thumbnail data in the
+          order R0, G0, B0, ... Rn, Gn, Bn
     enums:
       density_unit:
         0: no_units
@@ -200,7 +202,9 @@ types:
         doc: End of spectral selection
       - id: appr_bit_pos
         type: u1
-        doc: Successive approximation bit position high + Successive approximation bit position low or point transform
+        doc: |
+          Successive approximation bit position high + Successive approximation bit
+          position low or point transform
     types:
       component:
         seq:

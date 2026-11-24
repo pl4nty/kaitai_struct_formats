@@ -11,7 +11,8 @@ meta:
   #ks-version: 0.9
 
 doc: |
-  TortoiseGit is a GUI frontend for git SCM. It caches some data to `tortoisegit.data` file in `.git` dir.
+  TortoiseGit is a GUI frontend for git SCM. It caches some data to
+  `tortoisegit.data` file in `.git` dir.
 
 doc-ref:
   - https://gitlab.com/tortoisegit/tortoisegit/raw/master/src/TortoiseProc/gitlogcache.h
@@ -24,7 +25,7 @@ seq:
   - id: version
     -orig-id: m_Version
     type: u4
-    doc: "current one is 0x11"
+    doc: current one is 0x11
   - id: items
     type: item
     repeat: eos

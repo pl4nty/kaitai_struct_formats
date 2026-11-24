@@ -8,9 +8,11 @@ meta:
   endian: le
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
-  The Symantec quarantine files are created by Symantec Endpoint Protection and store suspected malware and its metadata.
+  The Symantec quarantine files are created by Symantec Endpoint Protection and
+  store suspected malware and its metadata.
   The parser was created by analyzing different quarantine files.
-  The quarantine files consist of an unencrypted metadata part and a data part. Both hold metadata of the suspected malware.
+  The quarantine files consist of an unencrypted metadata part and a data part.
+  Both hold metadata of the suspected malware.
 doc-ref: https://github.com/ernw/quarantine-formats/blob/master/docs/Symantec_Endpoint_Protection.md
 seq:
   - id: ofs_data

@@ -6,7 +6,8 @@ meta:
     - /windows/windows_systemtime
   endian: le
 doc: |
-  Microsoft Windows (DYNAMIC_)?TIME_ZONE_INFORMATION structure, stores info about timezone.
+  Microsoft Windows (DYNAMIC_)?TIME_ZONE_INFORMATION structure, stores info about
+  timezone.
 
 doc-ref:
   - https://learn.microsoft.com/en-us/windows/win32/api/timezoneapi/ns-timezoneapi-time_zone_information

@@ -6,8 +6,7 @@ meta:
   license: GPL-2.0-or-later
   endian: le
 
-doc: |
-  File format used in Bunshell GPS receivers
+doc: File format used in Bunshell GPS receivers
 
 doc-ref:
   - https://www.gpsbabel.org/htmldoc-development/fmt_bushnell_trl.html

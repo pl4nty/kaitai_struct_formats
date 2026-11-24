@@ -57,10 +57,12 @@ types:
         doc: Tracker name
       - id: version_number
         type: version
-        doc: "Format versions below [0x01, 0x04] have a LOT of differences. Check this field!"
+        doc: Format versions below [0x01, 0x04] have a LOT of differences. Check this field!
       - id: header_size
         type: u4
-        doc: Header size << Calculated FROM THIS OFFSET, not from the beginning of the file! >>
+        doc: |
+          Header size << Calculated FROM THIS OFFSET, not from the beginning of the
+          file! >>
     types:
       version:
         seq:
@@ -82,13 +84,13 @@ types:
         type: u2
       - id: num_channels
         type: u2
-        doc: "(2,4,6,8,10,...,32)"
+        doc: (2,4,6,8,10,...,32)
       - id: num_patterns
         type: u2
-        doc: "(max 256)"
+        doc: (max 256)
       - id: num_instruments
         type: u2
-        doc: "(max 128)"
+        doc: (max 128)
       - id: flags
         type: flags
       - id: default_tempo
@@ -100,14 +102,14 @@ types:
         repeat: expr
         #repeat-expr: song_length
         repeat-expr: 256
-        doc: "max 256"
+        doc: max 256
   flags:
     seq:
       - id: reserved
         type: b15
       - id: freq_table_type
         type: b1
-        doc: "0 = Amiga frequency table (see below); 1 = Linear frequency table"
+        doc: 0 = Amiga frequency table (see below); 1 = Linear frequency table
   pattern:
     seq:
       - id: header
@@ -157,7 +159,10 @@ types:
         type: u4
         doc: |
           Instrument size << header that is >>
-          << "Instrument Size" field tends to be more than the actual size of the structure documented here (it includes also the extended instrument sample header above). So remember to check it and skip the additional bytes before the first sample header >>
+          << "Instrument Size" field tends to be more than the actual size of the
+          structure documented here (it includes also the extended instrument sample
+          header above). So remember to check it and skip the additional bytes before the
+          first sample header >>
       - id: header
         size: header_size - 4
         type: header
@@ -248,9 +253,12 @@ types:
             doc: |
               Envelope frame-counters work in range 0..FFFFh (0..65535 dec).
               BUT! FT2 only itself supports only range 0..FFh (0..255 dec).
-              Some other trackers (like SoundTracker for Unix), however, can use the full range 0..FFFF, so it should be supported.
-              !!TIP: This is also a good way to detect if the module has been made with FT2 or not. (In case the tracker name is brain- deadly left unchanged!)
-              Of course it does not help if all instruments have the values inside FT2 supported range.
+              Some other trackers (like SoundTracker for Unix), however, can use the full
+              range 0..FFFF, so it should be supported.
+              !!TIP: This is also a good way to detect if the module has been made with FT2 or
+              not. (In case the tracker name is brain- deadly left unchanged!)
+              Of course it does not help if all instruments have the values inside FT2
+              supported range.
               The value-field of the envelope point is ranged between 00..3Fh (0..64 dec).
             seq:
               - id: x
@@ -266,7 +274,8 @@ types:
             2: loop
       samples_data:
         doc: |
-          The saved data uses simple delta-encoding to achieve better compression ratios (when compressed with pkzip, etc.)
+          The saved data uses simple delta-encoding to achieve better compression ratios
+          (when compressed with pkzip, etc.)
           Pseudocode for converting the delta-coded data to normal data,
           old = 0;
           for i in range(data_len):

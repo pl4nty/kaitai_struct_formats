@@ -7,7 +7,8 @@ meta:
   endian: le
 
 doc: |
-  FastCGI is a protocol between a web server process and a process generating responses.
+  FastCGI is a protocol between a web server process and a process generating
+  responses.
 
 doc-ref:
   - https://fastcgi-archives.github.io/FastCGI_Specification.html

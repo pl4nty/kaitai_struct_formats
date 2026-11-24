@@ -5,8 +5,7 @@ meta:
   license: CC0-1.0
   encoding: ASCII
   endian: le
-doc: |
-  https://github.com/Freed-Wu/pvz.nvim provides tools to (de)serialize it.
+doc: https://github.com/Freed-Wu/pvz.nvim provides tools to (de)serialize it.
 doc-ref: https://github.com/chiaracoetzee/plants-vs-zombies-user-file-editor/blob/595523add14b649147218bcd059eeb18fe506e92/Plants%20vs.%20Zombies%20user%20file%20editor/FormSelectUser.cs#L111-L125
 seq:
   - id: version

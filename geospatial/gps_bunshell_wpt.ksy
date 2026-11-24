@@ -9,8 +9,7 @@ meta:
   encoding: ASCII
   endian: le
 
-doc: |
-  File format used in Bunshell GPS receivers for POIs
+doc: File format used in Bunshell GPS receivers for POIs
 
 doc-ref:
   - https://www.gpsbabel.org/htmldoc-development/fmt_bushnell.html

@@ -8,8 +8,10 @@ meta:
   license: MIT
   endian: le
 doc: |
-  The Privilege Attribute Certificate (PAC) Data Structure is used by authentication protocols (protocols
-  that verify identities) to transport authorization information, which controls access to resources.
+  The Privilege Attribute Certificate (PAC) Data Structure is used by
+  authentication protocols (protocols
+  that verify identities) to transport authorization information, which controls
+  access to resources.
   To fetch PAC file from KDC easily, you may use samba net utility:
   sudo net ads kerberos pac save -U test_user filename=test_user.pac
   doc-ref: "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/c38cc307-f3e6-4ed4-8c81-dc550d96223c"
@@ -18,22 +20,27 @@ seq:
     -orig-id: PACTYPE
     type: pactype
     doc: |
-      The PACTYPE structure is the topmost structure of the PAC and specifies the number of elements in
+      The PACTYPE structure is the topmost structure of the PAC and specifies the
+      number of elements in
       the PAC_INFO_BUFFER array. The PACTYPE structure serves as the header for the
       complete PAC data.
 types:
   pactype:
-    doc: "See [MS-PAC] 2.3 PACTYPE"
+    doc: See [MS-PAC] 2.3 PACTYPE
     seq:
       - id: c_buffers
         -orig-id: cBuffers
         type: u4
-        doc: A 32-bit unsigned integer in little-endian format that defines the number of entries in the buffers array
+        doc: |
+          A 32-bit unsigned integer in little-endian format that defines the number of
+          entries in the buffers array
       - id: version
         -orig-id: Version
         type: u4
         if: c_buffers != logon_info_magic_number
-        doc: A 32-bit unsigned integer in little-endian format that defines the PAC version; MUST be 0x00000000
+        doc: |
+          A 32-bit unsigned integer in little-endian format that defines the PAC version;
+          MUST be 0x00000000
       - id: buffers
         -orig-id: Buffers
         type: pac_info_buffer
@@ -41,7 +48,8 @@ types:
         repeat-expr: c_buffers
         if: c_buffers != logon_info_magic_number
         doc: |
-          Following the PACTYPE structure is an array of PAC_INFO_BUFFER structures each of
+          Following the PACTYPE structure is an array of PAC_INFO_BUFFER structures each
+          of
           which defines the type and byte offset to a buffer of the PAC
     instances:
       logon_info_magic_number:
@@ -54,9 +62,11 @@ types:
         pos: 0
         type: kerb_validation_info
         if: c_buffers == logon_info_magic_number
-        doc: "To auto-detect file content in case of reduced data (logon_info only) we use version+endianness fields as the magic"
+        doc: |
+          To auto-detect file content in case of reduced data (logon_info only) we use
+          version+endianness fields as the magic
   pac_info_buffer:
-    doc: "See [MS-PAC] 2.4 PAC_INFO_BUFFER"
+    doc: See [MS-PAC] 2.4 PAC_INFO_BUFFER
     seq:
       - id: ul_type
         -orig-id: ulType
@@ -65,7 +75,9 @@ types:
       - id: cb_buffer_size
         -orig-id: cbBufferSize
         type: u4
-        doc: A 32-bit unsigned integer in little-endian format that contains the size, in bytes, of the buffer in the PAC located at Offset
+        doc: |
+          A 32-bit unsigned integer in little-endian format that contains the size, in
+          bytes, of the buffer in the PAC located at Offset
       - id: offset
         -orig-id: Offset
         type: u8
@@ -96,12 +108,14 @@ types:
         15: pac_type_device_claims_info
         16: pac_type_ticket_checksum
   rpc_unicode_string:
-    doc: "See [MS-DTYP] 2.3.10 RPC_UNICODE_STRING"
+    doc: See [MS-DTYP] 2.3.10 RPC_UNICODE_STRING
     seq:
       - id: length
         -orig-id: Length
         type: u2
-        doc: The length, in bytes, of the string pointed to by the Buffer member, not including the terminating null character if any
+        doc: |
+          The length, in bytes, of the string pointed to by the Buffer member, not
+          including the terminating null character if any
       - id: maximum_length
         -orig-id: MaximumLength
         type: u2
@@ -110,7 +124,7 @@ types:
         -orig-id: Buffer
         type: u4
   unicode_string_body:
-    doc: "See [MS-RPCE] 4.7 UNICODE_STRING Representation"
+    doc: See [MS-RPCE] 4.7 UNICODE_STRING Representation
     seq:
       - id: maximum_count
         -orig-id: MaximumCount
@@ -130,7 +144,7 @@ types:
         if: actual_count & 1 != 0
     -webide-representation: "{str_body}"
   rpc_sid:
-    doc: "See [MS-DTYP] 2.4.2.3 RPC_SID"
+    doc: See [MS-DTYP] 2.4.2.3 RPC_SID
     seq:
       - id: revision
         -orig-id: Revision
@@ -178,7 +192,7 @@ types:
       se_group_mandatory:
         value: (attributes & 0x1) != 0
   group_membership:
-    doc: "See [MS-PAC] 2.2.2 GROUP_MEMBERSHIP"
+    doc: See [MS-PAC] 2.2.2 GROUP_MEMBERSHIP
     seq:
       - id: relative_id
         -orig-id: RelativeId
@@ -197,7 +211,7 @@ types:
         repeat: expr
         repeat-expr: group_ids_count
   kerb_sid_and_attributes:
-    doc: "See [MS-PAC] 2.2.1 KERB_SID_AND_ATTRIBUTES"
+    doc: See [MS-PAC] 2.2.1 KERB_SID_AND_ATTRIBUTES
     seq:
       - id: sid_referent
         -orig-id: SidReferent
@@ -231,7 +245,7 @@ types:
         repeat: expr
         repeat-expr: resource_group_ids_count
   common_type_header:
-    doc: "See [MS-RPCE] 2.2.6.1 Common Type Header for the Serialization Stream"
+    doc: See [MS-RPCE] 2.2.6.1 Common Type Header for the Serialization Stream
     doc-ref: "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-rpce/6d75d40e-e2d2-4420-b9e9-8508a726a9ae"
     seq:
       - id: version
@@ -252,7 +266,7 @@ types:
         0:    big_endian
         0x10: little_endian
   private_type_header:
-    doc: "See [MS-RPCE] 2.2.6.2 Private Header for Constructed Type"
+    doc: See [MS-RPCE] 2.2.6.2 Private Header for Constructed Type
     doc-ref: "https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-rpce/63949ba8-bc88-4c0c-9377-23f14b197827"
     seq:
       - id: object_buffer_length
@@ -262,7 +276,7 @@ types:
         -orig-id: Filler
         type: u4
   filetime:
-    doc: "See [MS-DTYP] 2.3.3 FILETIME"
+    doc: See [MS-DTYP] 2.3.3 FILETIME
     seq:
       - id: low_date_time
         -orig-id: dwLowDateTime
@@ -272,7 +286,7 @@ types:
         type: u4
     -webide-representation: "low_date_time={low_date_time}, high_date_time={high_date_time}"
   kerb_validation_info:
-    doc: "See [MS-PAC] 2.5 KERB_VALIDATION_INFO"
+    doc: See [MS-PAC] 2.5 KERB_VALIDATION_INFO
     seq:
       - id: common_header
         type: common_type_header
@@ -284,59 +298,87 @@ types:
       - id: logon_time
         -orig-id: LogonTime
         type: filetime
-        doc: A FILETIME structure that contains the user account's lastLogon attribute ([MS-ADA1] section 2.351) value
+        doc: |
+          A FILETIME structure that contains the user account's lastLogon attribute
+          ([MS-ADA1] section 2.351) value
       - id: logoff_time
         -orig-id: LogoffTime
         type: filetime
-        doc: A FILETIME structure that contains the time the client's logon session is set to expire.
+        doc: |
+          A FILETIME structure that contains the time the client's logon session is set to
+          expire.
       - id: kickoff_time
         -orig-id: KickOffTime
         type: filetime
-        doc: A FILETIME structure that contains LogoffTime minus the user account's forceLogoff attribute ([MS-ADA1] section 2.233) value
+        doc: |
+          A FILETIME structure that contains LogoffTime minus the user account's
+          forceLogoff attribute ([MS-ADA1] section 2.233) value
       - id: password_last_set
         -orig-id: PasswordLastSet
         type: filetime
-        doc: A FILETIME structure that contains the user account's pwdLastSet attribute ([MS-ADA3] section 2.175) value.
+        doc: |
+          A FILETIME structure that contains the user account's pwdLastSet attribute
+          ([MS-ADA3] section 2.175) value.
       - id: password_can_change
         -orig-id: PasswordCanChange
         type: filetime
-        doc: A FILETIME structure that contains the time at which the client's password is allowed to change.
+        doc: |
+          A FILETIME structure that contains the time at which the client's password is
+          allowed to change.
       - id: password_must_change
         -orig-id: PasswordMustChange
         type: filetime
-        doc: A FILETIME structure that contains the time at which the client's password expires.
+        doc: |
+          A FILETIME structure that contains the time at which the client's password
+          expires.
       - id: effective_name
         -orig-id: EffectiveName
         type: rpc_unicode_string
-        doc: An RPC_UNICODE_STRING structure that contains the user account's samAccountName attribute ([MS-ADA3] section 2.222) value.
+        doc: |
+          An RPC_UNICODE_STRING structure that contains the user account's samAccountName
+          attribute ([MS-ADA3] section 2.222) value.
       - id: full_name
         -orig-id: FullName
         type: rpc_unicode_string
-        doc: An RPC_UNICODE_STRING structure that contains the user account's full name for interactive logon and is set to zero for network logon.
+        doc: |
+          An RPC_UNICODE_STRING structure that contains the user account's full name for
+          interactive logon and is set to zero for network logon.
       - id: logon_script
         -orig-id: LogonScript
         type: rpc_unicode_string
-        doc: An RPC_UNICODE_STRING structure that contains the user account's scriptPath attribute ([MS-ADA3] section 2.232) value for interactive logon
+        doc: |
+          An RPC_UNICODE_STRING structure that contains the user account's scriptPath
+          attribute ([MS-ADA3] section 2.232) value for interactive logon
       - id: profile_path
         -orig-id: ProfilePath
         type: rpc_unicode_string
-        doc: An RPC_UNICODE_STRING structure that contains the user account's profilePath attribute ([MS-ADA3] section 2.167) value for interactive logon
+        doc: |
+          An RPC_UNICODE_STRING structure that contains the user account's profilePath
+          attribute ([MS-ADA3] section 2.167) value for interactive logon
       - id: home_directory
         -orig-id: HomeDirectory
         type: rpc_unicode_string
-        doc: An RPC_UNICODE_STRING structure that contains the user account's HomeDirectory attribute ([MS-ADA1] section 2.295) value for interactive logon
+        doc: |
+          An RPC_UNICODE_STRING structure that contains the user account's HomeDirectory
+          attribute ([MS-ADA1] section 2.295) value for interactive logon
       - id: home_directory_drive
         -orig-id: HomeDirectoryDrive
         type: rpc_unicode_string
-        doc: An RPC_UNICODE_STRING structure that contains the user account's HomeDrive attribute ([MS-ADA1] section 2.296) value for interactive logon
+        doc: |
+          An RPC_UNICODE_STRING structure that contains the user account's HomeDrive
+          attribute ([MS-ADA1] section 2.296) value for interactive logon
       - id: logon_count
         -orig-id: LogonCount
         type: u2
-        doc: A 16-bit unsigned integer that contains the user account's LogonCount attribute ([MS-ADA1] section 2.375) value.
+        doc: |
+          A 16-bit unsigned integer that contains the user account's LogonCount attribute
+          ([MS-ADA1] section 2.375) value.
       - id: bad_password_count
         -orig-id: BadPasswordCount
         type: u2
-        doc: A 16-bit unsigned integer that contains the user account's badPwdCount attribute ([MS-ADA1] section 2.83) value for interactive logon
+        doc: |
+          A 16-bit unsigned integer that contains the user account's badPwdCount attribute
+          ([MS-ADA1] section 2.83) value for interactive logon
       - id: user_id
         -orig-id: UserId
         type: u4
@@ -344,18 +386,24 @@ types:
       - id: primary_group_id
         -orig-id: PrimaryGroupId
         type: u4
-        doc: A 32-bit unsigned integer that contains the RID for the primary group to which this account belongs
+        doc: |
+          A 32-bit unsigned integer that contains the RID for the primary group to which
+          this account belongs
       - id: group_count
         -orig-id: GroupCount
         type: u4
-        doc: A 32-bit unsigned integer that contains the number of groups within the account domain to which the account belongs
+        doc: |
+          A 32-bit unsigned integer that contains the number of groups within the account
+          domain to which the account belongs
       - id: group_ids_referent
         -orig-id: GroupIdsReferent
         type: u4
       - id: user_flags
         -orig-id: UserFlags
         type: u4
-        doc: A 32-bit unsigned integer that contains a set of bit flags that describe the user's logon information
+        doc: |
+          A 32-bit unsigned integer that contains a set of bit flags that describe the
+          user's logon information
       - id: user_session_key
         -orig-id: UserSessionKey
         type: u1
@@ -365,11 +413,15 @@ types:
       - id: logon_server
         -orig-id: LogonServer
         type: rpc_unicode_string
-        doc: An RPC_UNICODE_STRING structure that contains the NetBIOS name of the Kerberos KDC that performed the authentication server (AS) ticket request 
+        doc: |
+          An RPC_UNICODE_STRING structure that contains the NetBIOS name of the Kerberos
+          KDC that performed the authentication server (AS) ticket request
       - id: logon_domain_name
         -orig-id: LogonDomainName
         type: rpc_unicode_string
-        doc: An RPC_UNICODE_STRING structure that contains the NetBIOS name of the domain to which this account belongs
+        doc: |
+          An RPC_UNICODE_STRING structure that contains the NetBIOS name of the domain to
+          which this account belongs
       - id: logon_domain_id_referent
         -orig-id: LogonDomainIdReferent
         type: u4
@@ -379,30 +431,43 @@ types:
       - id: user_account_control
         -orig-id: UserAccountControl
         type: u4
-        doc: A 32-bit unsigned integer that contains a set of bit flags that represent information about this account
+        doc: |
+          A 32-bit unsigned integer that contains a set of bit flags that represent
+          information about this account
       - id: sub_auth_status
         -orig-id: SubAuthStatus
         type: u4
-        doc: A 32-bit unsigned integer that contains the subauthentication package's ([MS-APDS] section 3.1.5.2.1) status code
+        doc: |
+          A 32-bit unsigned integer that contains the subauthentication package's
+          ([MS-APDS] section 3.1.5.2.1) status code
       - id: last_successful_i_logon
         -orig-id: LastSuccessfulILogon
         type: filetime
-        doc: A FILETIME structure that contains the user account's msDS-LastSuccessfulInteractiveLogonTime ([MS-ADA2] section 2.359)
+        doc: |
+          A FILETIME structure that contains the user account's
+          msDS-LastSuccessfulInteractiveLogonTime ([MS-ADA2] section 2.359)
       - id: last_failed_i_logon
         -orig-id: LastFailedILogon
         type: filetime
-        doc: A FILETIME structure that contains the user account's msDS-LastFailedInteractiveLogonTime ([MS-ADA2] section 2.357)
+        doc: |
+          A FILETIME structure that contains the user account's
+          msDS-LastFailedInteractiveLogonTime ([MS-ADA2] section 2.357)
       - id: failed_i_logon_count
         -orig-id: LastFailedILogon
         type: u4
-        doc: A 32-bit unsigned integer that contains the user account's msDS-FailedInteractiveLogonCountAtLastSuccessfulLogon ([MS-ADA2] section 2.315)
+        doc: |
+          A 32-bit unsigned integer that contains the user account's
+          msDS-FailedInteractiveLogonCountAtLastSuccessfulLogon ([MS-ADA2] section 2.315)
       - id: reserved3
         -orig-id: Reserved3
         type: u4
       - id: sid_count
         -orig-id: SidCount
         type: u4
-        doc: A 32-bit unsigned integer that contains the total number of SIDs present in the ExtraSids member. If this member is not zero then the D bit MUST be set in the UserFlags member
+        doc: |
+          A 32-bit unsigned integer that contains the total number of SIDs present in the
+          ExtraSids member. If this member is not zero then the D bit MUST be set in the
+          UserFlags member
       - id: extra_sids_referent
         -orig-id: ExtraSidsReferent
         type: u4
@@ -412,7 +477,9 @@ types:
       - id: resource_group_count
         -orig-id: ResourceGroupCount
         type: u4
-        doc: A 32-bit unsigned integer that contains the number of resource group identifiers stored in ResourceGroupIds
+        doc: |
+          A 32-bit unsigned integer that contains the number of resource group identifiers
+          stored in ResourceGroupIds
       - id: resource_group_ids_referent
         -orig-id: ResourceGroupIdsReferent
         type: u4
@@ -463,41 +530,57 @@ types:
           A flag (bit) of UserFlags field (KERB_VALIDATION_INFO structure)
           [MS-PAC] 2.5 KERB_VALIDATION_INFO
   pac_client_info:
-    doc: "See [MS-PAC] 2.7 PAC_CLIENT_INFO"
+    doc: See [MS-PAC] 2.7 PAC_CLIENT_INFO
     seq:
       - id: client_id
         -orig-id: ClientId
         type: filetime
-        doc: A FILETIME structure in little-endian format that contains the Kerberos initial ticket-granting ticket (TGT) authentication time
+        doc: |
+          A FILETIME structure in little-endian format that contains the Kerberos initial
+          ticket-granting ticket (TGT) authentication time
       - id: name_length
         -orig-id: NameLength
         type: u2
-        doc: An unsigned 16-bit integer in little-endian format that specifies the length, in bytes, of the Name field
+        doc: |
+          An unsigned 16-bit integer in little-endian format that specifies the length, in
+          bytes, of the Name field
       - id: name
         -orig-id: Name
         size: name_length
         type: str
         encoding: UTF-16LE
-        doc: An array of 16-bit Unicode characters in little-endian format that contains the client's account name
+        doc: |
+          An array of 16-bit Unicode characters in little-endian format that contains the
+          client's account name
   upn_dns_info:
-    doc: "See [MS-PAC] 2.10 UPN_DNS_INFO"
+    doc: See [MS-PAC] 2.10 UPN_DNS_INFO
     seq:
       - id: upn_length
         -orig-id: UpnLength
         type: u2
-        doc: An unsigned 16-bit integer in little-endian format that specifies the length, in bytes, of the UPN information
+        doc: |
+          An unsigned 16-bit integer in little-endian format that specifies the length, in
+          bytes, of the UPN information
       - id: upn_offset
         -orig-id: UpnOffset
         type: u2
-        doc: An unsigned 16-bit integer in little-endian format that contains the offset to the beginning of the UPN information, in bytes, from the beginning of the UPN_DNS_INFO structure
+        doc: |
+          An unsigned 16-bit integer in little-endian format that contains the offset to
+          the beginning of the UPN information, in bytes, from the beginning of the
+          UPN_DNS_INFO structure
       - id: dns_domain_name_length
         -orig-id: DnsDomainNameLength
         type: u2
-        doc: An unsigned 16-bit integer in little-endian format that specifies the length, in bytes, of the DNS information
+        doc: |
+          An unsigned 16-bit integer in little-endian format that specifies the length, in
+          bytes, of the DNS information
       - id: dns_domain_name_offset
         -orig-id: DnsDomainNameOffset
         type: u2
-        doc: An unsigned 16-bit integer in little-endian format that contains the offset to the beginning of the DNS information, in bytes, from the beginning of the UPN_DNS_INFO structure
+        doc: |
+          An unsigned 16-bit integer in little-endian format that contains the offset to
+          the beginning of the DNS information, in bytes, from the beginning of the
+          UPN_DNS_INFO structure
       - id: padding1
         size: upn_offset - 8
       - id: upn
@@ -511,13 +594,15 @@ types:
         type: str
         encoding: UTF-16LE
   pac_signature_data:
-    doc: "See [MS-PAC] 2.8 PAC_SIGNATURE_DATA"
+    doc: See [MS-PAC] 2.8 PAC_SIGNATURE_DATA
     seq:
       - id: signature_type
         -orig-id: SignatureType
         type: u4
         enum: signature_type_enum
-        doc: A 32-bit unsigned integer value in little-endian format that defines the cryptographic system used to calculate the checksum
+        doc: |
+          A 32-bit unsigned integer value in little-endian format that defines the
+          cryptographic system used to calculate the checksum
       - id: signature_16
         -orig-id: Signature
         type: u1
@@ -534,7 +619,10 @@ types:
         -orig-id: RODCIdentifier
         type: u2
         repeat: eos
-        doc: A 16-bit unsigned integer value in little-endian format that contains the first 16 bits of the key version number ([MS-KILE] section 3.1.5.8) when the KDC is an RODC
+        doc: |
+          A 16-bit unsigned integer value in little-endian format that contains the first
+          16 bits of the key version number ([MS-KILE] section 3.1.5.8) when the KDC is an
+          RODC
     enums:
       signature_type_enum:
         0xFFFFFF76: kerb_checksum_hmac_md5

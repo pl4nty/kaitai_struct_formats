@@ -17,7 +17,8 @@ doc: |
   A native file format of NT-MDT scientific software. Usually contains
   any of:
 
-  * [Scanning probe](https://en.wikipedia.org/wiki/Scanning_probe_microscopy) microscopy scans and spectra
+  * [Scanning probe](https://en.wikipedia.org/wiki/Scanning_probe_microscopy)
+    microscopy scans and spectra
   * [Raman spectra](https://en.wikipedia.org/wiki/Raman_spectroscopy)
   * results of their analysis
 
@@ -41,7 +42,9 @@ seq:
     size: 18
   - id: wrong_doc
     size: 1
-    doc: documentation specifies 32 bytes long header, but zeroth frame starts at 33th byte in reality
+    doc: |
+      documentation specifies 32 bytes long header, but zeroth frame starts at 33th
+      byte in reality
   - id: frames
     size: size
     type: framez
@@ -950,7 +953,7 @@ types:
                 doc: x_scale->offset = gwy_get_gfloat_le(&p);# r0 (physical units)
               - id: step
                 type: f4
-                doc: >
+                doc: |
                   x_scale->step = gwy_get_gfloat_le(&p);
                   r (physical units)
                   x_scale->step = fabs(x_scale->step);

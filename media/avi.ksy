@@ -48,7 +48,9 @@ types:
             'chunk_type::strh': strh_body
       - id: pad_byte
         size: block_size % 2
-        doc: RIFF chunks are padded to an even size; the pad byte is not counted in block_size.
+        doc: |
+          RIFF chunks are padded to an even size; the pad byte is not counted in
+          block_size.
   list_body:
     seq:
       - id: list_type
@@ -93,7 +95,9 @@ types:
       - id: fcc_handler
         type: u4
         enum: handler_type
-        doc: Type of preferred data handler for the stream (specifies codec for audio / video streams)
+        doc: |
+          Type of preferred data handler for the stream (specifies codec for audio / video
+          streams)
       - id: flags
         type: u4
       - id: priority

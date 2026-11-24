@@ -76,7 +76,9 @@ seq:
     type: descriptor
     repeat: expr
     repeat-expr: 4
-    doc: These 18 byte data fields shall contain either detailed timing data or other types of data.
+    doc: |
+      These 18 byte data fields shall contain either detailed timing data or other
+      types of data.
     doc-ref: |
       Section 3.10: 18 Byte Descriptors
 
@@ -208,7 +210,9 @@ types:
       gamma_see_extension:
         value: true
         if: gamma_raw == 0xff
-        doc: The display transfer characteristic (gamma value) is stored in an extension block.
+        doc: |
+          The display transfer characteristic (gamma value) is stored in an extension
+          block.
 
     types:
       video_input:
@@ -368,7 +372,9 @@ types:
             doc: Whether sRGB is the defualt color space.
           - id: preferred_timing_mode
             type: b1
-            doc: Whether the preferred timing mode includes the native pixel format and refresh rate of the display.
+            doc: |
+              Whether the preferred timing mode includes the native pixel format and refresh
+              rate of the display.
           - id: continuous_frequency
             type: b1
             doc: Whether this is a continuous frequency display.
@@ -587,7 +593,9 @@ types:
         size: 18
         type: detailed_timing_descriptor
         if: is_detailed_timing_descriptor
-        doc: Detailed timing descriptors represent supported video timing modes of the display.
+        doc: |
+          Detailed timing descriptors represent supported video timing modes of the
+          display.
 
       - id: display_descriptor
         size: 18
@@ -735,7 +743,9 @@ types:
         instances:
           pixel_clock:
             value: pixel_clock_raw * 10_000
-            doc: Pixel clock, value is measured in Hz. Range is 10 kHz to 655.35 MHz in 10 kHz steps.
+            doc: |
+              Pixel clock, value is measured in Hz. Range is 10 kHz to 655.35 MHz in 10 kHz
+              steps.
 
           horizontal_addressable_video:
             value: '(horizontal_addressable_video_11_8_raw << 8) | horizontal_addressable_video_7_0_raw'

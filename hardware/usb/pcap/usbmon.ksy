@@ -9,7 +9,9 @@ meta:
     - /hardware/usb/pcap/usb_pcap_endpoint_number
   endian: le
 doc: |
-  A native pcap header of [usbmon](https://www.kernel.org/doc/Documentation/usb/usbmon.txt) part of libpcap and Linux kernel.
+  A native pcap header of
+  [usbmon](https://www.kernel.org/doc/Documentation/usb/usbmon.txt) part of
+  libpcap and Linux kernel.
 doc-ref:
   - https://github.com/the-tcpdump-group/libpcap/blob/ba0ef0353ed9f9f49a1edcfb49fefaf12dec54de/pcap/usb.h#L94
   - https://www.kernel.org/doc/Documentation/usb/usbmon.txt

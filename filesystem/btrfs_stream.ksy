@@ -9,15 +9,22 @@ meta:
   license: CC0-1.0
   endian: le
 doc: |
-  Btrfs is a copy on write file system based on B-trees focusing on fault tolerance, repair and easy
-  administration. Btrfs is intended to address the lack of pooling, snapshots, checksums, and
+  Btrfs is a copy on write file system based on B-trees focusing on fault
+  tolerance, repair and easy
+  administration. Btrfs is intended to address the lack of pooling, snapshots,
+  checksums, and
   integral multi-device spanning in Linux file systems.
-  Given any pair of subvolumes (or snapshots), Btrfs can generate a binary diff between them by
-  using the `btrfs send` command that can be replayed later by using `btrfs receive`, possibly on a
-  different Btrfs file system. The `btrfs send` command creates a set of data modifications required
+  Given any pair of subvolumes (or snapshots), Btrfs can generate a binary diff
+  between them by
+  using the `btrfs send` command that can be replayed later by using `btrfs
+  receive`, possibly on a
+  different Btrfs file system. The `btrfs send` command creates a set of data
+  modifications required
   for converting one subvolume into another.
-  This spec can be used to disassemble the binary diff created by the `btrfs send` command.
-  If you want a text representation you may want to checkout `btrfs receive --dump` instead.
+  This spec can be used to disassemble the binary diff created by the `btrfs send`
+  command.
+  If you want a text representation you may want to checkout `btrfs receive
+  --dump` instead.
 doc-ref: https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/Design_notes_on_Send/Receive.html
 
 seq:
@@ -42,7 +49,9 @@ types:
         enum: command
       - id: checksum
         size: 4
-        doc: CRC32 checksum of a whole send command, including the header, with this attribute set to 0.
+        doc: |
+          CRC32 checksum of a whole send command, including the header, with this
+          attribute set to 0.
       - id: data
         size: len_data
         type: tlvs

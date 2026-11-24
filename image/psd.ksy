@@ -187,8 +187,7 @@ enums:
       doc: ResolutionInfo structure. See Appendix A in Photoshop API Guide.pdf.
     1006:
       id: alpha_channel_names
-      doc: |
-        Names of the alpha channels as a series of Pascal strings.
+      doc: Names of the alpha channels as a series of Pascal strings.
     1007:
       id: display_info_structure
       doc: |
@@ -396,7 +395,8 @@ enums:
       id: exif_data_3
       doc: |
         (Photoshop 7.0) EXIF data 3.
-        See http://www.kodak.com/global/plugins/acrobat/en/service/digCam/exifStandard2.pdf
+        See
+        http://www.kodak.com/global/plugins/acrobat/en/service/digCam/exifStandard2.pdf
     1060:
       id: xmp_metadata
       doc: |
@@ -539,7 +539,8 @@ enums:
       id: origin_path_info
       doc: |
         (Photoshop CC) Origin Path Info. 4 bytes (descriptor version = 16),
-        Descriptor (see See Descriptor structure) Information about the origin path data.
+        Descriptor (see See Descriptor structure) Information about the origin path
+        data.
     #4000-4999 Plug-In resource(s). Resources added by a plug-in. See the plug-in API found in the SDK documentation
     7000:
       id: image_ready_variables

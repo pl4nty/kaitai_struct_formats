@@ -5,7 +5,8 @@ meta:
   endian: le
   bit-endian: le
 doc: |
-  A structure describing Windows feature suite. By default parses 4 bytes. Set `size: 2` to parse the basic version only.
+  A structure describing Windows feature suite. By default parses 4 bytes. Set
+  `size: 2` to parse the basic version only.
 doc-ref:
   - https://github.com/mirror/mingw-w64/blob/adfc6f4f73cc9de26007e7879422d5d3d9ffbfa4/mingw-w64-headers/include/ntdef.h#L799-L817
   - https://github.com/reactos/reactos/blob/2204695f0a87741b9b6224625a4707e59b9c9995/sdk/include/xdk/ntbasedef.h#L810-L827

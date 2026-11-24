@@ -19,7 +19,8 @@ meta:
   encoding: UTF-8
   endian: be
 doc: |
-  The NITF (National Image Transition Format) format is a file format developed by the U.S. Government for
+  The NITF (National Image Transition Format) format is a file format developed by
+  the U.S. Government for
   storing imagery, e.g. from satellites.
 
   According to the [foreword of the specification](https://web.archive.org/web/20181105050336/https://www.gwg.nga.mil/ntb/baseline/docs/2500c/2500C.pdf):
@@ -27,7 +28,8 @@ doc: |
   > imagery and imagery-related products and exchanging them among members of the Intelligence Community (IC) as
   > defined by the Executive Order 12333, and other United States Government departments and agencies."
 
-  This implementation is set to version format (`file_version`) of 02.10 and `standard_type` of `BF01`.
+  This implementation is set to version format (`file_version`) of 02.10 and
+  `standard_type` of `BF01`.
   It was implemented by [River Loop Security](https://www.riverloopsecurity.com/).
 doc-ref: https://web.archive.org/web/20181105050336/https://www.gwg.nga.mil/ntb/baseline/docs/2500c/2500C.pdf
 seq:
@@ -68,7 +70,7 @@ types:
       - id: standard_type
         -orig-id: stype
         contents: 'BF01'
-        doc: 'Value of BF01 indicates the file is formatted using ISO/IEC IS 12087-5.'
+        doc: Value of BF01 indicates the file is formatted using ISO/IEC IS 12087-5.
       - id: originating_station_id
         -orig-id: ostaid
         size: 10
@@ -165,7 +167,9 @@ types:
     seq:
       - size: 14
         type: str
-        doc: 'UTC time of image acquisition in the format CCYYMMDDhhmmss: CC century, YY last two digits of the year, MM month, DD day, hh hour, mm minute, ss second'
+        doc: |
+          UTC time of image acquisition in the format CCYYMMDDhhmmss: CC century, YY last
+          two digits of the year, MM month, DD day, hh hour, mm minute, ss second
   encrypt:
     seq:
       - size: 1
@@ -335,7 +339,9 @@ types:
         -orig-id: nrows
         size: 8
         type: str
-        doc: 'Total number of rows of significant pixels in the image; only rows indexed 0 to (NROWS - 1) of the image contain significant data.'
+        doc: |
+          Total number of rows of significant pixels in the image; only rows indexed 0 to
+          (NROWS - 1) of the image contain significant data.
       - id: num_sig_cols
         -orig-id: ncols
         size: 8
@@ -348,12 +354,14 @@ types:
         -orig-id: irep
         size: 8
         type: str
-        doc: 'MONO, RGB, RGB/LUT, MULTI, NODISPLY, NVECTOR, POLAR, VPH, YCbCr601'
+        doc: MONO, RGB, RGB/LUT, MULTI, NODISPLY, NVECTOR, POLAR, VPH, YCbCr601
       - id: image_category
         -orig-id: icat
         size: 8
         type: str
-        doc: 'VIS, SL, TI, FL, RD, EO, OP, HR, HS,CP, BP, SAR, SARIQ, IR, MAP, MS, FP, MRI, XRAY, CAT, VD, PAT, LEG, DTEM, MATR, LOCG, BARO, CURRENT, DEPTH, WIND'
+        doc: |
+          VIS, SL, TI, FL, RD, EO, OP, HR, HS,CP, BP, SAR, SARIQ, IR, MAP, MS, FP, MRI,
+          XRAY, CAT, VD, PAT, LEG, DTEM, MATR, LOCG, BARO, CURRENT, DEPTH, WIND
       - id: actual_bits_per_pixel_per_band
         -orig-id: abpp
         size: 2
@@ -406,12 +414,14 @@ types:
         -orig-id: isync
         size: 1
         type: str
-        doc: 'Reserved for future use.'
+        doc: Reserved for future use.
       - id: img_mode
         -orig-id: imode
         size: 1
         type: str
-        doc: 'B = Band Interleaved by Block, P = Band Interleaved by Pixel, R = Band Interleaved by Row, S = Band Sequential'
+        doc: |
+          B = Band Interleaved by Block, P = Band Interleaved by Pixel, R = Band
+          Interleaved by Row, S = Band Sequential
       - id: num_blocks_per_row
         -orig-id: nbpr
         size: 4
@@ -471,7 +481,9 @@ types:
         -orig-id: irepband
         size: 2
         type: str
-        doc: 'Indicates processing required to display the nth band of image w.r.t. the general image type recorded by IREP field'
+        doc: |
+          Indicates processing required to display the nth band of image w.r.t. the
+          general image type recorded by IREP field
       - id: subcategory
         -orig-id: isubcat
         size: 6
@@ -483,7 +495,7 @@ types:
         -orig-id: imflt
         size: 3
         type: str
-        doc: 'Reserved'
+        doc: Reserved
       - id: num_luts
         -orig-id: nluts
         size: 1
@@ -493,7 +505,7 @@ types:
         size: 5
         type: str
         if: num_luts.to_i != 0
-        doc: 'Number of entries in each of the LUTs for the nth image band'
+        doc: Number of entries in each of the LUTs for the nth image band
       - id: luts
         -orig-id: lutd
         size: num_lut_entries.to_i
@@ -510,28 +522,28 @@ types:
         type: u4
       - id: bmrlnth
         type: u2
-        doc: 'Block Mask Record Length'
+        doc: Block Mask Record Length
       - id: tmrlnth
         type: u2
-        doc: 'Pad Pixel Mask Record Length'
+        doc: Pad Pixel Mask Record Length
       - id: tpxcdlnth
         type: u2
-        doc: 'Pad Output Pixel Code Length'
+        doc: Pad Output Pixel Code Length
       - id: tpxcd
         size: tpxcd_size
-        doc: 'Pad Output Pixel Code'
+        doc: Pad Output Pixel Code
       - id: bmrbnd
         type: u4
         repeat: expr
         repeat-expr: bmrtmr_count
         if: has_bmr
-        doc: 'Block n, Band m Offset'
+        doc: Block n, Band m Offset
       - id: tmrbnd
         type: u4
         repeat: expr
         repeat-expr: bmrtmr_count
         if: has_tmr
-        doc: 'Pad Pixel n, Band m'
+        doc: Pad Pixel n, Band m
     instances:
       tpxcd_size:
         value: "(tpxcdlnth % 8 == 0 ? tpxcdlnth : tpxcdlnth + (8 - tpxcdlnth % 8)) / 8"
@@ -588,7 +600,7 @@ types:
         -orig-id: sstruct
         size: 13
         type: str
-        doc: 'Reserved'
+        doc: Reserved
       - id: graphic_display_level
         -orig-id: sdlvl
         size: 3
@@ -617,7 +629,7 @@ types:
         -orig-id: sres2
         size: 2
         type: str
-        doc: 'Reserved'
+        doc: Reserved
       - id: graphics_extended_sub_header
         type: tre_header
   tre_header:
@@ -663,7 +675,7 @@ types:
         -orig-id: txtfmt
         size: 3
         type: str
-        doc: 'MTF (USMTF see MIL-STD-6040), STA (indicates BCS), UT1 (indicates ECS), U8S'
+        doc: MTF (USMTF see MIL-STD-6040), STA (indicates BCS), UT1 (indicates ECS), U8S
       - id: text_extended_sub_header
         type: tre_header
   data_extension_segment:
@@ -681,7 +693,7 @@ types:
       - id: file_part_type_de
         -orig-id: de
         contents: 'DE'
-        doc: 'File Part Type desigantor for Data Extension'
+        doc: File Part Type desigantor for Data Extension
       - id: desid
         size: 25
         type: str
@@ -742,7 +754,7 @@ types:
         size: des_defined_subheader_fields_len.to_i
         type: str
   data_sub_header_streaming:
-    doc: 'Streaming file Header Data Extension Segment Subheader'
+    doc: Streaming file Header Data Extension Segment Subheader
     seq:
       - id: des_base
         type: data_sub_header_base
@@ -756,18 +768,18 @@ types:
         doc: 'SFH Length 1: number of bytes in sfh_dr field'
       - id: sfh_delim1
         type: u4
-        doc: 'Shall contain the value 0x0A6E1D97.'
+        doc: Shall contain the value 0x0A6E1D97.
       - id: sfh_dr
         type: u1
         repeat: expr
         repeat-expr: sfh_l1.to_i
       - id: sfh_delim2
         type: u4
-        doc: 'Shall contain the value 0x0ECA14BF.'
+        doc: Shall contain the value 0x0ECA14BF.
       - id: sfh_l2
         size: 7
         type: str
-        doc: 'A repeat of sfh_l1.'
+        doc: A repeat of sfh_l1.
   reserved_extension_segment:
     params:
       - id: idx
@@ -811,16 +823,16 @@ types:
         -orig-id: etag
         size: 6
         type: str
-        doc: 'RETAG or CETAG'
+        doc: RETAG or CETAG
       - id: edata_length
         -orig-id: el
         size: 5
         type: str
-        doc: 'REL or CEL'
+        doc: REL or CEL
       - id: edata
         size: edata_length.to_i
         type: str
-        doc: 'REDATA or CEDATA'
+        doc: REDATA or CEDATA
   tre_entries:
     seq:
       - id: entries

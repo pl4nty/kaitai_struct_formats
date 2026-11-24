@@ -7,8 +7,10 @@ meta:
   bit-endian: be
 
 doc: |
-  Many modern general purpose BMS include a UART/Bluetooth based communication interface.
-  After sending read requests they respond with various information's about the battery state in
+  Many modern general purpose BMS include a UART/Bluetooth based communication
+  interface.
+  After sending read requests they respond with various information's about the
+  battery state in
   a custom binary format.
 
 doc-ref: https://www.lithiumbatterypcb.com/Protocol%20English%20Version.rar

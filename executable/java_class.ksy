@@ -364,8 +364,7 @@ types:
     -orig-id:
       - CONSTANT_Module_info
       - CONSTANT_Package_info
-    doc: |
-      Project Jigsaw modules introduced in Java 9
+    doc: Project Jigsaw modules introduced in Java 9
     doc-ref:
       - https://docs.oracle.com/javase/specs/jvms/se19/html/jvms-3.html#jvms-3.16
       - https://docs.oracle.com/javase/specs/jvms/se19/html/jvms-4.html#jvms-4.4.11

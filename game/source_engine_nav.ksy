@@ -11,16 +11,21 @@ meta:
   endian: le
 
 doc: |
-  Base file format used by the Source Engine to store nav mesh data for maps. This KSY file does *not* account for derivative implementations.
+  Base file format used by the Source Engine to store nav mesh data for maps. This
+  KSY file does *not* account for derivative implementations.
 
-  Code for the base NAV file format can be found in `game/server/nav_file.cpp`, which is located in the Source SDK 2013 repository (located at `https://github.com/ValveSoftware/source-sdk-2013/`).
+  Code for the base NAV file format can be found in `game/server/nav_file.cpp`,
+  which is located in the Source SDK 2013 repository (located at
+  `https://github.com/ValveSoftware/source-sdk-2013/`).
 
 doc-ref: "https://developer.valvesoftware.com/wiki/NAV"
 
 seq:
   - id: magic_number
     contents: [0xce, 0xfa, 0xed, 0xfe] # 0xFEEDFACE
-    doc: Magic Number of the NAV file. NAV files are always generated with 0xFEEDFACE in little-endian.
+    doc: |
+      Magic Number of the NAV file. NAV files are always generated with 0xFEEDFACE in
+      little-endian.
   - id: version
     type: u4
     doc: |
@@ -38,7 +43,8 @@ seq:
         * 7 = Areas store ladder ID's so ladders can have one-way connections
         * 8 = Added earliest occupy times (2 floats) to each area
         * 9 = Promoted CNavArea's attribute flags to a short
-        * 10 - Added sub-version number to allow derived classes to have custom area data
+        * 10 - Added sub-version number to allow derived classes to have custom area
+          data
         * 11 - Added light intensity to each area
         * 12 - Storing presence of unnamed areas in the PlaceDirectory
         * 13 - Widened NavArea attribute bits from unsigned short to int
@@ -51,7 +57,8 @@ seq:
     type: u4
     if: 'version >= 10'
     doc: |
-      Version of the derivative implementation of the NAV file format. Added in NAV version 10.
+      Version of the derivative implementation of the NAV file format. Added in NAV
+      version 10.
 
       Subversions used by Source Games:
       * Base SDK and Garry's Mod | 0
@@ -70,7 +77,8 @@ seq:
     type: u1 # The value is interpreted as a boolean, but it is actually stored as a full byte.
     if: 'version >= 14'
     doc: |
-      Value that stores if the nav mesh has been analyzed (usually through `nav_analyze`).
+      Value that stores if the nav mesh has been analyzed (usually through
+      `nav_analyze`).
 
       True: NAV file has been analyzed (usually through `nav_analyze`).
       False: It has not been analyzed.
@@ -112,12 +120,15 @@ seq:
   - id: custom_data
     size-eos: true
     if: '_root.version >= 10 and _root.subversion != 0'
-    doc: Custom data appended by a specialized implementation of the NAV format. Should only be parsed if NAV file has a subversion.
+    doc: |
+      Custom data appended by a specialized implementation of the NAV format. Should
+      only be parsed if NAV file has a subversion.
 
 types:
   place_name:
     doc: |
-      A label of a location in a map. They are defined by the map (BSP file). Added in NAV Version 5.
+      A label of a location in a map. They are defined by the map (BSP file). Added in
+      NAV Version 5.
 
       Place names are stored as Length-String value pairs.
     seq:
@@ -140,7 +151,8 @@ types:
   # ApproachInfo
   approach_info:
     doc: |
-      Datum point that determines the type of movement between areas. Removed in NAV version 15.
+      Datum point that determines the type of movement between areas. Removed in NAV
+      version 15.
 
       It is only used by the Counter-Strike video game series.
 
@@ -181,8 +193,7 @@ types:
       hiding_spot_attribute_flag:
         meta:
           bit-endian: le
-        doc: |
-          Attribute flag used by hiding spots.
+        doc: Attribute flag used by hiding spots.
         seq:
           - id: in_cover
             type: b1
@@ -222,7 +233,8 @@ types:
     doc: |
       Stores the type of visibility to an area. Added in NAV version 16.
 
-      The structure stores an area ID as an unsigned integer (32-bits) and a byte flag that determines if visibility checks should be done.
+      The structure stores an area ID as an unsigned integer (32-bits) and a byte flag
+      that determines if visibility checks should be done.
     seq:
       - id: bound_area_id
         type: u4
@@ -231,7 +243,8 @@ types:
         type: u1 # The value is used by the source engine as a number in an unsigned byte, NOT as a bit field!
         enum: visibility_type
         doc: |
-          Determines type of visibility to the bound area. See the `visibility_type` enum for the values.
+          Determines type of visibility to the bound area. See the `visibility_type` enum
+          for the values.
     enums:
       # VisibilityType enum.
       visibility_type:
@@ -240,7 +253,9 @@ types:
           doc: No visibility checks; area is always invisible.
         1:
           id: potentially_visible
-          doc: Perform visibility checks to determine if the pointed area is visible (from the bot).
+          doc: |
+            Perform visibility checks to determine if the pointed area is visible (from the
+            bot).
         2:
           id: completely_visible
           doc: No visibility checks; area is always visible.
@@ -248,7 +263,8 @@ types:
   # NavEncounterSpot
   encounter_spot:
     doc: |
-      Encounter spots are waypoints used in Encounter Paths to determine the path to travel.
+      Encounter spots are waypoints used in Encounter Paths to determine the path to
+      travel.
 
       Encounter spots are currently only used in the Counter-Strike video game series.
     seq:
@@ -261,7 +277,8 @@ types:
   # NavEncounterPath
   encounter_path:
     doc: |
-      A sequence of encounter spots which are used by bots to determine the route to an area.
+      A sequence of encounter spots which are used by bots to determine the route to
+      an area.
 
       Encounter Paths are currently only used in the Counter-Strike video game series.
     seq:
@@ -288,8 +305,7 @@ types:
         doc: Sequence of encounter spots with `encounter_spot_count` elements.
   # NavArea
   nav_area:
-    doc: |
-      Navigation Areas determine the boundaries AI can move within.
+    doc: Navigation Areas determine the boundaries AI can move within.
     seq:
       # Custom data can be prepended here.
       # Area Data.
@@ -399,18 +415,21 @@ types:
       - id: area_id_vis_inherit
         type: u4
         if: '_root.version >= 16'
-        doc: ID of area to inherit visibility bind information from. Only exists in NAV version 16 and later.
+        doc: |
+          ID of area to inherit visibility bind information from. Only exists in NAV
+          version 16 and later.
       # Custom data can be appended here.
     types:
       nav_area_attribute_field:
         meta:
           bit-endian: le
-        doc: |
-          Attribute flag used by navigation areas.
+        doc: Attribute flag used by navigation areas.
         params:
           - id: format_version
             type: u4
-            doc: Version of the NAV format to save the attribute flag in (determines the size of the bit field).
+            doc: |
+              Version of the NAV format to save the attribute flag in (determines the size of
+              the bit field).
         seq:
           - id: bit_field
             type: b1

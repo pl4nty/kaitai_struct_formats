@@ -130,8 +130,7 @@ types:
         doc: Number of local time types.
       - id: len_tz_designations
         type: u4
-        doc: |
-          Length of space (in octets) holding the time zone designation strings.
+        doc: Length of space (in octets) holding the time zone designation strings.
       - id: num_leap_second_records
         type: u4
         doc: Number of leap-second records.

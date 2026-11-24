@@ -12,7 +12,8 @@ meta:
 doc: |
   GBR0 files are used by GameBoy Tile Designer
   to store tilemaps created with the program.
-  For example files, check: https://github.com/ZetaTwo/gameboy-project/tree/master/gbr-parser
+  For example files, check:
+  https://github.com/ZetaTwo/gameboy-project/tree/master/gbr-parser
 doc-ref: https://www.devrs.com/gb/hmgd/gbtd.html
 
 seq:
@@ -177,7 +178,10 @@ types:
             enum: palettes
           - id: make_meta_tiles
             type: u1
-            doc: This flag indicates whether "Metatiles" should be created. These are not described in the file format specification and further investigation is needed to implement these.
+            doc: |
+              This flag indicates whether "Metatiles" should be created. These are not
+              described in the file format specification and further investigation is needed
+              to implement these.
           - id: meta_offset
             type: u4
           - id: meta_counter

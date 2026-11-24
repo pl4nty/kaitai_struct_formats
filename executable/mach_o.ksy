@@ -137,70 +137,96 @@ types:
     instances:
       no_undefs:
         value: value & 0x1 != 0
-        doc: "the object file has no undefined references"
+        doc: the object file has no undefined references
       incr_link:
         value: value & 0x2 != 0
-        doc: "the object file is the output of an incremental link against a base file and can't be link-edited again"
+        doc: |
+          the object file is the output of an incremental link against a base file and
+          can't be link-edited again
       dyld_link:
         value: value & 0x4 != 0
-        doc: "the object file is input for the dynamic linker and can't be statically link-edited again"
+        doc: |
+          the object file is input for the dynamic linker and can't be statically
+          link-edited again
       bind_at_load:
         value: value & 0x8 != 0
-        doc: "the object file's undefined references are bound by the dynamic linker when loaded."
+        doc: |
+          the object file's undefined references are bound by the dynamic linker when
+          loaded.
       prebound:
         value: value & 0x10 != 0
-        doc: "the file has its dynamic undefined references prebound."
+        doc: the file has its dynamic undefined references prebound.
       split_segs:
         value: value & 0x20 != 0
-        doc: "the file has its read-only and read-write segments split"
+        doc: the file has its read-only and read-write segments split
       lazy_init:
         value: value & 0x40 != 0
-        doc: "the shared library init routine is to be run lazily via catching memory faults to its writeable segments (obsolete)"
+        doc: |
+          the shared library init routine is to be run lazily via catching memory faults
+          to its writeable segments (obsolete)
       two_level:
         value: value & 0x80 != 0
-        doc: "the image is using two-level name space bindings"
+        doc: the image is using two-level name space bindings
       force_flat:
         value: value & 0x100 != 0
-        doc: "the executable is forcing all images to use flat name space bindings"
+        doc: the executable is forcing all images to use flat name space bindings
       no_multi_defs:
         value: value & 0x200 != 0
-        doc: "this umbrella guarantees no multiple definitions of symbols in its sub-images so the two-level namespace hints can always be used."
+        doc: |
+          this umbrella guarantees no multiple definitions of symbols in its sub-images so
+          the two-level namespace hints can always be used.
       no_fix_prebinding:
         value: value & 0x400 != 0
-        doc: "do not have dyld notify the prebinding agent about this executable"
+        doc: do not have dyld notify the prebinding agent about this executable
       prebindable:
         value: value & 0x800 != 0
-        doc: "the binary is not prebound but can have its prebinding redone. only used when MH_PREBOUND is not set."
+        doc: |
+          the binary is not prebound but can have its prebinding redone. only used when
+          MH_PREBOUND is not set.
       all_mods_bound:
         value: value & 0x1000 != 0
-        doc: "indicates that this binary binds to all two-level namespace modules of its dependent libraries. only used when MH_PREBINDABLE and MH_TWOLEVEL are both set."
+        doc: |
+          indicates that this binary binds to all two-level namespace modules of its
+          dependent libraries. only used when MH_PREBINDABLE and MH_TWOLEVEL are both set.
       subsections_via_symbols:
         value: value & 0x2000 != 0
-        doc: "safe to divide up the sections into sub-sections via symbols for dead code stripping"
+        doc: |
+          safe to divide up the sections into sub-sections via symbols for dead code
+          stripping
       canonical:
         value: value & 0x4000 != 0
-        doc: "the binary has been canonicalized via the unprebind operation"
+        doc: the binary has been canonicalized via the unprebind operation
       weak_defines:
         value: value & 0x8000 != 0
-        doc: "the final linked image contains external weak symbols"
+        doc: the final linked image contains external weak symbols
       binds_to_weak:
         value: value & 0x10000 != 0
-        doc: "the final linked image uses weak symbols"
+        doc: the final linked image uses weak symbols
       allow_stack_execution:
         value: value & 0x20000 != 0
-        doc: "When this bit is set, all stacks in the task will be given stack execution privilege.  Only used in MH_EXECUTE filetypes."
+        doc: |
+          When this bit is set, all stacks in the task will be given stack execution
+          privilege.  Only used in MH_EXECUTE filetypes.
       root_safe:
         value: value & 0x40000 != 0
-        doc: "When this bit is set, the binary declares it is safe for use in processes with uid zero"
+        doc: |
+          When this bit is set, the binary declares it is safe for use in processes with
+          uid zero
       setuid_safe:
         value: value & 0x80000 != 0
-        doc: "When this bit is set, the binary declares it is safe for use in processes when issetugid() is true"
+        doc: |
+          When this bit is set, the binary declares it is safe for use in processes when
+          issetugid() is true
       no_reexported_dylibs:
         value: value & 0x100000 != 0
-        doc: "When this bit is set on a dylib, the static linker does not need to examine dependent dylibs to see if any are re-exported"
+        doc: |
+          When this bit is set on a dylib, the static linker does not need to examine
+          dependent dylibs to see if any are re-exported
       pie:
         value: value & 0x200000 != 0
-        doc: "When this bit is set, the OS will load the main executable at a random address. Only used in MH_EXECUTE filetypes."
+        doc: |
+          When this bit is set, the OS will load the main executable at a random address.
+          Only used in MH_EXECUTE filetypes.
       dead_strippable_dylib:
         value: value & 0x400000 != 0
       has_tlv_descriptors:

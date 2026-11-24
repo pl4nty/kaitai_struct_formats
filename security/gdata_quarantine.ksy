@@ -11,7 +11,8 @@ doc: |
   G Data quarantine files are created by the G Data antivirus software.
   They store suspected malware and its metadata.
   This parser was created by analyzing different quarantine files.
-  G Data quarantine files consist of three encrypted parts. The first two parts hold metadata, the third holds the suspected malware.
+  G Data quarantine files consist of three encrypted parts. The first two parts
+  hold metadata, the third holds the suspected malware.
 doc-ref: https://github.com/ernw/quarantine-formats/blob/master/docs/GData.md
 seq:
   - id: magic1

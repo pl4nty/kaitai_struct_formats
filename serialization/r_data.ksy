@@ -9,10 +9,13 @@ meta:
   license: GPL-3.0-or-later
   encoding: UTF-8
 doc: |
-  A set of file formats used for serialization of objects of [R language](https://www.r-project.org/about.html) for statistical computing.
+  A set of file formats used for serialization of objects of [R
+  language](https://www.r-project.org/about.html) for statistical computing.
   Datasets are often distributed in these formats.
-  RDA files are usually compressed, you need to detect compression and decompress them before applying the code generated from this spec.
-  There are 2 different formats, "old" and "new", the version is set up via is_new parameter.
+  RDA files are usually compressed, you need to detect compression and decompress
+  them before applying the code generated from this spec.
+  There are 2 different formats, "old" and "new", the version is set up via is_new
+  parameter.
 doc-ref:
   - https://github.com/wch/r-source/blob/master/src/main/saveload.c
   - https://github.com/wch/r-source/blob/master/src/include/Rinternals.h

@@ -3,7 +3,9 @@ meta:
   title: utmp log file, IBM AIX version
   license: CC0-1.0
   endian: be
-doc: This spec can be used to parse utmp, wtmp and other similar as created by IBM AIX.
+doc: |
+  This spec can be used to parse utmp, wtmp and other similar as created by IBM
+  AIX.
 doc-ref: https://www.ibm.com/docs/en/aix/7.1?topic=files-utmph-file
 seq:
   - id: records

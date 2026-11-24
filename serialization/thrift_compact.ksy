@@ -246,8 +246,7 @@ types:
         type: u1
         repeat: until
         repeat-until: (_ & 0x80) == 0
-        doc: |
-          Zigzag-encoded variable-length integer (base-128 LE).
+        doc: Zigzag-encoded variable-length integer (base-128 LE).
     instances:
       value_u:
         value: "(bytes[0] & 0x7f)\n          + (bytes.size > 1 ? ((bytes[1] & 0x7f) << 7) : 0)\n          + (bytes.size > 2 ? ((bytes[2] & 0x7f) << 14) : 0)\n          + (bytes.size > 3 ? ((bytes[3] & 0x7f) << 21) : 0)\n          + (bytes.size > 4 ? ((bytes[4] & 0x7f) << 28) : 0)\n          + (bytes.size > 5 ? ((bytes[5] & 0x7f) << 35) : 0)\n          + (bytes.size > 6 ? ((bytes[6] & 0x7f) << 42) : 0)\n          + (bytes.size > 7 ? ((bytes[7] & 0x7f) << 49) : 0)\n          + (bytes.size > 8 ? ((bytes[8] & 0x7f) << 56) : 0)\n          + (bytes.size > 9 ? ((bytes[9] & 0x7f) << 63) : 0)"

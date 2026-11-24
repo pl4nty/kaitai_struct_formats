@@ -49,7 +49,9 @@ types:
       - id: modern_header_suffix
         contents: '7-01v'
         if: not is_legacy
-        doc: Remainder of the 17-byte header size, 64-bit pointer marker, format version 01 and little-endian marker
+        doc: |
+          Remainder of the 17-byte header size, 64-bit pointer marker, format version 01
+          and little-endian marker
       - id: endian_legacy
         type: u1
         enum: endian

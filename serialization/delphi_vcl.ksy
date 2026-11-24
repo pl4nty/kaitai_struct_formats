@@ -181,8 +181,7 @@ types:
         repeat: until
         repeat-until: _.class_name.len_value == 0x00
   object_rec:
-    doc: |
-      XXX Filer flags are not implemented
+    doc: XXX Filer flags are not implemented
     seq:
       - id: class_name
         type: string

@@ -8,8 +8,13 @@ meta:
   encoding: ASCII
   endian: le
 doc: |
-  Prism II headers are usually used by wlan cards based on Intersil/Conexant/Broadcom [Prism II](https://en.wikipedia.org/wiki/Prism_(chipset)) and Proxim Wireless/Lucent ORiNOCO.
-  Disclaimer: AFAIK there is no official spec publicly available, most of the specs publicly available are reverse-engineered and incorporate their authors beleifs.
+  Prism II headers are usually used by wlan cards based on
+  Intersil/Conexant/Broadcom [Prism
+  II](https://en.wikipedia.org/wiki/Prism_(chipset)) and Proxim Wireless/Lucent
+  ORiNOCO.
+  Disclaimer: AFAIK there is no official spec publicly available, most of the
+  specs publicly available are reverse-engineered and incorporate their authors
+  beleifs.
 
 doc-ref:
   - https://www.tcpdump.org/linktypes/LINKTYPE_IEEE802_11_PRISM.html
@@ -34,7 +39,7 @@ seq:
 instances:
   rssi_offset:
     value: 100
-    doc: "+100 for PRISM II, +149 for Lucent cards"
+    doc: +100 for PRISM II, +149 for Lucent cards
   header_size:
     value: 4 + 4 + 16
   fields_size:

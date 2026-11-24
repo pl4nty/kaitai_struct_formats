@@ -207,7 +207,7 @@ types:
         if: (_parent.normal_type == normal_type::normals_r1 or
           _parent.normal_type == normal_type::normals_float)
           and not _parent.normal_half_float
-        doc: 'no idea what this is'
+        doc: no idea what this is
 
       - id: tan
         type:

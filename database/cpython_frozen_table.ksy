@@ -6,8 +6,10 @@ meta:
   encoding: ASCII
   endian: le
 doc: |
-  CPython has facilities to embed serialized python objects bytecode right into cpython binaries (libpython, which mai be linked to python as a static lib).
-  These stuff is organized into an array of `_frozen`, the ptr to the table is exported as PyImport_FrozenModules.
+  CPython has facilities to embed serialized python objects bytecode right into
+  cpython binaries (libpython, which mai be linked to python as a static lib).
+  These stuff is organized into an array of `_frozen`, the ptr to the table is
+  exported as PyImport_FrozenModules.
   
 doc-ref:
   - "https://github.com/python/cpython/blob/master/Include/import.h#L136L140"
@@ -16,19 +18,19 @@ doc-ref:
 params:
   - id: pointer_size
     type: u1
-    doc: "sizeof(void*), 4 or 8"
+    doc: sizeof(void*), 4 or 8
   - id: int_size
     type: u1
-    doc: "sizeof(int), 4 or 8"
+    doc: sizeof(int), 4 or 8
   - id: padding_size
     type: u1
-    doc: "4 or 0"
+    doc: 4 or 0
   #- id: parsed_binary # unneeded for now, because KS lacks the feature
   #  type: object
   #  doc: "Object of a parsed binary to be passed to translated_ptr. translated_ptr translates raw offset into offset in a blob"
   - id: table_offset
     type: u8
-    doc: "Offset of the table in a file / binary image"
+    doc: Offset of the table in a file / binary image
 instances:
   table:
     pos: table_offset
@@ -38,7 +40,7 @@ instances:
 
 types:
   ptr_type:
-    doc: "Selects the right size of ptr based on platform pointer_size."
+    doc: Selects the right size of ptr based on platform pointer_size.
     seq:
       - id: raw_ptr
         type:
@@ -76,16 +78,16 @@ types:
       #  type: translated(translated_code_ptr, code_size, translated_name_ptr)
   
   translated_entry:
-    doc: "Represents a translated table entry"
+    doc: Represents a translated table entry
     params:
       - id: code_offset
         type: u8
-        doc: "translated offset of code"
+        doc: translated offset of code
       - id: entry
         type: entry
       - id: name_offset
         type: u8
-        doc: "translated offset of name"
+        doc: translated offset of name
     instances:
       code:
         pos: code_offset

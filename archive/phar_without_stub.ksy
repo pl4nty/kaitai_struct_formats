@@ -276,8 +276,7 @@ types:
         doc: The length of the alias, in bytes.
       - id: alias
         size: len_alias
-        doc: |
-          The phar's alias, i. e. the name under which it is loaded into PHP.
+        doc: The phar's alias, i. e. the name under which it is loaded into PHP.
       - id: len_metadata
         type: u4
         doc: The size of the metadata, in bytes, or 0 if there is none.

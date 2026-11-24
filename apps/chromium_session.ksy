@@ -314,20 +314,17 @@ types:
         type: u4
       - id: workspace
         type: cr_string
-        doc: |
-          On macOS contains a BASE64-encoded binary plist.
+        doc: On macOS contains a BASE64-encoded binary plist.
   command_tab_navigation_path_pruned:
     seq:
       - id: tab_id
         type: u4
       - id: index
         type: u4
-        doc: |
-          Index starting which |count| entries were removed.
+        doc: Index starting which |count| entries were removed.
       - id: count
         type: u4
-        doc: |
-          Number of entries removed.
+        doc: Number of entries removed.
   command_set_tab_group:
     seq:
       - id: tab_id
@@ -350,8 +347,7 @@ types:
         type: cr_string16
       - id: color
         type: u4
-        doc: |
-          Unused, tab_groups::TabGroupColorId::kGrey is used.
+        doc: Unused, tab_groups::TabGroupColorId::kGrey is used.
   command_set_tab_group_metadata2:
     seq:
       - id: pickle_payload_size

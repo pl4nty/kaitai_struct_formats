@@ -108,12 +108,10 @@ types:
         type: vec3
       - id: num_skins
         type: s4
-        doc: |
-          Number of skins (=texture bitmaps) included in this model.
+        doc: Number of skins (=texture bitmaps) included in this model.
       - id: skin_width
         type: s4
-        doc: |
-          Width (U coordinate max) of every skin (=texture) in pixels.
+        doc: Width (U coordinate max) of every skin (=texture) in pixels.
       - id: skin_height
         type: s4
         doc: |
@@ -126,12 +124,10 @@ types:
           for all the animation frames and all textures.
       - id: num_tris
         type: s4
-        doc: |
-          Number of triangles (=triangular faces) in this model.
+        doc: Number of triangles (=triangular faces) in this model.
       - id: num_frames
         type: s4
-        doc: |
-          Number of animation frames included in this model.
+        doc: Number of animation frames included in this model.
       - id: synctype
         type: s4
       - id: flags
@@ -141,8 +137,7 @@ types:
     instances:
       skin_size:
         value: skin_width * skin_height
-        doc: |
-          Skin size in pixels.
+        doc: Skin size in pixels.
   mdl_skin:
     seq:
       - id: group

@@ -16,7 +16,8 @@ doc: |
   import numpy as np
   import unicodedata
 
-  s = SpiderSav.from_file("./spider.sav")  # https://github.com/kaitai-io/kaitai_struct_formats/files/6118058/spider.zip
+  s = SpiderSav.from_file("./spider.sav")  #
+  https://github.com/kaitai-io/kaitai_struct_formats/files/6118058/spider.zip
 
   prgState = s.initial_prg_state
   def prng():
@@ -25,7 +26,8 @@ doc: |
     prgState = prgState.next
     return res
 
-  suits = [unicodedata.lookup("BLACK " + s.Suit(i).name.upper() + " SUIT") for i in range(4)]
+  suits = [unicodedata.lookup("BLACK " + s.Suit(i).name.upper() + " SUIT") for i
+  in range(4)]
 
   ranks = ["A"]
   ranks.extend(range(2, 9 + 2))
@@ -80,7 +82,9 @@ doc-ref: http://www.genialitaet.de/fw/Spider.sav
 seq:
   - id: suits_used_count
     type: u4
-    doc: internally it uses 4 suits, but transforms the suits of cards into the needed suit
+    doc: |
+      internally it uses 4 suits, but transforms the suits of cards into the needed
+      suit
   - id: prg_seed
     type: u4
   - id: card_count_without_undealt_rows

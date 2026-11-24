@@ -4,7 +4,8 @@ meta:
   license: Unlicense
   endian: le
 doc: |
-  Stores the info about Windows processor archiectures. By default takes 4 bytes with the second `reserved` field`. Limit to 2 bytes if you don't need that.
+  Stores the info about Windows processor archiectures. By default takes 4 bytes
+  with the second `reserved` field`. Limit to 2 bytes if you don't need that.
 doc-ref:
   - https://learn.microsoft.com/en-us/previous-versions/ms942639(v=msdn.10)
   - https://github.com/reactos/reactos/blob/fe777bb52f67921b26bf5791b06a5c712f5be3f6/sdk/include/ndk/ketypes.h#L105-L115

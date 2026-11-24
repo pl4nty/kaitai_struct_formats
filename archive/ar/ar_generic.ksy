@@ -20,9 +20,16 @@ meta:
   # In particular, numerical values are stored as ASCII-encoded decimal and octal numbers, rather than packed byte values.  Because of this, the ar format has no endianness.
   # No string encoding is specified either. As different systems use different encodings, all text (i. e. file names) are exposed as byte arrays.
 doc: |
-  The Unix ar archive format, as created by the `ar` utility. It is a simple uncompressed flat archive format, but is rarely used for general-purpose archiving. Instead, it is commonly used by linkers to collect multiple object files along with a symbol table into a static library. The Debian package format (.deb) is also based on the ar format.
+  The Unix ar archive format, as created by the `ar` utility. It is a simple
+  uncompressed flat archive format, but is rarely used for general-purpose
+  archiving. Instead, it is commonly used by linkers to collect multiple object
+  files along with a symbol table into a static library. The Debian package format
+  (.deb) is also based on the ar format.
   
-  The ar format is not standardized and several variants have been developed, which differ mainly in how member names and the symbol table (if any) are stored. This specification describes the basic structure shared by all ar variants.
+  The ar format is not standardized and several variants have been developed,
+  which differ mainly in how member names and the symbol table (if any) are
+  stored. This specification describes the basic structure shared by all ar
+  variants.
 doc-ref: |
   https://en.wikipedia.org/w/index.php?title=Ar_(Unix)&oldid=880452895#File_format_details
   https://docs.oracle.com/cd/E36784_01/html/E36873/ar.h-3head.html
@@ -46,9 +53,15 @@ types:
         size: 16
         # We don't set a terminator for the name field, because different ar format variants use different terminators (see doc).
         doc: |
-          The name of the archive member, right-padded with spaces. Because the exact format of this field differs between format variants, it is exposed as a fixed-size byte array. Long member names are not processed, and no terminator or padding characters are removed. To read member names correctly from an archive whose format variant is known, use the `ar_bsd` or `ar_sysv` specification.
+          The name of the archive member, right-padded with spaces. Because the exact
+          format of this field differs between format variants, it is exposed as a
+          fixed-size byte array. Long member names are not processed, and no terminator or
+          padding characters are removed. To read member names correctly from an archive
+          whose format variant is known, use the `ar_bsd` or `ar_sysv` specification.
           
-          Names are usually unique within an archive, but this is not required - the `ar` command even provides various options to work with archives containing multiple identically named members.
+          Names are usually unique within an archive, but this is not required - the `ar`
+          command even provides various options to work with archives containing multiple
+          identically named members.
       - id: metadata
         type: member_metadata
         doc: The member's metadata (timestamp, user and group ID, mode).
@@ -66,8 +79,12 @@ types:
       - id: padding
         contents: "\n"
         if: size % 2 != 0
-        doc: An extra newline is added as padding after members with an odd data size. This ensures that all members are 2-byte-aligned.
+        doc: |
+          An extra newline is added as padding after members with an odd data size. This
+          ensures that all members are 2-byte-aligned.
     instances:
       size:
         value: size_raw.value
-        doc: The size of the member's data. The trailing padding byte (if any) does not count toward the data size.
+        doc: |
+          The size of the member's data. The trailing padding byte (if any) does not count
+          toward the data size.

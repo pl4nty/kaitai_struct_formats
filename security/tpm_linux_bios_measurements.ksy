@@ -200,7 +200,9 @@ enums:
   tcg_pcr_index:
     0:
       id: pcr0_crtm_and_bios
-      doc: PCR for CRTM (Core Root of Trust of Measurement), BIOS and Host Platform Extensions
+      doc: |
+        PCR for CRTM (Core Root of Trust of Measurement), BIOS and Host Platform
+        Extensions
     1:
       id: pcr1_bios_config
       doc: PCR for Host Platform Configuration (including BIOS configuration)

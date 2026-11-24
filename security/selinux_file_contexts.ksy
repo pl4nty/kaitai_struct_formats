@@ -16,7 +16,8 @@ doc: |
 
   Test files:
     - version 4: inside omni-7.1.2-20171120-flounder-WEEKLY.zip from OmniROM
-    - version 5: /etc/selinux/targeted/contexts/files/file_contexts.bin on Fedora 33
+    - version 5: /etc/selinux/targeted/contexts/files/file_contexts.bin on Fedora
+      33
 doc-ref: https://github.com/SELinuxProject/selinux/blob/b550c0e/libselinux/utils/sefcontext_compile.c#L68
 seq:
   - id: magic

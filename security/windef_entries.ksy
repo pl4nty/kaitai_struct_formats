@@ -8,9 +8,12 @@ meta:
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
   Entries files store metadata of quarantine files of Windows Defender.
-  The parser was created analyzing different files from the Entries subdirectory in the Windows Defender quarantine directory.
-  The file consists of three encrypted parts. The first part contains the size of the other two parts.
-  The other parts contain metadata like timestamps or paths of the original malware file.
+  The parser was created analyzing different files from the Entries subdirectory
+  in the Windows Defender quarantine directory.
+  The file consists of three encrypted parts. The first part contains the size of
+  the other two parts.
+  The other parts contain metadata like timestamps or paths of the original
+  malware file.
 doc-ref: https://github.com/ernw/quarantine-formats/blob/master/docs/Windows_Defender.md
 seq:
   - id: header

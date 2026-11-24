@@ -56,10 +56,10 @@ types:
                 contents: "LABELONE"
               - id: sector_number
                 type: u8
-                doc: "The sector number of the physical volume label header"
+                doc: The sector number of the physical volume label header
               - id: checksum
                 type: u4
-                doc: "CRC-32 for offset 20 to end of the physical volume label sector"
+                doc: CRC-32 for offset 20 to end of the physical volume label sector
               - id: label_header_
                 type: label_header_
             types:
@@ -67,7 +67,9 @@ types:
                 seq:
                   - id: data_offset
                     type: u4
-                    doc: "The offset, in bytes, relative from the start of the physical volume label header where data is stored"
+                    doc: |
+                      The offset, in bytes, relative from the start of the physical volume label
+                      header where data is stored
                   - id: type_indicator
                     contents: "LVM2 001"
 
@@ -76,17 +78,20 @@ types:
               - id: id
                 size: 32
                 type: str
-                doc: >
+                doc: |
                   Contains a UUID stored as an ASCII string.
-                  The physical volume identifier can be used to uniquely identify a physical volume. The physical volume identifier is stored as: 9LBcEB7PQTGIlLI0KxrtzrynjuSL983W but is equivalent to its formatted variant: 9LBcEB-7PQT-GIlL-I0Kx-rtzr-ynju-SL983W, which is used in the metadata.
+                  The physical volume identifier can be used to uniquely identify a physical
+                  volume. The physical volume identifier is stored as:
+                  9LBcEB7PQTGIlLI0KxrtzrynjuSL983W but is equivalent to its formatted variant:
+                  9LBcEB-7PQT-GIlL-I0Kx-rtzr-ynju-SL983W, which is used in the metadata.
               - id: size
                 type: u8
-                doc: "Physical Volume size. Value in bytes"
+                doc: Physical Volume size. Value in bytes
               - id: data_area_descriptors
                 type: data_area_descriptor
                 repeat: until
                 repeat-until: _.size == 0 and _.offset == 0
-                doc: "The last descriptor in the list is terminator and consists of 0-byte values."
+                doc: The last descriptor in the list is terminator and consists of 0-byte values.
               - id: metadata_area_descriptors
                 type: metadata_area_descriptor
                 repeat: until
@@ -99,9 +104,10 @@ types:
                     doc: The offset, in bytes, relative from the start of the physical volume
                   - id: size
                     type: u8
-                    doc: >
+                    doc: |
                       Value in bytes.
-                      Can be 0. [yellow-background]*Does this represent all remaining available space?*
+                      Can be 0. [yellow-background]*Does this represent all remaining available
+                      space?*
                 instances:
                   data:
                     io: _root._io
@@ -125,7 +131,11 @@ types:
                     type: metadata_area
                     if: size != 0
               metadata_area:
-                doc: "According to `[REDHAT]` the metadata area is a circular buffer. New metadata is appended to the old metadata and then the pointer to the start of it is updated. The metadata area, therefore, can contain copies of older versions of the metadata."
+                doc: |
+                  According to `[REDHAT]` the metadata area is a circular buffer. New metadata is
+                  appended to the old metadata and then the pointer to the start of it is updated.
+                  The metadata area, therefore, can contain copies of older versions of the
+                  metadata.
                 seq:
                   - id: header
                     type: metadata_area_header
@@ -134,21 +144,23 @@ types:
                     seq:
                       - id: checksum
                         type: u4
-                        doc: "CRC-32 for offset 4 to end of the metadata area header"
+                        doc: CRC-32 for offset 4 to end of the metadata area header
                       - id: signature
                         contents: " LVM2 x[5A%r0N*>"
                       - id: version
                         type: u4
                       - id: metadata_area_offset
                         type: u8
-                        doc: "The offset, in bytes, of the metadata area relative from the start of the physical volume"
+                        doc: |
+                          The offset, in bytes, of the metadata area relative from the start of the
+                          physical volume
                       - id: metadata_area_size
                         type: u8
                       - id: raw_location_descriptors
                         type: raw_location_descriptor
                         repeat: until
                         repeat-until: _.offset == 0 and _.size == 0 and _.checksum == 0 # and _.flags == 0
-                        doc: "The last descriptor in the list is terminator and consists of 0-byte values."
+                        doc: The last descriptor in the list is terminator and consists of 0-byte values.
                     instances:
                       metadata_area:
                         io: _root._io
@@ -157,17 +169,19 @@ types:
                     types:
                       raw_location_descriptor:
                         -orig-id: "raw_locn"
-                        doc: "The data area size can be 0. It is assumed it represents the remaining available data."
+                        doc: |
+                          The data area size can be 0. It is assumed it represents the remaining available
+                          data.
                         seq:
                           - id: offset
                             type: u8
-                            doc: "The data area offset, in bytes, relative from the start of the metadata area"
+                            doc: The data area offset, in bytes, relative from the start of the metadata area
                           - id: size
                             type: u8
-                            doc: "data area size in bytes"
+                            doc: data area size in bytes
                           - id: checksum
                             type: u4
-                            doc: "CRC-32 of *TODO (metadata?)*"
+                            doc: CRC-32 of *TODO (metadata?)*
                           - id: flags
                             type: u4
                             enum: raw_location_descriptor_flags

@@ -26,7 +26,8 @@ types:
   dt_navmesh_params:
     doc: |
       Configuration parameters used to define multi-tile navigation meshes.
-      The values are used to allocate space during the initialization of a navigation mesh.
+      The values are used to allocate space during the initialization of a navigation
+      mesh.
     seq:
       - id: orig
         type: float3
@@ -95,7 +96,9 @@ types:
         doc: The number of sub-meshes in the detail mesh.
       - id: detail_vert_count
         type: s4
-        doc: The number of unique vertices in the detail mesh. (In addition to the polygon vertices.)
+        doc: |
+          The number of unique vertices in the detail mesh. (In addition to the polygon
+          vertices.)
       - id: detail_tri_count
         type: s4
         doc: The number of triangles in the detail mesh.
@@ -208,7 +211,8 @@ types:
   dt_off_mesh_connection:
     doc: |
       Defines an navigation mesh off-mesh connection within a dtMeshTile object.
-      An off-mesh connection is a user defined traversable connection made up to two vertices.
+      An off-mesh connection is a user defined traversable connection made up to two
+      vertices.
     seq:
       - id: pos
         type: float3
@@ -229,7 +233,9 @@ types:
         doc: End point side.
       - id: user_id
         type: u4
-        doc: The id of the offmesh connection. (User assigned when the navigation mesh is built.)
+        doc: |
+          The id of the offmesh connection. (User assigned when the navigation mesh is
+          built.)
   dt_mesh_tile:
     seq:
       - id: header
@@ -264,7 +270,9 @@ types:
         type: u1
         repeat: expr
         repeat-expr: header.detail_tri_count * 4
-        doc: The detail mesh's triangles. [(vertA, vertB, vertC, triFlags) * dtMeshHeader::detailTriCount].
+        doc: |
+          The detail mesh's triangles. [(vertA, vertB, vertC, triFlags) *
+          dtMeshHeader::detailTriCount].
       - id: bv_tree
         type: dt_bv_node
         repeat: expr

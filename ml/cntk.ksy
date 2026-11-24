@@ -9,8 +9,11 @@ meta:
   endian: le
 
 doc: |
-  A native CNTK format for serialization of a computation graph. These graphs are usually used to store machine-learning models, like neural networks and gradient boosted decision trees ensembles.
-  The list of pretrained models is here: https://github.com/Microsoft/CNTK/blob/master/PretrainedModels/download_model.py
+  A native CNTK format for serialization of a computation graph. These graphs are
+  usually used to store machine-learning models, like neural networks and gradient
+  boosted decision trees ensembles.
+  The list of pretrained models is here:
+  https://github.com/Microsoft/CNTK/blob/master/PretrainedModels/download_model.py
   Only some of them have this format.
 
 doc-ref:

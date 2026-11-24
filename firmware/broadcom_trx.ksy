@@ -24,7 +24,8 @@ meta:
   CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 doc: |
-  .trx file format is widely used for distribution of firmware for Broadcom devices.
+  .trx file format is widely used for distribution of firmware for Broadcom
+  devices.
 
   Fundamentally, it is a header which list numerous partitions packaged inside
   a single .trx file.
@@ -65,7 +66,9 @@ seq:
 instances:
   max_partition_count:
     value: "3 + (version >= 2 ? 1 : 0)"
-    doc: Upper bound for count of partitions for this format version. Real count of partitions can be lower, if some partitions are not present.
+    doc: |
+      Upper bound for count of partitions for this format version. Real count of
+      partitions can be lower, if some partitions are not present.
   max_partition_idx:
     value: max_partition_count - 1
     doc: Upper bound for partition index for this format version.
@@ -88,7 +91,9 @@ types:
       - id: jamcrc32
         -orig-id: crc32
         type: u4
-        doc: JAMCRC - bitwise not of CRC. In Python you can get it as `~zlib.crc32(p.header.crc_material) & 0xffff_ffff`
+        doc: |
+          JAMCRC - bitwise not of CRC. In Python you can get it as
+          `~zlib.crc32(p.header.crc_material) & 0xffff_ffff`
   partition:
     params:
       - id: idx
@@ -121,7 +126,9 @@ types:
         3: some_header
 
   flags:
-    doc: "the names of these flags will probably be changed: the names of Broadcom ones are a bit unclear"
+    doc: |
+      the names of these flags will probably be changed: the names of Broadcom ones
+      are a bit unclear
     seq:
       - id: unkn1
         type: b1

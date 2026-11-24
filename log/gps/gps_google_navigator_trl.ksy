@@ -6,8 +6,7 @@ meta:
   license: GPL-2.0-or-later
   endian: le
 
-doc: |
-  File format to save logs used in old Google Navigator
+doc: File format to save logs used in old Google Navigator
 
 doc-ref:
   - https://www.gpsbabel.org/htmldoc-development/fmt_gnav_trl.html

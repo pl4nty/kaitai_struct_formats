@@ -25,8 +25,7 @@ instances:
     type: 'record_checksum_iter(_index, _index == 0 ? 0 : record_checksum_reduction[_index - 1].res)'
     repeat: expr
     repeat-expr: _root.header.record_in_use.size
-    doc: |
-      Expression used in calculating `expected_record_checksum.`
+    doc: Expression used in calculating `expected_record_checksum.`
   record_checksum:
     value: record_checksum_reduction[_root.header.record_in_use.size - 1].res
     doc: |
@@ -95,11 +94,9 @@ types:
           checksum.
       - id: prev
         type: u2
-        doc: |
-          The sum of the values of all previous (lower) indexes.
+        doc: The sum of the values of all previous (lower) indexes.
     instances:
       res:
         value: |
           prev + (_root.header.record_in_use[idx].to_i << (7 - (idx % 8)))
-        doc: |
-          Add one additional checksum byte from the given `record_in_use` bit.
+        doc: Add one additional checksum byte from the given `record_in_use` bit.

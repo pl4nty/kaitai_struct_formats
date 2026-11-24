@@ -32,13 +32,15 @@ meta:
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 doc: |
-  .trx file format is widely used for distribution of firmware updates of ASUS routers.
+  .trx file format is widely used for distribution of firmware updates of ASUS
+  routers.
 
   Fundamentally, it includes a footer which acts as a safeguard
   against installing a firmware package on a wrong hardware model or
   version. If it is broadcom-based, it also may contain this header.
 
-  trx files not necessarily contain all these headers. There are some files with `trx` extensions neither containing the header, nor the footer.
+  trx files not necessarily contain all these headers. There are some files with
+  `trx` extensions neither containing the header, nor the footer.
 
   Sample files:
     https://github.com/wl500g/wl500g/releases
@@ -62,7 +64,9 @@ instances:
   header:
     pos: 0
     type: broadcom_trx
-    doc: this may be present, or may not. The images will still have `trx` extension even if they are not ASUS trx.
+    doc: |
+      this may be present, or may not. The images will still have `trx` extension even
+      if they are not ASUS trx.
   footer:
     pos: _io.size - sizeof<footer>
     type: footer

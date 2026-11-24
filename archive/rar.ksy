@@ -64,7 +64,7 @@ types:
           - 'Rar!'
           - 0x1a
           - 0x07
-        doc: "Fixed part of file's magic signature that doesn't change with RAR version"
+        doc: Fixed part of file's magic signature that doesn't change with RAR version
       - id: version
         type: u1
         enum: version
@@ -131,7 +131,9 @@ types:
         doc: Date and time in standard MS DOS format
       - id: rar_version
         type: u1
-        doc: RAR version needed to extract file (Version number is encoded as 10 * Major version + minor version.)
+        doc: |
+          RAR version needed to extract file (Version number is encoded as 10 * Major
+          version + minor version.)
       - id: method
         type: u1
         enum: method_v4
@@ -166,9 +168,11 @@ types:
         # `header.content.specific.as<file_or_service>.file_name == "QO"`
         if: header.content.flags.has_data
         doc: |
-          Block payload. Content is dependent on the type of block (`header.content.block_type`):
+          Block payload. Content is dependent on the type of block
+          (`header.content.block_type`):
 
-          - `file` records: compressed file data. If file is uncompressed, that is just a file data
+          - `file` records: compressed file data. If file is uncompressed, that is just a
+            file data
           - `service` records:
             - `ACL`: access control lists of the file/folder from the previous block
             - `CMT`: null-terminated string with an archive comment

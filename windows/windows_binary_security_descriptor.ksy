@@ -176,7 +176,8 @@ types:
       - id: flags
         size: 2
         doc: |
-          Documentation says that this is an access mask, but there is no documentation about the different flags
+          Documentation says that this is an access mask, but there is no documentation
+          about the different flags
         doc-ref: https://docs.microsoft.com/en-us/windows/win32/secauthz/access-mask
   access_mask_standard_rights:
     seq:

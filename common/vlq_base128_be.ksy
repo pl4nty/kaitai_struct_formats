@@ -46,7 +46,8 @@ types:
   group:
     -webide-representation: '{value}'
     doc: |
-      One byte group, clearly divided into 7-bit "value" chunk and 1-bit "continuation" flag.
+      One byte group, clearly divided into 7-bit "value" chunk and 1-bit
+      "continuation" flag.
     seq:
       - id: has_next
         type: b1

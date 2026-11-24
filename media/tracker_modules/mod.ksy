@@ -38,20 +38,27 @@ seq:
     type: u1
     valid:
       eq: 127
-    doc: Well... this little byte here is set to 127, so that old trackers will search through all patterns when loading. Noisetracker uses this byte for restart, but we don't. Protracker uses 0x7F.
+    doc: |
+      Well... this little byte here is set to 127, so that old trackers will search
+      through all patterns when loading. Noisetracker uses this byte for restart, but
+      we don't. Protracker uses 0x7F.
   - id: song_positions
     type: pattern_index
     repeat: expr
     repeat-expr: 128
-    doc: Each hold a number from 0-63 that tells the tracker what pattern to play at that position.
+    doc: |
+      Each hold a number from 0-63 that tells the tracker what pattern to play at that
+      position.
   - id: application_id_string
     type: application_id_string
-    doc: "For the description see application_id type"
+    doc: For the description see application_id type
   - id: patterns
     type: pattern
     repeat: expr
     repeat-expr: song_positions.last.index
-    doc: Number of patterns stored is equal to the highest pattern_number in the song position table (at offset 952-1079).
+    doc: |
+      Number of patterns stored is equal to the highest pattern_number in the song
+      position table (at offset 952-1079).
 
 instances:
   application_id_31_pos:
@@ -87,7 +94,7 @@ types:
         size: 4
         type: str
         encoding: ASCII
-        doc: "For the description see application_id type"
+        doc: For the description see application_id type
   application_id:
     doc: |
       The four letters (in regex format)
@@ -180,7 +187,9 @@ types:
         doc: From 0 to 64.
       - id: repeat_point
         type: u2
-        doc:  Stored as number of words offset from start of sample. Multiply by two to get offset in bytes.
+        doc:  |
+          Stored as number of words offset from start of sample. Multiply by two to get
+          offset in bytes.
       - id: repeat_length
         type: u2
         doc:  Stored as number of words in loop. Multiply by two to get replen in bytes.

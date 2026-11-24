@@ -178,10 +178,14 @@ types:
         doc: Default page cache size.
       - id: largest_root_page
         type: u4
-        doc: The page number of the largest root b-tree page when in auto-vacuum or incremental-vacuum modes, or zero otherwise.
+        doc: |
+          The page number of the largest root b-tree page when in auto-vacuum or
+          incremental-vacuum modes, or zero otherwise.
       - id: text_encoding
         type: u4
-        doc: The database text encoding. A value of 1 means UTF-8. A value of 2 means UTF-16le. A value of 3 means UTF-16be.
+        doc: |
+          The database text encoding. A value of 1 means UTF-8. A value of 2 means
+          UTF-16le. A value of 3 means UTF-16be.
       - id: user_version
         type: u4
         doc: The "user version" as read and set by the user_version pragma.
@@ -206,13 +210,19 @@ types:
         doc: The "usable size" of a database page
       overflow_min_payload_size:
         value: ((usable_size-12)*32/255)-23
-        doc: The minimum amount of payload that must be stored on the btree page before spilling is allowed
+        doc: |
+          The minimum amount of payload that must be stored on the btree page before
+          spilling is allowed
       table_max_overflow_payload_size:
         value: usable_size - 35
-        doc: The maximum amount of payload that can be stored directly on the b-tree page without spilling onto an overflow page. Value for table page
+        doc: |
+          The maximum amount of payload that can be stored directly on the b-tree page
+          without spilling onto an overflow page. Value for table page
       index_max_overflow_payload_size:
         value: ((usable_size-12)*64/255)-23
-        doc: The maximum amount of payload that can be stored directly on the b-tree page without spilling onto an overflow page. Value for index page
+        doc: |
+          The maximum amount of payload that can be stored directly on the b-tree page
+          without spilling onto an overflow page. Value for index page
       idx_lock_byte_page:
         value: '1073741824 / page_size'
       num_ptrmap_entries_max:
@@ -229,11 +239,15 @@ types:
         doc: The index (0-based) of the last ptrmap page (inclusive)
   lock_byte_page:
     doc: |
-      The lock-byte page is the single page of the database file that contains the bytes at offsets between
-      1073741824 and 1073742335, inclusive. A database file that is less than or equal to 1073741824 bytes
-      in size contains no lock-byte page. A database file larger than 1073741824 contains exactly one
+      The lock-byte page is the single page of the database file that contains the
+      bytes at offsets between
+      1073741824 and 1073742335, inclusive. A database file that is less than or equal
+      to 1073741824 bytes
+      in size contains no lock-byte page. A database file larger than 1073741824
+      contains exactly one
       lock-byte page.
-      The lock-byte page is set aside for use by the operating-system specific VFS implementation in implementing
+      The lock-byte page is set aside for use by the operating-system specific VFS
+      implementation in implementing
       the database file locking primitives. SQLite does not use the lock-byte page.
     params:
       - id: page_number
@@ -363,14 +377,17 @@ types:
         enum: btree_page_type
       - id: first_freeblock
         type: u2
-        doc: The start of the first freeblock on the page, or is zero if there are no freeblocks.
+        doc: |
+          The start of the first freeblock on the page, or is zero if there are no
+          freeblocks.
       - id: num_cells
         type: u2
         doc: The number of cells on the page
       - id: ofs_cell_content_area_raw
         type: u2
         doc: |
-          The start of the cell content area. A zero value for this integer is interpreted as 65536.
+          The start of the cell content area. A zero value for this integer is interpreted
+          as 65536.
           The interpreted value is available as `cell_content_area`.
           The offset is relative to the current page.
       - id: num_frag_free_bytes
@@ -428,8 +445,7 @@ types:
           including any overflow
       - id: row_id
         type: vlq_base128_be
-        doc: |
-          integer key, a.k.a. "rowid"
+        doc: integer key, a.k.a. "rowid"
       - id: payload
         type:
           switch-on: '(payload_size.value > _root.header.table_max_overflow_payload_size ? 1 : 0)'

@@ -7,30 +7,29 @@ meta:
   license: CC0-1.0
   encoding: UTF-8
   endian: be
-doc: |
-  (No support for Auth-Name + Add-Name for simplicity)
+doc: (No support for Auth-Name + Add-Name for simplicity)
 seq:
   - id: transaction_id
     type: u2
-    doc: "ID to keep track of request/responses"
+    doc: ID to keep track of request/responses
   - id: flags
     type: packet_flags
   - id: qdcount
     type: u2
     if: flags.is_opcode_valid
-    doc: "How many questions are there"
+    doc: How many questions are there
   - id: ancount
     type: u2
     if: flags.is_opcode_valid
-    doc: "Number of resource records answering the question"
+    doc: Number of resource records answering the question
   - id: nscount
     type: u2
     if: flags.is_opcode_valid
-    doc: "Number of resource records pointing toward an authority"
+    doc: Number of resource records pointing toward an authority
   - id: arcount
     type: u2
     if: flags.is_opcode_valid
-    doc: "Number of resource records holding additional information"
+    doc: Number of resource records holding additional information
   - id: queries
     type: query
     repeat: expr
@@ -74,10 +73,10 @@ types:
         enum: class_type
       - id: ttl
         type: s4
-        doc: "Time to live (in seconds)"
+        doc: Time to live (in seconds)
       - id: rdlength
         type: u2
-        doc: "Length in octets of the following payload"
+        doc: Length in octets of the following payload
       - id: payload
         size: rdlength
         type:
@@ -98,12 +97,16 @@ types:
         type: label
         repeat: until
         repeat-until: "_.length == 0 or _.length >= 192"
-        doc: "Repeat until the length is 0 or it is a pointer (bit-hack to get around lack of OR operator)"
+        doc: |
+          Repeat until the length is 0 or it is a pointer (bit-hack to get around lack of
+          OR operator)
   label:
     seq:
       - id: length
         type: u1
-        doc: "RFC1035 4.1.4: If the first two bits are raised it's a pointer-offset to a previously defined name"
+        doc: |
+          RFC1035 4.1.4: If the first two bits are raised it's a pointer-offset to a
+          previously defined name
       - id: pointer
         type: pointer_struct
         if: "is_pointer"
@@ -111,7 +114,7 @@ types:
         size: length
         type: str
         if: "not is_pointer"
-        doc: "Otherwise its a string the length of the length value"
+        doc: Otherwise its a string the length of the length value
     instances:
       is_pointer:
         value: length >= 192
@@ -119,7 +122,7 @@ types:
     seq:
       - id: value
         type: u1
-        doc: "Read one byte, then offset to that position, read one domain-name and return"
+        doc: Read one byte, then offset to that position, read one domain-name and return
     instances:
       contents:
         io: _root._io

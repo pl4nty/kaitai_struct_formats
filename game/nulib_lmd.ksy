@@ -168,7 +168,9 @@ types:
             type: u4
           - id: bytecode
             size: len_bytecode
-            doc: 'This bytecode is for *AVM1*, not AVM2. Refer to projects such as OpenFlash for more info.'
+            doc: |
+              This bytecode is for *AVM1*, not AVM2. Refer to projects such as OpenFlash for
+              more info.
           - id: padding
             size: 4 - len_bytecode % 4
             type: nothing
@@ -218,7 +220,9 @@ types:
         type: u2
       - id: position_id
         type: u2
-        doc: 'This is conditionally a position id, transform id, or nothing (0xffff) depending on position_flags'
+        doc: |
+          This is conditionally a position id, transform id, or nothing (0xffff) depending
+          on position_flags
       - id: position_flags
         type: u2
         enum: position_flags
@@ -273,7 +277,7 @@ types:
         type: u4
       - id: num_children
         type: u4
-        doc: 'children directly follow this tag, they may be place/remove object or do_action'
+        doc: children directly follow this tag, they may be place/remove object or do_action
   frame_label:
     seq:
       - id: name_id
@@ -288,10 +292,10 @@ types:
         size: 8
       - id: num_frame_labels
         type: u4
-        doc: 'labels follow this tag, their respective index is the keyframe id'
+        doc: labels follow this tag, their respective index is the keyframe id
       - id: num_frames
         type: u4
-        doc: 'frames and keyframes may be mixed and come directly after this tag'
+        doc: frames and keyframes may be mixed and come directly after this tag
       - id: num_keyframes
         type: u4
       - id: unknown2
@@ -347,7 +351,7 @@ types:
         type: u4
       - id: num_graphics
         type: u4
-        doc: 'graphics are the following tags'
+        doc: graphics are the following tags
     instances:
       num_children:
         value: num_graphics

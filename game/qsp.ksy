@@ -6,8 +6,7 @@ meta:
   license: Unlicense
   encoding: UTF-16LE   # in fact "ucs-2le"
   endian: le
-doc: |
-  QSP is a player for text quests written in a QSP language.
+doc: QSP is a player for text quests written in a QSP language.
 
 doc-ref:
   - https://github.com/QSPFoundation/qsp/blob/master/help/gam_desc.txt
@@ -91,7 +90,9 @@ types:
         type: str
   rot5_str:
     -orig-id: $$кодированная строка   # "encoded string", in Russian
-    doc: According to the official docs it allows to put multiple lines into a single line.
+    doc: |
+      According to the official docs it allows to put multiple lines into a single
+      line.
     seq:
       - id: placeholder
         type: string_placeholder
