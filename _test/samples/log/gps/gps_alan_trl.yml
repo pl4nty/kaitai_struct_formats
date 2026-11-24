@@ -1,0 +1,12 @@
+# GPSBabel test file. Expects from reference/alantrl.gpx, GPSBabel's conversion of this file
+# (testo.d/alantrl.test): tracks FH-DRIVE, 30-12-05, 1-1-06, 2-1-06 with 45, 250, 282, 27 points.
+samples:
+  - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/f0f20ea4db9b71238ceb72c4838024699181d657/reference/alantrl.trl
+    sha256: 766ec5d59c53e0b6ef64874c40641aefc44d787852c84c87449ef9cf84c4874b
+    source: gpsbabel/gpsbabel f0f20ea4db9b reference/alantrl.trl
+    expect:
+      loghdr.trkhdr[0].name: FH-DRIVE
+      loghdr.trkhdr[0].totalpt: 45
+      loghdr.trkhdr[1].totalpt: 250
+      loghdr.trkhdr[2].totalpt: 282
+      loghdr.trkhdr[3].totalpt: 27

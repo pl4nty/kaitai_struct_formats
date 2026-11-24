@@ -1,0 +1,15 @@
+# Intel microcode for CPUID 06-8e-09. Expects from a hex read against the Intel SDM
+# microcode update header: header version 1, revision 0xf6, signature 0x806e9, platform flags
+# 0x10, total size 0x1a000, so the 0x34000-byte file holds two updates.
+samples:
+  - url: https://raw.githubusercontent.com/intel/Intel-Linux-Processor-Microcode-Data-Files/d71fe4e2f0f70a49ebbac7f2c7e915f181361974/intel-ucode/06-8e-09
+    sha256: d8c8e053e21bcf29499345b597e665d8709f86ac27dd17807bbb239e85cacc58
+    source: intel/Intel-Linux-Processor-Microcode-Data-Files d71fe4e2f0f7 intel-ucode/06-8e-09
+    license: LicenseRef-Intel-microcode (redistributable binary)
+    eof: true
+    expect:
+      len(updates): 2
+      updates[0].header.header_version: 1
+      updates[0].header.update_revision: 0xf6
+      updates[0].header.processor_flags: 0x10
+      updates[0].header.loader_revision: 1

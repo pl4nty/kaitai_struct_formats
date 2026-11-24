@@ -1,0 +1,8 @@
+# GPSBabel test file. Expect from a hex read of the waypoint header (holux.h WPTHDR: 4-byte id,
+# u2 number of waypoints = 0x61).
+samples:
+  - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/3054af94a308f2fafdac7e2f2862ea0f6b335666/reference/paris.wpo
+    sha256: a9902f76182544dcf5de90c358fa6e467677d28f3e97d76d4820749e0ed4d47d
+    source: gpsbabel/gpsbabel 3054af94a308 (tag gpsbabel_1_8_0) reference/paris.wpo
+    expect:
+      waypoint_header.num_waypoints: 97

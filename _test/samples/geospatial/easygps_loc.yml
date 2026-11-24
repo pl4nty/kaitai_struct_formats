@@ -1,0 +1,11 @@
+# GPSBabel test file. Expects from a hex read: the "TerraByte Location File" header, then nine
+# 'W' (0x57) waypoint records and the terminating 0x00 (easygps.cc).
+samples:
+  - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/e1e195beca8e0f24ca0e41c02d1986af13865cd0/reference/easygps.loc
+    sha256: 92a1927d9dfa3a4fb61b202c2923e666e8f0487e8c766365c51d4f4bda84e507
+    source: gpsbabel/gpsbabel e1e195beca8e reference/easygps.loc
+    eof: true
+    expect:
+      len(records): 10
+      records[0].marker: 0x57
+      records[9].marker: 0

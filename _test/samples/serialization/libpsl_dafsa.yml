@@ -1,0 +1,20 @@
+# Debian publicsuffix package (snapshot.debian.org), /usr/share/publicsuffix/public_suffix_list.dafsa.
+# The .deb is an ar archive; data.tar.xz is the member at offset 1068 (329208 bytes). Expects from
+# a hex read: header ".DAFSA@PSL_0   \n" and a last byte 0x01 (UTF-8 mode, psl-make-dafsa).
+samples:
+  - url: https://snapshot.debian.org/archive/debian/20261008T203843Z/pool/main/p/publicsuffix/publicsuffix_20261007.0728-1_all.deb
+    sha256: 6f4877a1783020aa2373b21446dac6e4e5247909f5f78119e2b1396ea1a4e1e8
+    name: public_suffix_list.dafsa
+    source: Debian publicsuffix 20261007.0728-1 (sha256 of the extracted file 6e64700dfbd2af08effb39da1dd56a20bfad11073afc3d31e3e8477d2c2bf49d)
+    license: MPL-2.0
+    extract:
+      format: slice
+      offset: 1068
+      size: 329208
+      then:
+        format: xz
+        then: { format: tar, member: ./usr/share/publicsuffix/public_suffix_list.dafsa }
+    expect:
+      version: '0'
+      last_byte: 1
+      is_utf8_mode: true

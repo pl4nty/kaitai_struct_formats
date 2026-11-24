@@ -1,0 +1,17 @@
+# rive-runtime unit test assets. Expects from a hex read against runtime_header.hpp: "RIVE",
+# varuint major 7, minor 0, file id (ce 81 01 = 16590), first property key (ee 03 = 494).
+samples:
+  - url: https://raw.githubusercontent.com/rive-app/rive-runtime/07428ca90b68ca07c79d24016a32153043150a7d/tests/unit_tests/assets/ball_test.riv
+    sha256: 7754e2d48ed666e09324cd4744cd6e27d1d65573feb077e71be1e8b3a3381a69
+    source: rive-app/rive-runtime 07428ca90b68 tests/unit_tests/assets/ball_test.riv
+    expect:
+      major_version.value: 7
+      minor_version.value: 0
+      file_id.value: 16590
+      property_keys[0].value: 494
+  - url: https://raw.githubusercontent.com/rive-app/rive-runtime/07428ca90b68ca07c79d24016a32153043150a7d/tests/unit_tests/assets/align_target.riv
+    sha256: 813c851057941da57027e32a323c987f554b485e1760c1ea0d8d4e49004634c9
+    source: rive-app/rive-runtime 07428ca90b68 tests/unit_tests/assets/align_target.riv
+    expect:
+      major_version.value: 7
+      minor_version.value: 0

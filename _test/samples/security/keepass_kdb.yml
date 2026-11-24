@@ -1,0 +1,24 @@
+# KeePassXC KeePass 1 test databases. Expects from a hex read against KeePass1.h: signatures
+# 0x9AA2D903 0xB54BFB65, flags 3 (SHA-2 + Rijndael) / 9 (SHA-2 + Twofish), version 0x00030002,
+# group/entry counts at 0x30/0x34 (6/7 and 1/2), 713 key transform rounds at 0x78.
+samples:
+  - url: https://raw.githubusercontent.com/keepassxreboot/keepassxc/cd42236540c1cfca332c0f051d981acfdacf7b4e/tests/data/basic.kdb
+    sha256: b406807c0b2f6de59dbc89b70e93d40a383d3de5764cc0af7452f96756ef6930
+    source: keepassxreboot/keepassxc cd42236540c1 tests/data/basic.kdb
+    license: GPL-2.0-or-later
+    eof: true
+    expect:
+      header.flags: 3
+      header.version: 0x00030002
+      header.num_groups: 6
+      header.num_entries: 7
+      header.transform_rounds: 713
+  - url: https://raw.githubusercontent.com/keepassxreboot/keepassxc/cd42236540c1cfca332c0f051d981acfdacf7b4e/tests/data/Twofish.kdb
+    sha256: fe9dc088eb25865df6979c993a2c198ebc4cedaa493c2afb446622d2e0cbcdea
+    source: keepassxreboot/keepassxc cd42236540c1 tests/data/Twofish.kdb
+    license: GPL-2.0-or-later
+    eof: true
+    expect:
+      header.flags: 9
+      header.num_groups: 1
+      header.num_entries: 2

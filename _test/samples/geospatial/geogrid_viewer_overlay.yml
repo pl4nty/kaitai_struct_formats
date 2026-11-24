@@ -1,0 +1,22 @@
+# GPSBabel test files. Expects from reference/ggv_bin-sample-v2.gpx and -v3.gpx, GPSBabel's
+# own conversion of these files (testo.d/ggv_bin.test): v2 has one 16-point area, v3 a
+# 15-point line starting at 51.416622730,7.634582135.
+samples:
+  - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/e1e195beca8e0f24ca0e41c02d1986af13865cd0/reference/ggv_bin-sample-v2.ovl
+    sha256: 7bda7d18b70c8c8c67bb5000bbad1d76cfef321d8026a90e7840185a1fd4284a
+    source: gpsbabel/gpsbabel e1e195beca8e reference/ggv_bin-sample-v2.ovl
+    eof: true
+    expect:
+      magic: 'DOMGVCRD Ovlfile V2.0:'
+      body.entries[2].body.num_points: 16
+      abs(body.entries[2].body.points[0].lat - 48.270464676) < 0.0000001: true
+      abs(body.entries[2].body.points[0].lon - 11.126680138) < 0.0000001: true
+  - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/e1e195beca8e0f24ca0e41c02d1986af13865cd0/reference/ggv_bin-sample-v3.ovl
+    sha256: 01ddc1a30e726b95116f1184445eb2debcf132a2de13ea95118d1b710e79280f
+    source: gpsbabel/gpsbabel e1e195beca8e reference/ggv_bin-sample-v3.ovl
+    eof: true
+    expect:
+      magic: 'DOMGVCRD Ovlfile V3.0:'
+      body.sections[0].records[4].body.num_points: 15
+      abs(body.sections[0].records[4].body.points[0].lat - 51.416622730) < 0.0000001: true
+      abs(body.sections[0].records[4].body.points[0].lon - 7.634582135) < 0.0000001: true

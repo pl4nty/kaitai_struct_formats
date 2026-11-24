@@ -1,0 +1,24 @@
+# mapsforge map-reader test files. Expects for file_header/output.map from MapFileFileHeaderTest.java
+# at the same commit (bounding box 0.1/0.2/0.3/0.4 in microdegrees, file size 709, version 3, date,
+# Mercator, tile size 256, start zoom 16, language en).
+samples:
+  - url: https://raw.githubusercontent.com/mapsforge/mapsforge/f136dce0d3c02f25cf50fb79001d31db7fb08b21/mapsforge-map-reader/src/test/resources/file_header/output.map
+    name: file_header.map
+    sha256: 36ce826499ee21568246955ea701d4b22765e1c4b5f7f7bd46bae38ff743019c
+    source: mapsforge/mapsforge f136dce0d3c0 mapsforge-map-reader/src/test/resources/file_header/output.map
+    expect:
+      header.file_version: 3
+      header.file_size: 709
+      header.date_of_creation: 1335871456973
+      header.min_lat: 100000
+      header.max_lon: 400000
+      header.tile_size: 256
+      header.projection.value: Mercator
+      header.start_zoom_level: 16
+      header.languages_preference.value: en
+  - url: https://raw.githubusercontent.com/mapsforge/mapsforge/f136dce0d3c02f25cf50fb79001d31db7fb08b21/mapsforge-map-reader/src/test/resources/with_data/output.map
+    name: with_data.map
+    sha256: 63fce6449bb400841b0bdc2b16137dd8b77c2cf7eed8c4c5d41393f752a30dae
+    source: mapsforge/mapsforge f136dce0d3c0 mapsforge-map-reader/src/test/resources/with_data/output.map
+    expect:
+      header.file_size: 2441

@@ -1,0 +1,20 @@
+# AMD microcode container files from linux-firmware. Expects from a hex read against
+# arch/x86/kernel/cpu/microcode/amd.c: magic 0x00414d44 ("DMA\0" on disk), equivalence table
+# type 0 and size 0x120 / 0x80.
+samples:
+  - url: https://raw.githubusercontent.com/endlessm/linux-firmware/15fadb6da305801f74233d07602d174e58c4a611/amd-ucode/microcode_amd.bin
+    sha256: 8a9d9e8b788e31e61cddc03cb1eeab5db99e0f667128943ff0780e6437d2e43e
+    source: endlessm/linux-firmware 15fadb6da305 amd-ucode/microcode_amd.bin
+    license: LicenseRef-AMD-microcode (redistributable binary)
+    eof: true
+    expect:
+      len(containers): 1
+      containers[0].equiv_table_type: 0
+      containers[0].len_equiv_table: 0x120
+  - url: https://raw.githubusercontent.com/endlessm/linux-firmware/15fadb6da305801f74233d07602d174e58c4a611/amd-ucode/microcode_amd_fam17h.bin
+    sha256: 966e4b796ec689c618868d08f8a37f347b0e7bfce4ae9df793e08471d363b7d0
+    source: endlessm/linux-firmware 15fadb6da305 amd-ucode/microcode_amd_fam17h.bin
+    license: LicenseRef-AMD-microcode (redistributable binary)
+    eof: true
+    expect:
+      containers[0].len_equiv_table: 0x80

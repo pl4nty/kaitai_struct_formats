@@ -1,0 +1,12 @@
+# Android bionic tzdata (tag android-4.4_r1). Expects from a hex read of the 24-byte header
+# (ZoneCompactor.java): "tzdata2013g\0", index at 0x18, data at 0x754c, zone.tab at 0x82500.
+samples:
+  - url: https://raw.githubusercontent.com/aosp-mirror/platform_bionic/8e39d2f9f403639195e430f81a47ad3940bd6975/libc/zoneinfo/tzdata
+    sha256: a8f0013295bd4df7b416201fbdca03ecfabe311ce47fb36b46ee0fc7509882b5
+    source: aosp-mirror/platform_bionic 8e39d2f9f403 libc/zoneinfo/tzdata
+    license: LicenseRef-Public-Domain
+    expect:
+      header.version: 2013g
+      header.ofs_index: 24
+      header.ofs_data: 30028
+      header.ofs_zone_tab: 533760

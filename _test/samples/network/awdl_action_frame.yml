@@ -1,0 +1,12 @@
+# AWDL master indication frame from awdl-frame-parser's test binaries. Expects from a hex read
+# against the OWL AWDL dissector layout: type 8, version 1.0 (0x10), subtype 3 (MIF), reserved 0.
+samples:
+  - url: https://raw.githubusercontent.com/Frostie314159/awdl-frame-parser/de6c54e1aef0d01a964628a44754f1c688f07ac6/test_bins/mif.bin
+    sha256: 4195e61e482240e8829894a9ec127d8803432b37dc53c63eb13c517f1a2acd6f
+    source: Frostie314159/awdl-frame-parser de6c54e1aef0 test_bins/mif.bin
+    eof: true
+    expect:
+      version.major: 1
+      version.minor: 0
+      subtype: mif
+      reserved: 0

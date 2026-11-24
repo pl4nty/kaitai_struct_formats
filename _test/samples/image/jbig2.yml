@@ -1,0 +1,14 @@
+# pdfbox-jbig2 test images. Expects from a hex read of the file header (ITU-T T.88 D.4.2): flags
+# 0x01 (sequential organisation, page count known).
+samples:
+  - url: https://raw.githubusercontent.com/apache/pdfbox-jbig2/2d62947a279423dfdadcd4ca2d894c55b4e665d9/src/test/resources/images/003.jb2
+    sha256: 78063bda11c340a5b903112679939e682b165e7323d71f31fa7866fca0697dc7
+    source: apache/pdfbox-jbig2 2d62947a2794 src/test/resources/images/003.jb2
+    expect:
+      file_header.is_sequential: true
+      file_header.num_pages_unknown: false
+  - url: https://raw.githubusercontent.com/apache/pdfbox-jbig2/2d62947a279423dfdadcd4ca2d894c55b4e665d9/src/test/resources/images/005.jb2
+    sha256: 465034f52c6354712f157958fd5b099f5ecc952d9e2d1700bb261e86e6cc4345
+    source: apache/pdfbox-jbig2 2d62947a2794 src/test/resources/images/005.jb2
+    expect:
+      file_header.is_sequential: true

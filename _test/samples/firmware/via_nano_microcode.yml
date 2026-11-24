@@ -1,0 +1,17 @@
+# VIA Nano microcode from coreboot/blobs. Expects from a hex read (cpu/via/nano/microcode.h dumps
+# the same words): "RRAS" signature at offsets 0, 3280, 4240, 4832, 7984, 8800 and 11936 (7
+# updates); first update: date word 0x010f07d9, fms 0x6f2, data size 0xca0, total size 0xcd0,
+# name "006F2P2E".
+samples:
+  - url: https://raw.githubusercontent.com/coreboot/blobs/b5e64d7cf4984dcf8e284c1878d943e88d53de5d/cpu/via/nano/microcode.bin
+    sha256: b6761e3fc7052e9182b260466ae43b9d8d63c983ed5903a90b13c237c8649192
+    source: coreboot/blobs b5e64d7cf498 cpu/via/nano/microcode.bin
+    license: LicenseRef-VIA-microcode (redistributable, see microcode.h)
+    eof: true
+    expect:
+      len(updates): 7
+      updates[0].year: 2009
+      updates[0].applicable_fms: 0x6f2
+      updates[0].len_payload: 0xca0
+      updates[0].len_total: 0xcd0
+      updates[0].name: 006F2P2E

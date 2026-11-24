@@ -1,0 +1,20 @@
+# OpenAL Soft built-in HRTF data sets. Expects from a hex read against docs/hrtf.txt: magic
+# "MinPHR03" / "MinPHR01", sample rate 48000 / 44100 (u4 LE after the magic).
+samples:
+  - url: https://raw.githubusercontent.com/kcat/openal-soft/7691c238c8b80a223c27cabc99fd02e6a542217e/hrtf/Default%20HRTF.mhr
+    sha256: 40ed10f203488fdeca5f873bfd64f6fae232f4f7412ba07ae5e501ad882adf8c
+    name: Default HRTF.mhr
+    source: kcat/openal-soft 7691c238c8b8 hrtf/Default HRTF.mhr
+    license: LGPL-2.0-or-later
+    eof: true
+    expect:
+      magic: MinPHR03
+      sample_rate: 48000
+  - url: https://raw.githubusercontent.com/kcat/openal-soft/f903a7aa645c4f7a95914104d532ddd66c8ad232/hrtf/default-44100.mhr
+    sha256: 2f917d69111fb81187772b2d5e01b177c2243c18b0a0b2b3dd4a7c7e362a4c62
+    source: kcat/openal-soft f903a7aa645c (tag openal-soft-1.19.0) hrtf/default-44100.mhr
+    license: LGPL-2.0-or-later
+    eof: true
+    expect:
+      magic: MinPHR01
+      sample_rate: 44100

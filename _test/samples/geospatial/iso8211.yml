@@ -1,0 +1,15 @@
+# GDAL S-57 test cell. Expects from a hex read of the 24-byte DDR leader ("01970", interchange
+# level 3, leader id L, field area at 00245) and from walking the 5-digit record lengths of the
+# leaders by hand: 71 records that end exactly at the 9362-byte file end.
+samples:
+  - url: https://raw.githubusercontent.com/OSGeo/gdal/6d7a6388745ef760b68d3ea460d700f4be5479c4/autotest/ogr/data/s57/1B5X02NE.000
+    sha256: ec45b93ffaf90d62f24ee698b867f549f9e566371a6236b783a96d343971a3dc
+    source: OSGeo/gdal 6d7a6388745e autotest/ogr/data/s57/1B5X02NE.000
+    license: MIT
+    eof: true
+    expect:
+      len(records): 71
+      records[0].leader.len_record_str: '01970'
+      records[0].leader.interchange_level: '3'
+      records[0].leader.leader_identifier: L
+      records[0].leader.ofs_field_area_str: '00245'

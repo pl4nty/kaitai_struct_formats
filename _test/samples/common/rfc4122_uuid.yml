@@ -1,0 +1,39 @@
+# UUID test vectors: RFC 9562 Appendix A.1 (v1), A.5 (v6), A.6 (v7) and the RFC 4122 Appendix C
+# DNS namespace UUID. Expects from CPython's uuid module (version, variant, clock_seq, time for
+# v1) and from the RFC text (the v6 timestamp equals the v1 one, 0x1EC9414C232AB00; the v7
+# unix_ts_ms is 0x017F22E279B0).
+samples:
+  - name: rfc9562-a1-v1
+    data: c232ab00941411ecb3c89f6bdeced846
+    source: RFC 9562 Appendix A.1, C232AB00-9414-11EC-B3C8-9F6BDECED846
+    eof: true
+    expect:
+      variant: rfc4122
+      version: 1
+      clock_seq: 0x33c8
+      timestamp_v1: 0x1ec9414c232ab00
+      node: 9f6bdeced846
+  - name: rfc9562-a5-v6
+    data: 1ec9414c232a6b00b3c89f6bdeced846
+    source: RFC 9562 Appendix A.5, 1EC9414C-232A-6B00-B3C8-9F6BDECED846
+    eof: true
+    expect:
+      version: 6
+      clock_seq: 0x33c8
+      timestamp_v6: 0x1ec9414c232ab00
+  - name: rfc9562-a6-v7
+    data: 017f22e279b07cc398c4dc0c0c07398f
+    source: RFC 9562 Appendix A.6, 017F22E2-79B0-7CC3-98C4-DC0C0C07398F
+    eof: true
+    expect:
+      variant: rfc4122
+      version: 7
+      unix_ts_ms_v7: 0x017f22e279b0
+  - name: rfc4122-namespace-dns
+    data: 6ba7b8109dad11d180b400c04fd430c8
+    source: RFC 4122 Appendix C, NameSpace_DNS 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+    eof: true
+    expect:
+      version: 1
+      clock_seq: 0xb4
+      timestamp_v1: 0x1d19dad6ba7b810

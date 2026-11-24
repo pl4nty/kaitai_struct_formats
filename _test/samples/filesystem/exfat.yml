@@ -1,0 +1,15 @@
+# exfatprogs fsck test image (tests/duplicated_name). Expects from a hex read of the boot sector
+# against the Microsoft exFAT specification 3.1.
+samples:
+  - url: https://raw.githubusercontent.com/exfatprogs/exfatprogs/e5f9b14500298b02b9d9daba0267a5ea48cac85a/tests/duplicated_name/exfat.img.tar.xz
+    sha256: 5fd6589545db4fb2599636568878b82a776657ad2527cc012c292a0620c8143e
+    source: exfatprogs/exfatprogs e5f9b1450029 tests/duplicated_name/exfat.img.tar.xz
+    extract: { format: xz, then: { format: tar, member: exfat.img } }
+    expect:
+      boot_sector.len_volume: 10240
+      boot_sector.ofs_fat: 256
+      boot_sector.ofs_cluster_heap: 512
+      boot_sector.num_clusters: 38
+      boot_sector.root_directory_cluster: 4
+      boot_sector.bytes_per_sector_shift: 9
+      boot_sector.sectors_per_cluster_shift: 8

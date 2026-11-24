@@ -1,0 +1,13 @@
+# unshield test data (InstallShield 5 header file from the CVE-2015-1386 regression test).
+# Expects from a hex read of the common header: "ISc(", version 0x01005201 (major version 5 by
+# unshield's ((version >> 12) & 0xf) rule), cab descriptor at 0x200, 0x8f2 bytes long.
+samples:
+  - url: https://raw.githubusercontent.com/twogood/unshield/3914dffb32ad05ebcb3e7f64a033e69b59127f47/test/v5/CVE-2015-1386/data1.hdr
+    sha256: 6ed3cc2918dfb2611a112db5c88b40765c8ecdc661df40bc3c5fec0f176810c8
+    source: twogood/unshield 3914dffb32ad test/v5/CVE-2015-1386/data1.hdr
+    license: MIT
+    expect:
+      common_header.version: 0x01005201
+      major_version: 5
+      common_header.ofs_cab_descriptor: 0x200
+      common_header.len_cab_descriptor: 0x8f2
