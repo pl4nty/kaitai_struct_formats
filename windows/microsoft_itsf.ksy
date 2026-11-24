@@ -72,26 +72,26 @@ seq:
     if: version >= 3
 instances:
   header_section0:
-    pos: header_sections[0].ofs
-    size: header_sections[0].len
+    pos: header_sections[0].ofs_body
+    size: header_sections[0].len_body
     type: header_section0
   directory:
-    pos: header_sections[1].ofs
+    pos: header_sections[1].ofs_body
     type: directory
   ofs_content_section0:
     value: |
       version >= 3
         ? ofs_content_section0_v3
-        : header_sections[1].ofs + directory.header.len_header + directory.header.len_chunk * directory.header.num_chunks
+        : header_sections[1].ofs_body + directory.header.len_header + directory.header.len_chunk * directory.header.num_chunks
     doc: |
       Absolute offset of content section 0; offsets of files in section 0 are relative
       to it.
 types:
   header_section_entry:
     seq:
-      - id: ofs
+      - id: ofs_body
         type: u8
-      - id: len
+      - id: len_body
         type: u8
   header_section0:
     seq:
