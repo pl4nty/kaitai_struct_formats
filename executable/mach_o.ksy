@@ -1205,6 +1205,7 @@ types:
           team_id:
             pos: team_id_offset - 8
             type: strz
+            if: version >= 0x20200 and team_id_offset != 0
             encoding: utf-8
             -webide-parse-mode: eager
           hashes:
