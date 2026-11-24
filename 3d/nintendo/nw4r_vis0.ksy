@@ -8,20 +8,17 @@ meta:
     - /archive/nintendo/nw4r_brres_sub_header
   endian: be
 doc: |
-  Visibility animation: per named scene-graph node (matched by name
-  against a sibling MDL0's bones or objects), stores either a constant
-  visible/hidden flag or a bit per animation frame, per lib-vis0.h.
-  BrawlBox/BrawlCrate call this `VIS0`; on Tockdom it is documented as
-  the format behind effects like blinking eyes, toggled damage decals,
-  and multi-costume models that swap visible parts in and out rather
-  than changing geometry. Because each stored value is a single bit, a
-  VIS0 entry's per-frame data is far more compact than CHR0/SRT0/CLR0
-  tracks -- it is a bitstream, not a float array.
+  Visibility animation: per named scene-graph node (matched by name against
+  a sibling MDL0's bones or objects), stores either a constant
+  visible/hidden flag or a bit per animation frame. BrawlBox/BrawlCrate call
+  this `VIS0`; on Tockdom it is documented as the format behind effects like
+  blinking eyes, toggled damage decals, and multi-costume models that swap
+  visible parts in and out rather than changing geometry. Because each
+  stored value is a single bit, a VIS0 entry's per-frame data is far more
+  compact than CHR0/SRT0/CLR0 tracks -- it is a bitstream, not a float
+  array.
 
-  Only the fixed top-level header is modeled here; the resource-group
-  entries (dummy root + N named entries, each an 8-byte or larger header
-  followed by the per-frame bit data when not constant) are variable-
-  length and not expanded -- see lib-vis0.h for the documented layout.
+  Only the fixed top-level header is modeled here.
 seq:
   - id: header
     type: nw4r_brres_sub_header

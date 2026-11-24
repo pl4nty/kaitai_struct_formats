@@ -7,8 +7,7 @@ meta:
   endian: le
 doc: |
   Little-endian block/reference table used by *Metroid Prime: Federation
-  Force* (3DS, Next Level Games), ported from nintoolbox's
-  `lib-fedforce.c` (`ScanFedForceDict`). Reimplemented from
+  Force* (3DS, Next Level Games). Reimplemented from
   KillzXGaming/Metroid-Fed-Force-Dumper, not copied.
 
   The identifier at offset 0 aliases `0x5824F3A9` in either byte order

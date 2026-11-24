@@ -1,7 +1,7 @@
 # Imported from https://gist.githubusercontent.com/Hugoberry/6a1db3c3b0bf554970a2895804b955b5/raw/3a2aecde8aca200fe6dfa4bd891743b31bca15b9/abf.ksy
 meta:
   id: ssas_abf
-  title: Spreadsheet Data Model File
+  title: SQL Server Analysis Services backup (.abf)
   license: LicenseRef-All-Rights-Reserved
   endian: le
 

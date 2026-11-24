@@ -10,14 +10,14 @@ doc: |
   by three independently addressed sections: big-endian control words, a
   two-byte back-reference table, and literal/extended-length bytes.
 
-  nintoolbox's decoder reads control bits most-significant-bit first. A set
-  bit consumes one literal byte from `chunk_data`; a clear bit consumes a
-  big-endian 16-bit link. The link's low 12 bits encode a backward distance
-  minus one. Its high nibble encodes a copy length minus two when non-zero;
-  when zero, the next chunk-data byte gives a copy length minus 18. Thus
-  ordinary matches cover lengths 3..17, extended matches 18..273, and all
-  match distances are 1..4096 bytes. Decoding stops exactly after producing
-  `uncompressed_size` bytes, not at end of any compressed section.
+  A set bit consumes one literal byte from `chunk_data`; a clear bit
+  consumes a big-endian 16-bit link. The link's low 12 bits encode a
+  backward distance minus one. Its high nibble encodes a copy length minus
+  two when non-zero; when zero, the next chunk-data byte gives a copy length
+  minus 18. Thus ordinary matches cover lengths 3..17, extended matches
+  18..273, and all match distances are 1..4096 bytes. Decoding stops exactly
+  after producing `uncompressed_size` bytes, not at end of any compressed
+  section.
 
   The offsets are trusted only after each read is bounds-checked: masks must
   be available in four-byte units, links in two-byte units, literal and

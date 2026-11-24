@@ -4,12 +4,7 @@ meta:
   title: Paper Mario (Switch) light probe.header
   license: LicenseRef-All-Rights-Reserved
   endian: le
-doc: |
-  "probe.header" light-probe binary from Paper Mario: The Origami King
-  / The Thousand-Year Door (Switch), ported from `pmprobe_t` and
-  IsPMProbe()/ScanPMProbe() in lib-papermario.h/.c (native port of
-  KillzXGaming/Paper-Mario-Tools' LightConverter ProbeHeader.cs).
-  Fixed 156-byte body plus 4 bytes per axis-texture entry.
+doc: Fixed 156-byte body plus 4 bytes per axis-texture entry.
 seq:
   - id: magic
     contents: [0x64, 0x00, 0x00, 0x00]

@@ -28,8 +28,8 @@ seq:
   - id: root_node_offset
     type: u4
     doc: |-
-      Absolute offset of node 0 (the root directory).  Nintendo archives use
-      0x20; nintoolbox may align this later to retain a padded header.
+      Absolute offset of node 0 (the root directory). Nintendo archives
+      use 0x20.
   - id: header_size
     type: u4
     doc: |-
@@ -45,9 +45,9 @@ seq:
   - id: reserved
     size: 16
     doc: |-
-      Initial reserved header area (offsets 0x10..0x1f).  If root_node_offset
-      is larger than 0x20, further bytes before the node table are likewise
-      header padding; nintoolbox fills added padding with 0xcc.
+      Initial reserved header area (offsets 0x10..0x1f). If
+      root_node_offset is larger than 0x20, further bytes before the
+      node table are likewise header padding.
 instances:
   root:
     pos: root_node_offset

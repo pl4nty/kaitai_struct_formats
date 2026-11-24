@@ -5,13 +5,12 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  A minimal flat archive container, as read by ScanNCCARC() in
-  lib-nccarc.c: an offset table of `n` little-endian 32-bit values
-  (the high bit of each is a per-entry flag), where `off[0]` equals
-  the table's own byte size and `off[n-1]` equals the file size;
-  member `i` spans `off[i] .. off[i+1]` bytes right after the table.
-  No text magic identifies the format; detection is purely structural
-  (monotonic offsets bounded by the file size).
+  A minimal flat archive container: an offset table of `n` little-endian
+  32-bit values (the high bit of each is a per-entry flag), where `off[0]`
+  equals the table's own byte size and `off[n-1]` equals the file size;
+  member `i` spans `off[i].. off[i+1]` bytes right after the table. No text
+  magic identifies the format; detection is purely structural (monotonic
+  offsets bounded by the file size).
 
   The first offset word is also the table byte length: it must be nonzero,
   divisible by four, and no greater than the file size. There must be
@@ -22,10 +21,8 @@ doc: |
   flag has no corresponding member. Equal adjacent offsets represent an
   empty member. There are no stored names or compression instructions.
 
-  The nintoolbox writer emits at most 65535 members, clears every flag,
-  and packs bodies consecutively after the offset table. It does not
-  preserve source flags. This writer limit is narrower than the reader's
-  0x3ffff-member maximum.
+  It does not preserve source flags. This writer limit is narrower than the
+  reader's 0x3ffff-member maximum.
 seq:
   - id: table_bytes
     type: u4

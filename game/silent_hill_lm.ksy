@@ -10,7 +10,8 @@ meta:
 doc: |
   LM is the generic 3D model format used in Silent Hill (PSX).
   It is used for ILM character skeletons, global PLM world map props, and
-  embedded in IPD world map chunks to store local props.
+  embedded in IPD world map chunks to store local props. `sh_ilm` covers
+  ILM files, which use this layout.
 
   The header contains a table of meshes, each with a name, ID, and offset to
   its body. Each body contains vertex and primitive data.

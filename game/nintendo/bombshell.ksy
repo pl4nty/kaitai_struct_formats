@@ -13,7 +13,7 @@ doc: |
   Wheels Velocity X, Pac-Man World Rally, Snoopy vs. the Red Baron and
   Bigfoot). Wii files are big-endian with 32-byte alignment; PC files are
   little-endian and unaligned -- this definition covers the (verified) Wii
-  layout, per lib-bombshell.h's header comment.
+  layout's header comment.
 
   A directory table of fixed 24-byte records precedes one "datapack" blob
   per directory, each holding its own sound and texture sub-tables.
@@ -57,9 +57,9 @@ types:
         type: datapack
   datapack:
     doc: |
-      Header is 192 bytes on Wii (188 on PC). Field offsets per
-      lib-bombshell.h: +4 sound bytes, +8 sound table words, +20 texture
-      count, +32 sound count, +108 word list length.
+      Header is 192 bytes on Wii (188 on PC). Field offsets: +4 sound
+      bytes, +8 sound table words, +20 texture count, +32 sound count,
+      +108 word list length.
     seq:
       - id: unknown0
         type: u4

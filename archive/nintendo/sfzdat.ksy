@@ -5,11 +5,10 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  "DAT\0" flat resource table, per lib-sfzdat.c. Names use a
-  fixed-stride array (a u32 stride followed by that many
-  fixed-width, NUL-padded records); when that does not fit the file,
-  the reference reader falls back to packed NUL-terminated strings.
-  Only the common strided case is modeled here.
+  "DAT\0" flat resource table. Names use a fixed-stride array (a u32 stride
+  followed by that many fixed-width, NUL-padded records); when that does not
+  fit the file, the reference reader falls back to packed NUL-terminated
+  strings. Only the common strided case is modeled here.
 seq:
   - id: magic
     contents: [0x44, 0x41, 0x54, 0x00]

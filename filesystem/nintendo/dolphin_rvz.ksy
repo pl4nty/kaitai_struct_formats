@@ -5,12 +5,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Dolphin's WIA/RVZ compressed disc image, per lib-rvz.c. Only
-  plain GameCube discs are supported by the reference decoder (Wii
-  partition hash reconstruction is not implemented), and only
-  Zstandard compression. Group/raw-data payload internals (junk-data
-  PRNG-packed segments) are not modeled here.
-  Spec: https://github.com/dolphin-emu/dolphin/blob/master/docs/WiaAndRvz.md
+  Dolphin's WIA/RVZ compressed disc image. Only plain GameCube discs are
+  supported by the reference decoder (Wii partition hash reconstruction is
+  not implemented), and only Zstandard compression. Group/raw-data payload
+  internals (junk-data PRNG-packed segments) are not modeled here. Spec:
+  https://github.com/dolphin-emu/dolphin/blob/master/docs/WiaAndRvz.md
 seq:
   - id: magic
     size: 4

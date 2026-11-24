@@ -11,13 +11,10 @@ doc: |
   of the Luminous Arc (USA) sample match an independent directory reader byte
   for byte.
 
-  nintoolbox validates the whole directory before exposing anything: the
-  `JTBL` word count must equal `(n * 2 + 3) & ~3`; chunks must be in order,
-  non-overlapping, at least 16 bytes long with `payload_size == length - 16`,
-  and the last must end exactly where the 16-byte `ENDT` footer begins. Each
-  chunk starts with a four-character tag (`nclr`, `ncbr`, ... in lowercase
-  becomes the extension; unsafe tags fall back to `.bin`) and a 16-byte wrapper
-  that nintoolbox strips.
+  Chunks must be in order, non-overlapping, at least 16 bytes long with
+  `payload_size == length - 16`, and the last must end exactly where the
+  16-byte `ENDT` footer begins. Each chunk starts with a four-character tag
+  (`nclr`, `ncbr`,... in lowercase becomes the extension.
 seq:
   - id: magic
     contents: 'MAIN'

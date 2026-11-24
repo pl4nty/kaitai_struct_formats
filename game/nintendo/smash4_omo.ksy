@@ -5,13 +5,12 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Super Smash Bros. 4 object-motion skeletal animation (.omo), per
-  lib-smashomo.c (ported from KillzXGaming/Smash-Forge OMO.cs). The
-  header is 32 bytes. Each bone node points to interpolation floats at
-  `inter_offset + inter_rel_offset`; its flag word determines the number
-  of floats. Frame keys are rows of big-endian 16-bit values at key_offset,
-  with frame_size bytes per row. The node's own key-offset word is printed
-  by the decoder but not used to locate those frame rows.
+  Super Smash Bros. 4 object-motion skeletal animation (.omo). The header is
+  32 bytes. Each bone node points to interpolation floats at `inter_offset +
+  inter_rel_offset`; its flag word determines the number of floats. Frame
+  keys are rows of big-endian 16-bit values at key_offset, with frame_size
+  bytes per row. The node's own key-offset word is printed by the decoder
+  but not used to locate those frame rows.
 
   Flags 0x01000000, 0x02000000, and 0x04000000 enable position, rotation,
   and scale respectively. Enabled position is constant (0x00200000,
@@ -22,12 +21,9 @@ doc: |
   floats) or interpolation flag 0x80 (six floats). Those groups appear
   consecutively as position, rotation, then scale in each node payload.
 
-  nintoolbox checks OMO magic, complete node and frame tables, an even
-  frame_size, recognized enabled-channel flag combinations, and every
-  node's computed interpolation span within EOF. It permits zero-sized
-  channel groups. The semantic mapping from per-frame u16 keys to bone
-  channels is not reconstructed by its text decoder; this schema exposes
-  the key words without inventing that mapping.
+  It permits zero-sized channel groups. The semantic mapping from per-frame
+  u16 keys to bone channels is not reconstructed by its text decoder; this
+  schema exposes the key words without inventing that mapping.
 seq:
   - id: magic
     contents: "OMO "

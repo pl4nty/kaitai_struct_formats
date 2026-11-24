@@ -13,14 +13,11 @@ doc: |
   the three 32-bit table offsets begin immediately at byte 8. There is
   no reserved header word between them.
 
-  There is no magic. nintoolbox identifies ATB structurally: bank count
-  at most 4096, pattern count at most 8192, texture count at most 2048,
-  and at least one of those three counts nonzero. A used table must fit
-  entirely and begin at or after byte 20; unused-table offsets may be
-  zero or another in-file offset. Every bank's frame table and pattern's
-  layer table must fit. Texture format must be at most 0x0c, width and
-  height at most 4096, and all declared palette/image byte ranges must
-  fit. The fourth count, num_references, is retained but not used to
+  A used table must fit entirely and begin at or after byte 20; unused-table
+  offsets may be zero or another in-file offset. Every bank's frame table
+  and pattern's layer table must fit. Texture format must be at most 0x0c,
+  width and height at most 4096, and all declared palette/image byte ranges
+  must fit. The fourth count, num_references, is retained but not used to
   locate any table by this reader.
 
   The writer lays out patterns and their layers first, then banks and

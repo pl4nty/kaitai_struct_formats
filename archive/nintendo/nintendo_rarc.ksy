@@ -5,9 +5,8 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Nintendo "RARC" directory archive, ported from `rarc_file_header_t`/
-  `rarc_header_t`/`rarc_node_t`/`rarc_entry_t` in lib-rarc.h.
-  Reference: http://hitmen.c02.at/files/yagcd/yagcd/chap15.html#sec15.3
+  Nintendo "RARC" directory archive. Reference:
+  http://hitmen.c02.at/files/yagcd/yagcd/chap15.html#sec15.3
 seq:
   - id: magic
     contents: "RARC"

@@ -5,15 +5,13 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Wario World resource container, per lib-wwrsc.h (re-implemented
-  from KillzXGaming/MdlConverter's GCNLibrary/WarioWorld). 0x20 bytes
-  of unknown header words followed by a 32-byte-aligned linked list of resources.
-  Per-resource-type model/animation/collision payloads are variable-
-  layout and not expanded here.
+  Wario World resource container. 0x20 bytes of unknown header words
+  followed by a 32-byte-aligned linked list of resources. Per-resource-type
+  model/animation/collision payloads are variable- layout and not expanded
+  here.
 
-  nintoolbox validates each node's type (0..32), payload range, and next
-  pointer. A non-final `next_offset` must move forward, remain within EOF, and
-  be 32-byte aligned; the final zero pointer is accepted only when its member
+  A non-final `next_offset` must move forward, remain within EOF, and be
+  32-byte aligned; the final zero pointer is accepted only when its member
   reaches within 64 bytes of EOF. The chain is capped at 100,000 resources.
 seq:
   - id: unknown_header

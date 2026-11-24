@@ -11,16 +11,11 @@ doc: |
   WAD but with the type tag `Is` (`ib` and `Bk` are the Wii variants).
 
   A 0x20-byte header is followed by the certificate chain, CRL, ticket, TMD,
-  content data and footer, each starting on a 0x40 boundary (the last need not
-  be padded). Content *i* is stored as AES-128-CBC with IV =
-  `{content index as big-endian u2, 14 zero bytes}`, padded to 16; the ticket
-  carries the title key wrapped by the DSi common key with IV =
-  `{title id, 8 zero bytes}`. The TMD content records hold the plain size and
-  SHA-1, which identifies the right common key (retail, debug, or the Wii
-  debug key) after the fact. nintoolbox follows WinterMute's twltool.
-
-  nintoolbox validates `tik_size >= 0x1f2` and `tmd_size >= 0x1e4`, and that every
-  section lies inside the file.
+  content data and footer, each starting on a 0x40 boundary (the last need
+  not be padded). Content *i* is stored as AES-128-CBC with IV = `{content
+  index as big-endian u2, 14 zero bytes}`, padded to 16; the ticket carries
+  the title key wrapped by the DSi common key with IV = `{title id, 8 zero
+  bytes}`.
 seq:
   - id: header_size
     type: u4

@@ -6,16 +6,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
 doc: |
   Wii U / Switch / 3DS Sound Archive ("FSAR"/"CSAR" magic; the RSAR/BRSAR
-  family's successor generation, a different byte format despite the
-  similar purpose). Layout follows the Citric Composer project's written
-  spec for the generic block-table container plus STRG (string table
-  and binary-trie name lookup); the INFO block's real Sound/Bank/Player/
-  WaveArchive/SoundGroup/Group/File directory has a documented but far
-  more involved per-record layout that this tool's own reader treats as
-  future work beyond the directory-location/basics covered here (see
-  lib-bfsar.h's scope note), so it is kept as a raw block below. The
-  FILE block is a plain payload pool addressed from INFO's File entries
-  by (pool-relative offset, size) and is likewise left opaque.
+  family's successor generation, a different byte format despite the similar
+  purpose). Layout follows the Citric Composer project's written spec for
+  the generic block-table container plus STRG (string table and binary-trie
+  name lookup). The FILE block is a plain payload pool addressed from INFO's
+  File entries by (pool-relative offset, size) and is likewise left opaque.
 seq:
   - id: magic
     size: 4
@@ -143,8 +138,8 @@ types:
           - id: ofs_string
             type: s4
             doc: |
-              Relative to the STRG block's own start, plus a fixed +24 this tool's reader
-              confirmed against real files.
+              Relative to the STRG block's own start, plus a fixed +24 (confirmed against real
+              files).
           - id: len_string
             type: u4
             doc: Includes the trailing NUL.

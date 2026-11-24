@@ -1,11 +1,15 @@
 # Imported from https://github.com/eybisi/misc/blob/a0bc329d335417da375fab330b36d7b3b0b36a2f/kaitai/luac.ksy
 meta:
-  id: luac
-  title: Lua bytecode (luac)
+  id: lua51_bytecode
+  title: Lua 5.1 bytecode
   file-extension: luac
   license: LicenseRef-All-Rights-Reserved
   endian: le
 
+doc: |
+  Precompiled Lua 5.1 chunk as written by `luac` (12-byte header with
+  version 0x51, then the top-level function prototype). See
+  `lua52_bytecode` for Lua 5.2 and `luajit_bytecode` for LuaJIT.
 seq:
   - id: file_header
     type: header

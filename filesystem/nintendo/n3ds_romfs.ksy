@@ -5,11 +5,10 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Nintendo 3DS RomFS archive (.romfs), per lib-romfs.c. An IVFC
-  hierarchical-hash container wrapping a Level 3 directory/file
-  metadata table. Directory/file metadata entry internals (name,
-  sibling/child links, hash-table chaining) are walked recursively
-  by RomFS_ReadDirectories() and are not modeled here.
+  Nintendo 3DS RomFS archive (.romfs). An IVFC hierarchical-hash container
+  wrapping a Level 3 directory/file metadata table. Directory/file metadata
+  entry internals (name, sibling/child links, hash-table chaining) are
+  walked recursively by RomFS_ReadDirectories() and are not modeled here.
 seq:
   - id: magic
     contents: "IVFC"

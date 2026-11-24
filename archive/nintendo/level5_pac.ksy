@@ -17,9 +17,6 @@ doc: |
   * `file_size == 0xffffffff` or `alloc_size == 0xffffffff` (sentinel record);
   * `header_length != 0x50` or `alloc_size == 0`;
   * the entry name is empty, or only padding is left.
-
-  The name field is NUL-terminated ASCII / Shift-JIS up to about 36 bytes,
-  followed by memory / tool scratch metadata that nintoolbox ignores.
 seq:
   - id: members
     type: member

@@ -6,11 +6,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Whole-file zlib stream (Gorilla Games' WiiWare titles). Once inflated,
-  a 0x14-byte header holds a data offset and the member count, followed
-  by one 0x28-byte entry (32-byte name, offset, size) per member. Entry
-  offsets are relative to `decompressed_size - data_off`, i.e. the start
-  of the data area. Ported from lib-gpkg.c's `ScanGPKG`/`CreateGPKG`.
+  Whole-file zlib stream (Gorilla Games' WiiWare titles). Once inflated, a
+  0x14-byte header holds a data offset and the member count, followed by one
+  0x28-byte entry (32-byte name, offset, size) per member. Entry offsets are
+  relative to `decompressed_size - data_off`, i.e. the start of the data
+  area.
 seq:
   - id: body
     size-eos: true
@@ -62,8 +62,8 @@ types:
       data_area_start:
         value: base_off
         doc: |-
-          First member-data byte.  nintoolbox's writer aligns this up from
-          entry_table_end to 0x20 and aligns each following member likewise.
+          First member-data byte, aligned up from entry_table_end to 0x20;
+          each following member is aligned likewise.
     types:
       entry:
         seq:

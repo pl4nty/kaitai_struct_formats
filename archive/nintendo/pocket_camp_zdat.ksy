@@ -5,10 +5,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Animal Crossing: Pocket Camp ".zdat" flat container, per
-  lib-zdat.c. Every payload is a Unity asset bundle XORed with one
-  repeated byte recoverable from its own "UnityFS" signature; the
-  XOR itself is not undone here.
+  Animal Crossing: Pocket Camp ".zdat" flat container. Every payload is a
+  Unity asset bundle XORed with one repeated byte recoverable from its own
+  "UnityFS" signature; the XOR itself is not undone here.
 seq:
   - id: magic
     contents: "ZDAT"

@@ -5,11 +5,10 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Sonic Team Storybook-series ".one" archive, as written by
-  CreateONEArchive() in lib-one.c. A fixed 16-byte header followed by
-  a flat table of 48-byte entries: 32 name bytes, a reserved 32-bit
-  word, absolute PRS-body offset, compressed size, and decompressed size.
-  Member data is Sonic Team's PRS-variant LZ stream, not decoded here.
+  Sonic Team Storybook-series ".one" archive. A fixed 16-byte header
+  followed by a flat table of 48-byte entries: 32 name bytes, a reserved
+  32-bit word, absolute PRS-body offset, compressed size, and decompressed
+  size. Member data is Sonic Team's PRS-variant LZ stream, not decoded here.
 
   The reader requires the table offset to be 16, a nonzero entry count,
   a data_start at or beyond the complete table, and marker 0 (Secret Rings)
@@ -35,10 +34,10 @@ doc: |
 seq:
   - id: num_entries
     type: u4
-    doc: Number of 48-byte descriptors; must be nonzero for nintoolbox.
+    doc: Number of 48-byte descriptors.
   - id: table_offset
     type: u4
-    doc: Absolute descriptor-table offset; nintoolbox requires 16.
+    doc: Absolute descriptor-table offset.
   - id: data_start
     type: u4
     doc: Earliest permitted payload offset; writer uses 16 + num_entries * 48.
@@ -63,7 +62,7 @@ types:
         doc: Member path; occupies all 32 bytes when not NUL-terminated.
       - id: reserved
         type: u4
-        doc: Unused by extractor; zero in nintoolbox-produced archives.
+        doc: Unused by extractor.
       - id: data_offset
         type: u4
         doc: Absolute offset of the PRS-compressed payload.

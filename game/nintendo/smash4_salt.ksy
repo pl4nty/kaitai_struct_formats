@@ -5,13 +5,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Super Smash Bros. 4 SALT parameter file (fighter_param.bin, stage
-  params), per lib-saltparam.h. Reference:
-  Sammi-Husky/Sm4sh-Tools SALT/Params/ParamFile.cs (MIT).
-  Values before the first group form a flat list; every group holds
-  `entry_count` entries of equal size (that equal-size invariant is
-  not itself checkable statically, so groups are parsed as a plain
-  repeated value stream here).
+  Super Smash Bros. 4 SALT parameter file (fighter_param.bin, stage params).
+  Reference: Sammi-Husky/Sm4sh-Tools SALT/Params/ParamFile.cs (MIT). Values
+  before the first group form a flat list; every group holds `entry_count`
+  entries of equal size (that equal-size invariant is not itself checkable
+  statically, so groups are parsed as a plain repeated value stream here).
 seq:
   - id: magic
     contents: [0xff, 0xff]

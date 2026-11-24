@@ -13,9 +13,7 @@ doc: |
   which in all 311 retail samples is a complete Ogg Vorbis stream starting at
   offset 126 and ending exactly at EOF.
 
-  The field list between `count` and the Ogg stream is not modelled; this
-  definition exposes the wrapper and the Ogg payload, found the way
-  nintoolbox finds it (the first `OggS` page).
+  The field list between `count` and the Ogg stream is not modelled.
 seq:
   - id: magic
     contents: 'NIBM'

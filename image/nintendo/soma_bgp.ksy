@@ -5,10 +5,7 @@ meta:
   file-extension: bgp
   license: LicenseRef-All-Rights-Reserved
   endian: le
-doc: |
-  `BGP1` 256x192 background tile map of Soma Bringer (23 files validated)
-  with a companion RGB555 palette. nintoolbox reads the header only; the
-  `data_offset` / `palette_size` fields locate the two payloads.
+doc: The `data_offset` / `palette_size` fields locate the two payloads.
 seq:
   - id: magic
     contents: 'BGP1'

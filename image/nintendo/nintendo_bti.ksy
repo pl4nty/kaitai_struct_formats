@@ -10,11 +10,7 @@ doc: |
   standalone (`.bti`) and embedded inside BMD/BDL models and other GC/Wii
   formats. Unlike NW4R's TEX0, a BTI can carry its own palette.
 
-  Field layout taken from `bti_header_t` in lib-image.h, whose own comment
-  attributes the unknown-field names to http://www.amnoid.de/gc/bti.txt.
-  `n_image` counts the base image plus mipmaps; `pal_off`/`data_off` are
-  both relative to the start of this header (offset 0), per lib-image.c's
-  `SaveBTI()`/`SetupPointerBTI()`.
+  `n_image` counts the base image plus mipmaps.
 seq:
   - id: iform
     type: u1

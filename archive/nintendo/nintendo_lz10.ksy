@@ -5,12 +5,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Standard Nintendo LZSS compression used across DS/Wii/3DS titles.
-  Ported from lib-lz10.c/.h (Wiimms SZS Tools): a 4-byte header of a
-  1-byte magic (0x10 for LZ10, 0x11 for LZ11) plus a 24-bit
-  little-endian decompressed size, followed by the forward LZSS token
-  stream. LZ11 extends LZ10's back-reference encoding with longer
-  match lengths/distances but shares this same header shape.
+  Standard Nintendo LZSS compression used across DS/Wii/3DS titles. LZ11
+  extends LZ10's back-reference encoding with longer match lengths/distances
+  but shares this same header shape.
 seq:
   - id: magic
     type: u1

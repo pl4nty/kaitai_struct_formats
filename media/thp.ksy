@@ -1,5 +1,5 @@
 # Imported from https://github.com/kenrinzero/palimpsest/blob/6d3d9a577e19ebd344da420ecda1aad594a5bc5c/formats/thp.ksy
-# Frame chain model from https://github.com/quatric/Wii-Kaitai/blob/HEAD/media/thp.ksy
+# Frame chain model from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/media/thp.ksy
 meta:
   id: thp
   title: Nintendo GameCube THP header and component table

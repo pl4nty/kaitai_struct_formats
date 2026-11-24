@@ -5,13 +5,12 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  NDS overlay compression, ported from lib-lzovl.c (split out of
-  Wiimms SZS Tools' lib-nintendo.c). Like BLZ (see `nintendo_blz`), this
-  carries no magic of its own: it is raw LZSS data whose
-  control/back-reference stream is written and decoded from the *end*
-  of the file backward, described by a small trailer at the very end.
-  The reference detector additionally requires callers to already know
-  the file is an ".ovl" (there is no structural magic to gate on).
+  NDS overlay compression. Like BLZ (see `nintendo_blz`), this carries no
+  magic of its own: it is raw LZSS data whose control/back-reference stream
+  is written and decoded from the *end* of the file backward, described by a
+  small trailer at the very end. The reference detector additionally
+  requires callers to already know the file is an ".ovl" (there is no
+  structural magic to gate on).
 
   Layout, all fields read from the tail of the file: last 4 bytes
   `inc_len` (0 => not compressed; the whole file, minus this 4-byte

@@ -1,7 +1,7 @@
 # Imported from https://github.com/remixer-dec/GameTranslationPipelines/blob/b145e6972ee8ae8ed121c0ea64ffa49fbf71a189/3DS/Sonic%20Lost%20World/TranslatorUI/USM.ksy
 meta:
   id: cri_usm
-  title: Sonic Lost World (3DS) USM stream with video, audio and text chunks
+  title: CRI Middleware USM video stream
   file-extension: usm
   license: LicenseRef-All-Rights-Reserved
   endian: le

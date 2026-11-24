@@ -9,26 +9,22 @@ meta:
   endian: be
 doc: |
   Vertex-morph ("shape") animation: blends between named vertex sets of a
-  polygon over time, per lib-shp.h. BrawlBox/BrawlCrate call this `SHP0`
-  and model it as one entry per *object* (not material -- shape animation
-  targets an MDL0 object's replacement vertex arrays, unlike SRT0/CLR0
-  which target materials by name), carrying one keyframe track per morph
-  target. Wexos's Toolbox and Tockdom's MDL0 documentation both note SHP0
-  is the rarest of the NW4R animation formats in retail Wii titles --
-  most games instead drive visual variation through CLR0/SRT0/VIS0, and
-  SHP0 shows up mainly where a model needs true per-vertex deformation
-  (e.g. squash-and-stretch or facial blend shapes) that a bone or texture
-  animation cannot express.
+  polygon over time. BrawlBox/BrawlCrate call this `SHP0` and model it as
+  one entry per *object* (not material -- shape animation targets an MDL0
+  object's replacement vertex arrays, unlike SRT0/CLR0 which target
+  materials by name), carrying one keyframe track per morph target. Wexos's
+  Toolbox and Tockdom's MDL0 documentation both note SHP0 is the rarest of
+  the NW4R animation formats in retail Wii titles -- most games instead
+  drive visual variation through CLR0/SRT0/VIS0, and SHP0 shows up mainly
+  where a model needs true per-vertex deformation (e.g. squash-and-stretch
+  or facial blend shapes) that a bone or texture animation cannot express.
 
   Each morph target is named by index into a file-level string list
   rather than carrying its own name inline, so a target's identity comes
   from position, not from a pooled-string offset next to its track --
   matching how the sibling MDL0 stores its vertex-set names.
 
-  Only the fixed top-level header is modeled here; entry/track internals
-  (fixed-vs-keyed tracks, `(frame, value, tangent)` keys, and the
-  target-index list) are variable-length and not expanded -- see
-  lib-shp.h for the documented layout.
+  Only the fixed top-level header is modeled here.
 seq:
   - id: header
     type: nw4r_brres_sub_header

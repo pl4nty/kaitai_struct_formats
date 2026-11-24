@@ -11,6 +11,9 @@ meta:
 # No known producers currently evidenced, but
 # 0x02 0x00 is encountered in factory SET files that make their rounds on the web.
 
+doc: |
+  Akai MPC60 sound set with the wrapper bytes `02 00`. Same layout as
+  `akai_mpc60_set_v1` except for the version byte.
 seq:
   - id: file_id
     contents: [0x02]

@@ -5,18 +5,15 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Super Smash Bros. 4 sound sequence archive (.sqb), per
-  lib-smashtsqb.c (ported from KillzXGaming/Smash-Forge SQB.cs).
-  Each signed sequence-table value is relative to `0x10 +
-  sequence_data_offset`; -1 denotes an empty slot. A nonempty sequence
-  has an eight-byte header and num_events 16-byte event records. These
-  are sound-event references, not encoded audio samples.
+  Super Smash Bros. 4 sound sequence archive (.sqb). Each signed
+  sequence-table value is relative to `0x10 + sequence_data_offset`; -1
+  denotes an empty slot. A nonempty sequence has an eight-byte header and
+  num_events 16-byte event records. These are sound-event references, not
+  encoded audio samples.
 
-  nintoolbox requires at most 100000 sequences, a complete offset table,
-  and each nonempty sequence header and event array within EOF. A negative
-  offset other than -1 is invalid, as is an event count above 1000000.
-  The four unknown event halfwords are retained but not interpreted by
-  the text decoder. This schema follows the pointers but does not perform
+  A negative offset other than -1 is invalid, as is an event count above
+  1000000. The four unknown event halfwords are retained but not interpreted
+  by the text decoder. This schema follows the pointers but does not perform
   all of the reader's bounds checks explicitly.
 seq:
   - id: magic

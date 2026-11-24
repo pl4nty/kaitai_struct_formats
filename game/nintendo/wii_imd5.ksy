@@ -5,10 +5,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  The 0x20-byte header Nintendo puts in front of banner.bin,
-  icon.bin and sound.bin (and other Wii menu resources), per
-  lib-wii-banner.h. The payload may itself be an "LZ77"-wrapped
-  LZ10/LZ11 stream (not modeled here).
+  The 0x20-byte header Nintendo puts in front of banner.bin, icon.bin and
+  sound.bin (and other Wii menu resources). The payload may itself be an
+  "LZ77"-wrapped LZ10/LZ11 stream (not modeled here).
 
   This is a plain integrity wrapper, not a container format: it has no
   section list and no type tag for the payload beyond the file it is

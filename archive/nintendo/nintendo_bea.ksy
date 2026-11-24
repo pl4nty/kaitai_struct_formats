@@ -43,7 +43,6 @@ seq:
   - id: v5_asset_offset
     type: u8
     if: version_major2 >= 5
-    doc: Unused by this tool's reader.
   - id: ofs_file_info
     type: u8
   - id: ofs_dic
@@ -147,10 +146,8 @@ types:
         contents: "ASST"
       - id: block_offset
         type: u4
-        doc: Unused by this tool's reader.
       - id: block_size
         type: u8
-        doc: Unused by this tool's reader.
       - id: unk1
         type: u2
       - id: unk2

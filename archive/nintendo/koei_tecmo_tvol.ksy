@@ -5,9 +5,8 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Koei Tecmo / Gust Texture Volume Archive, per lib-tvol.c. Each
-  member's name is a NUL-terminated string stored inline at the
-  start of its own data.
+  Koei Tecmo / Gust Texture Volume Archive. Each member's name is a
+  NUL-terminated string stored inline at the start of its own data.
 
   There is no magic or separate name table: the file begins with a
   little-endian count followed by count pairs of absolute file offsets and
@@ -15,15 +14,14 @@ doc: |
   entire payload, including that prefix, to a .bin file. Consequently the
   parsed body is not just the texture bytes after the name.
 
-  nintoolbox recognizes this format only for .tvol filenames and requires
-  1..10000 entries and a complete descriptor table. It skips zero-length
-  members and offsets at or past EOF; a member extending beyond EOF is
-  truncated on extraction. A name is used only when at least 48 bytes remain
-  from its offset: the extractor scans at most the first 47 bytes for a NUL,
-  using a nonempty prefix as NAME.bin. Otherwise it uses tex_NNNN.bin, with
-  NNNN the zero-based entry index. Those output names are not stored in a
-  separate table. This Kaitai instance exposes the inline name but does not
-  implement the extractor's bounds checks, fallback naming, or truncation.
+  It skips zero-length members and offsets at or past EOF; a member
+  extending beyond EOF is truncated on extraction. A name is used only when
+  at least 48 bytes remain from its offset: the extractor scans at most the
+  first 47 bytes for a NUL, using a nonempty prefix as NAME.bin. Otherwise
+  it uses tex_NNNN.bin, with NNNN the zero-based entry index. Those output
+  names are not stored in a separate table. This Kaitai instance exposes the
+  inline name but does not implement the extractor's bounds checks, fallback
+  naming, or truncation.
 seq:
   - id: num_textures
     type: u4

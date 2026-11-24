@@ -12,8 +12,6 @@ doc: |
   PlatinumGames engine flat file archive, magic "DAT\0". Holds parallel
   tables of file offsets, sizes, extensions and (optionally) names.
 
-  Reference: nintoolbox project/src/lib-pgdat.c (ExtractPGDATArchive).
-
 seq:
   - id: magic
     contents: [0x44, 0x41, 0x54, 0x00]

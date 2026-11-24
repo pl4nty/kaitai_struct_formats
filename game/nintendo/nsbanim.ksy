@@ -13,17 +13,13 @@ meta:
   endian: le
 doc: |
   Container shared by the six NSB* animation files used by NNSG3d on the
-  Nintendo DS: NSBCA (BCA0/JNT0, joint SRT), NSBTA (BTA0/SRT0, texture
-  SRT), NSBTP (BTP0/PAT0, texture pattern), NSBVA (BVA0/VIS0, visibility),
-  NSBMA (BMA0/MAT0, material colour), NSBCK (BCK0/CHR0, character/inverse
-  -TRS). Ported from `lib-nsbanim.c`/`.h`.
+  Nintendo DS: NSBCA (BCA0/JNT0, joint SRT), NSBTA (BTA0/SRT0, texture SRT),
+  NSBTP (BTP0/PAT0, texture pattern), NSBVA (BVA0/VIS0, visibility), NSBMA
+  (BMA0/MAT0, material colour), NSBCK (BCK0/CHR0, character/inverse -TRS).
 
-  All six share one NNSG3dResFileHeader + block-offset-table container;
-  this definition models that shared outer framing and the
-  NNSG3dResDict block structure. The per-unit animation payloads
-  (bit-packed SRT streams, visibility bitfields, keyframe tables, etc.)
-  are format-specific and not decoded here, matching lib-nsbanim.c's own
-  per-format decode functions rather than a single fixed schema.
+  All six share one NNSG3dResFileHeader + block-offset-table container; this
+  definition models that shared outer framing and the NNSG3dResDict block
+  structure.
 seq:
   - id: signature
     size: 4

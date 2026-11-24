@@ -4,7 +4,7 @@ meta:
   title: Nintendo Switch Joy-Con Vibration Archive (.vibs)
   license: LicenseRef-All-Rights-Reserved
   endian: le
-doc: Nintendo Switch Joy-Con vibration archive, per lib-vibs.c.
+doc: Nintendo Switch Joy-Con vibration archive.
 seq:
   - id: version
     type: u4

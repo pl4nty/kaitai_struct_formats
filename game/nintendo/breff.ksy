@@ -18,10 +18,8 @@ doc: |
   engineering the MKW/NSMBW binaries rather than a leaked SDK header.
 
   It reuses the exact same 16-byte header shape as BRRES (magic, bom,
-  version, file size, root offset, section count) with a different magic
-  and version (9 for MKW, 11 for NSMB); see `breff_root_head_t` /
-  `breff_root_t` / `breff_item_list_t` in `lib-breff.h` and the reading
-  code in `IterateFilesBREFF()` (`lib-breff.c`).
+  version, file size, root offset, section count) with a different magic and
+  version (9 for MKW, 11 for NSMB).
 
   Right after the header sits a second `REFF`-tagged block (the "root
   header") whose payload is the root record: a pointer to the item list,

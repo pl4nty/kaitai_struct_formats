@@ -5,37 +5,33 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  NW4R "RBNK" instrument bank, per lib-rbnk.c/.h. An RBNK does not hold
-  any audio itself -- it is the piece that turns a raw waveform (an
-  `nw4r_rwav` sample, in an `RWAR` archive or this file's own `WAVE`
-  section) into a *playable instrument*: which sample to use for which
-  MIDI-style note range, at what pitch offset, envelope and pan. An
-  `nintendoware_sequence` (BRSEQ) track's "program change" event selects one
-  instrument out of a paired RBNK by index; the bank is what the sequence
-  player consults on every note-on to resolve pitch -> sample. This
-  three-layer split (BRSEQ bytecode -> RBNK instrument mapping -> RWAV/RWAR
-  sample data) mirrors a General MIDI synthesizer's separation of a MIDI
-  file, a patch/soundfont, and PCM sample ROM, and is the same division
-  BrawlBox/BrawlLib exposed when it let modders "reskin" Brawl's music by
-  swapping instruments without touching the RSEQ bytecode.
+  NW4R "RBNK" instrument bank. An RBNK does not hold any audio itself -- it
+  is the piece that turns a raw waveform (an `nw4r_rwav` sample, in an
+  `RWAR` archive or this file's own `WAVE` section) into a *playable
+  instrument*: which sample to use for which MIDI-style note range, at what
+  pitch offset, envelope and pan. An `nintendoware_sequence` (BRSEQ) track's
+  "program change" event selects one instrument out of a paired RBNK by
+  index; the bank is what the sequence player consults on every note-on to
+  resolve pitch -> sample. This three-layer split (BRSEQ bytecode -> RBNK
+  instrument mapping -> RWAV/RWAR sample data) mirrors a General MIDI
+  synthesizer's separation of a MIDI file, a patch/soundfont, and PCM sample
+  ROM, and is the same division BrawlBox/BrawlLib exposed when it let
+  modders "reskin" Brawl's music by swapping instruments without touching
+  the RSEQ bytecode.
 
-  Models the fixed header and the DATA/WAVE ruint-list containers; the
-  note-lookup tree inside DATA (RangeTable/IndexTable/InstParam, ported
-  from BrawlLib) is recursive with offsets always relative to the top of
-  the DATA ruint list, so it is left as a raw byte span here rather
-  than reproduced -- see lib-rbnk.h for the documented tree-walk
-  semantics. In broad strokes (per BrawlLib's RBNK reader, not verified
-  byte-exact here): an `inst` entry may point directly at note parameters
-  or at a `range`/`index` node that keys off the incoming note number to
-  pick a child entry, so instruments with per-key-range samples (a piano
-  spanning many octaves from a handful of recorded notes, for instance)
-  resolve through one or more levels of that tree before reaching the
-  actual `InstParam` (sample index into WAVE/RWAR, base pitch, volume,
-  pan, ADSR-style envelope). WAVE is only present for version-minor < 2
-  banks; version >= 2 references an embedded RWAR archive instead --
-  matching the same generational split BrawlBox documents between
-  "old-style" banks with inline waves and newer ones that reference a
-  separate wave archive so multiple banks can share it.
+  Models the fixed header and the DATA/WAVE ruint-list containers. In broad
+  strokes (per BrawlLib's RBNK reader, not verified byte-exact here): an
+  `inst` entry may point directly at note parameters or at a `range`/`index`
+  node that keys off the incoming note number to pick a child entry, so
+  instruments with per-key-range samples (a piano spanning many octaves from
+  a handful of recorded notes, for instance) resolve through one or more
+  levels of that tree before reaching the actual `InstParam` (sample index
+  into WAVE/RWAR, base pitch, volume, pan, ADSR-style envelope). WAVE is
+  only present for version-minor < 2 banks; version >= 2 references an
+  embedded RWAR archive instead -- matching the same generational split
+  BrawlBox documents between "old-style" banks with inline waves and newer
+  ones that reference a separate wave archive so multiple banks can share
+  it.
 seq:
   - id: magic
     contents: "RBNK"

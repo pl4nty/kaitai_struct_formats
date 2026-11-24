@@ -5,19 +5,15 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Super Smash Bros. Ultimate top-level ARC container, per
-  `smash_arc_header_t` and the table structs in lib-smash-arc.c
-  (`ExtractSmashARC()`). Everything below the header is little-endian.
+  Everything below the header is little-endian.
 
   `fs_offset` points at a V1 FileSystemHeader followed by the directory
   table, the directory-offset table (in two runs, sized
   `dir_offset_count1`/`dir_offset_count2`), a hash-folder lookup table
   (skipped here; 8 bytes per `hash_folder_count` entry, purpose not yet
-  modeled) and the file-information / sub-file-information tables (also
-  in two runs each). `search_offset` points at an optional
-  SearchFileSystem table of folder/path hash lookups used to resolve
-  full paths; nintoolbox's extractor does not need it to pull file data
-  and only reads it when present.
+  modeled) and the file-information / sub-file-information tables (also in
+  two runs each). `search_offset` points at an optional SearchFileSystem
+  table of folder/path hash lookups used to resolve full paths.
 
   A directory's real byte range comes from its `dir_offset` entry
   (`offset_lo`/`offset_hi` combine into a 64-bit folder offset relative

@@ -7,12 +7,10 @@ meta:
   endian: le
 doc: |
   Harmonix "Ark" archives: a header (`*.hdr`) plus one or more data parts
-  (`<stem>_0.ark`, `<stem>_1.ark`, ...). Used by Guitar Hero 1/2, Rock Band 1-3,
-  The Beatles: Rock Band, AC/DC Live: Rock Band, Green Day: Rock Band and Lego
-  Rock Band. Documented in code by PikminGuts92's Mackiloha / ArkHelper;
-  nintoolbox is an independent C reimplementation, checked against the Wii
-  AC/DC Live: Rock Band Track Pack disc, where the entry sizes of all 3418
-  members add up to the ark's length to the byte.
+  (`<stem>_0.ark`, `<stem>_1.ark`,...). Used by Guitar Hero 1/2, Rock Band
+  1-3, The Beatles: Rock Band, AC/DC Live: Rock Band, Green Day: Rock Band
+  and Lego Rock Band. Documented in code by PikminGuts92's Mackiloha /
+  ArkHelper.
 
   **This definition describes the decrypted header** (little-endian on Wii).
   Header encryption: if the first `u4` is not a known version (2..7, 9, 10) it is

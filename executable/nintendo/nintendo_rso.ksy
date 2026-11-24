@@ -6,11 +6,10 @@ meta:
   endian: be
 doc: |
   Nintendo "RSO" module (GameCube/Wii PowerPC dynamically loadable
-  code/data), per lib-rso.h. No magic signature; the module-list
-  pointers are always zero on disk. Only the section table needed to
-  recover payloads is modeled; prolog/epilog/import/export tables
-  documented in the source as existing further in the header are
-  not covered here.
+  code/data). No magic signature; the module-list pointers are always zero
+  on disk. Only the section table needed to recover payloads is modeled;
+  prolog/epilog/import/export tables documented in the source as existing
+  further in the header are not covered here.
 seq:
   - id: next
     type: u4

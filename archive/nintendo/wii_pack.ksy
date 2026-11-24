@@ -5,12 +5,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Generic "PACK" flat archive used by several Wii/GameCube titles, as
-  read by IterateFilesPACK() in lib-pack.c (`pack_header_t`/
-  `pack_metric_t` in lib-pack.h). A fixed header points to a metric
-  table of (offset, size) pairs; subfile names live in a name pool
-  directly after the header. The pool holds one NUL-terminated path per
-  metric, in matching order; the metrics do not contain name offsets.
+  Generic "PACK" flat archive used by several Wii/GameCube titles. A fixed
+  header points to a metric table of (offset, size) pairs; subfile names
+  live in a name pool directly after the header. The pool holds one
+  NUL-terminated path per metric, in matching order; the metrics do not
+  contain name offsets.
 
   The reader checks the magic, a declared file_size at least as large as
   the available buffer, a metric offset of at least 0x20, and a metric

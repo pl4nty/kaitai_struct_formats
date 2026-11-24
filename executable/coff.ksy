@@ -26,12 +26,20 @@ instances:
   first_word:
     pos: 0
     type: u4
+  anon_object_version:
+    pos: 4
+    type: u2
+    doc: |
+      `Version` of an anonymous object header (ANON_OBJECT_HEADER), read
+      only to tell the header kinds apart.
   is_bigobj:
-    value: first_word == 0xffff_0000
+    value: first_word == 0xffff_0000 and anon_object_version >= 2
     doc: |
       Microsoft "big object" format (`/bigobj`, MinGW `-Wa,-mbig-obj`): Sig1 =
       0 and Sig2 = 0xffff, where a regular header has its machine type and
-      number of sections.
+      number of sections. Short import library members (IMPORT_OBJECT_HEADER,
+      version 0) and `/GL` anonymous objects (version 1) share the same
+      signature, so the version must also be 2 or higher.
   num_sections:
     value: 'is_bigobj ? bigobj_header.num_sections : header.num_sections'
   ofs_symbol_table:

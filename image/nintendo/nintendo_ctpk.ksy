@@ -8,19 +8,15 @@ meta:
 doc: |
   CTPK ("CTPK", Level5/Nintendo 3DS texture package) bundles one or more
   Pica200-format textures behind a shared header and a fixed-size entry
-  table, followed by a string table (entry names) and a texture-data
-  region. Modeled from `ScanCTPK()`/`GetCTPKEntry()` in nintoolbox's
-  lib-ctpk.c; the bytes between the entry table and `texture_offset`
-  (string table plus whatever undocumented padding) are not otherwise
-  interpreted by that code, which is why `RebuildCTPKFromPrefix()` treats
-  that whole span as an opaque, byte-for-byte-preserved prefix rather than
-  reconstructing it field by field.
+  table, followed by a string table (entry names) and a texture-data region.
+  The bytes between the entry table and `texture_offset` (string table plus
+  whatever undocumented padding) are not otherwise interpreted by that code,
+  which is why `RebuildCTPKFromPrefix()` treats that whole span as an
+  opaque, byte-for-byte-preserved prefix rather than reconstructing it field
+  by field.
 
   Each entry's `data_offset` is relative to the package's `texture_offset`,
-  not to the file start. Pixel data itself is Pica200-tiled (8x8
-  Z-order/Morton blocks) in one of several raw or ETC1(A4)-compressed
-  formats, decoded by `DecodePicaTexture()` -- not modeled here since it
-  is pixel-format decoding, not container structure.
+  not to the file start.
 seq:
   - id: magic
     contents: "CTPK"
@@ -55,7 +51,7 @@ types:
         doc: Offset of this entry's pixel data, relative to the package's texture_offset.
       - id: format
         type: u4
-        doc: Pica200 pixel format (0=RGBA8888 and others handled by DecodePicaTexture()).
+        doc: Pica200 pixel format (0 = RGBA8888).
       - id: width
         type: u2
       - id: height

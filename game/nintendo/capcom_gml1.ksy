@@ -7,10 +7,7 @@ meta:
   endian: le
 doc: |
   `1LMG` script binary of Ghost Trick: Phantom Detective (18 retail
-  `.xml.bin` files, 929 inner `.xml.lz` files). A 48-byte header, then bytecode
-  instructions, localized text blocks, and dictionary key-to-offset index
-  tables. nintoolbox requires `data_length > 0`, `48 + data_length <= file
-  size` and `key_offset >= 48`.
+  `.xml.bin` files, 929 inner `.xml.lz` files).
 seq:
   - id: magic
     contents: '1LMG'

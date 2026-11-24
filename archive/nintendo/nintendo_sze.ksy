@@ -5,11 +5,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Encrypted SZS/SARC/Zstd container used by F-Zero 99 and Switch
-  titles, per lib-sze.c. A fixed 32-byte header precedes an encrypted
-  payload. Mode 0 uses AES-128-CBC, mode 2 uses AES-128-OFB, and mode 1
-  or any other nonzero value uses AES-128-CTR. The payload is not
-  decrypted or decompressed by this Kaitai schema.
+  Encrypted SZS/SARC/Zstd container used by F-Zero 99 and Switch titles. A
+  fixed 32-byte header precedes an encrypted payload. Mode 0 uses
+  AES-128-CBC, mode 2 uses AES-128-OFB, and mode 1 or any other nonzero
+  value uses AES-128-CTR. The payload is not decrypted or decompressed by
+  this Kaitai schema.
 
   The decoder uses its built-in 16-byte key `FZERO99_NST_SZE1` unless a
   caller supplies another key. The IV is the 16 bytes at header offset
@@ -38,7 +38,7 @@ seq:
     doc: 0 = AES-128-CBC, 2 = AES-128-OFB, all other values = AES-128-CTR.
   - id: unknown_0c
     size: 4
-    doc: Header word written as zero by nintoolbox; decoder ignores it.
+    doc: Decoder ignores it.
   - id: iv
     size: 16
     doc: Initial vector/counter bytes passed to the selected AES mode.

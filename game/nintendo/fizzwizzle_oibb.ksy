@@ -8,8 +8,8 @@ meta:
 doc: |
   `OIBB` object pack (Doctor Fizzwizzle's Animal Rescue `*.pak`, SPG
   "AxEngine"): the magic, a little-endian version (4), offset tables, then a
-  memory image of the game's objects. Only `TXTR` objects are decoded by
-  nintoolbox (see `txtr_header`); embedded RIFF/WAVE files are carved out.
+  memory image of the game's objects. Embedded RIFF/WAVE files are carved
+  out.
 seq:
   - id: magic
     contents: OIBB

@@ -5,12 +5,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Retro Studios' CMPD wrapper for an RPAK entry payload. It is a directory of
-  8-byte block headers followed by the corresponding block byte streams in
-  header order. The directory's first byte is commonly 0xc0 for a zlib block
-  and 0x00 for a stored block in nintoolbox output, but the decoder does not
-  consult it: compression is determined from the stored and output sizes and
-  the bytes themselves.
+  Retro Studios' CMPD wrapper for an RPAK entry payload. It is a directory
+  of 8-byte block headers followed by the corresponding block byte streams
+  in header order.
 
   Each header packs a 24-bit stored length and a 32-bit decompressed length.
   If the two lengths are equal, the block is copied verbatim. Otherwise the
@@ -22,8 +19,6 @@ doc: |
   consume precisely the stored bytes and produce precisely the declared
   output, the decoder retries the entire block as one zlib stream.
 
-  nintoolbox rejects more than 0x100000 blocks, a truncated header table or
-  block range, arithmetic overflow, and a combined decoded size above 256 MiB.
   Its writer currently emits exactly one block and chooses zlib only when it
   makes the data smaller; otherwise it emits a stored block.
 seq:
@@ -49,9 +44,7 @@ seq:
       byte alone does not select the decoder; see the format-level contract.
   - id: trailing_bytes
     size-eos: true
-    doc: |
-      Any bytes after the declared block streams. The nintoolbox decoder
-      bounds-checks each block but does not require payloads to end at EOF.
+    doc: Any bytes after the declared block streams.
 instances:
   payload_offset:
     value: 8 + num_blocks * 8
@@ -62,9 +55,8 @@ types:
       - id: method
         type: u1
         doc: |
-          Producer hint byte. nintoolbox writes 0xc0 for a zlib block and 0x00
-          for a stored block, but its decoder deliberately does not branch on
-          this field.
+          Producer hint byte: 0xc0 for a zlib block, 0x00 for a stored block.
+          Not needed to decode the block.
       - id: stored_size_hi
         type: u1
       - id: stored_size_mid

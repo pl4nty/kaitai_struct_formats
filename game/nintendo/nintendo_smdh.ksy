@@ -5,9 +5,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Nintendo 3DS application icon + title metadata block, per
-  lib-smdh.h. Fixed-size 0x36c0-byte layout, per 3dbrew's SMDH page
-  and cross-checked against Gericom's EveryFileExplorer 3DS/SMDH.cs.
+  Nintendo 3DS application icon + title metadata block. Fixed-size
+  0x36c0-byte layout, per 3dbrew's SMDH page and cross-checked against
+  Gericom's EveryFileExplorer 3DS/SMDH.cs.
 seq:
   - id: magic
     contents: "SMDH"

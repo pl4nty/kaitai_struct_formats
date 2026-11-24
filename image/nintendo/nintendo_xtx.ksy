@@ -5,11 +5,10 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Nintendo Switch XTX texture container ("DFvN"), per lib-xtx.h
-  (verified against KillzXGaming/Switch-Toolbox XTX.cs). "HBvN"
-  blocks follow the header; block type 2 is a fixed 120-byte texture
-  header, block type 3 is that texture's Tegra block-linear pixel
-  payload, paired in order. Only the block envelope is modeled here.
+  Nintendo Switch XTX texture container ("DFvN"). "HBvN" blocks follow the
+  header; block type 2 is a fixed 120-byte texture header, block type 3 is
+  that texture's Tegra block-linear pixel payload, paired in order. Only the
+  block envelope is modeled here.
 seq:
   - id: magic
     contents: "DFvN"

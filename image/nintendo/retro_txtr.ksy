@@ -5,13 +5,12 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  The original Retro Studios "TXTR" texture (Metroid Prime 1-3,
-  Donkey Kong Country Returns), per lib-retro-txtr.h. Has no magic of
-  its own -- it starts directly with the GX format word. Indexed
-  formats (C4/C8/C14X2) carry a palette; pixel data is GX-tiled and
-  not detiled here. This covers only the old format; the unrelated
-  Tropical Freeze (Wii U) and Metroid Prime Remastered (Switch) TXTR
-  revisions are RFRM-wrapped containers documented separately in the
+  The original Retro Studios "TXTR" texture (Metroid Prime 1-3, Donkey Kong
+  Country Returns). Has no magic of its own -- it starts directly with the
+  GX format word. Indexed formats (C4/C8/C14X2) carry a palette; pixel data
+  is GX-tiled and not detiled here. This covers only the old format; the
+  unrelated Tropical Freeze (Wii U) and Metroid Prime Remastered (Switch)
+  TXTR revisions are RFRM-wrapped containers documented separately in the
   source and are not modeled here.
 seq:
   - id: format

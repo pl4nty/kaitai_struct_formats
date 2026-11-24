@@ -9,8 +9,7 @@ doc: |
   DARC ("Directory ARChive") is Nintendo's flat container for the 3DS/Wii U
   era, the sibling of Wii's U8 (`nintendo_u8`) and the later SARC
   (`nintendo_sarc`): a header, a flat table of fixed-size entries, then a
-  UTF-16LE string table, then the raw payloads. Modeled from
-  `ScanDARC()`/`ResetDARC()` in nintoolbox's lib-darc.c.
+  UTF-16LE string table, then the raw payloads.
 
   Unlike U8/SARC, entries here form a tree only implicitly: each entry
   knows its own name-table offset and either (file) an absolute data
@@ -96,10 +95,7 @@ types:
         size: end_or_size
         if: not is_dir
   str_utf16le:
-    doc: |
-      NUL-terminated UTF-16LE string, decoded here as raw u2 code units;
-      lib-darc.c does its own surrogate-pair-aware conversion to UTF-8
-      (`darc_utf16le_to_utf8`) which Kaitai has no direct equivalent for.
+    doc: NUL-terminated UTF-16LE string, decoded here as raw u2 code units.
     seq:
       - id: units
         type: u2

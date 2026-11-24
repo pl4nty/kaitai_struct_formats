@@ -9,14 +9,13 @@ meta:
   endian: be
 doc: |
   Texture SRT (Scale/Rotate/Translate) animation: animates the texture
-  matrix of a material -- scale X/Y, rotation, translation X/Y per
-  texture layer -- per lib-srt.h. Known in BrawlBox/BrawlCrate and on
-  Tockdom's Custom Mario Kart Wii Wiki as `SRT0`; it is what drives
-  scrolling/rotating textures such as water, lava flows and UI marquees
-  in Wii-era games. Each entry is named after a material of a sibling
-  MDL0 and holds a bitmask of which of the 8 ordinary + 3 indirect
-  texture layers are animated -- a layer with no bit set keeps its
-  material's static SRT values for the whole animation.
+  matrix of a material -- scale X/Y, rotation, translation X/Y per texture
+  layer --. Known in BrawlBox/BrawlCrate and on Tockdom's Custom Mario Kart
+  Wii Wiki as `SRT0`; it is what drives scrolling/rotating textures such as
+  water, lava flows and UI marquees in Wii-era games. Each entry is named
+  after a material of a sibling MDL0 and holds a bitmask of which of the 8
+  ordinary + 3 indirect texture layers are animated -- a layer with no bit
+  set keeps its material's static SRT values for the whole animation.
 
   Unlike CHR0, every animated channel always uses the I12 (raw float
   keyframe, no quantization) encoding, so there is no per-channel
@@ -24,9 +23,7 @@ doc: |
   count compared to CHR0's per-bone channels, so the SDK did not bother
   with CHR0's quantized I4/I6/L1/L2 formats here.
 
-  Only the fixed top-level header is modeled here; entry/texture/
-  channel internals are variable-length and not expanded -- see
-  lib-srt.h for the documented layout.
+  Only the fixed top-level header is modeled here.
 seq:
   - id: header
     type: nw4r_brres_sub_header

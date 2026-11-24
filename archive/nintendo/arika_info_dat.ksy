@@ -6,13 +6,13 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  The directory half of Arika's "rom:\INFO.DAT" / "rom:\GAME.DAT" pair
-  (Dr. Mario Online Rx/Express, the original DS Endless Ocean, and
-  Endless Ocean: Blue World's own non-encrypted *ARK variant). This .ksy
-  covers INFO.DAT only, after decryption -- GAME.DAT is just raw member
-  bytes addressed by `entries[i].byte_offset`/`entries[i].len_decompressed`
-  from this table and is not itself structured (each member is either
-  stored raw or ALZ1/ZALZ-compressed; see lib-arika.c's DecodeALZ1).
+  The directory half of Arika's "rom:\INFO.DAT" / "rom:\GAME.DAT" pair (Dr.
+  Mario Online Rx/Express, the original DS Endless Ocean, and Endless Ocean:
+  Blue World's own non-encrypted *ARK variant). This .ksy covers INFO.DAT
+  only, after decryption -- GAME.DAT is just raw member bytes addressed by
+  `entries[i].byte_offset`/`entries[i].len_decompressed` from this table and
+  is not itself structured (each member is either stored raw or
+  ALZ1/ZALZ-compressed.
 
   Bytes [0x10, EOF) are XOR/rotate/subtract-obfuscated using the 16-byte
   title/key at the very start whenever that key's first byte is nonzero;

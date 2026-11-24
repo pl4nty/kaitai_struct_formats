@@ -8,7 +8,7 @@ meta:
 doc: |
   SSBH NLST container (`.nulstb`), Super Smash Bros. Ultimate. Reference:
   ultimate-research/ssbh_lib `ssbh_lib/src/formats/nlst.rs` (`Nlst::V10`) --
-  a flat array of file names to load. Ported from `lib-nulstb.c`/`.h`.
+  a flat array of file names to load.
 seq:
   - id: magic
     contents: [0x48, 0x42, 0x53, 0x53] # "HBSS"

@@ -14,10 +14,6 @@ doc: |
   flat, singly-linked chain of typed sections (emitters, emitter sets,
   textures, embedded model/shader/texture archives, primitive geometry).
 
-  Reference: nintoolbox project/src/lib-pctl.c (DecodePCTL_Text /
-  ExtractPCTLArchive), cross-checked against KillzXGaming/Switch-Toolbox
-  File_Format_Library/FileFormats/Effects/PCTL.cs and EffectLibrary.
-
 seq:
   - id: magic
     contents: "VFXB"
@@ -58,12 +54,10 @@ instances:
 types:
   section:
     doc: |
-      One 32-byte section header. `subsection_offset`, `next_section_offset`
-      and `binary_data_offset` are offsets relative to the start of this
-      section header; a value of 0xFFFFFFFF means "not present". Section
-      bodies are opaque here -- see lib-pctl.c's decode_section() for the
-      per-signature payload layouts (TEXR, TEXA, GX2B, EMTR, ESET, ESTA,
-      ESFT, GTNT, G3NT, GRTF, G3PR, GRSN, PRMA).
+      One 32-byte section header. `subsection_offset`,
+      `next_section_offset` and `binary_data_offset` are offsets
+      relative to the start of this section header; a value of
+      0xFFFFFFFF means "not present".
     seq:
       - id: signature
         size: 4

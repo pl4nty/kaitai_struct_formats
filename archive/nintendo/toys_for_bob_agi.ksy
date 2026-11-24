@@ -92,7 +92,7 @@ types:
         type: u4
         repeat: expr
         repeat-expr: _root.len_entry_table / 4
-        doc: Words scanned for pairs or aligned four-word records by nintoolbox.
+        doc: Words holding pairs or aligned four-word records.
   name_table_t:
     params:
       - id: count

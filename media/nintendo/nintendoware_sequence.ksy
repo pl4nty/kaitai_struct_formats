@@ -10,23 +10,21 @@ meta:
       '"SSEQ"': le
       _: be
 doc: |
-  NintendoWare sound-sequence bytecode container (Wii RSEQ, 3DS
-  CSEQ, Wii U/Switch FSEQ, DS SSEQ), per lib-sequence.c. It is the
-  NW4R family's answer to a MIDI file: not sampled audio at all, but a
-  compact, MIDI-like event stream -- note-on/note-off, wait, program
-  change, jumps and subroutine calls, plus a large set of NW4R-specific
-  extensions for looping, variables and conditional branches -- that a
-  game's sequence player interprets against an `nw4r_rbnk` instrument
-  bank to actually produce sound. This is also the DS `SSEQ` format's
-  direct ancestor/sibling: RSEQ is described by community documentation
-  (Custom Mario Kart wiki, vgmtrans) as "basically SSEQ with some of the
-  command bytes changed," reflecting NintendoWare's shared lineage across
-  the DS and Wii sound engines.
+  NintendoWare sound-sequence bytecode container (Wii RSEQ, 3DS CSEQ, Wii
+  U/Switch FSEQ, DS SSEQ). It is the NW4R family's answer to a MIDI file:
+  not sampled audio at all, but a compact, MIDI-like event stream --
+  note-on/note-off, wait, program change, jumps and subroutine calls, plus a
+  large set of NW4R-specific extensions for looping, variables and
+  conditional branches -- that a game's sequence player interprets against
+  an `nw4r_rbnk` instrument bank to actually produce sound. This is also the
+  DS `SSEQ` format's direct ancestor/sibling: RSEQ is described by community
+  documentation (Custom Mario Kart wiki, vgmtrans) as "basically SSEQ with
+  some of the command bytes changed," reflecting NintendoWare's shared
+  lineage across the DS and Wii sound engines.
 
   Two shapes exist: the legacy Wii RSEQ layout with direct DATA/LABL block
   offsets, and the newer reference-table layout (CSEQ/FSEQ/SSEQ) with a
-  block-type table. The bytecode itself (a large opcode set documented in
-  lib-sequence.h) is not modeled here.
+  block-type table.
 
   ## Bytecode shape (for reference; not parsed by this definition)
 
@@ -49,9 +47,8 @@ doc: |
     for the format's small scripting layer, used for things like
     randomized fills or state-driven music switches.
 
-  A full opcode table is out of scope for a container-level `.ksy` and
-  would need its own dedicated bytecode grammar; see lib-sequence.h and
-  community disassemblers (e.g. `kitlith/rseq_rs`) for the complete set.
+  A full opcode table is out of scope for a container-level `.ksy` and would
+  need its own dedicated bytecode grammar.
 seq:
   - id: magic
     size: 4

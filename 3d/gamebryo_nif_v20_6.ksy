@@ -5,16 +5,13 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Gamebryo scene/model file ("Gamebryo File Format, Version 20.6.0.0"),
-  the Wii-era build used by Pocoyo Racing and parsed by NifOpen() in
-  lib-nif.c. The text banner and the first few little-endian header
-  fields are followed by an entirely big-endian body: a type-name
-  table, one type index and size per block, a shared string table,
-  group-size table, the block payloads themselves, and finally the
-  scene root references. Block *contents* are polymorphic per
-  NiObject type (see lib-nif.c's per-block readers for
-  NiPersistentSrcTextureRendererData / NiMesh / NiDataStream etc.);
-  only the fixed outer skeleton is modeled here.
+  Gamebryo scene/model file ("Gamebryo File Format, Version 20.6.0.0"), the
+  Wii-era build used by Pocoyo Racing. The text banner and the first few
+  little-endian header fields are followed by an entirely big-endian body: a
+  type-name table, one type index and size per block, a shared string table,
+  group-size table, the block payloads themselves, and finally the scene
+  root references. Block *contents* are polymorphic per NiObject type; only
+  the fixed outer skeleton is modeled here.
 seq:
   - id: header_str
     type: strz
@@ -25,7 +22,7 @@ seq:
     doc: 0x14060000.
   - id: is_big_endian
     type: u1
-    doc: 0 = big-endian body (the only variant this codebase reads).
+    doc: 0 = big-endian body (the only variant modelled here).
   - id: user_version
     type: u4le
   - id: n_blocks

@@ -5,19 +5,17 @@ meta:
   file-extension: apak
   license: LicenseRef-All-Rights-Reserved
 doc: |
-  A flat archive with a 24-byte header and fixed 64-byte entries. Written
-  by this tool always as big-endian version 5; endianness is detected on
-  read from the version field at offset 6, which reads as big-endian 5
-  when the whole file is big-endian.
+  A flat archive with a 24-byte header and fixed 64-byte entries. Endianness
+  is detected on read from the version field at offset 6, which reads as
+  big-endian 5 when the whole file is big-endian.
 
-  nintoolbox extracts .apak and .bin files with APAK magic. It chooses
-  big-endian only when the version probe equals 5; every other probe is
-  interpreted as little-endian without validating a little-endian version.
-  The reader requires 1..100000 entries and a complete 64-byte-per-entry
-  table. It ignores the file-info byte count and reserved words, skips a
-  member whose absolute offset is at or beyond EOF, and truncates a member
-  whose declared length extends past EOF. Empty on-disk names become
-  file_NNNN.bin, where NNNN is the zero-based descriptor index.
+  It chooses big-endian only when the version probe equals 5; every other
+  probe is interpreted as little-endian without validating a little-endian
+  version. The reader requires 1..100000 entries and a complete
+  64-byte-per-entry table. It ignores the file-info byte count and reserved
+  words, skips a member whose absolute offset is at or beyond EOF, and
+  truncates a member whose declared length extends past EOF. Empty on-disk
+  names become file_NNNN.bin, where NNNN is the zero-based descriptor index.
 
   The writer sorts input entries, strips directory prefixes from names,
   writes version 5 in big-endian order, and sets len_file_info to

@@ -15,11 +15,9 @@ doc: |
   * `TextureData\0` / `Texture Data\0` -- 12/13-byte tag, 56-byte-or-larger
     header, whose palette offset is relative to the end of the header.
 
-  Texture formats are the DS GX ones, numbered as nintoolbox numbers them:
-  1 = A3I5, 3 = 4 bpp indexed (low nibble first), 4 = 8 bpp indexed,
-  6 = A5I3. Palette colours are RGB555 (`r = c & 0x1f`, `g = (c >> 5) & 0x1f`,
-  `b = (c >> 10) & 0x1f`). For formats 3 and 4 palette index 0 is the
-  transparent key.
+  Palette colours are RGB555 (`r = c & 0x1f`, `g = (c >> 5) & 0x1f`, `b = (c
+  >> 10) & 0x1f`). For formats 3 and 4 palette index 0 is the transparent
+  key.
 
   Width is `8 << width_shift` (for the `TextureData` variant, a shift above 8 is
   read as `shift * 4` pixels). Height is not stored directly: it is

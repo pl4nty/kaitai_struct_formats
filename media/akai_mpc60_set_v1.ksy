@@ -11,6 +11,9 @@ meta:
 # - MPC60 firmware 2.12
 # - MPC60 firmware 2.14
 
+doc: |
+  Akai MPC60 sound set with the wrapper bytes `02 01`. Same layout as
+  `akai_mpc60_set_v0` except for the version byte.
 seq:
   - id: file_id
     contents: [0x02]

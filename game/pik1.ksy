@@ -12,21 +12,15 @@ doc: |
   directory half of the ARC/DIR archive pair; ARC itself is just the raw
   payload bytes the DIR entries point into).
 
-  Reference: nintoolbox project/src/lib-pik1.c/.h (IsPIKMOD/pk_walk,
-  IsTXE/DecodeTXE_RGBA, ScanPIKARC/CreatePIKARC), re-implemented in that
-  project from KillzXGaming/MdlConverter's GCNLibrary/Pikmin (MIT).
-
 seq: []
 
 types:
   mod:
     doc: |
-      A stream of {s32 opcode, u32 size} chunk headers, each chunk padded so
-      the next one starts on a 32-byte boundary. Starts with a Header chunk
-      (opcode 0) at offset 0 and ends with an EOF chunk (opcode 0xffff).
-      Chunk payload layouts beyond the generic "count + 32-byte-aligned
-      pool" convention are not modeled here -- see lib-pik1.c's per-opcode
-      readers for materials/joints/envelopes/meshes/etc.
+      A stream of {s32 opcode, u32 size} chunk headers, each chunk
+      padded so the next one starts on a 32-byte boundary. Starts with a
+      Header chunk (opcode 0) at offset 0 and ends with an EOF chunk
+      (opcode 0xffff).
     seq:
       - id: chunks
         type: chunk

@@ -12,12 +12,6 @@ doc: |
   base, and every inter-struct pointer is stored as an offset relative to
   that base, patched at load time via an explicit relocation table.
 
-  Carries no magic number, so a decoder must validate the header shape
-  itself (file size matching the real file size, relocation table
-  placement, root/reference counts and the ASCII version tag) rather than
-  checking a fixed byte string -- this is exactly what `IsHSD` in lib-hsd.c
-  does before `ScanHSD` trusts the header.
-
   The header, relocation table, root/reference tables and string pool are
   modeled below, and so is the object graph itself: a JOBJ (joint) tree,
   each JOBJ optionally owning a chain of DOBJ (display object) nodes, each
@@ -48,19 +42,10 @@ doc: |
   not a fixed record layout, and decoding it is what `ExportHSDModel`
   exists for, not this `.ksy`.
 
-  Scope note: cull/depth/blend render state (MOBJ rendermode, PEDesc) and
-  shape-animation morph-target display lists are structurally reachable
-  below but not decoded further, matching lib-hsd.c's own "not yet
-  exported" scope for those two.
-
   Several titles (e.g. Doraemon on GameCube) ship one file holding several
   complete HSD archives back to back, each with its own header and 0xCD
   fill between them -- not modeled here since it is a container-of-
   containers concern, not part of a single archive's layout.
-
-  Ported from lib-hsd.c's `IsHSD`/`ScanHSD` and the header comment in
-  lib-hsd.h, both cross-checked against Ploaj/HSDLib's HSDRawFile.cs
-  (`Open()`, MIT licensed) for the relocation/root/reference parsing.
 seq:
   - id: file_size
     type: u4
@@ -161,19 +146,18 @@ types:
         doc: |
           Convenience view for the common case (a JOBJ root, e.g.
           "ToyBoxModel_TopN_joint" on an item/object file). Two real
-          cases are NOT a plain JOBJ here and must be read a different
-          way instead: a "scene_data" root (Doraemon GC maps, some
-          Kirby Air Ride/Melee menu files), whose first field is a
-          NULL-terminated list of pointers to JObjDesc structs (each
-          starting with ITS root JOBJ) rather than a JOBJ itself; and a
-          per-fighter root (Melee character files like "PlMr.dat"),
-          which is instead an FTDATA wrapper -- see `as_ftdata`. Both
-          are only distinguishable from a real JOBJ by inspection (an
-          empty/non-"scene_data" name, and non-finite/subnormal
-          rotate/scale/translate floats, respectively) since the file
-          carries no separate type tag for its root_table entries;
-          lib-hsd.c's own `hsd_root_jobjs`/`hsd_walk_jobj_meshes` apply
-          exactly this heuristic rather than a structural check.
+          cases are NOT a plain JOBJ here and must be read a
+          different way instead: a "scene_data" root (Doraemon GC
+          maps, some Kirby Air Ride/Melee menu files), whose first
+          field is a NULL-terminated list of pointers to JObjDesc
+          structs (each starting with ITS root JOBJ) rather than a
+          JOBJ itself; and a per-fighter root (Melee character files
+          like "PlMr.dat"), which is instead an FTDATA wrapper --
+          see `as_ftdata`. Both are only distinguishable from a real
+          JOBJ by inspection (an empty/non-"scene_data" name, and
+          non-finite/subnormal rotate/scale/translate floats,
+          respectively) since the file carries no separate type tag
+          for its root_table entries.
       as_ftdata:
         pos: 0x20 + ofs_node
         type: ftdata

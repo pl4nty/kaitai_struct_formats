@@ -5,12 +5,19 @@ meta:
   file-extension: gvas
   license: LicenseRef-All-Rights-Reserved
   endian: le
+doc: |
+  Unreal Engine `USaveGame` file (magic `GVAS`): the save game header
+  (file and package versions, engine version, custom version table and
+  save game class name) followed by the serialized properties. Only the
+  header and the first property are modelled; `MapProperty` and
+  `NameProperty` bodies are decoded, other property types are not.
+  `pseudoregalia_save` is a game-specific GVAS spec.
 seq:
   - id: header
     type: save_game_header
   - id: unknown1
     size: 1
-  - id: test
+  - id: first_property
     type: fproperty
 types:
   fproperty:

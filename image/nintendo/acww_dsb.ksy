@@ -14,11 +14,8 @@ doc: |
   length is derived from the remaining data size as `sqrt(file_size -
   0x60)`).
 
-  Each pixel byte packs a 3-bit alpha level in bits 5..7 (scaled
-  `value/7 * 255`) and a 5-bit palette index in bits 0..4. Only 128x128
-  images are produced by the encoder (`EncodeDSB_RGBA` in
-  `lib-dsb.c`), but the decoder accepts any square size up to 1024 that
-  the file length implies.
+  Each pixel byte packs a 3-bit alpha level in bits 5..7 (scaled `value/7 *
+  255`) and a 5-bit palette index in bits 0..4.
 seq:
   - id: magic
     contents: "TXTR"

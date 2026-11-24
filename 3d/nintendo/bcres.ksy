@@ -24,9 +24,8 @@ doc: |
   address and stops there: decoding a model's skeleton/geometry, a
   material's PICA200 command list, or a texture's pixel format is
   version-specific, deeply nested work this project's own reader does
-  procedurally (`lib-bcres.c`, ~2800 lines) rather than through one fixed
-  struct, matching the scope line `nintendo_bch` draws for the same PICA200
-  hardware on the SMDH/BCH side.
+  procedurally rather than through one fixed struct, matching the scope line
+  `nintendo_bch` draws for the same PICA200 hardware on the SMDH/BCH side.
 seq:
   - id: magic
     contents: "CGFX"

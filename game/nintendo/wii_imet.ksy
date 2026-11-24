@@ -5,13 +5,12 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Wii channel banner IMET header, per lib-wii-banner.h. Magic sits
-  at a fixed offset from the start of this structure regardless of
-  the leading padding scheme the caller stripped (0x40 for a disc
-  /opening.bnr, 0 for the rare unpadded variant, 0x80 for a NAND
-  content's 00000000.app); this definition starts right at the
-  magic. The embedded U8 archive begins immediately after the fixed
-  0x600-byte header.
+  Wii channel banner IMET header. Magic sits at a fixed offset from the
+  start of this structure regardless of the leading padding scheme the
+  caller stripped (0x40 for a disc /opening.bnr, 0 for the rare unpadded
+  variant, 0x80 for a NAND content's 00000000.app); this definition starts
+  right at the magic. The embedded U8 archive begins immediately after the
+  fixed 0x600-byte header.
 
   wiibrew.org's Opening.bnr page describes the same header (there
   documented starting from the leading padding rather than from `magic`)

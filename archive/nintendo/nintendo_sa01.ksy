@@ -5,13 +5,12 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Nintendo "SA01" (named) / "CA01" (unnamed) flat archive, per
-  ScanSA01() in lib-sa01.c. The reference reader has no fixed
-  endianness tag and instead guesses byte order from whichever
-  interpretation yields a sane file count (<= 0x10000); this
-  definition assumes the big-endian (Mii Maker) convention noted in
-  the source as the common case. Amiibo-derived files may need the
-  little-endian counterpart instead.
+  Nintendo "SA01" (named) / "CA01" (unnamed) flat archive. The reference
+  reader has no fixed endianness tag and instead guesses byte order from
+  whichever interpretation yields a sane file count (<= 0x10000); this
+  definition assumes the big-endian (Mii Maker) convention noted in the
+  source as the common case. Amiibo-derived files may need the little-endian
+  counterpart instead.
 
   The inner archive can be stored directly, inside a `ZCMP` wrapper with a
   0x80-byte prelude and zlib stream, or behind a four-byte big-endian output
@@ -37,8 +36,8 @@ seq:
   - id: num_files
     type: u4
     doc: |
-      Number of member offsets and sizes. This definition reads big-endian;
-      nintoolbox falls back to little-endian when only that count is plausible.
+      Number of member offsets and sizes. This definition reads
+      big-endian.
   - id: base_offset
     type: u4
     doc: Base added to each stored relative member offset.

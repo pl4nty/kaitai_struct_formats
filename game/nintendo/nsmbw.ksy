@@ -5,8 +5,8 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  A grab-bag of small New Super Mario Bros. Wii (and the "Newer Super
-  Mario Bros. Wii" ROM hack) formats decoded by `lib-nsmbw.c`/`.h`:
+  A grab-bag of small New Super Mario Bros. Wii (and the "Newer Super Mario
+  Bros. Wii" ROM hack) formats/`.h`:
 
   - NWRp `LevelInfo.bin` (`nwr_level_info`): the world/level menu table.
   - NWRa `AnimTiles.bin` (`nwr_anim_tiles`): animated-tile definitions.
@@ -14,11 +14,10 @@ doc: |
     inside a tileset's U8 `.arc` (256 tiles x 8 bytes).
 
   The tileset texture (`BG_tex/<name>_tex.bin.LZ`, LZ11-compressed
-  RGB4A3/RGB555 GX texel data) and object definitions
-  (`BG_unt/<name>.bin` + `_hd.bin`) are not modelled here: the texture is
-  a raw GX texel blob with no header of its own (see lib-nsmbw.c's
-  DecodeRGB4A3), and the object-definition format is a variable-length
-  byte-code stream rather than a fixed record layout.
+  RGB4A3/RGB555 GX texel data) and object definitions (`BG_unt/<name>.bin` +
+  `_hd.bin`) are not modelled here: the texture is a raw GX texel blob with
+  no header of its own, and the object-definition format is a
+  variable-length byte-code stream rather than a fixed record layout.
 seq: []
 types:
   nwr_level_info:
@@ -85,9 +84,9 @@ types:
         pos: text_offset
         size: text_len
         doc: |
-          Bytes are shift-encoded: each byte b is stored as (b - 0x30) & 0xFF
-          (see lib-nsmbw.c's ScanNWRLevelInfo), so the raw bytes here are
-          not the final ASCII text.
+          Bytes are shift-encoded: each byte b is stored as (b -
+          0x30) & 0xFF, so the raw bytes here are not the final
+          ASCII text.
   nwr_anim_tiles:
     doc: '"NWRa" AnimTiles.bin, the Newer SMBW animated-tile table.'
     seq:

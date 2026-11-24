@@ -5,20 +5,19 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Level-5 container archive (.xc/.xpck), per lib-xpck.c. All table
-  section offsets and relative payload offsets are stored in units of
-  four bytes; member sizes themselves are byte counts. The fixed header
-  is 0x10 bytes, not 0x20: the file-info table may start immediately at
-  0x10. Names are consecutive NUL-terminated strings in a separate
-  filename table and correspond to file-info records by index.
+  Level-5 container archive (.xc/.xpck). All table section offsets and
+  relative payload offsets are stored in units of four bytes; member sizes
+  themselves are byte counts. The fixed header is 0x10 bytes, not 0x20: the
+  file-info table may start immediately at 0x10. Names are consecutive
+  NUL-terminated strings in a separate filename table and correspond to
+  file-info records by index.
 
-  nintoolbox accepts XPCK or XPC2 magic in .xc, .xpck, or .bin files. It
-  requires the file-info and filename-table start offsets to be inside
-  the file, but stops on a truncated descriptor rather than rejecting
-  the entire archive. It uses the filename table only if its complete
-  declared range fits; an empty/missing name becomes file_NNNN.bin.
-  Oversized payloads are truncated to EOF. The 32-bit filename CRC and
-  reserved two bytes in each descriptor are ignored by the extractor.
+  It requires the file-info and filename-table start offsets to be inside
+  the file, but stops on a truncated descriptor rather than rejecting the
+  entire archive. It uses the filename table only if its complete declared
+  range fits; an empty/missing name becomes file_NNNN.bin. Oversized
+  payloads are truncated to EOF. The 32-bit filename CRC and reserved two
+  bytes in each descriptor are ignored by the extractor.
 
   The writer emits XPCK, sorts entries, strips directory prefixes from
   names, and writes each basename's zlib CRC32 to its descriptor. It
@@ -68,7 +67,7 @@ instances:
     type: entry_t
     repeat: expr
     repeat-expr: num_files
-    doc: Twelve-byte file descriptors; nintoolbox may stop early on truncation.
+    doc: Twelve-byte file descriptors.
   filename_table:
     pos: file_table_offset
     size: filename_table_size

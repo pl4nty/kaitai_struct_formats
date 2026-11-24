@@ -5,14 +5,12 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  PlatinumGames WT Archive texture bundle, per lib-wta.c. Endianness
-  and detail differ by title; this definition covers the "WTA "
-  magic form with separate position/size tables. The unrelated Wii U
-  big-endian `\0BTW` form (Star Fox Zero) is not modeled here.
+  PlatinumGames WT Archive texture bundle. Endianness and detail differ by
+  title; this definition covers the "WTA " magic form with separate
+  position/size tables. The unrelated Wii U big-endian `\0BTW` form (Star
+  Fox Zero) is not modeled here.
 
-  nintoolbox selects big-endian only when the big-endian version is in
-  1..0xffff and its little-endian interpretation is larger than 0xffff;
-  otherwise the fields and tables are little-endian. It accepts 1..100000
+  Otherwise the fields and tables are little-endian. It accepts 1..100000
   members. When both table offsets are at least 0x20 and contain every u32,
   each index supplies a data position and stored size. Otherwise it falls
   back to 32-byte descriptors beginning at 0x20. A member whose stored and
@@ -56,12 +54,12 @@ instances:
   is_big_endian:
     value: version_be > 0 and version_be <= 0xffff and version_le > 0xffff
     doc: |-
-      nintoolbox's exact endian discriminator: only a plausible small
-      big-endian version whose little-endian reading is implausibly large
-      selects the big-endian interpretation.
+      Endian discriminator: the file is big-endian when the version read as
+      big-endian is a plausible small value and the little-endian reading is
+      implausibly large.
   version:
     value: "is_big_endian ? version_be : version_le"
-    doc: Version selected by the reader's endian discriminator.
+    doc: Version in the byte order chosen by `is_big_endian`.
   num_files:
     value: "is_big_endian ? num_files_be : num_files_le"
     doc: Selected member count; valid archives have 1..100000 members.

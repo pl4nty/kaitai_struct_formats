@@ -53,7 +53,6 @@ seq:
     type: u8
   - id: ofs_shader_model
     type: u8
-    doc: Unused by this tool's reader.
   - id: ptr_name
     type: u8
     doc: |

@@ -9,9 +9,8 @@ meta:
   endian: le
 doc: |
   Little-endian 3DS archive family used by Grezzo's *Ocarina of Time 3D* /
-  *Majora's Mask 3D* (`ZAR\x01`, "queen"/"jenkins" codename) and
-  *Luigi's Mansion 3DS* (`GAR`, version 2..5, "agora"/"SYSTEM" codename).
-  Ported from nintoolbox's `lib-gar.c` (`ExtractGARArchive`).
+  *Majora's Mask 3D* (`ZAR\x01`, "queen"/"jenkins" codename) and *Luigi's
+  Mansion 3DS* (`GAR`, version 2..5, "agora"/"SYSTEM" codename).
 
   Both variants share a 32-byte header: file group count/offset, file
   count/offset and a data-offset-table offset, plus an 8-byte "codename"

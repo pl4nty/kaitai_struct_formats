@@ -5,9 +5,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Data Design Interactive "WADH" game archive (DataWII.wad in
-  Ninjabread Man), per lib-wadh.h. Not related to Wii channel WADs.
-  Directories are entries with size == 0 and last_child != 0xffffffff.
+  Data Design Interactive "WADH" game archive (DataWII.wad in Ninjabread
+  Man). Not related to Wii channel WADs. Directories are entries with size
+  == 0 and last_child != 0xffffffff.
 
   The 16-byte header is followed by num_entries 32-byte descriptors;
   the name table then extends from the descriptor-table end to data_base.

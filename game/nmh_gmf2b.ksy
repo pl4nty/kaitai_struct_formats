@@ -9,7 +9,9 @@ meta:
   encoding: Shift_JIS
   endian: be
 
-doc: Planned to be merged into the main gmf2.ksy file soon.
+doc: |
+  No More Heroes GMF2 model, as parsed by TCP-23/GMF2-Tools. A separately
+  developed variant of `nmh_gmf2` (sevonj/nmh_reverse) for the same format.
 
 seq:
   - id: magic

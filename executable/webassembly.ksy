@@ -225,6 +225,10 @@ types:
       Constant expression: a single constant instruction followed by the `end`
       opcode (0x0b). Parsing the instruction, rather than scanning for the first
       0x0b byte, keeps immediates such as `i32.const 11` (bytes 41 0b 0b) intact.
+
+      Only MVP constant expressions are covered: one `*.const`, `global.get`,
+      `ref.null` or `ref.func` instruction. Extended constant expressions
+      (e.g. `i32.add` sequences) and `v128.const` are not supported.
     doc-ref: https://www.w3.org/TR/wasm-core-1/#valid-constant
     seq:
       - id: opcode
@@ -449,7 +453,6 @@ enums:
     0x03: global_var
 
   const_opcode:
-    0x0b: end
     0x23: global_get
     0x41: i32_const
     0x42: i64_const

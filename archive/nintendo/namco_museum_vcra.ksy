@@ -5,22 +5,20 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Bandai Namco Museum Remix archive, per lib-vcra.c. Two entry
-  layouts exist, selected by whether the word at file offset 0x0C
-  is non-zero: a 44-byte entry carrying a CRC, or a 64-byte
-  CRC-less entry whose table starts at 0x40. In the CRC-bearing
-  variant, the table starts at 0x0C: the word used as the discriminator
-  is also the first entry's payload offset. The extractor does not
-  verify CRC values. It requires at least one entry, a complete table,
-  total_size equal to actual file size, and every payload to begin at
-  or after the table and end within the file. Invalid names are replaced
-  on extraction with file_NNNN.bin, using the zero-based entry index.
+  Bandai Namco Museum Remix archive. Two entry layouts exist, selected by
+  whether the word at file offset 0x0C is non-zero: a 44-byte entry carrying
+  a CRC, or a 64-byte CRC-less entry whose table starts at 0x40. In the
+  CRC-bearing variant, the table starts at 0x0C: the word used as the
+  discriminator is also the first entry's payload offset. The extractor does
+  not verify CRC values. It requires at least one entry, a complete table,
+  total_size equal to actual file size, and every payload to begin at or
+  after the table and end within the file. Invalid names are replaced on
+  extraction with file_NNNN.bin, using the zero-based entry index.
 
-  The nintoolbox writer emits only the 64-byte variant. It places the
-  table at 0x40, writes names in the 56-byte area, and aligns the first
-  and all subsequent payloads to 32 bytes. The header tail, name padding,
-  and inter-payload gaps are zero-filled. These are writer conventions,
-  not required by the reader.
+  It places the table at 0x40, writes names in the 56-byte area, and aligns
+  the first and all subsequent payloads to 32 bytes. The header tail, name
+  padding, and inter-payload gaps are zero-filled. These are writer
+  conventions, not required by the reader.
 seq:
   - id: magic
     contents: "VCRA"
@@ -83,7 +81,7 @@ types:
         doc: Payload length in bytes.
       - id: crc
         type: u4
-        doc: Stored CRC value; nintoolbox's extractor does not check it.
+        doc: Stored CRC value.
       - id: name
         size: 32
         type: str

@@ -5,10 +5,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  CyberConnect2 ".wimg" texture (And-Kensaku / "Kanji Sonomama"
-  family, Wii), per lib-wimg.h. GX-tiled pixel data is not detiled
-  here; CI4/CI8 payloads are followed immediately by a straight
-  RGBA8888 palette (16 or 256 entries).
+  CyberConnect2 ".wimg" texture (And-Kensaku / "Kanji Sonomama" family,
+  Wii). GX-tiled pixel data is not detiled here; CI4/CI8 payloads are
+  followed immediately by a straight RGBA8888 palette (16 or 256 entries).
 seq:
   - id: magic
     contents: "WIMG"

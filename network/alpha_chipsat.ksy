@@ -1,7 +1,7 @@
 # Imported from https://github.com/Alpha-CubeSat/Alpha-Chipsat-Ground/blob/b7cfdbc17d19736e6910047565e93ed0485ed926/chipsat.ksy
 meta:
   id: alpha_chipsat
-  title: Alpha ChipSat Downlink Packet (last updated 11/11)
+  title: Alpha ChipSat downlink packet
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: https://github.com/Alpha-CubeSat/oop-chipsat-code/wiki/2.-Telemetry

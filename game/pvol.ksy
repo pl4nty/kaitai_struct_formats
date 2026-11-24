@@ -12,9 +12,6 @@ doc: |
   block (two NUL-padded strings concatenated, 32 + 8 bytes) followed by the
   payload. Entries must appear at strictly increasing offsets.
 
-  Reference: nintoolbox project/src/lib-pvol.c (ExtractPVOLArchive /
-  CreatePVOLArchive).
-
 seq:
   - id: file_count
     type: u4

@@ -5,10 +5,10 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Rainbow Studios engine ".gcg" geometry container, per lib-rainbow.h.
-  Models only the fixed header up through the material-name table;
-  the per-strip GX vertex-attribute descriptions, arrays and display
-  lists that follow are variable-length and not modeled here.
+  Rainbow Studios engine ".gcg" geometry container. Models only the fixed
+  header up through the material-name table; the per-strip GX
+  vertex-attribute descriptions, arrays and display lists that follow are
+  variable-length and not modeled here.
 seq:
   - id: magic
     contents: "gcg\0"

@@ -5,9 +5,8 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  BOTW/TOTK Resource Size Table, per lib-rstb.c. Flat crc32+name size
-  lookup, no relocations -- the whole file length is known up front
-  from the two header counts.
+  BOTW/TOTK Resource Size Table. Flat crc32+name size lookup, no relocations
+  -- the whole file length is known up front from the two header counts.
   Reference: zeldamods.org/wiki/ResourceSizeTable.product.rsizetable
 seq:
   - id: magic

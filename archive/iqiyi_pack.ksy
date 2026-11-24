@@ -6,13 +6,10 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  NVIDIA Shield iQiyi PAK container. A fixed 0x28-byte header is followed
-  by an XXTEA-encrypted header block (per-file directory) and then the
-  asset data area; each asset is itself independently XXTEA-encrypted,
-  keyed off its own relative path string, length and offset (see
-  lib-iqipack.c's `GenerateKey`/`DecryptAsset` -- the encryption itself is
-  algorithmic, not structural, so it is not modeled here). Ported from
-  lib-iqipack.c's `iqipack_header_t`/`IsIQIPack`/`ExtractIQIPack`.
+  NVIDIA Shield iQiyi PAK container. A fixed 0x28-byte header is followed by
+  an XXTEA-encrypted header block (per-file directory) and then the asset
+  data area; each asset is itself independently XXTEA-encrypted, keyed off
+  its own relative path string, length and offset.
 
   The encrypted directory starts immediately after the 0x28-byte header;
   asset offsets are relative to the first byte after that directory, not
@@ -45,7 +42,7 @@ seq:
     contents: "PACK"
   - id: version
     type: u4
-    doc: Usually 1; ignored by nintoolbox's detector and extractor.
+    doc: Usually 1.
   - id: unknown1
     size: 0x0c
     doc: Reserved header bytes; reader does not inspect them.

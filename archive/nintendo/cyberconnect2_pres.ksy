@@ -2,18 +2,15 @@
 meta:
   id: cyberconnect2_pres
   title: CyberConnect2 Pres archive
-  application: "And-Kensaku \"Pres\" archive (Nintendo DS \"Kanji Sonomama Rakubiki Jiten\" family)"
+  application: Kanji Sonomama Rakubiki Jiten (Nintendo DS)
   file-extension: res
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  CyberConnect2 "Pres" archive, as decoded (once already decompressed
-  from the whole-stream Nintendo LZ77 wrapper used by the ".rz" files) by
-  `ScanKensakuRes()`/`ScanKensakuPres()` in `lib-kensaku.c` of Wiimms SZS
-  Tools. Ported from Luigi Auriemma's `and_kensaku.bms`. This `.ksy`
-  models the already-decompressed "Pres" blob (i.e. the ".res" variant);
-  the compressed ".rz" container is just that same blob run through
-  Nintendo LZ77 type 0x10 or 0x11 and is not separately modeled.
+  Ported from Luigi Auriemma's `and_kensaku.bms`. This `.ksy` models the
+  already-decompressed "Pres" blob (i.e. the ".res" variant); the compressed
+  ".rz" container is just that same blob run through Nintendo LZ77 type 0x10
+  or 0x11 and is not separately modeled.
 
   Layout: a fixed 0x80-byte header (only the "Pres" magic and, for most
   archives, a `u32` at offset 0x60 giving the end of the entry table are

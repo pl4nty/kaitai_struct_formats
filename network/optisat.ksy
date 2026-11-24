@@ -1,7 +1,7 @@
 # Imported from https://github.com/BramVH98/optisat-telemetry/blob/9e06473ade552e71c8280e3b2ab64e4b6a9637ed/optisat.ksy
 meta:
   id: optisat
-  title: OPTISAT (2026-067C) AX.25 telemetry beacon
+  title: OPTISAT AX.25 telemetry beacon
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |

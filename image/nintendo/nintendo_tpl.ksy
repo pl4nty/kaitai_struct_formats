@@ -5,9 +5,7 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Nintendo GameCube/Wii TPL texture library, per `tpl_header_t`/
-  `tpl_header_ex_t`/`tpl_imgtab_t`/`tpl_pal_header_t`/
-  `tpl_img_header_t` in lib-image.h. GX-tiled pixel data itself is
+  Nintendo GameCube/Wii TPL texture library. GX-tiled pixel data itself is
   not detiled here.
 seq:
   - id: magic
@@ -104,13 +102,13 @@ types:
         doc: Vertical texture-coordinate wrapping mode (normally 0 or 1).
       - id: min_filter
         type: u4
-        doc: GX minification-filter value; nintoolbox-generated TPLs use 1.
+        doc: GX minification-filter value.
       - id: mag_filter
         type: u4
-        doc: GX magnification-filter value; nintoolbox-generated TPLs use 1.
+        doc: GX magnification-filter value.
       - id: load_bias
         type: f4
-        doc: LOD bias value; nintoolbox-generated TPLs use 0.0.
+        doc: LOD bias value.
       - id: edge_load
         type: u1
         doc: GX LOD/edge-load setting; normally zero in TPL files.

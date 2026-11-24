@@ -7,9 +7,9 @@ meta:
   endian: le
 doc: |
   SSBH NUFX container (`.nufxlb`), Super Smash Bros. Ultimate. Reference:
-  ultimate-research/ssbh_lib `ssbh_lib/src/formats/nufx.rs` (`Nufx::V0`/`V1`,
-  `ShaderProgramV0`/`V1`, `ShaderStages`, `VertexAttribute`,
-  `MaterialParameter`). Ported from `lib-nufxlb.c`/`.h`.
+  ultimate-research/ssbh_lib `ssbh_lib/src/formats/nufx.rs`
+  (`Nufx::V0`/`V1`, `ShaderProgramV0`/`V1`, `ShaderStages`,
+  `VertexAttribute`, `MaterialParameter`).
 
   Same container conventions as this family's other SSBH decoders (NUMATB,
   NUMDLB, NUMSHB, NUANMB, NUHLPB, NULSTB): every pointer is a 64-bit offset
@@ -88,7 +88,7 @@ types:
     seq:
       - id: param_id
         type: u8
-        doc: One of lib-numatb.c's matl_param_names ids.
+        doc: Material parameter id.
       - id: parameter_name
         type: ssbh_string
       - id: padding

@@ -21,12 +21,10 @@ doc: |
   Kaitai spec and is left to application code.
 
   Background, animation and object data are variable-length and depend on
-  per-record flags (`has_palette`, `aux_flag`, the animation flags byte,
-  and the object dimensions), which is more branching than a straight
-  `seq` can express cleanly; only the fixed-size header and per-record
-  tables are modeled here. Consumers should treat `background_records`
-  and `animation_records` as the entry point and walk the variable
-  payloads that follow them by hand, mirroring `lib-cs-dct.c`.
+  per-record flags (`has_palette`, `aux_flag`, the animation flags byte, and
+  the object dimensions), which is more branching than a straight `seq` can
+  express cleanly; only the fixed-size header and per-record tables are
+  modeled here.
 seq:
   - id: version
     type: u2

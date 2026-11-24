@@ -10,10 +10,6 @@ doc: |
   field that holds it. `bone_entries` and the four Matrix4x4 arrays
   (world/inverse-world/local/inverse-local transforms) are parallel,
   one element per bone.
-
-  Reference: nintoolbox project/src/lib-nusktb.c (DecodeNUSKTB_Text),
-  itself following ultimate-research/ssbh_lib's skel.rs (Skel::V10),
-  verified there against 151 retail skeletons.
 seq:
   - id: magic
     size: 4

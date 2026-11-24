@@ -939,19 +939,6 @@ enums:
     0x766d6864: vmhd
     0x77617665: wave
 
-  # https://mp4ra.org/#/brands
-  #
-  # JS code to scrape the enum `brand` (paste into the browser JS console on the above page):
-  # ```javascript
-  # copy(Array.from(document.querySelector('tbody').querySelectorAll('tr')).map(r => {
-  #   const code = r.querySelector('td:nth-child(1)').innerText.replace(/\$20/g, '\x20');
-  #   if (!code.trim()) return null;
-  #   return [
-  #     '0x' + Array.from((new TextEncoder()).encode(code), b => b.toString(16).padStart(2, '0')).join(''),
-  #     (/^\d/.test(code) ? 'x_' : '') + code.trim().toLowerCase(),
-  #   ];
-  # }).filter(entry => !!entry).map(entry => `    ${entry[0]}: ${entry[1]}\n`).join(''));
-  # ```
   track_reference_type:
     0x63646570: cdep
     0x63647363: cdsc
@@ -965,6 +952,20 @@ enums:
     0x73737263: ssrc
     0x73796e63: sync
     0x746d6364: tmcd
+
+  # https://mp4ra.org/#/brands
+  #
+  # JS code to scrape the enum `brand` (paste into the browser JS console on the above page):
+  # ```javascript
+  # copy(Array.from(document.querySelector('tbody').querySelectorAll('tr')).map(r => {
+  #   const code = r.querySelector('td:nth-child(1)').innerText.replace(/\$20/g, '\x20');
+  #   if (!code.trim()) return null;
+  #   return [
+  #     '0x' + Array.from((new TextEncoder()).encode(code), b => b.toString(16).padStart(2, '0')).join(''),
+  #     (/^\d/.test(code) ? 'x_' : '') + code.trim().toLowerCase(),
+  #   ];
+  # }).filter(entry => !!entry).map(entry => `    ${entry[0]}: ${entry[1]}\n`).join(''));
+  # ```
   brand:
     0x33673261: x_3g2a
     0x33676536: x_3ge6

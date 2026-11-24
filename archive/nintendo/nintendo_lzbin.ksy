@@ -5,13 +5,12 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  LZBIN archive, ported from lib-lzbin.c/.h. A little-endian file table
-  {u32 num_files} followed by one {u32 offset, u32 comp_size} pair per
-  file; each entry's data lives at `offset` as a 4-byte skipped word
-  followed by a raw LZ10/LZ11 stream (see
-  `nintendo_lz10`) `comp_size` bytes long. The reference scanner
-  recognises this container purely from those structural constraints
-  (there is no magic).
+  LZBIN archive. A little-endian file table {u32 num_files} followed by one
+  {u32 offset, u32 comp_size} pair per file; each entry's data lives at
+  `offset` as a 4-byte skipped word followed by a raw LZ10/LZ11 stream (see
+  `nintendo_lz10`) `comp_size` bytes long. The reference scanner recognises
+  this container purely from those structural constraints (there is no
+  magic).
 
   Detection requires 1..4000 files, a complete table, and a first member
   whose offset and declared compressed range are in-file. It checks only

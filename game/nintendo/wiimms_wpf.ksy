@@ -5,9 +5,8 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Wiimms Patch File, per `wpf_head_t`/`wpf_t` in lib-staticr.h. A
-  header followed by a stream of variable-length patch/condition
-  records terminated by a record with selector 0.
+  A header followed by a stream of variable-length patch/condition records
+  terminated by a record with selector 0.
 seq:
   - id: magic
     type: u4

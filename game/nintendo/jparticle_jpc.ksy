@@ -6,10 +6,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  JParticle effect container (`JPAC1-00` / `JPAC2-10`: Twilight Princess, Super
-  Mario Galaxy, Pikmin 2, Wind Waker HD). The texture table is a run of `TEX1`
-  blocks, each holding a standalone BTI image at +0x20. The particle resources
-  themselves are not decoded by nintoolbox and are not modelled here.
+  JParticle effect container (`JPAC1-00` / `JPAC2-10`: Twilight Princess,
+  Super Mario Galaxy, Pikmin 2, Wind Waker HD). The texture table is a run
+  of `TEX1` blocks, each holding a standalone BTI image at +0x20.
 seq:
   - id: magic
     size: 8

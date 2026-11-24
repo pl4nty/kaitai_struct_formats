@@ -21,11 +21,8 @@ doc: |
   RWAV -> .rwav, RARC -> .rarc, and ARC plus NUL -> .pac. All other
   payloads use .bin. These filenames/extensions are extractor inventions.
 
-  The nintoolbox writer reconstructs descriptor order from contiguous
-  file_0000, file_0001, ... names, ignores derived side-products, computes
-  CRC32 with zlib, and writes payloads contiguously immediately after the
-  table. Descriptor order is semantically important because filenames are
-  not present in the archive. No payload alignment is imposed by the reader.
+  Descriptor order is semantically important because filenames are not
+  present in the archive. No payload alignment is imposed by the reader.
 seq:
   - id: magic
     contents: "ARCV"

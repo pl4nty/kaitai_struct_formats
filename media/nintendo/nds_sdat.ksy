@@ -5,11 +5,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Nintendo DS "SDAT" sound archive, per lib-sdat.c. The header holds
-  block-relative SYMB/INFO offsets and an absolute FAT offset. Only
-  the FAT (flat file table) and the fixed header fields are modeled;
-  the SYMB/INFO symbol-lookup blocks use a variable per-category
-  offset scheme (per UnpackSDAT()) and are left raw.
+  Nintendo DS "SDAT" sound archive. The header holds block-relative
+  SYMB/INFO offsets and an absolute FAT offset. Only the FAT (flat file
+  table) and the fixed header fields are modeled; the SYMB/INFO
+  symbol-lookup blocks use a variable per-category offset scheme (per
+  UnpackSDAT()) and are left raw.
 seq:
   - id: magic
     contents: "SDAT"

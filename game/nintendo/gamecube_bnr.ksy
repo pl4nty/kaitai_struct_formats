@@ -12,12 +12,6 @@ doc: |
   variant; `BNR2` is the Wii (six-language) variant that follows it under
   the same 0x20-byte header and pixel layout, just with a bigger comment
   table after the icon.
-
-  Layout taken from lib-bnr.c's `DecodeBNR_RGBA`/`EncodeBNR_RGBA`, which
-  only round-trip the fixed 96x32 RGB5A3 icon: the 0x20-byte header ahead of
-  it and the comment table behind it are treated as opaque padding there,
-  so this definition exposes the icon precisely and the comment area as raw
-  bytes only, sized from each magic's known total file length.
 seq:
   - id: magic
     size: 4
@@ -30,7 +24,7 @@ seq:
     size: 0x1c
     doc: |
       Padding between the magic and the icon pixels; the total header is
-      0x20 bytes. Not otherwise interpreted by lib-bnr.c.
+      0x20 bytes.
   - id: icon
     type: icon_pixel
     repeat: expr
@@ -45,7 +39,7 @@ seq:
       One 0x140-byte Shift-JIS comment block (game name / developer /
       full title / full developer / description, NUL-padded) for BNR1, or
       six such blocks (one per Wii system language) for BNR2. Not decoded
-      here -- lib-bnr.c never reads this area, only the icon.
+      here.
 types:
   icon_pixel:
     seq:

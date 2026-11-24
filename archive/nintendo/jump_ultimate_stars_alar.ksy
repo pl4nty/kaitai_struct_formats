@@ -16,16 +16,14 @@ doc: |
   2 it is a u2, for `archive_type` 3 it is a u4. The header is a fixed 16
   bytes either way; the entry table starts right after it.
 
-  nintoolbox's DecodeALAR is not a general archive extractor: it returns
-  only entry zero's raw payload. Type 2 requires a nonzero count and a
-  complete count*16 descriptor table. Type 3 requires only a nonzero
-  count and at least 32 file bytes; later descriptors are never checked.
-  In both cases, entry zero must have a nonzero length and a payload range
-  within the file. Unknown type values are rejected. This schema models
-  the nominal complete descriptor array, so a type 3 file accepted by
-  the reference decoder may still fail to parse here if its advertised
-  later entries are absent. No decompression or filename interpretation
-  is performed by DecodeALAR.
+  Type 2 requires a nonzero count and a complete count*16 descriptor table.
+  Type 3 requires only a nonzero count and at least 32 file bytes; later
+  descriptors are never checked. In both cases, entry zero must have a
+  nonzero length and a payload range within the file. Unknown type values
+  are rejected. This schema models the nominal complete descriptor array, so
+  a type 3 file accepted by the reference decoder may still fail to parse
+  here if its advertised later entries are absent. No decompression or
+  filename interpretation is performed by DecodeALAR.
 seq:
   - id: magic
     contents: "ALAR"

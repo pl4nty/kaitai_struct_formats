@@ -1,6 +1,6 @@
 # Imported from https://github.com/RiiConnect24/Kaitai-Files/blob/86568af7c4f29040c178ab627c68be707a829829/Kaitais/mobiclip.ksy
-# Generic tag-section header model as in https://github.com/spotlightishere/kaitais/blob/HEAD/mobiclip.ksy
-# and https://github.com/quatric/Wii-Kaitai/blob/HEAD/media/mobiclip.ksy
+# Generic tag-section header model as in https://github.com/spotlightishere/kaitais/blob/b08d4add98d0c1e27f64cc2b431797d56cc65d78/mobiclip.ksy
+# and https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/media/mobiclip.ksy
 meta:
   id: mobiclip
   file-extension: mo
@@ -40,6 +40,28 @@ instances:
     repeat: expr
     repeat-expr: timeline.chunk_count
     if: tag_sections[0].tag == "TL"
+  fps:
+    value: timeline.fps
+    if: tag_sections[0].tag == "TL"
+    doc: |
+      Compatibility alias for `timeline.fps` (a root field in older versions of this
+      spec).
+  chunk_count:
+    value: timeline.chunk_count
+    if: tag_sections[0].tag == "TL"
+    doc: Compatibility alias for `timeline.chunk_count`.
+  video_info:
+    value: tag_sections[1].payload.as<video>
+    if: tag_sections.size >= 2 and tag_sections[1].tag == "V2"
+    doc: The video section, which comes second (after TL) in known files.
+  width:
+    value: video_info.width
+    if: tag_sections.size >= 2 and tag_sections[1].tag == "V2"
+    doc: Compatibility alias for the width in the V2 section.
+  height:
+    value: video_info.height
+    if: tag_sections.size >= 2 and tag_sections[1].tag == "V2"
+    doc: Compatibility alias for the height in the V2 section.
 types:
   tag_section:
     -webide-representation: "{tag}"

@@ -5,14 +5,12 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Pokemon Mystery Dungeon "SIR0" resource container, per lib-sir0.c.
-  Three segments: primary data (0x10 up to sub_header_offset),
-  subheader (up to pointer_offsets_offset), and the pointer-offset
-  table to the end of the file. The tail is a variable-length delta list
-  of locations within the primary data that need pointer relocation,
-  followed by 0xAA padding to a 16-byte boundary. The delta coding and
-  game-specific pointer content are not decoded by nintoolbox and are
-  not modeled here.
+  Pokemon Mystery Dungeon "SIR0" resource container. Three segments: primary
+  data (0x10 up to sub_header_offset), subheader (up to
+  pointer_offsets_offset), and the pointer-offset table to the end of the
+  file. The tail is a variable-length delta list of locations within the
+  primary data that need pointer relocation, followed by 0xAA padding to a
+  16-byte boundary.
 
   The extractor accepts .sir0 and .bin files with SIR0 magic. It treats
   invalid or out-of-file subheader/pointer offsets as EOF when choosing

@@ -6,13 +6,10 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  The "DSiWare export" `.bin` that the DSi writes to an SD card (GBATEK
-  "Tad Files"). On disk every part is an "ES block" -- data followed by a
-  0x20-byte metablock (16-byte MAC + 16-byte info) -- encrypted with AES-CCM-like
-  counters; this definition describes the *decrypted* block geometry, so it
-  applies to data after twltool-style decryption. nintoolbox decrypts the
-  fixed-key blocks, then derives the console-specific key from the TW
-  certificate in the footer (a 16-hex-digit console ID) for the tmd and app.
+  The "DSiWare export" `.bin` that the DSi writes to an SD card (GBATEK "Tad
+  Files"). On disk every part is an "ES block" -- data followed by a
+  0x20-byte metablock (16-byte MAC + 16-byte info) -- encrypted with
+  AES-CCM-like counters.
 
   Layout (offset, data length):
 

@@ -7,30 +7,19 @@ meta:
   endian: be
 doc: |
   A flat, block-aligned data archive Koei Tecmo ships as `LINKDATA*.BNS` on
-  Samurai Warriors 3 (Wii). This is unrelated to, and collides in extension
-  with, the "BNS " stream-audio format some other Nintendo titles use --
-  see lib-passthru.c's `is_stream_audio` check, which deliberately leaves
-  magic-less `.bns` files (this format) to the native extractor in
-  lib-bns.c rather than misclaiming them.
-
-  Layout traced directly from `ScanBNS()`: a 16-byte header (whose first
-  four bytes are never read/validated by the scanner) followed by a flat
-  table of (block-index, size) pairs, one per entry, and the data itself
-  addressed as `block_index * block_size` from the start of the file.
+  Samurai Warriors 3 (Wii).
 seq:
   - id: unused
     size: 4
-    doc: Never read by `ScanBNS()`; not part of the validated header fields.
+    doc: Not part of the validated header fields.
   - id: num_entries
     type: u4
   - id: block_size
     type: u4
-    doc: |
-      Alignment granularity for entry offsets; must be a power of two
-      (`ScanBNS()` rejects the file otherwise).
+    doc: Alignment granularity for entry offsets.
   - id: reserved
     type: u4
-    doc: Must be zero, or `ScanBNS()` rejects the file.
+    doc: Must be zero.
   - id: entries
     type: entry
     repeat: expr

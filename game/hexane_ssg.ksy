@@ -1,5 +1,5 @@
 # Imported from https://github.com/HenryOfCarim/GameFilesTemplates/blob/f61646c9173f4f9052e2fa8421c17e4bea7776b9/albam/engines/hexn/ssg.ksy
-# Layout version 5 and ofs_in_buffer_chunks from https://github.com/Brachi/albam/blob/HEAD/albam/engines/hexn/structs/ssg.ksy
+# Layout version 5 and ofs_in_buffer_chunks from https://github.com/Brachi/albam/blob/6242aaff6c4145732b9b78213f2d7cf9b84d4545/albam/engines/hexn/structs/ssg.ksy
 meta:
   id: hexane_ssg
   title: Hexane Engine Archive format
@@ -26,7 +26,7 @@ seq:
     type: u4
     valid:
       any-of: [5, 6]
-    doc: Layout version - see meta.doc for what the two differ in.
+    doc: Layout version; the top-level doc describes how layouts 5 and 6 differ.
   - {id: reserved_01, type: u4}
   - {id: size_files_info, type: u4}
   - {id: size_file_names, type: u4}

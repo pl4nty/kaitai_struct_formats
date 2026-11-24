@@ -13,7 +13,6 @@ doc: |
   zero-size type-1 block. Textures are stored in the Latte GPU's tiled
   surface layout and need a separate detiling pass to become linear RGBA;
   this definition only exposes the container structure, not decoded pixels.
-  Ported from lib-gtx.c's `ScanGTX`.
 
   GTX sits a level below NintendoWare rather than inside it: it is the
   Cafe SDK's raw GX2 surface dump, the same struct (`GX2Surface`/

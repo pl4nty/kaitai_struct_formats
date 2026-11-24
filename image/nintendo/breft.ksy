@@ -6,12 +6,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  The texture-carrying sibling of BREFF: same `REFF`-shaped 16-byte
-  header as BRRES/BREFF but with magic `REFT`, holding one or more
-  `breft_image_t` records (see `lib-breff.h`). Each image is a plain Wii
-  GX texture -- format, dimensions, an optional palette and mipmaps --
-  addressed exactly like BREFF's items, through the same item-list
-  layout.
+  The texture-carrying sibling of BREFF: same `REFF`-shaped 16-byte header
+  as BRRES/BREFF but with magic `REFT`, holding one or more `breft_image_t`
+  records. Each image is a plain Wii GX texture -- format, dimensions, an
+  optional palette and mipmaps -- addressed exactly like BREFF's items,
+  through the same item-list layout.
 
   Unlike a BRRES TEX0, a BREFT image packs its own small header
   (`breft_image` below) directly in front of the texel data instead of

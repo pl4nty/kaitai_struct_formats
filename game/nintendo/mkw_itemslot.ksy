@@ -9,16 +9,15 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Mario Kart Wii's "ITEMSLT" item-probability table, as parsed by
-  `lib-itemslot.c`/`itemslot_bin_t` in `lib-common.h` of Wiimms SZS Tools.
-  This is the binary form of `ItemSlot.bin` / `ItemSlotAll.bin` (extension
+  Mario Kart Wii's "ITEMSLT" item-probability table: the binary form of
+  `ItemSlot.bin` / `ItemSlotAll.bin` (extension
   `.bin`, or `.slt` when produced by `wstrt`), a flat table of `u8`
   probabilities: for each of a fixed set of "situations" (Grand-Prix
   player/enemy, VS player/enemy/online, special item boxes, and -- if
   `add_battle` -- the 4 Balloon/Coin battle situations plus their online
-  variants), one row per placement (0..18, "Green Shell".."Triple
-  Bananas") and one column per race position (1st..12th, or 1st..16th for
-  the "special" table).
+  variants), one row per placement (0..18, "Green Shell".."Triple Bananas")
+  and one column per race position (1st..12th, or 1st..16th for the
+  "special" table).
 
   Every table is prefixed by its own `n_rows`/`n_cols` byte pair, mirroring
   the fixed geometry baked into the tool (`ITEMSLT_SIZE6` = 1457 bytes for

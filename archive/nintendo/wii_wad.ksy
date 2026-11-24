@@ -13,20 +13,9 @@ doc: |
   0x20 bytes but still leaves a 0x20-byte gap before `certificates`
   begins.
 
-  The contents are AES-128-CBC encrypted with the title key, which the
-  ticket carries encrypted with one of the console's common keys -- the
-  same two-step scheme a Wii disc's own partitions use, which is why
-  `wiimms-iso-tools-plus`'s `x-wad.c` reuses its disc-crypto helpers
-  rather than a separate implementation. Decryption itself is out of
-  scope for this definition (as it is for every other container in this
-  batch): `title_key_encrypted` and each content's `encrypted_data` are
-  exposed as opaque bytes, not decrypted here.
-
-  Only the TMD's content hash can confirm the title key was right --
-  `wiimms-iso-tools-plus`'s own extractor decrypts unconditionally and
-  only checks the SHA-1 hash afterward, warning rather than refusing when
-  it disagrees, because a wrong common key is not the only thing that
-  makes a hash mismatch.
+  Decryption itself is out of scope for this definition (as it is for every
+  other container in this batch): `title_key_encrypted` and each content's
+  `encrypted_data` are exposed as opaque bytes, not decrypted here.
 
   A content's *stored* size is not its real size: `wd_tmd_content_t.size`
   (`len_content` here) is the plaintext length, but only whole AES blocks
@@ -38,12 +27,8 @@ doc: |
 
   ## Validated against
 
-  Two real WAD files, `DiskCheck v1.00` (2 contents) and `Photo Channel
-  v1.1 (World) (v3)`. Every section size and offset, and every content's
-  encrypted size, were checked against `wiimms-iso-tools-plus`'s own `wit
-  XINFO` output for both -- including that this definition's content
-  walk (using the two roundings above) lands on exactly the same content
-  count and matching per-content sizes that `wit` reports.
+  Two real WAD files, `DiskCheck v1.00` (2 contents) and `Photo Channel v1.1
+  (World) (v3)`.
 seq:
   - id: len_header
     type: u4
@@ -126,11 +111,9 @@ types:
         size: (64 - (_root.tmd.contents[index].len_content_stored % 64)) % 64
   ticket:
     doc: |
-      Fixed 0x2A4-byte layout; see WiiBrew's Ticket page, which
-      `wiimms-iso-tools-plus`'s own struct comment cites directly. Fields
-      this definition doesn't need for container-level parsing (the
-      signature, most of the padding) are collapsed into `reserved*`
-      rather than named individually.
+      Fixed 0x2A4-byte layout. Fields this definition doesn't need for
+      container-level parsing (the signature, most of the padding) are
+      collapsed into `reserved*` rather than named individually.
     seq:
       - id: sig_type
         type: u4
@@ -169,9 +152,8 @@ types:
         size: 0x62
   tmd:
     doc: |
-      Fixed-size header followed by `num_contents` `tmd_content` records.
-      See WiiBrew's Title metadata page, cited the same way in
-      `wiimms-iso-tools-plus`'s own struct comment.
+      Fixed-size header followed by `num_contents` `tmd_content`
+      records.
     seq:
       - id: sig_type
         type: u4

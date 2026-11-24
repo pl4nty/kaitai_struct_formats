@@ -7,12 +7,11 @@ meta:
   endian: le
 doc: |
   Nintendo's general-purpose Huffman compression, as used across GBA/DS/Wii
-  titles (the same on-disk shape as the public "CompressHuff" tooling).
-  A one-byte tag selects 4-bit or 8-bit symbols, followed by a 24-bit
-  little-endian uncompressed size (falling back to an extra 32-bit size
-  word when that field is 0), a Huffman tree stored as paired child
-  bytes, and the bitstream itself, read 32 bits at a time. Ported from
-  lib-huff.c's `DecodeNintendoHuff`/`EncodeNintendoHuff`.
+  titles (the same on-disk shape as the public "CompressHuff" tooling). A
+  one-byte tag selects 4-bit or 8-bit symbols, followed by a 24-bit
+  little-endian uncompressed size (falling back to an extra 32-bit size word
+  when that field is 0), a Huffman tree stored as paired child bytes, and
+  the bitstream itself, read 32 bits at a time.
 seq:
   - id: tag
     type: u1

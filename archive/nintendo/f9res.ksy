@@ -6,9 +6,7 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Flat resource archive, magic `res\n`, ported from nintoolbox's
-  `lib-f9res.c` (module comment header "6. GameCube Resource Archive").
-  All fields big-endian.
+  Flat resource archive, magic `res\n`. All fields big-endian.
 
   The header carries two absolute offsets: `header_offset`, added to
   every chunk's stored offset to get its real file position, and
@@ -17,32 +15,28 @@ doc: |
   (relative to `header_offset`) and a size; the remaining 8 bytes are
   unused by the reader.
 
-  The nintoolbox extractor accepts .res and .bin names but identifies this
-  format by the magic. It requires a complete table with 1..100000 entries;
-  a payload extending beyond EOF is truncated, while empty or out-of-file
-  entries produce no extracted file. Extraction names are TAG_NNNN.bin,
-  where NNNN is the zero-based table index and non-printable tag bytes become
-  underscores. These names are generated, not stored in the archive.
+  It requires a complete table with 1..100000 entries; a payload extending
+  beyond EOF is truncated, while empty or out-of-file entries produce no
+  extracted file. Extraction names are TAG_NNNN.bin, where NNNN is the
+  zero-based table index and non-printable tag bytes become underscores.
+  These names are generated, not stored in the archive.
 
-  The nintoolbox writer sorts input entries by name, derives each tag from
-  up to four basename bytes preceding the first underscore (default DATA),
-  writes both header_offset and chunks_offset as 0x20, and puts 4 in the
-  second table word. It aligns the first payload and each following payload
-  to 16-byte boundaries; the entry offsets remain relative to 0x20. The
-  writer zeros all other header/table reserved bytes and both trailing
-  entry words. This is a writer convention, not a general format invariant.
+  It aligns the first payload and each following payload to 16-byte
+  boundaries; the entry offsets remain relative to 0x20. The writer zeros
+  all other header/table reserved bytes and both trailing entry words. This
+  is a writer convention, not a general format invariant.
 seq:
   - id: magic
     contents: "res\n"
   - id: unknown_04
     size: 4
-    doc: Reserved header bytes; zero in nintoolbox-produced archives.
+    doc: Reserved header bytes.
   - id: header_offset
     type: u4
     doc: Base added to each entry's relative payload offset.
   - id: unknown_0c
     size: 16
-    doc: Reserved header region; zero in nintoolbox-produced archives.
+    doc: Reserved header region.
   - id: chunks_offset
     type: u4
     doc: Absolute file offset of the count word and chunk-entry table.
@@ -55,10 +49,10 @@ types:
     seq:
       - id: chunk_count
         type: u4
-        doc: Number of 20-byte entries; nintoolbox accepts 1 through 100000.
+        doc: Number of 20-byte entries.
       - id: unknown
         type: u4
-        doc: Unused by the extractor; nintoolbox writes 4.
+        doc: Unused by the extractor.
       - id: entries
         type: chunk_entry
         repeat: expr
@@ -79,7 +73,7 @@ types:
         doc: Declared payload byte count; extractor truncates at EOF.
       - id: unknown
         size: 8
-        doc: Two unused 32-bit words, both zero in nintoolbox output.
+        doc: Two unused 32-bit words.
     instances:
       body:
         io: _root._io

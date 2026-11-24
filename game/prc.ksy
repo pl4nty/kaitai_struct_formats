@@ -13,9 +13,6 @@ doc: |
   label table, a reference section (strings + struct key tables), and a
   parameter tree whose root value is always a struct (type 12).
 
-  Reference: nintoolbox project/src/lib-prc.c (DecodePRC_XML), itself a
-  reimplementation of ultimate-research/prc-rs's disasm.rs.
-
   Older Smash 4 era variants ("parambinary", "PRC\0", "BPAR") are a
   different, undocumented layout and are not modeled here.
 

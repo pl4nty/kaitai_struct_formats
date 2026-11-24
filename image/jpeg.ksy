@@ -221,6 +221,8 @@ types:
         seq:
           - id: precision
             type: b4
+            valid:
+              any-of: [0, 1]
             doc: Element precision; 0 = 8-bit values, 1 = 16-bit values
           - id: table_id
             type: b4

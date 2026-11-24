@@ -5,19 +5,16 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Super Smash Bros. 4 joint table (.jtb), per lib-smashvbn.c (ported
-  from KillzXGaming/Smash-Forge JTB.cs). This is a VBN bone-index remap
+  Super Smash Bros. 4 joint table (.jtb). This is a VBN bone-index remap
   with two consecutive arrays of signed 16-bit joint indices, not one
   undifferentiated array. There is no magic or stored byte-order tag.
 
-  nintoolbox recognizes a file only when its length is even, between 4
-  and 0x40000 bytes, and exactly `4 + 2 * (size1 + size2)` under the
-  selected byte order. It first tests the big-endian counts; if that
-  length matches and the first count is at most 255, it selects big-
-  endian. Otherwise it requires a matching little-endian interpretation.
-  This schema exposes that same selection rule, but it does not validate
-  the file-length condition itself. The two arrays correspond to the
-  decoder's table1 and table2 output sections.
+  It first tests the big-endian counts; if that length matches and the first
+  count is at most 255, it selects big- endian. Otherwise it requires a
+  matching little-endian interpretation. This schema exposes that same
+  selection rule, but it does not validate the file-length condition itself.
+  The two arrays correspond to the decoder's table1 and table2 output
+  sections.
 seq:
   - id: size1_be_probe
     type: u2be

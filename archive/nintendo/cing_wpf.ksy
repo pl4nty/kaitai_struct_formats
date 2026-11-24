@@ -40,4 +40,4 @@ types:
         size: next_offset - _io.pos
         doc: |
           Alignment padding between the end of the payload and `next_offset`
-          (nintoolbox requires `next_offset >= offset + 0x20 + size`).
+          (`next_offset >= offset + 0x20 + size`).

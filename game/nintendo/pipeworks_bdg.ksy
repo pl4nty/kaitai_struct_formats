@@ -6,12 +6,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Pipeworks Software bundle (Merv Griffin's Crosswords, ...). A 0x26-byte text
-  banner (`Pipeworks bundle v1.03 (big endian)`), then big-endian header fields
-  at 0x30. Names are stored only as hashes, so nintoolbox writes members as
-  `<hash>_<type>.bin` (`.txt` when plain text). Entries whose data lies outside
-  the file (stored in a sibling bundle) are skipped; zlib members (type name
-  `Ifc`) are inflated.
+  Pipeworks Software bundle (Merv Griffin's Crosswords,...). A 0x26-byte
+  text banner (`Pipeworks bundle v1.03 (big endian)`), then big-endian
+  header fields at 0x30. Entries whose data lies outside the file (stored in
+  a sibling bundle) are skipped; zlib members (type name `Ifc`) are
+  inflated.
 seq:
   - id: banner
     size: 0x26

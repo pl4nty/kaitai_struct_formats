@@ -8,11 +8,8 @@ meta:
 doc: |
   Sega's GameCube/Wii texture wrapper (Super Monkey Ball: Banana Blitz and
   other Sega titles). A tiny "GCIX" index chunk is followed by a "GVRT"
-  chunk whose body holds width/height/format and then the pixel data in
-  the GX GameCube tile layouts (4x4 or 8x8 blocks, depending on format).
-  Mipmaps and paletted formats are not covered here (the decoder in
-  lib-gvr.c rejects them), and the tiled pixel data itself is left as raw
-  bytes since untiling is algorithmic, not structural.
+  chunk whose body holds width/height/format and then the pixel data in the
+  GX GameCube tile layouts (4x4 or 8x8 blocks, depending on format).
 seq:
   - id: gcix_magic
     contents: "GCIX"
@@ -43,10 +40,7 @@ seq:
     type: u2
   - id: pixel_data
     size-eos: true
-    doc: |
-      Tile-encoded pixel data in the GX layout for `format` (see
-      lib-gvr.c's `DecodeGVR_RGBA` for the per-format block layout and
-      untiling logic).
+    doc: Tile-encoded pixel data in the GX layout for `format`.
 enums:
   gvr_format:
     0: i4

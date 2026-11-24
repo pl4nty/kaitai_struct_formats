@@ -6,17 +6,15 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  The Wii `RSAR` sound-archive container -- the single file (typically
-  named `sound_data.brsar` or similar) a retail Wii game ships all of its
-  music, sound effects, banks and samples in. Community tools (BrawlBox /
-  BrawlLib, later BrawlCrate, and vgmtrans' `RSARScanner`) reverse-engineered
-  it independently from Super Smash Bros. Brawl and Mario Kart Wii, since
+  The Wii `RSAR` sound-archive container -- the single file (typically named
+  `sound_data.brsar` or similar) a retail Wii game ships all of its music,
+  sound effects, banks and samples in. Community tools (BrawlBox / BrawlLib,
+  later BrawlCrate, and vgmtrans' `RSARScanner`) reverse-engineered it
+  independently from Super Smash Bros. Brawl and Mario Kart Wii, since
   Nintendo never published the layout. A fixed 0x40-byte header whose three
   payload blocks (`SYMB` the name/string table, `INFO` the sound/bank/group
   tables, `FILE` the raw payload blobs) are each an offset+size pair at a
-  fixed slot in the header. Field layout verified against `lib-brsar.c`'s
-  `UnpackBRSAR()`/`WriteRsarEnvelope()`, itself taken from vgmtrans'
-  `RSARScanner.cpp`.
+  fixed slot in the header.
 
   The three blocks divide the archive by *kind of information*, not by
   file: `SYMB` is purely names (an FST-like radix-tree string pool used to
@@ -35,17 +33,13 @@ doc: |
   simplicity.
 
   The related Wii U `FSAR` and 3DS `CSAR` archives share the same three
-  named blocks but wrap them in a BFSTM/BCSTM-style section table instead
-  of this fixed header; `lib-brsar.c` explicitly documents that its
-  handling of those two variants is an untested extrapolation rather than
-  something verified against a real reader, so they are intentionally
-  not modeled here.
+  named blocks but wrap them in a BFSTM/BCSTM-style section table instead of
+  this fixed header.
 
-  Only the SYMB/INFO/FILE envelope is modeled; the internal structure of
-  the RSEQ/RBNK/RWAR/RWSD payloads those blocks describe is out of scope
-  (`lib-brsar.c` itself treats most of it as opaque pass-through). Community
-  tools that do decode INFO fully (BrawlBox/BrawlLib, vgmtrans) are the
-  best available reference if that structure is ever added here.
+  Only the SYMB/INFO/FILE envelope is modeled; the internal structure of the
+  RSEQ/RBNK/RWAR/RWSD payloads those blocks describe is out of scope.
+  Community tools that do decode INFO fully (BrawlBox/BrawlLib, vgmtrans)
+  are the best available reference if that structure is ever added here.
 seq:
   - id: magic
     contents: "RSAR"

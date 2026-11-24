@@ -13,9 +13,6 @@ doc: |
   reader treats these as always fitting in 32 bits and reads high and
   low words separately). `flag == 1` means the payload is zlib
   compressed.
-
-  Reference: nintoolbox project/src/lib-nxarc.c (ExtractNXARCArchive /
-  CreateNXARCArchive).
 seq:
   - id: magic
     contents: "RAXN"

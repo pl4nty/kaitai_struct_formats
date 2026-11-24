@@ -6,13 +6,15 @@
 meta:
   id: tomodachi_life_qr_code
   title: Tomodachi Life Mii QR code extra data
-  application: |
-    Extra data stored within Mii QR codes created from Tomodachi Life.
-    To access this data, use this jsfiddle: https://jsfiddle.net/arian_/ckya346z/22/
-    Please note that strings usually contain garbage data after the first terminator.
+  application: Tomodachi Life
   license: LicenseRef-All-Rights-Reserved
   endian: le
   bit-endian: le
+doc: |
+  Extra data stored within Mii QR codes created from Tomodachi Life.
+  To access this data, use this jsfiddle: https://jsfiddle.net/arian_/ckya346z/22/
+  Please note that strings usually contain garbage data after the first
+  terminator.
 seq:
   - id: first_name
     size: 32

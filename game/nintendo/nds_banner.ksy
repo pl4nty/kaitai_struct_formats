@@ -5,13 +5,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  The Nintendo DS ROM banner block ("banner.bin", what the ROM
-  header's icon/title offset points at, and what ndstool -b/-t
-  extracts), as read by ScanNDSBanner()/IsNDSBanner() in
-  lib-nds-banner.c. Ported from GBATEK's "DS Cartridge Icon/Title"
-  layout. A 32x32 4bpp icon plus one UTF-16LE title per supported
-  language; DSi-enhanced titles (version 0x0103) extend it with an
-  8-frame animated icon block.
+  The Nintendo DS ROM banner block ("banner.bin", what the ROM header's
+  icon/title offset points at, and what ndstool -b/-t extracts). Ported from
+  GBATEK's "DS Cartridge Icon/Title" layout. A 32x32 4bpp icon plus one
+  UTF-16LE title per supported language; DSi-enhanced titles (version
+  0x0103) extend it with an 8-frame animated icon block.
 
   There is no format magic; detection instead checks that the stored
   CRC16 (CRC-16/MODBUS, poly 0xa001, init 0xffff) over the region a
@@ -85,9 +83,7 @@ types:
         repeat: expr
         repeat-expr: 16
   anim_token:
-    doc: |
-      One animation step; a `duration` of 0 terminates the sequence
-      (DecodeNDSBannerIcon_RGBA()'s nds_banner_frame_t).
+    doc: One animation step.
     seq:
       - id: duration
         type: u1

@@ -5,11 +5,11 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Nintendo DS NCER ("RECN") cell-bank container, as read by ScanNCER()
-  in lib-ncer.c. Outer "RECN" header wraps one "KBEC" chunk holding a
-  table of cells (each a small OAM group descriptor) followed by the
-  packed OAM object records those cells index into. Object records are
-  plain 6-byte DS hardware OAM attribute triples (attr0/attr1/attr2).
+  Nintendo DS NCER ("RECN") cell-bank container. Outer "RECN" header wraps
+  one "KBEC" chunk holding a table of cells (each a small OAM group
+  descriptor) followed by the packed OAM object records those cells index
+  into. Object records are plain 6-byte DS hardware OAM attribute triples
+  (attr0/attr1/attr2).
 seq:
   - id: magic
     contents: "RECN"

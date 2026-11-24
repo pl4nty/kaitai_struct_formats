@@ -14,11 +14,6 @@ doc: |
   * `sec2` -- `{u4 label_hash, u4 count, u4 sec3_offset}` records.
   * `sec3` -- `u4` offsets into the string pool.
   * `sec4` -- the string pool.
-
-  A string slot in the pool is a run of 16-bit control words that ends with the
-  pair `0x5458 0x0000` (`"TX\0\0"`), then a `u2` character count and that many
-  UTF-16BE characters, followed by trailing control words. nintoolbox writes
-  `[hash]` blocks as UTF-8.
 seq:
   - id: magic
     contents: 'GFMC'

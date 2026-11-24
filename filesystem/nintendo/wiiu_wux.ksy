@@ -6,35 +6,28 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  The sparse container `wiimms-iso-tools-plus` reads and writes for Wii U
-  disc images (WUD). Not a compression in the usual sense: every sector's
-  payload is stored verbatim, but a sector whose content is byte-identical
-  to one already stored is not stored again -- `index` just points every
-  image sector at whichever stored sector holds its bytes. A retail 25 GB
-  WUD is mostly encrypted data plus huge runs of identical padding, which
-  is what makes this worth doing at all; no cryptographic key is needed
-  for the conversion, since it never touches the payload's meaning, only
-  which bytes repeat.
+  Not a compression in the usual sense: every sector's payload is stored
+  verbatim, but a sector whose content is byte-identical to one already
+  stored is not stored again -- `index` just points every image sector at
+  whichever stored sector holds its bytes. A retail 25 GB WUD is mostly
+  encrypted data plus huge runs of identical padding, which is what makes
+  this worth doing at all; no cryptographic key is needed for the
+  conversion, since it never touches the payload's meaning, only which bytes
+  repeat.
 
-  `data_offset` -- where the stored sectors begin -- is not a header
-  field. It is computed from the header size and the index table's own
-  length, rounded up to the next `sector_size` boundary: `ceil((0x20 +
-  n_index * 4) / sector_size) * sector_size`, where `n_index =
-  ceil(image_size / sector_size)`. Both formulas come directly from
-  `wiimms-iso-tools-plus`'s own reader and writer (`lib-wux.c`), which
-  compute them identically for reading and writing.
+  `data_offset` -- where the stored sectors begin -- is not a header field.
+  It is computed from the header size and the index table's own length,
+  rounded up to the next `sector_size` boundary: `ceil((0x20 + n_index * 4)
+  / sector_size) * sector_size`, where `n_index = ceil(image_size /
+  sector_size)`.
 
   ## Validated against
 
-  A synthetic 10-sector image built by hand, with sector 7 made a
-  byte-identical duplicate of sector 3, converted to this format,
-  and read back -- both by this definition and independently by `wit
-  XINFO`/`XCONVERT`, from the real `wiimms-iso-tools-plus` binary itself.
-  `wit` reported "9 of 10 stored" (correctly deduplicating sector 7
-  against sector 3) and reconstructed the original 10-sector image byte
-  for byte when converted back to WUD -- confirming the header, the
-  index table and `data_offset`'s formula all independently of anything
-  this definition itself computes.
+  `wit` reported "9 of 10 stored" (correctly deduplicating sector 7 against
+  sector 3) and reconstructed the original 10-sector image byte for byte
+  when converted back to WUD -- confirming the header, the index table and
+  `data_offset`'s formula all independently of anything this definition
+  itself computes.
 seq:
   - id: magic0
     contents: [0x57, 0x55, 0x58, 0x30]
@@ -46,7 +39,7 @@ seq:
       present, unexplained, and checked by the real reader regardless.
   - id: sector_size
     type: u4
-    doc: 0x8000 in every file `wiimms-iso-tools-plus`'s own writer produces.
+    doc: Typically 0x8000.
   - id: reserved
     type: u4
     doc: Always 0; unused by the real reader.

@@ -4,6 +4,9 @@ meta:
   title: Pseudoregalia save file (GVAS)
   license: LicenseRef-All-Rights-Reserved
   endian: le
+doc: |
+  Pseudoregalia (Unreal Engine 5) save game. See `unreal_gvas` for the
+  generic GVAS save game header.
 seq:
   - id: magic
     contents: GVAS

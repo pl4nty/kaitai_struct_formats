@@ -1,7 +1,7 @@
 # Imported from https://github.com/lazbalBello/ecomovilapp-Backend/blob/5331e1adf88169440f5630dae61f640f55ad1d13/Ecomoviles-Ingestor-Reactivo/src/main/resources/Protocols/jt808_protocol.ksy
 meta:
   id: jt808
-  title: Protocolo JT808 (Ecomoviles Edition)
+  title: JT/T 808 vehicle terminal message (subset)
   license: LicenseRef-All-Rights-Reserved
   endian: be
 seq:

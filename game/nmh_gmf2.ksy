@@ -10,6 +10,7 @@ doc: |
   Grasshopper Manufacture
   No More Heroes world chunk
   GMF - Grasshopper Model File?
+  See also `nmh_gmf2b`, a separately developed spec for the same format.
   Japanese text encoding.
 
 seq:

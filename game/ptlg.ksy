@@ -16,10 +16,6 @@ doc: |
   padding word before the entry table, detected by peeking the word at
   0x10: if it reads zero, the table starts at 0x20, else at 0x10.
 
-  Reference: nintoolbox project/src/lib-ptlg.c (ExtractPTLGArchive /
-  DecodePTLGToPNGDir), cross-checked against KillzXGaming's StrikersRLT.cs
-  (Switch-Toolbox).
-
 seq:
   - id: magic
     contents: "PTLG"

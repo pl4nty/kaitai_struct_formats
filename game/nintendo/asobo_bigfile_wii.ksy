@@ -6,15 +6,13 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Asobo Studio's "Internal Cross Technology" BigFile container, as used
-  by *Ratatouille* on Wii. Layout after widberg/bff (BigFile v1.06.63);
-  the Wii flavour is big-endian. A resource's link header and body are
-  opaque blobs here -- their own internal structure is per-class (see
-  lib-asobo.c/.h for the handful of decoded classes: Bitmap_Z, Sound_Z,
-  Mesh_Z, Material_Z) and a compressed body additionally starts with an
-  8-byte little-endian (decompressed size, compressed size) pair
-  followed by an LZRS bitstream, neither of which is byte-structured
-  enough to model in Kaitai.
+  Asobo Studio's "Internal Cross Technology" BigFile container, as used by
+  *Ratatouille* on Wii. Layout after widberg/bff (BigFile v1.06.63); the Wii
+  flavour is big-endian. A resource's link header and body are opaque blobs
+  here -- their own internal structure is per-class and a compressed body
+  additionally starts with an 8-byte little-endian (decompressed size,
+  compressed size) pair followed by an LZRS bitstream, neither of which is
+  byte-structured enough to model in Kaitai.
 
   Names throughout are 32-bit hashes (Asobo CRC-32, MSB-first table,
   LSB-first update, lower-cased input), not stored strings.

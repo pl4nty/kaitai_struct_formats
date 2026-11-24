@@ -6,17 +6,14 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  CTXB is the container `SaveCTXB()` in nintoolbox's lib-ctxb.c writes when
-  exporting a decoded image back to a 3DS-style texture file: a small
-  header pointing at one `tex ` chunk, which holds a table of texture
-  entries whose pixel data (Pica200-tiled RGBA8, per `DecodePicaTexture`-
-  style 8x8 Z-order blocks) follows immediately after the chunk.
+  Grezzo 3DS texture container: a small header pointing at one `tex `
+  chunk, which holds a table of texture entries whose pixel data
+  (Pica200-tiled RGBA8 in 8x8 Z-order blocks) follows immediately after
+  the chunk.
 
-  This file only ever *writes* one chunk with one texture entry, so the
-  struct below generalizes the writer's fixed layout (chunk_count and
-  tex_count as counted fields) rather than being derived from a reader --
-  there is no `ScanCTXB`/`LoadCTXB` in this codebase to check field-by-field
-  against real-world multi-entry files.
+  The layout was derived from files with one chunk and one texture entry.
+  `chunk_count` and `tex_count` are modelled as counts, but files with
+  several entries have not been checked.
 seq:
   - id: magic
     contents: "ctxb"

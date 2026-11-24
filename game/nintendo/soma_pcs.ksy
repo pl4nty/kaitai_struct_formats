@@ -15,7 +15,7 @@ doc: |
 
   Header variants: normally word 1 is the file size and word 2 the component
   count (1..256); a few files (e.g. `BFldItm.pcs`) hold the count in word 1
-  with word 2 equal to 0. `component_count` follows nintoolbox's rule.
+  with word 2 equal to 0.
 seq:
   - id: magic
     contents: ['pcs', 0]

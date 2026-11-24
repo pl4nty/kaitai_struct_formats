@@ -5,17 +5,16 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Nintendo "VFF " PrFILE2 (eSOL) Virtual FAT volume, per lib-vff.c/.h.
-  Wii channels and save data use this to hold a small FAT12/FAT16
-  filesystem inside a single file, with the FAT boot sector left out
-  (so a normal FAT tool cannot open one directly). The 0x20-byte
-  wrapper header is followed by two copies of the FAT (each padded up
-  to a cluster boundary), a fixed 0x1000-byte root directory, and then
-  the data clusters themselves; cluster numbering starts at 2, so
-  cluster N begins at `data_offset + (N-2)*cluster_size`. Everything
-  below the header is little-endian regardless of the header's own
-  big-endian fields and byte-order mark. FAT12 is used at or below
-  0xff5 clusters, FAT16 above it; there is no FAT32 variant.
+  Nintendo "VFF " PrFILE2 (eSOL) Virtual FAT volume. Wii channels and save
+  data use this to hold a small FAT12/FAT16 filesystem inside a single file,
+  with the FAT boot sector left out (so a normal FAT tool cannot open one
+  directly). The 0x20-byte wrapper header is followed by two copies of the
+  FAT (each padded up to a cluster boundary), a fixed 0x1000-byte root
+  directory, and then the data clusters themselves; cluster numbering starts
+  at 2, so cluster N begins at `data_offset + (N-2)*cluster_size`.
+  Everything below the header is little-endian regardless of the header's
+  own big-endian fields and byte-order mark. FAT12 is used at or below 0xff5
+  clusters, FAT16 above it; there is no FAT32 variant.
 seq:
   - id: magic
     contents: "VFF "

@@ -1,7 +1,7 @@
 # Imported from https://github.com/carl-sr/FlpTool/blob/69fae32e51f6f3d055ffa27bb2ea9f233809b9c4/flp_word_event.ksy
 meta:
   id: flp_word_event
-  title: Image Line FL Studio Word Word Event
+  title: FL Studio project word event
   license: LicenseRef-All-Rights-Reserved
   endian: le
 

@@ -8,12 +8,12 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  SSBH MODL container (`.numdlb` / `.nusrcmdlb`), Super Smash Bros. Ultimate.
-  Reference: ultimate-research/ssbh_lib `ssbh_lib/src/formats/modl.rs`
-  (`Modl::V17`). Ties the mesh (.numshb), skeleton (.nusktb), materials
-  (.numatb) and, optionally, animation (.nuanmb) file names together and
-  assigns a material label to each mesh object. Ported from
-  `lib-numdlb.c`/`.h`.
+  SSBH MODL container (`.numdlb` / `.nusrcmdlb`), Super Smash Bros.
+  Ultimate. Reference: ultimate-research/ssbh_lib
+  `ssbh_lib/src/formats/modl.rs` (`Modl::V17`). Ties the mesh (.numshb),
+  skeleton (.nusktb), materials (.numatb) and, optionally, animation
+  (.nuanmb) file names together and assigns a material label to each mesh
+  object.
 seq:
   - id: magic
     contents: [0x48, 0x42, 0x53, 0x53] # "HBSS"

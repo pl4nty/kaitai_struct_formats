@@ -6,11 +6,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  `OBP1` sprite / object graphic of Soma Bringer (204 files validated):
-  a 16-byte header, an RGB555 palette and 4 bpp or 8 bpp tile data. Width and
-  height are each 1..2048. The bit depth and tile order are not stored in a
-  dedicated field that nintoolbox decodes; `payload_size` is whatever follows
-  the palette.
+  `OBP1` sprite / object graphic of Soma Bringer (204 files validated): a
+  16-byte header, an RGB555 palette and 4 bpp or 8 bpp tile data. Width and
+  height are each 1..2048. `payload_size` is whatever follows the palette.
 seq:
   - id: magic
     contents: 'OBP1'

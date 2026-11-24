@@ -5,10 +5,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Nintendo Switch Texture Archive (.wta header + .wtp image data),
-  per lib-wtb.c (ported from KillzXGaming/Switch-Toolbox WTB.cs).
-  Tegra block-linear pixel data is not detiled here; pixels live
-  either in this same buffer or a sibling .wtp file.
+  Nintendo Switch Texture Archive (.wta header +.wtp image data). Tegra
+  block-linear pixel data is not detiled here; pixels live either in this
+  same buffer or a sibling .wtp file.
 seq:
   - id: magic
     contents: [0x57, 0x54, 0x42]

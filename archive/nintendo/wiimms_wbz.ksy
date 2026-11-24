@@ -8,24 +8,16 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  BZIP2 itself is Julian Seward's standard block-sorting compression
-  format (http://www.bzip.org/1.0.5/bzip2-manual-1.0.5.html); Wiimms SZS
-  Tools just link libbz2 to read/write it and add no data-layout of their
-  own beyond the standard stream header that the tools' magic sniffers
-  (IsBZ()/IsBZIP2() in lib-bzip2.c) check for: 4-byte magic "BZh", an
-  ASCII compression-level digit '1'-'9', and the fixed per-block header
-  magic "1AY&SY'" (0x314159265359, the digits of pi) that opens the first
-  compressed block. That bare stream is what a plain .bz2 file contains,
-  and is modeled here as `bzip2_stream`; the bit-packed Huffman/BWT block
-  payload itself is not.
+  BZIP2 itself is Julian Seward's standard block-sorting compression format
+  (http://www.bzip.org/1.0.5/bzip2-manual-1.0.5.html). That bare stream is
+  what a plain .bz2 file contains, and is modeled here as `bzip2_stream`; the
+  bit-packed Huffman/BWT block payload itself is not.
 
-  Wiimms tools additionally define their own thin container around such
-  a stream: WBZ (wbz_header_t in lib-szs.h, magic "WBZa") for bzip2, and
-  WLZ (same struct, magic reused for LZMA) for LZMA. The container is a
-  4-byte magic followed by a verbatim copy of the first 8 bytes of the
-  *uncompressed* data -- so a magic-sniffer can identify the decompressed
-  content's real format (e.g. spot a U8/BRRES/BREFF payload) without
-  having to inflate anything -- and then the compressed stream itself.
+  The container is a 4-byte magic followed by a verbatim copy of the first 8
+  bytes of the *uncompressed* data -- so a magic-sniffer can identify the
+  decompressed content's real format (e.g. spot a U8/BRRES/BREFF payload)
+  without having to inflate anything -- and then the compressed stream
+  itself.
 seq:
   - id: magic
     contents: "WBZa"

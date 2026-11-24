@@ -12,10 +12,6 @@ doc: |
   container -- so it defines one type per format for use with `ksv -t
   <type>` or an importing .ksy's own root selection.
 
-  Reference: nintoolbox project/src/lib-pica3ds.c
-  (DecodeBTGA_RGBA / DecodeSTEX_RGBA / DecodeDMPBM_RGBA /
-  DecodeCMBTexture_RGBA).
-
 seq: []
 
 types:

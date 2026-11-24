@@ -21,10 +21,6 @@ doc: |
   starts at `child_offset`. The root block is at offset 0. The full path of a
   file is its names joined with `/`; that string is what the `.idx` hash is
   computed from.
-
-  nintoolbox's detector requires 1..256 root entries, names of 1..128
-  printable ASCII bytes, and the first child block to start past the root
-  entry list.
 seq:
   - id: root
     type: directory

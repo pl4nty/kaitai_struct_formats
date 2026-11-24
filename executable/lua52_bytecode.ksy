@@ -4,7 +4,8 @@ meta:
   title: Lua 5.2 bytecode
   file-extension: out
   license: LicenseRef-All-Rights-Reserved
-doc: https://www.lua.org/source/5.2/lundump.c.html
+doc: Precompiled Lua 5.2 chunk. See `lua51_bytecode` for Lua 5.1.
+doc-ref: https://www.lua.org/source/5.2/lundump.c.html
 seq:
   - id: header
     type: lua_header

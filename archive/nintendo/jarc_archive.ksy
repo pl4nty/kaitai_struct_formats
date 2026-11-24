@@ -2,19 +2,14 @@
 meta:
   id: jarc_archive
   title: jARC archive
-  application: "\"jARC\"/\"JARC\" archive container (with optional \"jCMP\"/\"JCMP\" LZ wrapper)"
   file-extension: arc
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Generic "jARC"/"JARC" archive container, as recovered heuristically by
-  `ScanJARC()` in `lib-jarc.c` of Wiimms SZS Tools. The format has no
-  public specification; the source documents its layout only through the
-  recovery heuristics it applies, in order:
+  Generic "jARC"/"JARC" archive container. The format has no public
+  specification; the source documents its layout only through the recovery
+  heuristics it applies, in order:
 
-    1. If the stream starts with "jCMP"/"JCMP", it is a whole-file LZ
-       wrapper (`DecodeJCMP()`); the real container follows after
-       decompression.
     2. If what follows does not start with "jARC"/"JARC", the whole
        (decompressed) blob is treated as a single opaque member (its type
        is guessed from magic bytes: jMDL/jTEX/jIMG/jMOT/jMSG/jCLT/jEFC/

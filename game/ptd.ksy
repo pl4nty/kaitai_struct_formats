@@ -11,9 +11,6 @@ doc: |
   A stream whose flags word equals 23871488 (0x016C3F80) carries an extra
   144-byte unknown data blob after its channel headers.
 
-  Reference: nintoolbox project/src/lib-ptd.c/.h (ScanPTDFile / CreatePTD),
-  matching MPLibrary/GCWii/Audio/PTD.cs PtdFile::Read/Write.
-
 seq:
   - id: version
     type: u2

@@ -200,10 +200,10 @@ types:
   channel_slot:
     doc: |
       One 4-byte channel slot: a big-endian float when `is_fixed`, else
-      an offset (relative to the owning entry's `self_pos`) to a `track`.
-      Scale/translation format fields that read `BANIM_NONE` (0) fall
-      back to I12 in practice (see lib-chr.c); that fallback is not
-      reproduced here.
+      an offset (relative to the owning entry's `self_pos`) to a
+      `track`. Scale/translation format fields that read `BANIM_NONE`
+      (0) fall back to I12 in practice; that fallback is not reproduced
+      here.
     params:
       - id: format
         type: u4

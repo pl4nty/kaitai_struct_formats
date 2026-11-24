@@ -14,9 +14,6 @@ doc: |
   Track payloads are whole audio files (IDSP or Opus in practice) packed
   back to back in the `pack` chunk; `adof` gives each track's offset and
   size into it, `nmof` gives each track's name offset into `tnnm`.
-
-  Reference: nintoolbox project/src/lib-nus3audio.c
-  (ExtractNUS3AudioArchive / CreateNUS3AudioArchive).
 seq:
   - id: magic
     contents: "NUS3"

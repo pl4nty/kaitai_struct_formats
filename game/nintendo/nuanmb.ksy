@@ -8,12 +8,7 @@ meta:
 doc: |
   SSBH ANIM container (`.nuanmb`), Super Smash Bros. Ultimate. Reference:
   ultimate-research/ssbh_lib `ssbh_lib/src/formats/anim.rs`
-  (`Anim::V12`/`V20`/`V21`). Ported from `lib-nuanmb.c`/`.h`.
-
-  The per-frame keyframe bytes referenced by each TrackV2's data_offset/
-  data_size (a bit-packed compression scheme documented only in the
-  companion ssbh_data crate, not ssbh_lib) are not decoded by this
-  definition, matching lib-nuanmb.c's own documented scope.
+  (`Anim::V12`/`V20`/`V21`).
 seq:
   - id: magic
     contents: [0x48, 0x42, 0x53, 0x53] # "HBSS"

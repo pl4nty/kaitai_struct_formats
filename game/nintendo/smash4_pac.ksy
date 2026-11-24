@@ -4,10 +4,9 @@ meta:
   title: Super Smash Bros. 4 animation container (.pac)
   license: LicenseRef-All-Rights-Reserved
 doc: |
-  Animation container used for .omo skeletal and .mta material animations,
-  described by nintoolbox lib-smashpac.c. PACK uses little-endian integers;
-  KCAP uses big-endian integers. This is unrelated to the Nd Cube PAC\0,
-  HAL ARC\0, and Mario Kart Arcade PAC containers.
+  PACK uses little-endian integers; KCAP uses big-endian integers. This is
+  unrelated to the Nd Cube PAC\0, HAL ARC\0, and Mario Kart Arcade PAC
+  containers.
 
   The 16-byte header is followed by three parallel, count-element u32 tables:
   absolute name offsets, absolute payload offsets, and payload byte lengths.
@@ -15,11 +14,10 @@ doc: |
   are NUL-terminated. Payloads are opaque here; their extensions identify
   the nested animation format.
 
-  nintoolbox accepts at most 100000 entries, requires all three tables to fit,
-  a terminating NUL for every name, and every payload range to fit the file.
-  Its writer emits both reserved words as zero, places names immediately after
-  the tables, then aligns each payload start to a 16-byte boundary. Alignment
-  and name placement describe writer output, not requirements of the reader.
+  Its writer emits both reserved words as zero, places names immediately
+  after the tables, then aligns each payload start to a 16-byte boundary.
+  Alignment and name placement describe writer output, not requirements of
+  the reader.
 seq:
   - id: magic
     size: 4
@@ -42,7 +40,7 @@ types:
     seq:
       - id: reserved_04
         type: u4
-        doc: Unknown header word; nintoolbox writes zero.
+        doc: Unknown header word.
       - id: num_entries
         type: u4
         valid:
@@ -50,7 +48,7 @@ types:
         doc: Number of elements in each of the three parallel tables.
       - id: reserved_0c
         type: u4
-        doc: Unknown header word; nintoolbox writes zero.
+        doc: Unknown header word.
       - id: name_offsets
         type: u4
         repeat: expr

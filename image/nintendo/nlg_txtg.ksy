@@ -4,7 +4,7 @@ meta:
   title: Next Level Games Texture To Go (.txtg / 6PK0)
   license: LicenseRef-All-Rights-Reserved
   endian: le
-doc: Next Level Games "Texture To Go" texture, per lib-txtg.c.
+doc: Next Level Games "Texture To Go" texture.
 seq:
   - id: header_size
     type: u2

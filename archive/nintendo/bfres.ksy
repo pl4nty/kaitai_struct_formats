@@ -42,18 +42,16 @@ doc: |
   kind of work from describing the container, exactly where `nintendo_bch`
   draws the same line for PICA200.
 
-  The reference implementation is `ParseBFRES()` in this project's sibling
-  repo, `wiimms-szs-tools-nintendo/project/src/lib-bfres.c`; that C code
-  only ever follows the *first* model-group entry after its sentinel and
-  the *first* FVTX/FSHP indices it needs, so only those fields are
-  something the C side has independently proven correct. The header
-  fields between `len_file` and the model-group pointer (`0x10`-`0x1f`)
-  and the eleven index-group pointer slots after it (`0x24`-`0x4f`,
-  publicly documented elsewhere as FTEX/FSKA/FSHU/FTXP/FVIS/FSCN and
-  friends) are read by nothing in that C parser, so they are left as
-  plain reserved bytes here rather than guessed at -- this repo's
-  convention is to describe what has actually been checked against real
-  bytes, not what other tooling's docs claim.
+  That C code only ever follows the *first* model-group entry after its
+  sentinel and the *first* FVTX/FSHP indices it needs, so only those fields
+  are something the C side has independently proven correct. The header
+  fields between `len_file` and the model-group pointer (`0x10`-`0x1f`) and
+  the eleven index-group pointer slots after it (`0x24`-`0x4f`, publicly
+  documented elsewhere as FTEX/FSKA/FSHU/FTXP/FVIS/FSCN and friends) are
+  read by nothing in that C parser, so they are left as plain reserved bytes
+  here rather than guessed at -- this repo's convention is to describe what
+  has actually been checked against real bytes, not what other tooling's
+  docs claim.
 
   Verified against two real samples:
 
@@ -106,10 +104,7 @@ seq:
     size: 0x10
     doc: |
       `0x10`-`0x1f`. Not read by `ParseBFRES()`; left undescribed rather
-      than guessed. Likely candidates from the format's general shape
-      (alignment, string-table offset/length, relocation info) are not
-      asserted here because nothing in this codebase's ground truth
-      confirms them.
+      than guessed.
   - id: ofs_model_group
     type: s4
     doc: |

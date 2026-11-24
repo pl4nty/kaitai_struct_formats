@@ -25,9 +25,7 @@ doc: |
   The reader also accepts the degenerate case where the last name ends
   exactly at ofs_data, leaving no marker region.
 
-  The nintoolbox writer always adds L234, aligns ofs_data to four bytes,
-  and packs payloads consecutively with no inter-member alignment. Its
-  directory-scan order is not guaranteed to reproduce retail ordering;
+  Its directory-scan order is not guaranteed to reproduce retail ordering;
   these are reconstruction choices, not constraints on existing BIGFs.
 seq:
   - id: magic
@@ -63,8 +61,8 @@ types:
       - id: padding
         size-eos: true
         doc: |
-          Padding before the first payload (zero in the files nintoolbox writes; some
-          retail archives keep other bytes here).
+          Padding before the first payload (usually zero; some retail archives keep other
+          bytes here).
   entry:
     seq:
       - id: ofs_body

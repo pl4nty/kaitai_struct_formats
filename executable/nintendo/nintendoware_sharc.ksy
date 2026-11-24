@@ -5,11 +5,10 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  NintendoWare shader source archive, per lib-sharc.c (verified
-  against KillzXGaming/Switch-Toolbox Shader/SHARC/SHARC.cs
-  Header.Read()). Every program/source entry starts with its own
-  section_size covering itself, so entries can be walked without
-  understanding the version-dependent shader-variation payload
+  NintendoWare shader source archive (checked against KillzXGaming/Switch-Toolbox
+  Shader/SHARC/SHARC.cs). Every program/source entry starts
+  with its own section_size covering itself, so entries can be walked
+  without understanding the version-dependent shader-variation payload
   inside them; that payload is left raw here.
 seq:
   - id: magic

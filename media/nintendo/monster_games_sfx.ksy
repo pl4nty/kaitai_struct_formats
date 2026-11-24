@@ -5,9 +5,9 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Monster Games ".sfx" DSP-ADPCM audio, per lib-sfx.c/.h. A fixed
-  0x80-byte header (mixed little/big-endian fields, kept as they
-  appear on disc) over a plain Nintendo DSP-ADPCM stream.
+  Monster Games ".sfx" DSP-ADPCM audio. A fixed 0x80-byte header (mixed
+  little/big-endian fields, kept as they appear on disc) over a plain
+  Nintendo DSP-ADPCM stream.
 seq:
   - id: data_size
     type: u4
@@ -53,6 +53,5 @@ instances:
   decoded_sample_count:
     value: data_size / 8 * 14
     doc: |-
-      Decoded mono sample count for complete DSP frames.  This is the value
-      nintoolbox supplies to its GENH wrapper; num_nibbles retains any more
-      precise partial-final-frame count.
+      Decoded mono sample count for complete DSP frames. Num_nibbles
+      retains any more precise partial-final-frame count.

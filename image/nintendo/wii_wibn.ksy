@@ -5,10 +5,10 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: be
 doc: |
-  Wii save-game banner, per lib-wii-banner.h. Lives at the start of
-  a save's decrypted banner.bin/data.bin. Icon count is not stored:
-  it follows from the file size, and trailing all-zero frames are
-  padding rather than real animation steps.
+  Wii save-game banner. Lives at the start of a save's decrypted
+  banner.bin/data.bin. Icon count is not stored: it follows from the file
+  size, and trailing all-zero frames are padding rather than real animation
+  steps.
 
   This is the format shown in the Wii System Menu's save-data management
   screen, distinct from (though visually similar in layout to) the

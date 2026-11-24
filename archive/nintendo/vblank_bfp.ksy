@@ -5,11 +5,10 @@ meta:
   license: LicenseRef-All-Rights-Reserved
   endian: le
 doc: |
-  Vblank Entertainment "gamedata_wii.bfp" package (Retro City
-  Rampage DX, Shakedown: Hawaii), per lib-vblank.h. A member is
-  stored raw when size == stored_size, else zlib-compressed. The
-  sibling BPP3/BAP1 audio package variants documented in the same
-  header are not modeled here.
+  Vblank Entertainment "gamedata_wii.bfp" package (Retro City Rampage DX,
+  Shakedown: Hawaii). A member is stored raw when size == stored_size, else
+  zlib-compressed. The sibling BPP3/BAP1 audio package variants documented
+  in the same header are not modeled here.
 seq:
   - id: magic
     contents: "BFP2"

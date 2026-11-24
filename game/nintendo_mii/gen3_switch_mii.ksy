@@ -1,5 +1,5 @@
 # Imported from https://github.com/TheGreatRambler/Mii_to_UMii/blob/64caebae9613dcca464d38709ade7c510caa5bb0/ksy/gen3_switch.ksy
-# Special type, region and checksum fields from https://github.com/WiiLink24/MiiContestChannelServer/blob/HEAD/mii/gen3_switch.ksy
+# Special type, region and checksum fields from https://github.com/WiiLink24/MiiContestChannelServer/blob/58b4353d543e0d821cad334d4aa0ca86831d9084/mii/gen3_switch.ksy
 # Portions Copyright (c) 2024, WiiLink (BSD-2-Clause)
 meta:
   id: gen3_switch_mii
@@ -225,6 +225,10 @@ seq:
       Unique Mii identifier, randomly generated. The leftmost bit of byte 9 must be
       set to 1, otherwise the Mii is deemed invalid and the console deletes its Mii
       database on boot.
+
+      This is the 16-byte create ID of nn::mii StoreData. Older versions of this
+      spec used `mii_id` for the last 4 bytes of the record, which are now
+      `checksum_mii` and `checksum_console`.
   - id: checksum_mii
     type: u1
     repeat: expr
