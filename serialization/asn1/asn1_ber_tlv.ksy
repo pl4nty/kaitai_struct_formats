@@ -25,10 +25,24 @@ seq:
     repeat: expr
     repeat-expr: length.val_len
     if: (tag.form == tag_form::primitive_form)
-  - id: value_constructed
-    type: asn1_ber_tlv
-    repeat: eos
+  - id: constructed_body
+    size: length.val_len
+    type: constructed
     if: (tag.form == tag_form::constructed_form)
+    doc: The contents octets of a constructed value, holding its child TLVs.
+
+instances:
+  value_constructed:
+    value: constructed_body.items
+    if: (tag.form == tag_form::constructed_form)
+    doc: The child TLVs of a constructed value.
+
+types:
+  constructed:
+    seq:
+      - id: items
+        type: asn1_ber_tlv
+        repeat: eos
 
 enums:
   tag_form:
