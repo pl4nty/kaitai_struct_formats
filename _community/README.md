@@ -25,7 +25,7 @@ Where the source has a licence file, its text (with the copyright notice) is kep
 | [andreas-volz/startsconverter](https://github.com/andreas-volz/startsconverter) | GPL-2.0 | [text](licenses/andreas-volz__startsconverter.txt) | `game/starcraft_chk`, `game/starcraft_lo_overlay` |
 | [AnthoChamb/FsgXmk](https://github.com/AnthoChamb/FsgXmk) | MIT | [text](licenses/AnthoChamb__FsgXmk.txt) | `game/fsg_xmk` |
 | [anthonyhfm/launchpad-core-firmware](https://github.com/anthonyhfm/launchpad-core-firmware) | GPL-3.0-only | [text](licenses/anthonyhfm__launchpad-core-firmware.txt) | `firmware/launchpad_boot_animation` |
-| [armijnhemel/binaryanalysis-ng](https://github.com/armijnhemel/binaryanalysis-ng) | Apache-2.0, CC0-1.0, GPL-2.0-only, GPL-2.0-or-later, GPL-3.0, GPL-3.0-or-later, LGPL-2.1, LGPL-2.1-or-later, MIT, Unlicense | [text](licenses/armijnhemel__binaryanalysis-ng.txt) | `3d/xg3d`, `archive/android_imgdiff`, `archive/bzip2`, `archive/chrome_crx`, `archive/cpio_new_ascii` and 64 more |
+| [armijnhemel/binaryanalysis-ng](https://github.com/armijnhemel/binaryanalysis-ng) | Apache-2.0, BSD-2-Clause, CC0-1.0, GPL-2.0-only, GPL-2.0-or-later, GPL-3.0, GPL-3.0-or-later, LGPL-2.1, LGPL-2.1-or-later, MIT, Unlicense | [text](licenses/armijnhemel__binaryanalysis-ng.txt) | `3d/xg3d`, `archive/android_imgdiff`, `archive/bzip2`, `archive/chrome_crx`, `archive/cpio_new_ascii` and 76 more |
 | [atc1441/Gadgetbridge-BLE-OpenEpaperLink](https://github.com/atc1441/Gadgetbridge-BLE-OpenEpaperLink) | AGPL-3.0 | [text](licenses/atc1441__Gadgetbridge-BLE-OpenEpaperLink.txt) | `network/dji_duml_wifi` |
 | [AtomCrafty/MajiroTools](https://github.com/AtomCrafty/MajiroTools) | MIT | [text](licenses/AtomCrafty__MajiroTools.txt) | `game/majiro_readmark` |
 | [AtomCrafty/yukatool](https://github.com/AtomCrafty/yukatool) | GPL-3.0 | [text](licenses/AtomCrafty__yukatool.txt) | `game/yuka_ykc`, `game/yuka_ykg` |
@@ -38,7 +38,7 @@ Where the source has a licence file, its text (with the copyright notice) is kep
 | [Bithack/principia](https://github.com/Bithack/principia) | BSD-2-Clause | [text](licenses/Bithack__principia.txt) | `game/principia_plvl`, `game/principia_pobj`, `game/principia_ppkg` |
 | [BlazingRenderer/io_scene_brender](https://github.com/BlazingRenderer/io_scene_brender) | MIT | [text](licenses/BlazingRenderer__io_scene_brender.txt) | `3d/brender_datafile` |
 | [bodriodroid/ZGIRLSLOADER](https://github.com/bodriodroid/ZGIRLSLOADER) | MIT | [text](licenses/bodriodroid__ZGIRLSLOADER.txt) | `game/skullgirls_foit` |
-| [Brachi/albam](https://github.com/Brachi/albam) | CC0-1.0, MIT | [text](licenses/Brachi__albam.txt) | `game/hexane_anims`, `game/hexane_skel`, `game/mtframework_arc`, `game/mtframework_lmt`, `game/mtframework_mfx` and 23 more |
+| [Brachi/albam](https://github.com/Brachi/albam) | CC0-1.0, MIT | [text](licenses/Brachi__albam.txt) | `game/hexane_anims`, `game/hexane_skel`, `game/mtframework_arc`, `game/mtframework_lmt`, `game/mtframework_mfx` and 24 more |
 | [broideryfab/embroidery-ksy](https://github.com/broideryfab/embroidery-ksy) | MIT | [text](licenses/broideryfab__embroidery-ksy.txt) | `cad/embroidery/ameco_new`, `cad/embroidery/barudan_dat`, `cad/embroidery/barudan_dsb`, `cad/embroidery/barudan_record`, `cad/embroidery/barudan_u01` and 49 more |
 | [burnsba/getools](https://github.com/burnsba/getools) | GPL-3.0 | [text](licenses/burnsba__getools.txt) | `game/goldeneye_bg`, `game/goldeneye_gbi_vtx`, `game/goldeneye_ramrom_replay`, `game/goldeneye_setup`, `game/goldeneye_stan` and 1 more |
 | [cakiki/chess-file-formats](https://github.com/cakiki/chess-file-formats) | MIT | [text](licenses/cakiki__chess-file-formats.txt) | `game/chess_tablebase_op1` |
@@ -94,6 +94,7 @@ Where the source has a licence file, its text (with the copyright notice) is kep
 | [Equidamoid/dltpy](https://github.com/Equidamoid/dltpy) | GPL-3.0 | [text](licenses/Equidamoid__dltpy.txt) | `log/autosar_dlt_file`, `log/stored_message` |
 | [er1t-h/thl-tools](https://github.com/er1t-h/thl-tools) | Unlicense | [text](licenses/er1t-h__thl-tools.txt) | `game/mbe`, `game/mvgl` |
 | [erysdren/QCVM](https://github.com/erysdren/QCVM) | CC0-1.0 | [text](licenses/erysdren__QCVM.txt) | `game/quake_progs` |
+| [eset/malware-ioc](https://github.com/eset/malware-ioc) | BSD-2-Clause | [text](licenses/eset__malware-ioc.txt) | `security/sshdoor_crait_report`, `security/sshdoor_kessel_config` |
 | [eset/malware-research](https://github.com/eset/malware-research) | BSD-2-Clause | [text](licenses/eset__malware-research.txt) | `security/oceanlotus_backdoor_config`, `security/oceanlotus_decoy_dropper` |
 | [estcube/Telemetry-Forwarding-Client](https://github.com/estcube/Telemetry-Forwarding-Client) | MIT | [text](licenses/estcube__Telemetry-Forwarding-Client.txt) | `network/estcube_icp` |
 | [FAForever/faf-scfa-replay-parser](https://github.com/FAForever/faf-scfa-replay-parser) | GPL-3.0 | [text](licenses/FAForever__faf-scfa-replay-parser.txt) | `game/supcom_fa_replay` |
@@ -105,7 +106,8 @@ Where the source has a licence file, its text (with the copyright notice) is kep
 | [frazew/rrdmerge](https://github.com/frazew/rrdmerge) | CC0-1.0 | [text](licenses/frazew__rrdmerge.txt) | `database/rrd`, `database/rrd32` |
 | [FreeREAC/reac-protocol](https://github.com/FreeREAC/reac-protocol) | GPL-3.0-or-later | [text](licenses/FreeREAC__reac-protocol.txt) | `network/reac` |
 | [g3gg0/ProxmarkWebSerial](https://github.com/g3gg0/ProxmarkWebSerial) | MIT | [text](licenses/g3gg0__ProxmarkWebSerial.txt) | `hardware/iso15693` |
-| [Game3DEE/darkstone](https://github.com/Game3DEE/darkstone) | MIT | [text](licenses/Game3DEE__darkstone.txt) | `archive/darkstone_mtf`, `game/darkstone_anb`, `game/darkstone_brm`, `game/darkstone_cdf`, `game/darkstone_itemsobject_dat` and 7 more |
+| [Game3DEE/darkstone](https://github.com/Game3DEE/darkstone) | CC0-1.0, MIT | [text](licenses/Game3DEE__darkstone.txt) | `archive/darkstone_mtf`, `game/darkstone_anb`, `game/darkstone_brm`, `game/darkstone_cdf`, `game/darkstone_itemsobject_dat` and 9 more |
+| [Game3DEE/io_game3dee](https://github.com/Game3DEE/io_game3dee) | CC0-1.0 | [text](licenses/Game3DEE__io_game3dee.txt) | `game/animator_3df`, `game/canopygames_mdl`, `game/carnivores_3df` |
 | [Game3DEE/webcarnivores](https://github.com/Game3DEE/webcarnivores) | CC0-1.0, None | `meta/license` | `game/carnivores_vtl`, `game/ivector` |
 | [gballa/audi_mmi_studio](https://github.com/gballa/audi_mmi_studio) | Apache-2.0 | [text](licenses/gballa__audi_mmi_studio.txt) | `archive/mapstyle_xar`, `executable/adi_ldr`, `firmware/hb_fpga`, `firmware/hb_grammar`, `firmware/smsc_ipf` and 2 more |
 | [GDATAAdvancedAnalytics/winreg-tasks](https://github.com/GDATAAdvancedAnalytics/winreg-tasks) | MIT | [text](licenses/GDATAAdvancedAnalytics__winreg-tasks.txt) | `windows/windows_task_scheduler/aligned_bstr`, `windows/windows_task_scheduler/aligned_bstr_expand_size`, `windows/windows_task_scheduler/aligned_buffer`, `windows/windows_task_scheduler/aligned_u1`, `windows/windows_task_scheduler/aligned_u4` and 10 more |
@@ -193,6 +195,8 @@ Where the source has a licence file, its text (with the copyright notice) is kep
 | [mzhinf/SanMapEditor](https://github.com/mzhinf/SanMapEditor) | MIT | [text](licenses/mzhinf__SanMapEditor.txt) | `game/sanguo_baye_stg` |
 | [n-rook/thscoreboard](https://github.com/n-rook/thscoreboard) | Apache-2.0 | [text](licenses/n-rook__thscoreboard.txt) | `game/touhou_alco_rpy`, `game/touhou_th095_encrypted_rpy`, `game/touhou_th10_rpy`, `game/touhou_th11_rpy`, `game/touhou_th125_encrypted_rpy` and 11 more |
 | [naclomi/libgarib](https://github.com/naclomi/libgarib) | MIT | [text](licenses/naclomi__libgarib.txt) | `game/glover_level`, `game/glover_objbank`, `game/glover_texbank` |
+| [nanocurrency/nanodb-specification](https://github.com/nanocurrency/nanodb-specification) | BSD-2-Clause | [text](licenses/nanocurrency__nanodb-specification.txt) | `database/nano_ledger_db` |
+| [nanocurrency/protocol](https://github.com/nanocurrency/protocol) | BSD-2-Clause | [text](licenses/nanocurrency__protocol.txt) | `network/nano_protocol` |
 | [nathankellenicki/node-smartplay](https://github.com/nathankellenicki/node-smartplay) | MIT | `meta/license` | `firmware/lego_smart_play_firmware`, `game/lego_smart_play_aap`, `game/lego_smart_play_ani`, `game/lego_smart_play_ppl` |
 | [nccgroup/mtk_bp](https://github.com/nccgroup/mtk_bp) | GPL-3.0 | [text](licenses/nccgroup__mtk_bp.txt) | `firmware/md1img`, `firmware/mtk_dbg_info`, `firmware/mtk_img` |
 | [NellowTCS/Mesh-NOW](https://github.com/NellowTCS/Mesh-NOW) | MIT | [text](licenses/NellowTCS__Mesh-NOW.txt) | `network/mesh_now` |
@@ -257,6 +261,7 @@ Where the source has a licence file, its text (with the copyright notice) is kep
 | [RonnyReverse/cc-tools](https://github.com/RonnyReverse/cc-tools) | CC0-1.0 | [text](licenses/RonnyReverse__cc-tools.txt) | `game/cc_anim`, `game/cc_loaded_scene`, `game/gt_image`, `game/mm_chunk_container`, `game/up_package` |
 | [rowanseymour/aaa](https://github.com/rowanseymour/aaa) | MIT | [text](licenses/rowanseymour__aaa.txt) | `game/axis_and_allies_rmp`, `game/axis_and_allies_rwd`, `game/tgck` |
 | [Ruslan0Dev/nfs2](https://github.com/Ruslan0Dev/nfs2) | GPL-3.0 | [text](licenses/Ruslan0Dev__nfs2.txt) | `game/nfs2_replay` |
+| [schiebel/casatabstream](https://github.com/schiebel/casatabstream) | LGPL-2.0-or-later | [text](licenses/schiebel__casatabstream.txt) | `scientific/casa_table_incremental_store`, `scientific/casa_table_metadata` |
 | [schwarzeszeux/AoE-Kaitai](https://github.com/schwarzeszeux/AoE-Kaitai) | MIT | [text](licenses/schwarzeszeux__AoE-Kaitai.txt) | `game/aoe2record`, `game/aoe2record_body`, `game/aoe2record_header` |
 | [scm-js/scm-js](https://github.com/scm-js/scm-js) | MIT | [text](licenses/scm-js__scm-js.txt) | `game/starcraft_scenario_chk` |
 | [scottprahl/RigolWFM](https://github.com/scottprahl/RigolWFM) | BSD-3-Clause | [text](licenses/scottprahl__RigolWFM.txt) | `scientific/agilent_agxx_bin`, `scientific/lecroy_1_0_be_trc`, `scientific/lecroy_1_0_le_trc`, `scientific/lecroy_2_3_be_trc`, `scientific/lecroy_2_3_le_trc` and 27 more |
@@ -265,6 +270,7 @@ Where the source has a licence file, its text (with the copyright notice) is kep
 | [sem-geologist/peaksight-binary-parser](https://github.com/sem-geologist/peaksight-binary-parser) | LGPL-2.1-or-later | [text](licenses/sem-geologist__peaksight-binary-parser.txt) | `scientific/cameca` |
 | [ser-pounce/rood-reverse](https://github.com/ser-pounce/rood-reverse) | CC0-1.0 | [text](licenses/ser-pounce__rood-reverse.txt) | `game/vagrant_story_arm`, `game/vagrant_story_effect_p` |
 | [Serpens66/Stronghold-Crusader-DE-Mods](https://github.com/Serpens66/Stronghold-Crusader-DE-Mods) | MIT | `meta/license` | `game/stronghold_crusader_de_map` |
+| [Shirakumo/sf3.ksy](https://github.com/Shirakumo/sf3.ksy) | Zlib | [text](licenses/Shirakumo__sf3.ksy.txt) | `serialization/sf3_archive`, `serialization/sf3_audio`, `serialization/sf3_image`, `serialization/sf3_log`, `serialization/sf3_model` and 4 more |
 | [sibeshkar/jiminy](https://github.com/sibeshkar/jiminy) | MIT | [text](licenses/sibeshkar__jiminy.txt) | `network/vnc_fbs`, `network/vnc_rfb_client`, `network/vnc_rfb_server` |
 | [Sigmmma/HaloKSY](https://github.com/Sigmmma/HaloKSY) | GPL-3.0-only | [text](licenses/Sigmmma__HaloKSY.txt) | `game/halo_ce_blam_sav` |
 | [simonmx1/CBI_Parser](https://github.com/simonmx1/CBI_Parser) | CC0-1.0 | [text](licenses/simonmx1__CBI_Parser.txt) | `serialization/cbi_movement` |
