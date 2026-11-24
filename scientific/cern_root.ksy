@@ -203,11 +203,12 @@ types:
       - id: method
         type: u1
       - id: len_compressed
-        type: u3le
+        type: b24le
+        doc: Little-endian, unlike the rest of the file.
       - id: len_uncompressed
-        type: u3le
+        type: b24le
       - id: data
-        size: len_compressed.value
+        size: len_compressed
         type:
           switch-on: algorithm
           cases:
@@ -218,17 +219,6 @@ types:
       - id: uncompressed
         size-eos: true
         process: zlib
-  u3le:
-    seq:
-      - id: b0
-        type: u1
-      - id: b1
-        type: u1
-      - id: b2
-        type: u1
-    instances:
-      value:
-        value: b0 | b1 << 8 | b2 << 16
   tstring:
     seq:
       - id: len_short
