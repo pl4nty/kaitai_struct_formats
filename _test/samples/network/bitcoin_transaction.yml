@@ -5,7 +5,7 @@ samples:
     eof: true
     expect:
       version: 1
-      num_vins: 131
-      num_vouts: 1
+      num_vins.value: 131
+      num_vouts.value: 1
       vouts[0].amount: 1000000000000
       locktime: 0
