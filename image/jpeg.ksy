@@ -68,6 +68,12 @@ types:
       - id: image_data
         size-eos: true
         if: marker == marker_enum::sos
+        doc: |
+          Entropy-coded scan data. Its end is only marked by the next marker
+          (0xFF followed by a byte other than 0x00 or RST0-RST7), which
+          cannot be expressed here, so this takes the rest of the file and
+          the segments after the first scan (further scans of progressive
+          JPEGs, EOI, trailing data) are not parsed as segments.
     enums:
       marker_enum:
         0x01: tem
