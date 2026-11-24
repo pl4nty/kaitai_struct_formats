@@ -171,13 +171,16 @@ enums:
       -orig-id:
         - kRequestPart
         - Begin
-        - [FILE_REQUEST_TYPE_PART, PIT_REQUEST_TYPE_PART]
+        - FILE_REQUEST_TYPE_PART
+        - PIT_REQUEST_TYPE_PART
     3:
       id: end
       -orig-id:
-        - [kRequestEnd, kRequestEndTransfer]
+        - kRequestEnd
+        - kRequestEndTransfer
         - End
-        - [FILE_REQUEST_TYPE_END_TRANSFER, PIT_REQUEST_TYPE_END_TRANSFER]
+        - FILE_REQUEST_TYPE_END_TRANSFER
+        - PIT_REQUEST_TYPE_END_TRANSFER
     0x2000: unknown2000
   destination:
     # BinaryType in Thor
@@ -199,38 +202,43 @@ enums:
       id: send_file_part
       -orig-id:
         - kResponseTypeSendFilePart
-        -    
         - RESPONSE_TYPE_SEND_FILE_PART
     0x00000064:
       id: session
       -orig-id:
-        - [kControlTypeSession, kResponseTypeSessionSetup]
+        - kControlTypeSession
+        - kResponseTypeSessionSetup
         - SessionStart
-        - [CONTROL_TYPE_SESSION, RESPONSE_TYPE_SETUP_SESSION]
+        - CONTROL_TYPE_SESSION
+        - RESPONSE_TYPE_SETUP_SESSION
     0x00000065:
       id: pit_file
       -orig-id:
-        - kControlTypePitFile, kResponseTypePitFile
+        - kControlTypePitFile
+        - kResponseTypePitFile
         - PitXmit
-        - [CONTROL_TYPE_PIT_FILE, RESPONSE_TYPE_PIT_FILE]
+        - CONTROL_TYPE_PIT_FILE
+        - RESPONSE_TYPE_PIT_FILE
     0x00000066:
       id: file_transfer
       -orig-id:
-        - [kControlTypeFileTransfer, kResponseTypeFileTransfer]
+        - kControlTypeFileTransfer
+        - kResponseTypeFileTransfer
         - FileXmit
-        - [CONTROL_TYPE_FILE_TRANSFER, RESPONSE_TYPE_FILE_TRANSFER]
+        - CONTROL_TYPE_FILE_TRANSFER
+        - RESPONSE_TYPE_FILE_TRANSFER
     0x00000067:
       id: end_session
       -orig-id:
-        - [kControlTypeEndSession, kResponseTypeEndSession]
+        - kControlTypeEndSession
+        - kResponseTypeEndSession
         - SessionEnd
-        - [CONTROL_TYPE_END_SESSION, RESPONSE_TYPE_END_SESSION]
+        - CONTROL_TYPE_END_SESSION
+        - RESPONSE_TYPE_END_SESSION
     0x00000069:
       id: device_information
       -orig-id:
-        -    
         - DeviceInfo
-        -    
 
 types:
   end_session:
@@ -255,15 +263,11 @@ types:
         2:
           id: reboot_bootloader
           -orig-id:
-            -    
             - OdinReboot
-            -    
         3:
           id: power_off
           -orig-id:
-            -    
             - Shutdown
-            -    
   file_transfer:
     seq:
       - id: request
@@ -421,7 +425,8 @@ types:
         1:
           id: device_type
           -orig-id:
-            - [kDeviceType, kDeviceInfo]
+            - kDeviceType
+            - kDeviceInfo
             - DeviceType
             - SESSION_REQUEST_TYPE_DEVICE_TYPE
           doc: obsolete (why?)
@@ -436,13 +441,10 @@ types:
           -orig-id:
             - kEnableSomeSortOfFlag
             - OemState
-            -    
         4:
           id: no_oem_check
           -orig-id:
-            -    
             - NoOemCheck
-            -    
         5:
           id: file_part_size
           -orig-id:
@@ -452,9 +454,7 @@ types:
         7:
           id: erase_user_data
           -orig-id:
-            -    
             - EraseUserdata
-            -    
         8:
           id: enable_tflash
           -orig-id:
@@ -464,15 +464,11 @@ types:
         9:
           id: set_region
           -orig-id:
-            -    
             - SetRegionCode
-            -    
         10:
           id: enable_rtn
           -orig-id:
-            -    
             - EnableRtn
-            -    
           doc: make device refurbished?
 
     types:

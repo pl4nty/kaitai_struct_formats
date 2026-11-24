@@ -64,7 +64,7 @@ types:
             type: u4
           - id: unkn0
             type: u2
-            doc: 0x0000
+            doc: "0x0000"
           - id: unkn1
             type: u4
 enums:

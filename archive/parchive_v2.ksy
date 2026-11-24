@@ -9,7 +9,7 @@ meta:
     - PAR Buddy
   file-extension: par2
   xref:
-    justsolve: Parity Volume Set
+    justsolve: Parity_Volume_Set
     wikidata: Q497118
   license: GNU-FDL-1.3-or-later
   encoding: ASCII

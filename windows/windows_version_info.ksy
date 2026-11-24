@@ -120,7 +120,7 @@ types:
             0:
               id: win32s
               -orig-id: VER_PLATFORM_WIN32s
-              doc: 3.1
+              doc: "3.1"
             1:
               id: windows
               -orig-id: VER_PLATFORM_WIN32_WINDOWS

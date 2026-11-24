@@ -4,7 +4,7 @@ meta:
   application:
     - TGE
     - Space Rangers
-    - Space Rangers 2: Dominators
+    - "Space Rangers 2: Dominators"
   file-extension:
     - qm
     - qmm
