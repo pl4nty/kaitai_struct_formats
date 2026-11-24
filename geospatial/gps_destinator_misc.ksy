@@ -5,12 +5,12 @@ meta:
   file-extension:
     - rte
     - dat
-  license: GPL-2.0-or-later
-  encoding: utf-16le
-  -affected-by: 187
-  endian: le
   tags:
     - geospatial
+  license: GPL-2.0-or-later
+  -affected-by: 187
+  encoding: UTF-16LE
+  endian: le
 
 doc: |
   Destinator formats

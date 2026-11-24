@@ -2,8 +2,8 @@ meta:
   id: pmm_str
   title: POST Memory Manager Services structure
   application: x86 architecture
-  endian: le
   license: Unlicense
+  endian: le
 doc-ref: ftp://ftp.software.ibm.com/eserver/pseries/chrptech/1394ohci/bios2.pdf
 seq:
   - id: structure_revision

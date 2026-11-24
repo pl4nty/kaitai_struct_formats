@@ -6,7 +6,7 @@ meta:
     - Diagnostic Data Viewer
   file-extension: rbs
   license: MIT
-  encoding: utf-8
+  encoding: UTF-8
   endian: le
 doc: |
   The file format used by Windows Diagnostics Framework (including so called telemetery).
@@ -36,8 +36,8 @@ types:
       - id: signature
         contents: ["UTCRBES"]
       - id: version_str
-        type: str
         size: 1
+        type: str
       - id: unkn0
         size: 8
         doc: "Doesn't match any data inside of JSON"
@@ -55,13 +55,13 @@ types:
         size: 4
         if: "version >=5"
       - id: elements_count
-        type: u4
         -orig-id: num_elements
+        type: u4
       - id: elements_count_again
         -orig-id: num_elements2
         type: u4
-        doc: "Usisally matches elements_count"
         if: "version < 5"
+        doc: "Usisally matches elements_count"
       - id: unkn3
         type: u2
       - id: unkn4

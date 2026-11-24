@@ -1,10 +1,10 @@
 meta:
   id: game_4x4_evolution_pod
-  file-extension: pod
   application: 4x4 Evolution
+  file-extension: pod
   license: CC0-1.0
+  encoding: UTF-8
   endian: le
-  encoding: utf-8
 doc-ref: 'https://www.watto.org/specs.html?specs=Archive_POD'
 seq:
   - id: header
@@ -20,14 +20,14 @@ types:
         type: u4
         doc: The number of files in the archive
       - id: description
-        type: strz
         size: 80
+        type: strz
         doc: A description for the archive
   details_directory:
     seq:
       - id: file_name
-        type: strz
         size: 32
+        type: strz
       - id: length
         type: u4
         doc: The length of the file data

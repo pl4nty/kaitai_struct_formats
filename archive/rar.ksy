@@ -144,8 +144,8 @@ types:
         doc: File attributes
       - id: high_pack_size
         type: u4
-        doc: Compressed file size, high 32 bits, only if 64-bit header flag is present
         if: '_parent.flags & 0x100 != 0'
+        doc: Compressed file size, high 32 bits, only if 64-bit header flag is present
       - id: file_name
         size: name_size
       - id: salt
@@ -161,6 +161,10 @@ types:
       - id: header
         type: header
       - id: data
+        size: header.content.data_size.value
+        # There are should be `qo_data` type in case of
+        # `header.content.specific.as<file_or_service>.file_name == "QO"`
+        if: header.content.flags.has_data
         doc: |
           Block payload. Content is dependent on the type of block (`header.content.block_type`):
 
@@ -170,10 +174,6 @@ types:
             - `CMT`: null-terminated string with an archive comment
             - `QO`: index to some blocks of this file
             - `RR`: recovery information
-        size: header.content.data_size.value
-        # There are should be `qo_data` type in case of
-        # `header.content.specific.as<file_or_service>.file_name == "QO"`
-        if: header.content.flags.has_data
     types:
       header:
         -webide-representation: '{content}'
@@ -184,8 +184,8 @@ types:
             -orig-id: BlockSize
             type: vlq_base128_le
           - id: content
-            type: content
             size: content_size.value
+            type: content
       content:
         -webide-representation: '{type}: {specific}; flags: {flags}'
         seq:
@@ -198,9 +198,9 @@ types:
             type: flags
           - id: extra_size
             type: vlq_base128_le
-            doc: Original unrar produces error if this size is >= sizeof of block_v5
             # valid: _.value < sizeof(block_v5)
             if: flags.has_extra
+            doc: Original unrar produces error if this size is >= sizeof of block_v5
           - id: data_size
             -orig-id: PackSize
             type: vlq_base128_le
@@ -216,12 +216,12 @@ types:
                 0x04: crypt(false)
                 0x05: end
           - id: extra
-            doc: |
-              The original unrar looks for it from the end of block, so in the future
-              additional fields can come between `specific` and `extra` fields
             size: extra_size.value
             type: extra
             if: flags.has_extra
+            doc: |
+              The original unrar looks for it from the end of block, so in the future
+              additional fields can come between `specific` and `extra` fields
         instances:
           type:
             value: block_type.value
@@ -234,35 +234,35 @@ types:
                 type: vlq_base128_le
             instances:
               has_extra:
-                doc: Additional extra area is present in the end of block header
                 value: (value.value & 0x0001) != 0
+                doc: Additional extra area is present in the end of block header
               has_data:
-                doc: Additional data area is present in the end of block header
                 value: (value.value & 0x0002) != 0
+                doc: Additional data area is present in the end of block header
               skip_if_unknown:
-                doc: Unknown blocks with this flag must be skipped when updating an archive
                 value: (value.value & 0x0004) != 0
+                doc: Unknown blocks with this flag must be skipped when updating an archive
               # This flags relevant only for file_or_service records
               split_before:
+                value: (value.value & 0x0008) != 0
                 doc: |
                   Data area of this block is continuing from previous volume
                   (this flag is only applicable to file or service header type)
-                value: (value.value & 0x0008) != 0
               split_after:
+                value: (value.value & 0x0010) != 0
                 doc: |
                   Data area of this block is continuing in next volume
                   (this flag is only applicable to file or service header type)
-                value: (value.value & 0x0010) != 0
               sub_block:
+                value: (value.value & 0x0020) != 0
                 doc: |
                   Block depends on preceding file block
                   (this flag is only applicable to file or service header type)
-                value: (value.value & 0x0020) != 0
               inherited:
+                value: (value.value & 0x0040) != 0
                 doc: |
                   Preserve a child block if host is modified
                   (this flag is only applicable to file or service header type)
-                value: (value.value & 0x0040) != 0
           extra:
             seq:
               - id: entries
@@ -293,24 +293,24 @@ types:
           - id: flags
             type: vlq_base128_le
           - id: volume
-            doc: |
-              Volume number of the multi-volume archive. The first volume (`0`)
-              may not have this field
             -orig-id: VolNumber
             type: vlq_base128_le
             if: has_volume
+            doc: |
+              Volume number of the multi-volume archive. The first volume (`0`)
+              may not have this field
         instances:
           multi_volume:
-            doc: Archive split into several files
             value: (flags.value & 0x0001) != 0
+            doc: Archive split into several files
           has_volume:
             value: (flags.value & 0x0002) != 0
           solid:
             value: (flags.value & 0x0004) != 0
           recovery_info:
             -orig-id: Protected
-            doc: Archive contains information for restoration
             value: (flags.value & 0x0008) != 0
+            doc: Archive contains information for restoration
           locked:
             value: (flags.value & 0x0010) != 0
         types:
@@ -335,20 +335,20 @@ types:
               - id: flags
                 type: vlq_base128_le
               - id: quick_open_off
-                doc: Offset from the beginning of block if not `0`
                 type: vlq_base128_le
                 if: has_quick_open
-              - id: recovery_off
                 doc: Offset from the beginning of block if not `0`
+              - id: recovery_off
                 type: vlq_base128_le
                 if: has_recovery
+                doc: Offset from the beginning of block if not `0`
             instances:
               has_quick_open:
-                doc: Quick open offset is present
                 value: (flags.value & 0x01) != 0
+                doc: Quick open offset is present
               has_recovery:
-                doc: Recovery record offset is present
                 value: (flags.value & 0x02) != 0
+                doc: Recovery record offset is present
         enums:
           extra_type:
             0x01: locator
@@ -370,14 +370,14 @@ types:
           - id: flags
             type: file_flags
           - id: unpacked_size
-            doc: Only relevant if `is_unknown_unpacked_size` is `false`
             type: vlq_base128_le
+            doc: Only relevant if `is_unknown_unpacked_size` is `false`
           - id: attributes
             type: vlq_base128_le
           - id: mtime
-            doc: File modification time
             type: u4
             if: flags.has_mtime
+            doc: File modification time
           - id: crc32
             type: u4
             if: flags.has_crc32
@@ -389,11 +389,11 @@ types:
           - id: file_name_len
             type: vlq_base128_le
           - id: file_name
-            doc: Original unrar will read to the size or end-of-block
-            type: str
             size: 'file_name_len.value < 2048 ? file_name_len.value : 2048'
-            encoding: utf-8
+            type: str
             eos-error: false
+            encoding: UTF-8
+            doc: Original unrar will read to the size or end-of-block
         instances:
           os:
             value: host_os.value
@@ -408,11 +408,11 @@ types:
               is_directory:
                 value: (value.value & 0x0001) != 0
               has_mtime:
-                doc: Time field in Unix format is present
                 value: (value.value & 0x0002) != 0
+                doc: Time field in Unix format is present
               has_crc32:
-                doc: CRC32 field is present
                 value: (value.value & 0x0004) != 0
+                doc: CRC32 field is present
               is_unknown_unpacked_size:
                 value: (value.value & 0x0008) != 0
           compression:
@@ -427,8 +427,8 @@ types:
               version:
                 value: (value.value & 0x3f) + 50
               solid:
-                doc: Only file blocks has it, service is not
                 value: (value.value & 0x0040) != 0
+                doc: Only file blocks has it, service is not
           extra:
             -webide-representation: '{type}: {content}'
             seq:
@@ -457,9 +457,9 @@ types:
               - id: raw_type
                 type: vlq_base128_le
               - id: digest
-                doc: Blake2 digest
                 size: 32
                 if: type == algo::blake2
+                doc: Blake2 digest
             instances:
               type:
                 value: raw_type.value
@@ -505,20 +505,20 @@ types:
                 if: is_unix and has_nanos and has_atime
             instances:
               is_unix:
-                doc: Use Unix time_t format
                 value: (flags.value & 0x01) != 0
+                doc: Use Unix time_t format
               has_mtime:
-                doc: mtime is present
                 value: (flags.value & 0x02) != 0
+                doc: mtime is present
               has_ctime:
-                doc: ctime is present
                 value: (flags.value & 0x04) != 0
+                doc: ctime is present
               has_atime:
-                doc: atime is present
                 value: (flags.value & 0x08) != 0
+                doc: atime is present
               has_nanos:
-                doc: Unix format with nanosecond precision
                 value: (flags.value & 0x10) != 0
+                doc: Unix format with nanosecond precision
           version:
             -webide-representation: '{version}'
             doc: (0x04) File version information
@@ -539,14 +539,14 @@ types:
               - id: name_len
                 type: vlq_base128_le
               - id: name
-                type: str
                 size: 'name_len.value < 2048 ? name_len.value : 2048'
-                encoding: utf-8
+                type: str
+                encoding: UTF-8
             instances:
               is_dir:
                 -orig-id: DirTarget
-                doc: Link target is directory
                 value: (flags.value & 0x01) != 0
+                doc: Link target is directory
               type:
                 value: raw_type.value
                 enum: redirection_type
@@ -572,37 +572,37 @@ types:
                 -orig-id: UnixGroupId
                 type: vlq_base128_le
                 if: has_group_id
+            instances:
+              has_user_name:
+                -orig-id: UnixOwnerNumeric
+                value: (flags.value & 0x01) != 0
+                doc: User name string is present
+              has_group_name:
+                -orig-id: UnixGroupNumeric
+                value: (flags.value & 0x02) != 0
+                doc: Group name string is present
+              has_user_id:
+                value: (flags.value & 0x04) != 0
+                doc: Numeric user ID is present
+              has_group_id:
+                value: (flags.value & 0x08) != 0
+                doc: Numeric group ID is present
             types:
               name:
                 seq:
                   - id: len
                     type: vlq_base128_le
                   - id: name
-                    type: str
                     size: 'len.value < 256 ? len.value : 256'
-                    encoding: utf-8
-            instances:
-              has_user_name:
-                -orig-id: UnixOwnerNumeric
-                doc: User name string is present
-                value: (flags.value & 0x01) != 0
-              has_group_name:
-                -orig-id: UnixGroupNumeric
-                doc: Group name string is present
-                value: (flags.value & 0x02) != 0
-              has_user_id:
-                doc: Numeric user ID is present
-                value: (flags.value & 0x04) != 0
-              has_group_id:
-                doc: Numeric group ID is present
-                value: (flags.value & 0x08) != 0
+                    type: str
+                    encoding: UTF-8
           sub_data:
             -webide-representation: '{content}'
             doc: (0x07) Service header subdata array
             seq:
               - id: content
-                doc: For `RR` service record there is one byte with recovery percent
                 size-eos: true
+                doc: For `RR` service record there is one byte with recovery percent
         enums:
           extra_type:
             0x01: crypt
@@ -632,17 +632,18 @@ types:
           is required a stream of known size.
         params:
           - id: extra
-            doc: Block is used as an `extra` block for `file` or `service` record
             type: bool
+            doc: Block is used as an `extra` block for `file` or `service` record
         seq:
           - id: version
+            type: vlq_base128_le
             doc: |
               Identifier of the encryption algorithm used. The only known algorithm
               is AES-256 (`0`)
-            type: vlq_base128_le
           - id: flags
             type: vlq_base128_le
           - id: lg2_count
+            type: u1
             doc: |
               LOG2 of maximum accepted iteration count.
 
@@ -652,15 +653,16 @@ types:
               Currently the maximum is 24.
 
               [`pbkdf2`]: https://en.wikipedia.org/wiki/PBKDF2
-            type: u1
             # valid: _ <= 24
           - id: salt
             size: 16
           - id: iv
-            doc: Initialization vector for AES-256
             size: 16
             if: extra
+            doc: Initialization vector for AES-256
           - id: password_check
+            size: 8
+            if: use_password_check
             doc: |
               Value used to check the correctness of the entered password.
 
@@ -685,25 +687,23 @@ types:
               this value, password is invalid.
 
               [`pbkdf2`]: https://en.wikipedia.org/wiki/PBKDF2
-            size: 8
-            if: use_password_check
           - id: password_check_sum
+            size: 4
+            if: use_password_check
             doc: |
               First 4 bytes of SHA-256(password_check)
 
               This field is used to determine corrupted archives. Because block's
               CRC32 is encrypted there is need another way to check data validity.
-            size: 4
-            if: use_password_check
             # valid: sha256(password_check)[0..4]
         instances:
           use_password_check:
-            doc: Password check data is present
             value: (flags.value & 0x0001) != 0
+            doc: Password check data is present
           use_hash_mac:
-            doc: Use MAC for unpacked data checksums
             value: (flags.value & 0x0002) != 0
             if: extra
+            doc: Use MAC for unpacked data checksums
       end:
         -webide-representation: '{this:flags}'
         doc: |
@@ -716,8 +716,8 @@ types:
             type: vlq_base128_le
         instances:
           has_next_volume:
-            doc: Not last volume
             value: (flags.value & 0x0001) != 0
+            doc: Not last volume
       qo_data:
         -webide-representation: '{entry}'
         doc: Content of the `data` field of the QuickOpen block (`service` block `QO`)
@@ -727,34 +727,34 @@ types:
           - id: size
             type: vlq_base128_le
           - id: entry
-            type: entry
             size: size.value
+            type: entry
         types:
           entry:
             -webide-representation: '{header}'
             seq:
-            - id: flags
-              doc: Not used
-              type: vlq_base128_le
-            - id: offset
-              doc: |
-                Offset from beginning of the QO block to header.
-                This offset should be substracted from the QO block address
-              type: vlq_base128_le
-            - id: header_size
-              type: vlq_base128_le
-            - id: header
-              size: header_size.value
-              type: header
+              - id: flags
+                type: vlq_base128_le
+                doc: Not used
+              - id: offset
+                type: vlq_base128_le
+                doc: |
+                  Offset from beginning of the QO block to header.
+                  This offset should be substracted from the QO block address
+              - id: header_size
+                type: vlq_base128_le
+              - id: header
+                size: header_size.value
+                type: header
   block_v5_encrypted:
     seq:
       - id: iv
-        doc: Initialization vector for AES-256
         size: 16
+        doc: Initialization vector for AES-256
       - id: content
-        doc: Encrypted block
         # process: aes(256, iv)
         type: block_v5
+        doc: Encrypted block
 enums:
   version:
     0:

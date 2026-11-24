@@ -21,8 +21,8 @@ types:
       - id: len_data
         type: u4
       - id: root_entry
-        type: entry
         size: len_header - 16
+        type: entry
       - id: magic2
         contents: 'DATA'
     types:
@@ -32,8 +32,8 @@ types:
           - id: len_name
             type: u1
           - id: name
-            type: str
             size: len_name
+            type: str
           - id: flags
             type: flags
           - id: body

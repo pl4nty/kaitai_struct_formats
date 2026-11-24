@@ -5,10 +5,10 @@ meta:
   file-extension: exe
   xref:
     wikidata: Q2378
-  endian: le
   license: Apache-2.0
-  encoding: ascii
   ks-opaque-types: true
+  encoding: ASCII
+  endian: le
 doc: |
   Converted from https://github.com/williballenthin/python-vb/blob/master/vb/__init__.py with addition of some structures described in various reverse-engineered documentation
   
@@ -56,17 +56,17 @@ types:
         -orig-id: RuntimeBuild
         type: u2
       - id: lang_dll # 0x6
-        type: str
-        size: 0xE
         -orig-id:
           - LangDll
           - LanguageDLL
-      - id: sec_lang_dll # 0x14
-        type: str
         size: 0xE
+        type: str
+      - id: sec_lang_dll # 0x14
         -orig-id:
           - SecLangDll
           - BackupLanguageDLL
+        size: 0xE
+        type: str
       - id: runtime_revision
         -orig-id:
           - RuntimeRevision
@@ -197,16 +197,16 @@ types:
             type: resolved_ptr
           - id: primitive_path
             -orig-id: wsPrimitivePath
-            type: strz
             #encoding: utf-16le
             size: 6
+            type: strz
             if: _root.header.runtime_build < 9782
           - id: path_information
             -orig-id: szPathInformation
+            size: "0x210 - (_root.header.runtime_build < 9782 ? 6 : 0)"
             type: str # fucking incorrectly processes strz
             #pad-right: 0x00
-            encoding: utf-16le
-            size: "0x210 - (_root.header.runtime_build < 9782 ? 6 : 0)"
+            encoding: UTF-16LE
           - id: external_table
             -orig-id: lpExternalTable
             type: u4
@@ -979,8 +979,8 @@ types:
         -orig-id: OBJECT_USER_CONTROL
         type: b1
       - id: object_class_module
-        type: b1
         -orig-id: OBJECT_CLASS_MODULE
+        type: b1
       - id: unkn2
         type: u2
 enums:

@@ -1,13 +1,13 @@
 meta:
   id: f32le
   title: IEEE 754 Octuple-precision floating-point
-  license: Unlicense
-  endian: be
   xref:
     iso: 60559:2011
     wikidata: Q25109769
+  license: Unlicense
   imports:
     - ./ieee754_float
+  endian: be
 doc: see the doc for `ieee754_float`.
 seq:
   - id: frac_lo_lo

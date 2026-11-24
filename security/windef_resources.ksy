@@ -1,10 +1,10 @@
 meta:
   id: windef_resources
-  application: Windows Defender
-  endian: le
   title: Windows Defender quarantine resources file
+  application: Windows Defender
   license: MIT
   ks-version: 0.9
+  endian: le
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
   Resources files store metadata of quarantine files of Windows Defender.
@@ -15,8 +15,8 @@ doc: |
 doc-ref: https://github.com/ernw/quarantine-formats/blob/master/docs/Windows_Defender.md
 seq:
   - id: header
-    type: rc4encrypted_header
     size: 0x3C
+    type: rc4encrypted_header
     process: util.custom_arc4.custom_arc4([0x1E, 0x87, 0x78, 0x1B, 0x8D, 0xBA, 0xA8, 0x44, 0xCE, 0x69,
                                            0x70, 0x2C, 0x0C, 0x78, 0xB7, 0x86, 0xA3, 0xF6, 0x23, 0xB7,
                                            0x38, 0xF5, 0xED, 0xF9, 0xAF, 0x83, 0x53, 0x0F, 0xB3, 0xFC,

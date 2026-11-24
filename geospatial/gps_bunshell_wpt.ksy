@@ -3,11 +3,11 @@ meta:
   title: Bunshell GPS Point of Interest
   application: Bunshell receivers
   file-extension: wpt
-  endian: le
-  encoding: ascii
   license: GPL-2.0-or-later
   imports:
     - /log/gps/gps_bunshell_trl
+  encoding: ASCII
+  endian: le
 
 doc: |
   File format used in Bunshell GPS receivers for POIs

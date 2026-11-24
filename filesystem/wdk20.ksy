@@ -8,11 +8,11 @@ seq:
   - id: header
     type: fs_header
   - id: inodes
-    type: inodes
     size: header.len_inodes - header._sizeof
+    type: inodes
   - id: lzma_blobs
-    type: dummy
     size: header.len_data
+    type: dummy
 types:
   dummy: {}
   fs_header:

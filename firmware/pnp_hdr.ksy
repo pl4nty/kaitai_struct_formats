@@ -2,11 +2,11 @@ meta:
   id: pnp_hdr
   title: Generic Option ROM Header
   application: x86 architecture
-  endian: le
   license: Unlicense
   imports:
     - /common/device_class_code
     - ./bios_header_generic
+  endian: le
 doc: >
   Specs:
     Plug and Play BIOS Specification Version 1.0A May 5, 1994, 3.2 Expansion Header for Plug and Play

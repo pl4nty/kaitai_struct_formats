@@ -22,8 +22,8 @@ seq:
   - id: magic2
     contents: 'AVI '
   - id: data
-    type: blocks
     size: file_size - 4
+    type: blocks
 types:
   # either a chunk or list
   blocks:

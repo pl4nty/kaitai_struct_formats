@@ -2,9 +2,8 @@ meta:
   id: lz4
   title: LZ4
   license: CC0-1.0
-  endian: le
   encoding: ASCII
-doc-ref: https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md
+  endian: le
 doc: |
   This specification describes a single LZ4 frame.
 
@@ -17,6 +16,7 @@ doc: |
   into compilations, provided that the copyright notice and this notice are preserved,
   and that any substantive changes or deletions from the original are clearly
   marked. Distribution of this document is unlimited.
+doc-ref: https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md
 seq:
   - id: magic
     type: u4

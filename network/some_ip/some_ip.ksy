@@ -3,9 +3,9 @@ meta:
   title: AUTOSAR SOME/IP
   license: CC0-1.0
   ks-version: 0.9
-  endian: be
   imports:
     - /network/some_ip/some_ip_sd
+  endian: be
 
 doc: |
   SOME/IP (Scalable service-Oriented MiddlewarE over IP) is an automotive/embedded
@@ -28,8 +28,8 @@ types:
   header:
     seq:
       - id: message_id
-        type: message_id
         size: 4
+        type: message_id
         doc: |
           The Message ID shall be a 32 Bit identifier that is used to identify
           the RPC call to a method of an application or to identify an event.
@@ -39,8 +39,8 @@ types:
           [PRS_SOMEIP_00042] Length field shall contain the length in Byte
           starting from Request ID/Client ID until the end of the SOME/IP message.
       - id: request_id
-        type: request_id
         size: 4
+        type: request_id
         doc: |
           The Request ID allows a provider and subscriber to differentiate
           multiple parallel uses of the same method, event, getter or setter.
@@ -69,8 +69,22 @@ types:
           successfully processed.
         doc-ref: AUTOSAR_PRS_SOMEIPProtocol.pdf - Table 4.5
 
+    instances:
+      is_valid_service_discovery:
+        value: message_id.value == 0xffff8100 and protocol_version == 0x01 and interface_version == 0x01 and message_type == message_type_enum::notification and return_code == return_code_enum::ok
+        doc: auxiliary value
+        doc-ref: AUTOSAR_PRS_SOMEIPServiceDiscoveryProtocol.pdf - section 4.1.2.1 General Requirements
+
     types:
       message_id:
+        doc: |
+          [PRS_SOMEIP_00035] The assignment of the Message ID shall be up to
+          the user. However, the Message ID shall be unique for the whole
+          system (i.e. the vehicle). TheMessage ID is similar to a CAN ID and
+          should be handled via a comparable process.
+          [PRS_SOMEIP_00038] Message IDs of method calls shall be structured in
+          the ID with 2^16 services with 2^15 methods.
+        doc-ref: AUTOSAR_PRS_SOMEIPProtocol.pdf 4.1.1.1  Message ID
         seq:
           - id: service_id
             type: u2
@@ -88,14 +102,6 @@ types:
             if: sub_id == true
             doc: Event ID
             doc-ref: AUTOSAR_PRS_SOMEIPProtocol.pdf - Table 4.6
-        doc: |
-          [PRS_SOMEIP_00035] The assignment of the Message ID shall be up to
-          the user. However, the Message ID shall be unique for the whole
-          system (i.e. the vehicle). TheMessage ID is similar to a CAN ID and
-          should be handled via a comparable process.
-          [PRS_SOMEIP_00038] Message IDs of method calls shall be structured in
-          the ID with 2^16 services with 2^15 methods.
-        doc-ref: AUTOSAR_PRS_SOMEIPProtocol.pdf 4.1.1.1  Message ID
 
         instances:
           value:
@@ -104,27 +110,21 @@ types:
             doc: The value provides the undissected Message ID
 
       request_id:
+        doc: |
+          The Request ID allows a provider and subscriber to differentiate
+          multiple parallel usesof the same method, event, getter or setter.
+        doc-ref: AUTOSAR_PRS_SOMEIPProtocol.pdf - section 4.1.1.3  Request ID
         seq:
           - id: client_id
             type: u2
           - id: session_id
             type: u2
-        doc: |
-          The Request ID allows a provider and subscriber to differentiate
-          multiple parallel usesof the same method, event, getter or setter.
-        doc-ref: AUTOSAR_PRS_SOMEIPProtocol.pdf - section 4.1.1.3  Request ID
 
         instances:
           value:
             pos: 0
             type: u4
             doc: The value provides the undissected Request ID
-
-    instances:
-      is_valid_service_discovery:
-        value: message_id.value == 0xffff8100 and protocol_version == 0x01 and interface_version == 0x01 and message_type == message_type_enum::notification and return_code == return_code_enum::ok
-        doc: auxiliary value
-        doc-ref: AUTOSAR_PRS_SOMEIPServiceDiscoveryProtocol.pdf - section 4.1.2.1 General Requirements
 
     enums:
       message_type_enum:

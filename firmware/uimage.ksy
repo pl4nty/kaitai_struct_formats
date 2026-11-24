@@ -80,8 +80,8 @@ types:
     seq:
       - id: name
         type: strz
-        encoding: UTF-8
         eos-error: false
+        encoding: UTF-8
         if: not has_asus_info
       - id: asus_info
         type: asus_firmware_information
@@ -144,9 +144,9 @@ types:
       - id: fs_version
         type: version
       - id: product_id
+        size: 12
         type: strz
         encoding: UTF-8
-        size: 12
         doc: |
           In the Ralink SDK variant (see `extra_info`), the product ID field is
           actually 23 bytes long, but no known product ID is longer than 12

@@ -51,9 +51,9 @@ types:
       name:
         io: _root._io
         pos: ofs_name + _parent.ofs_nametable
-        type: str
-        encoding: cp1251
         size: len_name
+        type: str
+        encoding: windows-1251
       data:
         io: _root._io
         pos: ofs_file

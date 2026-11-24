@@ -2,10 +2,10 @@ meta:
   id: microsoft_network_monitor_v2
   application: Microsoft Network Monitor, v2.x
   file-extension: cap
-  license: CC0-1.0
   xref:
     pronom: fmt/778
     wikidata: Q47245444
+  license: CC0-1.0
   ks-version: 0.7
   imports:
     - /network/ethernet_frame
@@ -79,8 +79,8 @@ types:
       stored in the file.
     seq:
       - id: ofs
-        doc: Absolute pointer to frame data in the file
         type: u4
+        doc: Absolute pointer to frame data in the file
     instances:
       body:
         io: _root._io
@@ -105,11 +105,11 @@ types:
         doc: Number of octets captured in file
       - id: body
         size: inc_len
-        doc: Actual packet captured from the network
         type:
           switch-on: _root.mac_type
           cases:
             'linktype::ethernet': ethernet_frame
+        doc: Actual packet captured from the network
 # Duplicate from pcap.ksy - should disappear from here as soon as
 # we'll get shared enums working
 enums:

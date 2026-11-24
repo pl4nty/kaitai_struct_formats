@@ -12,7 +12,7 @@ meta:
   tags:
     - serialization
   license: CC0-1.0
-  encoding: utf-8
+  encoding: UTF-8
   endian: be
 doc: |
   A structured binary format native to Minecraft for saving game data and transferring

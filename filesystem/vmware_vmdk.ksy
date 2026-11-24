@@ -45,10 +45,6 @@ seq:
   - id: compression_method
     type: u2
     enum: compression_methods
-enums:
-  compression_methods:
-    0: none
-    1: deflate
 instances:
   len_sector:
     value: 0x200
@@ -61,6 +57,10 @@ instances:
   grain_secondary:
     pos: start_secondary_grain * _root.len_sector
     size: size_grain * _root.len_sector
+enums:
+  compression_methods:
+    0: none
+    1: deflate
 types:
   header_flags:
     doc-ref: 'https://github.com/libyal/libvmdk/blob/main/documentation/VMWare%20Virtual%20Disk%20Format%20(VMDK).asciidoc#411-flags'

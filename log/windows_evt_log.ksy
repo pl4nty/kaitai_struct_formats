@@ -6,8 +6,8 @@ meta:
     forensicswiki: windows_event_log_(evt)
     justsolve: Windows_Event_Log
   tags:
-    - windows
     - log
+    - windows
   license: CC0-1.0
   ks-version: 0.9
   endian: le

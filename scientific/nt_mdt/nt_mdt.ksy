@@ -9,10 +9,10 @@ meta:
     - Callisto
   file-extension: mdt
   license: GPL-3.0-or-later
-  endian: le
   imports:
     - /common/ieee754_float/f10le
     - ./nt_mdt_color_table
+  endian: le
 doc: |
   A native file format of NT-MDT scientific software. Usually contains
   any of:
@@ -68,18 +68,18 @@ types:
       - id: title_len
         type: u4
       - id: title
-        type: str
-        encoding: cp1251
         size: title_len
+        type: str
+        encoding: windows-1251
   xml:
     to-string: xml
     seq:
       - id: xml_len
         type: u4
       - id: xml
+        size: xml_len
         type: str
         encoding: UTF-16LE
-        size: xml_len
   version:
     to-string: '"version " + major.to_s + "." + minor.to_s'
     seq:
@@ -116,8 +116,8 @@ types:
     to-string: '"u2<" + x.to_s + ", " + y.to_s + ">"'
     seq:
       - id: value
-        type: u2
         -orig-id: fm_xres, fm_yres, xres, yres
+        type: u2
         repeat: expr
         repeat-expr: 2
     instances:
@@ -131,8 +131,8 @@ types:
     to-string: '"s4<" + x.to_s + ", " + y.to_s + ">"'
     seq:
       - id: value
-        type: s4
         -orig-id: s_x00, s_y00
+        type: s4
         repeat: expr
         repeat-expr: 2
     instances:
@@ -148,8 +148,8 @@ types:
         type: u4
         doc: h_sz
       - id: main
-        type: frame_main
         size: size - 4
+        type: frame_main
     enums:
       frame_type:
         0: scanned
@@ -230,9 +230,9 @@ types:
                 repeat: expr
                 repeat-expr: block_count
               - id: blocks_names
+                size: blocks_headers[_index].name_len
                 type: str
                 encoding: UTF-8
-                size: blocks_headers[_index].name_len
                 repeat: expr
                 repeat-expr: block_count
               - id: blocks_data
@@ -251,15 +251,15 @@ types:
               - id: head_size
                 type: u4
               - id: header
-                type: header
                 size: head_size-4
+                type: header
               - id: title
-                type: str
                 size: header.name_size
+                type: str
                 encoding: UTF-8
               - id: xml
-                type: str
                 size: header.comm_size
+                type: str
                 encoding: UTF-8
               - id: frame_spec
                 size: header.spec_size
@@ -277,8 +277,8 @@ types:
               data:
                 io: _root._io
                 pos: header.data_offset
-                type: data
                 size: header.data_size
+                type: data
             types:
               header:
                 seq:
@@ -354,21 +354,21 @@ types:
                             size: len_header
                             type: header
                           - id: name
-                            type: str
-                            encoding: utf-8
                             size: header.len_name
+                            type: str
+                            encoding: UTF-8
                           - id: comment
-                            type: str
-                            encoding: utf-8
                             size: header.len_comment
+                            type: str
+                            encoding: UTF-8
                           - id: unit
-                            type: str
-                            encoding: cp1251
                             size: header.len_unit
-                          - id: author
                             type: str
-                            encoding: utf-8
+                            encoding: windows-1251
+                          - id: author
                             size: header.len_author
+                            type: str
+                            encoding: UTF-8
                         types:
                           header:
                             seq:
@@ -390,11 +390,11 @@ types:
                               - id: scale
                                 type: f8
                               - id: min_index_placeholder
-                                type: placeholder
                                 size: 8
+                                type: placeholder
                               - id: max_index_placeholder
-                                type: placeholder
                                 size: 8
+                                type: placeholder
                               - id: data_type
                                 type: s4
                                 enum: data_type
@@ -405,12 +405,12 @@ types:
                                 doc: Garbage from memory!
                             instances:
                               min_index:
-                                pos: 0
                                 io: min_index_placeholder._io
+                                pos: 0
                                 type: scalar(data_type)
                               max_index:
-                                pos: 0
                                 io: max_index_placeholder._io
+                                pos: 0
                                 type: scalar(data_type)
                               count:
                                 -orig-id: nx, ny and nz
@@ -486,20 +486,20 @@ types:
           scanned:
             seq:
               - id: vars
-                type: vars
                 size: _parent.var_size
+                type: vars
 
               # it seems these also belong to vars (of scanned image frame) (it's commented-out gwyddion code), but where?
               - id: orig_format
                 type: u4
-                doc: s_oem
                 if: false
+                doc: s_oem
 
               - id: tune
                 type: u4
                 enum: lift_mode
-                doc: z_tune
                 if: false
+                doc: z_tune
 
               - id: feedback_gain
                 type: f8
@@ -508,12 +508,12 @@ types:
 
               - id: dac_scale
                 type: s4
-                doc: s_s
                 if: false
+                doc: s_s
               - id: overscan
                 type: s4
-                doc: s_xov (in %)
                 if: false
+                doc: s_xov (in %)
               # end of supposed vars
               - id: data
                 type: data
@@ -721,8 +721,8 @@ types:
                       - id: unkn2
                         type: u2
                       - id: feedback_gain
-                        doc: s_fbg
                         type: f4
+                        doc: s_fbg
                       - id: unkn3_1
                         size: 2 * 16
                       - id: unkn3_2
@@ -856,8 +856,8 @@ types:
                   - id: size
                     type: u4
                   - id: frame_spec
-                    type: frame_spec
                     size: size
+                    type: frame_spec
                     if: size != 0
             enums:
               mode:
@@ -884,9 +884,9 @@ types:
               - id: vars
                 size: _parent.var_size
               - id: text
-                type: strz
-                encoding: cp1251
                 size: size
+                type: strz
+                encoding: windows-1251
               - id: title
                 type: title
                 if: _io.size >= _io.pos + 4
@@ -926,8 +926,8 @@ types:
           - id: colors_count
             type: u4le
           - id: color_scheme
-            type: nt_mdt_color_table(colors_count, 0)
             size-eos: true
+            type: nt_mdt_color_table(colors_count, 0)
       scales:
         seq:
           - id: scales

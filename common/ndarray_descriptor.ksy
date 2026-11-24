@@ -5,8 +5,8 @@ meta:
     - numpy
     - safetensors
   license: Unlicense
+  encoding: UTF-8
   endian: le
-  encoding: utf-8
 
 doc: |
   This is a part of an abstraction layer for multidimensional arrays and tensors, as used in, for example, `numpy`.
@@ -129,4 +129,3 @@ enums:
     0227: f12be
     0224: f16be
     0225: f32be
-

@@ -5,15 +5,15 @@ meta:
     - Joda-Time library
   license: Apache-2.0
   ks-version: 0.9
-  encoding: utf-8
+  encoding: UTF-8
   endian: be
 
 doc: Joda-Time is a time manipulation library for Java. It stores info about timezones in own binary format. The timezones are embedded into the jars (can be downloaded from https://github.com/JodaOrg/joda-time/releases/) and can be unpacked from them.
 doc-ref: https://github.com/JodaOrg/joda-time/blob/e37246fb936b2c242812235dff53c749e18ec200/src/main/java/org/joda/time/tz/DateTimeZoneBuilder.java#L110
 seq:
   - id: encoding
-    type: str
     size: 1
+    type: str
   - id: payload
     type:
       switch-on: encoding
@@ -28,8 +28,8 @@ types:
       - id: length
         type: u2
       - id: value
-        type: str
         size: length
+        type: str
   fixed:
     seq:
       - id: name_key

@@ -3,11 +3,11 @@ meta:
   title: ACPI table header
   license: Unlicense
   ks-version: 0.9
-  bit-endian: le
-  encoding: ascii
-  endian: le
   imports:
     - ./windows_platform_binary_table
+  encoding: ASCII
+  endian: le
+  bit-endian: le
 
 seq:
   - id: header

@@ -30,8 +30,8 @@ types:
   section:
     seq:
       - id: name
-        type: str
         size: 4
+        type: str
         encoding: ASCII
       - id: size
         type: u4

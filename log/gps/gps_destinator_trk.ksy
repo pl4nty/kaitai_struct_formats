@@ -4,12 +4,12 @@ meta:
   application: Destinator
   file-extension:
     - dat
-  license: GPL-2.0-or-later
-  encoding: utf-16le
-  -affected-by: 187
-  endian: le
   tags:
     - geospatial
+  license: GPL-2.0-or-later
+  -affected-by: 187
+  encoding: UTF-16LE
+  endian: le
 
 doc: |
   Destinator GPS tracks format for versions 3.0.75_103, 5.1.80 and 6.0.0.24556
@@ -59,9 +59,9 @@ types:
         doc: again decimal
       - id: is_connected_to_satellite
         type: u1
-        doc: likely bools
         repeat: expr
         repeat-expr: 12
+        doc: likely bools
       - id: signal_strength
         type: u2
         -unit: arb. unts

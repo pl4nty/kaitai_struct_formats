@@ -1,10 +1,10 @@
 meta:
   id: samsung_android_pit
   title: Samsung Partition Information Table
-  license: CC0-1.0
   file-extension: pit
+  license: CC0-1.0
+  encoding: UTF-8
   endian: le
-  encoding: utf-8
   #imports:
   #  - /common/samsung_signature
 
@@ -24,17 +24,17 @@ seq:
     type: u4
     valid: 0x12_34_98_76
   - id: num_entries
-    type: u4
     -orig-id: entryCount
+    type: u4
   - id: port
-    type: str
     size: 4
+    type: str
   - id: format
-    type: str
     size: 4
-  - id: chip
     type: str
+  - id: chip
     size: 8
+    type: str
   - id: unknown4
     type: u4
   - id: partitions
@@ -51,14 +51,14 @@ types:
       - id: unkn0
         type: b5
       - id: bml
-        type: b1
         -orig-id: kAttributeBML
+        type: b1
       - id: stl
-        type: b1
         -orig-id: kAttributeSTL
-      - id: write
         type: b1
+      - id: write
         -orig-id: kAttributeWrite
+        type: b1
       - id: unkn1
         size: 3
 
@@ -67,11 +67,11 @@ types:
       - id: unkn0
         type: b6
       - id: secure
-        type: b1
         -orig-id: kUpdateAttributeSecure
-      - id: fota
         type: b1
+      - id: fota
         -orig-id: kUpdateAttributeFota
+        type: b1
       - id: unkn1
         size: 3
 
@@ -102,14 +102,14 @@ types:
         type: u4
         doc: obsolete
       - id: partition_name
-        type: strz
         size: 32
+        type: strz
       - id: flash_filename
-        type: strz
         size: 32
+        type: strz
       - id: fota_filename
-        type: strz
         size: 32
+        type: strz
 
     enums:
       binary_type:

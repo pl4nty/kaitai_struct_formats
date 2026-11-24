@@ -3,7 +3,7 @@ meta:
   title: Adobe Flash Video File Format
   license: CC0-1.0
   ks-version: 0.9
-  encoding: utf-8
+  encoding: UTF-8
   endian: be
 doc-ref: https://wwwimages2.adobe.com/content/dam/acom/en/devnet/flv/video_file_format_spec_v10_1.pdf
 seq:

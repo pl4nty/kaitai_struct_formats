@@ -35,16 +35,17 @@ seq:
     doc: List of archive members. May be empty.
 types:
   regular_member_name:
+    doc: |
+      A regular (or "short") member name, stored directly in the name field.
+      
+      Note: Since regular names in BSD archives are terminated using spaces, file names that contain spaces cannot be stored as regular names. Such names must be stored as long names, even if they are not longer than 16 bytes.
     seq:
       - id: name
         terminator: 0x20
         pad-right: 0x20
         doc: The member name, right-padded with spaces.
-    doc: |
-      A regular (or "short") member name, stored directly in the name field.
-      
-      Note: Since regular names in BSD archives are terminated using spaces, file names that contain spaces cannot be stored as regular names. Such names must be stored as long names, even if they are not longer than 16 bytes.
   long_member_name:
+    doc: A long member name, stored at the start of the member's data.
     seq:
       - id: magic
         contents: '#1/'
@@ -52,7 +53,6 @@ types:
       - id: name_size
         type: space_padded_number(13, 10)
         doc: The size of the long member name in bytes.
-    doc: A long member name, stored at the start of the member's data.
   member_name:
     seq:
       - id: first_three_bytes
@@ -73,6 +73,7 @@ types:
             true: long_member_name
             false: regular_member_name
   member:
+    doc: An archive member's header and data.
     seq:
       - id: name_internal
         -orig-id: ar_name
@@ -117,4 +118,3 @@ types:
       size:
         value: 'name_internal.is_long ? size_with_long_name - name_internal.parsed.as<long_member_name>.name_size.value : size_with_long_name'
         doc: The size of the member's data, excluding any long member name.
-    doc: An archive member's header and data.

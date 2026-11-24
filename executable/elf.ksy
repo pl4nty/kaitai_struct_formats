@@ -357,8 +357,8 @@ types:
       no_common:
         -orig-id: DF_1_NOCOMMON
         value: value & 0x4000_0000 != 0
-        doc-ref: https://forge.sourceware.org/glibc/glibc-mirror/src/tag/glibc-2.43/elf/elf.h#L1040
         doc: No COMMON symbols exist.
+        doc-ref: https://forge.sourceware.org/glibc/glibc-mirror/src/tag/glibc-2.43/elf/elf.h#L1040
   endian_elf:
     meta:
       endian:
@@ -745,10 +745,10 @@ types:
         seq:
           - id: entries
             type: strz
-            repeat: eos
             # For an explanation of why UTF-8 instead of ASCII, see the comment
             # on the `name` attribute in the `dynsym_section_entry` type.
             encoding: UTF-8
+            repeat: eos
       sh_dynamic_section:
         doc: |
           Same type as `ph_dynamic_section`, but it depends on
@@ -1544,8 +1544,8 @@ types:
           - id: len_body
             type: u4
           - id: body
-            type: arm_attributes_section_entry_body
             size: len_body - len_body._sizeof
+            type: arm_attributes_section_entry_body
         types:
           arm_attributes_section_entry_body:
             seq:

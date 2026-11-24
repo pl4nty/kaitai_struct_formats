@@ -129,15 +129,15 @@ types:
       - id: len_tuples
         type: u4
       - id: tuples
-        type: cstring_tuples_nested
         size: len_tuples
+        type: cstring_tuples_nested
   packed_cstring_tuples_packed:
     seq:
       - id: len_tuples
         type: u4
       - id: tuples
-        type: cstring_tuples_packed
         size: len_tuples
+        type: cstring_tuples_packed
   cstrings_utf8:
     seq:
       - id: strings
@@ -207,6 +207,6 @@ types:
       - id: len_value
         type: u4
       - id: value
+        size: len_value
         type: str
         encoding: UTF-8
-        size: len_value

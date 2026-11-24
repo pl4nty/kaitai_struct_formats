@@ -1,7 +1,7 @@
 meta:
   id: pm
-  endian: le
   license: 0BSD
+  endian: le
 
 doc: Power management PCI capability
 

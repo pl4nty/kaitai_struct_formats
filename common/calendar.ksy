@@ -1,10 +1,10 @@
 meta:
   id: calendar
   title: Proleptic Gregorian calendar
-  license: Unlicense
-  endian: le
   xref:
     wikidata: Q1985727
+  license: Unlicense
+  endian: le
 -affected-by: upstream kaitai_struct_webide issue 155
 doc: |
   A set of types to compute a date from epoch offsets in days.
@@ -111,8 +111,8 @@ types:
       leap_period:
         value: 4
       days_in_era:
-        doc: civil calendar exactly repeats itself every this count of days.
         value: 146097
+        doc: civil calendar exactly repeats itself every this count of days.
       max_day_in_era:
         value: days_in_era - 1
       era:

@@ -41,8 +41,8 @@ seq:
   - id: len_body
     type: u4
   - id: body
-    type: chunk_list(tag::ucfb.to_i)
     size: len_body
+    type: chunk_list(tag::ucfb.to_i)
 types:
   chunk_list:
     params:
@@ -66,12 +66,12 @@ types:
         if: tag != tag::zero_word
       - id: body
         size: len_body
-        if: tag != tag::zero_word
         type:
           switch-on: body_kind
           cases:
             1: chunk_list(tag.to_i)
             2: sub_level
+        if: tag != tag::zero_word
       - id: padding
         size: len_padding
         if: tag != tag::zero_word
@@ -159,8 +159,8 @@ types:
       - id: len_chunks
         type: u4
       - id: chunks
-        type: chunk_list(tag::lvl.to_i)
         size-eos: true
+        type: chunk_list(tag::lvl.to_i)
 enums:
   tag:
     0:

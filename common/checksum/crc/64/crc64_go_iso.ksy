@@ -15,10 +15,10 @@ params:
   - id: array
     type: bytes
 
-instances:
-  value:
-    value: generic.value
-
 seq:
   - id: generic
     type: crc_generic(64, 0xffffffffffffffff, 0xffffffffffffffff, true, true, 0x1b, array)
+
+instances:
+  value:
+    value: generic.value

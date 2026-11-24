@@ -34,8 +34,8 @@ doc: |
 doc-ref: https://web.archive.org/web/20100206055706/http://www.qzx.com/pc-gpe/pcx.txt
 seq:
   - id: hdr
-    type: header
     size: 128
+    type: header
 instances:
   palette_256:
     pos: _io.size - 769

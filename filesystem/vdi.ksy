@@ -7,14 +7,13 @@ meta:
     - VMWare Workstation
   file-extension: vdi
   xref:
-    justsolve: VDI
     forensicswiki: virtual_disk_image_(vdi)
+    justsolve: VDI
     pronom: fmt/726
     wikidata: Q29209126
   license: GPL-3.0-or-later
-  encoding: utf-8
+  encoding: UTF-8
   endian: le
-doc-ref: https://github.com/qemu/qemu/blob/master/block/vdi.c
 #  - https://github.com/qemu/qemu/blob/master/block/vdi.c
 #  - https://www.virtualbox.org/browser/vbox/trunk/src/VBox/Storage/VDI.cpp
 #  - https://forums.virtualbox.org/viewtopic.php?t=8046
@@ -27,6 +26,7 @@ doc: |
    * <https://virtualboxes.org/images/>
 
   or you can convert images of other formats.
+doc-ref: https://github.com/qemu/qemu/blob/master/block/vdi.c
 seq:
   - id: header
     type: header
@@ -57,8 +57,8 @@ types:
   header:
     seq:
       - id: text
-        type: str
         size: 0x40
+        type: str
 
       - id: signature
         contents: [0x7F, 0x10, 0xDA, 0xBE]
@@ -111,8 +111,8 @@ types:
             type: flags
 
           - id: description
-            type: str
             size: 256
+            type: str
 
           - id: blocks_map_offset
             -orig-id: offset_bmap

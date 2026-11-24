@@ -1,11 +1,11 @@
 meta:
   id: symantec_quarantine_meta
-  file-extension: vbn
-  application: Symantec Endpoint Protection
-  endian: le
   title: Symantec Endpoint Protection quarantine metadata file
+  application: Symantec Endpoint Protection
+  file-extension: vbn
   license: MIT
   ks-version: 0.9
+  endian: le
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
   The Symantec quarantine files are created by Symantec Endpoint Protection and store suspected malware and its metadata.
@@ -16,21 +16,21 @@ seq:
   - id: ofs_data
     type: u4
   - id: filename
-    type: strz
-    encoding: utf-8
     size: 0x180
+    type: strz
+    encoding: UTF-8
   - id: meta
-    type: str
-    encoding: utf-8
     size: 0x800
+    type: str
+    encoding: UTF-8
     doc: |
       The string can contain null bytes at arbitrary locations, therefore no strz.
       Therefore, the null bytes have to be stripped manually.
 instances:
   data:
     pos: ofs_data
-    type: list_of_entries
     size-eos: true
+    type: list_of_entries
 types:
   list_of_entries:
     seq:
@@ -73,9 +73,9 @@ types:
       - id: len_string
         type: u4
       - id: string
-        type: str
-        encoding: utf-16le
         size: 'len_string > 2 ? len_string - 2 : len_string'
+        type: str
+        encoding: UTF-16LE
       - id: padding
         size: 2
         contents: [0x00, 0x00]

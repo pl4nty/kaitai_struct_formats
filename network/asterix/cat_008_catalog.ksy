@@ -2,7 +2,7 @@ meta:
   id: cat_008_catalog
   title: Eurocontrol Asterix Category 008 CAT008 data items catalog. Edition 1.2
   license: GPL-3.0-only
-  endian: be
+  ks-version: 0.9
   imports:
 #    - bit_map
     - fixed
@@ -10,7 +10,7 @@ meta:
     - extended
     - repetitive
     - compound
-  ks-version: 0.9
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.

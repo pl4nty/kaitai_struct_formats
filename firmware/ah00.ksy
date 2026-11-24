@@ -1,7 +1,7 @@
 meta:
   id: ah00
   license: MIT
-  encoding: ascii
+  encoding: ASCII
   endian: be
 doc-ref: |
   - https://reverseengineering.stackexchange.com/questions/4565/format-of-chk-firmware-package-on-wgr614v7

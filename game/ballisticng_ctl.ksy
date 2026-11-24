@@ -2,8 +2,8 @@ meta:
   id: ballisticng_ctl
   title: BallisticNG Custom Track Layout
   file-extension: ctl
-  endian: le
   license: CC0-1.0
+  endian: le
 doc: |
   Format for custom race track layouts in BallisticNG.
   Only encodes non-decorative information about the track,
@@ -37,9 +37,9 @@ seq:
     type: u1
     if: version > 5
   - id: reference_image_path
+    size: reference_image_path_len
     type: str
     encoding: UTF-8
-    size: reference_image_path_len
     if: version > 5
   - id: reference_is_locked
     type: u1

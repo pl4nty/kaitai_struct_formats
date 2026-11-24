@@ -126,9 +126,9 @@ types:
   xmp:
     seq:
       - id: data
-        type: str
         size-eos: true
-        encoding: utf-8
+        type: str
+        encoding: UTF-8
   raw_data:
     seq:
       - id: data
@@ -301,11 +301,11 @@ enums:
         (Photoshop 5.0) Thumbnail resource (supersedes resource 1033).
         See Thumbnail resource format.
     1037:
-     id: global_angle
-     doc: |
-       (Photoshop 5.0) Global Angle. 4 bytes that contain an integer between
-       0 and 359, which is the global lighting angle for effects layer. If not
-       present, assumed to be 30.
+      id: global_angle
+      doc: |
+        (Photoshop 5.0) Global Angle. 4 bytes that contain an integer between
+        0 and 359, which is the global lighting angle for effects layer. If not
+        present, assumed to be 30.
     1038:
       id: color_samplers_resource_photoshop_50
       doc: |

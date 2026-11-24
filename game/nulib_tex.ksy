@@ -1,8 +1,8 @@
 meta:
   id: nulib_tex
-  file-extension: tex
-  application: Games with Namco NU library
   title: Namco Texture Archive
+  application: Games with Namco NU library
+  file-extension: tex
   license: MIT
   imports:
     - nulib_xmd
@@ -12,8 +12,8 @@ seq:
     type: nulib_xmd
 instances:
   textures:
-    type: texture(_index)
     io: _root._io
+    type: texture(_index)
     repeat: expr
     repeat-expr: xmd.header.count
 
@@ -28,6 +28,6 @@ types:
       len_nut:
         value: _root.xmd.lengths[i]
       nut:
-        type: nulib_nut
         pos: _root.xmd.positions[i]
         size: len_nut
+        type: nulib_nut

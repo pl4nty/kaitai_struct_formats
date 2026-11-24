@@ -19,8 +19,8 @@ seq:
     type: s4
     doc: 'Size of this chunk exclusive of `fmt_magic` + `len_chunk` itself.'
   - id: fx_magic
-    type: str
     size: 4
+    type: str
     encoding: ASCII
     doc: |
       Identifies the kind of preset, FxCk for a `regular_chunk` or FPCh for an
@@ -31,8 +31,8 @@ seq:
     doc: 'Format version, always equal to 1.'
   - id: fx_fourcc
     -orig-id: fxID
-    type: str
     size: 4
+    type: str
     encoding: ASCII
     doc: 'VST FourCC as registered with Steinberg Media Technologies GmbH.'
   - id: fx_version
@@ -47,8 +47,8 @@ seq:
       `regular_chunk.params`, else it is 1.
   - id: preset_name
     -orig-id: prgName
-    type: str
     size: 28
+    type: str
     encoding: ASCII
     doc: 'Preset name'
   - id: preset_content
@@ -69,9 +69,9 @@ types:
     seq:
       - id: fx_params
         -orig-id: params
+        type: f4
         repeat: expr
         repeat-expr: _root.num_fx_params
-        type: f4
   opaque_chunk:
     seq:
       - id: len_chunk

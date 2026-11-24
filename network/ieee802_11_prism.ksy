@@ -1,12 +1,12 @@
 meta:
   id: ieee802_11_prism
   title: prism II headers for 802.11 capture
-  license: Unlicense
-  endian: le
-  encoding: ascii
   xref:
     ieee: 802.11
     wikidata: Q7245672
+  license: Unlicense
+  encoding: ASCII
+  endian: le
 doc: |
   Prism II headers are usually used by wlan cards based on Intersil/Conexant/Broadcom [Prism II](https://en.wikipedia.org/wiki/Prism_(chipset)) and Proxim Wireless/Lucent ORiNOCO.
   Disclaimer: AFAIK there is no official spec publicly available, most of the specs publicly available are reverse-engineered and incorporate their authors beleifs.
@@ -24,11 +24,11 @@ seq:
   - id: size
     type: u4
   - id: device_name
-    type: strz
     size: 16
+    type: strz
   - id: fields
-    type: fields
     size: fields_size
+    type: fields
   - id: body
     size-eos: true
 instances:
@@ -78,8 +78,8 @@ types:
                 type: u4
             instances:
               value:
-                doc-ref: https://github.com/freebsd/freebsd/blob/c71e73b0fbd8b142ebb4a933bb0e93ec2b0d830e/sys/dev/wi/if_wivar.h#L173
                 value: "offsetted - _root.rssi_offset"
+                doc-ref: https://github.com/freebsd/freebsd/blob/c71e73b0fbd8b142ebb4a933bb0e93ec2b0d830e/sys/dev/wi/if_wivar.h#L173
                 -affected-by: 88
           direction:
             seq:
@@ -101,15 +101,15 @@ types:
               - id: mandatory_part_offset
                 type: b4
               - id: placeholder
-                type: placeholder
                 size: header_size - 1
+                type: placeholder
             instances:
               mandatory_part_offset_from_first_byte:
                 value: mandatory_part_offset - 1
               mandatory_part:
+                io: placeholder._io
                 pos: mandatory_part_offset_from_first_byte / 2
                 type: mandatory_part(mandatory_part_skip_nibble)
-                io: placeholder._io
               mandatory_part_skip_nibble:
                 value: mandatory_part_offset_from_first_byte % 2 == 1
               type:

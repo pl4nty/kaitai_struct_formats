@@ -6,9 +6,9 @@ meta:
   xref:
     wikidata: Q178572
   license: GPL-3.0+
-  endian: le
-  encoding: utf-16le
   ks-version: 0.9
+  encoding: UTF-16LE
+  endian: le
 
 doc: |
   TortoiseGit is a GUI frontend for git SCM. It caches some data to `tortoisegit.data` file in `.git` dir. `tortoisegit.index is an index for that file.
@@ -19,15 +19,15 @@ doc-ref:
 
 seq:
   - id: signature
-    contents: [0x66, 0x55, 0xAA, 0x88]
     -orig-id: m_Magic
+    contents: [0x66, 0x55, 0xAA, 0x88]
   - id: version
+    -orig-id: m_Version
     type: u4
     doc: "current one is 0x11"
-    -orig-id: m_Version
   - id: item_count
-    type: u4
     -orig-id: m_ItemCount
+    type: u4
   - id: items
     type: item
     repeat: expr
@@ -41,8 +41,8 @@ types:
     -orig-id: SLogCacheIndexItem
     seq:
       - id: hash
-        type: c_git_hash
         -orig-id: m_Hash
+        type: c_git_hash
       - id: offset
-        type: u8 # ULONGLONG
         -orig-id: m_Offset
+        type: u8 # ULONGLONG

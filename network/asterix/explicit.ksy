@@ -1,8 +1,8 @@
 meta:
   id: explicit
   license: GPL-3.0-only
-  endian: be
   ks-version: 0.9
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.

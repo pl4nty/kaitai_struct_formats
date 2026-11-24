@@ -124,13 +124,13 @@ types:
       - id: num_samples
         -orig-id: length
         type: u4
-        doc: number of samples
         if: sound_header_type == sound_header_type::standard
+        doc: number of samples
       - id: num_channels
         -orig-id: numChannels
         type: u4
-        doc: number of channels in sample
         if: sound_header_type == sound_header_type::extended or sound_header_type == sound_header_type::compressed
+        doc: number of channels in sample
       - id: sample_rate
         -orig-id: sampleRate
         type: unsigned_fixed_point
@@ -148,9 +148,9 @@ types:
         enum: sound_header_type
         doc: sample's encoding option
       - id: midi_note
+        -orig-id: baseFrequency
         type: u1
         doc: base frequency of sample, expressed as MIDI note values, 60 is middle C
-        -orig-id: baseFrequency
       - id: extended_or_compressed
         type: extended_or_compressed
         if: sound_header_type == sound_header_type::extended or sound_header_type == sound_header_type::compressed
@@ -160,8 +160,8 @@ types:
           sound_header_type == sound_header_type::standard ? num_samples :
           sound_header_type == sound_header_type::extended ? extended_or_compressed.num_frames * num_channels * extended_or_compressed.bits_per_sample / 8 :
           _io.size - _io.pos
-        doc: sampled-sound data
         if: sample_ptr == 0
+        doc: sampled-sound data
     instances:
       start_ofs:
         value: _io.pos
@@ -202,8 +202,8 @@ types:
       - id: reserved
         -orig-id: futureUse1, futureUse2, futureUse3, futureUse4
         size: 14
-        doc: reserved
         if: _parent.sound_header_type == sound_header_type::extended
+        doc: reserved
   extended:
     seq:
       - id: instrument_chunk_ptr

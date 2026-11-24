@@ -5,9 +5,9 @@ meta:
     - usbmon (Linux Kernel)
     - Wireshark
   license: BSD-3-Clause
-  endian: le
   imports:
     - /hardware/usb/pcap/usb_pcap_endpoint_number
+  endian: le
 doc: |
   A native pcap header of [usbmon](https://www.kernel.org/doc/Documentation/usb/usbmon.txt) part of libpcap and Linux kernel.
 doc-ref:
@@ -60,8 +60,8 @@ types:
         type: u1
         enum: setup_flag
       - id: data_flag
-        enum: data_flag
         type: u1
+        enum: data_flag
       - id: timestamp
         type: timestamp
       - id: status

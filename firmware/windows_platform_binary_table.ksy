@@ -3,13 +3,13 @@ meta:
   title: Windows Platform Binary Table
   license: Unlicense
   ks-version: 0.9
-  bit-endian: le
-  encoding: utf-8
+  encoding: UTF-8
   endian: le
+  bit-endian: le
 
-doc-ref: https://download.microsoft.com/download/8/A/2/8A2FB72D-9B96-4E2D-A559-4A27CF905A80/windows-platform-binary-table.docx
 doc: |
   Windows platform Binary table is a file format enablind vendors to preinstall eiter needed essential software, or malware and spyware.
+doc-ref: https://download.microsoft.com/download/8/A/2/8A2FB72D-9B96-4E2D-A559-4A27CF905A80/windows-platform-binary-table.docx
 
 seq:
   - id: handoff_memory_size

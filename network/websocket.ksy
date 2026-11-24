@@ -15,9 +15,9 @@ seq:
     type: initial_frame
   - id: trailing_frames
     type: dataframe
-    if: initial_frame.header.finished != true
     repeat: until
     repeat-until: _.header.finished
+    if: initial_frame.header.finished != true
 
 types:
   frame_header:
@@ -29,8 +29,8 @@ types:
         -orig-id: 'rsv1, rsv2, rsv3'
         type: b3
       - id: opcode
-        enum: opcode
         type: b4
+        enum: opcode
       - id: is_masked
         type: b1
       - id: len_payload_primary

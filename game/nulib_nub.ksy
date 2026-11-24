@@ -1,9 +1,9 @@
 meta:
   id: nulib_nub
-  application: Games with Namco NU library
   title: Namco Sound Bank
-  license: MIT
+  application: Games with Namco NU library
   file-extension: nub
+  license: MIT
   endian: le
 seq:
   - id: header

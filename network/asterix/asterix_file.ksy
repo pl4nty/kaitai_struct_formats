@@ -1,11 +1,11 @@
 meta:
   id: asterix_file
   file-extension: ast
-  endian: be
   license: GPL-3.0-only
+  ks-version: 0.9
   imports:
     - asterix_message
-  ks-version: 0.9
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.

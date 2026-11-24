@@ -2,13 +2,13 @@ meta:
   id: aih0
   title: AIH0 firmware container
   license: MIT
-  encoding: ascii
+  encoding: ASCII
   endian: be
 doc-ref: https://github.com/ReFirmLabs/binwalk/blob/563a19d5cb7748da8da2db3ed5ee5c4dd76e8ffe/src/binwalk/magic/firmware#L483
 seq:
   - id: header
-    type: header
     size: 48
+    type: header
   - id: data
     size: header.len_data
 types:
@@ -27,6 +27,6 @@ types:
         contents: ["5.00TP", 0,0,0,0,0,0,0,0,0,0]
     instances:
       version_str:
-        pos: 0x20
         io: _parent.header._io
+        pos: 0x20
         type: strz

@@ -43,8 +43,8 @@ seq:
   - id: ofs_data
     type: u4
   - id: header
-    type: header
     size: ofs_data - magic._sizeof - ofs_data._sizeof
+    type: header
 instances:
   len_data:
     value: 'header.data_size == 0xffff_ffff ? _io.size - ofs_data : header.data_size'

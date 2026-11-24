@@ -1,7 +1,7 @@
 meta:
   id: cat_020_catalog
   license: GPL-3.0-only
-  endian: be
+  ks-version: 0.9
   imports:
 #    - bit_map
     - fixed
@@ -9,7 +9,7 @@ meta:
     - extended
     - repetitive
     - compound
-  ks-version: 0.9
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.

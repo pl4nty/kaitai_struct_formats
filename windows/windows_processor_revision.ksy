@@ -2,15 +2,15 @@ meta:
   id: windows_processor_revision
   title: Microsoft Windows `wProcessorRevision` field of various structures, describing processor revision
   license: Unlicense
-  endian: le
   imports:
     - /windows/windows_processor_architecture
+  endian: le
+doc: |
+  Decodes the info about Windows processor revision.
 doc-ref:
   - https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-system_info
   - https://learn.microsoft.com/en-us/previous-versions/ms942639(v=msdn.10)
   - https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_system_info
-doc: |
-  Decodes the info about Windows processor revision.
 -orig-id: wProcessorRevision
 params:
   - id: oem_id

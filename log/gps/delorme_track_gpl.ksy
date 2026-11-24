@@ -6,10 +6,10 @@ meta:
     - DeLorme Map'n'Go 3.0
     - Deorme Street Atlas 4.0
   file-extension: gpl
-  license: GPL-2.0-or-later
-  endian: le
   tags:
     - geospatial
+  license: GPL-2.0-or-later
+  endian: le
 
 doc: |
   Native DeLorme TripMate file format (the version used in GPSBabel).

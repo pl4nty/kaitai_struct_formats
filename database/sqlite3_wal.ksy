@@ -5,8 +5,8 @@ meta:
     - db-wal
     - db3-wal
     - sqlite3-wal
-  endian: be
   license: CC0-1.0
+  endian: be
 doc: |
   SQLite3 is a popular serverless SQL engine, implemented as a library
   to be used within other applications. It keeps its databases as

@@ -5,8 +5,6 @@ meta:
     - numpy
     - safetensors
   license: Unlicense
-  endian: le
-  encoding: utf-8
   imports:
     - /common/ieee754_float/f1
     - /common/ieee754_float/f2be
@@ -20,8 +18,10 @@ meta:
     - /common/ieee754_float/f32be
     - /common/ieee754_float/f32le
     - /common/ndarray_descriptor
-  -affected-by: 703
   ks-opaque-types: true
+  encoding: UTF-8
+  -affected-by: 703
+  endian: le
 
 doc: |
   This is a part of an abstraction layer for multidimensional arrays and tensors, as used in, for example, `numpy`.

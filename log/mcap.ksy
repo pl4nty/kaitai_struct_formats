@@ -63,8 +63,8 @@ types:
       - id: len_str
         type: u4
       - id: str
-        type: str
         size: len_str
+        type: str
         encoding: UTF-8
 
   tuple_str_str:

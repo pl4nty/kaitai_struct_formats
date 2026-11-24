@@ -94,7 +94,6 @@ types:
         type: str
       - id: hash
         type: u4
-        doc-ref: https://gitlab.com/worr/libintl/raw/master/src/lib/libintl/strhash.c
         doc: |
           def string_hash(s):
             s=s.encode("utf-8")
@@ -107,6 +106,7 @@ types:
                 h ^= tmp
                 h ^= tmp >> 24
             return h
+        doc-ref: https://gitlab.com/worr/libintl/raw/master/src/lib/libintl/strhash.c
     instances:
       collision_step:
         value: "hash % (_root.mo.num_hashtable_items - 2) + 1"

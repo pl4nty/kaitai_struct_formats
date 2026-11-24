@@ -7,8 +7,8 @@ meta:
 doc-ref: https://github.com/ckolivas/lrzip/blob/master/doc/magic.header.txt
 seq:
   - id: header
-    type: header
     size: 24
+    type: header
   - id: rchunks
     type: rchunk
     repeat: until
@@ -135,8 +135,8 @@ types:
       size:
         value: 1 + 3 * byte_width
       next:
-        pos: next_block_head + start_position
         io: _root._io
+        pos: next_block_head + start_position
         type: stream_header_data(byte_width, start_position)
         if: next_block_head != 0
 enums:

@@ -2,15 +2,15 @@ meta:
   id: pvz_main_pak
   application: Plants vs. Zombies
   file-extension: pak
-  endian: le
   license: CC0-1.0
   encoding: ASCII
-doc-ref: https://plantsvszombies.fandom.com/wiki/Modify_Plants_vs._Zombies
+  endian: le
 doc: |
   Before parse, use 0xF7 to xor decrypt.
   After file_entry, the following is file contents without any gap.
 
   https://github.com/Freed-Wu/pvz.nvim provides tools to (de)serialize it.
+doc-ref: https://plantsvszombies.fandom.com/wiki/Modify_Plants_vs._Zombies
 seq:
   - id: magic
     type: u8
@@ -28,8 +28,8 @@ types:
         type: u1
         if: mark == 0x00
       - id: name
-        type: str
         size: len_name
+        type: str
         if: mark == 0x00
       - id: size
         type: u4

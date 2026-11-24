@@ -1,10 +1,10 @@
 meta:
   id: ieee754_float
   title: IEEE 754 floating-point
-  license: Unlicense
   xref:
     iso: 60559:2011
     wikidata: Q1994657
+  license: Unlicense
 doc: |
   An extremily widespread format of floating-point numbers used in most of hardware implementations of floating-point numbers.
   Unfortunately not all the standardized formats are supported natively in hardware, programming languages and software, especially in old ones. For example Kaitai Struct itself doesn't support anything except `f4` and `f8` natively.

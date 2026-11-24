@@ -23,8 +23,8 @@ doc: |
 doc-ref: https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md
 seq:
   - id: header
-    type: header
     size: 128
+    type: header
   - id: frames
     type: frame
     repeat: expr
@@ -47,8 +47,8 @@ types:
         enum: color_depth
         doc: Bits per pixel
       - id: flags
-        type: header_flags
         size: 4
+        type: header_flags
       - id: speed
         type: u2
         doc: Milliseconds between frames. Deprecated, every frame has its own duration.
@@ -140,8 +140,8 @@ types:
       - id: len_value
         type: u2
       - id: value
-        type: str
         size: len_value
+        type: str
         encoding: UTF-8
   old_palette_chunk:
     doc: |
@@ -189,8 +189,8 @@ types:
   layer_chunk:
     seq:
       - id: flags
-        type: layer_flags
         size: 2
+        type: layer_flags
       - id: layer_type
         type: u2
         enum: layer_type

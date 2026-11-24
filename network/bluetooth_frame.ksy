@@ -5,9 +5,9 @@ meta:
     ieee: 802.15.1
   license: CC0-1.0
   ks-version: 0.8
-  endian: le
   imports:
     - /network/bluetooth_att
+  endian: le
 doc: |
   Bluetooth frame is a OSI data link layer (layer 2) and higher protocol data
   unit for Bluetooth networks.
@@ -17,9 +17,9 @@ seq:
   - id: direction
     type: u4be
     enum: direction_enum
-    doc-ref: https://github.com/the-tcpdump-group/libpcap/blob/master/pcap/bluetooth.h#L44
     doc: |
       packet direction
+    doc-ref: https://github.com/the-tcpdump-group/libpcap/blob/master/pcap/bluetooth.h#L44
   - id: hci_packet_type
     type: u1
     enum: hci_packet_type_enum
@@ -46,28 +46,28 @@ enums:
 
 types:
   hci_acl_data:
-    doc-ref: https://www.bluetooth.org/docman/handlers/downloaddoc.ashx?doc_id=457080 page 771
     doc: HCI ACL Data packet
+    doc-ref: https://www.bluetooth.org/docman/handlers/downloaddoc.ashx?doc_id=457080 page 771
     seq:
-    - id: handle
-      type: b12
-    - id: pb_flag
-      type: b2
-      doc: Packet Boundary Flag
-    - id: bc_flag
-      type: b2
-      doc: Broadcast Flag
-    - id: data_len
-      type: u2
-      doc: Length of the HCI ACL Data payload
-    - id: body
-      size: data_len
-      # TODO: add more ACL Data payload types
-      type: l2cap
+      - id: handle
+        type: b12
+      - id: pb_flag
+        type: b2
+        doc: Packet Boundary Flag
+      - id: bc_flag
+        type: b2
+        doc: Broadcast Flag
+      - id: data_len
+        type: u2
+        doc: Length of the HCI ACL Data payload
+      - id: body
+        size: data_len
+        # TODO: add more ACL Data payload types
+        type: l2cap
 
   l2cap:
-    doc-ref: https://www.bluetooth.org/docman/handlers/downloaddoc.ashx?doc_id=457080 page 1829
     doc: Logical Link Control and Adaptation Protocol
+    doc-ref: https://www.bluetooth.org/docman/handlers/downloaddoc.ashx?doc_id=457080 page 1829
     seq:
       - id: len_payload
         type: u2

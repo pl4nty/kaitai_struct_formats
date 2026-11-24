@@ -18,11 +18,6 @@ doc-ref:
   - _MEMORYSTATUS
   - _MEMORYSTATUSEX
 
-instances:
-  basic_size:
-    value: size._sizeof + sizeof<internal::basic>
-  extended_size:
-    value: basic_size + sizeof<internal::extended>
 seq:
   - id: size
     -orig-id: dwOSVersionInfoSize
@@ -38,6 +33,11 @@ seq:
       cases:
         basic_size: internal(false)
         extended_size: internal(true)
+instances:
+  basic_size:
+    value: size._sizeof + sizeof<internal::basic>
+  extended_size:
+    value: basic_size + sizeof<internal::extended>
 
 types:
   internal:
@@ -55,9 +55,9 @@ types:
         seq:
           - id: memory_load_percent
             -orig-id: dwMemoryLoad
-            doc: in percents
-            -unit: "%"
             type: u4
+            -unit: "%"
+            doc: in percents
           - id: physical_total
             -orig-id:
               - dwTotalPhys

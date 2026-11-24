@@ -74,8 +74,8 @@ types:
           volume_header:
             seq:
               - id: id
-                type: str
                 size: 32
+                type: str
                 doc: >
                   Contains a UUID stored as an ASCII string.
                   The physical volume identifier can be used to uniquely identify a physical volume. The physical volume identifier is stored as: 9LBcEB7PQTGIlLI0KxrtzrynjuSL983W but is equivalent to its formatted variant: 9LBcEB-7PQT-GIlL-I0Kx-rtzr-ynju-SL983W, which is used in the metadata.
@@ -146,9 +146,9 @@ types:
                         type: u8
                       - id: raw_location_descriptors
                         type: raw_location_descriptor
-                        doc: "The last descriptor in the list is terminator and consists of 0-byte values."
                         repeat: until
                         repeat-until: _.offset == 0 and _.size == 0 and _.checksum == 0 # and _.flags == 0
+                        doc: "The last descriptor in the list is terminator and consists of 0-byte values."
                     instances:
                       metadata_area:
                         io: _root._io
@@ -171,9 +171,6 @@ types:
                           - id: flags
                             type: u4
                             enum: raw_location_descriptor_flags
-                        enums:
-                          raw_location_descriptor_flags:
-                            0x00000001: raw_location_ignored #The raw location descriptor should be ignored.
                         instances:
                           metadata:
                             io: _root._io
@@ -181,3 +178,6 @@ types:
                             size: size
                             type: strz
                             if: size != 0
+                        enums:
+                          raw_location_descriptor_flags:
+                            0x00000001: raw_location_ignored #The raw location descriptor should be ignored.

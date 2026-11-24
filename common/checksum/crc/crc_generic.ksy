@@ -1,13 +1,13 @@
 meta:
   id: crc_generic
   title: Computes CRC checksum of an array.
+  xref:
+    osdev: CRC32
+    wikidata: Q245471
   license: Unlicense
   imports:
     - /common/bit_reflector/bit_reflector_u8
     - /common/bit_reflector/bit_reflector_u1
-  xref:
-    wikidata: Q245471
-    osdev: CRC32
 
 doc: |
   Computes CRC checksum of an array.

@@ -1,7 +1,7 @@
 meta:
   id: asterix_record
-  endian: be
   license: GPL-3.0-only
+  ks-version: 0.9
   imports:
     - cat_000
     - cat_001
@@ -14,7 +14,7 @@ meta:
     - cat_048
     - cat_062
 
-  ks-version: 0.9
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.

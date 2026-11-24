@@ -13,11 +13,11 @@ meta:
     - rec
   xref:
     wikidata:
-    - Q6717445
-    - Q5009675
+      - Q6717445
+      - Q5009675
   license: Unlicense
+  encoding: ASCII
   endian: le
-  encoding: ascii
 
 doc: |
   A file format for transmission electron microscopy.
@@ -29,8 +29,8 @@ doc-ref:
 
 seq:
   - id: header
-    type: header
     size: header_size
+    type: header
   - id: extended_header
     size: header.extended_header_size
     type:
@@ -106,8 +106,8 @@ types:
   label:
     seq:
       - id: value
-        type: str
         size: _root.label_length
+        type: str
   header:
     seq:
       - id: dimensions #0
@@ -196,8 +196,8 @@ types:
             size: 8
           - id: type #104
             -orig-id: EXTTYP
-            type: str
             size: 4
+            type: str
           - id: version_number #108
             -orig-id: NVERSION
             type: format_version
@@ -225,8 +225,8 @@ types:
   str16:
     seq:
       - id: str
-        type: str
         size: 16
+        type: str
   s3:
     seq:
       - id: sign

@@ -2,8 +2,8 @@ meta:
   id: lz4_legacy
   title: LZ4 legacy format
   license: CC0-1.0
-  endian: le
   encoding: ASCII
+  endian: le
 doc-ref: https://github.com/lz4/lz4/blob/master/doc/lz4_Frame_format.md#legacy-frame
 seq:
   - id: magic

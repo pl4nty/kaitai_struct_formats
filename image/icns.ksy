@@ -520,8 +520,8 @@ types:
         type: header
         doc: The header storing the element's type code and length.
       - id: data_with_io
-        type: bytes_with_io
         size: header.len_data
+        type: bytes_with_io
         doc: |
           Use `data` instead,
           unless you need access to this field's `_io`.
@@ -597,8 +597,8 @@ types:
         -webide-representation: '{type}: {len_element} bytes'
         seq:
           - id: type
-            type: type_code
             size: 4
+            type: type_code
             doc: |
               The element's type code.
               This indicates the format of the icon or other data stored in the element.
@@ -695,6 +695,15 @@ types:
         doc: |
           Use `compressed_data` instead,
           unless you need access to this field's `_io`.
+    instances:
+      compressed_data:
+        value: compressed_data_with_io.data
+        doc: The raw compressed data.
+      chunks:
+        pos: 0
+        type: chunk
+        repeat: eos
+        doc: The compressed data parsed into chunks.
     types:
       chunk:
         doc: |
@@ -738,15 +747,6 @@ types:
             doc: |
               If this is a repeat chunk,
               the number of times the stored byte should be repeated in the output.
-    instances:
-      compressed_data:
-        value: compressed_data_with_io.data
-        doc: The raw compressed data.
-      chunks:
-        pos: 0
-        type: chunk
-        repeat: eos
-        doc: The compressed data parsed into chunks.
   icon_x1_and_mask_data:
     doc: The data for a 1-bit monochrome bitmap icon with a 1-bit mask.
     params:

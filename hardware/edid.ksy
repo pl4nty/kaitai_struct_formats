@@ -199,6 +199,17 @@ types:
         doc-ref: |
           Section 3.6.4: Feature Support
 
+    instances:
+      gamma:
+        value: (gamma_raw + 100) / 100.0
+        if: gamma_raw != 0xff
+        doc: The display transfer characteristic (gamma value), range is 1.00 - 3.54.
+
+      gamma_see_extension:
+        value: true
+        if: gamma_raw == 0xff
+        doc: The display transfer characteristic (gamma value) is stored in an extension block.
+
     types:
       video_input:
         seq:
@@ -374,17 +385,6 @@ types:
             0b01: supports_rgb444_ycrcb444
             0b10: supports_rgb444_ycrcb422
             0b11: supports_rgb444_ycrcb444_ycrcb422
-
-    instances:
-      gamma:
-        value: (gamma_raw + 100) / 100.0
-        if: gamma_raw != 0xff
-        doc: The display transfer characteristic (gamma value), range is 1.00 - 3.54.
-
-      gamma_see_extension:
-        value: true
-        if: gamma_raw == 0xff
-        doc: The display transfer characteristic (gamma value) is stored in an extension block.
 
   chromaticity:
     seq:
@@ -584,14 +584,14 @@ types:
   descriptor:
     seq:
       - id: detailed_timing_descriptor
-        type: detailed_timing_descriptor
         size: 18
+        type: detailed_timing_descriptor
         if: is_detailed_timing_descriptor
         doc: Detailed timing descriptors represent supported video timing modes of the display.
 
       - id: display_descriptor
-        type: display_descriptor
         size: 18
+        type: display_descriptor
         if: is_display_descriptor
         doc: Display descriptors provide a variety of misc information about the display.
 
@@ -609,6 +609,8 @@ types:
 
     types:
       detailed_timing_descriptor:
+        doc-ref: "Section: 3.10.2 Detailed Timing Descriptor"
+
         seq:
           - id: pixel_clock_raw
             type: u2
@@ -730,35 +732,6 @@ types:
           - id: stereo_viewing_0_raw
             type: b1
 
-        doc-ref: "Section: 3.10.2 Detailed Timing Descriptor"
-
-        enums:
-          sync_definition_analog:
-            0b0: analog_composite
-            0b1: bipolar_analog_composite
-
-          sync_definition_digital:
-            0b0: digital_composite
-            0b1: digital_separate
-
-          sync_polarity:
-            0b0: negative
-            0b1: positive
-
-          sync_line:
-            0b0: green
-            0b1: all
-
-          stereo_viewing:
-            0b000: do_not_care
-            0b001: no_stereo
-            0b010: sequential_right_sync
-            0b100: sequential_left_sync
-            0b011: interleaved_lines_right_even
-            0b101: interleaved_lines_left_even
-            0b110: interleaved_4_way
-            0b111: side_by_side
-
         instances:
           pixel_clock:
             value: pixel_clock_raw * 10_000
@@ -830,8 +803,37 @@ types:
               ))))))
             doc: Supported stereo viewing mode.
 
+        enums:
+          sync_definition_analog:
+            0b0: analog_composite
+            0b1: bipolar_analog_composite
+
+          sync_definition_digital:
+            0b0: digital_composite
+            0b1: digital_separate
+
+          sync_polarity:
+            0b0: negative
+            0b1: positive
+
+          sync_line:
+            0b0: green
+            0b1: all
+
+          stereo_viewing:
+            0b000: do_not_care
+            0b001: no_stereo
+            0b010: sequential_right_sync
+            0b100: sequential_left_sync
+            0b011: interleaved_lines_right_even
+            0b101: interleaved_lines_left_even
+            0b110: interleaved_4_way
+            0b111: side_by_side
+
 
       display_descriptor:
+        doc-ref: "Section: 3.10.3 Display Descriptor Definitions"
+
         seq:
           - id: indicator_raw
             type: u2
@@ -876,38 +878,38 @@ types:
                 _: unknown_descriptor
             doc: Payload of the display descriptor.
 
-        doc-ref: "Section: 3.10.3 Display Descriptor Definitions"
-
         types:
           product_serial_number_descriptor:
+            doc-ref: "Section: 3.10.3.1 Display Product Serial Number Descriptor Definition"
             seq:
               - id: reserved_raw
                 type: u1
                 valid: 0x00
               - id: serial_number
-                type: str
                 size: 13
-                encoding: ASCII
+                type: str
                 terminator: 0x0a
                 pad-right: 0x20
+                encoding: ASCII
                 doc: Display product serial number, up to 13 characters.
-            doc-ref: "Section: 3.10.3.1 Display Product Serial Number Descriptor Definition"
 
           alphanumeric_data_string_descriptor:
+            doc-ref: "Section: 3.10.3.2 Alphanumeric Data String Descriptor Definition"
             seq:
               - id: reserved_raw
                 type: u1
                 valid: 0x00
               - id: string
-                type: str
                 size: 13
-                encoding: ASCII
+                type: str
                 terminator: 0x0a
                 pad-right: 0x20
+                encoding: ASCII
                 doc: An alphanumeric data string, up to 13 bytes.
-            doc-ref: "Section: 3.10.3.2 Alphanumeric Data String Descriptor Definition"
 
           display_range_limits_descriptor:
+            doc-ref: "Section: 3.10.3.3 Display Range Limits & Additional Timing Descriptor Definition"
+
             seq:
               - id: reserved_raw
                 type: b4
@@ -951,6 +953,7 @@ types:
                 enum: timing_support_flags
                 doc: Flags describing the interpretation of the remaining bytes.
               - id: video_timing_data
+                size: 7
                 type:
                   switch-on: timing_support_flags
                   cases:
@@ -962,10 +965,7 @@ types:
                 if: |
                   timing_support_flags == timing_support_flags::secondary_gtf_supported or
                   timing_support_flags == timing_support_flags::cvt_supported
-                size: 7
                 doc: Timing definitions, interpretation according to the above flags.
-
-            doc-ref: "Section: 3.10.3.3 Display Range Limits & Additional Timing Descriptor Definition"
 
             instances:
               vertical_lower_offset:
@@ -1102,6 +1102,25 @@ types:
                       max: 0xff
                     doc: The preferred vertical refresh rate, value is measured in Hz, range is 1 - 255.
 
+                instances:
+                  pixel_clock_precision_offset:
+                    value: pixel_clock_precision_offset_raw * 250_000
+                    doc: Maximal pixel clock offset (subtractive), value is measured in Hz.
+
+                  max_pixel_clock_precise:
+                    value: '_parent.max_pixel_clock - pixel_clock_precision_offset'
+                    doc: Maximum pixel clock speed, value is measured in Hz, precision is 0.25 MHz.
+
+                  max_active_pixels_per_line:
+                    value: '(max_active_pixels_per_line_9_8_raw << 8) | max_active_pixels_per_line_7_0_raw'
+                    if: max_active_pixels_per_line_7_0_raw != 0x00
+                    doc: Maximum of active pixels per line.
+
+                  unlimited_active_pixels_per_line:
+                    value: true
+                    if: max_active_pixels_per_line_7_0_raw == 0x00
+                    doc: Number of active pixels per line is not limited.
+
                 types:
                   cvt_standard_version:
                     seq:
@@ -1161,40 +1180,22 @@ types:
                     0b011: ratio_5_4
                     0b100: ratio_15_9
 
-                instances:
-                  pixel_clock_precision_offset:
-                    value: pixel_clock_precision_offset_raw * 250_000
-                    doc: Maximal pixel clock offset (subtractive), value is measured in Hz.
-
-                  max_pixel_clock_precise:
-                    value: '_parent.max_pixel_clock - pixel_clock_precision_offset'
-                    doc: Maximum pixel clock speed, value is measured in Hz, precision is 0.25 MHz.
-
-                  max_active_pixels_per_line:
-                    value: '(max_active_pixels_per_line_9_8_raw << 8) | max_active_pixels_per_line_7_0_raw'
-                    if: max_active_pixels_per_line_7_0_raw != 0x00
-                    doc: Maximum of active pixels per line.
-
-                  unlimited_active_pixels_per_line:
-                    value: true
-                    if: max_active_pixels_per_line_7_0_raw == 0x00
-                    doc: Number of active pixels per line is not limited.
-
           product_name_descriptor:
+            doc-ref: "Section: 3.10.3.4 Display Product Name (ASCII) String Descriptor Definition"
             seq:
               - id: reserved_raw
                 type: u1
                 valid: 0x00
               - id: name
-                type: str
                 size: 13
-                encoding: ASCII
+                type: str
                 terminator: 0x0a
                 pad-right: 0x20
+                encoding: ASCII
                 doc: Display product/model name, up to 13 characters.
-            doc-ref: "Section: 3.10.3.4 Display Product Name (ASCII) String Descriptor Definition"
 
           color_point_data_descriptor:
+            doc-ref: "Section: 3.10.3.5 Color Point Descriptor Definition"
             seq:
               - id: reserved_raw
                 type: u1
@@ -1217,7 +1218,6 @@ types:
                 repeat: expr
                 repeat-expr: 2
                 doc: Padding data.
-            doc-ref: "Section: 3.10.3.5 Color Point Descriptor Definition"
 
             types:
               white_point:
@@ -1284,6 +1284,7 @@ types:
                     doc: The associated gamma value is stored in an extension block.
 
           standard_timing_identifiers_descriptor:
+            doc-ref: "Section: 3.10.3.6 Standard Timing Identifier Definition"
             seq:
               - id: reserved_raw
                 type: u1
@@ -1298,9 +1299,9 @@ types:
                 type: u1
                 valid: 0x0a
                 doc: Padding data.
-            doc-ref: "Section: 3.10.3.6 Standard Timing Identifier Definition"
 
           color_management_data_descriptor:
+            doc-ref: "Section: 3.10.3.7 Color Management Data Definition"
             seq:
               - id: reserved_raw
                 type: u1
@@ -1327,9 +1328,9 @@ types:
               - id: coefficient_blue_a2
                 type: u2
                 doc: Blue a2 color management polynomial coefficient.
-            doc-ref: "Section: 3.10.3.7 Color Management Data Definition"
 
           cvt_timing_codes_descriptor:
+            doc-ref: "Section: 3.10.3.8 CVT 3 Byte Code Descriptor Definition"
             seq:
               - id: reserved_raw
                 type: u1
@@ -1344,7 +1345,6 @@ types:
                 repeat: expr
                 repeat-expr: 4
                 doc: Up to 4 CVT 3-byte code descriptors, in descending priority.
-            doc-ref: "Section: 3.10.3.8 CVT 3 Byte Code Descriptor Definition"
 
             types:
               cvt_timing_code:
@@ -1400,6 +1400,7 @@ types:
                     doc: Number of addressable lines per field.
 
           established_timings_descriptor:
+            doc-ref: "Section: 3.10.3.9 Established Timings III Descriptor Definition"
             seq:
               - id: reserved_raw
                 type: u1
@@ -1553,9 +1554,9 @@ types:
               # Byte 12 .. 17
               - id: reserved_2_raw
                 contents: [0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-            doc-ref: "Section: 3.10.3.9 Established Timings III Descriptor Definition"
 
           dummy_descriptor:
+            doc-ref: "Section: 3.10.3.11 Dummy Descriptor Definition"
             seq:
               - id: reserved_raw
                 type: u1
@@ -1564,9 +1565,9 @@ types:
                 contents: [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
                 doc: Padding data.
                 # TODO: Maybe accept invalid payload which seems to happen in the wild?
-            doc-ref: "Section: 3.10.3.11 Dummy Descriptor Definition"
 
           manufacturer_specified_descriptor:
+            doc-ref: "Section: 3.10.3.12 Manufacturer Specified Data"
             seq:
               - id: reserved_raw
                 type: u1
@@ -1574,7 +1575,6 @@ types:
               - id: data
                 size: 13
                 doc: Manufacturer specified proprietary data.
-            doc-ref: "Section: 3.10.3.12 Manufacturer Specified Data"
 
           unknown_descriptor:
             seq:

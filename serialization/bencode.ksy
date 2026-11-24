@@ -6,9 +6,9 @@ meta:
     justsolve: Bencode
     mime: application/x-bittorrent  # for most of them
     wikidata: Q871923
-  endian: le
-  encoding: ascii
   license: Unlicense
+  encoding: ASCII
+  endian: le
 doc: |
   Binary serialization for a kind of subset of JSON, but that can be human-readable and editable in text editors indicating byte positions.
   Used in BitTorrent protocol.
@@ -54,8 +54,8 @@ types:
         seq:
           - id: int_str
             type: strz
-            encoding: ascii
             terminator: 101  # type::end.to_i
+            encoding: ASCII
         instances:
           value:
             value: int_str.to_i

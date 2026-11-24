@@ -7,8 +7,7 @@ meta:
   license: AGPL-3.0-or-later
   endian: le
 seq:
-  -
-    type: u1
+  - type: u1
     doc: |
       Currently unknown data.
       Always 3?
@@ -23,8 +22,7 @@ seq:
     type: b1
   - id: is_copying_enabled
     type: b1
-  -
-    type: b2
+  - type: b2
     doc: Currently unknown data.
   - id: mii_position_slot_index
     type: b4
@@ -32,8 +30,7 @@ seq:
     type: b4
   - id: version
     type: b4
-  -
-    type: b4
+  - type: b4
     doc: Currently unknown data.
   - id: system_id
     type: u1
@@ -52,9 +49,9 @@ seq:
   - id: data_1
     type: u2
   - id: mii_name
-    type: str
     size: 20
-    encoding: utf-16le
+    type: str
+    encoding: UTF-16LE
   - id: body_height
     type: u1
   - id: body_weight
@@ -72,8 +69,7 @@ seq:
     type: b4
   - id: hair_type
     type: u1
-  -
-    type: b4
+  - type: b4
     doc: Currently unknown data.
   - id: is_hair_flipped
     type: b1
@@ -96,9 +92,9 @@ seq:
   - id: mole
     type: u2
   - id: creator_name
-    type: str
     size: 20
-    encoding: utf-16le
+    type: str
+    encoding: UTF-16LE
   - id: padding2
     type: u2
   - id: checksum

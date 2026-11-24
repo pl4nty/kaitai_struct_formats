@@ -3,10 +3,10 @@ meta:
   title: AUTOSAR SOME/IP Service Discovery
   license: CC0-1.0
   ks-version: 0.9
-  endian: be
   imports:
     - /network/some_ip/some_ip_sd_entries
     - /network/some_ip/some_ip_sd_options
+  endian: be
 
 doc: |
   The main tasks of the Service Discovery Protocol are communicating the
@@ -26,16 +26,17 @@ seq:
   - id: len_entries
     type: u4
   - id: entries
-    type: some_ip_sd_entries
     size: len_entries
+    type: some_ip_sd_entries
   - id: len_options
     type: u4
   - id: options
-    type: some_ip_sd_options
     size: len_options
+    type: some_ip_sd_options
 
 types:
   sd_flags:
+    doc-ref: AUTOSAR_PRS_SOMEIPServiceDiscoveryProtocol.pdf - Figure 4.3
     seq:
       - id: reboot
         type: b1
@@ -45,4 +46,3 @@ types:
         type: b1
       - id: reserved
         type: b5
-    doc-ref: AUTOSAR_PRS_SOMEIPServiceDiscoveryProtocol.pdf - Figure 4.3

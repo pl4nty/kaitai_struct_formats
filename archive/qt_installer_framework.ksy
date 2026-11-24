@@ -3,11 +3,11 @@ meta:
   title: Qt Installer Framework archive
   application: Qt Installer Framework
   file-extension: exe
-  endian: le
-  encoding: utf-8
-  license: GPL-3.0 WITH Qt-GPL-exception-1.0
   xref:
     wikidata: Q201904
+  license: GPL-3.0 WITH Qt-GPL-exception-1.0
+  encoding: UTF-8
+  endian: le
 
 doc: |
   Qt installer framework is a set of libs to make SFX installers. Installers usually contain 7zip-compressed archives. Obviously, Qt installer itself is built using this framework.
@@ -54,23 +54,23 @@ types:
   header:
     seq:
       - id: meta_resources_count
-        type: u8
         -orig-id: metaResourcesCount
+        type: u8
       - id: unkn
         type: u8
         repeat: expr
         repeat-expr: 2
       - id: cookie
-        type: cookie_identifier
         -orig-id: magicCookie
+        type: cookie_identifier
 
     instances:
       other_stuff_size:
         value: 4 * sizeof<u8>
         doc: "meta count, offset/length collection index, marker, cookie..."
       binary_descriptor_offset:
-        value: _root.end_of_binary_content - other_stuff_size
         -orig-id: posOfResourceCollectionsSegment
+        value: _root.end_of_binary_content - other_stuff_size
       binary_descriptor:
         io: _root._io
         pos: binary_descriptor_offset
@@ -122,12 +122,12 @@ types:
             doc: read it, but deliberately not used
           
           - id: binary_content_size
-            type: s8
             -orig-id: binaryContentSize
+            type: s8
           
           - id: marker
-            type: marker_identifier
             -orig-id: magicMarker
+            type: marker_identifier
         instances:
           size_of_segment_descriptor:
             value: (_parent.meta_resources_count + 2) * sizeof<range>
@@ -146,14 +146,14 @@ types:
                 type: range
               
               - id: meta_resource_segments
+                -orig-id: metaResourceSegments
                 type: range
                 repeat: expr
                 repeat-expr: _parent._parent.meta_resources_count
-                -orig-id: metaResourceSegments
               
               - id: operations_segment
-                type: range
                 -orig-id: operationsSegment
+                type: range
             instances:
               collections:
                 io: _root._io
@@ -188,8 +188,8 @@ types:
               collections:
                 seq:
                   - id: count
-                    type: s8
                     -orig-id: size
+                    type: s8
                   - id: collections
                     type: collection
                     repeat: expr

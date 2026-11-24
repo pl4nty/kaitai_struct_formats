@@ -63,8 +63,8 @@ types:
       - id: outline
         type: u1        
       - id: face
-        type: str
         size: block_size - 14
+        type: str
         terminator: 0        
         encoding: UTF-8
   common:

@@ -310,36 +310,36 @@ types:
         type: u4
     instances:
       strip_read:
+        -orig-id: VM_PROT_STRIP_READ
         value: value & 0x80 != 0
         doc: Special marker to support execute-only protection.
-        -orig-id: VM_PROT_STRIP_READ
       is_mask:
+        -orig-id: VM_PROT_IS_MASK
         value: value & 0x40 != 0
         doc: Indicates to use value as a mask against the actual protection bits.
-        -orig-id: VM_PROT_IS_MASK
       reserved0:
         value: value & 0x20 != 0
         doc: Reserved (unused) bit.
       copy:
+        -orig-id: VM_PROT_COPY
         value: value & 0x10 != 0
         doc: Used when write permission can not be obtained, to mark the entry as COW.
-        -orig-id: VM_PROT_COPY
       no_change:
+        -orig-id: VM_PROT_NO_CHANGE
         value: value & 0x08 != 0
         doc: Used only by memory_object_lock_request to indicate no change to page locks.
-        -orig-id: VM_PROT_NO_CHANGE
       execute:
+        -orig-id: VM_PROT_EXECUTE
         value: value & 0x04 != 0
         doc: Execute permission.
-        -orig-id: VM_PROT_EXECUTE
       write:
+        -orig-id: VM_PROT_WRITE
         value: value & 0x02 != 0
         doc: Write permission.
-        -orig-id: VM_PROT_WRITE
       read:
+        -orig-id: VM_PROT_READ
         value: value & 0x01 != 0
         doc: Read permission.
-        -orig-id: VM_PROT_READ
       reserved1:
         value: value >> 8
         doc: Reserved (unused) bits.
@@ -399,10 +399,10 @@ types:
     -webide-representation: '{segname} ({initprot}): offs={fileoff}, size={filesize}'
     seq:
       - id: segname
-        type: str
         size: 16
+        type: str
         pad-right: 0
-        encoding: ascii
+        encoding: ASCII
       - id: vmaddr
         type: u8
       - id: vmsize
@@ -432,13 +432,13 @@ types:
             size: 16
             type: str
             pad-right: 0
-            encoding: ascii
+            encoding: ASCII
           - id: seg_name
             -orig-id: segname
             size: 16
             type: str
             pad-right: 0
-            encoding: ascii
+            encoding: ASCII
           - id: addr
             type: u8
           - id: size
@@ -503,11 +503,11 @@ types:
                 type: u4
               - id: body
                 size: length - 4
-                if: length > 0
                 type:
                   switch-on: id
                   cases:
                     0: cie
+                if: length > 0
             types:
               char_chain:
                 seq:
@@ -549,7 +549,7 @@ types:
             seq:
               - id: strings
                 type: strz
-                encoding: ascii
+                encoding: ASCII
                 repeat: eos
           pointer_list:
             seq:
@@ -694,8 +694,8 @@ types:
             if: "opcode == bind_opcode::do_bind_uleb_times_skipping_uleb"
           - id: symbol
             type: strz
+            encoding: ASCII
             if: "opcode == bind_opcode::set_symbol_trailing_flags_immediate"
-            encoding: ascii
         instances:
           opcode:
             value: "opcode_and_immediate & 0xf0"
@@ -728,7 +728,7 @@ types:
             seq:
               - id: name
                 type: strz
-                encoding: ascii
+                encoding: ASCII
               - id: node_offset
                 type: uleb128
             instances:
@@ -797,10 +797,10 @@ types:
             type: u4
           - id: items
             type: strz
-            encoding: utf-8
+            eos-error: false
+            encoding: UTF-8
             repeat: until
             repeat-until: _ == ""
-            eos-error: false
       nlist_64:
         -webide-representation: "un={un} type={type} sect={sect} desc={desc} value={value}"
         seq:
@@ -818,7 +818,7 @@ types:
           name:
             pos: _parent.str_off + un
             type: strz
-            encoding: utf-8
+            encoding: UTF-8
             if: un != 0
       nlist:
         -webide-representation: "un={un} type={type} sect={sect} desc={desc} value={value}"
@@ -837,7 +837,7 @@ types:
           name:
             pos: _parent.str_off + un
             type: strz
-            encoding: utf-8
+            encoding: UTF-8
             if: un != 0
   dysymtab_command:
     meta:
@@ -997,7 +997,7 @@ types:
         type: u4
       - id: strings
         type: strz
-        encoding: utf-8
+        encoding: UTF-8
         repeat: expr
         repeat-expr: num_strings
   sub_command:
@@ -1084,7 +1084,7 @@ types:
         type: u4
       - id: name
         type: strz
-        encoding: utf-8
+        encoding: UTF-8
   rpath_command:
     meta:
       endian:
@@ -1098,7 +1098,7 @@ types:
         type: u4
       - id: path
         type: strz
-        encoding: utf-8
+        encoding: UTF-8
   linkedit_data_command:
     meta:
       endian:
@@ -1200,13 +1200,13 @@ types:
           ident:
             pos: ident_offset - 8
             type: strz
-            encoding: utf-8
+            encoding: UTF-8
             -webide-parse-mode: eager
           team_id:
             pos: team_id_offset - 8
             type: strz
+            encoding: UTF-8
             if: version >= 0x20200 and team_id_offset != 0
-            encoding: utf-8
             -webide-parse-mode: eager
           hashes:
             pos: hash_offset - 8 - hash_size * n_special_slots
@@ -1468,10 +1468,10 @@ types:
           false: le
     seq:
       - id: segname
-        type: str
         size: 16
+        type: str
         pad-right: 0
-        encoding: ascii
+        encoding: ASCII
       - id: vmaddr
         type: u4
       - id: vmsize
@@ -1500,13 +1500,13 @@ types:
             size: 16
             type: str
             pad-right: 0
-            encoding: ascii
+            encoding: ASCII
           - id: seg_name
             -orig-id: segname
             size: 16
             type: str
             pad-right: 0
-            encoding: ascii
+            encoding: ASCII
           - id: addr
             type: u4
           - id: size

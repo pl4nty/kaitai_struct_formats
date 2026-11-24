@@ -12,8 +12,8 @@ doc: |
   
 seq:
   - id: recs
-    type: rec
     size: 75
+    type: rec
     repeat: eos
 
 types:

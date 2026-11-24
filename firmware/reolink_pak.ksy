@@ -3,8 +3,8 @@ meta:
   title: Reolink firmware update
   file-extension: pak
   license: MIT
-  endian: le
   encoding: UTF-8
+  endian: le
 doc-ref:
   - https://github.com/vmallet/pakler/blob/acbf084b/pakler/__init__.py
 seq:

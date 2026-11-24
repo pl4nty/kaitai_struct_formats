@@ -4,9 +4,9 @@ meta:
   file-extension: model
   xref:
     wikidata: Q23680120
-  endian: le
-  encoding: UTF-16le
   license: MIT
+  encoding: UTF-16LE
+  endian: le
 
 doc: |
   A native CNTK format for serialization of a computation graph. These graphs are usually used to store machine-learning models, like neural networks and gradient boosted decision trees ensembles.
@@ -102,24 +102,24 @@ types:
               - id: reserved0
                 type: b3
               - id: set_value_on_device
-                type: b1
                 -orig-id: bitPosSetValueOnDevice
+                type: b1
                 doc: in a setValue situation, the copy from buffer is already on the device
               - id: dont_own_buffer
-                type: b1
                 -orig-id: bitPosDontOwnBuffer
+                type: b1
                 doc: buffer is not owned by this matrix
               - id: compressed
-                type: b1
                 -orig-id: bitPosCompressed
+                type: b1
                 doc: a compressed sparse format (CSC/CSR)
               - id: sparse
-                type: b1
                 -orig-id: bitPosSparse
+                type: b1
                 doc: sparse matrix (COO if uncompressed)
               - id: row_major
-                type: b1
                 -orig-id: bitPosRowMajor
+                type: b1
                 doc: row major matrix
               - id: reserved1
                 type: b24
@@ -176,8 +176,8 @@ types:
           relation:
             seq:
               - id: name
-                type: strz
                 -orig-id: nodePtr->NodeName()
+                type: strz
                 
               - id: inputs_count
                 -orig-id: nodePtr->GetNumInputs()

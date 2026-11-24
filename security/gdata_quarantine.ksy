@@ -1,11 +1,11 @@
 meta:
   id: gdata_quarantine
-  file-extension: q
-  application: G Data Antivirus
-  endian: le
   title: G Data quarantine file
+  application: G Data Antivirus
+  file-extension: q
   license: MIT
   ks-version: 0.9
+  endian: le
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
   G Data quarantine files are created by the G Data antivirus software.
@@ -90,9 +90,9 @@ types:
       - id: len_string
         type: u1
       - id: string
-        type: str
-        encoding: utf-16le
         size: len_string * 2
+        type: str
+        encoding: UTF-16LE
   winfiletime:
     seq:
       - id: ts

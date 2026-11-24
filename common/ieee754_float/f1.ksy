@@ -1,9 +1,9 @@
 meta:
   id: f1
   title: IEEE 754-like Minifloat
-  license: Unlicense
   xref:
     wikidata: Q449270
+  license: Unlicense
   imports:
     - ./ieee754_float
 doc: see the doc for `ieee754_float`.

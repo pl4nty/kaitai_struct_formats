@@ -13,9 +13,9 @@ seq:
   - id: num_animations
     type: u4
   - id: unit_name
-    type: str
-    encoding: cp1251
     size: 24
+    type: str
+    encoding: windows-1251
   - id: min_height
     type: f4
   - id: mid_height
@@ -31,9 +31,9 @@ types:
     doc: Animation's parameters
     seq:
       - id: name
-        type: str
-        encoding: cp1251
         size: 16
+        type: str
+        encoding: windows-1251
       - id: index
         type: u4
         doc: Index in animations array

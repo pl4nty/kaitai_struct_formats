@@ -198,10 +198,10 @@ types:
   section:
     seq:
       - id: name
-        type: str
-        encoding: UTF-8
         size: 8
+        type: str
         pad-right: 0
+        encoding: UTF-8
       - id: virtual_size
         type: u4
       - id: virtual_address

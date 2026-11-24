@@ -24,6 +24,9 @@ types:
       - id: params
         type: dt_navmesh_params
   dt_navmesh_params:
+    doc: |
+      Configuration parameters used to define multi-tile navigation meshes.
+      The values are used to allocate space during the initialization of a navigation mesh.
     seq:
       - id: orig
         type: float3
@@ -40,9 +43,6 @@ types:
       - id: max_polys
         type: s4
         doc: The maximum number of polygons each tile can contain.
-    doc: |
-      Configuration parameters used to define multi-tile navigation meshes.
-      The values are used to allocate space during the initialization of a navigation mesh.
   float3:
     seq:
       - id: x
@@ -190,6 +190,7 @@ types:
       #   size: 2
       #   doc: for align for 4 bytes
   dt_bv_node:
+    doc: Bounding volume node
     seq:
       - id: bmin
         type: u2
@@ -204,8 +205,10 @@ types:
       - id: i
         type: s4
         doc: The node's index. (Negative for escape sequence.)
-    doc: Bounding volume node
   dt_off_mesh_connection:
+    doc: |
+      Defines an navigation mesh off-mesh connection within a dtMeshTile object.
+      An off-mesh connection is a user defined traversable connection made up to two vertices.
     seq:
       - id: pos
         type: float3
@@ -227,9 +230,6 @@ types:
       - id: user_id
         type: u4
         doc: The id of the offmesh connection. (User assigned when the navigation mesh is built.)
-    doc: |
-      Defines an navigation mesh off-mesh connection within a dtMeshTile object.
-      An off-mesh connection is a user defined traversable connection made up to two vertices.
   dt_mesh_tile:
     seq:
       - id: header
@@ -250,8 +250,8 @@ types:
         repeat-expr: header.max_link_count
         doc: The tile links.
       - id: detail_meshes
-        type: dt_poly_detail
         size: 12
+        type: dt_poly_detail
         repeat: expr
         repeat-expr: header.detail_mesh_count
         doc: The tile's detail sub-meshes

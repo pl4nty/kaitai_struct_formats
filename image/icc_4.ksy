@@ -33,8 +33,8 @@ types:
         type: u4
         enum: data_colour_spaces
       - id: pcs
-        type: str
         size: 4
+        type: str
       - id: creation_date_time
         type: date_time_number
       - id: file_signature
@@ -47,8 +47,8 @@ types:
       - id: device_manufacturer
         type: device_manufacturer
       - id: device_model
-        type: str
         size: 4
+        type: str
       - id: device_attributes
         type: device_attributes
       - id: rendering_intent
@@ -1512,8 +1512,8 @@ types:
                   - id: device_manufacturer
                     type: device_manufacturer
                   - id: device_model
-                    type: str
                     size: 4
+                    type: str
                   - id: device_attributes
                     type: device_attributes
                   - id: device_technology
@@ -1569,8 +1569,8 @@ types:
               - id: reserved
                 contents: [0x00, 0x00, 0x00, 0x00]
               - id: signature
-                type: str
                 size: 4
+                type: str
           text_description_type:
             doc: |
               ICC v2 only (replaced by multiLocalizedUnicodeType in v4): an
@@ -1607,8 +1607,8 @@ types:
               - id: reserved
                 contents: [0x00, 0x00, 0x00, 0x00]
               - id: value
-                type: strz
                 size-eos: true
+                type: strz
           u_16_fixed_16_array_type:
             seq:
               - id: reserved

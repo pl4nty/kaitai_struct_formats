@@ -12,17 +12,17 @@ meta:
   endian: le
 instances:
   bg1:
-    doc-ref: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/filesystems/ext2.rst?id=a9edc03f13db#n116
     pos: 1024
     type: block_group
+    doc-ref: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/filesystems/ext2.rst?id=a9edc03f13db#n116
   root_dir:
     value: bg1.block_groups[0].inodes[1].as_dir
 types:
   block_group:
     seq:
       - id: super_block
-        type: super_block_struct
         size: 1024
+        type: super_block_struct
       - id: block_groups
         type: bgd
         repeat: expr
@@ -205,14 +205,14 @@ types:
         pos: inode_bitmap_block * _root.bg1.super_block.block_size
         size: 1024
       inodes:
-        doc-ref:
-          - https://www.nongnu.org/ext2-doc/ext2.html#INODE-TABLE
-          - https://web.archive.org/web/20161114202411/http://www.virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-10.html
         pos: inode_table_block * _root.bg1.super_block.block_size
         size: _root.bg1.super_block.len_inode
         type: inode
         repeat: expr
         repeat-expr: _root.bg1.super_block.inodes_per_group
+        doc-ref:
+          - https://www.nongnu.org/ext2-doc/ext2.html#INODE-TABLE
+          - https://web.archive.org/web/20161114202411/http://www.virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-10.html
   inode:
     seq:
       - id: mode
@@ -324,9 +324,9 @@ types:
         size: 'rec_len >= name_len + 8 ? rec_len - name_len - 8 : 0'
     instances:
       inode:
+        value: '_root.bg1.block_groups[(inode_ptr - 1) / _root.bg1.super_block.inodes_per_group].inodes[(inode_ptr - 1) % _root.bg1.super_block.inodes_per_group]'
         if: inode_ptr != 0
         doc: Inode of this entry; inode_ptr 0 marks an unused entry
-        value: '_root.bg1.block_groups[(inode_ptr - 1) / _root.bg1.super_block.inodes_per_group].inodes[(inode_ptr - 1) % _root.bg1.super_block.inodes_per_group]'
     enums:
       # https://www.nongnu.org/ext2-doc/ext2.html#IFDIR-FILE-TYPE
       file_type_enum:

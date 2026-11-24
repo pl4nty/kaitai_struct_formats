@@ -9,7 +9,7 @@ meta:
   xref:
     wikidata: Q784695
   license: CC-BY-SA-3.0
-  encoding: utf-8
+  encoding: UTF-8
   endian: le
   -requires-optional:
     - https://github.com/kaitai-io/kaitai_compress
@@ -75,23 +75,23 @@ instances:
     pos: mime_list_ptr
     type: str_list
   url_pointer_list:
+    pos: url_pointer_list_ptr
+    type: directory_entry_ptr
+    repeat: expr
+    repeat-expr: article_count
     doc: |
       The URL pointer list is a list of 8 byte offsets to the directory entries.
       The directory entries are always ordered by URL. Ordering is simply done by comparing the URL strings.
       Since directory entries have variable sizes this is needed for random access.
       Zimlib caches directory entries and references the cached entries via the URL pointers.
-    pos: url_pointer_list_ptr
-    type: directory_entry_ptr
-    repeat: expr
-    repeat-expr: article_count
   title_pointer_list:
-    doc: |
-      The title pointer list is a list of article indices ordered by title. The title pointer list actually points to entries in the URL pointer list. Note that the title pointers are only 4 bytes. They are not offsets in the file but article numbers. To get the offset of an article from the title pointer list, you have to look it up in the URL pointer list.
-      The indirection from titles via URLs to directory entries has two reasons: the pointer list is only half in size as 4 bytes are enough for each entry accessing directory entries by title also makes use of cached directory entries which are referenced by the URL pointers, as implemented in zimlib.
     pos: title_pointer_list_ptr
     type: title_index
     repeat: expr
     repeat-expr: article_count
+    doc: |
+      The title pointer list is a list of article indices ordered by title. The title pointer list actually points to entries in the URL pointer list. Note that the title pointers are only 4 bytes. They are not offsets in the file but article numbers. To get the offset of an article from the title pointer list, you have to look it up in the URL pointer list.
+      The indirection from titles via URLs to directory entries has two reasons: the pointer list is only half in size as 4 bytes are enough for each entry accessing directory entries by title also makes use of cached directory entries which are referenced by the URL pointers, as implemented in zimlib.
   cluster_pointer_list:
     pos: cluster_pointer_list_ptr
     type: cluster_ptr
@@ -280,14 +280,14 @@ types:
           - id: info
             type: info_t
           - id: blobs_ptrs_compressed_lzma2
-            process: kaitai.compress.lzma(2)
             size: info.ptr_size * blob_count_plus_one
             type: blobs_ptrs(blob_count)
+            process: kaitai.compress.lzma(2)
             if: info.compression == compression::lzma2
           - id: blobs_ptrs_compressed_zstd
-            process: kaitai.compress.zstd
             size: info.ptr_size * blob_count_plus_one
             type: blobs_ptrs(blob_count)
+            process: kaitai.compress.zstd
             if: info.compression == compression::lzma2
           - id: blobs_ptrs_uncompressed
             type: blobs_ptrs(blob_count)
@@ -302,16 +302,16 @@ types:
           first_blob_ptr_compressed_lzma:
             io: _root._io
             pos: first_blob_offset
-            process: kaitai.compress.lzma(2)
             size: info.ptr_size + _root.minimal_xz_lzma_size # max(8, 4) + minimal_xz_lzma_size
             type: blob_ptr_u
+            process: kaitai.compress.lzma(2)
             if: info.compression == compression::lzma2
           first_blob_ptr_compressed_zstd:
             io: _root._io
             pos: first_blob_offset
-            process: kaitai.compress.zstd
             size: info.ptr_size + _root.minimal_zstd_size # max(8, 4) + minimal_zstd_size
             type: blob_ptr_u
+            process: kaitai.compress.zstd
             if: info.compression == compression::zstd
           first_blob_ptr_uncompressed:
             pos: first_blob_offset

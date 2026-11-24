@@ -1,8 +1,8 @@
 meta:
   id: pirt
   title: PCI IRQ Routing Table
-  endian: le
   license: Unlicense
+  endian: le
 doc-ref: "https://web.archive.org/web/20101127024139/http://www.microsoft.com/whdc/archive/pciirq.mspx"
 seq:
   - id: ver
@@ -32,9 +32,9 @@ seq:
     doc: "This byte should be set such that the sum of all of the bytes in the PCI IRQ Routing Table, including the checksum, and all of the slot entries, modulo 256, is zero."
   - id: entries
     type: pir_slot_entry
-    doc: "Each slot entry is 16-bytes long and describes how a slot's PCI interrupt pins are wire OR'd to other slot interrupt pins and to the chip set's IRQ pins."
     repeat: expr
     repeat-expr: (table_size - 32) / 16
+    doc: "Each slot entry is 16-bytes long and describes how a slot's PCI interrupt pins are wire OR'd to other slot interrupt pins and to the chip set's IRQ pins."
 types:
   pir_slot_entry:
     seq:

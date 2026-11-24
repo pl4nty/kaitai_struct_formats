@@ -4,7 +4,7 @@ meta:
   file-extension: trx
   license: ISC
   ks-version: 0.9
-  encoding: utf-8
+  encoding: UTF-8
   endian: le
   bit-endian: le
 

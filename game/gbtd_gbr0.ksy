@@ -6,7 +6,7 @@ meta:
   tags:
     - game
   license: MIT
-  encoding: ascii
+  encoding: ASCII
   endian: le
 
 doc: |
@@ -60,20 +60,20 @@ types:
       producer:
         seq:
           - id: name
-            type: strz
             size: 30
+            type: strz
           - id: version
-            type: strz
             size: 10
-          - id: info
             type: strz
+          - id: info
             size: 80
+            type: strz
 
       tile_data:
         seq:
           - id: name
-            type: strz
             size: 30
+            type: strz
           - id: width
             type: u2
           - id: height
@@ -88,25 +88,6 @@ types:
             repeat-expr: count
 
       tile_settings:
-        enums:
-          split_order:
-            0: left2right_top2bottom
-            1: top2bottom_left2right
-
-          color_set:
-            0: pocket
-            1: gameboy
-            2: gbc
-            3: sgb
-
-        types:
-          display_settings:
-            seq:
-              - id: grid_shown
-                type: b1
-              - id: nibble_markers_shown
-                type: b1
-
         seq:
           - id: tile_id
             type: u2
@@ -134,53 +115,41 @@ types:
             repeat-expr: 3
           - id: auto_update
             type: u1
+
+        enums:
+          split_order:
+            0: left2right_top2bottom
+            1: top2bottom_left2right
+
+          color_set:
+            0: pocket
+            1: gameboy
+            2: gbc
+            3: sgb
+
+        types:
+          display_settings:
+            seq:
+              - id: grid_shown
+                type: b1
+              - id: nibble_markers_shown
+                type: b1
         
       tile_export:
-        enums:
-          compression:
-            0x00: none
-            0x01:
-              id: gb_compress
-              doc-ref: "The source code for the \"GB Compress\" algorithm can be found here: http://www.devrs.com/gb/hmgd/source.html"
-
-          format:
-            0x00: gameboy_4_color
-            0x01: gameboy_2_color
-            0x03: byte_per_color
-
-          counter_type:
-            0x00: none
-            0x01: count_byte_as_byte
-            0x02: count_byte_as_word
-            0x03: count_byte_as_constant
-            0x04: count_tile_as_byte
-            0x05: count_tile_as_word
-            0x06: count_tile_as_constant
-            0x07: count_8x8_as_byte
-            0x08: count_8x8_as_word
-            0x09: count_8x8_as_constant
-
-          palettes:
-            0: none
-            1: constant_per_entry
-            2: bits_2_per_entry
-            3: bits_4_per_entry
-            4: byte_1_per_entry
-
         seq:
           - id: tile_id
             type: u2
           - id: file_name
-            type: strz
             size: 128
+            type: strz
           - id: file_type
             type: u1
           - id: section_name
-            type: strz
             size: 20
+            type: strz
           - id: label_name
-            type: strz
             size: 20
+            type: strz
           - id: bank
             type: u1
           - id: tile_array
@@ -221,27 +190,44 @@ types:
           - id: sel_tab
             type: u1
 
-      tile_import:
         enums:
-          file_type:
-            0: gbe_file
-            1: binary_8x8_tiles
+          compression:
+            0x00: none
+            0x01:
+              id: gb_compress
+              doc-ref: "The source code for the \"GB Compress\" algorithm can be found here: http://www.devrs.com/gb/hmgd/source.html"
 
-          color_conversion:
-            0: by_colors
-            1: by_index
+          format:
+            0x00: gameboy_4_color
+            0x01: gameboy_2_color
+            0x03: byte_per_color
 
-          binary_file_type:
-            0: byte_per_pixel
-            1: bits_per_pixel
-            2: gameboy_vram
+          counter_type:
+            0x00: none
+            0x01: count_byte_as_byte
+            0x02: count_byte_as_word
+            0x03: count_byte_as_constant
+            0x04: count_tile_as_byte
+            0x05: count_tile_as_word
+            0x06: count_tile_as_constant
+            0x07: count_8x8_as_byte
+            0x08: count_8x8_as_word
+            0x09: count_8x8_as_constant
 
+          palettes:
+            0: none
+            1: constant_per_entry
+            2: bits_2_per_entry
+            3: bits_4_per_entry
+            4: byte_1_per_entry
+
+      tile_import:
         seq:
           - id: tile_id
             type: u2
           - id: file_name
-            type: strz
             size: 128
+            type: strz
           - id: file_type
             type: u1
             enum: file_type
@@ -259,6 +245,20 @@ types:
           - id: binary_file_type
             type: u1
             enum: binary_file_type
+
+        enums:
+          file_type:
+            0: gbe_file
+            1: binary_8x8_tiles
+
+          color_conversion:
+            0: by_colors
+            1: by_index
+
+          binary_file_type:
+            0: byte_per_pixel
+            1: bits_per_pixel
+            2: gameboy_vram
 
       palette:
         seq:

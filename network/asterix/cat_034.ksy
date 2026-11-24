@@ -1,12 +1,12 @@
 meta:
   id: cat_034
   license: GPL-3.0-only
-  endian: be
-  imports:
-      - field_spec
-      - explicit
-      - cat_034_catalog
   ks-version: 0.9
+  imports:
+    - field_spec
+    - explicit
+    - cat_034_catalog
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.
@@ -32,43 +32,6 @@ seq:
 
   - id: data
     type: uap_type(fspec, [10,0,30,20,41,50,60,70,100,110,120,90].as<u2[]>.as<str>)
-
-types:
-  uap_type:
-    params:
-
-      - id: fspec
-        type: field_spec
-
-      - id: uap
-        type: str
-
-    seq:
-      - id: items
-        type:
-          switch-on: fspec.octects[_index/7].bits[_index % 7]
-          cases:
-            true: cat_034_catalog(uap_list[ _index ])
-        repeat: expr
-        repeat-expr: loop_range
-
-
-      - id: sp #,"E","1","Special Purpose Field","N.A."),
-        type: explicit("SP",true)
-        if: fspec.size >= 13 and fspec.octects[1].bits[5]
-
-      - id: ire #,"E","1","Reserved Expansion Field","N.A."),
-        type: explicit("RE",true)
-        if: fspec.size >= 14 and fspec.octects[1].bits[6]
-
-
-    instances:
-
-      uap_list:
-        value: uap.as<u2[]>
-
-      loop_range:
-        value: 'fspec.size > uap_list.size ? uap_list.size : fspec.size'
 
 instances:
 
@@ -161,6 +124,43 @@ instances:
   i090:
     value: data.items[11].item
     if: data.loop_range-1 >= 11
+
+types:
+  uap_type:
+    params:
+
+      - id: fspec
+        type: field_spec
+
+      - id: uap
+        type: str
+
+    seq:
+      - id: items
+        type:
+          switch-on: fspec.octects[_index/7].bits[_index % 7]
+          cases:
+            true: cat_034_catalog(uap_list[ _index ])
+        repeat: expr
+        repeat-expr: loop_range
+
+
+      - id: sp #,"E","1","Special Purpose Field","N.A."),
+        type: explicit("SP",true)
+        if: fspec.size >= 13 and fspec.octects[1].bits[5]
+
+      - id: ire #,"E","1","Reserved Expansion Field","N.A."),
+        type: explicit("RE",true)
+        if: fspec.size >= 14 and fspec.octects[1].bits[6]
+
+
+    instances:
+
+      uap_list:
+        value: uap.as<u2[]>
+
+      loop_range:
+        value: 'fspec.size > uap_list.size ? uap_list.size : fspec.size'
 #  - id: i090 #("I034/090","F","2","Collimation Error","Range: 1/128 NM Azimuth: 360/(214)"),
 #    type: c34_item(90)
 #    if: fspec.octects.size > 1 and fspec.octects[1].bits[4]

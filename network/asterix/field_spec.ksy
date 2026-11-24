@@ -1,8 +1,8 @@
 meta:
   id: field_spec
   license: GPL-3.0-only
-  endian: be
   ks-version: 0.9
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.
@@ -19,6 +19,10 @@ seq:
     repeat: until
     repeat-until: not _.fx
 
+instances:
+  size:
+    value: 7 * octects.size
+
 types:
 
   bits_t:
@@ -30,7 +34,3 @@ types:
         repeat-expr: 7
       - id: fx
         type: b1
-
-instances:
-  size:
-    value: 7 * octects.size

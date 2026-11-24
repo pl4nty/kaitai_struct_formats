@@ -130,11 +130,11 @@ types:
       - id: ssrc_media_source
         type: u4
       - id: fci_block
+        size-eos: true
         type:
           switch-on: fmt
           cases:
             'rtpfb_subtype::transport_feedback': rtpfb_transport_feedback_packet
-        size-eos: true
     instances:
       fmt:
         value: _parent.subtype
@@ -187,11 +187,11 @@ types:
       - id: ssrc_media_source
         type: u4
       - id: fci_block
+        size-eos: true
         type:
           switch-on: fmt
           cases:
             'psfb_subtype::afb': psfb_afb_packet
-        size-eos: true
     instances:
       fmt:
         value: _parent.subtype
@@ -202,11 +202,11 @@ types:
       - id: uid
         type: u4
       - id: contents
+        size-eos: true
         type:
           switch-on: uid
           cases:
             0x52454d42: psfb_afb_remb_packet
-        size-eos: true
 
   psfb_afb_remb_packet:
     seq:

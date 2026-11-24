@@ -7,7 +7,7 @@ meta:
     - rds
     - RData
   license: GPL-3.0+
-  encoding: utf-8
+  encoding: UTF-8
 doc: |
   A set of file formats used for serialization of objects of [R language](https://www.r-project.org/about.html) for statistical computing.
   Datasets are often distributed in these formats.
@@ -90,8 +90,8 @@ types:
           - id: len
             type: s4
           - id: str
-            type: str
             size: len
+            type: str
       item:
         seq:
           - id: flags
@@ -233,8 +233,8 @@ types:
                 type: item
                 if: flagz.has_tag
               - id: car
-                doc-ref: https://en.wikipedia.org/wiki/CAR_and_CDR
                 type: item
+                doc-ref: https://en.wikipedia.org/wiki/CAR_and_CDR
               - id: cdr
                 type: item
           string_vec:
@@ -242,8 +242,8 @@ types:
               - id: name_len
                 type: s4
               - id: name
-                type: str
                 size: name_len
+                type: str
               - id: len
                 type: s4
               - id: items
@@ -296,8 +296,8 @@ types:
               - id: len
                 type: s4
               - id: vec
-                type: str
                 size: len
+                type: str
 
           complex:
             seq:
@@ -404,8 +404,8 @@ types:
               maxeltsize_str:
                 seq:
                   - id: value
-                    type: str
                     size: _root.max_elt_size - 1
+                    type: str
         enums:
           type:
             0:

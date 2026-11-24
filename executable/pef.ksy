@@ -69,13 +69,13 @@ types:
         size: 1
     instances:
       section:
+        io: _root._io
         pos: ofs_container
         size: len_packed
         type:
           switch-on: section_kind
           cases:
             section::loader: loader
-        io: _root._io
   loader:
     seq:
       - id: header
@@ -153,9 +153,9 @@ types:
         size: 2
     instances:
       name:
+        io: _parent._io
         pos: _parent.header.ofs_loader_strings + ofs_name
         type: strz
-        io: _parent._io
   imported_symbol:
     seq:
       - id: symbol_class_data
@@ -164,9 +164,9 @@ types:
         type: b24
     instances:
       name:
+        io: _parent._io
         pos: _parent.header.ofs_loader_strings + ofs_name
         type: strz
-        io: _parent._io
       is_weak:
         value: symbol_class_data & 0x80 == 0x80
       symbol_class:
@@ -184,11 +184,11 @@ types:
         type: u4
     instances:
       relocations:
+        io: _parent._io
         pos: _parent.header.ofs_reloc_instructions + ofs_first_reloc
         type: u2
         repeat: expr
         repeat-expr: num_reloc
-        io: _parent._io
 enums:
   architectures:
     0x70777063: powerpc

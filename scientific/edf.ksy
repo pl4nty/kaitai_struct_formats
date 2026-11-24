@@ -1,8 +1,8 @@
 meta:
   id: edf
   file-extension: edf
-  endian: le
   license: MIT
+  endian: le
 
 seq:
   - id: header
@@ -13,12 +13,6 @@ seq:
 
 types:
   header:
-    instances:
-      ns:
-        value: num_signals.to_i
-      ndr:
-        value: num_data_records.to_i
-
     seq:
       - id: "version"
         size: 8
@@ -49,8 +43,8 @@ types:
       - id: "header_num_bytes"
         size: 8
         type: str
-        encoding: ASCII
         pad-right: 0x20
+        encoding: ASCII
 
       - id: "reserved"
         size: 44
@@ -77,85 +71,97 @@ types:
 
       - id: "labels"
         size: 16
-        repeat: expr
-        repeat-expr: ns
         type: str
         pad-right: 0x20
         encoding: ASCII
+        repeat: expr
+        repeat-expr: ns
 
       - id: "transducers"
         size: 80
-        repeat: expr
-        repeat-expr: ns
         type: str
         pad-right: 0x20
         encoding: ASCII
+        repeat: expr
+        repeat-expr: ns
 
       - id: "phys_dimensions"
         size: 8
-        repeat: expr
-        repeat-expr: ns
         type: str
         pad-right: 0x20
         encoding: ASCII
+        repeat: expr
+        repeat-expr: ns
 
       - id: "phys_mins"
         size: 8
-        repeat: expr
-        repeat-expr: ns
         type: str
         pad-right: 0x20
         encoding: ASCII
+        repeat: expr
+        repeat-expr: ns
 
       - id: "phys_maxes"
         size: 8
-        repeat: expr
-        repeat-expr: ns
         type: str
         pad-right: 0x20
         encoding: ASCII
+        repeat: expr
+        repeat-expr: ns
 
       - id: "dig_mins"
         size: 8
-        repeat: expr
-        repeat-expr: ns
         type: str
         pad-right: 0x20
         encoding: ASCII
+        repeat: expr
+        repeat-expr: ns
 
       - id: "dig_maxes"
         size: 8
-        repeat: expr
-        repeat-expr: ns
         type: str
         pad-right: 0x20
         encoding: ASCII
+        repeat: expr
+        repeat-expr: ns
 
       - id: "prefiltering"
         size: 80
-        repeat: expr
-        repeat-expr: ns
         type: str
         pad-right: 0x20
         encoding: ASCII
+        repeat: expr
+        repeat-expr: ns
 
       - id: "num_samples"
         size: 8
-        repeat: expr
-        repeat-expr: ns
         type: str
         pad-right: 0x20
         encoding: ASCII
+        repeat: expr
+        repeat-expr: ns
 
       - id: "signals_reserved"
         size: 32
-        repeat: expr
-        repeat-expr: ns
         type: str
         pad-right: 0x20
         encoding: ASCII
+        repeat: expr
+        repeat-expr: ns
+
+    instances:
+      ns:
+        value: num_signals.to_i
+      ndr:
+        value: num_data_records.to_i
 
   body:
+    seq:
+      - id: "signals"
+        type: signal(_index)
+        repeat: expr
+        repeat-expr: _root.header.ns
+
     types:
       data_recording:
         seq:
@@ -171,12 +177,6 @@ types:
 
         seq:
           - id: "recordings"
+            type: data_recording
             repeat: expr
             repeat-expr: _root.header.ndr
-            type: data_recording
-
-    seq:
-      - id: "signals"
-        repeat: expr
-        repeat-expr: _root.header.ns
-        type: signal(_index)

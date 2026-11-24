@@ -30,23 +30,23 @@ seq:
     type: u2
     doc: the size, in bytes, of the string table
   - id: names_section
-    type: names_section
     size: len_names_section
+    type: names_section
   - id: boolean_section
-    type: boolean_section
     size: len_boolean_section
+    type: boolean_section
   - id: boolean_padding
     size: 1
     if: (len_names_section + len_boolean_section) % 2 == 1
   - id: numbers_section
-    type: numbers_section
     size: num_numbers_section * 2
+    type: numbers_section
   - id: strings_section
-    type: strings_section
     size: num_strings_offsets * 2
+    type: strings_section
   - id: string_table
-    type: string_table
     size: len_string_table
+    type: string_table
 types:
   names_section:
     seq:

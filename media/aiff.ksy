@@ -24,8 +24,8 @@ seq:
         - aiff_type::aifc
         - aiff_type::aiff
   - id: chunks
-    type: chunks
     size: header.len_data - aiff_type._sizeof
+    type: chunks
 types:
   header:
     seq:
@@ -103,8 +103,8 @@ types:
   text_chunk:
     seq:
       - id: text
-        type: str
         size-eos: true
+        type: str
   instrument_chunk:
     seq:
       - id: base_note

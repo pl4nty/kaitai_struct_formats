@@ -118,4 +118,3 @@ types:
         type: b16
         repeat: expr
         repeat-expr: 2*4096 # HASHTABLE_NSLOT
-

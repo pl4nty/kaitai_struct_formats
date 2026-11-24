@@ -103,8 +103,8 @@ seq:
     size: file_hdr.ofs_bitmap - file_hdr._sizeof
     type: bitmap_info
   - id: bitmap
-    type: bitmap
     size-eos: true
+    type: bitmap
 types:
   bitmap:
     doc: |
@@ -404,8 +404,8 @@ types:
         enum: intent
       - id: ofs_profile
         -orig-id: bV5ProfileData
-        doc: The offset, in bytes, from the beginning of the BITMAPV5HEADER structure to the start of the profile data.
         type: u4
+        doc: The offset, in bytes, from the beginning of the BITMAPV5HEADER structure to the start of the profile data.
       - id: len_profile
         -orig-id: bV5ProfileSize
         type: u4
@@ -436,12 +436,12 @@ types:
       - id: has_reserved_field
         type: bool
       - id: num_colors
+        type: u4
         doc: |
           If equal to 0, the palette should contain as many colors as can fit into the pixel value
           according to the `bits_per_pixel` field (if `bits_per_pixel` = 8, then the pixel can
           represent 2 ** 8 = 256 values, so exactly 256 colors should be present). For more flexibility,
           it reads as many colors as it can until EOS is reached (and the image data begin).
-        type: u4
     seq:
       - id: colors
         type: rgb_record(has_reserved_field)

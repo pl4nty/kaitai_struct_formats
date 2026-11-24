@@ -40,9 +40,9 @@ seq:
     repeat-expr: num_materials
   - id: tiles_id
     type: u4
+    enum: tile_type
     repeat: expr
     repeat-expr: num_tiles
-    enum: tile_type
   - id: animated_tiles
     type: animated_tile
     repeat: expr

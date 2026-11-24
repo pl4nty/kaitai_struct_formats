@@ -6,15 +6,15 @@ meta:
   ks-version: 0.9
   imports:
     - /executable/dex
-  endian: le
   encoding: UTF-8
+  endian: le
 doc-ref: http://web.archive.org/web/20180816094438/https://android.googlesource.com/platform/dalvik.git/+/master/libdex/DexFile.h
 seq:
   - id: magic
     contents: "dey\n"
   - id: version
-    type: strz
     size: 4
+    type: strz
   - id: ofs_dex
     type: u4
     doc: file offset of DEX header

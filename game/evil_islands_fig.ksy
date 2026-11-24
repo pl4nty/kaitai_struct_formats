@@ -30,33 +30,33 @@ seq:
     type: u4
   - id: center
     type: vec3
-    doc: Center of mesh
     repeat: expr
     repeat-expr: 8
+    doc: Center of mesh
   - id: aabb_min
     type: vec3
-    doc: AABB point of mesh
     repeat: expr
     repeat-expr: 8
+    doc: AABB point of mesh
   - id: aabb_max
     type: vec3
-    doc: AABB point of mesh
     repeat: expr
     repeat-expr: 8
+    doc: AABB point of mesh
   - id: bounding_radius
     type: f4
     repeat: expr
     repeat-expr: 8
   - id: vertex_blocks
     type: vertex_block
-    doc: Blocks of raw vertex data
     repeat: expr
     repeat-expr: 8
+    doc: Blocks of raw vertex data
   - id: normal_blocks
     type: vec4x4
-    doc: Packed normal data
     repeat: expr
     repeat-expr: num_normal_blocks
+    doc: Packed normal data
   - id: texcoord_array
     type: vec2
     repeat: expr

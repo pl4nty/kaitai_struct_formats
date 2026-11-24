@@ -5,52 +5,52 @@ meta:
     rfc: 1035
     wikidata: Q8767
   license: CC0-1.0
-  encoding: utf-8
+  encoding: UTF-8
   endian: be
 doc: |
   (No support for Auth-Name + Add-Name for simplicity)
 seq:
   - id: transaction_id
-    doc: "ID to keep track of request/responses"
     type: u2
+    doc: "ID to keep track of request/responses"
   - id: flags
     type: packet_flags
   - id: qdcount
+    type: u2
+    if: flags.is_opcode_valid
     doc: "How many questions are there"
-    if: flags.is_opcode_valid
-    type: u2
   - id: ancount
+    type: u2
+    if: flags.is_opcode_valid
     doc: "Number of resource records answering the question"
-    if: flags.is_opcode_valid
-    type: u2
   - id: nscount
+    type: u2
+    if: flags.is_opcode_valid
     doc: "Number of resource records pointing toward an authority"
-    if: flags.is_opcode_valid
-    type: u2
   - id: arcount
-    doc: "Number of resource records holding additional information"
-    if: flags.is_opcode_valid
     type: u2
-  - id: queries
     if: flags.is_opcode_valid
+    doc: "Number of resource records holding additional information"
+  - id: queries
     type: query
     repeat: expr
     repeat-expr: qdcount
-  - id: answers
     if: flags.is_opcode_valid
+  - id: answers
     type: answer
     repeat: expr
     repeat-expr: ancount
-  - id: authorities
     if: flags.is_opcode_valid
+  - id: authorities
     type: answer
     repeat: expr
     repeat-expr: nscount
-  - id: additionals
     if: flags.is_opcode_valid
+  - id: additionals
     type: answer
     repeat: expr
     repeat-expr: arcount
+    if: flags.is_opcode_valid
 types:
   query:
     seq:
@@ -73,11 +73,11 @@ types:
         type: u2
         enum: class_type
       - id: ttl
-        doc: "Time to live (in seconds)"
         type: s4
+        doc: "Time to live (in seconds)"
       - id: rdlength
-        doc: "Length in octets of the following payload"
         type: u2
+        doc: "Length in octets of the following payload"
       - id: payload
         size: rdlength
         type:
@@ -97,29 +97,29 @@ types:
       - id: name
         type: label
         repeat: until
-        doc: "Repeat until the length is 0 or it is a pointer (bit-hack to get around lack of OR operator)"
         repeat-until: "_.length == 0 or _.length >= 192"
+        doc: "Repeat until the length is 0 or it is a pointer (bit-hack to get around lack of OR operator)"
   label:
     seq:
       - id: length
-        doc: "RFC1035 4.1.4: If the first two bits are raised it's a pointer-offset to a previously defined name"
         type: u1
+        doc: "RFC1035 4.1.4: If the first two bits are raised it's a pointer-offset to a previously defined name"
       - id: pointer
-        if: "is_pointer"
         type: pointer_struct
+        if: "is_pointer"
       - id: name
+        size: length
+        type: str
         if: "not is_pointer"
         doc: "Otherwise its a string the length of the length value"
-        type: str
-        size: length
     instances:
       is_pointer:
         value: length >= 192
   pointer_struct:
     seq:
       - id: value
-        doc: "Read one byte, then offset to that position, read one domain-name and return"
         type: u1
+        doc: "Read one byte, then offset to that position, read one domain-name and return"
     instances:
       contents:
         io: _root._io
@@ -175,8 +175,8 @@ types:
       - id: length
         type: u1
       - id: text
-        type: str
         size: length
+        type: str
   txt_body:
     seq:
       - id: data

@@ -53,12 +53,6 @@ types:
           are used for "wire type", and everything higher designates
           an integer "field tag".
       - id: value
-        doc: |
-          Value that corresponds to field identified by
-          `field_tag`. Type is determined approximately: there is
-          enough information to parse it unambiguously from a stream,
-          but further information from `.proto` file is required to
-          interpret it properly.
         type:
           switch-on: wire_type
           cases:
@@ -66,6 +60,12 @@ types:
             'wire_types::len_delimited': delimited_bytes
             'wire_types::bit_64': u8le
             'wire_types::bit_32': u4le
+        doc: |
+          Value that corresponds to field identified by
+          `field_tag`. Type is determined approximately: there is
+          enough information to parse it unambiguously from a stream,
+          but further information from `.proto` file is required to
+          interpret it properly.
     instances:
       wire_type:
         value: 'key.value & 0b111'

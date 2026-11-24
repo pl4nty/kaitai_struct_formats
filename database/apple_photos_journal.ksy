@@ -5,9 +5,9 @@ meta:
   file-extension: plj
   license: MIT
   ks-version: '0.11'
-  endian: be
   imports:
     - /common/vlq_base128_le
+  endian: be
 doc: |
   Apple Photos stores these journals in resources/journals inside a Photos
   library. A file is a sequence of records; empty journals also occur.
@@ -40,8 +40,8 @@ types:
         valid:
           min: 1
       - id: header
-        type: journal_header
         size: len_header
+        type: journal_header
       - id: payload
         size: 'header.entry_type.value == 2 or header.payload_info.next_field_key != 0x28 ? 0 : header.payload_info.len_payload.value'
         doc: Binary plist bytes, absent for deletions and nil-property-only updates

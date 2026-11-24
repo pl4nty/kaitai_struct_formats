@@ -14,22 +14,22 @@ types:
     seq:
       - id: user
         -orig-id: ut_user
-        doc: User login name
         size: 256
         type: str
-        encoding: ascii
+        encoding: ASCII
+        doc: User login name
       - id: inittab_id
         -orig-id: ut_id
-        doc: /etc/inittab id
         size: 14
         type: str
-        encoding: ascii
+        encoding: ASCII
+        doc: /etc/inittab id
       - id: device
         -orig-id: ut_line
-        doc: device name (console, lnxx)
         size: 64
         type: str
-        encoding: ascii
+        encoding: ASCII
+        doc: device name (console, lnxx)
       - id: pid
         -orig-id: ut_pid
         type: u8
@@ -37,8 +37,8 @@ types:
       - id: type
         -orig-id: ut_type
         type: s2
-        doc: Type of login
         enum: entry_type
+        doc: Type of login
       - id: timestamp
         -orig-id: ut_time
         type: s8
@@ -50,9 +50,9 @@ types:
       - id: hostname
         -orig-id: ut_host
         size: 256
-        doc: host name
         type: str
-        encoding: ascii
+        encoding: ASCII
+        doc: host name
       - id: dbl_word_pad
         type: s4
       - id: reserved_a

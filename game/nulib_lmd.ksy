@@ -1,13 +1,13 @@
 meta:
   id: nulib_lmd
-  file-extension: lmd
-  application: Games with Namco NU library
   title: Namco Lumen UI
+  application: Games with Namco NU library
+  file-extension: lmd
   license: MIT
-  endian: le
-  bit-endian: le
   imports:
     - nulib_xmd
+  endian: le
+  bit-endian: le
 seq:
   - id: xmd
     type: nulib_xmd
@@ -16,13 +16,13 @@ instances:
     pos: xmd.positions[2]
     size: xmd.lengths[2]
   textures:
-    type: textures
     pos: xmd.positions[1]
     size: xmd.lengths[1]
+    type: textures
   lmb:
-    type: lmb
     pos: xmd.positions[0]
     size: xmd.lengths[0]
+    type: lmb
 types:
   nothing: {}
   textures:
@@ -76,6 +76,7 @@ types:
       - id: data_len
         type: u4
       - id: data
+        size: data_len * 4
         type:
           switch-on: tag_type
           cases:
@@ -100,7 +101,6 @@ types:
             'tag_type::action_script': action_script
             'tag_type::fonts': fonts
             _: unknown_tag_data
-        size: data_len * 4
       - id: children
         type: tag
         repeat: expr
@@ -167,11 +167,11 @@ types:
           - id: len_bytecode
             type: u4
           - id: bytecode
-            doc: 'This bytecode is for *AVM1*, not AVM2. Refer to projects such as OpenFlash for more info.'
             size: len_bytecode
+            doc: 'This bytecode is for *AVM1*, not AVM2. Refer to projects such as OpenFlash for more info.'
           - id: padding
-            type: nothing
             size: 4 - len_bytecode % 4
+            type: nothing
             if: i != _parent.num_actions - 1
   defines:
     seq:
@@ -217,8 +217,8 @@ types:
       - id: unknown4
         type: u2
       - id: position_id
-        doc: 'This is conditionally a position id, transform id, or nothing (0xffff) depending on position_flags'
         type: u2
+        doc: 'This is conditionally a position id, transform id, or nothing (0xffff) depending on position_flags'
       - id: position_flags
         type: u2
         enum: position_flags
@@ -272,8 +272,8 @@ types:
       - id: id
         type: u4
       - id: num_children
-        doc: 'children directly follow this tag, they may be place/remove object or do_action'
         type: u4
+        doc: 'children directly follow this tag, they may be place/remove object or do_action'
   frame_label:
     seq:
       - id: name_id
@@ -287,11 +287,11 @@ types:
       - id: unknown1
         size: 8
       - id: num_frame_labels
+        type: u4
         doc: 'labels follow this tag, their respective index is the keyframe id'
-        type: u4
       - id: num_frames
-        doc: 'frames and keyframes may be mixed and come directly after this tag'
         type: u4
+        doc: 'frames and keyframes may be mixed and come directly after this tag'
       - id: num_keyframes
         type: u4
       - id: unknown2
@@ -346,8 +346,8 @@ types:
       - id: unknown2
         type: u4
       - id: num_graphics
-        doc: 'graphics are the following tags'
         type: u4
+        doc: 'graphics are the following tags'
     instances:
       num_children:
         value: num_graphics
@@ -484,8 +484,8 @@ types:
       - id: num_values
         type: u4
       - id: values
-        type: color
         size: 8
+        type: color
         repeat: expr
         repeat-expr: num_values
     types:
@@ -513,9 +513,9 @@ types:
           - id: len
             type: u4
           - id: value
+            size: len
             type: str
             encoding: UTF-8
-            size: len
           - id: padding
-            type: nothing
             size: 4 - len % 4
+            type: nothing

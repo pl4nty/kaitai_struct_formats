@@ -1,10 +1,10 @@
 meta:
   id: asn1_ber_tag
   title: ASN.1 BER tag
-  license: CC0-1.0
   xref:
     justsolve: BER
     wikidata: Q2738854
+  license: CC0-1.0
   
 doc: Basic Encoding Rules (BER) tag formatting rules.
 doc-ref: https://en.wikipedia.org/wiki/X.690#BER_encoding X.690 BER encoding
@@ -14,9 +14,9 @@ seq:
     type: u1
   - id: tag_subsequent_bytes
     type: u1
-    if: ((tag_first_byte & 0b00011111) == 0b00011111)
     repeat: until
     repeat-until: (_ < 0x80)
+    if: ((tag_first_byte & 0b00011111) == 0b00011111)
 instances:
   tag_class:
     value: (tag_first_byte & 0b11000000) >> 6

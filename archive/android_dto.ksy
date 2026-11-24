@@ -1,8 +1,8 @@
 meta:
   id: android_dto
   title: Android DTB/DTBO Partition
-  license: CC0-1.0
   file-extension: img
+  license: CC0-1.0
   endian: be
 
 doc: |

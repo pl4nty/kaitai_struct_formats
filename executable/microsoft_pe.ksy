@@ -47,12 +47,12 @@ types:
       - id: coff_hdr
         type: coff_header
       - id: optional_hdr
-        type: optional_header
         size: coff_hdr.size_of_optional_header
+        type: optional_header
       - id: sections
+        type: section
         repeat: expr
         repeat-expr: coff_hdr.number_of_sections
-        type: section
     instances:
       certificate_table:
         pos: optional_hdr.data_dirs.certificate_table.virtual_address
@@ -106,15 +106,15 @@ types:
         pos: symbol_name_table_offset
         type: u4
       symbol_table:
-        doc: |
-          COFF symbol records. `number_of_symbols` counts the 18-byte
-          auxiliary records too, which are read as part of the symbol they
-          follow (see `coff_symbol.aux_symbols`).
         pos: pointer_to_symbol_table
         type: coff_symbol
         repeat: until
         repeat-until: _io.pos >= symbol_name_table_offset
         if: number_of_symbols > 0
+        doc: |
+          COFF symbol records. `number_of_symbols` counts the 18-byte
+          auxiliary records too, which are read as part of the symbol they
+          follow (see `coff_symbol.aux_symbols`).
     enums:
       # Don't forget to update the `machine_type` enum in `executable/uefi_te.ksy` when
       # you modify this one.
@@ -223,8 +223,8 @@ types:
   coff_symbol:
     seq:
       - id: name_annoying
-        type: annoyingstring
         size: 8
+        type: annoyingstring
       #- id: name_zeroes
       #  type: u4
       #- id: name_offset
@@ -281,14 +281,14 @@ types:
         type: str
         terminator: 0
         eos-error: false
-        encoding: ascii
+        encoding: ASCII
         if: name_zeroes == 0
       name_from_short:
         pos: 0
         type: str
         terminator: 0
         eos-error: false
-        encoding: ascii
+        encoding: ASCII
         if: name_zeroes != 0
       name:
         value: 'name_zeroes == 0 ? name_from_offset : name_from_short'
@@ -455,10 +455,10 @@ types:
       'Section <Name: ' + name + ', VirtualSize: ' + virtual_size.to_s + ', VirtualAddr: ' + virtual_address.to_s + ', PointerToRawData: ' + pointer_to_raw_data.to_s + '>'
     seq:
       - id: name
-        type: str
-        encoding: UTF-8
         size: 8
+        type: str
         pad-right: 0
+        encoding: UTF-8
       - id: virtual_size
         type: u4
       - id: virtual_address
@@ -732,6 +732,25 @@ types:
         repeat: eos
   certificate_entry:
     doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#the-attribute-certificate-table-image-only'
+    seq:
+      - id: length
+        -orig-id: dwLength
+        type: u4
+        doc: Specifies the length of the attribute certificate entry.
+      - id: revision
+        -orig-id: wRevision
+        type: u2
+        enum: certificate_revision
+        doc: Contains the certificate version number.
+      - id: certificate_type
+        -orig-id: wCertificateType
+        type: u2
+        enum: certificate_type_enum
+        doc: Specifies the type of content in bCertificate
+      - id: certificate_bytes
+        -orig-id: bCertificate
+        size: length - 8
+        doc: Contains a certificate, such as an Authenticode signature.
     enums:
       certificate_revision:
         0x0100:
@@ -759,25 +778,6 @@ types:
           doc: |
             Terminal Server Protocol Stack Certificate signing
             Not Supported
-    seq:
-      - id: length
-        -orig-id: dwLength
-        type: u4
-        doc: Specifies the length of the attribute certificate entry.
-      - id: revision
-        -orig-id: wRevision
-        type: u2
-        enum: certificate_revision
-        doc: Contains the certificate version number.
-      - id: certificate_type
-        -orig-id: wCertificateType
-        type: u2
-        enum: certificate_type_enum
-        doc: Specifies the type of content in bCertificate
-      - id: certificate_bytes
-        -orig-id: bCertificate
-        size: length - 8
-        doc: Contains a certificate, such as an Authenticode signature.
   debug_table_entries:
     seq:
       - id: entry
@@ -811,6 +811,13 @@ types:
       - id: pointer_to_raw_data
         -orig-id: PointerToRawData
         type: u4
+    instances:
+      codeview_debug:
+        io: _root._io
+        pos: pointer_to_raw_data
+        size: size_of_data
+        type: codeview_debug_info
+        if: type == debug_entry_type::codeview
     enums:
       debug_entry_type:
         0: unknown
@@ -823,13 +830,6 @@ types:
         9: borland
       cv_signature:
         0x53445352: rsds
-    instances:
-      codeview_debug:
-        io: _root._io
-        pos: pointer_to_raw_data
-        size: size_of_data
-        type: codeview_debug_info
-        if: type == debug_entry_type::codeview
     types:
       codeview_debug_info:
         seq:
@@ -852,9 +852,9 @@ types:
           - id: age
             type: u4
           - id: pdb_file_name
-            type: strz
-            encoding: utf-8
             size-eos: true
+            type: strz
+            encoding: UTF-8
 
   dotnet_header:
     to-string: |
@@ -911,18 +911,18 @@ types:
       - id: version_length
         type: u4
       - id: version_string
-        type: str
-        encoding: UTF-8
         size: version_length
+        type: str
         pad-right: 0
+        encoding: UTF-8
       - id: flags
         type: u2
       - id: number_of_streams
         type: u2
       - id: streams
+        type: dotnet_stream
         repeat: expr
         repeat-expr: number_of_streams
-        type: dotnet_stream
   dotnet_stream:
     -webide-representation: '{name}'
     to-string: |
@@ -936,7 +936,7 @@ types:
         type: strz
         terminator: 0
         eos-error: false
-        encoding: ascii
+        encoding: ASCII
       - id: padding
         size: (4 - _io.pos) % 4
     instances:
@@ -958,8 +958,8 @@ types:
         type: u4
         doc: Reserved for future use, should be set to zero
       - id: timestamp
-        type: u4
         -orig-id: TimeDateStamp
+        type: u4
       - id: version
         type: version_u2
       - id: num_named_entries
@@ -1022,27 +1022,27 @@ types:
         parent: _parent
     enums:
       enum_resource_type:
-          1: cursor
-          2: bitmap
-          3: icon
-          4: menu
-          5: dialog
-          6: string
-          7: fontdir
-          8: font
-          9: accelerator
-          10: rcdata
-          11: messagetable
-          12: group_cursor
-          14: group_icon
-          16: version
-          17: dlginclude
-          19: plugplay
-          20: vxd
-          21: anicursor
-          22: aniicon
-          23: html
-          24: manifest
+        1: cursor
+        2: bitmap
+        3: icon
+        4: menu
+        5: dialog
+        6: string
+        7: fontdir
+        8: font
+        9: accelerator
+        10: rcdata
+        11: messagetable
+        12: group_cursor
+        14: group_icon
+        16: version
+        17: dlginclude
+        19: plugplay
+        20: vxd
+        21: anicursor
+        22: aniicon
+        23: html
+        24: manifest
 
   resource_data_entry:
     doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#resource-data-entry'

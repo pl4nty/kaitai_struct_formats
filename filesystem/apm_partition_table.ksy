@@ -9,7 +9,7 @@ meta:
     - filesystem
     - macos
   license: CC0-1.0
-  encoding: ascii
+  encoding: ASCII
   endian: be
 doc-ref: https://en.wikipedia.org/wiki/Apple_Partition_Map
 instances:
@@ -50,11 +50,11 @@ types:
         type: u4
         doc: "Number of sectors"
       - id: partition_name
-        type: strz
         size: 0x20
+        type: strz
       - id: partition_type
-        type: strz
         size: 0x20
+        type: strz
       - id: data_start
         type: u4
         doc: "First sector"
@@ -83,8 +83,8 @@ types:
         type: u4
         doc: "Boot code checksum"
       - id: processor_type
-        type: strz
         size: 0x10
+        type: strz
       # Skipping the remaining of the sector, it should be all 0x00
     instances:
       partition:

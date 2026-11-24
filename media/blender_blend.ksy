@@ -52,12 +52,12 @@ types:
         doc: Remainder of the 17-byte header size, 64-bit pointer marker, format version 01 and little-endian marker
       - id: endian_legacy
         type: u1
-        doc: Type of byte ordering used
         enum: endian
         if: is_legacy
+        doc: Type of byte ordering used
       - id: version
-        type: str
         size: 'is_legacy ? 3 : 4'
+        type: str
         encoding: ASCII
         doc: Blender version used to save this file
     instances:
@@ -81,8 +81,8 @@ types:
     doc-ref: https://github.com/blender/blender/blob/v5.0.0/source/blender/blenloader_core/BLO_core_bhead.hh
     seq:
       - id: code
-        type: str
         size: 4
+        type: str
         encoding: ASCII
         doc: Identifier of the file block
       - id: len_body_small

@@ -2,11 +2,11 @@ meta:
   id: civ5map
   application: Sid Meier's Civilization V
   file-extension: civ5map
-  encoding: UTF-8
-  license: CC0-1.0
-  endian: le
   xref:
     wikidata: Q2385
+  license: CC0-1.0
+  encoding: UTF-8
+  endian: le
 doc: |
   Many of Civilization 5's maps are in civ5map format, and encodes terrain and
   sometimes resources on the map plots. Scenario data is also encoded in some
@@ -77,34 +77,34 @@ types:
         type: u4
         
       - id: terrain_list
-        type: null_terminated_str
         size: terrain_list_len
+        type: null_terminated_str
       - id: feature1_list
-        type: null_terminated_str
         size: feature1_list_len  
+        type: null_terminated_str
       - id: feature2_list
-        type: null_terminated_str
         size: feature2_list_len
-      - id: resource_list
         type: null_terminated_str
+      - id: resource_list
         size: resource_list_len
+        type: null_terminated_str
         
       - id: mod_data
         size: mod_data_len
         
       - id: map_name
-        type: str
         size: map_name_len
-      - id: map_description
         type: str
+      - id: map_description
         size: map_description_len
+        type: str
         
       - id: string3_len
         type: u4
         if: version >= 0xB
       - id: string3
-        type: str
         size: string3_len
+        type: str
         if: version >= 0xB
         
     types:
@@ -147,8 +147,8 @@ types:
             type: u1
             enum: elevation
           - id: continent
-            enum: continent
             type: u1
+            enum: continent
           - id: feature2_type_id
             type: u1
           - id: resource_amount

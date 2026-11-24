@@ -29,11 +29,11 @@ types:
   index_entry:
     seq:
       - id: name
-        type: str
         size: 56
-        encoding: UTF-8
+        type: str
         terminator: 0
         pad-right: 0
+        encoding: UTF-8
       - id: ofs
         type: u4
       - id: size

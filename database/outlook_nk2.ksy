@@ -5,11 +5,11 @@ meta:
     - Outlook
     - NK2Edit # Shareware, free for personal use, can be used to create the samples without using Outlook
   file-extension: nk2
-  license: MIT
   xref:
     forensicswiki: Nickfile_(NK2)
     justsolve: Nickfile
-  encoding: UTF-16le
+  license: MIT
+  encoding: UTF-16LE
   endian: le
   bit-endian: le
   #imports:  # mapi_tags.ksy is not in the repo yet; re-enable when it is
@@ -66,11 +66,11 @@ types:
       value_header:
         seq:
           - id: type_descriptor
+            -orig-id: PropTag
             type: type_descriptor
-            -orig-id: PropTag
           - id: tag
-            type: u2
             -orig-id: PropTag
+            type: u2
             #enum: mapi_tags::tag  # needs generated mapi_tags.ksy
           - id: value_type
             type: u4
@@ -172,7 +172,7 @@ types:
                 seq:
                   - id: value
                     type: strz
-                    encoding: ascii
+                    encoding: ASCII
 
   footer:
     seq:
@@ -253,15 +253,8 @@ types:
       - id: reserved
         size: 3
       - id: service_provider_identifier
-        type: uid
         -orig-id: ProviderUID
-        doc-ref:
-          - https://github.com/stephenegriffin/mfcmapi/blob/b9f8c0371796790c5b333bcabafb8894f2591e39/core/interpret/guid.h  # MIT
-          - https://github.com/rtopken/CalCheck/blob/master/CalCheck/ProcessCalendar.h  # MIT
-          - https://github.com/nektra/outlook-autocomplete/blob/master/OlAutoComplete/nk2props.h
-          - https://interoperability.blob.core.windows.net/files/MS-OXCDATA/%5bMS-OXCDATA%5d.pdf
-          - https://interoperability.blob.core.windows.net/files/MS-OXCMAIL/%5bMS-OXCMAIL%5d.pdf
-          - https://github.com/libyal/libfmapi/blob/master/documentation/MAPI%20definitions.pdf  # some additional guids are there, but it is under GFDL-1.3-or-later, so haven't added them here.
+        type: uid
         doc: |
           These guids are also used in PidTagEntryId of MS-OXCMAIL (and other exchange protocols)
           a41f2b81-a3be-1910-9d6e-00dd010f5402 muidOOP - One Off Entry Provider
@@ -272,6 +265,13 @@ types:
           20fa551b-66aa-cd11-9bc8-00aa002fc45a g_muidStorePrivate - Exchange Private Store Provider
           1002831c-66aa-cd11-9bc8-00aa002fc45a g_muidStorePublic - Exchange Public Store Provider
           9073441a-66aa-cd11-9bc8-00aa002fc45a pbLongTermNonPrivateGuid - Exchange Public Folder Store Provider
+        doc-ref:
+          - https://github.com/stephenegriffin/mfcmapi/blob/b9f8c0371796790c5b333bcabafb8894f2591e39/core/interpret/guid.h  # MIT
+          - https://github.com/rtopken/CalCheck/blob/master/CalCheck/ProcessCalendar.h  # MIT
+          - https://github.com/nektra/outlook-autocomplete/blob/master/OlAutoComplete/nk2props.h
+          - https://interoperability.blob.core.windows.net/files/MS-OXCDATA/%5bMS-OXCDATA%5d.pdf
+          - https://interoperability.blob.core.windows.net/files/MS-OXCMAIL/%5bMS-OXCMAIL%5d.pdf
+          - https://github.com/libyal/libfmapi/blob/master/documentation/MAPI%20definitions.pdf  # some additional guids are there, but it is under GFDL-1.3-or-later, so haven't added them here.
       - id: oid
         type: oid
     types:

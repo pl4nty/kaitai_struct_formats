@@ -59,10 +59,6 @@ types:
       body:
         pos: ofs_body
         size: 'ofs_body + len_body > _root._io.size ? _root._io.size - ofs_body : len_body'
-        doc: |
-          Table body. Writers such as bdftopcf record a larger size for
-          the last table (usually BDF accelerators) than the file holds,
-          so, like FreeType, the size is clamped to the end of the file.
         type:
           switch-on: type
           cases:
@@ -75,6 +71,10 @@ types:
             'types::swidths': swidths
             'types::glyph_names': glyph_names
             # TODO: bdf_accelerators
+        doc: |
+          Table body. Writers such as bdftopcf record a larger size for
+          the last table (usually BDF accelerators) than the file holds,
+          so, like FreeType, the size is clamped to the end of the file.
     types:
       properties:
         meta:
@@ -314,8 +314,8 @@ types:
         type: b1
         doc: If set, then all integers in the table are treated as big-endian
       - id: glyph_pad_mask
-        type: b2
         -orig-id: PCF_GLYPH_PAD_MASK
+        type: b2
       - id: format
         type: u1
       - id: padding

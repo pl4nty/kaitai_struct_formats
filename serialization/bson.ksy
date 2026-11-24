@@ -19,8 +19,8 @@ seq:
     type: s4
     doc: "Total number of bytes comprising the document."
   - id: fields
-    type: elements_list
     size: len - 5
+    type: elements_list
   - id: terminator
     contents: [0]
 types:
@@ -49,9 +49,9 @@ types:
       - id: len
         type: s4
       - id: str
+        size: len-1
         type: str
         encoding: UTF-8
-        size: len-1
       - id: terminator
         contents: [0]
   cstring:
@@ -153,8 +153,8 @@ types:
               - id: iv
                 size: block_size
               - id: ciphertext
-                doc: The encrypted ciphertext
                 size-eos: true
+                doc: The encrypted ciphertext
         enums:
           subtype:
             0:

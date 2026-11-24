@@ -3,14 +3,14 @@ meta:
   title: 'Secure Transacted Filesystem'
   application: 'Microsoft Xbox 360'
   license: 'CC0-1.0'
-  endian: be
   encoding: UTF-8
+  endian: be
 seq:
   - id: header
     type: x_content_header
   - id: licenses
-    type: x_content_license
     size: 0x10
+    type: x_content_license
     repeat: expr
     repeat-expr: 0x10
   - id: metadata_hash
@@ -28,18 +28,18 @@ instances:
 types:
   # \ Uncommon Data Types
   u3: # Unsigned int24
+    doc: 'Unsigned 24-bit integer'
     seq:
       - id: value
         type: b24
-    doc: 'Unsigned 24-bit integer'
   s3: # Signed int24
+    doc: 'Signed 24-bit integer'
     seq:
       - id: a
         type: b24
     instances:
       value:
         value: (a ^ 0x80000) - 0x80000
-    doc: 'Signed 24-bit integer'
   # / Uncommon Data Types
   # \ SVOD structs
   svod_vol_desc:
@@ -54,12 +54,10 @@ types:
         type: u1
       - id: root_hash
         size: 0x14
-      -
-        type: b6
+      - type: b6
       - id: enhanced_gdf_layout
         type: b1
-      -
-        type: b1
+      - type: b1
       - id: num_data_block_raw
         size: 0x3
       - id: start_data_block_raw
@@ -75,8 +73,8 @@ types:
       - id: version
         type: u1
       - id: flags
-        type: stfs_vol_desc_flags
         size: 0x1
+        type: stfs_vol_desc_flags
       - id: file_table_block_count
         type: u2
       - id: file_table_block_num_raw
@@ -88,6 +86,7 @@ types:
       - id: unallocated_block_count
         type: u4
   stfs_vol_desc_flags:
+    doc: One byte of flags for the STFS volume descriptor
     seq:
       - id: read_only_format
         type: b1
@@ -105,7 +104,6 @@ types:
       - id: directory_index_bounds_valid
         type: b1
       - type: b4
-    doc: One byte of flags for the STFS volume descriptor
   stfs_hash_entry:
     seq:
       - id: sha1
@@ -134,6 +132,7 @@ types:
       - id: start_block_number_raw
         size: 0x3
   stfs_dir_entry_flags:
+    doc: One byte of flags for an STFS directory entry
     seq:
       - id: name_length
         type: b6
@@ -141,14 +140,13 @@ types:
         type: b1
       - id: directory
         type: b1
-    doc: One byte of flags for an STFS directory entry
   stfs_file_entry:
     seq:
       - id: entry_index
         type: u4
       - id: name
-        type: str
         size: name_length
+        type: str
         encoding: ASCII
       - id: name_length
         type: u1
@@ -204,14 +202,14 @@ types:
       - id: owner_console_id
         size: 0x5
       - id: owner_console_part_number
+        size: 0x11
         type: str
         encoding: ASCII
-        size: 0x11
       - id: console_type_data
         type: u4
       - id: date_generation
-        type: str
         size: 0x8
+        type: str
         encoding: ASCII
       - id: public_exponent
         type: u4
@@ -328,8 +326,8 @@ types:
         size: 0x80
         type: str
       - id: transfer_flags
-        type: x_content_attributes
         size: 0x1
+        type: x_content_attributes
       - id: thumbnail_size
         type: u4
       - id: title_thumbnail_size
@@ -337,16 +335,16 @@ types:
       - id: thumbnail_image
         size: thumbnail_size
       - id: display_names_ex
-        type: str
         size: 0x80
+        type: str
         repeat: expr
         repeat-expr: 6
         if: 'metadata_version == metadata_version::two'
       - id: title_thumbnail_image
         size: title_thumbnail_size
       - id: descriptions_ex
-        type: str
         size: 0x80
+        type: str
         repeat: expr
         repeat-expr: 6
         if: 'metadata_version == metadata_version::two'
@@ -480,12 +478,12 @@ enums:
     1: consecutive_blocks
     2: folder
   installer_type:
-     0x00000000: none
-     0x53555044: system_update
-     0x54555044: title_update
-     0x50245355: system_update_progress_cache
-     0x50245455: title_update_progress_cache
-     0x50245443: title_content_progress_cache
+    0x00000000: none
+    0x53555044: system_update
+    0x54555044: title_update
+    0x50245355: system_update_progress_cache
+    0x50245455: title_update_progress_cache
+    0x50245443: title_content_progress_cache
   content_type:
     0x0000001: saved_game
     0x0000002: marketplace_content

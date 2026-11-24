@@ -3,8 +3,8 @@ meta:
   title: CPython frozen table
   application: CPython 3
   license: Unlicense
+  encoding: ASCII
   endian: le
-  encoding: ascii
 doc: |
   CPython has facilities to embed serialized python objects bytecode right into cpython binaries (libpython, which mai be linked to python as a static lib).
   These stuff is organized into an array of `_frozen`, the ptr to the table is exported as PyImport_FrozenModules.

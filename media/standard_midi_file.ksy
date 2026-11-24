@@ -59,8 +59,8 @@ types:
       - id: len_events
         type: u4
       - id: events
-        type: track_events
         size: len_events
+        type: track_events
   track_events:
     seq:
       - id: event

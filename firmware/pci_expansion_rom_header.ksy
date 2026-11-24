@@ -1,12 +1,12 @@
 meta:
   id: pci_expansion_rom_header
   application: x86 architecture
-  endian: le
   license: Unlicense
   imports:
     - ./bios_header_generic
     - ./pci_data_structure
     - ./legacy_option_rom_header
+  endian: le
 doc: >
   Spec:
     Plug and Play BIOS Specification Version 1.0A May 5, 1994, 3.1 Option ROM Header

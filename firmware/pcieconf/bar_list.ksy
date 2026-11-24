@@ -1,7 +1,7 @@
 meta:
   id: bar_list
-  endian: le
   license: 0BSD
+  endian: le
 
 doc: PCI configuration space BAR segment
 
@@ -42,9 +42,9 @@ types:
       addr:
         # TODO: elaborate on masking
         value: >-
-         (_parent.dword0 & 0xfffffff0) |
-         (_parent.addr_size == bar_size::size64
-             ? _parent.dword1 << 32  : 0)
+          (_parent.dword0 & 0xfffffff0) |
+          (_parent.addr_size == bar_size::size64
+              ? _parent.dword1 << 32  : 0)
       prefetchable:
         value: (_parent.dword0 >> 3) & 1
 

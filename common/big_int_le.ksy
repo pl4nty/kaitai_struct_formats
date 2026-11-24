@@ -1,7 +1,7 @@
 meta:
   id: big_int_le
-  license: Unlicense
   title: Big int type, little endian
+  license: Unlicense
   endian: le
 doc: Works only for the languages where ints are big ints
 seq:

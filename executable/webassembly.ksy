@@ -3,8 +3,8 @@ meta:
   title: Binary format for WebAssembly modules
   file-extension: wasm
   tags: 
-    - webassembly
     - schema
+    - webassembly
   license: MIT
   ks-version: 0.9
   imports:

@@ -4,8 +4,8 @@ meta:
   application: Energympro GPS fitness tracker
   file-extension: cpo
   license: GPL-2.0-or-later
+  encoding: ASCII
   endian: le
-  encoding: ascii
 doc: |
   File format used in Energympro GPS fitness tracker
 
@@ -19,8 +19,8 @@ doc-ref:
 
 seq:
   - id: stuff
-    type: stuff
     size: _root._io.size - sizeof<footer>
+    type: stuff
 
 instances:
   footer:
@@ -170,8 +170,8 @@ types:
       - id: unkn0
         size: 14
       - id: product
-        type: strz
         size: 15
+        type: strz
       - id: version
         type: u2
 

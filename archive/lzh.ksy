@@ -88,8 +88,8 @@ types:
         type: u1
         if: header1.lha_level == 0 or header1.lha_level == 1
       - id: filename
-        type: str
         size: filename_len
+        type: str
         encoding: ASCII
         if: header1.lha_level == 0 or header1.lha_level == 1
       - id: file_uncompr_crc16
@@ -106,8 +106,8 @@ types:
       - id: header_checksum
         type: u1
       - id: method_id
-        type: str
         size: 5
+        type: str
         encoding: ASCII
       - id: file_size_compr
         type: u4

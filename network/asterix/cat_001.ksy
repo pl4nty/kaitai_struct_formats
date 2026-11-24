@@ -1,12 +1,12 @@
 meta:
   id: cat_001
   license: GPL-3.0-only
-  endian: be
-  imports:
-      - field_spec
-      - explicit
-      - cat_001_catalog
   ks-version: 0.9
+  imports:
+    - field_spec
+    - explicit
+    - cat_001_catalog
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.
@@ -49,6 +49,27 @@ seq:
     if: is_track and fspec.octects.size > 3 and fspec.octects[3].bits[1]
 
 
+instances:
+
+  uap_select:
+    pos: _root._io.pos + 2 #+ fspec.octects.size + 2
+    type: u1
+
+  is_track:
+    value: (uap_select >> 7).as<b1>
+
+  is_plot:
+    value: not is_track
+
+  category:
+    value: '"001"'
+
+  version:
+    value: '"1.20"'
+
+  items:
+    value: data.items
+
 types:
 
   uap_type:
@@ -76,24 +97,3 @@ types:
 
       loop_range:
         value: 'fspec.size > uap_list.size ? uap_list.size : fspec.size'
-
-instances:
-
-  uap_select:
-    pos: _root._io.pos + 2 #+ fspec.octects.size + 2
-    type: u1
-
-  is_track:
-    value: (uap_select >> 7).as<b1>
-
-  is_plot:
-    value: not is_track
-
-  category:
-    value: '"001"'
-
-  version:
-    value: '"1.20"'
-
-  items:
-    value: data.items

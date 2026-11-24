@@ -128,8 +128,8 @@ types:
         type: u1
         enum: inst_types
       - id: filename
-        terminator: 0
         size: 12
+        terminator: 0
       - id: body
         type:
           switch-on: type

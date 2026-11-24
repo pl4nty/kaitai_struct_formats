@@ -6,8 +6,8 @@ meta:
   xref:
     wikidata: Q178572
   license: GPL-3.0+
+  encoding: UTF-16LE
   endian: le
-  encoding: utf-16le
   #ks-version: 0.9
 
 doc: |
@@ -19,12 +19,12 @@ doc-ref:
 
 seq:
   - id: signature
-    contents: [0xFF, 0x0F, 0xBB, 0x99]
     -orig-id: m_Magic
+    contents: [0xFF, 0x0F, 0xBB, 0x99]
   - id: version
+    -orig-id: m_Version
     type: u4
     doc: "current one is 0x11"
-    -orig-id: m_Version
   - id: items
     type: item
     repeat: eos
@@ -33,11 +33,11 @@ types:
     -orig-id: CLogCache::SaveOneItem
     seq:
       - id: signature
-        contents: [0xCC, 0x9A, 0xCC, 0x0F]
         -orig-id: m_Magic
+        contents: [0xCC, 0x9A, 0xCC, 0x0F]
       - id: count
-        type: u4
         -orig-id: m_FileCount
+        type: u4
       - id: files
         type: file
         repeat: expr
@@ -46,40 +46,40 @@ types:
       file:
         seq:
           - id: signature
-            contents: [0xFF, 0x9D, 0xEE, 0x19]
             -orig-id: m_Magic
+            contents: [0xFF, 0x9D, 0xEE, 0x19]
           - id: action
-            type: action
             -orig-id: m_Action
+            type: action
           - id: stage
-            type: u4
             -orig-id: m_Stage
+            type: u4
           - id: parent_no
-            type: u4
             -orig-id: m_ParentNo
+            type: u4
           - id: added
-            type: u4
             -orig-id: m_Add
+            type: u4
           - id: deleted
-            type: u4
             -orig-id: m_Del
+            type: u4
           - id: is_submodule
-            type: u4
             -orig-id: m_IsSubmodule
+            type: u4
           - id: file_name_size
-            type: u4
             -orig-id: m_FileNameSize
-          - id: old_file_name_size
             type: u4
+          - id: old_file_name_size
             -orig-id: m_OldFileNameSize
+            type: u4
           - id: file_name
-            type: str
-            size: file_name_size * 2
             -orig-id: m_FileName, name
-          - id: old_file_name
+            size: file_name_size * 2
             type: str
-            size: old_file_name_size * 2
+          - id: old_file_name
             -orig-id: oldname
+            size: old_file_name_size * 2
+            type: str
         types:
           action:
             meta:

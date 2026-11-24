@@ -1,12 +1,12 @@
 meta:
   id: asterix_data_block
   file-extension: ast
-  endian: be
   license: GPL-3.0-only
+  ks-version: 0.9
   imports:
     - asterix_record
 
-  ks-version: 0.9
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.
@@ -26,8 +26,8 @@ seq:
   - id: len
     type: u2
   - id: data_records
-    type: asterix_record(cat)
     size: len - 3
+    type: asterix_record(cat)
 
 
 instances:

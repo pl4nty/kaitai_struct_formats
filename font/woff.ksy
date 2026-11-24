@@ -9,8 +9,8 @@ seq:
   - id: preheader
     type: preheader
   - id: woff
-    type: woff
     size: preheader.len_file - preheader._sizeof
+    type: woff
 types:
   preheader:
     seq:
@@ -32,14 +32,14 @@ types:
         repeat-expr: header.num_tables
     instances:
       extended_metadata:
+        io: _root._io
         pos: header.ofs_meta
         size: header.len_meta
-        io: _root._io
         if: header.len_meta != 0
       private_data:
+        io: _root._io
         pos: header.ofs_private_data_block
         size: header.len_private_data_block
-        io: _root._io
         if: header.len_private_data_block != 0
   header:
     seq:
@@ -101,9 +101,9 @@ types:
         doc: Checksum of the uncompressed table.
     instances:
       data:
+        io: _root._io
         pos: ofs_data
         type: table_data(len_data)
-        io: _root._io
   table_data:
     params:
       - id: len_data

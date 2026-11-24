@@ -1,7 +1,7 @@
 meta:
   id: checksum_simple_additive_u1
-  license: Unlicense
   title: Computes a simple additive checksum
+  license: Unlicense
   endian: le
 doc: |
   assert calcChecksum(0xFF, b"abcde") == 238

@@ -1,8 +1,6 @@
 meta:
   id: cbor
   title: Concise Binary Object Representation
-  endian: be
-  license: Unlicense
   xref:
     mime: application/cbor
     rfc:
@@ -11,6 +9,8 @@ meta:
       - 8610
       - 8392
     wikidata: Q28455556
+  license: Unlicense
+  endian: be
 doc: |
   A binary format capable of serialization of superset of JSON.
 seq:
@@ -96,9 +96,9 @@ types:
       - id: length_obj
         type: cuint(ib)
       - id: value
-        type: str
-        encoding: utf-8
         size: length
+        type: str
+        encoding: UTF-8
         doc: No escaping is used.
     instances:
       length:

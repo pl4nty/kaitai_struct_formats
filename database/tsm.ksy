@@ -46,9 +46,9 @@ types:
           - id: key_len
             type: u2
           - id: key
+            size: key_len
             type: str
             encoding: UTF-8
-            size: key_len
           - id: type
             type: u1
           - id: entry_count
@@ -71,6 +71,12 @@ types:
               - id: block_size
                 type: u4
 
+            instances:
+              block:
+                io: _root._io
+                pos: block_offset
+                type: block_entry
+
             types:
               block_entry:
                 seq:
@@ -78,9 +84,3 @@ types:
                     type: u4
                   - id: data
                     size: _parent.block_size - 4
-
-            instances:
-              block:
-                io: _root._io
-                pos: block_offset
-                type: block_entry

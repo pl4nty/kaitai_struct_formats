@@ -3,13 +3,13 @@ meta:
   title: Windows registry database
   application: Windows NT and later
   xref:
-    justsolve: Windows_Registry
     forensicswiki: windows_nt_registry_file_(regf)
+    justsolve: Windows_Registry
     wikidata: Q463244
   license: CC0-1.0
-  endian: le
   imports:
     - /windows/windows_filetime
+  endian: le
 doc: |
   This spec allows to parse files used by Microsoft Windows family of
   operating systems to store parts of its "registry". "Registry" is a
@@ -149,10 +149,10 @@ types:
             doc: Unallocated (free) cells are not parsed.
         instances:
           identifier:
-            type: str
-            encoding: iso-8859-1
-            size: 2
             pos: 0
+            size: 2
+            type: str
+            encoding: ISO-8859-1
             -webide-parse-mode: eager
       named_key:
         seq:
@@ -203,9 +203,9 @@ types:
           - id: class_name_size
             type: u2
           - id: key_name
-            type: str
-            encoding: iso-8859-1
             size: key_name_size
+            type: str
+            encoding: ISO-8859-1
         enums:
           nk_flags:
             0x0001: key_is_volatile   # Is volatile key
@@ -223,9 +223,9 @@ types:
       sub_key_list_lh_lf:
         seq:
           - id: signature
-            type: str
             size: 2
-            encoding: ascii
+            type: str
+            encoding: ASCII
           - id: count
             type: u2
           - id: items
@@ -297,7 +297,7 @@ types:
           - id: value_name
             size: value_name_size
             type: str
-            encoding: iso-8859-1
+            encoding: ISO-8859-1
             if: "flags == vk_flags::value_comp_name"
         enums:
           data_type_enum:

@@ -1,11 +1,11 @@
 meta:
   id: fbx
   title: Kaydara FBX (Filmbox) 3D model
-  file-extension: fbx
   application: Autodesk/Kaydara Filmbox
+  file-extension: fbx
+  license: MIT
   encoding: UTF-8
   endian: le
-  license: MIT
 
 doc: |
   A proprietary file format developed by Kaydara and owned by Autodesk
@@ -17,8 +17,8 @@ seq:
   - id: header
     type: header
   - id: records
-    type: node_records(27)
     size: _io.size - (27 + 168)
+    type: node_records(27)
   - id: footer
     type: footer
 
@@ -27,12 +27,12 @@ types:
   header:
     seq:
       - id: magic
+        size: 21
         type: strz
         valid: '"Kaydara FBX Binary  "'
-        size: 21
       - id: more_magic
-        valid: '[0x1A, 0x00]'
         size: 2
+        valid: '[0x1A, 0x00]'
       - id: version
         type: u4
 
@@ -65,14 +65,14 @@ types:
       - id: name_length
         type: u1
       - id: name
-        type: str
         size: name_length
+        type: str
       - id: attributes
         size: attribute_list_length
         type: attributes(attribute_count)
       - id: children
-        type: node_records(children_offset)
         size: end_offset - children_offset
+        type: node_records(children_offset)
         if: 'end_offset > children_offset'
     instances:
       children_offset:
@@ -121,8 +121,8 @@ types:
       - id: length
         type: u4
       - id: value
-        type: str
         size: length
+        type: str
     -webide-representation: '{value}'
   
   raw_binary_data:
@@ -149,12 +149,12 @@ types:
       - id: elements
         # Can't switch for process, so switch for type as a workaround.
         -affected-by: 374
+        size: compressed_size
         type:
           switch-on: encoding
           cases:
             0: array_data(pseudo_type, element_count)
             1: array_data_compressed(pseudo_type, element_count)
-        size: compressed_size
 
   array_data_compressed:
     params:
@@ -165,9 +165,9 @@ types:
         type: u4
     seq:
       - id: data
+        size-eos: true
         type: array_data(pseudo_type, element_count)
         process: zlib
-        size-eos: true
     instances:
       elements:
         value: data.elements

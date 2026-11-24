@@ -54,13 +54,14 @@ instances:
     doc: A special archive member that holds a list of long names used by other archive members. (Optional, only present if the archive has members with long names.)
 types:
   regular_member_name:
+    doc: A regular (or "short") member name, stored directly in the name field.
     seq:
       - id: name
         terminator: 0x2f
         pad-right: 0x20
         doc: The member name, terminated by a slash, and right-padded with spaces.
-    doc: A regular (or "short") member name, stored directly in the name field.
   long_member_name:
+    doc: A long member name, stored as a reference into the long name list.
     seq:
       - id: slash
         contents: "/"
@@ -73,14 +74,13 @@ types:
         pos: offset.value
         terminator: 0x2f
         doc: The member name stored in the long name list, terminated by a slash.
-    doc: A long member name, stored as a reference into the long name list.
   special_member_name:
+    doc: A "special" member name that does not follow the usual format. This kind of name is used for special members that do not represent a normal file, such as the symbol table (named "/", or on 64-bit Solaris "/SYM64/") and the long name list (named "//").
     seq:
       - id: name
         terminator: 0x20
         pad-right: 0x20
         doc: The member name, as a byte array, right-padded using ASCII spaces.
-    doc: A "special" member name that does not follow the usual format. This kind of name is used for special members that do not represent a normal file, such as the symbol table (named "/", or on 64-bit Solaris "/SYM64/") and the long name list (named "//").
   member_name:
     seq:
       - id: raw
@@ -110,11 +110,12 @@ types:
             1: long_member_name
             2: special_member_name
   member_data:
+    doc: Dummy type representing a member's data. This type is used instead of a normal byte array to allow "looking into" it using instances (this is needed to handle long member names).
     seq:
       - id: data
         size-eos: true
-    doc: Dummy type representing a member's data. This type is used instead of a normal byte array to allow "looking into" it using instances (this is needed to handle long member names).
   member:
+    doc: An archive member's header and data.
     seq:
       - id: name_internal
         -orig-id: ar_name
@@ -133,8 +134,8 @@ types:
         contents: "`\n"
         doc: Marks the end of the header.
       - id: data_internal
-        type: member_data
         size: size
+        type: member_data
         doc: Internal helper field, do not use directly, use the `data` instance instead.
       - id: padding
         contents: "\n"
@@ -156,4 +157,3 @@ types:
       data:
         value: data_internal.data
         doc: The member's data.
-    doc: An archive member's header and data.

@@ -22,9 +22,9 @@ seq:
     type: tz_struct(false)
   - id: v2_struct
     type: tz_struct(true)
-    if: version >= 2
     valid:
       expr: '_.header.ver_byte == _root.v1_struct.header.ver_byte'
+    if: version >= 2
   - id: v2_footer
     type: tz_footer
     if: version >= 2
@@ -298,9 +298,9 @@ types:
         contents: [0x0a]
       - id: tz_string
         type: str
-        encoding: ASCII
         terminator: 0x0a
         consume: false
+        encoding: ASCII
         doc: |
           The string is either empty or is a POSIX-style TZ string specifying
           the rule for computing local time changes after the last transition

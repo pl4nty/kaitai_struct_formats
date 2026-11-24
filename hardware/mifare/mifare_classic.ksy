@@ -9,12 +9,12 @@ meta:
   license: BSD-2-Clause
   ks-version: 0.9
   endian: le
-doc-ref: |
-  https://github.com/nfc-tools/libnfc
-  https://www.nxp.com/docs/en/data-sheet/MF1S70YYX_V1.pdf
 doc: |
   You can get a dump for testing from this link:
   <https://github.com/zhovner/mfdread/raw/master/dump.mfd>
+doc-ref: |
+  https://github.com/nfc-tools/libnfc
+  https://www.nxp.com/docs/en/data-sheet/MF1S70YYX_V1.pdf
 seq:
   - id: sectors
     size: ((_index >= 32)?4:1)*4*16 #sorry for this doubling of `block_size` (16), but we need `sector` be self-sufficient so we cannot use _root there
@@ -46,13 +46,13 @@ types:
       data:
         value: data_filler.data
       blocks:
-        pos: 0
         io: data_filler._io
+        pos: 0
         size: block_size
         repeat: eos
       values:
-        pos: 0
         io: data_filler._io
+        pos: 0
         type: values
     types:
       values:
@@ -142,9 +142,9 @@ types:
         instances:
           remaps:
             pos: 0
+            type: chunk_bit_remap(_index)
             repeat: expr
             repeat-expr: _parent.ac_bits
-            type: chunk_bit_remap(_index)
           chunks:
             pos: 0
             type: valid_chunk(raw_chunks[remaps[_index].inv_chunk_no], raw_chunks[remaps[_index].chunk_no])
@@ -192,9 +192,9 @@ types:
             instances:
               bits:
                 pos: 0
+                type: ac_bit(index, _parent.chunks[_index].chunk)
                 repeat: expr
                 repeat-expr: _parent._parent.ac_bits
-                type: ac_bit(index, _parent.chunks[_index].chunk)
 
               val:
                 value: (bits[2].n << 2) | (bits[1].n << 1) | bits[0].n

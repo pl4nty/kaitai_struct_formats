@@ -64,12 +64,12 @@ types:
     params:
       - id: advance_size
         type: u4
-    instances:
-      aligned_size:
-        value: ((advance_size + 3) & ~(3))
     seq:
       - id: padding
         size: aligned_size - advance_size
+    instances:
+      aligned_size:
+        value: ((advance_size + 3) & ~(3))
 
   # PickleIterator::ReadString()
   cr_string:

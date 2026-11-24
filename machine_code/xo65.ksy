@@ -2,7 +2,7 @@ meta:
   id: xo65
   title: xo65 object file
   license: CC0-1.0
-  encoding: ascii
+  encoding: ASCII
   endian: le
 doc: |
   xo65 is an object format used by the cc65 compiler: <https://cc65.github.io/>

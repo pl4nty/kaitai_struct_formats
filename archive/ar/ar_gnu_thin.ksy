@@ -41,6 +41,7 @@ instances:
     doc: A special archive member that holds a list of long names used by other archive members. (Optional, only present if the archive has members with long names.)
 types:
   long_member_name:
+    doc: A long member name (actually a relative path), stored as a reference into the long name list.
     seq:
       - id: slash
         contents: "/"
@@ -54,14 +55,13 @@ types:
         # The terminator is actually a slash followed by a newline, but multi-character terminators are not supported by Kaitai, and it's very unlikely that a path will contain a newline.
         terminator: 0x0a
         doc: The member name (actually a relative path) stored in the long name list, terminated by a slash and a newline. For technical reasons, includes the terminating slash (but not the newline).
-    doc: A long member name (actually a relative path), stored as a reference into the long name list.
   special_member_name:
+    doc: A "special" member name that does not follow the usual format. This kind of name is used for special members that do not represent a normal file, such as the symbol table (named "/") and the long name list (named "//").
     seq:
       - id: name
         terminator: 0x20
         pad-right: 0x20
         doc: The member name, as a byte array, right-padded using ASCII spaces.
-    doc: A "special" member name that does not follow the usual format. This kind of name is used for special members that do not represent a normal file, such as the symbol table (named "/") and the long name list (named "//").
   member_name:
     seq:
       - id: raw
@@ -88,11 +88,12 @@ types:
             true: long_member_name
             false: special_member_name
   member_data:
+    doc: Dummy type representing a member's data. This type is used instead of a normal byte array to allow "looking into" it using instances (this is needed to handle long member names).
     seq:
       - id: data
         size-eos: true
-    doc: Dummy type representing a member's data. This type is used instead of a normal byte array to allow "looking into" it using instances (this is needed to handle long member names).
   member:
+    doc: An archive member's header and data.
     seq:
       - id: name_internal
         -orig-id: ar_name
@@ -111,8 +112,8 @@ types:
         contents: "`\n"
         doc: Marks the end of the header.
       - id: data_internal
-        type: member_data
         size: size
+        type: member_data
         if: not name_internal.is_long
         doc: Internal helper field, do not use directly, use the `data` instance instead.
       - id: padding
@@ -133,4 +134,3 @@ types:
         value: data_internal.data
         if: not name_internal.is_long
         doc: The member's data. Only present for special members.
-    doc: An archive member's header and data.

@@ -2,8 +2,8 @@ meta:
   id: bios32
   title: legacy BIOS
   application: x86 architecture
-  endian: le
   license: Unlicense
+  endian: le
 doc-ref: http://bos.asmhackers.net/docs/pci/docs/bios32.pdf
 seq:
   - id: entry_point

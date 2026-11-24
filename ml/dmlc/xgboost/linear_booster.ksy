@@ -3,11 +3,11 @@ meta:
   title: xgboost linear booster
   application: xgboost
   license: Apache-2.0
-  endian: le # in fact machine-endian
-  encoding: ascii
   imports:
     - ../core/pas_str
     - ../core/f4_arr
+  encoding: ASCII
+  endian: le # in fact machine-endian
   -orig-id: GBLinearModel
 doc: gradient boosted linear model
 doc-ref:
@@ -48,8 +48,8 @@ types:
           lower bound: 1
           default: 1
       - id: reserved
-        type: reserved
         size: 32*4
+        type: reserved
   train_param:
     doc-ref: https://github.com/dmlc/xgboost/blob/master/src/gbm/gblinear.cc#L25L46
     -orig-id: GBLinearTrainParam

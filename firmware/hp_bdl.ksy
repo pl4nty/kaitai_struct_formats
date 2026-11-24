@@ -2,8 +2,8 @@ meta:
   id: hp_bdl
   title: HP BDL firmware
   license: MIT
-  endian: le
   encoding: UTF-8
+  endian: le
 doc-ref:
   - https://github.com/tylerwhall/hpbdl
   - https://github.com/onekey-sec/unblob/blob/1521c2f9280f35e46bd11ed97f07d41e8d522c4e/python/unblob/handlers/archive/hp/bdl.py
@@ -11,6 +11,10 @@ doc-ref:
 seq:
   - id: header
     type: header
+instances:
+  file_offset_table:
+    pos: header.ofs_toc
+    type: toc(header.num_toc_entries)
 types:
   header:
     seq:
@@ -118,7 +122,3 @@ types:
           data:
             pos: ofs_data
             size: len_data
-instances:
-  file_offset_table:
-    pos: header.ofs_toc
-    type: toc(header.num_toc_entries)

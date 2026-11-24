@@ -32,8 +32,8 @@ seq:
       max: 32
   - id: policydb
     -orig-id: policydb_str
-    type: str
     size: len_policydb
+    type: str
     valid:
       expr: '(magic == magics::kernel and (_ == "SE Linux" or _ == "XenFlask")) or (magic == magics::module and _ == "SE Linux Module")'
   - id: policy_type
@@ -164,16 +164,16 @@ types:
         valid:
           min: 1
       - id: name
-        type: str
         size: len_name
+        type: str
       - id: len_version
         -orig-id: len # again
         type: u4
         valid:
           min: 1
       - id: version
-        type: str
         size: len_version
+        type: str
 
   extensible_bitmap:
     doc-ref: https://github.com/SELinuxProject/selinux/blob/820f019e/libsepol/src/ebitmap.c#L539 ebitmap_read
@@ -355,8 +355,8 @@ types:
         -orig-id: nel
         type: u4
       - id: key
-        type: str
         size: len_key
+        type: str
       - id: permissions
         type: permission
         repeat: expr
@@ -373,8 +373,8 @@ types:
       - id: value
         type: u4
       - id: key
-        type: str
         size: len_key
+        type: str
 
   class:
     doc-ref: https://github.com/SELinuxProject/selinux/blob/820f019e/libsepol/src/policydb.c#L2241 class_read
@@ -401,12 +401,12 @@ types:
         -orig-id: ncons
         type: u4
       - id: key
-        type: str
         size: len_key
+        type: str
       - id: common_key
         -orig-id: comkey
-        type: str
         size: len_common_key
+        type: str
         if: len_common_key > 0
       - id: permissions
         type: permission
@@ -519,8 +519,8 @@ types:
         type: u4
         if: '_root.boundary_feature'
       - id: key
-        type: str
         size: len_key
+        type: str
       - id: dominates
         type: extensible_bitmap
       - id: types_eb
@@ -568,8 +568,8 @@ types:
         type: extensible_bitmap
         if: '_root.type_ != policy_types::kernel'
       - id: key
-        type: str
         size: len_key
+        type: str
 
   type_set:
     seq:
@@ -594,8 +594,8 @@ types:
         type: u4
         if: _root.boundary_feature
       - id: key
-        type: str
         size: len_key
+        type: str
       - id: roles_eb
         type: extensible_bitmap
         if: '_root.type_ == policy_types::kernel'
@@ -676,8 +676,8 @@ types:
         valid:
           min: 1
       - id: key
-        type: str
         size: len_key
+        type: str
       - id: flags
         type: u4
         if: '(_root.type_ != policy_types::kernel and _root.version >= 14)' 
@@ -694,8 +694,8 @@ types:
       - id: isalias
         type: u4
       - id: key
-        type: str
         size: len_key
+        type: str
       - id: level
         type: mls_level
 
@@ -712,8 +712,8 @@ types:
       - id: isalias
         type: u4
       - id: key
-        type: str
         size: len_key
+        type: str
 
   access_vector_table:
     doc-ref: https://github.com/SELinuxProject/selinux/blob/820f019e/libsepol/src/avtab.c#L591 avtab_read
@@ -775,9 +775,9 @@ types:
         if: '(specified & 0x700) != 0'
       - id: xperms_perms
         type: u4
-        if: '(specified & 0x700) != 0'
         repeat: expr
         repeat-expr: 8
+        if: '(specified & 0x700) != 0'
       - id: data
         type: u4
         if: '(specified & 0x700) == 0'
@@ -968,8 +968,8 @@ types:
         valid:
           min: 1
       - id: name
-        type: str
         size: len_name
+        type: str
       - id: stype
         type: u4
       - id: ttype
@@ -989,8 +989,8 @@ types:
         valid:
           min: 1
       - id: name
-        type: str
         size: len_name
+        type: str
       - id: ttype
         type: u4
       - id: tclass
@@ -1096,10 +1096,10 @@ types:
 
   role_allow_rule_item:
     seq:
-    - id: roles
-      type: role_set
-    - id: new_roles
-      type: role_set
+      - id: roles
+        type: role_set
+      - id: new_roles
+        type: role_set
 
   filename_trans_rule:
     doc-ref: https://github.com/SELinuxProject/selinux/blob/820f019e/libsepol/src/policydb.c#L3837 filename_trans_rule_read
@@ -1119,8 +1119,8 @@ types:
         valid:
           min: 1
       - id: name
-        type: str
         size: len_name
+        type: str
       - id: stypes
         type: type_set
       - id: ttypes
@@ -1191,8 +1191,8 @@ types:
         valid:
           min: 1
       - id: key
-        type: str
         size: len_key
+        type: str
       - id: scope
         type: u4
       - id: num_ids
@@ -1271,8 +1271,8 @@ types:
         valid:
           min: 1
       - id: key
-        type: str
         size: len_key
+        type: str
       - id: context0
         type: context
       - id: context1
@@ -1338,8 +1338,8 @@ types:
         valid:
           min: 1
       - id: name
-        type: str
         size: len_name
+        type: str
       - id: context
         type: context
 
@@ -1408,8 +1408,8 @@ types:
         type: u4
       - id: name
         -orig-id: dev_name
-        type: str
         size: len_name
+        type: str
       - id: context
         type: context
 
@@ -1552,8 +1552,8 @@ types:
         valid:
           min: 1
       - id: name
-        type: str
         size: len_name
+        type: str
       - id: context0
         type: context
 
@@ -1576,8 +1576,8 @@ types:
         valid:
           min: 1
       - id: fstype
-        type: str
         size: len_fstype
+        type: str
       - id: num_elements
         -orig-id: nel2
         type: u4
@@ -1594,8 +1594,8 @@ types:
         valid:
           min: 1
       - id: name
-        type: str
         size: len_name
+        type: str
       - id: sclass
         type: u4
       - id: context0

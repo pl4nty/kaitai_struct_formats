@@ -1,10 +1,10 @@
 meta:
   id: kerberos_pac
   title: Microsoft Kerberos PAC
+  application: Active Directory KDC
   file-extension:
     - pac
     - bin
-  application: Active Directory KDC
   license: MIT
   endian: le
 doc: |
@@ -37,9 +37,9 @@ types:
       - id: buffers
         -orig-id: Buffers
         type: pac_info_buffer
-        if: c_buffers != logon_info_magic_number
         repeat: expr
         repeat-expr: c_buffers
+        if: c_buffers != logon_info_magic_number
         doc: |
           Following the PACTYPE structure is an array of PAC_INFO_BUFFER structures each of
           which defines the type and byte offset to a buffer of the PAC
@@ -71,8 +71,8 @@ types:
         type: u8
     instances:
       buffer:
-        size: cb_buffer_size
         pos: offset
+        size: cb_buffer_size
         type:
           switch-on: ul_type
           cases:
@@ -122,8 +122,8 @@ types:
         -orig-id: ActualCount
         type: u4
       - id: str_body
-        type: str
         size: actual_count * 2
+        type: str
         encoding: UTF-16LE
       - id: str_padding
         type: u2
@@ -273,19 +273,6 @@ types:
     -webide-representation: "low_date_time={low_date_time}, high_date_time={high_date_time}"
   kerb_validation_info:
     doc: "See [MS-PAC] 2.5 KERB_VALIDATION_INFO"
-    instances:
-      netlogon_extra_sids_user_flag:
-        value: 0x20
-        doc: |
-          Indicates that the ExtraSids field is populated and contains additional SIDs
-          A flag (bit) of UserFlags field (KERB_VALIDATION_INFO structure)
-          [MS-PAC] 2.5 KERB_VALIDATION_INFO
-      netlogon_resource_groups_user_flag:
-        value: 0x200
-        doc: |
-          Indicates that the ResourceGroupIds field is populated
-          A flag (bit) of UserFlags field (KERB_VALIDATION_INFO structure)
-          [MS-PAC] 2.5 KERB_VALIDATION_INFO
     seq:
       - id: common_header
         type: common_type_header
@@ -462,6 +449,19 @@ types:
         -orig-id: ResourceGroupIds
         type: rpc_resource_group_ids
         if: (user_flags & netlogon_resource_groups_user_flag != 0) and (resource_group_count > 0)
+    instances:
+      netlogon_extra_sids_user_flag:
+        value: 0x20
+        doc: |
+          Indicates that the ExtraSids field is populated and contains additional SIDs
+          A flag (bit) of UserFlags field (KERB_VALIDATION_INFO structure)
+          [MS-PAC] 2.5 KERB_VALIDATION_INFO
+      netlogon_resource_groups_user_flag:
+        value: 0x200
+        doc: |
+          Indicates that the ResourceGroupIds field is populated
+          A flag (bit) of UserFlags field (KERB_VALIDATION_INFO structure)
+          [MS-PAC] 2.5 KERB_VALIDATION_INFO
   pac_client_info:
     doc: "See [MS-PAC] 2.7 PAC_CLIENT_INFO"
     seq:
@@ -475,8 +475,8 @@ types:
         doc: An unsigned 16-bit integer in little-endian format that specifies the length, in bytes, of the Name field
       - id: name
         -orig-id: Name
-        type: str
         size: name_length
+        type: str
         encoding: UTF-16LE
         doc: An array of 16-bit Unicode characters in little-endian format that contains the client's account name
   upn_dns_info:
@@ -501,14 +501,14 @@ types:
       - id: padding1
         size: upn_offset - 8
       - id: upn
-        type: str
         size: upn_length
+        type: str
         encoding: UTF-16LE
       - id: padding2
         size: dns_domain_name_offset - upn_offset - upn_length
       - id: dns_domain_name
-        type: str
         size: dns_domain_name_length
+        type: str
         encoding: UTF-16LE
   pac_signature_data:
     doc: "See [MS-PAC] 2.8 PAC_SIGNATURE_DATA"

@@ -13,8 +13,8 @@ meta:
     pronom: fmt/323
     wikidata: Q376852
   license: Unlicense
+  encoding: UTF-8
   endian: le
-  encoding: utf-8
 doc: |
   XM (standing for eXtended Module) is a popular module music file
   format, that was introduced in 1994 in FastTracker2 by Triton demo
@@ -97,10 +97,10 @@ types:
         type: u2
       - id: pattern_order_table
         type: u1
-        doc: "max 256"
         repeat: expr
         #repeat-expr: song_length
         repeat-expr: 256
+        doc: "max 256"
   flags:
     seq:
       - id: reserved
@@ -121,24 +121,24 @@ types:
             type: u4
             doc: Pattern header length
           - id: main
-            type: header_main
             size: header_length - 4
+            type: header_main
         types:
           header_main:
             seq:
-                - id: packing_type
-                  type: u1
-                  doc: Packing type (always 0)
-                - id: num_rows_raw
-                  type:
-                    switch-on: _root.preheader.version_number.value
-                    cases:
-                      0x0102: u1
-                      _: u2
-                  doc: Number of rows in pattern (1..256)
-                - id: len_packed_pattern
-                  type: u2
-                  doc: Packed pattern data size
+              - id: packing_type
+                type: u1
+                doc: Packing type (always 0)
+              - id: num_rows_raw
+                type:
+                  switch-on: _root.preheader.version_number.value
+                  cases:
+                    0x0102: u1
+                    _: u2
+                doc: Number of rows in pattern (1..256)
+              - id: len_packed_pattern
+                type: u2
+                doc: Packed pattern data size
             instances:
               num_rows:
                 value: 'num_rows_raw + (_root.preheader.version_number.value == 0x0102 ? 1 : 0)'

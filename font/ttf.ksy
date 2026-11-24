@@ -46,9 +46,9 @@ types:
     -webide-representation: '{tag} [{length:dec}b]: {value}'
     seq:
       - id: tag
-        type: str
         size: 4
-        encoding: ascii
+        type: str
+        encoding: ASCII
       - id: checksum
         type: u4
       - id: offset
@@ -104,9 +104,9 @@ types:
             type: u4
         instances:
           table:
-            type: subtable
             io: _parent._io
             pos: subtable_offset
+            type: subtable
             -webide-parse-mode: eager
       subtable:
         seq:
@@ -142,8 +142,8 @@ types:
               - id: length
                 type: u2
               - id: body
-                type: body
                 size: length - length._sizeof - _parent.format._sizeof
+                type: body
             types:
               body:
                 seq:
@@ -156,8 +156,8 @@ types:
               - id: length
                 type: u2
               - id: body
-                type: body
                 size: length - length._sizeof - _parent.format._sizeof
+                type: body
             types:
               body:
                 seq:
@@ -173,8 +173,8 @@ types:
               - id: length
                 type: u2
               - id: body
-                type: delta_body
                 size: length - length._sizeof - _parent.format._sizeof
+                type: delta_body
             types:
               delta_body:
                 seq:
@@ -218,8 +218,8 @@ types:
               - id: length
                 type: u2
               - id: body
-                type: body
                 size: length - length._sizeof - _parent.format._sizeof
+                type: body
             types:
               body:
                 seq:
@@ -242,8 +242,8 @@ types:
               - id: length
                 type: u4
               - id: body
-                type: body
                 size: length - length._sizeof - reserved._sizeof - _parent.format._sizeof
+                type: body
             types:
               body:
                 seq:
@@ -265,8 +265,8 @@ types:
               - id: length
                 type: u4
               - id: body
-                type: body
                 size: length - length._sizeof - reserved._sizeof - _parent.format._sizeof
+                type: body
             types:
               body:
                 seq:
@@ -292,8 +292,8 @@ types:
               - id: length
                 type: u4
               - id: body
-                type: body
                 size: length - length._sizeof - _parent.format._sizeof
+                type: body
             types:
               body:
                 seq:
@@ -533,26 +533,12 @@ types:
             type: u4
         instances:
           body:
-            type: tuple_variation_store_header
-            parent: _parent
             pos: '_parent.glyph_variation_data_array_offset + (_parent.glyph_variation_data_offsets[index] * (_parent.long_offsets ? 1 : 2))'
+            parent: _parent
             size: '(_parent.glyph_variation_data_offsets[index + 1] - _parent.glyph_variation_data_offsets[index]) * (_parent.long_offsets ? 1 : 2)'
+            type: tuple_variation_store_header
             -webide-parse-mode: eager
   head:
-    enums:
-      flags:
-        0x01: baseline_at_y0            # Bit 0 - baseline for font at y=0
-        0x02: left_sidebearing_at_x0    # Bit 1 - left sidebearing at x=0
-        0x04: flag_depend_on_point_size # Bit 2 - instructions may depend on point size
-        0x08: flag_force_ppem           # Bit 3 - force ppem to integer values for all internal scaler math;
-                                        #         may use fractional ppem sizes if this bit is clear
-        0x10: flag_may_advance_width    # Bit 4 - instructions may alter advance width (the advance widths might not scale linearly)
-      font_direction_hint:
-        0: fully_mixed_directional_glyphs
-        1: only_strongly_left_to_right
-        2: strongly_left_to_right_and_neutrals
-        #-1: only_strongly_right_to_left
-        #-2: strongly_right_to_left_and_neutrals
     seq:
       - id: version
         type: fixed
@@ -590,6 +576,20 @@ types:
         type: s2
       - id: glyph_data_format
         type: s2
+    enums:
+      flags:
+        0x01: baseline_at_y0            # Bit 0 - baseline for font at y=0
+        0x02: left_sidebearing_at_x0    # Bit 1 - left sidebearing at x=0
+        0x04: flag_depend_on_point_size # Bit 2 - instructions may depend on point size
+        0x08: flag_force_ppem           # Bit 3 - force ppem to integer values for all internal scaler math;
+                                        #         may use fractional ppem sizes if this bit is clear
+        0x10: flag_may_advance_width    # Bit 4 - instructions may alter advance width (the advance widths might not scale linearly)
+      font_direction_hint:
+        0: fully_mixed_directional_glyphs
+        1: only_strongly_left_to_right
+        2: strongly_left_to_right_and_neutrals
+        #-1: only_strongly_right_to_left
+        #-2: strongly_right_to_left_and_neutrals
   hhea:
     seq:
       - id: version
@@ -629,8 +629,165 @@ types:
         type: u2
   os2:
     doc: 'The OS/2 table consists of a set of metrics that are required by Windows and OS/2.'
+    seq:
+      - id: version
+        type: u2
+        doc: 'The version number for this OS/2 table.'
+      - id: x_avg_char_width
+        type: s2
+        doc: >
+          The Average Character Width parameter specifies the arithmetic average of the escapement (width)
+          of all of the 26 lowercase letters a through z of the Latin alphabet and the space character.
+          If any of the 26 lowercase letters are not present, this parameter should equal the weighted average
+          of all glyphs in the font. For non-UGL (platform 3, encoding 0) fonts, use the unweighted average.
+      - id: weight_class
+        type: u2
+        enum: weight_class
+        doc: >
+          Indicates the visual weight (degree of blackness or thickness of strokes)
+          of the characters in the font.
+      - id: width_class
+        type: u2
+        enum: width_class
+        doc: >
+          Indicates a relative change from the normal aspect ratio (width to height ratio)
+          as specified by a font designer for the glyphs in a font.
+      - id: fs_type
+        type: s2
+        enum: fs_type
+        doc: >
+          Indicates font embedding licensing rights for the font.
+          Embeddable fonts may be stored in a document.
+          When a document with embedded fonts is opened on a system that does
+          not have the font installed (the remote system), the embedded font
+          may be loaded for temporary (and in some cases, permanent) use on that
+          system by an embedding-aware application. Embedding licensing rights are
+          granted by the vendor of the font.
+      - id: y_subscript_x_size
+        type: s2
+        doc: 'The recommended horizontal size in font design units for subscripts for this font.'
+      - id: y_subscript_y_size
+        type: s2
+        doc: 'The recommended vertical size in font design units for subscripts for this font.'
+      - id: y_subscript_x_offset
+        type: s2
+        doc: 'The recommended horizontal offset in font design untis for subscripts for this font.'
+      - id: y_subscript_y_offset
+        type: s2
+        doc: 'The recommended vertical offset in font design units from the baseline for subscripts for this font.'
+      - id: y_superscript_x_size
+        type: s2
+        doc: 'The recommended horizontal size in font design units for superscripts for this font.'
+      - id: y_superscript_y_size
+        type: s2
+        doc: 'The recommended vertical size in font design units for superscripts for this font.'
+      - id: y_superscript_x_offset
+        type: s2
+        doc: 'The recommended horizontal offset in font design units for superscripts for this font.'
+      - id: y_superscript_y_offset
+        type: s2
+        doc: 'The recommended vertical offset in font design units from the baseline for superscripts for this font.'
+      - id: y_strikeout_size
+        type: s2
+        doc: 'Width of the strikeout stroke in font design units.'
+      - id: y_strikeout_position
+        type: s2
+        doc: 'The position of the strikeout stroke relative to the baseline in font design units.'
+      - id: s_family_class
+        type: s2
+        doc: 'This parameter is a classification of font-family design.'
+      - id: panose
+        type: panose
+      - id: unicode_range
+        type: unicode_range
+      - id: ach_vend_id
+        size: 4
+        type: str
+        encoding: ASCII
+        doc: 'The four character identifier for the vendor of the given type face.'
+      - id: selection
+        type: u2
+        enum: fs_selection
+        doc: 'Contains information concerning the nature of the font patterns'
+      - id: first_char_index
+        type: u2
+        doc: 'The minimum Unicode index (character code) in this font, according to the cmap subtable for platform ID 3 and encoding ID 0 or 1.'
+      - id: last_char_index
+        type: u2
+        doc: 'The maximum Unicode index (character code) in this font, according to the cmap subtable for platform ID 3 and encoding ID 0 or 1.'
+      - id: typo_ascender
+        type: s2
+        doc: 'The typographic ascender for this font.'
+      - id: typo_descender
+        type: s2
+        doc: 'The typographic descender for this font.'
+      - id: typo_line_gap
+        type: s2
+        doc: 'The typographic line gap for this font.'
+      - id: win_ascent
+        type: u2
+        doc: 'The ascender metric for Windows.'
+      - id: win_descent
+        type: u2
+        doc: 'The descender metric for Windows.'
+      - id: code_page_range
+        type: code_page_range
+        if: version >= 1
+        doc: 'This field is used to specify the code pages encompassed by the font file in the `cmap` subtable for platform 3, encoding ID 1 (Microsoft platform).'
+      - id: x_height
+        type: u2
+        if: version >= 2
+      - id: cap_height
+        type: u2
+        if: version >= 2
+      - id: default_char
+        type: u2
+        if: version >= 2
+      - id: break_char
+        type: u2
+        if: version >= 2
+      - id: max_context
+        type: u2
+        if: version >= 2
+      - id: lower_optical_point_size
+        type: u2
+        if: version >= 5
+      - id: upper_optical_point_size
+        type: u2
+        if: version >= 5
     types:
       panose:
+        seq:
+          - id: family_type
+            type: u1
+            enum: family_kind
+          - id: serif_style
+            type: u1
+            enum: serif_style
+          - id: weight
+            type: u1
+            enum: weight
+          - id: proportion
+            type: u1
+            enum: proportion
+          - id: contrast
+            type: u1
+            enum: contrast
+          - id: stroke_variation
+            type: u1
+            enum: stroke_variation
+          - id: arm_style
+            type: u1
+            enum: arm_style
+          - id: letter_form
+            type: u1
+            enum: letter_form
+          - id: midline
+            type: u1
+            enum: midline
+          - id: x_height
+            type: u1
+            enum: x_height
         enums:
           family_kind:
             0: any
@@ -755,37 +912,6 @@ types:
             5: ducking_small
             6: ducking_standard
             7: ducking_large
-        seq:
-          - id: family_type
-            type: u1
-            enum: family_kind
-          - id: serif_style
-            type: u1
-            enum: serif_style
-          - id: weight
-            type: u1
-            enum: weight
-          - id: proportion
-            type: u1
-            enum: proportion
-          - id: contrast
-            type: u1
-            enum: contrast
-          - id: stroke_variation
-            type: u1
-            enum: stroke_variation
-          - id: arm_style
-            type: u1
-            enum: arm_style
-          - id: letter_form
-            type: u1
-            enum: letter_form
-          - id: midline
-            type: u1
-            enum: midline
-          - id: x_height
-            type: u1
-            enum: x_height
       unicode_range:
         seq:
           - { id: basic_latin, type: b1 }
@@ -939,132 +1065,6 @@ types:
         0x10: strikeout
         0x20: bold
         0x40: regular
-    seq:
-      - id: version
-        type: u2
-        doc: 'The version number for this OS/2 table.'
-      - id: x_avg_char_width
-        type: s2
-        doc: >
-          The Average Character Width parameter specifies the arithmetic average of the escapement (width)
-          of all of the 26 lowercase letters a through z of the Latin alphabet and the space character.
-          If any of the 26 lowercase letters are not present, this parameter should equal the weighted average
-          of all glyphs in the font. For non-UGL (platform 3, encoding 0) fonts, use the unweighted average.
-      - id: weight_class
-        type: u2
-        enum: weight_class
-        doc: >
-          Indicates the visual weight (degree of blackness or thickness of strokes)
-          of the characters in the font.
-      - id: width_class
-        type: u2
-        enum: width_class
-        doc: >
-          Indicates a relative change from the normal aspect ratio (width to height ratio)
-          as specified by a font designer for the glyphs in a font.
-      - id: fs_type
-        type: s2
-        enum: fs_type
-        doc: >
-          Indicates font embedding licensing rights for the font.
-          Embeddable fonts may be stored in a document.
-          When a document with embedded fonts is opened on a system that does
-          not have the font installed (the remote system), the embedded font
-          may be loaded for temporary (and in some cases, permanent) use on that
-          system by an embedding-aware application. Embedding licensing rights are
-          granted by the vendor of the font.
-      - id: y_subscript_x_size
-        type: s2
-        doc: 'The recommended horizontal size in font design units for subscripts for this font.'
-      - id: y_subscript_y_size
-        type: s2
-        doc: 'The recommended vertical size in font design units for subscripts for this font.'
-      - id: y_subscript_x_offset
-        type: s2
-        doc: 'The recommended horizontal offset in font design untis for subscripts for this font.'
-      - id: y_subscript_y_offset
-        type: s2
-        doc: 'The recommended vertical offset in font design units from the baseline for subscripts for this font.'
-      - id: y_superscript_x_size
-        type: s2
-        doc: 'The recommended horizontal size in font design units for superscripts for this font.'
-      - id: y_superscript_y_size
-        type: s2
-        doc: 'The recommended vertical size in font design units for superscripts for this font.'
-      - id: y_superscript_x_offset
-        type: s2
-        doc: 'The recommended horizontal offset in font design units for superscripts for this font.'
-      - id: y_superscript_y_offset
-        type: s2
-        doc: 'The recommended vertical offset in font design units from the baseline for superscripts for this font.'
-      - id: y_strikeout_size
-        type: s2
-        doc: 'Width of the strikeout stroke in font design units.'
-      - id: y_strikeout_position
-        type: s2
-        doc: 'The position of the strikeout stroke relative to the baseline in font design units.'
-      - id: s_family_class
-        type: s2
-        doc: 'This parameter is a classification of font-family design.'
-      - id: panose
-        type: panose
-      - id: unicode_range
-        type: unicode_range
-      - id: ach_vend_id
-        type: str
-        size: 4
-        encoding: ascii
-        doc: 'The four character identifier for the vendor of the given type face.'
-      - id: selection
-        type: u2
-        enum: fs_selection
-        doc: 'Contains information concerning the nature of the font patterns'
-      - id: first_char_index
-        type: u2
-        doc: 'The minimum Unicode index (character code) in this font, according to the cmap subtable for platform ID 3 and encoding ID 0 or 1.'
-      - id: last_char_index
-        type: u2
-        doc: 'The maximum Unicode index (character code) in this font, according to the cmap subtable for platform ID 3 and encoding ID 0 or 1.'
-      - id: typo_ascender
-        type: s2
-        doc: 'The typographic ascender for this font.'
-      - id: typo_descender
-        type: s2
-        doc: 'The typographic descender for this font.'
-      - id: typo_line_gap
-        type: s2
-        doc: 'The typographic line gap for this font.'
-      - id: win_ascent
-        type: u2
-        doc: 'The ascender metric for Windows.'
-      - id: win_descent
-        type: u2
-        doc: 'The descender metric for Windows.'
-      - id: code_page_range
-        type: code_page_range
-        if: version >= 1
-        doc: 'This field is used to specify the code pages encompassed by the font file in the `cmap` subtable for platform 3, encoding ID 1 (Microsoft platform).'
-      - id: x_height
-        type: u2
-        if: version >= 2
-      - id: cap_height
-        type: u2
-        if: version >= 2
-      - id: default_char
-        type: u2
-        if: version >= 2
-      - id: break_char
-        type: u2
-        if: version >= 2
-      - id: max_context
-        type: u2
-        if: version >= 2
-      - id: lower_optical_point_size
-        type: u2
-        if: version >= 5
-      - id: upper_optical_point_size
-        type: u2
-        if: version >= 5
   prep:
     seq:
       - id: instructions
@@ -1074,33 +1074,17 @@ types:
       - id: instructions
         size-eos: true
   kern:
+    seq:
+      - id: version
+        type: u2
+      - id: subtable_count
+        type: u2
+      - id: subtables
+        type: subtable
+        repeat: expr
+        repeat-expr: subtable_count
     types:
       subtable:
-        types:
-          format0:
-            types:
-              kerning_pair:
-                -webide-representation: '{left:dec}+{right:dec}: {value:dec}'
-                seq:
-                  - id: left
-                    type: u2
-                  - id: right
-                    type: u2
-                  - id: value
-                    type: s2
-            seq:
-              - id: pair_count
-                type: u2
-              - id: search_range
-                type: u2
-              - id: entry_selector
-                type: u2
-              - id: range_shift
-                type: u2
-              - id: kerning_pairs
-                type: kerning_pair
-                repeat: expr
-                repeat-expr: pair_count
         seq:
           - id: version
             type: u2
@@ -1121,15 +1105,31 @@ types:
           - id: format0
             type: format0
             if: format == 0
-    seq:
-      - id: version
-        type: u2
-      - id: subtable_count
-        type: u2
-      - id: subtables
-        type: subtable
-        repeat: expr
-        repeat-expr: subtable_count
+        types:
+          format0:
+            seq:
+              - id: pair_count
+                type: u2
+              - id: search_range
+                type: u2
+              - id: entry_selector
+                type: u2
+              - id: range_shift
+                type: u2
+              - id: kerning_pairs
+                type: kerning_pair
+                repeat: expr
+                repeat-expr: pair_count
+            types:
+              kerning_pair:
+                -webide-representation: '{left:dec}+{right:dec}: {value:dec}'
+                seq:
+                  - id: left
+                    type: u2
+                  - id: right
+                    type: u2
+                  - id: value
+                    type: s2
   maxp:
     seq:
       - id: table_version_number
@@ -1186,29 +1186,6 @@ types:
         type: u2
         doc: 'Maximum levels of recursion; 1 for simple components.'
   post:
-    types:
-      format20:
-        types:
-          pascal_string:
-            -webide-representation: "{value}"
-            seq:
-              - id: length
-                type: u1
-              - id: value
-                type: str
-                size: length
-                encoding: ascii
-                if: length != 0
-        seq:
-          - id: number_of_glyphs
-            type: u2
-          - id: glyph_name_index
-            type: u2
-            repeat: expr
-            repeat-expr: number_of_glyphs
-          - id: glyph_names
-            type: pascal_string
-            repeat: eos
     seq:
       - id: format
         type: fixed
@@ -1231,6 +1208,29 @@ types:
       - id: format20
         type: format20
         if: format.major == 2 and format.minor == 0
+    types:
+      format20:
+        seq:
+          - id: number_of_glyphs
+            type: u2
+          - id: glyph_name_index
+            type: u2
+            repeat: expr
+            repeat-expr: number_of_glyphs
+          - id: glyph_names
+            type: pascal_string
+            repeat: eos
+        types:
+          pascal_string:
+            -webide-representation: "{value}"
+            seq:
+              - id: length
+                type: u1
+              - id: value
+                size: length
+                type: str
+                encoding: ASCII
+                if: length != 0
   name:
     doc: |
       Name table is meant to include human-readable string metadata
@@ -1240,6 +1240,21 @@ types:
       The table includes a list of "name records", each of which
       corresponds to a single metadata entry.
     doc-ref: https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6name.html
+    seq:
+      - id: format_selector
+        -orig-id: format
+        type: u2
+      - id: num_name_records
+        -orig-id: count
+        type: u2
+      - id: ofs_strings
+        -orig-id: stringOffset
+        type: u2
+      - id: name_records
+        -orig-id: nameRecord
+        type: name_record
+        repeat: expr
+        repeat-expr: num_name_records
     types:
       name_record:
         -webide-representation: "{ascii_value}"
@@ -1275,36 +1290,21 @@ types:
               the deprecated ISO platform, are UTF-16BE; Macintosh and other
               ISO strings use single-byte encodings.
           ascii_value:
-            type: str
-            size: len_str
-            encoding: ascii
             io: _parent._io
             pos: _parent.ofs_strings + ofs_str
+            size: len_str
+            type: str
+            encoding: ASCII
             if: not is_utf16
             -webide-parse-mode: eager
           unicode_value:
-            type: str
-            size: len_str
-            encoding: utf-16be
             io: _parent._io
             pos: _parent.ofs_strings + ofs_str
+            size: len_str
+            type: str
+            encoding: UTF-16BE
             if: is_utf16
             -webide-parse-mode: eager
-    seq:
-      - id: format_selector
-        -orig-id: format
-        type: u2
-      - id: num_name_records
-        -orig-id: count
-        type: u2
-      - id: ofs_strings
-        -orig-id: stringOffset
-        type: u2
-      - id: name_records
-        -orig-id: nameRecord
-        type: name_record
-        repeat: expr
-        repeat-expr: num_name_records
     enums:
       platforms:
         0: unicode

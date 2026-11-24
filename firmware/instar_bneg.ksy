@@ -2,8 +2,8 @@ meta:
   id: instar_bneg
   title: Instar BNEG
   license: MIT
-  endian: le
   encoding: ASCII
+  endian: le
 doc: |
   An old uClinux based firmware format for IP cameras. Test files:
   - https://wiki.instar.com/en/Downloads/Outdoor_Cameras/IN-2905_V2/

@@ -1,7 +1,7 @@
 meta:
   id: msi
-  endian: le
   license: 0BSD
+  endian: le
 
 doc: Message signaled interrupt PCI capability
 

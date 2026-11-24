@@ -3,9 +3,9 @@ meta:
   title: Quest Soft Player (QSP) Game
   application: Quest Soft Player
   file-extension: qsp
-  endian: le
-  encoding: utf-16le   # in fact "ucs-2le"
   license: Unlicense
+  encoding: UTF-16LE   # in fact "ucs-2le"
+  endian: le
 doc: |
   QSP is a player for text quests written in a QSP language.
 
@@ -79,16 +79,16 @@ types:
 
     instances:
       val:
-        size: placeholder.size
         pos: placeholder.pos
+        size: placeholder.size
         type: str
   wrapped_str:
     doc: just a str wrapped in a type to overcome a bug in KSC
     -affected-by: 503
     seq:
       - id: val
-        type: str
         size-eos: true
+        type: str
   rot5_str:
     -orig-id: $$кодированная строка   # "encoded string", in Russian
     doc: According to the official docs it allows to put multiple lines into a single line.
@@ -99,8 +99,8 @@ types:
       val:
         value: derot.val
       derot:
-        size: placeholder.size
         pos: placeholder.pos
+        size: placeholder.size
         type: wrapped_str
         process: rot(5, 2)
         doc: |

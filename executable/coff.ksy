@@ -5,7 +5,7 @@ meta:
     - dos
   license: CC0-1.0
   ks-version: 0.9
-  encoding: ascii
+  encoding: ASCII
   endian: le
 doc-ref: https://wiki.osdev.org/COFF
 seq:
@@ -84,19 +84,19 @@ types:
         type: u4
     instances:
       section:
+        io: _root._io
         pos: ofs_section
         size: len_section
-        io: _root._io
         if: ofs_section != 0
       relocation_table:
+        io: _root._io
         pos: ofs_relocation_table
         type: relocation_table(num_relocation_entries)
-        io: _root._io
         if: ofs_relocation_table != 0 and num_relocation_entries != 0
       line_number_table:
+        io: _root._io
         pos: ofs_line_number_table
         type: line_number_table(num_line_number_table_entries)
-        io: _root._io
         if: ofs_line_number_table != 0 and num_line_number_table_entries != 0
       is_text:
         value: flags & 0x20 == 0x20
@@ -148,8 +148,8 @@ types:
       - id: len_strings_table
         type: u4
       - id: strings_table
-        type: strings_table
         size: len_strings_table - len_strings_table._sizeof
+        type: strings_table
   strings_table:
     seq:
       - id: strings

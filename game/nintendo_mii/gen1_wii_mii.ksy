@@ -12,11 +12,11 @@ meta:
     - rcd
     - rsd
   xref:
-    wikidata: Q4252
     wiibrew: Mii_Data
+    wikidata: Q4252
   license: AGPL-3.0-or-later
-  bit-endian: be
   endian: be
+  bit-endian: be
 doc: |
   A Mii is a customizable avatar used on several Nintendo video game consoles and mobile apps.
   This is the format used most commonly on the Wii console.
@@ -45,10 +45,10 @@ seq:
     type: b1
     doc: Whether the Mii is a favorite or not.
   - id: mii_name
-    type: str
     size: 20
+    type: str
+    encoding: UTF-16BE
     doc: Mii name. Can be up to 10 characters long.
-    encoding: utf-16be
   - id: body_height
     type: u1
     doc: Body height. Ranges from 0 to 127, short to tall.
@@ -74,14 +74,12 @@ seq:
   - id: facial_feature
     type: b4
     doc: Facial feature. Ranges from 0 to 11.
-  -
-    type: b3
+  - type: b3
     doc: Currently unknown data.
   - id: is_not_mingled
     type: b1
     doc: Whether the Mii was allowed to travel to other consoles via WiiConnect24. 0 = yes, 1 = no.
-  -
-    type: b1
+  - type: b1
     doc: Currently unknown data.
   - id: is_downloaded
     type: b1
@@ -95,20 +93,17 @@ seq:
   - id: is_hair_flipped
     type: b1
     doc: Flip hair. 0 = no, 1 = yes.
-  -
-    type: b5
+  - type: b5
     doc: Currently unknown data.
   - id: eyebrow_type
     type: b5
     doc: Eyebrow type. Ranges from 0 to 23. Not ordered the same as visible in editor.
-  -
-    type: b1
+  - type: b1
     doc: Currently unknown data.
   - id: eyebrow_rotation
     type: b4
     doc: Eyebrow rotation. Ranges from 0 to 11, down to up. Note that some eye types have a default rotation.
-  -
-    type: b6
+  - type: b6
     doc: Currently unknown data.
   - id: eyebrow_color
     type: b3
@@ -124,20 +119,18 @@ seq:
   - id: eye_type
     type: b6
     doc: Eye type. Ranges from 0 to 47. Not ordered the same as visible in editor.
-  -
-    type: b2
+  - type: b2
     doc: Currently unknown data.
   - id: eye_rotation
-    doc: Eye rotation. Ranges from 0 to 7. 
     type: b3
+    doc: Eye rotation. Ranges from 0 to 7. 
   - id: eye_vertical
     type: b5
     doc: Eye Y (vertical) position. Ranges from 0 to 18, high to low.
   - id: eye_color
     type: b3
     doc: Eye color. Ranges from 0 to 5. Not ordered the same as visible in editor.
-  -
-    type: b1
+  - type: b1
     doc: Currently unknown data.
   - id: eye_size
     type: b3
@@ -145,8 +138,7 @@ seq:
   - id: eye_horizontal
     type: b4
     doc: Eye X (horizontal) distance. Ranges from 0 to 12, close to far.
-  -
-    type: b5
+  - type: b5
     doc: Currently unknown data.
   - id: nose_type
     type: b4
@@ -157,8 +149,7 @@ seq:
   - id: nose_vertical
     type: b5
     doc: Nose Y (vertical) position. Ranges from 0 to 18, high to low.
-  -
-    type: b3
+  - type: b3
     doc: Currently unknown data.
   - id: mouth_type
     type: b5
@@ -178,8 +169,7 @@ seq:
   - id: glasses_color
     type: b3
     doc: Glasses color. Ranges from 0 to 5
-  -
-    type: b1
+  - type: b1
     doc: Currently unknown data. When enabled, mii does not appear.
   - id: glasses_size
     type: b3
@@ -214,13 +204,12 @@ seq:
   - id: mole_horizontal
     type: b5
     doc: Beauty mark X (horizontal) position. Ranges from 0 to 16, left to right.
-  -
-    type: b1
+  - type: b1
     doc: Currently unknown data.
   - id: creator_name
-    type: str
     size: 20
-    encoding: utf-16be
+    type: str
+    encoding: UTF-16BE
     doc: Mii creator's name. Can be up to 10 characters long.
   - id: checksum
     type: u2

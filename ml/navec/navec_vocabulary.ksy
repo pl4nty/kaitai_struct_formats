@@ -3,9 +3,9 @@ meta:
   title: navec vocabulary
   license: MIT
   -file-regex: ^vocab\.bin$
+  encoding: UTF-8
   endian: le
   bit-endian: le
-  encoding: utf-8
 
 doc: |
   Vocabulary files of navec word embedding library. Shipped in compressed form, must be decompressed first.
@@ -23,8 +23,8 @@ seq:
     repeat: expr
     repeat-expr: header.count
   - id: words_in_lines
-    type: str
     size-eos: true
+    type: str
     doc: |
       Words splitted by line breaks.
       Count of words must match `header.count`. The 2 last words must be `<unk>` (some vector of non-zeros) and `<pad>` (must have all zeros) in this order.

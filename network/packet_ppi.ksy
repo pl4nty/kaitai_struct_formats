@@ -19,8 +19,8 @@ seq:
   - id: header
     type: packet_ppi_header
   - id: fields
-    type: packet_ppi_fields
     size: header.pph_len - 8 # sizeof(packet_ppi_header)
+    type: packet_ppi_fields
   - id: body
     size-eos: true
     type:
@@ -124,14 +124,14 @@ types:
         doc: RSSI (Received Signal Strength Indication), combined from all active antennas / channels
       - id: rssi_ant_ctl
         type: u1
-        doc: RSSI (Received Signal Strength Indication) for antennas 0-3, control channel
         repeat: expr
         repeat-expr: 4
+        doc: RSSI (Received Signal Strength Indication) for antennas 0-3, control channel
       - id: rssi_ant_ext
         type: u1
-        doc: RSSI (Received Signal Strength Indication) for antennas 0-3, extension channel
         repeat: expr
         repeat-expr: 4
+        doc: RSSI (Received Signal Strength Indication) for antennas 0-3, extension channel
       - id: ext_channel_freq
         type: u2
         doc: Extension channel frequency (MHz)

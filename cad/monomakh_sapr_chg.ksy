@@ -17,9 +17,9 @@ doc: |
   Written and tested by Vladimir Shulzhitskiy, 2017
 seq:
   - id: title
-    type: str
     size: 10
-    encoding: "ascii"
+    type: str
+    encoding: "ASCII"
   - id: ent
     type: block
     repeat: eos
@@ -27,9 +27,9 @@ types:
   block:
     seq:
       - id: header
-        type: str
         size: 13
-        encoding: "ascii"
+        type: str
+        encoding: "ASCII"
       - id: file_size
         type: u8
       - id: file

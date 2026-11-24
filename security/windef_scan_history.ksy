@@ -1,10 +1,10 @@
 meta:
   id: windef_scan_history
-  application: Windows Defender
-  endian: le
   title: Windows Defender scan history file
+  application: Windows Defender
   license: MIT
   ks-version: 0.9
+  endian: le
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
   Scan History files are created by Windows Defender to store metadata about scans that found malware.
@@ -54,9 +54,9 @@ types:
   str_utf16le:
     seq:
       - id: value
+        size-eos: true
         type: str
         encoding: UTF-16LE
-        size-eos: true
   winfiletime:
     seq:
       - id: ts
@@ -83,9 +83,9 @@ types:
       - id: len_name
         type: u4
       - id: name
+        size: 'len_name > 2 ? len_name - 2 : len_name'
         type: str
         encoding: UTF-16LE
-        size: 'len_name > 2 ? len_name - 2 : len_name'
       - id: padding
         size: 2
         if: 'len_name > 2'
@@ -112,9 +112,9 @@ types:
       - id: len_string
         type: u4
       - id: string
+        size: 'len_string > 2 ? len_string - 2 : len_string'
         type: str
         encoding: UTF-16LE
-        size: 'len_string > 2 ? len_string - 2 : len_string'
       - id: padding
         size: 2
         if: 'len_string > 2'

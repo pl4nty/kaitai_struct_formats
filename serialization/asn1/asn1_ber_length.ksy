@@ -1,10 +1,10 @@
 meta:
   id: asn1_ber_length
   title: ASN.1 BER length
-  license: CC0-1.0
   xref:
     justsolve: BER
     wikidata: Q2738854
+  license: CC0-1.0
   
 doc: Basic Encoding Rules (BER) length formatting rules.
 doc-ref: https://en.wikipedia.org/wiki/X.690#BER_encoding X.690 BER encoding
@@ -14,9 +14,9 @@ seq:
     type: u1
   - id: length_long_len_bytes
     type: u1
-    if: (length_short_len_byte >= 0x80)
     repeat: expr
     repeat-expr: length_short_len_byte - 0x80
+    if: (length_short_len_byte >= 0x80)
 instances:
   val_len:
     value: >-

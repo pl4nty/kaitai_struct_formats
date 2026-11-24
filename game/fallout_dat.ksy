@@ -29,8 +29,8 @@ types:
       - id: size
         type: u1
       - id: str
-        type: str
         size: size
+        type: str
         encoding: ASCII
   folder:
     seq:

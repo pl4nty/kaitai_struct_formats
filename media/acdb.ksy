@@ -10,12 +10,12 @@ doc: |
   firmware of several Android devices using a Qualcomm chipset and
   very incomplete as it is a proprietary format.
 seq:
- - id: header
-   type: header
-   size: 32
- - id: data
-   type: data
-   size: header.filesize1
+  - id: header
+    size: 32
+    type: header
+  - id: data
+    size: header.filesize1
+    type: data
 types:
   header:
     seq:
@@ -24,8 +24,8 @@ types:
       - id: reserved1
         contents: [0, 0, 0, 0, 0, 0, 0, 0]
       - id: name
-        type: str
         size: 4
+        type: str
         valid:
           any-of:
             - '"AMDB"'
@@ -47,8 +47,8 @@ types:
   entry:
     seq:
       - id: name
-        type: str
         size: 8
+        type: str
       - id: len_data
         type: u4
       - id: data

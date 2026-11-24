@@ -30,10 +30,10 @@ seq:
     repeat: expr
     repeat-expr: 175
   - id: instrument_names
-    type: str
     size: 32
-    pad-right: 0
+    type: str
     terminator: 0
+    pad-right: 0
     repeat: expr
     repeat-expr: 175
 types:
@@ -47,9 +47,9 @@ types:
         type: u1
         doc: MIDI note for fixed instruments, 0 otherwise
       - id: instruments
+        type: instrument
         repeat: expr
         repeat-expr: 2
-        type: instrument
   instrument:
     seq:
       - id: op1

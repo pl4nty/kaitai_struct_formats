@@ -8,8 +8,8 @@ meta:
       - 9293
     wikidata: Q8803
   license: CC0-1.0
-  endian: be
   ks-version: '0.10'
+  endian: be
 doc: |
   TCP is one of the core Internet protocols on transport layer (AKA
   OSI layer 4), providing stateful connections with error checking,

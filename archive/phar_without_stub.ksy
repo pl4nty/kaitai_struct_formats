@@ -70,8 +70,8 @@ seq:
       as indicated by the file's flags in the manifest). The files are stored
       in the same order as they appear in the manifest.
   - id: signature
-    type: signature
     size-eos: true
+    type: signature
     if: manifest.flags.has_signature
     doc: |
       The archive's signature - a digest of all archive data before
@@ -133,16 +133,16 @@ types:
         doc: The unparsed flag bits.
     instances:
       permissions:
-        value: value & 0x1ff
         -orig-id: PHAR_ENT_PERM_MASK
+        value: value & 0x1ff
         doc: The file's permission bits.
       zlib_compressed:
-        value: (value & 0x1000) != 0
         -orig-id: PHAR_ENT_COMPRESSED_GZ
+        value: (value & 0x1000) != 0
         doc: Whether this file's data is stored using zlib compression.
       bzip2_compressed:
-        value: (value & 0x2000) != 0
         -orig-id: PHAR_ENT_COMPRESSED_BZ2
+        value: (value & 0x2000) != 0
         doc: Whether this file's data is stored using bzip2 compression.
   file_entry:
     seq:
@@ -238,20 +238,20 @@ types:
         doc: The unparsed flag bits.
     instances:
       any_zlib_compressed:
-        value: (value & 0x1000) != 0
         -orig-id: PHAR_HDR_COMPRESSED_GZ
+        value: (value & 0x1000) != 0
         doc: |
           Whether any of the files in this phar are stored using
           zlib compression.
       any_bzip2_compressed:
-        value: (value & 0x2000) != 0
         -orig-id: PHAR_HDR_COMPRESSED_BZ2
+        value: (value & 0x2000) != 0
         doc: |
           Whether any of the files in this phar are stored using
           bzip2 compression.
       has_signature:
-        value: (value & 0x10000) != 0
         -orig-id: PHAR_HDR_SIGNATURE
+        value: (value & 0x10000) != 0
         doc: Whether this phar contains a signature.
   manifest:
     seq:

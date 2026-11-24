@@ -2,7 +2,6 @@ meta:
   id: option_rom
   title: legacy BIOS Option ROM
   application: x86 architecture
-  endian: le
   file-extension:
     - rom
     - bin
@@ -10,6 +9,7 @@ meta:
   license: Unlicense
   imports:
     - /firmware/pci_expansion_rom_header
+  endian: le
 doc: >
   Optionrom is a legacy BIOS module. They are used for various purposes such as initializing devices, providing antibootkit features, boot managers, PXE boot, RAID managers, etc ... These modules are usually stored in PCI device's and motherboard onboard flash memory, retrieved and executed by BIOS when booting.
   There are several ways to obtain them:

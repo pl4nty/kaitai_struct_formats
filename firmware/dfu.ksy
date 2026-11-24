@@ -28,8 +28,8 @@ seq:
     repeat: expr
     repeat-expr: num_targets
   - id: device
-    doc: Firmware version
     type: u2
+    doc: Firmware version
   - id: product
     type: u2
     doc: USB product ID

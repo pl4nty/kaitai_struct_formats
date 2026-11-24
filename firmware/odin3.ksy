@@ -1,8 +1,6 @@
 meta:
   id: odin3
   title: ODIN3
-  license: MIT
-  endian: le
   application:
     - Samsung ODIN3
     - Samsung LOKE
@@ -11,6 +9,8 @@ meta:
     - Thor
   xref:
     wikidata: Q19599499
+  license: MIT
+  endian: le
 doc: |
   [Samsung Odin](https://en.wikipedia.org/wiki/Odin_(firmware_flashing_software)) is a proprietary piece of software developed by Samsung and used to flash firmware into Samsung devices. Odin utility has a Loke counterpart in the device bootloader. This ksy documents the message format of the protocol they talk to each other.
   The protocol was reverse engineered by Benjamin Dobell who have created a MIT-licensed utility Heimdall, on which source code this ksy is based.
@@ -29,6 +29,39 @@ doc-ref:
   - https://github.com/Samsung-Loki/Thor
   - https://github.com/nickelc/wuotan
 
+params:
+  - id: is_loki_to_odin
+    type: bool
+    doc: |
+      direction of the request, set into `true` if incoming to PC
+      `packet.meta.endpoint_number.is_input`
+  - id: was_previous_item_session_initiation
+    type: bool
+    doc: |
+      the previous item was sessio initiation, so we get a response in the format that is different
+      `not packet.meta.endpoint_number.is_input and o.type == odin3.Odin3.PacketType.session and o.content.regular_session.request == odin3.Odin3.Session.Request.begin_session`
+      of the previous packet
+
+seq:
+  - id: type
+    type: u4
+    enum: packet_type
+  - id: content
+    size-eos: true
+    type:
+      switch-on: type
+      cases:
+        packet_type::session: session
+        packet_type::pit_file: pit_file
+        packet_type::file_transfer: file_transfer
+        packet_type::end_session: end_session
+        packet_type::device_information: device_information
+
+instances:
+  odin_handshake_message:
+    contents: [ODIN, 0x00]
+  loke_handshake_message:
+    contents: [LOKE]
 enums:
   reboot_values:
     0x00:
@@ -166,7 +199,7 @@ enums:
       id: send_file_part
       -orig-id:
         - kResponseTypeSendFilePart
-        -
+        -    
         - RESPONSE_TYPE_SEND_FILE_PART
     0x00000064:
       id: session
@@ -195,42 +228,9 @@ enums:
     0x00000069:
       id: device_information
       -orig-id:
-        -
+        -    
         - DeviceInfo
-        -
-
-instances:
-  odin_handshake_message:
-    contents: [ODIN, 0x00]
-  loke_handshake_message:
-    contents: [LOKE]
-
-params:
-  - id: is_loki_to_odin
-    type: bool
-    doc: |
-      direction of the request, set into `true` if incoming to PC
-      `packet.meta.endpoint_number.is_input`
-  - id: was_previous_item_session_initiation
-    type: bool
-    doc: |
-      the previous item was sessio initiation, so we get a response in the format that is different
-      `not packet.meta.endpoint_number.is_input and o.type == odin3.Odin3.PacketType.session and o.content.regular_session.request == odin3.Odin3.Session.Request.begin_session`
-      of the previous packet
-seq:
-  - id: type
-    type: u4
-    enum: packet_type
-  - id: content
-    size-eos: true
-    type:
-      switch-on: type
-      cases:
-        packet_type::session: session
-        packet_type::pit_file: pit_file
-        packet_type::file_transfer: file_transfer
-        packet_type::end_session: end_session
-        packet_type::device_information: device_information
+        -    
 
 types:
   end_session:
@@ -255,15 +255,15 @@ types:
         2:
           id: reboot_bootloader
           -orig-id:
-            -
+            -    
             - OdinReboot
-            -
+            -    
         3:
           id: power_off
           -orig-id:
-            -
+            -    
             - Shutdown
-            -
+            -    
   file_transfer:
     seq:
       - id: request
@@ -397,6 +397,12 @@ types:
     doc-ref:
       - https://github.com/Samsung-Loki/samsung-docs/blob/main/docs/Odin/Session.md # in addition
 
+    seq:
+      - id: quirky_session
+        type: quirky_session
+      - id: regular_session
+        type: regular_session
+
     instances:
       is_quirky_session_response:
         value: _root.is_loki_to_odin and _root.was_previous_item_session_initiation
@@ -430,13 +436,13 @@ types:
           -orig-id:
             - kEnableSomeSortOfFlag
             - OemState
-            -
+            -    
         4:
           id: no_oem_check
           -orig-id:
-            -
+            -    
             - NoOemCheck
-            -
+            -    
         5:
           id: file_part_size
           -orig-id:
@@ -446,9 +452,9 @@ types:
         7:
           id: erase_user_data
           -orig-id:
-            -
+            -    
             - EraseUserdata
-            -
+            -    
         8:
           id: enable_tflash
           -orig-id:
@@ -458,22 +464,16 @@ types:
         9:
           id: set_region
           -orig-id:
-            -
+            -    
             - SetRegionCode
-            -
+            -    
         10:
           id: enable_rtn
           -orig-id:
-            -
+            -    
             - EnableRtn
-            -
+            -    
           doc: make device refurbished?
-
-    seq:
-      - id: quirky_session
-        type: quirky_session
-      - id: regular_session
-        type: regular_session
 
     types:
       quirky_session:
@@ -518,9 +518,9 @@ types:
       set_region:
         seq:
           - id: region
-            type: str
             size: 3
-            encoding: ascii
+            type: str
+            encoding: ASCII
   device_information:
     doc-ref: https://github.com/Samsung-Loki/Thor/blob/18d655064b0a767c3b94d249385b77b536e2a582/TheAirBlow.Thor.Enigma/DeviceInfo.cs
     seq:
@@ -563,6 +563,6 @@ types:
             type: u4
           - id: value
             -orig-id: str
-            type: str
-            encoding: utf-8
             size: size
+            type: str
+            encoding: UTF-8

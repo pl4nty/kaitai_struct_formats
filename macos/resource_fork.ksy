@@ -178,8 +178,8 @@ types:
         type: u2
         doc: Reserved space for the resource file's file reference number.
       - id: file_attributes
-        type: file_attributes
         size: 2
+        type: file_attributes
         doc: The resource file's attributes.
       - id: ofs_type_list
         type: u2
@@ -406,8 +406,8 @@ types:
                       the value of this field is `0xffff`
                       i. e. `-1` truncated to a 16-bit unsigned integer.
                   - id: attributes
-                    type: attributes
                     size: 1
+                    type: attributes
                     doc: Attributes of the resource described by this reference.
                   - id: ofs_data_block
                     type: b24 # 3-byte unsigned integer, packed together with the previous 1-byte field.

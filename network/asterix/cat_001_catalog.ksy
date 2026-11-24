@@ -2,14 +2,14 @@ meta:
   id: cat_001_catalog
   title: Eurocontrol Asterix Category 001 CAT001 data items catalog. Edition 1.0
   license: GPL-3.0-only
-  endian: be
+  ks-version: 0.9
   imports:
     - fixed
     - explicit
     - extended
     - repetitive
     - compound
-  ks-version: 0.9
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.

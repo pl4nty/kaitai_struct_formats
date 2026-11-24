@@ -125,8 +125,8 @@ types:
         type: u2
         doc: Length of the place name string.
       - id: name
-        type: str
         size: length
+        type: str
         encoding: ASCII
   # Connection Pair
   area_id_array:
@@ -231,7 +231,7 @@ types:
         type: u1 # The value is used by the source engine as a number in an unsigned byte, NOT as a bit field!
         enum: visibility_type
         doc: |
-            Determines type of visibility to the bound area. See the `visibility_type` enum for the values.
+          Determines type of visibility to the bound area. See the `visibility_type` enum for the values.
     enums:
       # VisibilityType enum.
       visibility_type:

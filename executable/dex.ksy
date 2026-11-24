@@ -149,7 +149,7 @@ types:
       - id: version_str
         size: 4
         type: strz
-        encoding: ascii
+        encoding: ASCII
       - id: checksum
         type: u4
         doc: |
@@ -273,6 +273,11 @@ types:
           The offset should be to a location in the data section, and the data
           should be in the format specified by "string_data_item" below.
           There is no alignment requirement for the offset.
+    instances:
+      value:
+        pos: string_data_off
+        type: string_data_item
+        -webide-parse-mode: eager
     types:
       string_data_item:
         -webide-representation: "{data}"
@@ -282,12 +287,7 @@ types:
           - id: data
             size: utf16_size.value
             type: str
-            encoding: ascii
-    instances:
-      value:
-        pos: string_data_off
-        type: string_data_item
-        -webide-parse-mode: eager
+            encoding: ASCII
   type_id_item:
     -webide-representation: "{type_name}"
     seq:
@@ -683,20 +683,20 @@ types:
           done on individual ushorts and not on the larger internal structures.
         doc-ref: 'https://source.android.com/devices/tech/dalvik/dalvik-bytecode'
       - id: padding
-        if: tries_size != 0 and ops_size % 2 == 1
         contents:
           - 0x00
           - 0x00
+        if: tries_size != 0 and ops_size % 2 == 1
         doc: |
           Two bytes of padding to make tries four-byte aligned.
 
           This element is only present if tries_size is non-zero and ops_size
           is odd.
       - id: tries
-        if: tries_size != 0
         type: try_item
         repeat: expr
         repeat-expr: tries_size
+        if: tries_size != 0
         doc: |
           Array indicating where in the code exceptions are caught and how to
           handle them.
@@ -706,8 +706,8 @@ types:
 
           This element is only present if tries_size is non-zero.
       - id: handlers
-        if: tries_size != 0
         type: encoded_catch_handler_list
+        if: tries_size != 0
         doc: |
           Bytes representing a list of lists of catch types and associated
           handler addresses.
@@ -774,8 +774,8 @@ types:
           Stream of abs(size) encoded items, one for each caught type, in the
           order that the types should be tested.
       - id: catch_all_addr
-        if: signed_size < 0
         type: vlq_base128_le
+        if: signed_size < 0
         doc: |
           Bytecode address of the catch-all handler.
 

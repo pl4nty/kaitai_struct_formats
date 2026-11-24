@@ -1,7 +1,7 @@
 meta:
   id: vendor
-  endian: le
   license: 0BSD
+  endian: le
 
 doc: Vendor specific PCI capability
 

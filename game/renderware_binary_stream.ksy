@@ -247,14 +247,14 @@ types:
       - id: has_normals
         type: u4
       - id: vertices
+        type: vector_3d
         repeat: expr
         repeat-expr: _parent.num_vertices
-        type: vector_3d
         if: has_vertices != 0
       - id: normals
+        type: vector_3d
         repeat: expr
         repeat-expr: _parent.num_vertices
-        type: vector_3d
         if: has_normals != 0
   sphere:
     seq:

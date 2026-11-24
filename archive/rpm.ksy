@@ -367,14 +367,14 @@ types:
     seq:
       - id: values
         terminator: 0
+        repeat: expr
+        repeat-expr: 1
         doc: |
           Raw NUL-terminated string bytes. If the header has an
           `encoding` tag (added in rpm 4.13) with value "utf-8", they are
           UTF-8, but older packages may contain strings in other
           encodings, typically ISO-8859-1 in changelogs and descriptions,
           so they are not decoded here.
-        repeat: expr
-        repeat-expr: 1
   record_type_bin:
     params:
       - id: len_value
@@ -391,14 +391,14 @@ types:
     seq:
       - id: values
         terminator: 0
+        repeat: expr
+        repeat-expr: num_values
         doc: |
           Raw NUL-terminated string bytes. If the header has an
           `encoding` tag (added in rpm 4.13) with value "utf-8", they are
           UTF-8, but older packages may contain strings in other
           encodings, typically ISO-8859-1 in changelogs and descriptions,
           so they are not decoded here.
-        repeat: expr
-        repeat-expr: num_values
   header_record:
     seq:
       - id: magic

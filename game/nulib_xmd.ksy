@@ -1,10 +1,10 @@
 meta:
   id: nulib_xmd
+  title: XMD Archive
   application: Games with Namco NU library
   file-extension: bin
-  title: XMD Archive
-  endian: le
   license: MIT
+  endian: le
 seq:
   - id: header
     type: xmd_header

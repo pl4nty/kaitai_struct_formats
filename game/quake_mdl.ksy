@@ -205,11 +205,11 @@ types:
       - id: bbox_max
         type: mdl_vertex
       - id: name
-        type: str
         size: 16
-        encoding: ASCII
+        type: str
         terminator: 0x00
         pad-right: 0x00
+        encoding: ASCII
       - id: vertices
         type: mdl_vertex
         repeat: expr

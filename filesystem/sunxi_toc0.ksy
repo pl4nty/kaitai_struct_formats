@@ -2,8 +2,8 @@ meta:
   id: sunxi_toc0
   title: Allwinner (sunxi) TOC0 image
   license: CC-BY-4.0
+  encoding: ASCII
   endian: le
-  encoding: ascii
 
 doc: |
   Allwinner (sunxi) TOC0 images.
@@ -24,6 +24,9 @@ types:
     params:
       - id: alignment
         type: u1
+    seq:
+      - id: padding
+        size: size
     instances:
       minus_1:
         value: alignment - 1
@@ -31,9 +34,6 @@ types:
         value: (_io.pos + minus_1) & ~minus_1
       size:
         value: next - _io.pos
-    seq:
-      - id: padding
-        size: size
 
   header:
     seq:
@@ -44,10 +44,10 @@ types:
       - id: alignment
         type: align_power_of_2(8)
       - id: signature
+        -orig-id: TOC0_MAGIC
         type: u4
         valid:
           eq: 0x89119800
-        -orig-id: TOC0_MAGIC
       - id: checksum
         -orig-id: TOC0_CHECK_SUM
         type: u4
@@ -68,8 +68,8 @@ types:
         doc: Total length of the TOC0 image. This must be a multiple of the storage block size (e.g. 512B or 8KiB).
       - id: boot_device
         -orig-id: TOC0_BOOT_MEDIA
-        doc: The first byte is the boot device, written by SBROM. The meaning of the other three bytes is unknown.
         type: u1
+        doc: The first byte is the boot device, written by SBROM. The meaning of the other three bytes is unknown.
         #enum: boot_device_type
       - id: unkn0
         size: 3
@@ -97,8 +97,8 @@ types:
     seq:
       - id: name
         -orig-id: TOC0_ITEMn_ID
-        type: strz
         size: 64
+        type: strz
       - id: data_offset
         -orig-id: TOC0_ITEMn_OFFSET
         type: u4

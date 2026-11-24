@@ -3,8 +3,8 @@ meta:
   title: Watchguard Fireware web update (Sysa-dl) file format
   file-extension: sysa-dl
   license: MIT
-  endian: be
   encoding: ASCII
+  endian: be
 
 seq:
   - id: fw_header
@@ -57,8 +57,8 @@ types:
         if: is_type2
 
       - id: value
-        type: strz
         size: 'is_type2 ? 0xf : 0x10'
+        type: strz
 
     instances:
       type2_indicator:

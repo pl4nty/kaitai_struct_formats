@@ -21,8 +21,8 @@ doc: |
 doc-ref: https://www.freedesktop.org/wiki/Software/systemd/journal-files/
 seq:
   - id: header
-    type: header
     size: len_header
+    type: header
   - id: objects
     type: journal_object
     repeat: expr

@@ -26,8 +26,8 @@ doc: |
   decoding the stream contents from that one.
 seq:
   - id: pages
-    repeat: eos
     type: page
+    repeat: eos
 types:
   page:
     doc: |
@@ -103,7 +103,7 @@ types:
         doc: |
           Table of lengths of segments.
       - id: segments
+        size: len_segments[_index]
         repeat: expr
         repeat-expr: num_segments
-        size: len_segments[_index]
         doc: Segment content bytes make up the rest of the Ogg page.

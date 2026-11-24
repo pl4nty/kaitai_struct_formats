@@ -1,7 +1,7 @@
 meta:
   id: compound
   license: GPL-3.0-only
-  endian: be
+  ks-version: 0.9
   imports:
     - field_spec
     - fixed
@@ -9,7 +9,7 @@ meta:
     - explicit
     - extended
 
-  ks-version: 0.9
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.
@@ -78,8 +78,8 @@ instances:
 types:
   empty:
     seq:
-    - id: no_val
-      size: 0
+      - id: no_val
+        size: 0
 
     instances:
       tot_size:

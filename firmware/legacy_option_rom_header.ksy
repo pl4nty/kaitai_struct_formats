@@ -2,8 +2,8 @@ meta:
   id: legacy_option_rom_header
   title: Legacy Option ROM header
   application: x86 architecture
-  endian: le
   license: Unlicense
+  endian: le
 doc: >
   Spec:
     Plug and Play BIOS Specification Version 1.0A May 5, 1994, 3.1 Option ROM Header

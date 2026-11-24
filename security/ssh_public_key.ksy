@@ -79,8 +79,8 @@ types:
       - id: len
         type: u4
       - id: value
-        type: str
         size: len
+        type: str
         encoding: ASCII
   bignum2:
     doc: |

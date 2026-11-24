@@ -26,8 +26,8 @@ doc: |
 doc-ref: https://uefi.org/sites/default/files/resources/UEFI_Spec_2_8_final.pdf
 seq:
   - id: var_attributes
-    doc: Attributes of the UEFI variable
     type: efi_var_attr
+    doc: Attributes of the UEFI variable
   - id: signatures
     type: signature_list
     repeat: eos
@@ -36,33 +36,33 @@ types:
     doc-ref: EFI_SIGNATURE_LIST
     seq:
       - id: signature_type
-        doc: Type of the signature as a GUID
         -orig-id: SignatureType
         size: 0x10
+        doc: Type of the signature as a GUID
       - id: len_signature_list
-        doc: Total size of the signature list, including this header
-        type: u4
         -orig-id: SignatureListSize
+        type: u4
+        doc: Total size of the signature list, including this header
       - id: len_signature_header
-        doc: Size of the signature header which precedes the array of signatures
-        type: u4
         -orig-id: SignatureHeaderSize
-      - id: len_signature
-        doc: Size of each signature
         type: u4
+        doc: Size of the signature header which precedes the array of signatures
+      - id: len_signature
         -orig-id: signatureSize
+        type: u4
+        doc: Size of each signature
       - id: header
-        doc: Header before the array of signatures
         -orig-id: SignatureHeader
         size: len_signature_header
+        doc: Header before the array of signatures
       - id: signatures
-        doc: An array of signatures
         -orig-id: Signatures
         size: len_signature
+        type: signature_data
         repeat: expr
         repeat-expr: (len_signature_list - len_signature_header - 0x1c) / len_signature
         if: len_signature > 0
-        type: signature_data
+        doc: An array of signatures
     instances:
       is_cert_sha256:
         value: signature_type == [0x26, 0x16, 0xc4, 0xc1, 0x4c, 0x50, 0x92, 0x40, 0xac, 0xa9, 0x41, 0xf9, 0x36, 0x93, 0x43, 0x28]
@@ -120,40 +120,40 @@ types:
     doc-ref: EFI_SIGNATURE_DATA
     seq:
       - id: owner
-        doc: An identifier which identifies the agent which added the signature to the list
         -orig-id: SignatureOwner
         size: 0x10
+        doc: An identifier which identifies the agent which added the signature to the list
       - id: data
-        doc: The format of the signature is defined by the SignatureType.
         -orig-id: SignatureData
         size-eos: true
+        doc: The format of the signature is defined by the SignatureType.
   efi_var_attr:
     doc: Attributes of a UEFI variable
     seq:
       - id: enhanced_authenticated_access
-        type: b1
         -orig-id: EFI_VARIABLE_ENHANCED_AUTHENTICATED_ACCESS
+        type: b1
       - id: append_write
-        type: b1
         -orig-id: EFI_VARIABLE_APPEND_WRITE
+        type: b1
       - id: time_based_authenticated_write_access
-        type: b1
         -orig-id: EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS
+        type: b1
       - id: authenticated_write_access
-        type: b1
         -orig-id: EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS
+        type: b1
       - id: hardware_error_record
-        type: b1
         -orig-id: EFI_VARIABLE_HARDWARE_ERROR_RECORD
+        type: b1
       - id: runtime_access
-        type: b1
         -orig-id: EFI_VARIABLE_RUNTIME_ACCESS
+        type: b1
       - id: bootservice_access
-        type: b1
         -orig-id: EFI_VARIABLE_BOOTSERVICE_ACCESS
-      - id: non_volatile
         type: b1
+      - id: non_volatile
         -orig-id: EFI_VARIABLE_NON_VOLATILE
+        type: b1
       - id: reserved1
-        doc: Reserved (unused) bits
         type: b24
+        doc: Reserved (unused) bits

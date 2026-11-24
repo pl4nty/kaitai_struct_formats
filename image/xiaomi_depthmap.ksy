@@ -1,8 +1,8 @@
 meta:
   id: xiaomi_depthmap
-  endian: le
   title: Xiaomi depth images
   license: MIT
+  endian: le
 doc: |
   Parser for Depthmaps embedded in photos taken with last models of Xiaomi phones.
   Still WIP.
@@ -17,13 +17,13 @@ seq:
   - id: depthmap_info
     type: type_depthmap_info
   - id: confidence_map
-    doc: the confidence map, probably
     type: sector
     repeat: until
     repeat-until: not _.has_next
+    doc: the confidence map, probably
   - id: depthmap
-    doc: the depthmap
     size-eos: true
+    doc: the depthmap
 types:
   info:
     doc: Header of the file. Contains the raw length and many fields I still don't undestand
@@ -54,30 +54,30 @@ types:
   padding80:
     doc: 1kb of 0x80
     seq:
-    - id: head
-      contents: [0x80]
-    - id: padding 
-      size: 1022
-    - id: tail
-      contents: [0x80]
+      - id: head
+        contents: [0x80]
+      - id: padding 
+        size: 1022
+      - id: tail
+        contents: [0x80]
 
 
   type_depthmap_info: 
     doc: 17+1007 = 1kb, info about the shape of the depthmap
     seq:
-    - id: head
-      contents: [0x01, 0x00, 0xff, 0xff]
-    - id: image_width
-      type: u4
-    - id: image_height_padded 
-      type: u4
-      doc: the size of the height _after padding_, the real image will be shorter
-    - id: unknown1
-      type: u4
-    - id: is_landscape
-      type: u1      
-    - id: data
-      size: 1007
+      - id: head
+        contents: [0x01, 0x00, 0xff, 0xff]
+      - id: image_width
+        type: u4
+      - id: image_height_padded 
+        type: u4
+        doc: the size of the height _after padding_, the real image will be shorter
+      - id: unknown1
+        type: u4
+      - id: is_landscape
+        type: u1      
+      - id: data
+        size: 1007
   
   sector:
     doc: A sector of the confidence map, probably. I still don't undestand this part.

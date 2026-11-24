@@ -5,10 +5,10 @@ meta:
     - dt0
     - dt1
     - dt2
+  license: MIT
+  ks-version: 0.8
   encoding: ASCII
   endian: be
-  ks-version: 0.8
-  license: MIT
 doc: |
   PERFORMANCE SPECIFICATION DIGITAL TERRAIN ELEVATION DATA (DTED). |
   MIL-PRF-89020B (23 May 2000) |
@@ -60,20 +60,20 @@ types:
         doc: |
           Latitude data interval in tenths of seconds.
       - id: absolute_vertical_accuracy
-        type: str
         size: 4
+        type: str
         doc: |
           Absolute Vertical Accuracy in Meters. (With 90% assurance that |
           the linear errors will not exceed this value relative to mean sea |
           level (Right justified)).
       - id: security_code
-        type: str
         size: 3
+        type: str
         doc: |
           Security code. (Left Justified)
       - id: unique_reference
-        type: str
         size: 12
+        type: str
         doc: |
           Unique reference number
       - id: number_of_longitude_lines
@@ -88,15 +88,15 @@ types:
           Count of the number of latitude points per longitude line for |
           a full one-degree cell. ( e.g. 1201 for DTED1, 3601.for DTED2).
       - id: multiple_accuracy
-        type: str
         size: 1
+        type: str
         encoding: ASCII
         doc: |
           0 - Single |
           1 - Multiple
       - id: reserved
-        type: str
         size: 24
+        type: str
         doc: |
           Unused portion for future use.
   dsi_header:
@@ -115,46 +115,46 @@ types:
         doc: |
           Security Classification Code
       - id: security_control_and_release_markings
-        type: str
         size: 2
+        type: str
         doc: |
           Security Control and Release Markings. For DoD use only.
       - id: security_handling_description
-        type: str
         size: 27
+        type: str
         doc: |
           Security Handling Description. Other security description. (Free |
           text or blank filled).
       - id: reserved_for_future_use1
-        type: str
         size: 26
+        type: str
         doc: |
           Reserved for future use. (Blank filled).
       - id: nima_series_designator_for_product_level
-        type: str
         size: 5
+        type: str
         doc: |
           NIMA Series Designator for or DTED2 product level (DTED0, DTED1 or |
           DTED2).
       - id: unique_reference_number
-        type: str
         size: 15
+        type: str
         doc: |
           *Unique reference number. (For producing nations own use (free |
           text or zero filled)).
       - id: reserved_for_future_use2
-        type: str
         size: 8
+        type: str
         doc: |
           Reserved for future use. (Blank filled).
       - id: data_edition_number
-        type: str
         size: 2
+        type: str
         doc: |
           Data Edition Number (01-99).
       - id: match_merge_version
-        type: str
         size: 1
+        type: str
         doc: |
           Match/Merge Version (A-Z).
       - id: maintenance_date
@@ -166,29 +166,29 @@ types:
         doc: |
           Match/Merge Date. Zero filled until used. (YYMM)
       - id: maintenance_description
-        type: str
         size: 4
+        type: str
         doc: |
           Maintenance Description Code. Zero filled until used. (0000 or ANNN)
       - id: producer_code
-        type: str
         size: 8
+        type: str
         doc: |
           Producer Code.(Country - Free Text) (FIPS 10-4 Country Codes used 
           for first 2 characters) (CCAAABBB).
       - id: reserved_for_future_use3
-        type: str
         size: 16
+        type: str
         doc: |
           Reserved for future use. (Blank filled).
       - id: product_specification
-        type: str
         size: 9
+        type: str
         doc: |
           Product Specification. (Alphanumeric field) (AAAAAAAAA)
       - id:  product_specification_number
-        type: str
         size: 2
+        type: str
         doc: |
           First digit is Product Specification Amendment Number and second |
           digit is the Change Number.
@@ -197,18 +197,18 @@ types:
         doc: |
           Date of Product Specification.
       - id:  vertical_datum
-        type: str
         size: 3
+        type: str
         doc: |
           Vertical Datum (MSL, E96)
       - id:  horizontal_datum_code
-        type: str
         size: 5
+        type: str
         doc: |
           Horizontal Datum Code (Current Version World Geodetic System) (WGS84).
       - id:  digitizing_collection_system
-        type: str
         size: 10
+        type: str
         doc: |
           Digitizing/Collection System. (Free text).
       - id:  compilation_date
@@ -216,8 +216,8 @@ types:
         doc: |
           Compilation Date. (Most descriptive year/month) (YYMM).
       - id:  reserved_for_future_use4
-        type: str
         size: 22
+        type: str
         doc: |
           Reserved for future use. (Blank filled).
       - id: latitude_of_origin
@@ -302,25 +302,25 @@ types:
           full one-degree cell. The count is based on the level of DTED and |
           the latitude zone of the cell. (See Table II and III) (0000-9999). 
       - id:  partial_cell_indicator_text
-        type: str
         size: 2
+        type: str
         doc: |
           Partial Cell Indicator 
           00 = Complete 1° cell 
           01-99 = % of data coverage.
       - id:  reserved_for_nima_use_only
-        type: str
         size: 101
+        type: str
         doc: |
           Reserved for NIMA use only. (Free text or Blank filled.)
       - id:  reserved_for_producing_nation_use_only
-        type: str
         size: 100
+        type: str
         doc: |
           Reserved for producing nation use only. (Free text or blank filled.)
       - id:  reserved_for_free_text_comments
-        type: str
         size: 155
+        type: str
         doc: |
           Reserved for free text comments. (Free text or Blank filled.)
     instances:
@@ -360,23 +360,23 @@ types:
           *Relative (Point-to-Point) Vertical Accuracy of Product in meters. |
           (0000-9999 or Not Available (NA))
       - id: reserved_for_future_use1
-        type: str
         size: 4
+        type: str
         doc: |
           Reserved for future use. (Blank filled.)
       - id: reserved_for_nima_use_only1
-        type: str
         size: 1
+        type: str
         doc: |
           Reserved for NIMA use only.
       - id: reserved_for_future_use2
-        type: str
         size: 31
+        type: str
         doc: |
           Reserved for future use. (Blank filled.)
       - id: multiple_accuracy_outline_flag
-        type: str
         size: 2
+        type: str
         doc: |
           Multiple Accuracy Outline Flag. |
           00 = No accuracy subregions provided. |
@@ -386,13 +386,13 @@ types:
         repeat: expr
         repeat-expr: 9
       - id: reserved_for_nima_use_only2
-        type: str
         size: 18
+        type: str
         doc: |
           Reserved for NIMA use only.
       - id: reserved_for_future_use3
-        type: str
         size: 69
+        type: str
         doc: |
           Reserved for future use.
   acc_subregion:
@@ -424,8 +424,8 @@ types:
           Relative (Point-to-Point) Vertical Accuracy of Subregion in meters. |
           (0000-9999 or Not Available (NA))
       - id: number_of_coordinates_in_accuracy_subregion_outline
-        type: str
         size: 2
+        type: str
         doc: |
           Number of coordinates in accuracy sub region outline. (Maximum of |
           14 coordinate pairs. The first coordinate is the most southwestern. |
@@ -497,16 +497,16 @@ types:
   ascii_int:
     seq:
       - id: text
-        type: str
         size: 4
+        type: str
     instances:
       value:
         value: text.to_i
   ascii_int_maybe:
     seq:
       - id: text
-        type: str
         size: 4
+        type: str
     instances:
       has_value:
         value: text != "    " and text != "NA"
@@ -536,25 +536,25 @@ types:
         type: u1
     seq:
       - id: degrees
-        type: str
         size: len_degrees
+        type: str
       - id: minutes
-        type: str
         size: 2
+        type: str
       - id: seconds
-        type: str
         size: 2
-      - id: decimal_point
         type: str
+      - id: decimal_point
         size: 1
+        type: str
         if: has_decimal_point == 1
       - id: tenths_of_seconds
-        type: str
         size: 1
+        type: str
         if: has_decimal_point == 1
       - id: hemisphere
-        type: str
         size: 1
+        type: str
     instances:
       has_value:
         value: minutes != "  "
@@ -569,11 +569,11 @@ types:
   date:
     seq:
       - id: year_text
-        type: str
         size: 2
+        type: str
       - id: month_text
-        type: str
         size: 2
+        type: str
     instances:
       year:
         value: year_text.to_i

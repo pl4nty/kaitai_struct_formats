@@ -162,11 +162,11 @@ types:
               - FCGI_NameValuePair44
             seq:
               - id: key_length
-                type: vli
                 -orig-id: nameLength
-              - id: value_length
                 type: vli
+              - id: value_length
                 -orig-id: valueLength
+                type: vli
               - id: key
                 -orig-id: nameData
                 size: key_length.value
@@ -179,24 +179,24 @@ types:
                   - id: selector
                     type: b1
                   - id: b0
-                    type: b7
                     -orig-id:
                       - nameLengthB0
                       - valueLengthB0
+                    type: b7
                   - id: b1
-                    type: u1
-                    if: selector
                     -orig-id:
                       - nameLengthB1
                       - valueLengthB1
-                  - id: h1
-                    type: u2
+                    type: u1
                     if: selector
+                  - id: h1
                     -orig-id:
                       - nameLengthB2
                       - valueLengthB2
                       - nameLengthB3
                       - valueLengthB3
+                    type: u2
+                    if: selector
                 instances:
                   value:
                     value: "selector ? ((b0 << 24) | (b1 << 16) | h1) : b0"

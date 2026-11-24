@@ -1,11 +1,11 @@
 meta:
   id: lime_avml_memory_dump
   title: Memory dump in LiME/AVML format
-  file-extension: lime
   application:
     - LiME
     - AVML
     - Volatility
+  file-extension: lime
   license: MIT
 
 doc: |
@@ -77,14 +77,14 @@ types:
         seq:
           - id: signature0
             -orig-id: magic
-            type: str
             size: 1
-            encoding: ascii
+            type: str
+            encoding: ASCII
           - id: signature1
             -orig-id: magic
-            type: str
             size: 3
-            encoding: ascii
+            type: str
+            encoding: ASCII
         instances:
           is_be:
             value: signature0 == "L"

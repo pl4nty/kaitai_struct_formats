@@ -1,15 +1,15 @@
 meta:
   id: gbtd_gbr1
-  endian: le
-  encoding: ascii
   title: GBM file
-  license: MIT
-  ks-opaque-types: true
   application: Gameboy Map Builder, GBMB
   file-extension:
     - gbm
   tags:
     - game
+  license: MIT
+  ks-opaque-types: true
+  encoding: ASCII
+  endian: le
 
 doc: |
   GBR1 files are used by Gameboy Map Builder, GBMB
@@ -76,20 +76,20 @@ types:
       producer:
         seq:
           - id: name
-            type: strz
             size: 128
+            type: strz
           - id: version
-            type: strz
             size: 10
-          - id: info
             type: strz
+          - id: info
             size: 128
+            type: strz
 
       map:
         seq:
           - id: name
-            type: strz
             size: 128
+            type: strz
           - id: width
             type: u4
           - id: height
@@ -97,14 +97,24 @@ types:
           - id: prop_count
             type: u4
           - id: tile_file
-            type: strz
             size: 256
+            type: strz
           - id: tile_count
             type: u4
           - id: prop_color_count
             type: u4
 
       map_tile_data:
+        seq:
+          - id: data
+            type: record
+            repeat: expr
+            repeat-expr: num_records
+        instances:
+          num_records:
+            value: master.object.as<gbr1_object>.body.as<map>.width * master.object.as<gbr1_object>.body.as<map>.height
+          master:
+            type: "lookup_object(_root.objects, _parent.master_id)"
         types:
           record:
             seq:
@@ -122,6 +132,8 @@ types:
                 type: b5
               - id: tile_number
                 type: b10
+
+      map_properties:
         seq:
           - id: data
             type: record
@@ -129,11 +141,10 @@ types:
             repeat-expr: num_records
         instances:
           num_records:
-            value: master.object.as<gbr1_object>.body.as<map>.width * master.object.as<gbr1_object>.body.as<map>.height
+            value: master.object.as<gbr1_object>.body.as<map>.prop_count
           master:
             type: "lookup_object(_root.objects, _parent.master_id)"
 
-      map_properties:
         types:
           record:
             seq:
@@ -142,55 +153,44 @@ types:
               - id: size
                 type: u4
               - id: name
-                type: strz
                 size: 32
-        seq:
-          - id: data
-            type: record
-            repeat: expr
-            repeat-expr: num_records
-
-        instances:
-          num_records:
-            value: master.object.as<gbr1_object>.body.as<map>.prop_count
-          master:
-            type: "lookup_object(_root.objects, _parent.master_id)"
+                type: strz
 
       map_property_data:
-        types:
-          record:
-            seq:
-              - id: value
-                type: u2
         seq:
           - id: data
             type: record
             repeat: expr
             repeat-expr: num_records
-
         instances:
           num_records:
             value: master.object.as<gbr1_object>.body.as<map>.prop_count * master.object.as<gbr1_object>.body.as<map>.width * master.object.as<gbr1_object>.body.as<map>.height
           master:
             type: "lookup_object(_root.objects, _parent.master_id)"
 
-      map_default_property_value:
         types:
           record:
             seq:
               - id: value
                 type: u2
+
+      map_default_property_value:
         seq:
           - id: data
             type: record
             repeat: expr
             repeat-expr: num_records
-
         instances:
           num_records:
             value: master.object.as<gbr1_object>.body.as<map>.prop_count * master.object.as<gbr1_object>.body.as<map>.tile_count
           master:
             type: "lookup_object(_root.objects, _parent.master_id)"
+
+        types:
+          record:
+            seq:
+              - id: value
+                type: u2
 
       map_settings:
         seq:
@@ -224,6 +224,17 @@ types:
             type: u4
 
       map_property_colors:
+        seq:
+          - id: data
+            type: record
+            repeat: expr
+            repeat-expr: num_records
+        instances:
+          num_records:
+            value: master.object.as<gbr1_object>.body.as<map>.prop_color_count
+          master:
+            type: "lookup_object(_root.objects, _parent.master_id)"
+
         types:
           record:
             seq:
@@ -233,32 +244,21 @@ types:
                 type: u4
               - id: value
                 type: u4
-        seq:
-          - id: data
-            type: record
-            repeat: expr
-            repeat-expr: num_records
-
-        instances:
-          num_records:
-            value: master.object.as<gbr1_object>.body.as<map>.prop_color_count
-          master:
-            type: "lookup_object(_root.objects, _parent.master_id)"
 
       map_export_settings:
         seq:
           - id: file_name
-            type: strz
             size: 255
+            type: strz
             doc: Specification incorrectly lists this attribute as string(256)
           - id: file_type
             type: u1
           - id: section_name
-            type: strz
             size: 40
+            type: strz
           - id: label_name
-            type: strz
             size: 40
+            type: strz
           - id: bank
             type: u1
           - id: plane_count
@@ -281,6 +281,17 @@ types:
             type: u2
 
       map_export_properties:
+        seq:
+          - id: data
+            type: record
+            repeat: expr
+            repeat-expr: num_records
+        instances:
+          num_records:
+            value: master.object.as<gbr1_object>.body.as<map>.prop_count
+          master:
+            type: "lookup_object(_root.objects, _parent.master_id)"
+
         types:
           record:
             seq:
@@ -288,14 +299,3 @@ types:
                 type: u4
               - id: size
                 type: u4
-        seq:
-          - id: data
-            type: record
-            repeat: expr
-            repeat-expr: num_records
-
-        instances:
-          num_records:
-            value: master.object.as<gbr1_object>.body.as<map>.prop_count
-          master:
-            type: "lookup_object(_root.objects, _parent.master_id)"

@@ -31,7 +31,6 @@ types:
       - id: num_bytes_of_children_chunks
         type: u4
       - id: chunk_content
-        if: num_bytes_of_chunk_content != 0
         size: num_bytes_of_chunk_content
         type:
           switch-on: chunk_id
@@ -44,10 +43,11 @@ types:
             'chunk_type::ntrn': ntrn
             'chunk_type::nshp': nshp
             'chunk_type::ngrp': ngrp
+        if: num_bytes_of_chunk_content != 0
       - id: children_chunks
-        if: num_bytes_of_children_chunks != 0
         type: chunk
         repeat: eos
+        if: num_bytes_of_children_chunks != 0
   pack:
     seq:
       - id: num_models
@@ -108,29 +108,29 @@ types:
         # .to_i not implemented for C# runtime yet
         #enum: property_bits_type
       - id: plastic
+        type: f4
         if: has_plastic
-        type: f4
       - id: roughness
+        type: f4
         if: has_roughness
-        type: f4
       - id: specular
+        type: f4
         if: has_specular
-        type: f4
       - id: ior
+        type: f4
         if: has_ior
-        type: f4
       - id: attenuation
+        type: f4
         if: has_attenuation
-        type: f4
       - id: power
+        type: f4
         if: has_power
-        type: f4
       - id: glow
+        type: f4
         if: has_glow
-        type: f4
       - id: is_total_power
-        if: has_is_total_power
         type: f4
+        if: has_is_total_power
     instances:
       has_plastic:
         value: '(property_bits & 1) != 0'
@@ -217,9 +217,9 @@ types:
       - id: len
         type: u4
       - id: bytes
-        type: str
-        encoding: ascii
         size: len
+        type: str
+        encoding: ASCII
 enums:
   chunk_type:
     0x4d41494e: main

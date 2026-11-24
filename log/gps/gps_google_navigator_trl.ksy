@@ -3,8 +3,8 @@ meta:
   title: Google Navigator Tracklines
   application: Google Navigator
   file-extension: trl
-  endian: le
   license: GPL-2.0-or-later
+  endian: le
 
 doc: |
   File format to save logs used in old Google Navigator

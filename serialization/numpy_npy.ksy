@@ -3,10 +3,9 @@ meta:
   title: A Simple File Format for NumPy Arrays
   application: numpy
   file-extension: npy
-  license: Unlicense
-  endian: le
   xref:
     wikidata: Q197520
+  license: Unlicense
   imports:
     - /common/ieee754_float/f1
     - /common/ieee754_float/f2be
@@ -20,6 +19,7 @@ meta:
     - /common/ieee754_float/f32be
     - /common/ieee754_float/f32le
   ks-opaque-types: true
+  endian: le
 doc: |
   Serialization format used by numpy. An lot of bad mistakes have been made when designing this format:
     * it uses dicts in python syntax:
@@ -59,9 +59,9 @@ seq:
         true: u4
         false: u2
   - id: header
-    type: strz
-    encoding: ascii
     size: header_size
+    type: strz
+    encoding: ASCII
     doc: |
       Contains a Python literal expression of a dictionary. DO NOT `exec` it! If you use python, use `ast.literal_eval`.
       The dictionary contains three keys:
@@ -130,7 +130,6 @@ types:
         type: u8
     seq:
       - id: data
-        doc: "S<n> for n > 1 is currently out of scope"
         type:
           switch-on: _root.parsed_header.item_type.as<str>
           cases:
@@ -220,6 +219,7 @@ types:
             '"|g"': f12le
         repeat: expr
         repeat-expr: _root.parsed_header.shape.as<u8[]>[idx]
+        doc: "S<n> for n > 1 is currently out of scope"
   ndarray:
     params:
       - id: idx

@@ -1,15 +1,15 @@
 meta:
   id: eink_wbf
   title: E-Ink® Waveform blob
-  license: GPL-2.0
   file-extension: wbf
-  endian: le
-  bit-endian: le
   xref:
     wikidata: Q189897
+  license: GPL-2.0
   #imports:
   #  - /common/bcd
   ks-opaque-types: true  # https://github.com/KOLANICH-tools/inkwave.py/blob/master/inkwave/kaitai/eink_wbf_wav_addrs_collection.py
+  endian: le
+  bit-endian: le
   -affected-by:
     - &opaque_interfaces_bug 500
     - &opaque_incompatible_with_import 295
@@ -53,8 +53,8 @@ seq:
 instances:
   mysterious_offset:
     -orig-id: MYSTERIOUS OFFSET
-    doc: All mode pointers in the `.wrf` file need to be offset by 63 bytes. Likely has something to do with how they are passed by the epdc kernel module to the epdc.
     value: 63
+    doc: All mode pointers in the `.wrf` file need to be offset by 63 bytes. Likely has something to do with how they are passed by the epdc kernel module to the epdc.
 
   xwia:
     pos: header.xwia
@@ -149,9 +149,9 @@ types:
         repeat-expr: _root.header.temperature_range_count + 1
       - id: checksum
         type: u1
-        doc: must be equal to sum of all from + last to
         valid:
           expr: _ == calculated_checksum
+        doc: must be equal to sum of all from + last to
     instances:
       calculated_checksum:
         -affected-by: *checksumming_feature_request
@@ -187,16 +187,16 @@ types:
         type: checksummer(len)
       - id: checksum
         type: u1
-        doc: must be equal to sum of all from + last to
         valid:
           expr: _ == checksummed.calculated_checksum
+        doc: must be equal to sum of all from + last to
     instances:
       value:
         io: checksummed._io
         pos: 0
-        type: str
-        encoding: ascii
         size-eos: true
+        type: str
+        encoding: ASCII
 
   mode:
     seq:
@@ -443,21 +443,21 @@ types:
         #type: u1
         #enum: fpl_rate
         -affected-by: *opaque_incompatible_with_import
-        doc: legacy frontplane rate encoded as BCD
         if: format_version == 0
+        doc: legacy frontplane rate encoded as BCD
       - id: timing_mode
         type: u1
-        doc: newer frontplane rate encoded as binary number
-        -unit: kHz
         if: format_version == 0
+        -unit: kHz
+        doc: newer frontplane rate encoded as binary number
 
       - id: unkn
         type: u1
         if: format_version > 0
       - id: fpl_rate_direct
         type: u1
-        doc: frontplane rate encoded directly
         if: format_version > 0
+        doc: frontplane rate encoded directly
 
       - id: vcom_shifted
         type: u1
@@ -470,9 +470,9 @@ types:
       - id: checksum_7_30
         -orig-id: cs1
         type: u1
-        doc: checksum 1
         valid:
           expr: _ == checksummer_7_30.calculated_checksum
+        doc: checksum 1
 
       - id: waveform_modes_table
         -orig-id: wmta

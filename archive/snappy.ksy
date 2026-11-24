@@ -3,13 +3,13 @@ meta:
   title: snappy framing format
   license: CC0-1.0
   ks-version: 0.9
-  encoding: utf-8
+  encoding: UTF-8
   endian: le
-doc-ref: https://github.com/google/snappy/blob/master/framing_format.txt
 doc: |
   snappy's framing2 format
   
   Test files can be created with snzip: <https://github.com/kubo/snzip>
+doc-ref: https://github.com/google/snappy/blob/master/framing_format.txt
 seq:
   - id: chunks
     type: chunk
@@ -27,13 +27,13 @@ types:
         type: chunk_body
         if: is_valid
     instances:
-        # more values are actually allowed but in practice
-        # these aren't encountered
-        is_valid:
-          value: identifier == chunk_types::compressed or
-            identifier == chunk_types::uncompressed or
-            identifier == chunk_types::padding or
-            identifier == chunk_types::stream_identifier
+      # more values are actually allowed but in practice
+      # these aren't encountered
+      is_valid:
+        value: identifier == chunk_types::compressed or
+          identifier == chunk_types::uncompressed or
+          identifier == chunk_types::padding or
+          identifier == chunk_types::stream_identifier
   chunk_body:
     seq:
       - id: len_chunk

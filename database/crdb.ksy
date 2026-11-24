@@ -2,8 +2,8 @@ meta:
   id: crdb
   title: GNU/Linux wireless regulation database
   license: copyleft-next-0.3.0 AND ISC
-  endian: be
   encoding: ASCII
+  endian: be
 
 -license-URIs:
   - https://github.com/copyleft-next/copyleft-next/blob/master/Releases/copyleft-next-0.3.0
@@ -66,12 +66,12 @@ types:
       everything is in in kHz
       Values of zero mean "not applicable", i.e. the regulatory does not limit a certain value.
     seq:
-     - id: start
-       type: u4
-     - id: end
-       type: u4
-     - id: max_bandwidth
-       type: u4
+      - id: start
+        type: u4
+      - id: end
+        type: u4
+      - id: max_bandwidth
+        type: u4
   power_rule:
     seq:
       - id: max_antenna_gain
@@ -105,49 +105,49 @@ types:
         type: rule
   flags:
     seq:
-        - id: reserved1
-          type: b20
-        - id: auto_bw
-          -orig-id: RRF_AUTO_BW
-          type: b1
-          doc: Auto BW calculations
-        - id: reserved0
-          type: b2
-        - id: no_ibss
-          -orig-id: __RRF_NO_IBSS
-          type: b1
-          doc: old no-IBSS rule, maps to no-ir
-        - id: do_not_initiate_radiation
-          -orig-id: RRF_NO_IR
-          type: b1
-        - id: ptmp_only
-          -orig-id: RRF_PTMP_ONLY
-          type: b1
-          doc: this is only for Point To MultiPoint links
-        - id: ptp_only
-          -orig-id: RRF_PTP_ONLY
-          type: b1
-          doc: this is only for Point To Point links
-        - id: dfs_required
-          -orig-id: RRF_DFS
-          type: b1
-          doc: DFS support is required to be used
-        - id: no_outdoor
-          -orig-id: RRF_NO_OUTDOOR
-          type: b1
-          doc: outdoor operation not allowed
-        - id: no_indoor
-          -orig-id: RRF_NO_INDOOR
-          type: b1
-          doc: indoor operation not allowed
-        - id: no_cck
-          -orig-id: RRF_NO_CCK
-          type: b1
-          doc: CCK modulation not allowed
-        - id: no_ofdm
-          -orig-id: RRF_NO_OFDM
-          type: b1
-          doc: OFDM modulation not allowed
+      - id: reserved1
+        type: b20
+      - id: auto_bw
+        -orig-id: RRF_AUTO_BW
+        type: b1
+        doc: Auto BW calculations
+      - id: reserved0
+        type: b2
+      - id: no_ibss
+        -orig-id: __RRF_NO_IBSS
+        type: b1
+        doc: old no-IBSS rule, maps to no-ir
+      - id: do_not_initiate_radiation
+        -orig-id: RRF_NO_IR
+        type: b1
+      - id: ptmp_only
+        -orig-id: RRF_PTMP_ONLY
+        type: b1
+        doc: this is only for Point To MultiPoint links
+      - id: ptp_only
+        -orig-id: RRF_PTP_ONLY
+        type: b1
+        doc: this is only for Point To Point links
+      - id: dfs_required
+        -orig-id: RRF_DFS
+        type: b1
+        doc: DFS support is required to be used
+      - id: no_outdoor
+        -orig-id: RRF_NO_OUTDOOR
+        type: b1
+        doc: outdoor operation not allowed
+      - id: no_indoor
+        -orig-id: RRF_NO_INDOOR
+        type: b1
+        doc: indoor operation not allowed
+      - id: no_cck
+        -orig-id: RRF_NO_CCK
+        type: b1
+        doc: CCK modulation not allowed
+      - id: no_ofdm
+        -orig-id: RRF_NO_OFDM
+        type: b1
+        doc: OFDM modulation not allowed
 
   rules_collection:
     seq:
@@ -164,8 +164,8 @@ types:
     seq:
       - id: two_letter_code
         -orig-id: alpha2
-        type: str
         size: 2
+        type: str
       - id: pad
         type: u1
       - id: creqs

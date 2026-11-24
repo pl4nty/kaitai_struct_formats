@@ -31,8 +31,8 @@ types:
         repeat-until: _io.pos + _.size > header.size.value or _.is_invalid
         if: not header.flags.flag_unsynchronization
       - id: padding
-        if: header.flags.flag_headerex and not header.flags.flag_unsynchronization
         size: header_ex.padding_size - _io.pos
+        if: header.flags.flag_headerex and not header.flags.flag_unsynchronization
       - id: unsynchronized_data
         size: header.size.value
         if: header.flags.flag_unsynchronization
@@ -93,8 +93,8 @@ types:
     doc-ref: Section 3.3. ID3v2 frame overview
     seq:
       - id: id
-        type: str
         size: 4
+        type: str
         encoding: ASCII
       - id: size
         type: u4

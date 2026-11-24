@@ -1,12 +1,12 @@
 meta:
   id: cat_021
   license: GPL-3.0-only
-  endian: be
-  imports:
-      - field_spec
-      - explicit
-      - cat_021_catalog
   ks-version: 0.9
+  imports:
+    - field_spec
+    - explicit
+    - cat_021_catalog
+  endian: be
 
 doc: |
   Implementantion of ASTERIX format.
@@ -32,6 +32,16 @@ seq:
   - id: data
     type: uap_type(fspec, [10,40,161,15,71,130,131,72,150,151,80,73,74,75,76,140,90,210,70,230,145,152,200,155,157,160,165,77,170,20,220,146,148,110,16,8,271,132,250,260,400,295].as<u2[]>.as<str>)
 
+
+instances:
+  category:
+    value: '"021"'
+
+  version:
+    value: '"2.4"'
+
+  items:
+    value: data.items
 
 types:
   uap_type:
@@ -67,13 +77,3 @@ types:
 
       loop_range:
         value: 'fspec.size > uap_list.size ? uap_list.size : fspec.size'
-
-instances:
-  category:
-    value: '"021"'
-
-  version:
-    value: '"2.4"'
-
-  items:
-    value: data.items

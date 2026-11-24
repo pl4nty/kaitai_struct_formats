@@ -8,10 +8,10 @@ meta:
   xref:
     wikidata: Q2984629
   license: GPL-3.0+ # I'm sorry, but the main sources of info for this format (lfp-reader and plenopticam) are GPLed.
-  endian: be
-  encoding: utf-8
-  ks-opaque-types: true
   ks-version: 0.9
+  ks-opaque-types: true
+  encoding: UTF-8
+  endian: be
 
 doc: |
   Native file format of Lytro light field cameras.
@@ -82,8 +82,8 @@ types:
       section_contents:
         seq:
           - id: type
-            type: str
             size: 3
+            type: str
           - id: crlf
             contents: [0x0d, 0x0a]
           - id: unkn1
@@ -95,8 +95,8 @@ types:
           - id: identifier
             size: 80
             type: strz
-            doc: "Usually contains SHA-1 checksum"
             if: size != 0
+            doc: "Usually contains SHA-1 checksum"
           - id: data
             size: size
             type:

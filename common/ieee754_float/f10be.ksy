@@ -1,13 +1,13 @@
 meta:
   id: f10be
   title: IEEE 754 Extended-precision floating-point
-  license: Unlicense
-  endian: be
   xref:
     iso: 60559:2011
     wikidata: Q5421900
+  license: Unlicense
   imports:
     - ./ieee754_float
+  endian: be
 doc: see the doc for `ieee754_float`.
 seq:
   - id: sign

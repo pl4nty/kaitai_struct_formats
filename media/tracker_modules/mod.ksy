@@ -13,8 +13,8 @@ meta:
   xref:
     wikidata: Q1370814
   license: Unlicense
-  endian: le
   encoding: UTF-8
+  endian: le
 doc: |
   An old tracker music file format.
   This ksy is based on the spec by Steinar Midtskogen.
@@ -24,8 +24,8 @@ doc: |
 doc-ref: https://web.archive.org/web/20020415142434/http://www.cwi.nl:80/ftp/audio/MOD-info Steinar Midtskogen<steinarm@ifi.uio.no> Old MOD. format + PowerPacking
 seq:
   - id: song_name
-    type: strz
     size: 20
+    type: strz
     doc: Remember to put trailing null bytes at the end...
   - id: samples
     type: sample
@@ -36,14 +36,14 @@ seq:
     doc: Range is 1-128.
   - id: special
     type: u1
-    doc: Well... this little byte here is set to 127, so that old trackers will search through all patterns when loading. Noisetracker uses this byte for restart, but we don't. Protracker uses 0x7F.
     valid:
       eq: 127
+    doc: Well... this little byte here is set to 127, so that old trackers will search through all patterns when loading. Noisetracker uses this byte for restart, but we don't. Protracker uses 0x7F.
   - id: song_positions
     type: pattern_index
-    doc: Each hold a number from 0-63 that tells the tracker what pattern to play at that position.
     repeat: expr
     repeat-expr: 128
+    doc: Each hold a number from 0-63 that tells the tracker what pattern to play at that position.
   - id: application_id_string
     type: application_id_string
     doc: "For the description see application_id type"
@@ -84,9 +84,9 @@ types:
   application_id_string:
     seq:
       - id: id
-        type: str
         size: 4
-        encoding: ascii
+        type: str
+        encoding: ASCII
         doc: "For the description see application_id type"
   application_id:
     doc: |
@@ -163,8 +163,8 @@ types:
     -orig-id: sampleinfo
     seq:
       - id: name
-        type: strz
         size: 22
+        type: strz
         doc: Pad with null bytes.
       - id: length_words
         type: u2

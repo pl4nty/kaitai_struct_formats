@@ -33,10 +33,10 @@ types:
       - id: jmp_instruction
         size: 3
       - id: oem_name
-        type: str
-        encoding: ASCII
-        pad-right: 0x20
         size: 8
+        type: str
+        pad-right: 0x20
+        encoding: ASCII
       - id: bpb
         type: bios_param_block
         doc: Basic BIOS parameter block, present in all versions of FAT
@@ -189,13 +189,13 @@ types:
       - id: partition_volume_label
         size: 11
         type: str
-        encoding: ASCII
         pad-right: 0x20
+        encoding: ASCII
       - id: fs_type_str
         size: 8
         type: str
-        encoding: ASCII
         pad-right: 0x20
+        encoding: ASCII
   ext_bios_param_block_fat32:
     doc: Extended BIOS Parameter Block for FAT32
     seq:
@@ -271,13 +271,13 @@ types:
       - id: partition_volume_label
         size: 11
         type: str
-        encoding: ASCII
         pad-right: 0x20
+        encoding: ASCII
       - id: fs_type_str
         size: 8
         type: str
-        encoding: ASCII
         pad-right: 0x20
+        encoding: ASCII
   root_directory:
     seq:
       - id: records

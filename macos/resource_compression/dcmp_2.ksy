@@ -48,6 +48,10 @@ seq:
     doc: |
       The custom lookup table to be used instead of the default lookup table.
   - id: data
+    # The data extends to one byte before EOS if the decompressed length is odd,
+    # and otherwise extends completely to EOS.
+    size: |
+      _io.size - _io.pos - (is_len_decompressed_odd ? 1 : 0)
     type:
       switch-on: header_parameters.flags.tagged
       cases:
@@ -56,10 +60,6 @@ seq:
         # This is a workaround for kaitai-io/kaitai_struct#208 to make the compiler understand that the switch only has two cases,
         # so that it doesn't generate a third default case that maps to a byte array type.
         _: untagged_data
-    # The data extends to one byte before EOS if the decompressed length is odd,
-    # and otherwise extends completely to EOS.
-    size: |
-      _io.size - _io.pos - (is_len_decompressed_odd ? 1 : 0)
     doc: |
       The compressed data.
       The structure of the data varies depending on whether the "tagged" or "untagged" variant of the compression format is used.
@@ -263,11 +263,6 @@ types:
             doc: |
               The bits of the tag byte control the format and meaning of the 8 compressed data units that follow the tag byte.
           - id: units
-            type:
-              switch-on: tag[_index]
-              cases:
-                true: u1
-                # If false, the type is unset, i. e. a byte array.
             # This size attribute is necessary when the tag bit is false,
             # to set the size of the byte array to 2.
             # When the tag bit is true,
@@ -278,6 +273,11 @@ types:
             # even when the tag bit is true and an explicit size is not normally necessary.
             size: |
               tag[_index] ? 1 : 2
+            type:
+              switch-on: tag[_index]
+              cases:
+                true: u1
+                # If false, the type is unset, i. e. a byte array.
             repeat: until
             repeat-until: _index >= 7 or _io.eof
             doc: |

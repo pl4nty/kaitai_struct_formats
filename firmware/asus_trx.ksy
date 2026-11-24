@@ -4,11 +4,11 @@ meta:
   file-extension: trx
   license: GPL-2.0-or-later
   ks-version: 0.9
-  encoding: utf-8
-  endian: le
-  bit-endian: le
   imports:
     - /firmware/broadcom_trx
+  encoding: UTF-8
+  endian: le
+  bit-endian: le
 
 -license: |
   Copyright (C) 2007 Jonathan Zarate
@@ -79,8 +79,8 @@ types:
         -orig-id:
           - prod_id
           - productid
-        type: strz
         size: 12
+        type: strz
       - id: comp_hw
         type: hw_comp_info
         repeat: expr

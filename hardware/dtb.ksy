@@ -1,10 +1,10 @@
 meta:
   id: dtb
   title: Flattened Devicetree Format
-  file-extension: dtb
   application:
     - Linux
     - Das U-Boot
+  file-extension: dtb
   xref:
     wikidata: Q16960371
   tags:

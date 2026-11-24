@@ -57,7 +57,6 @@ types:
         if: marker != marker_enum::soi and marker != marker_enum::eoi
       - id: data
         size: length - 2
-        if: marker != marker_enum::soi and marker != marker_enum::eoi
         type:
           switch-on: marker
           cases:
@@ -65,6 +64,7 @@ types:
             'marker_enum::app1': segment_app1
             'marker_enum::sof0': segment_sof0
             'marker_enum::sos': segment_sos
+        if: marker != marker_enum::soi and marker != marker_enum::eoi
       - id: image_data
         size-eos: true
         if: marker == marker_enum::sos
@@ -112,9 +112,9 @@ types:
   segment_app0:
     seq:
       - id: magic
+        size: 5
         type: str
         encoding: ASCII
-        size: 5
       - id: version_major
         type: u1
       - id: version_minor

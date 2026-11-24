@@ -3,8 +3,8 @@ meta:
   title: Fullhan FLS
   file-extension: fls
   license: CC0-1.0
-  endian: le
   encoding: UTF-8
+  endian: le
 doc: |
   Test files:
   - https://www.nvripc.com/new-chinese-ip-camera-firmwares-update/

@@ -2,8 +2,8 @@ meta:
   id: netgear_chk
   title: Netgear chk
   license: GPL-2.0-or-later
-  endian: be
   encoding: UTF-8
+  endian: be
 doc-ref:
   - https://lxr.openwrt.org/source/firmware-utils/src/mkchkimg.c
   - https://github.com/onekey-sec/unblob/blob/5d9fd6d8/unblob/handlers/archive/netgear/chk.py
@@ -22,8 +22,8 @@ types:
       - id: len_header
         type: u4
       - id: rest_of_header
-        type: rest_of_header
         size: len_header - len_header._sizeof - magic._sizeof
+        type: rest_of_header
   rest_of_header:
     seq:
       - id: region_code

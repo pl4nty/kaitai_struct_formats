@@ -1,13 +1,13 @@
 meta:
   id: f16le
   title: IEEE 754 Quadruple-precision floating-point
-  license: Unlicense
-  endian: be
   xref:
     iso: 60559:2011
     wikidata: Q448573
+  license: Unlicense
   imports:
     - ./ieee754_float
+  endian: be
 doc: |
   see the doc for `ieee754_float`.
   64fl 32fm 16fh 8el s7eh

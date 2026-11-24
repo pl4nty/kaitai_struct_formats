@@ -1,12 +1,12 @@
 meta:
   id: scala_signature
-  endian: le
+  xref:
+    wikidata: Q460584
   license: Apache-2.0
   #imports:
   #  - /common/vlq_base128_be
-  encoding: utf-8
-  xref:
-    wikidata: Q460584
+  encoding: UTF-8
+  endian: le
 
 doc: |
   Scala signatures are stored as "modified UTF" strings (see ByteCodecs.scala) in ScalaSignature.bytes (which is a string).
@@ -46,20 +46,6 @@ types:
         type: group
         repeat: until
         repeat-until: not _.has_next
-    types:
-      group:
-        doc: |
-          One byte group, clearly divided into 7-bit "value" chunk and 1-bit "continuation" flag.
-        seq:
-          - id: b
-            type: u1
-        instances:
-          has_next:
-            value: (b & 0b1000_0000) != 0
-            doc: If true, then we have more bytes to read
-          value:
-            value: b & 0b0111_1111
-            doc: The 7-bit (base128) numeric value chunk of this group
     instances:
       last:
         value: groups.size - 1
@@ -74,6 +60,20 @@ types:
           + (last >= 6 ? (groups[last - 6].value << 42) : 0)
           + (last >= 7 ? (groups[last - 7].value << 49) : 0)
         doc: Resulting value as normal integer
+    types:
+      group:
+        doc: |
+          One byte group, clearly divided into 7-bit "value" chunk and 1-bit "continuation" flag.
+        seq:
+          - id: b
+            type: u1
+        instances:
+          has_next:
+            value: (b & 0b1000_0000) != 0
+            doc: If true, then we have more bytes to read
+          value:
+            value: b & 0b0111_1111
+            doc: The 7-bit (base128) numeric value chunk of this group
 
   version:
     seq:
@@ -258,10 +258,10 @@ types:
             if: has_private_within
         instances:
           has_private_within:
+            value: _io.pos < _io.size
             doc: |
               In Scala impl the parser is stateful.
               We don't have access to this state in KS. So we use the heuristic. The type has different length depending on his value.
-            value: _io.pos < _io.size
           private_within:
             value: index.value
             if: has_private_within

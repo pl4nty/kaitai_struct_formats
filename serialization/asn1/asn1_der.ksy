@@ -75,15 +75,15 @@ types:
     -webide-representation: '{str}'
     seq:
       - id: str
-        type: str
         size-eos: true
+        type: str
         encoding: UTF-8
   body_printable_string:
     -webide-representation: '{str}'
     seq:
       - id: str
-        type: str
         size-eos: true
+        type: str
         encoding: ASCII # actually a subset of ASCII
   body_object_id:
     -webide-representation: '{first:dec}.{second:dec}.{rest}'

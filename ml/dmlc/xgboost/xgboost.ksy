@@ -3,14 +3,14 @@ meta:
   title: xgboost model
   application: xgboost
   license: Apache-2.0
-  endian: le # in fact machine-endian
-  encoding: ascii
   imports:
     - ../core/pas_str
     - ../core/str_pair_arr
     - ../core/str_arr
     - ./tree_booster
     - ./linear_booster
+  encoding: ASCII
+  endian: le # in fact machine-endian
   -orig-id: Learner
 doc: It is an xgboost tree model.
 doc-ref:
@@ -33,12 +33,12 @@ seq:
     type: pas_str
     doc: name of objective gbm
   - id: gbm_
-    doc: The gradient booster used by the model
     type:
       switch-on: name_gbm_.str
       cases:
         '"gblinear"': linear_booster
         _: tree_booster
+    doc: The gradient booster used by the model
   - id: attributes_
     type: str_pair_arr
     if: param.contain_extra_attrs != 0
@@ -47,8 +47,8 @@ seq:
     if: name_obj_.str == "count:poisson"
   - id: metrics_
     type: str_arr
-    doc: The evaluation metrics used to evaluate the model.
     if: param.contain_eval_metrics != 0
+    doc: The evaluation metrics used to evaluate the model.
 instances:
   binf_signature_present:
     value: optional_binf_signature[0] == 0x62 and optional_binf_signature[1] ==  0x69 and optional_binf_signature[2] == 0x6e and optional_binf_signature[3] == 0x66
@@ -58,12 +58,12 @@ instances:
     size: 4
   max_delta_step:
     value: max_delta_step_str.str.to_i
+    if: name_obj_.str == "count:poisson"
     doc: |
       maximum delta update we can add in weight estimation
       this parameter can be used to stabilize update
       default=0 means no constraint on weight delta
     doc-ref: param.h
-    if: name_obj_.str == "count:poisson"
 types:
   reserved:
     seq:
@@ -117,8 +117,8 @@ types:
           default: 1
           lower bound: 1
       - id: reserved
-        type: reserved
         size: 26*4
+        type: reserved
         doc: reserved field
     types:
       version:

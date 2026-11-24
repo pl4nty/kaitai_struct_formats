@@ -26,8 +26,19 @@ seq:
   - id: len_header
     type: u4
   - id: header
-    type: header
     size: len_header - len_header._sizeof
+    type: header
+instances:
+  len_body:
+    value: header.width * header.height * header.bytes_per_pixel.to_i
+  body:
+    pos: len_header
+    size: len_body
+    -affected-by: 188
+    # type: bitmap # The `bitmap` type works, but it might be slow and memory intensive for larger bitmaps
+                   # because it creates a class instance for every pixel.
+                   # So it is not suitable for production, but you can use it as a reference to create your
+                   # own implementation.
 types:
   header:
     seq:
@@ -59,8 +70,8 @@ types:
         type: u4
         doc: Default spacing to be used for brush. Percentage of brush width.
       - id: brush_name
-        type: strz
         size-eos: true
+        type: strz
         encoding: UTF-8
   bitmap:
     seq:
@@ -108,17 +119,6 @@ types:
             type: u1
           - id: alpha
             type: u1
-instances:
-  len_body:
-    value: header.width * header.height * header.bytes_per_pixel.to_i
-  body:
-    pos: len_header
-    size: len_body
-    -affected-by: 188
-    # type: bitmap # The `bitmap` type works, but it might be slow and memory intensive for larger bitmaps
-                   # because it creates a class instance for every pixel.
-                   # So it is not suitable for production, but you can use it as a reference to create your
-                   # own implementation.
 enums:
   color_depth:
     1: grayscale

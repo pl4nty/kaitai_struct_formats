@@ -47,9 +47,9 @@ seq:
     type: u4
     if: is_str_32
   - id: str_value
+    size: str_len
     type: str
     encoding: UTF-8
-    size: str_len
     if: is_str
   # ========================================================================
   - id: len_byte_array8

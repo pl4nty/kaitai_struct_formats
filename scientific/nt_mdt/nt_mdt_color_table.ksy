@@ -1,13 +1,13 @@
 meta:
   id: nt_mdt_color_table
-  endian: le
-  encoding: UTF-16
   title: NT-MDT reusable part of palette
   application:
     - Nova
     - Image Analysis
     - NanoEducator
   license: Unlicense
+  encoding: UTF-16
+  endian: le
 doc: It is a reusable part of a color scheme for visualising SPM scans.
 params:
   - id: colors_count
@@ -16,8 +16,8 @@ params:
     type: u2
 seq:
   - id: title
-    type: str
     size: title_len
+    type: str
   - id: colors
     type: color
     repeat: expr

@@ -22,8 +22,8 @@ types:
         type: u4
         doc: Node full size
       - id: data
-        type: node_data
         size: size - 8
+        type: node_data
         doc: Stored data
   node_data:
     doc: Node data

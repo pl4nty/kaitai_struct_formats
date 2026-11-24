@@ -3,8 +3,8 @@ meta:
   title: ASUS Fugu bootloader.img format (version 2 and later)
   file-extension: img
   tags:
-    - archive
     - android
+    - archive
   license: CC0-1.0
   ks-version: 0.9
   encoding: ASCII

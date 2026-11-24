@@ -2,11 +2,11 @@ meta:
   id: windows_system_info
   title: Microsoft Windows SYSTEM_INFO structure
   license: Unlicense
-  endian: le
   imports:
     - /windows/windows_processor_architecture
     - /windows/windows_processor_type
     - /windows/windows_processor_revision
+  endian: le
 doc-ref:
   - https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-system_info
   - https://learn.microsoft.com/en-us/previous-versions/ms942639(v=msdn.10)

@@ -114,8 +114,8 @@ types:
       - id: num_temps
         type: u1
       - id: temps
-        type: temp
         size: 2
+        type: temp
         repeat: expr
         repeat-expr: num_temps
     types:
@@ -240,19 +240,15 @@ types:
   hardware:
     seq:
       - id: version
-        type: str
-        encoding: ascii
         size-eos: true
+        type: str
+        encoding: ASCII
         doc: BMS model and version specification
 
   response:
     params:
       - id: cmd
         type: u1
-    enums:
-      status:
-        0x00: ok
-        0x80: fail
     seq:
       - id: status
         type: u1
@@ -260,10 +256,14 @@ types:
       - id: len_data
         type: u1
       - id: data
+        size: len_data
         type:
           switch-on: cmd
           cases:
             registers::basic_info.to_i: basic_info
             registers::cell_voltages.to_i: cell_voltages
             registers::hardware.to_i: hardware
-        size: len_data
+    enums:
+      status:
+        0x00: ok
+        0x80: fail

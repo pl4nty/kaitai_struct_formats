@@ -99,18 +99,18 @@ types:
       - id: num_points
         type: s2
       - id: points
+        type: point_s
         repeat: expr
         repeat-expr: num_points
-        type: point_s
   params_polygon:
     doc-ref: section 2.3.3.15 = params_polyline
     seq:
       - id: num_points
         type: s2
       - id: points
+        type: point_s
         repeat: expr
         repeat-expr: num_points
-        type: point_s
   # section 2.3.5.14
   #params_setbkcolor:
   #  seq:

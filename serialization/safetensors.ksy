@@ -8,12 +8,12 @@ meta:
     - safetensors
     - sftr
   license: Unlicense
-  endian: le
-  encoding: utf-8
   imports:
     - /common/ndarray_descriptor
     - /common/ndarray
   ks-opaque-types: true
+  encoding: UTF-8
+  endian: le
 doc: |
   Serialization format used by HuggingFace to allow safe deserialization of pytorch models.
   To parse it properly you need a parser for JSON.
@@ -27,9 +27,9 @@ seq:
   - id: preheader
     type: preheader
   - id: header_str
-    type: strz
-    encoding: ascii
     size: preheader.header_size
+    type: strz
+    encoding: ASCII
     doc: |
       {"__metadata__":{"string": "string"},"tensor_name":{"dtype":"U8","shape":[6],"data_offsets":[0,6]}}
   - id: tensors
@@ -91,8 +91,8 @@ types:
         -affected-by: 314
         seq:
           - id: name
-            type: str
             size: 0
+            type: str
 
           - id: offsets
             type: range

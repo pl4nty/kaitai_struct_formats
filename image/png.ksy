@@ -321,12 +321,12 @@ types:
         type: u4
     instances:
       max_content_light_level:
-        value: max_content_light_level_int * 0.0001
         -orig-id: MaxCLL
+        value: max_content_light_level_int * 0.0001
         doc: Maximum Content Light Level (MaxCLL), in cd/m^2
       max_frame_average_light_level:
-        value: max_frame_average_light_level_int * 0.0001
         -orig-id: MaxFALL
+        value: max_frame_average_light_level_int * 0.0001
         doc: Maximum Frame Average Light Level (MaxFALL), in cd/m^2
   chrm_chunk:
     doc-ref: https://www.w3.org/TR/png/#11cHRM
@@ -407,8 +407,8 @@ types:
         valid: compression_methods::zlib
       - id: profile
         size-eos: true
-        process: zlib
         type: icc_4
+        process: zlib
         doc: |
           Embedded ICC profile.
 
@@ -892,8 +892,8 @@ types:
         if: compression_flag == 0
       - id: text_zlib
         size-eos: true
-        process: zlib
         type: international_text
+        process: zlib
         if: compression_flag == 1
         -affected-by:
           - 374 # `process/switch-on` would help here
@@ -914,9 +914,9 @@ types:
   international_text:
     seq:
       - id: value
+        size-eos: true
         type: str
         encoding: UTF-8
-        size-eos: true
         doc: |
           Text string (the "value" of this key-value pair), written in language
           specified in `_parent.language_tag`.
@@ -952,8 +952,8 @@ types:
           not permitted.
         doc-ref: https://www.w3.org/TR/2025/REC-png-3-20250624/#11keywords
       - id: text
-        type: str
         size-eos: true
+        type: str
         encoding: ISO-8859-1
         doc: |
           Text string (the "value" of this key-value pair).
@@ -992,15 +992,15 @@ types:
         valid: compression_methods::zlib
       - id: text
         size-eos: true
-        process: zlib
         type: compressed_text
+        process: zlib
         -affected-by: 706 # `process` does not work with `type: str`
   compressed_text:
     seq:
       - id: value
+        size-eos: true
         type: str
         encoding: ISO-8859-1
-        size-eos: true
         doc: |
           Text string (the "value" of this key-value pair).
 
@@ -1118,15 +1118,15 @@ types:
     doc-ref: https://stackoverflow.com/questions/4242402/the-fireworks-png-format-any-insight-any-libs/51683285#51683285
     seq:
       - id: preview_data
-        process: zlib
         size-eos: true
+        process: zlib
   evernote_skmf_chunk:
     doc-ref: https://web.archive.org/web/20210302212148/https://discussion.evernote.com/forums/topic/88532-how-to-extract-annotation-information-from-annotated-evernoteskitch-images/#comment-451501
     seq:
       - id: json
+        size-eos: true
         type: str
         encoding: UTF-8
-        size-eos: true
         doc: |
           JSON document with information about editable annotations (text,
           lines, paths, etc.) in Evernote/Skitch.

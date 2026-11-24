@@ -1,11 +1,11 @@
 meta:
   id: zyimage_footer
-  license: GPL-2.0
   title: Image header used in Zyxel devices official firmware
   xref:
     wikidata: Q245283
+  license: GPL-2.0
+  encoding: UTF-8
   endian: le
-  encoding: utf-8
 
 -license: |
   Copyright (C) 2014 Soul Trace <S-trace@list.ru>
@@ -31,8 +31,8 @@ types:
         type: u4
         enum: device_id
       - id: firmware_version
-        type: strz
         size: 48
+        type: strz
       - id: crc32
         type: u4
 

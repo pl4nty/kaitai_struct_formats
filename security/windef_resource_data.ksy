@@ -1,10 +1,10 @@
 meta:
   id: windef_resource_data
-  application: Windows Defender
-  endian: le
   title: Windows Defender quarantine resourcedata file
+  application: Windows Defender
   license: MIT
   ks-version: 0.9
+  endian: le
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
   ResourceData files store suspected malware and metadata and are created by Windows Defender.
@@ -14,6 +14,7 @@ doc: |
 doc-ref: https://github.com/ernw/quarantine-formats/blob/master/docs/Windows_Defender.md
 seq:
   - id: encryptedfile
+    size-eos: true
     type: rc4encrypted
     process: util.custom_arc4.custom_arc4([0x1E, 0x87, 0x78, 0x1B, 0x8D, 0xBA, 0xA8, 0x44, 0xCE, 0x69,
                                            0x70, 0x2C, 0x0C, 0x78, 0xB7, 0x86, 0xA3, 0xF6, 0x23, 0xB7,
@@ -42,20 +43,19 @@ seq:
                                            0xF2, 0x76, 0x5E, 0x1A, 0x95, 0xCB, 0x7C, 0xA4, 0xC3, 0xDD,
                                            0xAB, 0xDD, 0xBF, 0xF3, 0x82, 0x53
                                           ])
-    size-eos: true
 types:
   rc4encrypted:
     seq:
       - id: fixed
-        contents: [0x03, 0, 0, 0, 0x02, 0, 0, 0]
         size: 8
+        contents: [0x03, 0, 0, 0, 0x02, 0, 0, 0]
       - id: len_binarysd
         type: u4
       - id: padding
         size: 0x08
       - id: binarysd
-        type: binarysd
         size: len_binarysd
+        type: binarysd
       - id: unknown1
         size: 0x08
       - id: len_mal_file
@@ -66,21 +66,21 @@ types:
         size: len_mal_file
   binarysd:
     seq:
-    - id: revision
-      type: u1
-    - id: reserved
-      size: 1
-      contents: [0]
-    - id: flags
-      type: binarysd_flags
-    - id: owner_offset
-      type: u4
-    - id: group_offset
-      type: u4
-    - id: sacl_offset
-      type: u4
-    - id: dacl_offset
-      type: u4
+      - id: revision
+        type: u1
+      - id: reserved
+        size: 1
+        contents: [0]
+      - id: flags
+        type: binarysd_flags
+      - id: owner_offset
+        type: u4
+      - id: group_offset
+        type: u4
+      - id: sacl_offset
+        type: u4
+      - id: dacl_offset
+        type: u4
     instances:
       owner:
         pos: owner_offset
@@ -163,8 +163,8 @@ types:
         size: 2
         contents: [0, 0]
       - id: ace_list
-        type: ace_list
         size: acl_size - 8
+        type: ace_list
   ace_list:
     seq:
       - id: ace
@@ -182,26 +182,26 @@ types:
       - id: access_mask
         type: access_mask
       - id: sid
-        type: sid
         size: ace_size - 8
+        type: sid
   ace_flags:
     seq:
-        - id: failed_access
-          type: b1
-        - id: successful_access
-          type: b1
-        - id: unknown
-          type: b1
-        - id: inherited
-          type: b1
-        - id: inherit_only
-          type: b1
-        - id: no_propagate_inherit
-          type: b1
-        - id: container_inherit
-          type: b1
-        - id: object_inherit
-          type: b1
+      - id: failed_access
+        type: b1
+      - id: successful_access
+        type: b1
+      - id: unknown
+        type: b1
+      - id: inherited
+        type: b1
+      - id: inherit_only
+        type: b1
+      - id: no_propagate_inherit
+        type: b1
+      - id: container_inherit
+        type: b1
+      - id: object_inherit
+        type: b1
   access_mask:
     doc-ref: https://docs.microsoft.com/en-us/windows/win32/secauthz/access-mask
     seq:

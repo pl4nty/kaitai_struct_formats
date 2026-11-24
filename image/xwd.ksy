@@ -38,8 +38,8 @@ types:
         doc: X11WD file version (always 07h)
       - id: pixmap_format
         type: u4
-        doc: Format of the image data
         enum: pixmap_format
+        doc: Format of the image data
       - id: pixmap_depth
         type: u4
         doc: Pixmap depth in pixels - in practice, bits per pixel
@@ -54,8 +54,8 @@ types:
         doc: Bitmap X offset (number of pixels to ignore at the beginning of each scan-line)
       - id: byte_order
         type: u4
-        doc: Byte order of image data
         enum: byte_order
+        doc: Byte order of image data
       - id: bitmap_unit
         type: u4
         doc: Bitmap base data size
@@ -73,8 +73,8 @@ types:
         doc: Bytes per scan-line
       - id: visual_class
         type: u4
-        doc: Class of the image
         enum: visual_class
+        doc: Class of the image
       - id: red_mask
         type: u4
         doc: Red mask

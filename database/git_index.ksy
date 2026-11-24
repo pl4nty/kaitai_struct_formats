@@ -3,9 +3,9 @@ meta:
   title: Git index
   license: CC0-1.0
   ks-version: 0.9
+  encoding: UTF-8
   endian: be
   bit-endian: be
-  encoding: UTF-8
 doc-ref: https://github.com/git/git/blob/e6ebfd0e8c/Documentation/technical/index-format.txt
 seq:
   - id: header
@@ -60,8 +60,8 @@ types:
       - id: inode
         type: u4
       - id: mode
-        type: mode
         size: 4
+        type: mode
       - id: uid
         type: u4
       - id: gid
@@ -74,8 +74,8 @@ types:
       - id: name_flag
         type: name_flag
       - id: name
-        type: str
         size: name_flag.len_name
+        type: str
   mode:
     seq:
       - id: unused

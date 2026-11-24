@@ -25,14 +25,14 @@ doc-ref:
 
 seq:
   - id: header
-    type: vbmeta_header
     size: 256
+    type: vbmeta_header
   - id: authentication_data
-    type: vbmeta_authentication_data
     size: header.authentication_data_block_size
+    type: vbmeta_authentication_data
   - id: auxiliary_data
-    type: vbmeta_auxiliary_data
     size: header.auxiliary_data_block_size
+    type: vbmeta_auxiliary_data
 
 types:
   position:
@@ -186,9 +186,9 @@ types:
       - id: reserved
         size: 60
       - id: partition_name
-        type: str
         size: partition_name_len
-        encoding: utf-8
+        type: str
+        encoding: UTF-8
       - id: salt
         size: salt_len
       - id: root_digest
@@ -213,9 +213,9 @@ types:
       - id: reserved
         size: 60
       - id: partition_name
-        type: str
         size: partition_name_len
-        encoding: utf-8
+        type: str
+        encoding: UTF-8
       - id: salt
         size: salt_len
       - id: digest
@@ -232,9 +232,9 @@ types:
       - id: kernel_cmdline_length
         type: u4
       - id: cmdline
-        type: str
         size: kernel_cmdline_length
-        encoding: utf-8
+        type: str
+        encoding: UTF-8
   chain_partition_descriptor:
     doc: A descriptor containing a pointer to signed integrity data stored on another partition.
     seq:
@@ -247,9 +247,9 @@ types:
       - id: reserved
         size: 64
       - id: partition_name
-        type: str
         size: partition_name_len
-        encoding: utf-8
+        type: str
+        encoding: UTF-8
       - id: public_key
         size: public_key_len
   vbmeta_descriptor:

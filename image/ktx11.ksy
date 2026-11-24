@@ -3,7 +3,7 @@ meta:
   title: KTX (Khronos) File Format
   license: CC0-1.0
   ks-version: 0.9
-  encoding: utf-8
+  encoding: UTF-8
 doc-ref: https://www.khronos.org/registry/KTX/specs/1.0/ktxspec_v1.html
 
 seq:

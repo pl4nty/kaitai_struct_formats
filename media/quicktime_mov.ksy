@@ -559,12 +559,12 @@ types:
           - id: len_entry
             type: u4
           - id: type
-            type: str
             size: 4
+            type: str
             encoding: ASCII
           - id: body
-            type: entry_body
             size: len_entry - 8
+            type: entry_body
       entry_body:
         seq:
           - id: version
@@ -577,8 +577,8 @@ types:
             if: _parent.type == 'urn '
           - id: location
             type: strz
-            encoding: UTF-8
             eos-error: false
+            encoding: UTF-8
             if: not _io.eof
             doc: |
               This field is probably incorrect sometimes (GDCL muxer seems to have a bug here)
@@ -679,12 +679,12 @@ types:
           - id: len_entry
             type: u4
           - id: format
-            type: str
             size: 4
+            type: str
             encoding: ASCII
           - id: body
-            type: entry_body
             size: len_entry - 8
+            type: entry_body
       entry_body:
         seq:
           - id: reserved

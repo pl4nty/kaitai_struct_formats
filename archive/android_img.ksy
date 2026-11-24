@@ -3,8 +3,8 @@ meta:
   title: Android Boot Image
   file-extension: img
   tags:
-    - archive
     - android
+    - archive
   license: CC0-1.0
   endian: le
 doc-ref:
@@ -49,18 +49,18 @@ types:
       - id: os_version
         type: os_version
       - id: name
-        type: strz
         size: 16
+        type: strz
         encoding: ASCII
       - id: cmdline
-        type: strz
         size: 512
+        type: strz
         encoding: ASCII
       - id: sha
         size: 32
       - id: extra_cmdline
-        type: strz
         size: 1024
+        type: strz
         encoding: ASCII
       - id: recovery_dtbo
         type: size_offset
@@ -146,8 +146,8 @@ types:
   header34:
     seq:
       - id: header
-        type: header34_contents
         size: 4096
+        type: header34_contents
       - id: kernel_img
         size: header.len_kernel
       - id: padding1
@@ -182,8 +182,8 @@ types:
       - id: header_version
         type: u4
       - id: cmdline
-        type: strz
         size: 1536
+        type: strz
         encoding: ASCII
       - id: len_signature
         type: u4

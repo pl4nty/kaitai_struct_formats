@@ -1,16 +1,16 @@
 meta:
   id: space_rangers_qm
   title: Space Rangers Text Quest
-  file-extension:
-    - qm
-    - qmm
-  license: Unlicense
-  endian: le
-  encoding: utf-16le
   application:
     - TGE
     - Space Rangers
     - Space Rangers 2: Dominators
+  file-extension:
+    - qm
+    - qmm
+  license: Unlicense
+  encoding: UTF-16LE
+  endian: le
 doc: |
   You can download quests from: 
     * the sites mentioned on https://ifwiki.ru/TGE
@@ -20,17 +20,6 @@ doc-ref:
   - "https://github.com/roginvs/space-rangers-quest/blob/master/src/lib/qmreader.ts"
   - "https://github.com/ObKo/OpenSR/blob/rework/QM/QM.cpp https://github.com/ObKo/OpenSR/blob/rework/include/OpenSR/QM/QM.h"
   - "https://github.com/VirRus77/Space-Rangers-Quests/blob/master/SpaceRangersQuests.Model/FileQuest.cs"
-instances:
-  description_count:
-    value: 10
-  format_version:
-    value: (format_version_num & 0xF)
-  parameter_count_comp:
-    value: (6 << format_version)
-  parameter_count_comp_1:
-    value: 'parameter_count_comp < 48 ? 48 : parameter_count_comp'
-  parameter_count:
-    value: ((format_version<6)?parameter_count_comp_1:parameter_count_num)
 seq:
   - id: signature
     contents: [0xD3, 0x35, 0x3A]
@@ -127,6 +116,17 @@ seq:
     type: transition
     repeat: expr
     repeat-expr: transition_count
+instances:
+  description_count:
+    value: 10
+  format_version:
+    value: (format_version_num & 0xF)
+  parameter_count_comp:
+    value: (6 << format_version)
+  parameter_count_comp_1:
+    value: 'parameter_count_comp < 48 ? 48 : parameter_count_comp'
+  parameter_count:
+    value: ((format_version<6)?parameter_count_comp_1:parameter_count_num)
 enums:
   success_condition:
     00: arrival

@@ -2,8 +2,8 @@ meta:
   id: rockchip_rkel
   title: Rockchip RKEL
   license: CC0-1.0
-  endian: le
   encoding: UTF-8
+  endian: le
 doc: |
   Image format found in devices with the Rockchip RK3566, such as the PineNote
   <https://wiki.pine64.org/wiki/PineNote>
@@ -32,8 +32,8 @@ types:
       - id: num_images
         type: u4
       - id: version
-        type: strz
         size-eos: true
+        type: strz
   images:
     params:
       - id: num_images
@@ -64,6 +64,6 @@ types:
         size: 8
     instances:
       image_data:
+        io: _root._io
         pos: ofs_image_data
         size: len_image_data
-        io: _root._io

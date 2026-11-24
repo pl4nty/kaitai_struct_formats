@@ -58,8 +58,8 @@ types:
           this part contains the header type,
           which determines the format of the data in the type-specific part of the header.
       - id: type_specific_part_raw_with_io
-        type: bytes_with_io
         size: common_part.len_header - common_part._sizeof
+        type: bytes_with_io
         doc: |
           Use `type_specific_part_raw` instead,
           unless you need access to this field's `_io`.
@@ -165,8 +165,8 @@ types:
             doc: |
               The ID of the `'dcmp'` resource that should be used to decompress this resource.
           - id: decompressor_specific_parameters_with_io
-            type: bytes_with_io
             size: 4
+            type: bytes_with_io
             doc: |
               Use `decompressor_specific_parameters` instead,
               unless you need access to this field's `_io`.

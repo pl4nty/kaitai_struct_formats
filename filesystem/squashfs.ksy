@@ -5,11 +5,11 @@ meta:
     - squashfs
     - snap
     - sqfs
-  endian: le
-  bit-endian: be
-  license: CC0-1.0
   xref:
     wikidata: Q389314
+  license: CC0-1.0
+  endian: le
+  bit-endian: be
 doc: |
   SquashFS is a compressed filesystem in a file, that can be read-only
   accessed from low memory devices. It is popular for booting LiveCDs and
@@ -19,6 +19,43 @@ doc-ref: https://github.com/AgentD/squashfs-tools-ng/blob/master/doc/format.txt
 seq:
   - id: superblock
     type: superblock
+instances:
+  id_table:
+    io: _root._io
+    pos: superblock.id_table_start
+    # ceil(id_count/2048)
+    type: "metablock_reference_list(((superblock.id_count%2048 >0) ? 1 : 0) + superblock.id_count/2048)"
+  xattr_id_table:
+    io: _root._io
+    pos: superblock.xattr_id_table_start
+    type: metablock_list
+    if: superblock.xattr_id_table_start != 0xffff_ffff_ffff_ffff
+  inode_table:
+    io: _root._io
+    pos: superblock.inode_table_start
+    size: (superblock.directory_table_start-superblock.inode_table_start)
+    type: inode_table
+  directory_table:
+    io: _root._io
+    pos: superblock.directory_table_start
+    size: (superblock.fragment_table_start-superblock.directory_table_start)
+    type: directory_table
+  fragment_table:
+    io: _root._io
+    pos: superblock.fragment_table_start
+    # ceil(frag_count*8/16384)
+    type: "metablock_reference_list(((superblock.frag_count%512 >0) ? 1 : 0) + superblock.frag_count/512)"
+  export_table:
+    io: _root._io
+    pos: superblock.export_table_start
+    # ceil(inode_count*8/8192)
+    type: "metablock_reference_list(((superblock.inode_count%1024 >0) ? 1 : 0) + superblock.inode_count/1024)"
+  fragments:
+    io: _root.fragment_table.data._io
+    type: fragments
+  uid_gid_entries:
+    io: _root.id_table.data._io
+    type: uid_gid_entries
 enums:
   compressor:
     1: zlib
@@ -42,43 +79,6 @@ enums:
     12: extended_character_device
     13: extended_named_pipe
     14: extended_socket
-instances:
-  id_table:
-    io: _root._io
-    pos: superblock.id_table_start
-    # ceil(id_count/2048)
-    type: "metablock_reference_list(((superblock.id_count%2048 >0) ? 1 : 0) + superblock.id_count/2048)"
-  xattr_id_table:
-    if: superblock.xattr_id_table_start != 0xffff_ffff_ffff_ffff
-    io: _root._io
-    pos: superblock.xattr_id_table_start
-    type: metablock_list
-  inode_table:
-    io: _root._io
-    pos: superblock.inode_table_start
-    type: inode_table
-    size: (superblock.directory_table_start-superblock.inode_table_start)
-  directory_table:
-    io: _root._io
-    pos: superblock.directory_table_start
-    type: directory_table
-    size: (superblock.fragment_table_start-superblock.directory_table_start)
-  fragment_table:
-    io: _root._io
-    pos: superblock.fragment_table_start
-    # ceil(frag_count*8/16384)
-    type: "metablock_reference_list(((superblock.frag_count%512 >0) ? 1 : 0) + superblock.frag_count/512)"
-  export_table:
-    io: _root._io
-    pos: superblock.export_table_start
-    # ceil(inode_count*8/8192)
-    type: "metablock_reference_list(((superblock.inode_count%1024 >0) ? 1 : 0) + superblock.inode_count/1024)"
-  fragments:
-    io: _root.fragment_table.data._io
-    type: fragments
-  uid_gid_entries:
-    io: _root.id_table.data._io
-    type: uid_gid_entries
 types:
   flags:
     seq:
@@ -169,6 +169,9 @@ types:
       - id: export_table_start
         type: u8
   inode_reference:
+    seq:
+      - id: raw
+        type: u8
     instances:
       inode_block_start:
         value: (raw >> 16) & 0xFFFFFFFF
@@ -177,28 +180,25 @@ types:
       inode_table:
         io: _root._io
         pos: _root.superblock.inode_table_start + inode_block_start
-        type: inode_table_entry(block_offset)
         size: (_root.superblock.directory_table_start-_root.superblock.inode_table_start-inode_block_start)
-    seq:
-      - id: raw
-        type: u8
+        type: inode_table_entry(block_offset)
   inode_table_entry:
     params:
       - id: offset
         type: u2
-    instances:
-      inode_header:
-        io: inodes._io
-        pos: offset
-        type: inode_header
     seq:
       - id: metablock_list
         type: metablock_list
       - id: inodes
         # we want to concatenate the data of all metablocks, so we fake a 0-sized entry here. the decode method will be called with an empty array, but the constructor has the needed netablocks
         size: 0
-        process: concat(metablock_list)
         type: block_content
+        process: concat(metablock_list)
+    instances:
+      inode_header:
+        io: inodes._io
+        pos: offset
+        type: inode_header
   inode_table:
     seq:
       - id: metablock_list
@@ -206,8 +206,8 @@ types:
       - id: inodes
         # we want to concatenate the data of all metablocks, so we fake a 0-sized entry here. the decode method will be called with an empty array, but the constructor has the needed netablocks
         size: 0
-        process: concat(metablock_list)
         type: inode_headers
+        process: concat(metablock_list)
   directory_table:
     seq:
       - id: metablock_list
@@ -215,8 +215,8 @@ types:
       - id: directory
         # we want to concatenate the data of all metablocks, so we fake a 0-sized entry here. the decode method will be called with an empty array, but the constructor has the needed netablocks
         size: 0
-        process: concat(metablock_list)
         type: block_content
+        process: concat(metablock_list)
   metablock_list:
     seq:
       - id: metablock
@@ -234,32 +234,32 @@ types:
       - id: data
         # we want to concatenate the data of all metablocks, so we fake a 0-sized entry here. the decode method will be called with an empty array, but the constructor has the needed netablocks
         size: 0
-        process: concat(metablock_reference)
         type: block_content
+        process: concat(metablock_reference)
   metablock_reference:
     params:
       - id: index
         type: u4
+    seq:
+      - id: position
+        type: u8
     instances:
       metablock:
         io: _root._io
         pos: position
         type: metablock
-    seq:
-      - id: position
-        type: u8
   metablock:
-    instances:
-      compression:
-        value: (compression_and_len&0x8000)==0
-      len_data:
-        value: compression_and_len&0x7FFF
     seq:
       - id: compression_and_len
         type: u2
       - id: data
         size: len_data
         type: uncompressed_data(compression, 8192, false)
+    instances:
+      compression:
+        value: (compression_and_len&0x8000)==0
+      len_data:
+        value: compression_and_len&0x7FFF
   uncompressed_data:
     params:
       - id: compression
@@ -291,10 +291,10 @@ types:
         type: s4
       - id: directory_entry
         type: directory_entry
-        # sanity check
-        if: count < 256
         repeat: expr
         repeat-expr: count + 1
+        # sanity check
+        if: count < 256
   directory_entry:
     seq:
       - id: offset
@@ -306,8 +306,8 @@ types:
       - id: name_size
         type: u2
       - id: name
-        type: str
         size: name_size + 1
+        type: str
         encoding: 'ASCII'
   inode_headers:
     seq:
@@ -339,17 +339,6 @@ types:
             'inode_type::basic_file': inode_header_basic_file
             'inode_type::extended_file': inode_header_extended_file
   inode_header_basic_directory:
-    instances:
-      directory_table:
-        io: _root._io
-        pos: _root.superblock.directory_table_start + dir_block_start
-        type: directory_table
-        size: (_root.superblock.fragment_table_start - _root.superblock.directory_table_start - dir_block_start)
-      dir:
-        io: directory_table.directory._io
-        pos: block_offset
-        size: file_size - 3
-        type: directory
     seq:
       - id: dir_block_start
         type: u4
@@ -361,18 +350,18 @@ types:
         type: u2
       - id: parent_inode_number
         type: u4
-  inode_header_extended_directory:
     instances:
       directory_table:
         io: _root._io
         pos: _root.superblock.directory_table_start + dir_block_start
-        type: directory_table
         size: (_root.superblock.fragment_table_start - _root.superblock.directory_table_start - dir_block_start)
+        type: directory_table
       dir:
         io: directory_table.directory._io
         pos: block_offset
         size: file_size - 3
         type: directory
+  inode_header_extended_directory:
     seq:
       - id: hard_link_count
         type: u4
@@ -392,6 +381,17 @@ types:
         type: directory_index
         repeat: expr
         repeat-expr: num_index
+    instances:
+      directory_table:
+        io: _root._io
+        pos: _root.superblock.directory_table_start + dir_block_start
+        size: (_root.superblock.fragment_table_start - _root.superblock.directory_table_start - dir_block_start)
+        type: directory_table
+      dir:
+        io: directory_table.directory._io
+        pos: block_offset
+        size: file_size - 3
+        type: directory
   directory_index:
     seq:
       - id: index
@@ -401,14 +401,10 @@ types:
       - id: name_size
         type: u4
       - id: name
-        type: str
         size: name_size + 1
+        type: str
         encoding: 'ASCII'
   inode_header_basic_file:
-    instances:
-      fragment:
-        value: _root.fragments.fragments[frag_index]
-        if: frag_index!=0xFFFFFFFF
     seq:
       - id: blocks_start
         type: u4
@@ -421,21 +417,21 @@ types:
       - id: block_sizes
         type: u4
         repeat: expr
+        repeat-expr: "file_size / _root.superblock.block_size + (frag_index==0xFFFFFFFF and (file_size.as<f4> / _root.superblock.block_size.as<f4>) > file_size / _root.superblock.block_size ? 1 : 0)"
         doc: |
           A list of block sizes. If this file ends in a fragment, the size of this list is the number of full data
           blocks needed to store file_size bytes. If this file does not have a fragment, the size of the list is the 
           number of blocks needed to store file_size bytes, rounded up.
-        repeat-expr: "file_size / _root.superblock.block_size + (frag_index==0xFFFFFFFF and (file_size.as<f4> / _root.superblock.block_size.as<f4>) > file_size / _root.superblock.block_size ? 1 : 0)"
       - id: blocks
         size: 0
         type: data_block(_index==0?blocks_start:blocks[_index-1].start+blocks[_index-1].len_data, block_sizes[_index], _index!=block_sizes.size-1)
         repeat: expr
         repeat-expr: block_sizes.size
-  inode_header_extended_file:
     instances:
       fragment:
         value: _root.fragments.fragments[frag_index]
         if: frag_index!=0xFFFFFFFF
+  inode_header_extended_file:
     seq:
       - id: blocks_start
         type: u8
@@ -454,16 +450,20 @@ types:
       - id: block_sizes
         type: u4
         repeat: expr
+        repeat-expr: "file_size / _root.superblock.block_size + (frag_index==0xFFFFFFFF and (file_size.as<f4> / _root.superblock.block_size.as<f4>) > file_size / _root.superblock.block_size ? 1 : 0)"
         doc: |
           A list of block sizes. If this file ends in a fragment, the size of this list is the number of full data
           blocks needed to store file_size bytes. If this file does not have a fragment, the size of the list is the 
           number of blocks needed to store file_size bytes, rounded up.
-        repeat-expr: "file_size / _root.superblock.block_size + (frag_index==0xFFFFFFFF and (file_size.as<f4> / _root.superblock.block_size.as<f4>) > file_size / _root.superblock.block_size ? 1 : 0)"
       - id: blocks
         size: 0
         type: data_block(_index==0?blocks_start:blocks[_index-1].start+blocks[_index-1].len_data, block_sizes[_index], _index!=block_sizes.size-1)
         repeat: expr
         repeat-expr: block_sizes.size
+    instances:
+      fragment:
+        value: _root.fragments.fragments[frag_index]
+        if: frag_index!=0xFFFFFFFF
   data_block:
     params:
       - id: start

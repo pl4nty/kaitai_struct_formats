@@ -3,8 +3,8 @@ meta:
   title: SoundFont 2
   file-extension: sf2
   license: MIT
-  endian: le
   encoding: UTF-8 # though stated ASCII in the spec, UTF-8 is likely to be used as well
+  endian: le
 seq:
   - id: chunk
     type: riff_chunk
@@ -16,8 +16,8 @@ types:
       - id: len_body
         type: u4
       - id: body
-        type: sfbk_chunk_data
         size: len_body
+        type: sfbk_chunk_data
       - id: pad_byte
         size: len_body % 2
     types:
@@ -38,8 +38,8 @@ types:
       - id: len_body
         type: u4
       - id: body
-        type: info_chunk_data
         size: len_body
+        type: info_chunk_data
       - id: pad_byte
         size: len_body % 2
     types:
@@ -58,6 +58,7 @@ types:
           - id: len_body
             type: u4
           - id: body
+            size: len_body
             type:
               switch-on: chunk_id
               cases:
@@ -72,7 +73,6 @@ types:
                 'fourcc::icop': strz
                 'fourcc::icmt': strz
                 'fourcc::isft': strz
-            size: len_body
           - id: pad_byte
             size: len_body % 2
         types:
@@ -89,8 +89,8 @@ types:
       - id: len_body
         type: u4
       - id: body
-        type: sdta_chunk_data
         size: len_body
+        type: sdta_chunk_data
       - id: pad_byte
         size: len_body % 2
     types:
@@ -121,8 +121,8 @@ types:
               - id: len_body
                 type: u4
               - id: samples
-                type: samples_type
                 size: len_body
+                type: samples_type
               - id: pad_byte
                 size: len_body % 2
           sm24_chunk:
@@ -132,8 +132,8 @@ types:
               - id: len_body
                 type: u4
               - id: samples
-                type: samples_type
                 size: len_body
+                type: samples_type
               - id: pad_byte
                 size: len_body % 2
           samples_type: {}
@@ -144,8 +144,8 @@ types:
       - id: len_body
         type: u4
       - id: body
-        type: pdta_chunk_data
         size: len_body
+        type: pdta_chunk_data
       - id: pad_byte
         size: len_body % 2
     types:
@@ -366,8 +366,8 @@ types:
               sample_header:
                 seq:
                   - id: sample_name
-                    type: strz
                     size: 20
+                    type: strz
                   - id: start
                     type: u4
                   - id: end

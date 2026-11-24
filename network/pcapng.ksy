@@ -1,16 +1,16 @@
 meta:
   id: pcapng
   title: PCAP Next Generation Capture File Format
-  license: Unlicense
-  file-extension: pcapng
   application:
     - Wireshark
     - tcpdump
-  endian: le
-  encoding: utf-8
+  file-extension: pcapng
   xref:
     mime: application/x-pcapng
     # rfc: # TBD
+  license: Unlicense
+  encoding: UTF-8
+  endian: le
 doc: |
   Pcap-NG is a new format for captures superseding pcap.
 doc-ref:
@@ -226,7 +226,7 @@ types:
               id: ipv6_address
               -orig-id: if_IPv6addr
               doc: |
-                 address first, then prefix length
+                address first, then prefix length
             6:
               id: mac_address
               -orig-id: if_MACaddr
@@ -360,8 +360,8 @@ types:
         seq:
           - id: records
             -orig-id: Name Resolution Records
-            repeat: eos
             type: record
+            repeat: eos
           - id: options
             -orig-id: Options (variable)
             type: options
@@ -371,8 +371,8 @@ types:
             seq:
               - id: type
                 -orig-id: Record Type
-                enum: record_type
                 type: u2
+                enum: record_type
               - id: size
                 -orig-id: Record Value Length
                 type: u2

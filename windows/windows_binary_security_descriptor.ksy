@@ -1,9 +1,9 @@
 meta:
   id: windows_binary_security_descriptor
-  endian: le
   title: Windows Binary Security Descriptor parser
   license: MIT
   ks-version: 0.9
+  endian: le
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
 doc-ref: |
@@ -20,26 +20,26 @@ seq:
   - id: padding
     type: u8
   - id: binarysd
-    type: binarysd
     size: len_binarysd
+    type: binarysd
 types:
   binarysd:
     seq:
-    - id: revision
-      type: u1
-    - id: reserved
-      size: 1
-      contents: [0]
-    - id: flags
-      type: flags
-    - id: owner_offset
-      type: u4
-    - id: group_offset
-      type: u4
-    - id: sacl_offset
-      type: u4
-    - id: dacl_offset
-      type: u4
+      - id: revision
+        type: u1
+      - id: reserved
+        size: 1
+        contents: [0]
+      - id: flags
+        type: flags
+      - id: owner_offset
+        type: u4
+      - id: group_offset
+        type: u4
+      - id: sacl_offset
+        type: u4
+      - id: dacl_offset
+        type: u4
     instances:
       owner:
         pos: owner_offset
@@ -123,8 +123,8 @@ types:
         size: 2
         contents: [0, 0]
       - id: ace_list
-        type: ace_list
         size: acl_size - 8
+        type: ace_list
   ace_list:
     seq:
       - id: ace
@@ -142,26 +142,26 @@ types:
       - id: access_mask
         type: access_mask
       - id: sid
-        type: sid
         size: ace_size - 8
+        type: sid
   ace_flags:
     seq:
-        - id: failed_access
-          type: b1
-        - id: successful_access
-          type: b1
-        - id: unknown
-          type: b1
-        - id: inherited
-          type: b1
-        - id: inherit_only
-          type: b1
-        - id: no_propagate_inherit
-          type: b1
-        - id: container_inherit
-          type: b1
-        - id: object_inherit
-          type: b1
+      - id: failed_access
+        type: b1
+      - id: successful_access
+        type: b1
+      - id: unknown
+        type: b1
+      - id: inherited
+        type: b1
+      - id: inherit_only
+        type: b1
+      - id: no_propagate_inherit
+        type: b1
+      - id: container_inherit
+        type: b1
+      - id: object_inherit
+        type: b1
   access_mask:
     doc-ref: https://docs.microsoft.com/en-us/windows/win32/secauthz/access-mask
     seq:

@@ -2,9 +2,9 @@ meta:
   id: windows_timezone_information
   title: Microsoft Windows (DYNAMIC_)?TIME_ZONE_INFORMATION structure
   license: Unlicense
-  endian: le
   imports:
     - /windows/windows_systemtime
+  endian: le
 doc: |
   Microsoft Windows (DYNAMIC_)?TIME_ZONE_INFORMATION structure, stores info about timezone.
 
@@ -16,8 +16,8 @@ doc-ref:
   - _TIME_ZONE_INFORMATION
 seq:
   - id: basic
-    type: basic
     -orig-id: TIME_ZONE_INFORMATION
+    type: basic
   - id: dynamic
     type: dynamic
     if: _io.pos < _io.size
@@ -49,9 +49,9 @@ types:
         seq:
           - id: name
             -orig-id: StandardName, DaylightName
+            size: 32 * 2
             type: str
             encoding: utf-16
-            size: 32 * 2
           - id: date
             -orig-id: StandardDate, StandardDate
             type: windows_systemtime
@@ -64,9 +64,9 @@ types:
     seq:
       - id: time_zone_key_name
         -orig-id: TimeZoneKeyName
+        size: 128 * 2
         type: str
         encoding: utf-16
-        size: 128 * 2
       - id: dynamic_daylight_saving_disabled
         -orig-id: DynamicDaylightTimeDisabled
         type: u1

@@ -1,3 +1,9 @@
+meta:
+  id: roaringbitmap
+  title: Roaring Bitmap Portable Format
+  license: Apache-2.0
+  endian: le
+
 doc: |
   Roaring bitmaps are compressed bitmaps which tend to outperform
   conventional compressed bitmaps such as WAH, EWAH or Concise.
@@ -18,12 +24,6 @@ doc: |
   16-bit "chunks" (most significant bits + least significant bits).
   Each chunk is stored in a container, of which there are three types:
   array, bitset, and run containers.
-
-meta:
-  id: roaringbitmap
-  title: Roaring Bitmap Portable Format
-  license: Apache-2.0
-  endian: le
 
 seq:
   - id: magic
@@ -53,10 +53,10 @@ seq:
       cardinality of each container.
 
   - id: offset_header
-    if: (not has_runs) or (num_containers >= 4)
     type: u4
     repeat: expr
     repeat-expr: num_containers
+    if: (not has_runs) or (num_containers >= 4)
     doc: |
       Offset header containing the byte offsets of each container from the beginning
       of the stream. This is included if either:

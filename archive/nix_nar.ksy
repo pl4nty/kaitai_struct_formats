@@ -5,8 +5,8 @@ meta:
   license: MIT
   endian: le
 doc: |
-    Nix Archive (NAR) format. A simple, reproducible binary archive
-    format used by the Nix package manager to serialize file system objects.
+  Nix Archive (NAR) format. A simple, reproducible binary archive
+  format used by the Nix package manager to serialize file system objects.
 doc-ref: https://github.com/NixOS/nix/blob/88907193c54fcd5184cf59d14b693188e2875168/doc/manual/source/protocols/nix-archive/index.md Git tag "2.36.0"
 
 seq:
@@ -30,7 +30,7 @@ types:
       - id: body
         size: len_str
         type: str
-        encoding: 'ascii'
+        encoding: 'ASCII'
       - id: padding
         size: (8 - (len_str % 8)) % 8
 

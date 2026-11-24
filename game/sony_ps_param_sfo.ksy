@@ -1,10 +1,10 @@
 meta:
   id: sony_ps_param_sfo
   title: Sony PlayStation metadata file (PARAM.SFO)
-  endian: le
-  encoding: utf-8
-  license: Unlicense
   file-extension: SFO
+  license: Unlicense
+  encoding: UTF-8
+  endian: le
 doc: |
   Sony PlayStation is a popular game console series. PlayStation Portable is a portable one which was popular in 200x. Currently this file describes only the subset of the files available on PSP used for games saves metadata, though the format is used on most of PS consoles. Despite applications can use any files in the flash, the system has only GUI for choosing of saves. Each save is a subfolder in ms0:/PSP/SAVEDATA/ containing a set of files. PARAM.SFO is a mandatory metadata file created by sceUtilitySavedataInitStart function (and the underlying syscall). You can get these files by saving a game on PSP and then connecting it to a PC. Or you can use an emulator like [PPSSPP](https://github.com/hrydgard/ppsspp).
 seq:

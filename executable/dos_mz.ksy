@@ -31,8 +31,8 @@ seq:
     size: header.len_body
 instances:
   relocations:
-    pos: header.mz.ofs_relocations
     io: header._io
+    pos: header.mz.ofs_relocations
     type: relocation
     repeat: expr
     repeat-expr: header.mz.num_relocations

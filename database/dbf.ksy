@@ -33,8 +33,8 @@ seq:
   - id: header_terminator
     contents: [0x0D]
   - id: records
-    type: record
     size: header1.len_record
+    type: record
     repeat: expr
     repeat-expr: header1.num_records
 types:
@@ -61,11 +61,11 @@ types:
   header2:
     seq:
       - id: header_dbase_3
-        if: _root.header1.dbase_level == 3
         type: header_dbase_3
+        if: _root.header1.dbase_level == 3
       - id: header_dbase_7
-        if: _root.header1.dbase_level == 7
         type: header_dbase_7
+        if: _root.header1.dbase_level == 7
       - id: fields
         type: field
         repeat: eos
@@ -100,9 +100,9 @@ types:
   field:
     seq:
       - id: name
+        size: 11
         type: strz
         encoding: ASCII
-        size: 11
       - id: datatype
         type: u1
       - id: data_address

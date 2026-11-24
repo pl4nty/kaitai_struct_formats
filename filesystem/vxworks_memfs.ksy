@@ -2,8 +2,8 @@ meta:
   id: vxworks_memfs
   title: VxWorks memfs
   license: MIT
-  endian: be
   encoding: UTF-8
+  endian: be
 doc-ref:
   - https://blog.quarkslab.com/reverse-engineering-a-vxworks-os-based-router.html
   - https://web.archive.org/web/20110831171246/devttys0.com/2011/06/mystery-file-system
@@ -18,8 +18,8 @@ types:
   header:
     seq:
       - id: magic
-        contents: "owowowowowowowowowowowowowowowow"
         size: 32
+        contents: "owowowowowowowowowowowowowowowow"
       - id: version
         type: u4
         valid: 1

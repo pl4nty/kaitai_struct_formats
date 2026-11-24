@@ -3,13 +3,13 @@ meta:
   title: Microsoft Windows `dwOemId` union or just its `wProcessorArchitecture` field of various structures, describing general processor architecture
   license: Unlicense
   endian: le
+doc: |
+  Stores the info about Windows processor archiectures. By default takes 4 bytes with the second `reserved` field`. Limit to 2 bytes if you don't need that.
 doc-ref:
   - https://learn.microsoft.com/en-us/previous-versions/ms942639(v=msdn.10)
   - https://github.com/reactos/reactos/blob/fe777bb52f67921b26bf5791b06a5c712f5be3f6/sdk/include/ndk/ketypes.h#L105-L115
   - https://github.com/reactos/reactos/blob/4363e74ddcb26a528c2723ab0afe5af3443bde6f/sdk/include/xdk/winnt_old.h#L448-L458
   - https://github.com/mirror/mingw-w64/blob/0f2264e7b8fedbe225921367e82aeb97ddfed46b/mingw-w64-headers/include/winnt.h#L5472-L5488
-doc: |
-  Stores the info about Windows processor archiectures. By default takes 4 bytes with the second `reserved` field`. Limit to 2 bytes if you don't need that.
 -orig-id: dwOemId
 seq:
   - id: arch

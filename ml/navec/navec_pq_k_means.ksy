@@ -62,9 +62,9 @@ types:
           - qdim
           - num_subdim
         type: u4
-        doc: when quantising, big vector is sliced into multiple vectors, then these subvectors are clustered separately. This variable gives the count of parts in an original vector, and so count of components in quantized representations
         valid:
           max: 255  # single byte is an index, cannot really have moar
+        doc: when quantising, big vector is sliced into multiple vectors, then these subvectors are clustered separately. This variable gives the count of parts in an original vector, and so count of components in quantized representations
       - id: centroid_count
         -orig-id: centroids
         type: u4

@@ -140,8 +140,8 @@ types:
       - id: version
         type: u2
       - id: flags
-        type: gp_flags
         size: 2
+        type: gp_flags
       - id: compression_method
         type: u2
         enum: compression
@@ -159,8 +159,8 @@ types:
       - id: len_extra
         type: u2
       - id: file_name
-        type: str
         size: len_file_name
+        type: str
         encoding: UTF-8
       - id: extra
         size: len_extra
@@ -261,8 +261,8 @@ types:
       - id: ofs_local_header
         type: s4
       - id: file_name
-        type: str
         size: len_file_name
+        type: str
         encoding: UTF-8
       - id: extra
         size: len_extra
@@ -298,8 +298,8 @@ types:
         type: u8
         doc: size of zip64 end of central directory record
       - id: zip64_end_of_central_dir_body
-        type: zip64_end_of_central_dir_body
         size: len_record
+        type: zip64_end_of_central_dir_body
     types:
       zip64_end_of_central_dir_body:
         seq:
@@ -504,7 +504,7 @@ types:
           - id: name
             size-eos: true
             type: str
-            encoding: utf-8
+            encoding: UTF-8
             doc: UTF-8 version of the entry file name
       infozip_unix_var_size:
         doc-ref: 'https://github.com/LuaDist/zip/blob/b710806/proginfo/extrafld.txt#L1339'
@@ -533,7 +533,7 @@ types:
           - id: data
             size-eos: true
             type: str
-            encoding: utf-16le
+            encoding: UTF-16LE
       alzip_code_page:
         doc-ref: 'https://github.com/icsharpcode/SharpZipLib/issues/657'
         seq:

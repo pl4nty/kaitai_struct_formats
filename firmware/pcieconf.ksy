@@ -1,6 +1,5 @@
 meta:
   id: pcieconf
-  endian: le
   license: 0BSD
   imports:
     - pcieconf/bar_list
@@ -9,6 +8,7 @@ meta:
     - pcieconf/capabilities/vendor
     - pcieconf/capabilities/msix
     - pcieconf/capabilities/af
+  endian: le
 
 # TODO: EXPANSION ROM
 # TODO: header type 0x2 (PC Card Standard)
@@ -149,8 +149,8 @@ types:
   endpoint_layout:
     seq:
       - id: bar_list
-        type: bar_list
         size: 0x18
+        type: bar_list
       - id: cardbus_cis_pointer
         type: u4
       - id: subsystem_vendor_id
@@ -175,15 +175,15 @@ types:
         type: u1
     instances:
       capabilities_list:
-        type: capability
         pos: capabilities_pointer.masked_pointer
+        type: capability
         if: _root.status.capabilities_list
 
   pci_pci_bridge_layout:
     seq:
       - id: bar_list
-        type: bar_list
         size: 0x8
+        type: bar_list
       - id: primary_bus_number
         type: u1
       - id: secondary_bus_number
@@ -230,46 +230,46 @@ types:
         size: 2
     instances:
       capabilities_list:
-        type: capability
         pos: capabilities_pointer.masked_pointer
+        type: capability
         if: _root.status.capabilities_list
       io_base_32_addressing:
+        value:
+          io_base & 0x0f == 0x1
         doc-ref: |
           PCI-to-PCI Bridge Architecture Specification, Revision 1.1
           p41, Table 3-7: I/O Adressing Capability
-        value:
-          io_base & 0x0f == 0x1
       io_limit_32_addressing:
         value:
           io_limit & 0x0f == 0x1
       io_base_addr:
-        doc-ref: |
-          PCI-to-PCI Bridge Architecture Specification, Revision 1.1
-          p41, 3.2.5.6. I/O Base Register and I/O Limit Register
         value: >-
           ((io_base & 0xf0) << 8) |
           ( io_base_32_addressing ? io_base_upper << 16 : 0)
+        doc-ref: |
+          PCI-to-PCI Bridge Architecture Specification, Revision 1.1
+          p41, 3.2.5.6. I/O Base Register and I/O Limit Register
       io_limit_addr:
         value: >-
           ((io_limit & 0xf0) << 8) |
           ( io_limit_32_addressing ? io_limit_upper << 16 : 0) |
           0xfff
       memory_base_addr:
+        value:
+          (memory_base & 0xfff0) << 16
         doc-ref: |
           PCI-to-PCI Bridge Architecture Specification, Revision 1.1
           p45, 3.2.5.8. Memory Base Register and Memory Limit Register
-        value:
-          (memory_base & 0xfff0) << 16
       memory_limit_addr:
         value:
           (memory_limit & 0xfff0) << 16 | 0xfffff
       prefetchable_memory_base_64_addressing:
+        value:
+          prefetchable_memory_base & 0x0f == 0x1
         doc-ref: |
           PCI-to-PCI Bridge Architecture Specification, Revision 1.1
           p46, 3.2.5.9.Prefetchable Memory Base Register and Prefetchable
           Memory Limit Register
-        value:
-          prefetchable_memory_base & 0x0f == 0x1
       prefetchable_memory_limit_64_adressing:
         value:
           prefetchable_memory_limit & 0x0f == 0x1
@@ -368,9 +368,9 @@ types:
             'capability_id::af': af
     instances:
       next:
-        type: capability
-        pos: next_pointer.masked_pointer
         io: _root._io
+        pos: next_pointer.masked_pointer
+        type: capability
         if: next_pointer.masked_pointer != 0
 
   capability_pointer:

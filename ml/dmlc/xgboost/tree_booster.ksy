@@ -3,13 +3,13 @@ meta:
   title: xgboost tree booster
   application: xgboost
   license: Apache-2.0
-  endian: le # in fact machine-endian
-  encoding: ascii
   imports:
     - ../core/pas_str
     - ../core/str_pair_arr
     - ../core/f4_arr
     - ../core/str_arr
+  encoding: ASCII
+  endian: le # in fact machine-endian
   -orig-id: GBTreeModel
 doc: Gradient boosting tree ensembles
 doc-ref:
@@ -85,8 +85,8 @@ types:
           lower_bound: 0
           default : 0
       - id: reserved
-        type: reserved
         size: 32*4
+        type: reserved
   reg_tree:
     doc: |
       define regression tree to be the most common tree model.
@@ -105,8 +105,8 @@ types:
         repeat: expr
         repeat-expr: param.num_nodes
       - id: leaf_vector
-        type: f4_arr
         size: param.num_nodes * param.size_leaf_vector+8
+        type: f4_arr
         if: param.size_leaf_vector != 0
     types:
       node_stat:
@@ -138,21 +138,21 @@ types:
           entry:
             seq:
               - id: placeholder
-                type: placeholder
                 size: 4
+                type: placeholder
             instances:
               fvalue:
-                pos: 0
                 io: placeholder._io
+                pos: 0
                 type: f4
               flag:
-                pos: 0
                 io: placeholder._io
+                pos: 0
                 type: u4
       param:
-        doc-ref: https://github.com/dmlc/xgboost/blob/master/include/xgboost/tree_model.h#L26L63
-        -orig-id: TreeParam
         doc: model parameters
+        -orig-id: TreeParam
+        doc-ref: https://github.com/dmlc/xgboost/blob/master/include/xgboost/tree_model.h#L26L63
         seq:
           - id: num_roots
             type: u4
@@ -206,8 +206,8 @@ types:
             type: u4
             doc: split feature index, left split or right split depends on the highest bit
           - id: info_
-            type: f4
             -orig-id: Info info_
+            type: f4
             doc: |
               extra info
               in leaf node, we have weights, in non-leaf nodes, we have split condition
@@ -225,23 +225,23 @@ types:
             value: info_
             if: not is_leaf
           is_root:
-            doc: whether current node is root
             value: parent_packed == 0xffffffff
+            doc: whether current node is root
           parent:
-            doc: get parent of the node
             value: parent_packed & 0x7fffffff
+            doc: get parent of the node
           is_deleted:
-            doc: whether this node is deleted
             value: sindex_ == 0xffffffff
+            doc: whether this node is deleted
           is_left_child:
-            doc: whether current node is left child
             value: parent_packed & 0x80000000 != 0
+            doc: whether current node is left child
           split_index:
-            doc: feature index of split condition
             value: sindex_ & 0x7fffffff
+            doc: feature index of split condition
           default_left:
-            doc: when feature is unknown, whether goes to left child
             value: sindex_ & 0x80000000 != 0
+            doc: when feature is unknown, whether goes to left child
           is_leaf:
-            doc: whether current node is leaf node
             value: cleft_  == 0xffffffff
+            doc: whether current node is leaf node

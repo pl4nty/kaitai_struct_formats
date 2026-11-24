@@ -140,6 +140,8 @@ types:
         value: '_root.version >= 7 ? frame_type : frame_type::key'
         doc: The frame type; every version 6 frame is a keyframe.
   partial_delta:
+    meta:
+      bit-endian: le
     doc: |
       The frame is _root.lines lines of R bytes, divided into bands of
       band_height lines (the last may be shorter). Byte j of line y of a
@@ -147,8 +149,6 @@ types:
       previous frame when that line is in the same band and 0 <= j - dx < R,
       and is 0 otherwise; the band is its prediction XOR its residual. Bands
       not in the mask are unchanged.
-    meta:
-      bit-endian: le
     seq:
       - id: band_height
         type: u1
@@ -179,6 +179,8 @@ types:
       num_bands:
         value: (_root.lines + band_height - 1) / band_height
   region_delta:
+    meta:
+      bit-endian: le
     doc: |
       Version 8. Like a partial delta, but each changed band also gives the
       range of bytes along its lines that changed (x0 to x0 + xw - 1), and
@@ -187,8 +189,6 @@ types:
       in unchanged bands, the frame equals the previous one. A range starts
       and ends on whole pixels (a multiple of 2 bytes for rgb565*, 3 for
       rgb444, rgb666 and rgb888, 1 otherwise), or ends at the end of the line.
-    meta:
-      bit-endian: le
     seq:
       - id: band_height
         type: u1
@@ -229,9 +229,9 @@ types:
         doc: Shift along the line, in bytes.
       - id: dy
         type: s1
-        if: changed
         valid:
           expr: _ > -band_height and _ < band_height
+        if: changed
         doc: Shift across lines, less than the band height either way.
       - id: x0
         type: u2le
@@ -239,9 +239,9 @@ types:
         doc: First byte of the range along each line.
       - id: xw
         type: u2le
-        if: changed
         valid:
           min: 1
+        if: changed
         doc: Bytes in the range.
   band_shift:
     params:
@@ -256,9 +256,9 @@ types:
         doc: Shift along the line, in bytes.
       - id: dy
         type: s1
-        if: changed
         valid:
           expr: _ > -band_height and _ < band_height
+        if: changed
         doc: Shift across lines, less than the band height either way.
 enums:
   pixel_format:

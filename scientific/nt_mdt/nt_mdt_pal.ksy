@@ -1,16 +1,16 @@
 meta:
   id: nt_mdt_pal
-  file-extension: pal
-  endian: be
-  encoding: UTF-16LE
   title: NT-MDT palette format
   application:
     - Nova
     - Image Analysis
     - NanoEducator
+  file-extension: pal
   license: Unlicense
   imports:
     - ./nt_mdt_color_table
+  encoding: UTF-16LE
+  endian: be
 doc: It is a color scheme for visualising SPM scans.
 seq:
   - id: signature
@@ -43,6 +43,6 @@ types:
         type: u2
     instances:
       color_table:
-        pos: color_table_ptr
         io: _root._io
+        pos: color_table_ptr
         type: nt_mdt_color_table(colors_count, title_len)

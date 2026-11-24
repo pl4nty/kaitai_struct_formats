@@ -3,8 +3,8 @@ meta:
   title: Huawei Bootloader packed image format
   file-extension: img
   tags:
-    - archive
     - android
+    - archive
   license: CC0-1.0
   # The `releasetools.py` script is written for Python 2, where the default
   # encoding is ASCII.

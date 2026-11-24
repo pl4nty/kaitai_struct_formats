@@ -34,7 +34,7 @@ seq:
   - id: len_file
     type: u4
     doc: |
-       The number of bytes in the entire file.
+      The number of bytes in the entire file.
   - size: len_header - _io.pos
   - id: sections
     type: tagged_section
@@ -254,32 +254,32 @@ types:
         type: u4
         if: len_entry > 43
       - id: comment
-        type: str
         size: len_comment
-        encoding: utf-16be
+        type: str
+        encoding: UTF-16BE
+        if: len_entry > 43
         doc: |
           The comment assigned to this cue by the DJ, if any, with a trailing NUL.
-        if: len_entry > 43
       - id: color_code
         type: u1
+        if: (len_entry - len_comment) > 44
         doc: |
           A lookup value for a color table? We use this to index to the hot cue colors shown in rekordbox.
-        if: (len_entry - len_comment) > 44
       - id: color_red
         type: u1
+        if: (len_entry - len_comment) > 45
         doc: |
           The red component of the hot cue color to be displayed.
-        if: (len_entry - len_comment) > 45
       - id: color_green
         type: u1
+        if: (len_entry - len_comment) > 46
         doc: |
           The green component of the hot cue color to be displayed.
-        if: (len_entry - len_comment) > 46
       - id: color_blue
         type: u1
+        if: (len_entry - len_comment) > 47
         doc: |
           The blue component of the hot cue color to be displayed.
-        if: (len_entry - len_comment) > 47
       - size: len_entry - 48 - len_comment  # The remainder after the color
         if: (len_entry - len_comment) > 48
 
@@ -291,9 +291,9 @@ types:
       - id: len_path
         type: u4
       - id: path
-        type: str
         size: len_path - 2
-        encoding: utf-16be
+        type: str
+        encoding: UTF-16BE
         if: len_path > 1
 
   vbr_tag:
@@ -321,9 +321,9 @@ types:
       - type: u4  # This seems to always have the value 0x10000
       - id: data
         size: len_preview
+        if: _parent.len_tag > _parent.len_header
         doc: |
           The actual bytes of the waveform preview.
-        if: _parent.len_tag > _parent.len_header
 
   wave_scroll_tag:
     doc: |

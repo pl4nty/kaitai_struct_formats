@@ -138,16 +138,16 @@ types:
     seq:
       - id: val
         type: str
-        encoding: ascii
         terminator: 0x0a # "\n"
+        encoding: ASCII
 
   decimalnl_long:
     doc: Integer, encoded with the ASCII characters [0-9-], followed by 'L'.
     seq:
       - id: val
         type: str
-        encoding: ascii
         terminator: 0x0a # "\n"
+        encoding: ASCII
 
   # TODO Can kaitai express constraint that these are quoted?
   stringnl:
@@ -155,16 +155,16 @@ types:
     seq:
       - id: val
         type: str
-        encoding: ascii
         terminator: 0x0a # "\n"
+        encoding: ASCII
 
   stringnl_noescape:
     doc: Unquoted string, does not contain string escapes.
     seq:
       - id: val
         type: str
-        encoding: ascii
         terminator: 0x0a # "\n"
+        encoding: ASCII
 
   stringnl_noescape_pair:
     doc: Pair of unquoted, unescaped strings.
@@ -179,8 +179,8 @@ types:
     seq:
       - id: val
         type: str
-        encoding: ascii
         terminator: 0x0a # "\n"
+        encoding: ASCII
 
   floatnl:
     doc: |
@@ -189,8 +189,8 @@ types:
     seq:
       - id: val
         type: str
-        encoding: ascii
         terminator: 0x0a # "\n"
+        encoding: ASCII
 
   long1:
     doc: |
@@ -298,9 +298,9 @@ types:
       - id: len
         type: u1
       - id: val
-        type: str
-        encoding: utf8
         size: len
+        type: str
+        encoding: UTF-8
 
   unicodestring4:
     doc: Length prefixed string, between 0 and 2**32-1 bytes long
@@ -308,9 +308,9 @@ types:
       - id: len
         type: u4
       - id: val
-        type: str
-        encoding: utf8
         size: len
+        type: str
+        encoding: UTF-8
 
   unicodestring8:
     doc: |
@@ -324,9 +324,9 @@ types:
       - id: len
         type: u8
       - id: val
-        type: str
-        encoding: utf8
         size: len
+        type: str
+        encoding: UTF-8
 
   no_arg:
     doc: Some opcodes take no argument, this empty type is used for them.

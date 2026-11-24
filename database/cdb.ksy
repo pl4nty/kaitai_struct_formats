@@ -1,10 +1,9 @@
 meta:
   id: cdb
   file-extension: cdb
-  endian: le
-  encoding: ASCII
   license: CC0-1.0
-doc-ref: https://cr.yp.to/cdb/cdb.txt
+  encoding: ASCII
+  endian: le
 doc: |
   A cdb is an associative array: it maps strings (``keys'') to strings
   (``data'').
@@ -16,6 +15,7 @@ doc: |
     +----------------+---------+-------+-------+-----+---------+
     | p0 p1 ... p255 | records | hash0 | hash1 | ... | hash255 |
     +----------------+---------+-------+-------+-----+---------+
+doc-ref: https://cr.yp.to/cdb/cdb.txt
 seq:
   - id: pointers
     type: pointer
@@ -54,11 +54,11 @@ types:
       - id: record_value_length
         type: u4le
       - id: record_key
-        type: str
         size: record_key_length
-      - id: record_value
         type: str
+      - id: record_value
         size: record_value_length
+        type: str
   hash_table:
     params:
       - id: idx

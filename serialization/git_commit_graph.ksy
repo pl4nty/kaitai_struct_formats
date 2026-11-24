@@ -1,8 +1,8 @@
 meta:
   id: git_commit_graph
-  endian: le
   license: Unlicense
-  encoding: utf-8
+  encoding: UTF-8
+  endian: le
 
 doc: |
   Black-box reverse-engineered Git Commit Graph Blob format.
@@ -18,8 +18,8 @@ types:
   record:
     seq:
       - id: signature
-        type: str
         size: 4
+        type: str
       - id: record
         type:
           switch-on: signature

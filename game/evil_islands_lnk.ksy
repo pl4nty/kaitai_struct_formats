@@ -20,12 +20,12 @@ types:
       - id: len_name
         type: u4
       - id: name
-        type: str
-        encoding: cp1251
         size: len_name
+        type: str
+        encoding: windows-1251
       - id: len_parent_name
         type: u4
       - id: parent_name
-        type: str
-        encoding: cp1251
         size: len_parent_name
+        type: str
+        encoding: windows-1251

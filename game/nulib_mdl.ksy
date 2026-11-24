@@ -1,8 +1,8 @@
 meta:
   id: nulib_mdl
-  file-extension: mdl
-  application: Games with Namco NU library
   title: Namco 3D Model Archive
+  application: Games with Namco NU library
+  file-extension: mdl
   license: MIT
   imports:
     - nulib_xmd
@@ -12,8 +12,8 @@ seq:
     type: nulib_xmd
 instances:
   models:
-    type: model(_index)
     io: _root._io
+    type: model(_index)
     repeat: expr
     repeat-expr: xmd.header.count
 
@@ -28,6 +28,6 @@ types:
       len_nud:
         value: _root.xmd.lengths[i]
       nud:
-        type: nulib_nud
         pos: _root.xmd.positions[i]
         size: len_nud
+        type: nulib_nud

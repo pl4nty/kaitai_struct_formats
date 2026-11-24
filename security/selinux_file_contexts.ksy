@@ -32,14 +32,14 @@ seq:
   - id: len_pcre_version
     type: u4
   - id: pcre_version
-    type: strz
     size: len_pcre_version
+    type: strz
   - id: len_regex_arch
     type: u4
     if: version > 4
   - id: regex_arch
-    type: strz
     size: len_regex_arch
+    type: strz
     if: version > 4
   - id: num_stems
     type: u4
@@ -60,21 +60,21 @@ types:
         type: u4
         # EXCLUDING NUL
       - id: stem
-        type: strz
         size: len_stem + 1
+        type: strz
         # INCLUDING NUL
   regex:
     seq:
       - id: len_context
         type: u4
       - id: raw_context
-        type: strz
         size: len_context
+        type: strz
       - id: len_regex_str
         type: u4
       - id: regex_str
-        type: strz
         size: len_regex_str
+        type: strz
       - id: mode_bits
         type: u4
       - id: stem_id

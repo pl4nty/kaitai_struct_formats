@@ -6,8 +6,8 @@ meta:
 doc-ref: https://github.com/serpent-os/libmoss/blob/841a6d67/source/moss/format/binary/archive_header.d
 seq:
   - id: header
-    type: header
     size: 32
+    type: header
   - id: payloads
     type: payload
     repeat: expr

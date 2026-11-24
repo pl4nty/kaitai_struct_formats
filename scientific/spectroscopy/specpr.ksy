@@ -4,7 +4,7 @@ meta:
   file-extension: spec
   license: Unlicense
   #encoding: "utf-8"
-  encoding: "ascii"
+  encoding: "ASCII"
   endian: be
 doc: |
   Specpr records are fixed format, 1536 bytes/record. Record number
@@ -74,26 +74,26 @@ types:
   identifiers:
     seq:
       - id: ititle
-        type: str
         size: 40
+        type: str
         pad-right: 0x20
         doc: "Title which describes the data"
       - id: usernm
-        type: str
         size: 8
+        type: str
         doc: "The name of the user who created the data record"
   coarse_timestamp:
     seq:
-     - id: scaled_seconds
-       type: s4
+      - id: scaled_seconds
+        type: s4
     instances:
       seconds:
         value: scaled_seconds * 24000.
   illum_angle:
     seq:
-     - id: angl
-       type: s4
-       doc: >
+      - id: angl
+        type: s4
+        doc: >
           (Integer*4 number, in arc-seconds*6000).
           (90 degrees=1944000000; -90 deg <= angle <= 90 deg)
     instances:
@@ -139,9 +139,9 @@ types:
         doc: "The number of independent spectral scans which were added to make the spectrum (integer*4 number)."
       - id: iband
         type: s4
-        doc: "The channel numbers which define the band normalization (scaling to unity). (integers*4)."
         repeat: expr
         repeat-expr: 2
+        doc: "The channel numbers which define the band normalization (scaling to unity). (integers*4)."
       - id: irwav
         type: s4
         doc: "The record number within the file where the wavelengths are found (integer*4)."
@@ -155,16 +155,16 @@ types:
         type: s4
         doc: "Text data record pointer. This pointer points to a data record where additional text describing the data may be found.  (32 bit integer)"
       - id: ihist
-        type: str
         size: 60
+        type: str
         pad-right: 0x20
         doc: "The program automatic 60 character history."
       - id: mhist
-        type: str
         size: 74
-        doc: "Manual history. Program automatic for large history requirements."
+        type: str
         repeat: expr
         repeat-expr: 4
+        doc: "Manual history. Program automatic for large history requirements."
       - id: nruns
         type: s4
         doc: "The number of independent spectral runs which were summed or averaged to make this spectrum (integer*4)."
@@ -207,9 +207,9 @@ types:
         doc: "Temperature in degrees Kelvin (32 bit real number)."
       - id: data
         type: f4
-        doc: "The spectral data (256 channels of 32 bit real data numbers)."
         repeat: expr
         repeat-expr: 256
+        doc: "The spectral data (256 channels of 32 bit real data numbers)."
     instances:
       phase_angle_arcsec:
         value: sphase / 1500.
@@ -232,29 +232,29 @@ types:
         type: s4
         doc: "The number of text characters (maximum= 19860)."
       - id: itext
-        type: str
         size: 1476
+        type: str
         doc: "1476 characters of text.  Text has embedded newlines so the number of lines available is limited only by the number of characters available."
   text_continuation:
     seq:
       - id: tdata
-        type: str
         size: 1532
+        type: str
         doc: "1532 characters of text."
   record:
     seq:
-    - id: icflag
-      type: icflag
-      doc: "Total number of bytes comprising the document."
-    - id: content
-      size: 1536 - 4
-      type:
-        switch-on: icflag.type
-        cases:
-          'record_type::data_initial': data_initial
-          'record_type::data_continuation': data_continuation
-          'record_type::text_initial': text_initial
-          'record_type::text_continuation': text_continuation
+      - id: icflag
+        type: icflag
+        doc: "Total number of bytes comprising the document."
+      - id: content
+        size: 1536 - 4
+        type:
+          switch-on: icflag.type
+          cases:
+            'record_type::data_initial': data_initial
+            'record_type::data_continuation': data_continuation
+            'record_type::text_initial': text_initial
+            'record_type::text_continuation': text_continuation
 enums:
   record_type: # if I use 0b notation it doesn't work
     0: data_initial

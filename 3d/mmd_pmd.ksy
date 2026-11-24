@@ -3,9 +3,9 @@ meta:
   title: MMD (MikuMikuDance) model data (older format)
   application: MikuMikuDance
   file-extension: pmd
+  license: MIT
   encoding: Shift_JIS
   endian: le
-  license: MIT
 
 doc: |
   PMD is the older format for storing MikuMikuDance (MMD) model data.
@@ -110,11 +110,11 @@ types:
       - id: version
         type: u4
       - id: model_name
-        type: strz
         size: 20
-      - id: comment
         type: strz
+      - id: comment
         size: 256
+        type: strz
 
   vertex:
     seq:
@@ -157,14 +157,14 @@ types:
       - id: face_vertex_count
         type: u4
       - id: file_name
-        type: strz
         size: 20
+        type: strz
 
   bone:
     seq:
       - id: name
-        type: strz
         size: 20
+        type: strz
       - id: parent_index
         type: u2
       - id: tail_index
@@ -196,8 +196,8 @@ types:
   morph:
     seq:
       - id: name
-        type: strz
         size: 20
+        type: strz
       - id: element_count
         type: u4
       - id: type
@@ -222,8 +222,8 @@ types:
   bone_frame_name:
     seq:
       - id: name
-        type: strz
         size: 50
+        type: strz
 
   bone_frame:
     seq:
@@ -237,43 +237,43 @@ types:
       - id: compatibility
         type: u1
       - id: model_name
-        type: strz
         size: 20
+        type: strz
         if: compatibility > 0
       - id: comment
-        type: strz
         size: 256
+        type: strz
         if: compatibility > 0
 
   english_bone_name:
     seq:
       - id: name
-        type: strz
         size: 20
+        type: strz
 
   english_morph_name:
     seq:
       - id: name
-        type: strz
         size: 20
+        type: strz
 
   english_bone_frame_name:
     seq:
       - id: name
-        type: strz
         size: 50
+        type: strz
 
   toon_texture:
     seq:
       - id: file_name
-        type: strz
         size: 100
+        type: strz
 
   rigid_body:
     seq:
       - id: name
-        type: strz
         size: 20
+        type: strz
       - id: bone_index
         type: u2
       - id: group_index
@@ -308,8 +308,8 @@ types:
   constraint:
     seq:
       - id: name
-        type: strz
         size: 20
+        type: strz
       - id: rigid_body_indices
         type: u4
         repeat: expr

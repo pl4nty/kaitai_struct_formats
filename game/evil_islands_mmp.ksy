@@ -33,6 +33,7 @@ seq:
     type: u4
 instances:
   base_texture:
+    pos: ofs_base_texture + 76
     type:
       switch-on: fourcc
       cases:
@@ -40,7 +41,6 @@ instances:
         'pixel_formats::dxt3': block_dxt3
         'pixel_formats::pnt3': block_pnt3
         _: block_custom
-    pos: ofs_base_texture + 76
 types:
   block_pnt3:
     seq:

@@ -3,9 +3,9 @@ meta:
   title: ComponentAce Absolute Database embedded database file
   application: ComponentAce Absolute Database (Delphi/C++Builder embedded DBMS)
   file-extension: abs
-  endian: le
   license: CC0-1.0
   ks-version: 0.9
+  endian: le
 
 doc: |
   Single-file embedded SQL database format of the Absolute Database
@@ -59,8 +59,8 @@ seq:
   - id: header
     type: db_header
   - id: pages
-    type: page
     size: header.page_size
+    type: page
     repeat: expr
     repeat-expr: header.total_page_count
 
@@ -103,8 +103,8 @@ types:
   page:
     seq:
       - id: signature
-        type: str
         size: 4
+        type: str
         encoding: ASCII
         doc: '"ABSP" on allocated pages; completely zero-filled pages have no signature'
       - id: page
@@ -242,8 +242,8 @@ types:
       - id: name_len
         type: u1
       - id: name
-        type: str
         size: name_len
+        type: str
         encoding: ASCII
         doc: table name (ShortString / TABSObjectName)
 

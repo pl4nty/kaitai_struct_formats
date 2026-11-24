@@ -34,9 +34,9 @@ types:
       - id: attributes
         type: u8
       - id: name
+        size: 0x48
         type: str
         encoding: UTF-16LE
-        size: 0x48
   partition_header:
     seq:
       - id: signature

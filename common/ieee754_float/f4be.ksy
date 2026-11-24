@@ -1,13 +1,13 @@
 meta:
   id: f4be
   title: IEEE 754 Single-precision floating-point
-  license: Unlicense
-  endian: be
   xref:
     iso: 60559:2011
     wikidata: Q1307173
+  license: Unlicense
   imports:
     - ./ieee754_float
+  endian: be
 doc: |
   YOU LIKELY DON'T NEED THIS. `f4` is implemented in all modern hardware and programming languages natively. It is here mainly for testing purposes.
   See the doc for `float` on the drawbacks of this impl.

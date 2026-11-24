@@ -27,12 +27,12 @@ types:
         contents: ' '
       - id: ip
         type: str
-        encoding: ascii
         terminator: 0x2f # '/'
+        encoding: ASCII
       - id: port
         type: str
-        encoding: ascii
         terminator: 0x0a # '\n'
+        encoding: ASCII
       - id: start_sec
         type: u4
         doc: |

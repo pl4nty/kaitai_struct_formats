@@ -28,8 +28,8 @@ types:
       - id: header
         type: file_header
       - id: contents
-        type: b_tree
         size: header.len_used_space
+        type: b_tree
       - id: free_space
         size: header.len_reserved_space - header._sizeof - header.len_used_space
   file_header:
@@ -49,8 +49,8 @@ types:
       - id: page_size
         type: u2
       - id: structure
-        type: strz
         size: 16
+        type: strz
       - id: zero
         type: u2
         valid: 0
@@ -72,8 +72,8 @@ types:
         repeat: expr
         repeat-expr: num_pages - 1
       - id: leaf_page
-        type: leaf_page
         size: page_size
+        type: leaf_page
   leaf_page:
     seq:
       - id: num_unused
@@ -96,8 +96,8 @@ types:
         type: u4
     instances:
       file:
-        pos: ofs_fileheader
         io: _root._io
+        pos: ofs_fileheader
         type: file_data(filename)
   file_data:
     params:

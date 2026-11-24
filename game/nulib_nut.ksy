@@ -1,10 +1,10 @@
 meta:
   id: nulib_nut
-  file-extension: nut
-  application: Games with Namco NU library
   title: Namco Texture Bank
-  endian: be
+  application: Games with Namco NU library
+  file-extension: nut
   license: MIT
+  endian: be
 seq:
   - id: signature
     type: u4
@@ -30,8 +30,8 @@ types:
           _: be
     seq:
       - id: header
-        type: header
         size: 0xC
+        type: header
       - id: textures
         type: texture(_index)
         repeat: expr
@@ -54,24 +54,24 @@ types:
           - id: size
             type: u4
           - id: padding
-            type: nothing
             size: 4
+            type: nothing
           - id: data_size
             type: u4
           - id: header_size
             type: u2
           - id: texture_data
+            size: 2
             # very important this way we save the current header offset
             # and we can calculate the data position properly
             type: texture_data(_root._io.pos)
-            size: 2
           - id: texture_info
-            type: texture_info
             # total size - header - gidx
             size: header_size - 0x10 - 0x20
+            type: texture_info
           - id: gidx
-            type: gidx
             size: 0x20
+            type: gidx
       texture_data:
         params:
           - id: offset
@@ -93,25 +93,25 @@ types:
           - id: version2
             type: u4
           - id: unknown
-            type: nothing
             size: 4
+            type: nothing
           - id: type
             contents: 'GIDX'
           - id: unknown2
-            type: nothing
             size: 4
+            type: nothing
           - id: hash_id
             type: u4
       texture_info:
         seq:
           - id: padding
-            type: nothing
             size: 1
+            type: nothing
           - id: mipmap_count
             type: u1
           - id: padding3
-            type: nothing
             size: 1
+            type: nothing
           - id: pixel_format
             type: u1
             enum: pixel_format
@@ -125,20 +125,20 @@ types:
           - id: height
             type: u2
           - id: texture_type
-            doc: It's a little unclear if this is actually that
             type: u4
             enum: texture_type
             valid:
               any-of:
                 - texture_type::dds
+            doc: It's a little unclear if this is actually that
           - id: cubemap
             size: 4
             type: cubemap
           - id: data_offset
             type: u4
           - id: padding4
-            type: nothing
             size: 12
+            type: nothing
           - id: mipmap_sizes
             type: u4
             repeat: expr
@@ -161,9 +161,9 @@ types:
             type: b1
           - id: sides
             type: b1
-            doc: '+x -x +y -y +z -z'
             repeat: expr
             repeat-expr: 6
+            doc: '+x -x +y -y +z -z'
       surfaces:
         seq:
           - id: surfaces

@@ -1,9 +1,9 @@
 meta:
   id: bif
-  file-extension: bif
-  endian: le
   title: Roku Base Index Frames (BIF) image archive format
+  file-extension: bif
   license: MIT
+  endian: le
 seq:
   - id: header
     type: header

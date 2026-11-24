@@ -8,9 +8,9 @@ meta:
     mime: application/dime
     wikidata: Q1227457
   license: CC0-1.0
-  bit-endian: be
-  endian: be
   encoding: ASCII
+  endian: be
+  bit-endian: be
 doc: |
   Direct Internet Message Encapsulation (DIME)
   is an old Microsoft specification for sending and receiving
@@ -54,56 +54,56 @@ types:
     doc: each individual fragment of the message
     seq:
       - id: version
-        doc: DIME format version (always 1)
         type: b5
+        doc: DIME format version (always 1)
       - id: is_first_record
+        type: b1
         doc: Set if this is the first record in the message
-        type: b1
       - id: is_last_record
+        type: b1
         doc: Set if this is the last record in the message
-        type: b1
       - id: is_chunk_record
-        doc: Set if the file contained in this record is chunked into multiple records
         type: b1
+        doc: Set if the file contained in this record is chunked into multiple records
       - id: type_format
-        doc: Indicates the structure and format of the value of the TYPE field
+        type: b4
         enum: type_formats
-        type: b4
+        doc: Indicates the structure and format of the value of the TYPE field
       - id: reserved
-        doc: Reserved for future use
         type: b4
+        doc: Reserved for future use
       - id: len_options
+        type: u2
         doc: Length of the Options field
-        type: u2
       - id: len_id
+        type: u2
         doc: Length of the ID field
-        type: u2
       - id: len_type
-        doc: Length of the Type field
         type: u2
+        doc: Length of the Type field
       - id: len_data
-        doc: Length of the Data field
         type: u4
+        doc: Length of the Data field
       - id: options
         size: len_options
         type: option_field
       - id: options_padding
         type: padding
       - id: id
-        doc: Unique identifier of the file (set in the first record of file)
-        type: str
         size: len_id
+        type: str
+        doc: Unique identifier of the file (set in the first record of file)
       - id: id_padding
         type: padding
       - id: type
-        doc: Specified type in the format set with type_format
-        type: str
         size: len_type
+        type: str
+        doc: Specified type in the format set with type_format
       - id: type_padding
         type: padding
       - id: data
-        doc: The file data
         size: len_data
+        doc: The file data
       - id: data_padding
         type: padding
 enums:

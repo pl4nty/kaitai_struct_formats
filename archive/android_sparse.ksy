@@ -3,8 +3,8 @@ meta:
   title: Android sparse image
   file-extension: img
   tags:
-    - archive
     - android
+    - archive
   license: CC0-1.0
   ks-version: 0.9
   endian: le

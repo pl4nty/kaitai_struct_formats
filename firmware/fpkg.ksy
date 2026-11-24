@@ -2,7 +2,7 @@ meta:
   id: fpkg
   title: D-Link FPKG
   license: MIT
-  encoding: ascii
+  encoding: ASCII
   endian: be
 doc-ref: https://github.com/onekey-sec/unblob/blob/91941f3d9a6f8d0af1e80b2712ece93499037a96/python/unblob/handlers/archive/dlink/fpkg.py
 seq:
@@ -21,8 +21,8 @@ types:
       - id: len_header
         type: u4
       - id: rest_of_header
-        type: rest_of_header
         size: len_header - magic._sizeof - unknown_1._sizeof - len_header._sizeof
+        type: rest_of_header
     types:
       rest_of_header:
         seq:
@@ -31,8 +31,8 @@ types:
           - id: len_name
             type: u4
           - id: name
-            type: strz
             size: len_name
+            type: strz
   file_header:
     seq:
       - id: len_header

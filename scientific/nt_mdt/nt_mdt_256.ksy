@@ -1,7 +1,5 @@
 meta:
   id: nt_mdt_256
-  endian: le
-  encoding: UTF-16
   title: NT-MDT 256 byte palettes
   application:
     - Nova
@@ -9,6 +7,8 @@ meta:
     - NanoEducator
   file-extension: "256"
   license: Unlicense
+  encoding: UTF-16
+  endian: le
 doc: It is an old format for a color scheme for visualising SPM scans.
 seq:
   - id: color_tables

@@ -29,12 +29,16 @@ seq:
   - id: secondary_json_area
     type: json_area
     if: primary_binary_header.version2 == 0x02
+instances:
+  payload:
+    pos: primary_binary_header.payload_offset * 512
+    size-eos: true
 types:
   binary_header:
     seq:
       - id: magic1
-        type: str
         size: 4
+        type: str
         valid:
           any-of:
             - '"LUKS"'
@@ -50,16 +54,16 @@ types:
           max: 0x02
       # LUKS1
       - id: cipher_name_specification
-        type: str
         size: 32
+        type: str
         if: version2 == 0x01
       - id: cipher_mode_specification
-        type: str
         size: 32
+        type: str
         if: version2 == 0x01
       - id: hash_specification
-        type: str
         size: 32
+        type: str
         if: version2 == 0x01
       - id: payload_offset
         type: u4
@@ -84,12 +88,12 @@ types:
         type: u8
         if: version2 == 0x02
       - id: label
-        type: str
         size: 48
+        type: str
         if: version2 == 0x02
       - id: csum_alg
-        type: str
         size: 32
+        type: str
         if: version2 == 0x02
       - id: salt
         type: u8
@@ -97,8 +101,8 @@ types:
         repeat-expr: 8
         if: version2 == 0x02
       - id: uuid
-        type: str
         size: 40
+        type: str
       # LUKS1
       - id: key_slots
         type: key_slot
@@ -107,15 +111,15 @@ types:
         if: version2 == 0x01
       # LUKS2
       - id: subsystem
-        type: str
         size: 48
+        type: str
         if: version2 == 0x02
       - id: hdr_offset
         type: u8
         if: version2 == 0x02
       - id: padding184
-        type: str
         size: 184
+        type: str
         if: version2 == 0x02
       - id: csum
         type: u8
@@ -123,8 +127,8 @@ types:
         repeat-expr: 8
         if: version2 == 0x02
       - id: padding4096
-        type: str
         size: 7 * 512
+        type: str
         if: version2 == 0x02
     types:
       key_slot:
@@ -151,9 +155,5 @@ types:
   json_area:
     seq:
       - id: json
-        type: str
         size: _root.primary_binary_header.hdr_size - 4096
-instances:
-  payload:
-    pos: primary_binary_header.payload_offset * 512
-    size-eos: true
+        type: str

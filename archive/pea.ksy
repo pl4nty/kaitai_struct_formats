@@ -1,15 +1,15 @@
 meta:
   id: pea
   title: PeaZIP archive file
-  file-extension: pea
   application:
     - PeaZIP
     - PEA
     - UnPEA
+  file-extension: pea
   xref:
     wikidata: Q1275912
-  endian: le
   license: Unlicense
+  endian: le
 doc: |
   Format for PeaZIP archiver. WARNING: don't design formats like this!
 doc-ref:
@@ -34,11 +34,11 @@ types:
       - id: signature
         contents: [0xEA]
       - id: format_version
-        type: u1
         -orig-id: PEA_FILEFORMAT_VER
-      - id: format_revision
         type: u1
+      - id: format_revision
         -orig-id: PEA_FILEFORMAT_REV
+        type: u1
       - id: ecc_algo_archive
         type: u1
         enum: crypto_and_ecc
@@ -65,8 +65,8 @@ types:
       - id: pea_pod_signature
         contents: ["POD", 0]
       - id: compression_algo
-        type: compression_algo
         -orig-id: encode_compression
+        type: compression_algo
       - id: ecc_scheme_streamwide
         type: u1
         enum: crypto_and_ecc

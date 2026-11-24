@@ -72,6 +72,17 @@ types:
         type: free_list
         repeat: expr
         repeat-expr: num_free_lists
+    instances:
+      num_block_addresses:
+        value: 256
+      num_free_lists:
+        value: 32
+      directories:
+        io: _root._io
+        type: master_block_ref(_index)
+        repeat: expr
+        repeat-expr: num_directories
+        doc: Master blocks of the different B-trees.
     types:
       block_descriptor:
         seq:
@@ -99,17 +110,6 @@ types:
             type: u4
             repeat: expr
             repeat-expr: counter
-    instances:
-      num_block_addresses:
-        value: 256
-      num_free_lists:
-        value: 32
-      directories:
-        io: _root._io
-        type: master_block_ref(_index)
-        repeat: expr
-        repeat-expr: num_directories
-        doc: Master blocks of the different B-trees.
   master_block_ref:
     params:
       - id: idx
@@ -153,6 +153,13 @@ types:
         type: block_data(mode)
         repeat: expr
         repeat-expr: counter
+    instances:
+      rightmost_block:
+        io: _root._io
+        pos: _root.buddy_allocator_body.block_addresses[mode].offset
+        type: block
+        if: mode > 0
+        doc: Rightmost child block pointer.
     types:
       block_data:
         params:
@@ -214,10 +221,3 @@ types:
                   - id: value
                     size: 4
                     type: str
-    instances:
-      rightmost_block:
-        io: _root._io
-        pos: _root.buddy_allocator_body.block_addresses[mode].offset
-        type: block
-        if: mode > 0
-        doc: Rightmost child block pointer.

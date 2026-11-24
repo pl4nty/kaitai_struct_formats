@@ -5,7 +5,7 @@ meta:
     - mseed3 
     - mseed
   license: MIT
-  encoding: ascii
+  encoding: ASCII
   endian: le
 doc: |
   MiniSEED 3 is a binary data format defined by the International Federation of Digital 
@@ -45,12 +45,12 @@ types:
       - id: length_of_data_payload
         type: u4
       - id: source_identifier
-        type: str
         size: length_of_identifier
+        type: str
         encoding: ASCII
       - id: extra_header_fields
-        type: str
         size: length_of_extra_headers
+        type: str
         encoding: ASCII
       - id: data_payload
         type: 
@@ -106,8 +106,8 @@ types:
   miniseed_data_encoding_text: 
     seq:
       - id: data
-        type: str
         size: _parent.length_of_data_payload
+        type: str
         encoding: UTF-8
   miniseed_data_encoding_16_bit_integer:
     seq:

@@ -1,11 +1,11 @@
 meta:
   id: avira_quarantine
-  file-extension: qua
-  application: Avira Antivirus
-  endian: le
   title: Avira Antivirus quarantine file
+  application: Avira Antivirus
+  file-extension: qua
   license: MIT
   ks-version: 0.9
+  endian: le
 doc: |
   Creator: Florian Bausch, ERNW Research GmbH, https://ernw-research.de
   Avira quarantine files are created by the Avira Antivirus software.
@@ -32,38 +32,38 @@ seq:
   - id: unknown2
     size: 0x5c
   - id: mal_type
+    size: 0x40
     type: str
     terminator: 0
     encoding: UTF-8
-    size: 0x40
     doc: The string that contains the name of the suspected malware.
   - id: filename
+    size: 'len_filename < 2 ? len_filename : len_filename - 2'
     type: str
     encoding: UTF-16LE
-    size: 'len_filename < 2 ? len_filename : len_filename - 2'
     doc: The original filename where the malware was detected. Sometimes seems to be a process name.
   - id: padding1
     size: 2
     contents: [0x00, 0x00]
     if: 'len_filename >= 2'
   - id: addl_info
+    size: 'len_addl_info < 2 ? len_addl_info : len_addl_info - 2'
     type: str
     encoding: UTF-16LE
-    size: 'len_addl_info < 2 ? len_addl_info : len_addl_info - 2'
     doc: More information, but often empty.
   - id: padding2
     size: 2
     contents: [0x00, 0x00]
     if: 'len_addl_info >= 2'
   - id: mal_file
-    process: xor(0xaa)
     size-eos: true
+    process: xor(0xaa)
     doc: The quarantined file, xored with 0xAA.
 instances:
   mal_file_offset:
     pos: ofs_mal_file
-    process: xor(0xaa)
     size-eos: true
+    process: xor(0xaa)
     doc: |
       The malware file retrieved using the malicious_offset field.
       This field should have the same content as mal_file.

@@ -38,9 +38,9 @@ types:
             type: u2
             doc: Section name lenght
           - id: name
-            type: str
-            encoding: cp1251
             size: len_name
+            type: str
+            encoding: windows-1251
             doc: Section name
           - id: keys
             type: key_record
@@ -67,9 +67,9 @@ types:
               - id: len_name
                 type: u2
               - id: name
-                type: str
-                encoding: cp1251
                 size: len_name
+                type: str
+                encoding: windows-1251
               - id: num_values
                 type: u2
                 if: is_array
@@ -99,6 +99,6 @@ types:
                   - id: len
                     type: u2
                   - id: value
-                    type: str
-                    encoding: cp1251
                     size: len
+                    type: str
+                    encoding: windows-1251

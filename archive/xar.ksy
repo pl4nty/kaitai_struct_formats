@@ -108,8 +108,8 @@ types:
   toc_type:
     seq:
       - id: xml_string
-        type: str
         size-eos: true
+        type: str
 enums:
   # https://github.com/apple-opensource/xar/blob/03d10ac/xar/include/xar.h.in#L67-L73
   checksum_algorithms_apple:

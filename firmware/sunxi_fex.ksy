@@ -2,8 +2,8 @@ meta:
   id: sunxi_fex
   title: Allwinner (sunxi) fex "script"
   license: GPL-2.0-or-later
+  encoding: UTF-8
   endian: le
-  encoding: utf-8
 
 doc: |
   Something like vendor-specific FDT residing in `soc-cfg` part of 0 image.
@@ -108,8 +108,8 @@ types:
             seq:
               - id: name
                 -orig-id: gpio_name
-                type: strz
                 size: _io.size - sizeof<descriptor>
+                type: strz
               - id: descriptor
                 type: descriptor
             types:

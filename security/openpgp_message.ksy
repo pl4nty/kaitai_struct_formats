@@ -28,12 +28,12 @@ types:
         type: b1
       - id: packet_type_new
         type: b6
-        if: new_packet_format
         enum: packet_tags
+        if: new_packet_format
       - id: packet_type_old
         type: b4
-        if: not new_packet_format
         enum: packet_tags
+        if: not new_packet_format
       - id: len_type
         type: b2
         if: not new_packet_format
@@ -165,13 +165,13 @@ types:
       - id: len_hashed_subpacket
         type: u2
       - id: hashed_subpackets
-        type: subpackets
         size: len_hashed_subpacket
+        type: subpackets
       - id: len_unhashed_subpacket
         type: u2
       - id: unhashed_subpackets
-        type: subpackets
         size: len_unhashed_subpacket
+        type: subpackets
       - id: left_signed_hash
         type: u2
       - id: rsa_n
@@ -309,8 +309,8 @@ types:
       - id: revocation_class
         type: u1
       - id: public_key_algorithm
-        enum: public_key_algorithms
         type: u1
+        enum: public_key_algorithms
       - id: fingerprint
         size: 20
 
@@ -337,8 +337,8 @@ types:
   preferred_key_server:
     seq:
       - id: uri
-        type: str
         size-eos: true
+        type: str
 
   primary_user_id:
     seq:
@@ -348,8 +348,8 @@ types:
   policy_uri:
     seq:
       - id: uri
-        type: str
         size-eos: true
+        type: str
 
   key_flags_subpacket:
     seq:
@@ -361,8 +361,8 @@ types:
   signers_user_id:
     seq:
       - id: user_id
-        type: str
         size-eos: true
+        type: str
 
   reason_for_revocation:
     seq:
@@ -370,8 +370,8 @@ types:
         type: u1
         enum: revocation_codes
       - id: reason
-        type: str
         size-eos: true
+        type: str
 
   features:
     seq:

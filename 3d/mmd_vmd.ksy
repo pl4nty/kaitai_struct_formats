@@ -3,9 +3,9 @@ meta:
   title: MMD (MikuMikuDance) motion data
   application: MikuMikuDance
   file-extension: vmd
+  license: MIT
   encoding: Shift_JIS
   endian: le
-  license: MIT
 
 doc: |
   VMD is the format used by MikuMikuDance (MMD) for storing animation data.
@@ -43,14 +43,14 @@ types:
       - id: magic
         contents: "Vocaloid Motion Data 0002\0\0\0\0\0"
       - id: name
-        type: strz
         size: 20
+        type: strz
 
   motion:
     seq:
       - id: bone_name
-        type: strz
         size: 15
+        type: strz
       - id: frame_number
         type: u4
       - id: position
@@ -65,8 +65,8 @@ types:
   morph:
     seq:
       - id: morph_name
-        type: strz
         size: 15
+        type: strz
       - id: frame_number
         type: u4
       - id: weight

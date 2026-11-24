@@ -72,8 +72,8 @@ meta:
   xref:
     zeldamods: AAMP
   license: AGPL-3.0-or-later
-  bit-endian: le
   endian: le
+  bit-endian: le
 seq:
   - id: header
     type: header
@@ -108,42 +108,42 @@ seq:
 types:
   header:
     seq:
-    - id: magic
-      contents: AAMP
-    - id: version
-      type: u4
-      doc: Should be "2"
-    - id: flags
-      type: u4
-      doc: |
-        TODO
-        Flags (LittleEndian 1 << 0, UTF8 1 << 1)
-        What does this mean?
-      doc-ref: https://zeldamods.org/wiki/AAMP#Header
-    - id: file_size
-      type: u4
-    - id: pio_verision
-      type: u4
-    - id: pio_offset
-      type: u4
-    - id: num_lists
-      type: u4
-    - id: num_objects
-      type: u4
-    - id: num_parameters
-      type: u4
-    - id: data_section_size
-      type: u4
-    - id: string_section_size
-      type: u4
-    - id: num_unknown_uints
-      type: u4
-      doc: number of uint32s after the string section
-    - id: pio_type
-      type: strz
-      size: 4
-      encoding: utf-8
-      doc: typically "xml"
+      - id: magic
+        contents: AAMP
+      - id: version
+        type: u4
+        doc: Should be "2"
+      - id: flags
+        type: u4
+        doc: |
+          TODO
+          Flags (LittleEndian 1 << 0, UTF8 1 << 1)
+          What does this mean?
+        doc-ref: https://zeldamods.org/wiki/AAMP#Header
+      - id: file_size
+        type: u4
+      - id: pio_verision
+        type: u4
+      - id: pio_offset
+        type: u4
+      - id: num_lists
+        type: u4
+      - id: num_objects
+        type: u4
+      - id: num_parameters
+        type: u4
+      - id: data_section_size
+        type: u4
+      - id: string_section_size
+        type: u4
+      - id: num_unknown_uints
+        type: u4
+        doc: number of uint32s after the string section
+      - id: pio_type
+        size: 4
+        type: strz
+        encoding: UTF-8
+        doc: typically "xml"
   parameter_list:
     seq:
       - id: name_crc32

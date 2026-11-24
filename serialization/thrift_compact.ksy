@@ -1,9 +1,9 @@
 meta:
   id: thrift_compact
-  endian: le
   title: Thrift Compact Protocol
   license: MIT
   ks-version: '0.10'
+  endian: le
 
 doc: |
   Thrift Compact Protocol parser.
@@ -27,9 +27,9 @@ types:
     seq:
       - id: protocol_id
         type: u1
-        doc: Protocol ID (must be 0x82 for compact protocol)
         valid:
           eq: 0x82
+        doc: Protocol ID (must be 0x82 for compact protocol)
       - id: version_and_type
         type: u1
         doc: Version (4 bits) and message type (4 bits)
@@ -102,6 +102,7 @@ types:
         doc: Field id delta (if delta_short != 0) or absolute field id (if delta_short == 0)
 
   compact_value:
+    doc: Value of the field, type depends on value_type parameter
     params:
       - id: value_type
         type: u1
@@ -136,7 +137,6 @@ types:
       - id: struct_value
         type: compact_struct
         if: value_type == 12
-    doc: Value of the field, type depends on value_type parameter
 
   compact_list:
     seq:
@@ -217,9 +217,9 @@ types:
         type: varint_u
         doc: String length (unsigned varint)
       - id: value
+        size: length
         type: str
         encoding: UTF-8
-        size: length
         doc: String value
     instances:
       length:

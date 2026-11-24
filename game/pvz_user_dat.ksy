@@ -2,12 +2,12 @@ meta:
   id: pvz_user_dat
   application: Plants vs. Zombies
   file-extension: dat
-  endian: le
   license: CC0-1.0
   encoding: ASCII
-doc-ref: https://plantsvszombies.fandom.com/wiki/User_file_format
+  endian: le
 doc: |
   https://github.com/Freed-Wu/pvz.nvim provides tools to (de)serialize it.
+doc-ref: https://plantsvszombies.fandom.com/wiki/User_file_format
 seq:
   - id: version
     type: u4

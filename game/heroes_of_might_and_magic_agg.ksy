@@ -12,6 +12,13 @@ seq:
     type: entry
     repeat: expr
     repeat-expr: num_files
+instances:
+  filenames:
+    pos: entries.last.offset + entries.last.size
+    size: 15
+    type: filename
+    repeat: expr
+    repeat-expr: num_files
 types:
   entry:
     seq:
@@ -32,10 +39,3 @@ types:
       - id: str
         type: strz
         encoding: ASCII
-instances:
-  filenames:
-    pos: entries.last.offset + entries.last.size
-    size: 15
-    type: filename
-    repeat: expr
-    repeat-expr: num_files

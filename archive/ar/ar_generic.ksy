@@ -39,6 +39,7 @@ seq:
     doc: List of archive members. May be empty.
 types:
   member:
+    doc: An archive member's header and data.
     seq:
       - id: name
         -orig-id: ar_name
@@ -70,4 +71,3 @@ types:
       size:
         value: size_raw.value
         doc: The size of the member's data. The trailing padding byte (if any) does not count toward the data size.
-    doc: An archive member's header and data.

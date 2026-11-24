@@ -13,9 +13,9 @@ meta:
   xref:
     mime: application/x-compressed-iso
     wikidata: Q2347127
-  endian: le
-  encoding: ascii
   license: ISC
+  encoding: ASCII
+  endian: le
 
 doc: |
   This is a file format used in Sony PSP custom firmwares to compress ISO images, that are on-the-fly decompressed by the kernel, to allow to place more software onto a flash card. Some games tolerate such procedure well, other ones have lags in some points, another ones become completely unenjoyable.
@@ -82,17 +82,17 @@ types:
             (_root.header.flavour == "Z" ? compression_zso_v1 : compression::unknown)
           )
       block_uncompressed:
-        pos: ptr
         io: _root._io
+        pos: ptr
         size: size
       block_deflate:
-        pos: ptr
         io: _root._io
+        pos: ptr
         size: size
         process: kaitai.compress.zlib(15, "raw")
       block_lz4:
-        pos: ptr
         io: _root._io
+        pos: ptr
         size: size
         process: kaitai.compress.lz4
       block:
@@ -101,8 +101,8 @@ types:
   header:
     seq:
       - id: flavour
-        type: str
         size: 1
+        type: str
         doc: |
           "Z" for ZSO, "C" for CSO"
       - id: signature

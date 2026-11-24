@@ -2,8 +2,8 @@ meta:
   id: device_class_code
   title: Device class codes
   application: x86 architecture
-  endian: le
   license: Unlicense
+  endian: le
 doc: >
   Spec:
     Plug and Play BIOS Specification Version 1.0A May 5, 1994, 3.2 Expansion Header for Plug and Play
@@ -11,12 +11,12 @@ doc-ref:
   - http://download.intel.com/support/motherboards/desktop/sb/pnpbiosspecificationv10a.pdf
 seq:
   - id: base_type
-    doc: "Indicates the general device type"
     type: u1
     enum: base 
+    doc: "Indicates the general device type"
   - id: sub_type
-    doc: "Device Sub-Type, its definition is dependent upon the Base-Type code."
     type: u1
+    doc: "Device Sub-Type, its definition is dependent upon the Base-Type code."
     # enum:
       # switch-on: base_type
       # cases:
@@ -40,8 +40,8 @@ seq:
         # 'base::data_acquisition_and_signal_processing': sub_data_acquisition_and_signal_processing
         # 'base::processing_accelerators': sub_processing_accelerators
   - id: if_type
-    doc: "the specific device programming interface"
     type: u1
+    doc: "the specific device programming interface"
 enums:
   base:
     0x00: legacy
@@ -195,4 +195,3 @@ enums:
     0x00: processing_accelerators
   sub_unknown:
     0x00: unknown0
-

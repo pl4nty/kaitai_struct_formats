@@ -80,9 +80,9 @@ types:
   names_list_entry:
     seq:
       - id: name
-        type: strz
         size: 256
-        encoding: ascii
+        type: strz
+        encoding: ASCII
       - id: id
         type: u4
         doc: 'Record ID this name belongs to'

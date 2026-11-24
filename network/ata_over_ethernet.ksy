@@ -6,19 +6,13 @@ meta:
     - Linux
     - vblade
     - kvblade
-  license: Unlicense
-  endian: be
-  encoding: ascii
   xref:
     wikidata:
       - Q298746
       - Q5403289
-
-doc-ref:
-  - https://web.archive.org/web/20151208175927if_/http://brantleycoilecompany.com/AoEr11.pdf
-  - https://github.com/OpenAoE/aoe
-  - https://github.com/OpenAoE/vblade
-  - https://github.com/john-sharratt/kvblade
+  license: Unlicense
+  encoding: ASCII
+  endian: be
 
 doc: |
   Body of an Ethernet frame of type ETH_P_AOE (0x88A2).
@@ -30,6 +24,12 @@ doc: |
   To generate sample files with queries an `aoetools` package, a loopback interface and wireshark/tcpdump can be used. To generate the files with real ATA transactions and responses, a real impl is needed.
 
   Here are some samples: https://github.com/kaitai-io/kaitai_struct_formats/files/6343404/aoe.zip
+
+doc-ref:
+  - https://web.archive.org/web/20151208175927if_/http://brantleycoilecompany.com/AoEr11.pdf
+  - https://github.com/OpenAoE/aoe
+  - https://github.com/OpenAoE/vblade
+  - https://github.com/john-sharratt/kvblade
 
 seq:
   - id: header
@@ -108,8 +108,8 @@ types:
 
     instances:
       is_command_vendor_specific:
-        value: command.to_i >= 0xf0
         -orig-id: AOECMD_VEND_MIN
+        value: command.to_i >= 0xf0
 
     enums:
       error:
@@ -158,27 +158,27 @@ types:
         seq:
           - id: version
             type: b4
+            valid:
+              max: 1
             doc: |
               The version of the protocol used.
               The offset and size of this field is guaranteed to be stable across format versions.
-            valid:
-              max: 1
           - id: is_response
-            type: b1
             -orig-id:
               - R
               - AOEFL_RSP
               - Resp
-          - id: is_error
             type: b1
+          - id: is_error
             -orig-id:
               - E
               - AOEFL_ERR
               - Error
+            type: b1
           - id: reserved
-            type: b2
             -orig-id:
               - Z
+            type: b2
             valid: 0
   issue_ata:
     doc: |
@@ -333,18 +333,18 @@ types:
               - Buffer Count
               - bufcnt
             type: u2
-            doc: Count of messages that can be buffered. Messages exceeding buffer are dropped.
             valid:
               expr: _ == 0 or _root.header.version_and_flags.is_response
+            doc: Count of messages that can be buffered. Messages exceeding buffer are dropped.
           - id: server_version
             -orig-id:
               - Firmware Version
               - fwver
               - firmware
             type: u2
-            doc: Version of server software/firmware.
             valid:
               expr: _ == 0 or _root.header.version_and_flags.is_response
+            doc: Version of server software/firmware.
           - id: sectors_per_ata_command
             -orig-id:
               - Sector Count
@@ -368,9 +368,9 @@ types:
                 -orig-id:
                   - AoE
                 type: b4
-                doc: Maximum protocol version the server supports.
                 valid:
                   expr: _ == 0 or _root.header.version_and_flags.is_response
+                doc: Maximum protocol version the server supports.
               - id: command
                 -orig-id:
                   - CCmd

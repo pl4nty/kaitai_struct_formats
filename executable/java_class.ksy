@@ -267,13 +267,13 @@ types:
         value: descriptor_as_info.value
   utf8_cp_info:
     -orig-id: CONSTANT_Utf8_info
-    doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.7
     doc: |
       Class files store strings in "modified UTF-8": U+0000 is encoded as
       C0 80, and supplementary characters as two 3-byte encoded UTF-16
       surrogates (ED A0..BF xx ED B0..BF xx). Such strings are not valid
       UTF-8, so `value` is only provided when the raw bytes contain neither
       form; `value_raw` always holds the bytes.
+    doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.7
     seq:
       - id: str_len
         type: u2

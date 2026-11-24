@@ -55,6 +55,11 @@ seq:
   #   type: btree_page(1)
 instances:
   pages:
+    # The first 100 bytes of the database file comprise the database file header
+    pos: 100
+    # size: header.page_size
+    # the first page is 100 bytes smaller than all other pages
+    size: '(_index == 0) ? (header.page_size - 100) : header.page_size'
     type:
       switch-on: '(_index == header.idx_lock_byte_page ? 0 : _index >= header.idx_first_ptrmap_page and _index <= header.idx_last_ptrmap_page ? 1 : 2)'
       cases:
@@ -64,11 +69,6 @@ instances:
         # This is unfortunate, but unavoidable since there's no way to recognize these types at
         # this point in the parser.
         2: btree_page(_index + 1)
-    # The first 100 bytes of the database file comprise the database file header
-    pos: 100
-    # size: header.page_size
-    # the first page is 100 bytes smaller than all other pages
-    size: '(_index == 0) ? (header.page_size - 100) : header.page_size'
     repeat: expr
     repeat-expr: header.num_pages
     doc: |
@@ -228,10 +228,6 @@ types:
         value: 'idx_first_ptrmap_page + num_ptrmap_pages - (idx_first_ptrmap_page + num_ptrmap_pages >= idx_lock_byte_page ? 0 : 1)'
         doc: The index (0-based) of the last ptrmap page (inclusive)
   lock_byte_page:
-    params:
-      - id: page_number
-        type: u4
-    seq: []
     doc: |
       The lock-byte page is the single page of the database file that contains the bytes at offsets between
       1073741824 and 1073742335, inclusive. A database file that is less than or equal to 1073741824 bytes
@@ -239,29 +235,11 @@ types:
       lock-byte page.
       The lock-byte page is set aside for use by the operating-system specific VFS implementation in implementing
       the database file locking primitives. SQLite does not use the lock-byte page.
-  pointer_map_page:
     params:
-      - id: pointer_map_page_number
+      - id: page_number
         type: u4
-    seq:
-      - id: entries
-        type: pointer_map_entry
-        repeat: expr
-        repeat-expr: num_entries
-    instances:
-      first_linked_page_number:
-        value: pointer_map_page_number + 1
-      pointer_map_page_entries_max:
-        value: _root.header.usable_size / 5
-      last_linked_page_number_max:
-        value: pointer_map_page_number + pointer_map_page_entries_max
-      last_linked_page_number:
-        value: |
-          last_linked_page_number_max <= _root.header.num_pages
-          ? last_linked_page_number_max
-          : _root.header.num_pages
-      num_entries:
-        value: last_linked_page_number - first_linked_page_number + 1
+    seq: []
+  pointer_map_page:
     doc: |
       A ptrmap page contains back-links from child to parent.
       See also: /types/pointer_map_entry.
@@ -330,14 +308,36 @@ types:
       )
       ```
     doc-ref: https://www.sqlite.org/fileformat2.html#pointer_map_or_ptrmap_pages
+    params:
+      - id: pointer_map_page_number
+        type: u4
+    seq:
+      - id: entries
+        type: pointer_map_entry
+        repeat: expr
+        repeat-expr: num_entries
+    instances:
+      first_linked_page_number:
+        value: pointer_map_page_number + 1
+      pointer_map_page_entries_max:
+        value: _root.header.usable_size / 5
+      last_linked_page_number_max:
+        value: pointer_map_page_number + pointer_map_page_entries_max
+      last_linked_page_number:
+        value: |
+          last_linked_page_number_max <= _root.header.num_pages
+          ? last_linked_page_number_max
+          : _root.header.num_pages
+      num_entries:
+        value: last_linked_page_number - first_linked_page_number + 1
   pointer_map_entry:
+    doc-ref: https://www.sqlite.org/fileformat2.html#pointer_map_or_ptrmap_pages
     seq:
       - id: type
         type: u1
         enum: ptrmap_page_type
       - id: page_number
         type: u4
-    doc-ref: https://www.sqlite.org/fileformat2.html#pointer_map_or_ptrmap_pages
   btree_page_pointer:
     seq:
       - id: page_number
@@ -471,7 +471,6 @@ types:
             0: record
             1: overflow_record(payload_size.value, _root.header.index_max_overflow_payload_size)
   record:
-    doc-ref: 'https://sqlite.org/fileformat2.html#record_format'
     doc: |
       A record contains a header and a body, in that order.
 
@@ -483,11 +482,11 @@ types:
       Following the size varint are one or more additional varints, one per column.
       These additional varints are called "serial type" numbers
       and determine the datatype of each column
+    doc-ref: 'https://sqlite.org/fileformat2.html#record_format'
     seq:
       - id: header_size
         type: vlq_base128_be
       - id: header
-        type: record_header
         # FIXME sizeof(header_size) != 1
         # size: header_size.value - 1
         # FIXME error: Name(identifier(sizeof))
@@ -508,6 +507,7 @@ types:
           header_size.value < 2147483648 ? (header_size.value - 5) :
           header_size.value < 137438953472 ? (header_size.value - 6) :
           1/0
+        type: record_header
       - id: values
         type: value(header.value_types[_index])
         repeat: expr

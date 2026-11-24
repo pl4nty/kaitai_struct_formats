@@ -7,11 +7,10 @@ meta:
   xref:
     wikidata: Q2512977
   license: Unlicense
-  endian: le
   imports:
     - /common/prg/prg_lcg
+  endian: le
 
-doc-ref: http://www.genialitaet.de/fw/Spider.sav
 doc: |
   from spider_sav import SpiderSav
   import numpy as np
@@ -76,6 +75,7 @@ doc: |
       break
     print("\t".join(row))
     rNo += 1
+doc-ref: http://www.genialitaet.de/fw/Spider.sav
 
 seq:
   - id: suits_used_count
@@ -103,6 +103,24 @@ seq:
     type: column
     repeat: expr
     repeat-expr: column_count
+instances:
+  column_count:
+    value: 10
+  deck_count:
+    value: 2
+  ranks_count:
+    value: 13
+  cards_in_a_deck:
+    value: 52
+  total:
+    value: deck_count * cards_in_a_deck
+  initial_prg_state:
+    pos: 0
+    type: prg_lcg(0x343fd, 0x269ec3, 16, 15, prg_seed)  # Visual C++ rand
+  #decks:
+  #  type: card(_index)
+  #  repeat: expr
+  #  repeat-expr: total
 enums:
   suit:
     0: club
@@ -123,24 +141,6 @@ enums:
     10: jack
     11: queen
     12: king
-instances:
-  column_count:
-    value: 10
-  deck_count:
-    value: 2
-  ranks_count:
-    value: 13
-  cards_in_a_deck:
-    value: 52
-  total:
-    value: deck_count * cards_in_a_deck
-  initial_prg_state:
-    pos: 0
-    type: prg_lcg(0x343fd, 0x269ec3, 16, 15, prg_seed)  # Visual C++ rand
-  #decks:
-  #  type: card(_index)
-  #  repeat: expr
-  #  repeat-expr: total
 
 types:
   column:
@@ -180,4 +180,3 @@ types:
       rank:
         value: num_in_deck % _root.ranks_count
         enum: rank
-

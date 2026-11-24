@@ -8,13 +8,12 @@ meta:
     - Par-N-Rar
     - PAR Buddy
   file-extension: par2
-  license: GNU-FDL-1.3-or-later
   xref:
     justsolve: Parity Volume Set
     wikidata: Q497118
-  endian: le
+  license: GNU-FDL-1.3-or-later
   encoding: ASCII
-doc-ref: http://parchive.sourceforge.net/docs/specifications/parity-volume-spec/article-spec.html
+  endian: le
 doc: |
   This document describes a file format for storing redundant data for a set of files.
 
@@ -46,6 +45,7 @@ doc: |
   It is recommended that users are warned when they create PAR files with names that are incompatible with Windows, Mac, or Linux systems. That is, file or directory names that are more than 255 characters long, start with a period (.) or a dash (-), or contain one of these characters: < > : " ' ` ? * & | [ ] \ ; or newline (\n).
 
   It is *strongly* recommended that clients query a user before writing to a file whose File Description packet contains an absolute pathname. For Windows, that means one starting with "C:\" or "//" for example. For UNIX, that means one starting with "/" or "//". For Mac, that means one starting with ":". This is to prevent PAR files of unknown origin from cracking a system by overwriting system files.
+doc-ref: http://parchive.sourceforge.net/docs/specifications/parity-volume-spec/article-spec.html
 seq:
   - id: packets
     type: packet
@@ -84,12 +84,12 @@ types:
         type: header
       - id: body
         size: preheader.length - 32 - 32
-        doc: Size *must* be a multiple of 4 bytes.
         type:
           switch-on: header.types.types[0].type
           cases:
             '"PAR 2.0"': official_types(header.types.types[1].type)
             #'"NewsPostUsenet"': example_news_post
+        doc: Size *must* be a multiple of 4 bytes.
     types:
       official_types:
         params:
@@ -118,21 +118,21 @@ types:
             seq:
               - id: slice_size
                 type: u8
-                doc: "*must* be a multiple of 4 (and a multiple of the subslice size, if it is inside of packed_main)"
                 valid:
                   expr: _ % 4 == 0
+                doc: "*must* be a multiple of 4 (and a multiple of the subslice size, if it is inside of packed_main)"
               - id: recovery_set_length
                 type: u4
                 doc: Number of files in the recovery set.
               - id: recovery_set
                 type: md5
-                doc: File IDs of all files in the recovery set. (See File Description packet.) These hashes are sorted by numerical value (treating them as 16-byte unsigned integers).
                 repeat: expr
                 repeat-expr: recovery_set_length
+                doc: File IDs of all files in the recovery set. (See File Description packet.) These hashes are sorted by numerical value (treating them as 16-byte unsigned integers).
               - id: non_recovery_set
                 type: md5
-                doc: File IDs of all files in the non-recovery set. (See File Description packet.) These hashes are sorted by numerical value (treating them as 16-byte unsigned integers).
                 repeat: eos
+                doc: File IDs of all files in the non-recovery set. (See File Description packet.) These hashes are sorted by numerical value (treating them as 16-byte unsigned integers).
 
           packed_main:
             doc: |
@@ -145,7 +145,6 @@ types:
               - id: main
                 type: main
           recovery_slice:
-            doc-ref: https://www.cs.utk.edu/~plank/plank/papers/SPE-9-97.html James S. Plank, A tutorial on Reed-Solomon coding for fault-tolerance in RAID-like systems
             doc: |
               The recovery slice packet contains one slice of recovery data. The recovery data is generated using a 16-bit Galois Field (GF) with generator 0x0001100B.
 
@@ -156,6 +155,7 @@ types:
               Here, the PAR 2.0 Spec diverges from Plank's paper. In Plank, the first constant is 1, the second 2, the third 3, etc. This is a bad approach because some constants have an order less than 65535. (That is, there exists constants N where N raised to a power less than 65535 is equal to 1 in the Galois Field.) These constants can prevent recovery matrices from being invertible and can, therefore, stop recovery. This spec does not use those constants. So, the first constant is the first power of two that has order 65535. The second constant is the next power of two that has order 65535. And so on. A power of two has order 65535 if the exponent is not equal to 0 modulus 3, 5, 17, or 257. In C code, that would be (n%3 != 0 && n%5 != 0 && n%17 != 0 && n%257 != 0).
 
               Note - this is the exponent being tested, and not the constant itself. There are 32768 valid constants. The first few are: 2, 4, 16, 128, 256, 2048, 8192, 16384, 4107, 32856, 17132
+            doc-ref: https://www.cs.utk.edu/~plank/plank/papers/SPE-9-97.html James S. Plank, A tutorial on Reed-Solomon coding for fault-tolerance in RAID-like systems
             seq:
               - id: exponent
                 type: u4
@@ -197,8 +197,8 @@ types:
                 type: u8
                 doc: Length of the file.
               - id: name
-                type: str
                 size-eos: true
+                type: str
                 doc: |
                   File names can be of any length and not guaranteed to be null terminated!
 
@@ -223,27 +223,27 @@ types:
             doc: This packet is used to identify the client that created the file. It is *required* to be in every PAR file. If a client is unable to process a recovery set, the contents of the creator packet *must* be shown to the user. The goal of this is that any client incompatibilities can be found and resolved quickly.
             seq:
               - id: application_info
+                size-eos: true
                 type: str
                 doc: |
                   ASCII text identifying the client. This should also include a way to contact the client's creator - either through a URL or an email address.
 
                   NB: This is not a null terminated string!
-                size-eos: true
           unicode_filename:
             doc: This packet provides an alternate name for a file. This packet overrides the default "ASCII" name in the file description packet.
             seq:
               - id: file_id
                 type: md5
               - id: name
-                type: str
                 size-eos: true
+                type: str
                 encoding: UTF-16
           ascii_comment:
             doc: The ASCII comment packet contains - would you believe it - a comment in ASCII text! This should be shown to the user. If multiple copies of the same comment are found, only one need be shown.
             seq:
               - id: comment
-                type: str
                 size-eos: true
+                type: str
           unicode_comment:
             doc: The Unicode comment packet contains a comment in Unicode text. This should be shown to the user. If multiple copies of the same comment are found, only one need be shown. If an analogous ASCII version of the same comment is included in the file, the ASCII comment should not be shown.
             seq:
@@ -251,8 +251,8 @@ types:
                 type: md5
                 doc: If an ASCII comment packet exists in the file and is just a translation of the Unicode in this comment, this is the MD5 Hash of the ASCII comment packet. Otherwise, it is zeros.
               - id: comment
-                type: str
                 size-eos: true
+                type: str
                 encoding: UTF-16
           input_file_slice:
             doc: |
@@ -283,8 +283,8 @@ types:
                 type: md5
               - id: data
                 type: triplet
-                doc: MD5/CRC32/exponent triplets for the slices in the file in the same order as their respective slices in the file.
                 repeat: eos
+                doc: MD5/CRC32/exponent triplets for the slices in the file in the same order as their respective slices in the file.
       preheader:
         seq:
           - id: signature
@@ -312,8 +312,8 @@ types:
 
               For now Recovery Set ID is the MD5 hash of the body of the main packet.
           - id: types
-            type: type_markers
             size: 16
+            type: type_markers
             doc: Can be anything. All beginning "PAR " (ASCII) are reserved for specification-defined packets. Application-specific packets are recommended to begin with the ASCII name of the client.
         types:
           type_markers:

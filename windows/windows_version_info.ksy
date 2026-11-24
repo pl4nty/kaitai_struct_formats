@@ -2,9 +2,9 @@ meta:
   id: windows_version_info
   title: Windows OSVERSIONINFO(EX)?[AW] structure
   license: Unlicense
-  endian: le
   imports:
     - /windows/windows_suite_mask
+  endian: le
 doc: |
   A structure describing Windows OS edition.
 doc-ref:
@@ -27,22 +27,6 @@ doc-ref:
   - _OSVERSIONINFOEXW
   - OSVERSIONINFOEXW
 
-instances:
-  csd_version_size:
-    value: 128
-  csd_version_char_size:
-    value: csd_version_size
-  csd_version_wchar_size:
-    value: csd_version_size * 2
-  basic_char_size: # 148
-    value: size._sizeof + sizeof<internal::basic> + csd_version_char_size
-  extended_char_size: # 156
-    value: basic_char_size + sizeof<internal::extended>
-  basic_wchar_size: # 532
-    value: size._sizeof + sizeof<internal::basic> + csd_version_wchar_size
-  extended_wchar_size: # 540
-    value: basic_wchar_size + sizeof<internal::extended>
-
 seq:
   - id: size
     -orig-id: dwOSVersionInfoSize
@@ -63,6 +47,22 @@ seq:
         basic_wchar_size: internal(true, false)
         extended_wchar_size: internal(true, true)
 
+instances:
+  csd_version_size:
+    value: 128
+  csd_version_char_size:
+    value: csd_version_size
+  csd_version_wchar_size:
+    value: csd_version_size * 2
+  basic_char_size: # 148
+    value: size._sizeof + sizeof<internal::basic> + csd_version_char_size
+  extended_char_size: # 156
+    value: basic_char_size + sizeof<internal::extended>
+  basic_wchar_size: # 532
+    value: size._sizeof + sizeof<internal::basic> + csd_version_wchar_size
+  extended_wchar_size: # 540
+    value: basic_wchar_size + sizeof<internal::extended>
+
 types:
   internal:
     params:
@@ -75,15 +75,15 @@ types:
         type: basic
       - id: csd_version_wchar
         -orig-id: szCSDVersion
+        size: _root.csd_version_wchar_size
         type: str
         encoding: utf-16
-        size: _root.csd_version_wchar_size
         if: is_wide
       - id: csd_version_char
         -orig-id: szCSDVersion
-        type: str
-        encoding: ascii
         size: _root.csd_version_char_size
+        type: str
+        encoding: ASCII
         if: not is_wide
       - id: extended
         type: extended

@@ -4,13 +4,13 @@ meta:
   file-extension: swf
   xref:
     justsolve: SWF
-    pronom: fmt/507
-      # - fmt/{505..507} # Adobe Flash {8..10}
-      # - fmt/{757..776} # Adobe Flash {11..30}
     loc:
       - fdd000130 # SWF 7
       - fdd000248 # SWF 8
     mime: application/x-shockwave-flash
+    pronom: fmt/507
+      # - fmt/{505..507} # Adobe Flash {8..10}
+      # - fmt/{757..776} # Adobe Flash {11..30}
     wikidata: Q594447
   tags:
     - executable
@@ -53,8 +53,8 @@ seq:
     if: compression == compressions::none
   - id: zlib_body
     size-eos: true
-    process: zlib
     type: swf_body
+    process: zlib
     if: compression == compressions::zlib
 # lzma is not yet supporting in java runtime, that's why it's commented out
 #  - id: lzma_body

@@ -15,32 +15,32 @@ seq:
     doc: Liquids layer indicator
   - id: land_vertexes
     type: vertex
-    doc: Vertex array 33x33 (terrain layer)
     repeat: expr
     repeat-expr: 1089
+    doc: Vertex array 33x33 (terrain layer)
   - id: liquid_vertexes
     type: vertex
-    doc: Vertex array 33x33 (liquids layer)
-    if: have_liquids != 0
     repeat: expr
     repeat-expr: 1089
+    if: have_liquids != 0
+    doc: Vertex array 33x33 (liquids layer)
   - id: land_tiles
     type: tile
-    doc: Tile array 16x16 (terrain layer)
     repeat: expr
     repeat-expr: 256
+    doc: Tile array 16x16 (terrain layer)
   - id: liquid_tiles
     type: tile
-    doc: Tile array 16x16 (liquids layer)
-    if: have_liquids == 3
     repeat: expr
     repeat-expr: 256
+    if: have_liquids == 3
+    doc: Tile array 16x16 (liquids layer)
   - id: liquid_material
     type: s2
-    doc: Index of material from MP file
-    if: have_liquids == 3
     repeat: expr
     repeat-expr: 256
+    if: have_liquids == 3
+    doc: Index of material from MP file
 types:
   vertex:
     doc: Vertex data
@@ -86,11 +86,11 @@ types:
         doc: Bit-packed tile information
     instances:
       index:
-        doc: Tile index in texture atlas
         value: packed & 63
+        doc: Tile index in texture atlas
       texture:
-        doc: Index of texture atlas
         value: (packed >> 6) & 255
+        doc: Index of texture atlas
       rotation:
-        doc: Tile rotation in angles
         value: 90.0 * ((packed >> 14) & 3)
+        doc: Tile rotation in angles

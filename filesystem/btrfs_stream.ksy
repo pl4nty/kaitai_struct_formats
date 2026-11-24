@@ -44,8 +44,8 @@ types:
         size: 4
         doc: CRC32 checksum of a whole send command, including the header, with this attribute set to 0.
       - id: data
-        type: tlvs
         size: len_data
+        type: tlvs
     types:
       tlvs:
         seq:
@@ -55,8 +55,8 @@ types:
       tlv:
         seq:
           - id: type
-            enum: attribute
             type: u2le
+            enum: attribute
           - id: length
             type: u2le
           - id: value
@@ -98,8 +98,8 @@ types:
       string:
         seq:
           - id: string
-            type: str
             size-eos: true
+            type: str
             encoding: UTF-8
       uuid:
         seq:

@@ -128,8 +128,8 @@ types:
   frame:
     seq:
       - id: id
-        type: str
         size: 4
+        type: str
         encoding: ASCII
       - id: size
         type: u4be_synchsafe
@@ -139,6 +139,9 @@ types:
         type: flags_format
       - id: data
         size: size.value
+    instances:
+      is_invalid:
+        value: "id == '\x00\x00\x00\x00'"
     types:
       flags_status:
         seq:
@@ -168,9 +171,6 @@ types:
             type: b1
           - id: flag_indicator
             type: b1
-    instances:
-      is_invalid:
-        value: "id == '\x00\x00\x00\x00'"
 
   # Section 6.2. Synchsafe integers
   u1be_synchsafe:

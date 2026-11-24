@@ -8,9 +8,9 @@ meta:
       - fdd000392 # CFB 4
     wikidata: Q5156830
   license: CC0-1.0
-  endian: le
   imports:
     - /windows/windows_filetime
+  endian: le
 doc: |
   Due to restrictions of Kaitai Struct we cannot fully parse CFB file format. In particular,
   index of an entry in a FAT corresponds to a sector in the parsed file, while a value in that FAT entry
@@ -110,9 +110,9 @@ types:
         type: u4
         doc: Number of DIFAT sectors in this file.
       - id: difat
+        type: difat_entry_type
         repeat: expr
         repeat-expr: 109
-        type: difat_entry_type
     enums:
       version_type:
         3: three
@@ -145,9 +145,9 @@ types:
       difat_entries_type:
         seq:
           - id: entries
+            type: difat_entry_type
             repeat: expr
             repeat-expr: _root.len_sector / 4 - 1  # 4 - sizeof<difat_entry_type>
-            type: difat_entry_type
           - id: chain_entry
             type: difat_chain_entry_type
       fat_entries_type:
@@ -170,8 +170,8 @@ types:
   dir_entry_type:
     seq:
       - id: name
-        type: strz
         size: 64
+        type: strz
         encoding: UTF-16LE
         doc: |
           Entry name, terminated by U+0000. The bytes after the terminator

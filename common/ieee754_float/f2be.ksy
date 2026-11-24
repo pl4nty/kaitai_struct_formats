@@ -1,13 +1,13 @@
 meta:
   id: f2be
   title: IEEE 754 Half-precision floating-point
-  license: Unlicense
-  endian: be
   xref:
     iso: 60559:2011
     wikidata: Q1994657
+  license: Unlicense
   imports:
     - ./ieee754_float
+  endian: be
 doc: see the doc for `ieee754_float`.
 seq:
   - id: sign

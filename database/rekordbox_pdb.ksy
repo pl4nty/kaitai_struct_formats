@@ -129,13 +129,13 @@ types:
           Identifies the desired page number.
     instances:
       body:
-        doc: |
-          When referenced, loads the specified page and parses its
-          contents appropriately for the type of data it contains.
         io: _root._io
         pos: _root.len_page * index
         size: _root.len_page
         type: page
+        doc: |
+          When referenced, loads the specified page and parses its
+          contents appropriately for the type of data it contains.
 
   page:
     doc: |
@@ -147,18 +147,18 @@ types:
     seq:
       - contents: [0, 0, 0, 0]
       - id: page_index
-        doc: Matches the index we used to look up the page, sanity check?
         type: u4
+        doc: Matches the index we used to look up the page, sanity check?
       - id: type
         type: u4
         enum: page_type
         doc: |
           Identifies the type of information stored in the rows of this page.
       - id: next_page
+        type: page_ref
         doc: |
           Index of the next page containing this type of rows. Points past
           the end of the file if there are no more.
-        type: page_ref
       - type: u4
         doc: |
           @flesniak said: "sequence number (0->1: 8->13, 1->2: 22, 2->3: 27)"
@@ -240,11 +240,11 @@ types:
         type: 'row_group(_index)'
         repeat: expr
         repeat-expr: num_groups
+        if: is_data_page
         doc: |
           The actual row groups making up the row index. Each group
           can hold up to sixteen rows. Non-data pages do not have
           actual rows, and attempting to parse them can crash.
-        if: is_data_page
 
   row_group:
     doc: |
@@ -366,8 +366,8 @@ types:
           the start of this row.
     instances:
       name:
-        type: device_sql_string
         pos: _parent.row_base + ofs_name
+        type: device_sql_string
         doc: |
           The name of this album.
         -webide-parse-mode: eager
@@ -401,11 +401,11 @@ types:
       ofs_name_far:
         pos: _parent.row_base + 0x0a
         type: u2
+        if: subtype == 0x64
         doc: |
           For names that might be further than 0xff bytes from the
           start of this row, this holds a two-byte offset, and is
           signalled by the subtype value.
-        if: subtype == 0x64
       name:
         pos: '_parent.row_base + (subtype == 0x64? ofs_name_far : ofs_name_near)'
         type: device_sql_string
@@ -688,48 +688,48 @@ types:
           variety of variable-length strings.
     instances:
       unknown_string_1:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[0]
+        type: device_sql_string
         doc: |
           A string of unknown purpose, which has so far only been
           empty.
         -webide-parse-mode: eager
       texter:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[1]
+        type: device_sql_string
         doc: |
           A string of unknown purpose, which @flesnik named.
         -webide-parse-mode: eager
       unknown_string_2:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[2]
+        type: device_sql_string
         doc: |
           A string of unknown purpose; @flesniak said "thought
           tracknumber -> wrong!"
       unknown_string_3:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[3]
+        type: device_sql_string
         doc: |
           A string of unknown purpose; @flesniak said "strange
           strings, often zero length, sometimes low binary values
           0x01/0x02 as content"
       unknown_string_4:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[4]
+        type: device_sql_string
         doc: |
           A string of unknown purpose; @flesniak said "strange
           strings, often zero length, sometimes low binary values
           0x01/0x02 as content"
         -webide-parse-mode: eager
       message:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[5]
+        type: device_sql_string
         doc: |
           A string of unknown purpose, which @flesnik named.
         -webide-parse-mode: eager
       kuvo_public:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[6]
+        type: device_sql_string
         doc: |
           A string whose value is always either empty or "ON", and
           which apparently for some insane reason is used, rather than
@@ -737,8 +737,8 @@ types:
           information is visible on Kuvo.
         -webide-parse-mode: eager
       autoload_hotcues:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[7]
+        type: device_sql_string
         doc: |
           A string whose value is always either empty or "ON", and
           which apparently for some insane reason is used, rather than
@@ -746,44 +746,44 @@ types:
           auto-loaded for the track.
         -webide-parse-mode: eager
       unknown_string_5:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[8]
+        type: device_sql_string
         doc: |
           A string of unknown purpose.
         -webide-parse-mode: eager
       unknown_string_6:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[9]
+        type: device_sql_string
         doc: |
           A string of unknown purpose, usually empty.
         -webide-parse-mode: eager
       date_added:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[10]
+        type: device_sql_string
         doc: |
           A string containing the date this track was added to the collection.
         -webide-parse-mode: eager
       release_date:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[11]
+        type: device_sql_string
         doc: |
           A string containing the date this track was released, if known.
         -webide-parse-mode: eager
       mix_name:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[12]
+        type: device_sql_string
         doc: |
           A string naming the remix of the track, if known.
         -webide-parse-mode: eager
       unknown_string_7:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[13]
+        type: device_sql_string
         doc: |
           A string of unknown purpose, usually empty.
         -webide-parse-mode: eager
       analyze_path:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[14]
+        type: device_sql_string
         doc: |
           The file path of the track analysis, which allows rapid
           seeking to particular times in variable bit-rate files,
@@ -791,38 +791,38 @@ types:
           stores cue points and loops.
         -webide-parse-mode: eager
       analyze_date:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[15]
+        type: device_sql_string
         doc: |
           A string containing the date this track was analyzed by rekordbox.
         -webide-parse-mode: eager
       comment:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[16]
+        type: device_sql_string
         doc: |
           The comment assigned to the track by the DJ, if any.
         -webide-parse-mode: eager
       title:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[17]
+        type: device_sql_string
         doc: |
           The title of the track.
         -webide-parse-mode: eager
       unknown_string_8:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[18]
+        type: device_sql_string
         doc: |
           A string of unknown purpose, usually empty.
         -webide-parse-mode: eager
       filename:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[19]
+        type: device_sql_string
         doc: |
           The file name of the track audio file.
         -webide-parse-mode: eager
       file_path:
-        type: device_sql_string
         pos: _parent.row_base + ofs_strings[20]
+        type: device_sql_string
         doc: |
           The file path of the track audio file.
         -webide-parse-mode: eager
@@ -859,9 +859,9 @@ types:
           incremented again. Go figure.
     seq:
       - id: text
-        type: str
         size: length
-        encoding: ascii
+        type: str
+        encoding: ASCII
         if: '(mangled_length % 2 > 0) and (length >= 0)'  # Skip invalid strings
         doc: |
           The content of the string.
@@ -881,9 +881,9 @@ types:
         doc: |
           Contains the length of the string in bytes.
       - id: text
-        type: str
         size: length
-        encoding: ascii
+        type: str
+        encoding: ASCII
         doc: |
           The content of the string.
 
@@ -896,9 +896,9 @@ types:
         doc: |
           Contains the length of the string in bytes, including two trailing nulls.
       - id: text
-        type: str
         size: length - 4
-        encoding: utf-16be
+        type: str
+        encoding: UTF-16BE
         doc: |
           The content of the string.
 

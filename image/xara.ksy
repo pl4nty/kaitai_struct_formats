@@ -3,7 +3,7 @@ meta:
   title: XARA
   license: CC0-1.0
   ks-version: 0.9
-  encoding: ascii
+  encoding: ASCII
   endian: le
 doc-ref:
   - https://en.wikipedia.org/wiki/Xar_(graphics)

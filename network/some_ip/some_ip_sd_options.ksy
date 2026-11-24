@@ -21,20 +21,20 @@ seq:
 types:
   sd_option:
     seq:
-    - id: header
-      type: sd_option_header
-    - id: content
-      type:
-        switch-on: header.type
-        cases:
-          option_types::configuration_option : sd_configuration_option
-          option_types::load_balancing_option : sd_load_balancing_option
-          option_types::ipv4_endpoint_option : sd_ipv4_endpoint_option
-          option_types::ipv6_endpoint_option : sd_ipv6_endpoint_option
-          option_types::ipv4_multicast_option : sd_ipv4_multicast_option
-          option_types::ipv6_multicast_option : sd_ipv6_multicast_option
-          option_types::ipv4_sd_endpoint_option : sd_ipv4_sd_endpoint_option
-          option_types::ipv6_sd_endpoint_option : sd_ipv6_sd_endpoint_option
+      - id: header
+        type: sd_option_header
+      - id: content
+        type:
+          switch-on: header.type
+          cases:
+            option_types::configuration_option : sd_configuration_option
+            option_types::load_balancing_option : sd_load_balancing_option
+            option_types::ipv4_endpoint_option : sd_ipv4_endpoint_option
+            option_types::ipv6_endpoint_option : sd_ipv6_endpoint_option
+            option_types::ipv4_multicast_option : sd_ipv4_multicast_option
+            option_types::ipv6_multicast_option : sd_ipv6_multicast_option
+            option_types::ipv4_sd_endpoint_option : sd_ipv4_sd_endpoint_option
+            option_types::ipv6_sd_endpoint_option : sd_ipv6_sd_endpoint_option
 
     types:
       sd_option_header:
@@ -50,8 +50,8 @@ types:
           - id: reserved
             type: u1
           - id: configurations
-            type: sd_config_strings_container
             size: _parent.header.length - 1
+            type: sd_config_strings_container
 
       sd_config_strings_container:
         seq:
@@ -64,20 +64,20 @@ types:
           - id: length
             type: u1
           - id: config
-            type: sd_config_kv_pair
             size: length
+            type: sd_config_kv_pair
             if: length != 0
 
       sd_config_kv_pair:
         seq:
-        - id: key
-          type: str
-          terminator: 0x3D
-          encoding: ASCII
-        - id: value
-          type: str
-          size-eos: true
-          encoding: ASCII
+          - id: key
+            type: str
+            terminator: 0x3D
+            encoding: ASCII
+          - id: value
+            size-eos: true
+            type: str
+            encoding: ASCII
 
 
       sd_load_balancing_option:

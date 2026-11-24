@@ -1,10 +1,10 @@
 meta:
   id: nulib_nud
-  file-extension: nud
-  application: Games with Namco NU library
   title: Namco 3D Model
-  endian: le
+  application: Games with Namco NU library
+  file-extension: nud
   license: MIT
+  endian: le
   #  switch-on: file_type
   #  cases:
   #    ndwd: le
@@ -73,8 +73,8 @@ types:
         type: u2
     seq:
       - id: parts
-        type: part
         size: 0x30
+        type: part
         repeat: expr
         repeat-expr: num_parts
   mesh:
@@ -89,8 +89,8 @@ types:
       - id: name_offset
         type: u4
       - id: empty_bytes
-        doc: this is just for alignment
         contents: [0, 0]
+        doc: this is just for alignment
       - id: bone_flags
         type: u2
       - id: bone_index
@@ -149,11 +149,11 @@ types:
       - id: poly_size
         type: u1
       - id: poly_flag # TODO
-        doc: Need to determine what this does
         type: u1
         valid:
           any-of:
             - 0
+        doc: Need to determine what this does
     instances:
       indices_start:
         value: _root.header.indices_clump_start + poly_offset
@@ -191,7 +191,6 @@ types:
           (_parent.normal_type == normal_type::normals_tan_bitan and not _parent.normal_half_float)
 
       - id: normal
-        if: _parent.normal_type != normal_type::no_normals
         type:
           switch-on: _parent.normal_half_float
           cases:
@@ -199,18 +198,18 @@ types:
             false: f4
         repeat: expr
         repeat-expr: 4
+        if: _parent.normal_type != normal_type::no_normals
 
       - id: r1
-        doc: 'no idea what this is'
         size: 4
         repeat: expr
         repeat-expr: '_parent.normal_type == normal_type::normals_float ? 1 : 8'
         if: (_parent.normal_type == normal_type::normals_r1 or
           _parent.normal_type == normal_type::normals_float)
           and not _parent.normal_half_float
+        doc: 'no idea what this is'
 
       - id: tan
-        if: _parent.normal_type == normal_type::normals_tan_bitan
         type:
           switch-on: _parent.normal_half_float
           cases:
@@ -218,8 +217,8 @@ types:
             false: f4
         repeat: expr
         repeat-expr: 4
+        if: _parent.normal_type == normal_type::normals_tan_bitan
       - id: bitan
-        if: _parent.normal_type == normal_type::normals_tan_bitan
         type:
           switch-on: _parent.normal_half_float
           cases:
@@ -227,17 +226,17 @@ types:
             false: f4
         repeat: expr
         repeat-expr: 4
+        if: _parent.normal_type == normal_type::normals_tan_bitan
 
       - id: colors
-        if: |
-          (_parent.bone_size == bone_size::no_bones) and
-          (_parent.vertex_color_size != vertex_color_size::no_vertex_colors)
         type: u1
         repeat: expr
         repeat-expr: 4
+        if: |
+          (_parent.bone_size == bone_size::no_bones) and
+          (_parent.vertex_color_size != vertex_color_size::no_vertex_colors)
 
       - id: uv
-        if: _parent.bone_size == bone_size::no_bones
         type:
           switch-on: _parent.uv_float
           cases:
@@ -245,9 +244,9 @@ types:
             false: u2
         repeat: expr
         repeat-expr: _parent.uv_channel_count * 2
+        if: _parent.bone_size == bone_size::no_bones
 
       - id: bone_id
-        if: _parent.bone_size != bone_size::no_bones
         type:
           switch-on: _parent.bone_size
           cases:
@@ -256,8 +255,8 @@ types:
             'bone_size::byte': u1
         repeat: expr
         repeat-expr: 4
-      - id: bone_weight
         if: _parent.bone_size != bone_size::no_bones
+      - id: bone_weight
         type:
           switch-on: _parent.bone_size
           cases:
@@ -266,6 +265,7 @@ types:
             'bone_size::byte': u1
         repeat: expr
         repeat-expr: 4
+        if: _parent.bone_size != bone_size::no_bones
   material_wrapper:
     params:
       - id: position
@@ -273,8 +273,8 @@ types:
     instances:
       material:
         io: _root._io
-        type: material
         pos: position
+        type: material
   material:
     seq:
       # TODO
@@ -357,10 +357,10 @@ types:
         repeat-expr: num_values
     instances:
       name:
-        type: strz
-        if: num_values != 0
         pos: _root.header.name_start + name_offset
+        type: strz
         encoding: UTF-8
+        if: num_values != 0
   material_texture:
     seq:
       - id: hash

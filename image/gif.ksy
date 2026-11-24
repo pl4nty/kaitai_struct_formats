@@ -37,9 +37,9 @@ seq:
   - id: logical_screen_descriptor
     type: logical_screen_descriptor_struct
   - id: global_color_table
+    size: logical_screen_descriptor.color_table_size * 3
     type: color_table
     if: logical_screen_descriptor.has_color_table
-    size: logical_screen_descriptor.color_table_size * 3
     doc-ref: https://www.w3.org/Graphics/GIF/spec-gif89a.txt - section 18
   - id: blocks
     type: block
@@ -52,8 +52,8 @@ types:
       - id: magic
         contents: 'GIF'
       - id: version
-        type: str
         size: 3
+        type: str
         encoding: ASCII
   logical_screen_descriptor_struct:
     doc-ref: https://www.w3.org/Graphics/GIF/spec-gif89a.txt - section 18
@@ -112,9 +112,9 @@ types:
       - id: flags
         type: u1
       - id: local_color_table
+        size: color_table_size * 3
         type: color_table
         if: has_color_table
-        size: color_table_size * 3
       - id: image_data
         type: image_data
     instances:
@@ -190,9 +190,9 @@ types:
         type: u1
         valid: 11
       - id: application_identifier
+        size: 8
         type: str
         encoding: ASCII
-        size: 8
       - id: application_auth_code
         size: 3
 enums:

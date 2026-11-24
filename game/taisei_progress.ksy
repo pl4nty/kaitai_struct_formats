@@ -3,8 +3,8 @@ meta:
   title: Taisei Project Progress File (uncompressed)
   application: Taisei Project
   file-extension: progress
-  encoding: ASCII
   license: CC0-1.0
+  encoding: ASCII
   endian: le
 doc-ref: https://github.com/taisei-project/taisei/blob/master/src/progress.c
 seq:
