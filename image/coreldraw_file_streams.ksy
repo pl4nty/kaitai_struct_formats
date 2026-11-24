@@ -14,7 +14,7 @@ doc: |
              cdr_unpk
             /        \
            v          v
-  coreldraw_cdr -> file_streams
+  coreldraw_cdr -> coreldraw_file_streams
 
 seq:
   - id: files

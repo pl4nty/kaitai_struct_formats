@@ -23,7 +23,7 @@ doc: |
   of an install use. albam/engines/cie/fs.py tells the other one apart and
   says why it cannot be listed.
 
-  The DAT block's own layout is the same one dat.ksy models standalone, so
+  The DAT block's own layout is the same one re4_uhd_dat.ksy models standalone, so
   the two agree field for field; it is repeated here rather than shared
   because a .dat entry's offsets are relative to the file while a UDAS's are
   relative to the block.

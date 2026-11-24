@@ -11,7 +11,7 @@ meta:
 doc: |
   RE:ORC's `Animation/Projects/*.anims.ssg` bundles many named animation
   clips for one or more skeletons into a single archive. The container is
-  structurally the regular Hexane .ssg archive (see ssg.ksy) - same 32-byte
+  structurally the regular Hexane .ssg archive (see hexane_ssg.ksy) - same 32-byte
   header, same 32-byte-per-entry file table, same trailing `buffer_chunks`
   blob - but big-endian instead of little-endian, and `id_magic` is 5 or 6
   rather than always 6. Entries pack into `buffer_chunks` back-to-back with

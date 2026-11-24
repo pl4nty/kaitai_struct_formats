@@ -26,7 +26,7 @@ doc: |
   Group control (com.govee.ble.group): the same 20-byte frames are written to multiple
   group members over dedicated group service/characteristic UUIDs, serialized with ~20-100 ms
   spacing (BleController.K). The frame layout is identical; only the transport fan-out differs.
-  Advertisement (manufacturer-data) parsing is a separate bitstream — see govee_adv.ksy.
+  Advertisement (manufacturer-data) parsing is a separate bitstream — see govee_advertisement.ksy.
 
 seq:
   - id: pro_type

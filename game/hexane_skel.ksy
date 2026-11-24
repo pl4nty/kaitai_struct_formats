@@ -12,7 +12,7 @@ meta:
 # dlc/pack1/characters/<name>/models/<name>.edgemodel it rigs.
 #
 # Despite the extension, this is not the chunk-compressed container modeled
-# in ssg.ksy - it's a single payload starting at byte 0, parsed straight
+# in hexane_ssg.ksy - it's a single payload starting at byte 0, parsed straight
 # from the raw bytes (see skeleton.py).
 #
 # The outer header (0x00-0xBF) is big-endian; the body, from the "20SE" tag

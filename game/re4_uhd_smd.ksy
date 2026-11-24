@@ -14,7 +14,7 @@ doc: |
   size entries, each naming a model by index and carrying the position,
   rotation and scale to put it at, followed - much later in the file - by
   two tables of offsets, one to the embedded models (the same format as a
-  standalone mesh .bin, see re4-uhd-bin.ksy) and one to the embedded .tpl
+  standalone mesh .bin, see re4_uhd_bin.ksy) and one to the embedded .tpl
   each entry addresses its textures through.
 
   Neither offset table states its own length: what ends one is a zero

@@ -12,8 +12,8 @@ doc: |
   end of the file. A section may be zlib-compressed; its record's flags say
   so, not its sizes, as some payloads deflate to their own size.
 
-  This spec reads any TGCK file with each payload as bytes. `rwd.ksy` and
-  `rmp.ksy` reuse its types and give the payloads their layouts.
+  This spec reads any TGCK file with each payload as bytes. `axis_and_allies_rwd.ksy` and
+  `axis_and_allies_rmp.ksy` reuse its types and give the payloads their layouts.
 doc-ref: README.md
 seq:
   - id: header

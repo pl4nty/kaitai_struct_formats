@@ -10,7 +10,7 @@ meta:
 
 doc: |
   Decoded WinBox application messages. After the chunked transport layer
-  (see `winbox_chunk.ksy`) is reassembled and (for tag 0x06) AES-decrypted,
+  (see `mikrotik_winbox_chunk.ksy`) is reassembled and (for tag 0x06) AES-decrypted,
   the result is an `m2_message`: the literal ASCII bytes "M2" followed by
   zero or more TLV entries until end-of-stream.
 

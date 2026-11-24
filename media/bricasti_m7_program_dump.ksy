@@ -2,7 +2,7 @@
 # Licence and copyright: see _community/README.md
 # GENERATED FILE — do not hand-edit.
 # Produced by m7_sysex export from byte_map + parameter analyses.
-# Compile with: kaitai-struct-compiler m7_program_dump.ksy
+# Compile with: kaitai-struct-compiler bricasti_m7_program_dump.ksy
 # Spec: https://kaitai.io/
 
 meta:

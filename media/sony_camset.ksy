@@ -6,7 +6,7 @@
 # contract the kit and the editor read a file with is the camera's container block (docs/decisions/0020);
 # kit/tests/test_definitions.py ties this file to the ILCE-1M2's block, reading the sample both ways with the Python
 # reader generated from it (kit/camkit/formats/, kit/tools/build_docs.py runs kaitai-struct-compiler). The record names
-# it imports (sony_camset_ids_ILCE-1M2_fw4.00.ksy) are generated from editor/definitions/ILCE-1M2_fw4.00.json, one
+# it imports (sony_camset_ids_ilce_1m2_fw4_00.ksy) are generated from editor/definitions/ILCE-1M2_fw4.00.json, one
 # such file per definition.
 meta:
   id: sony_camset

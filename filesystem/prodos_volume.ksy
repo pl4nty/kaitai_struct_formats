@@ -13,7 +13,7 @@ meta:
 doc: |
   A ProDOS 8 volume as a flat sequence of 512-byte blocks, as found in
   ".po" (ProDOS-order 140K floppy), ".hdv" and similar hard-disk images, and
-  as the payload of a 2IMG container (see prodos_2img.ksy).
+  as the payload of a 2IMG container (see apple2_2img.ksy).
 
   Block map:
     0-1   boot code

@@ -14,7 +14,7 @@ doc: |
   Native DIY0a item selection is evidenced on Pact2/1 HW3.02.01/FW1.10.04.
   Direction30, position31 and Gradient A3 extensions remain speculative
   exact-model
-  reconstructed/direct-register evidence in speculative/h6199_control_payload.ksy.
+  reconstructed/direct-register evidence in govee_h6199_control_payload.ksy.
 seq:
   - id: header
     contents: [0x33]

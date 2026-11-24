@@ -10,7 +10,7 @@ meta:
 doc: |
   The four messages that precede AES-128-CBC session traffic on RouterOS
   >= 6.43. Each message is wrapped in the same chunked frame as the rest
-  of the protocol (see `winbox_chunk.ksy`) using tag `0x06`, so the byte
+  of the protocol (see `mikrotik_winbox_chunk.ksy`) using tag `0x06`, so the byte
   layouts shown here are the *assembled* (post-dechunking) payloads.
 
   Endianness note: the elliptic-curve points are serialized big-endian in

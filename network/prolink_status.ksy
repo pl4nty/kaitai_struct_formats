@@ -22,7 +22,7 @@ doc: |
   **The header is not the one on port 50000.** The device name occupies
   0x0b-0x1e -- one byte earlier and one byte shorter -- and byte 0x1f is a
   structural 0x01 where the discovery header has its name's last byte (C14).
-  Reusing `prolink_djl.ksy` here yields plausible nonsense rather than an error,
+  Reusing `prolink_discovery.ksy` here yields plausible nonsense rather than an error,
   so the two schemas are deliberately kept apart.
 
   **Why the type-specific fields are `instances` and not a `body` switch.**

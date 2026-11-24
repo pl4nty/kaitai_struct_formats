@@ -11,7 +11,7 @@ doc: |
   dump from a Kenwood TM-V71A radio. To generate a Python module from
   this description, use the Kaitai Struct Compiler:
 
-      ksc --target python --outdir tmv71 memory.ksy
+      ksc --target python --outdir tmv71 kenwood_tm_v71_memory.ksy
 
   This will generate `memory.py`.
 
