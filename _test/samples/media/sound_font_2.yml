@@ -1,0 +1,26 @@
+samples:
+  - url: https://sembiance.com/fileFormatSamples/audio/soundFont2/mood%20strings.sf2
+    sha256: 94617c8fd054dffc87b4a3fdffa92caa30f2efdf9edf6e706d2e531ab935bdf4
+    name: mood_strings.sf2
+    source: telparia fileFormatSamples (sembiance.com; E-mu bank); expects from file(1) and a manual RIFF chunk walk
+    eof: true
+    expect:
+      chunk.len_body: 42892
+      chunk.body.info.body.subchunks[0].body.major: 2
+      chunk.body.info.body.subchunks[0].body.minor: 1
+      len(chunk.body.preset_data.body.presets.body.records): 2
+  - url: https://sembiance.com/fileFormatSamples/audio/soundFont2/7FTGRAND.SF2
+    sha256: ed910537350d51a546babdd140ce7195b8c58dad931de759ae610c3b8b50c757
+    source: telparia fileFormatSamples (sembiance.com); expects from a manual RIFF chunk walk
+    eof: true
+    expect:
+      chunk.len_body: 522888
+      len(chunk.body.preset_data.body.presets.body.records): 10
+  - url: https://sembiance.com/fileFormatSamples/audio/soundFont2/TFX3512.SF2
+    sha256: 7f966c219ea420ee10706df497d5d63a6beaa9113a5c73ef5e8db4299cddfe43
+    source: telparia fileFormatSamples (sembiance.com); expects from a manual RIFF chunk walk
+    eof: true
+    expect:
+      chunk.body.info.body.subchunks[1].body: User Bank
+      len(chunk.body.preset_data.body.presets.body.records): 7
+    xfail: INFO strings are decoded as UTF-8, but this file's ICOP copyright string holds a Latin-1 0xA9 (copyright sign), as many 1990s banks do

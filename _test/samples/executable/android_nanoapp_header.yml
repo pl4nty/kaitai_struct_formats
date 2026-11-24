@@ -1,0 +1,13 @@
+samples:
+  - url: https://raw.githubusercontent.com/kaitai-io/kaitai_struct_samples/11ccc86d7697d1b4dcc58ee4b0c5bf8994307e76/executable/android_nanoapp_header/imu_cal.napp_header
+    sha256: 03a1f28348e5a71b54493ab72cfd4e1409683d55e49ec0d79959bdde5fdc9ba1
+    source: kaitai_struct_samples; from Pixel 6 (oriole) factory image vendor.img etc/chre/imu_cal.napp_header
+    license: Apache-2.0
+    eof: true
+    expect:   # manual hex read against CHRE build_template.mk header layout
+      app_id: 0x476f6f676c000016
+      app_version: 0x01000008
+      flags: 5
+      hub_type: 0x476f6f676c000008
+      chre_api_major_version: 1
+      chre_api_minor_version: 5

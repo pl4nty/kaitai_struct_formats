@@ -1,0 +1,12 @@
+samples:
+  - url: https://raw.githubusercontent.com/apache/tika/39d27b43befe2776ec17137c51dfafd1ab5bc42d/tika-parsers/tika-parsers-standard/tika-parsers-standard-modules/tika-parser-crypto-module/src/test/resources/test-documents/testCERT.der
+    sha256: 7c6909c2177ef201f943a07450e2b454e0471e6c572b19e6257c0b768ae0ba4e
+    source: 'Apache Tika test documents: X.509 certificate'
+    license: Apache-2.0
+    eof: true
+    expect:                               # openssl asn1parse -inform der
+      tag.form: constructed_form          # 0:d=0 hl=4 l=698 cons: SEQUENCE
+      length.val_len: 698
+      value_constructed[0].length.val_len: 547
+      len(value_constructed): 3           # tbsCertificate, signatureAlgorithm, signature
+    xfail: constructed values use repeat eos without a size limit (no size of length.val_len), so the first child TLV swallows all its siblings and the root SEQUENCE gets 1 child instead of 3

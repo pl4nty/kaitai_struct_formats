@@ -1,0 +1,24 @@
+# Xbox 360 LIVE packages (avatar items) from landaire/acceleration's stfs crate test fixtures.
+# Expect values from the crate's own insta header snapshots (an independent Rust parser),
+# tests/snapshots/parse_fixtures__<name>__header.snap.
+samples:
+  - url: https://raw.githubusercontent.com/landaire/acceleration/97f9ae6e0469d60c9320d5ea6010f133acb35e45/crates/stfs/tests/fixtures/live_120k_a.stfs
+    sha256: 47e38036a73112f5f0c07504e722250f7bf9f7b2727f7231d5dbdb292c7aa545
+    source: landaire/acceleration crates/stfs/tests/fixtures/live_120k_a.stfs (Microsoft avatar item; proprietary)
+    expect:
+      header.magic: live
+      metadata_size: 44302
+      metadata.metadata_version: 2
+      metadata.content_size: 77824
+      metadata.execution_info.title_id: 1480657581
+      metadata.thumbnail_size: 7641
+      metadata.title_thumbnail_size: 8509
+      metadata.display_names[0].rstrip('\x00'): Trials and Tribulations T-Shirt
+  - url: https://raw.githubusercontent.com/landaire/acceleration/97f9ae6e0469d60c9320d5ea6010f133acb35e45/crates/stfs/tests/fixtures/live_256k.stfs
+    sha256: 3a16330f841a26b63036c27441d024fff77f63649748dcfebe65a00aa4200d11
+    source: landaire/acceleration crates/stfs/tests/fixtures/live_256k.stfs (Microsoft avatar item; proprietary)
+    expect:
+      header.magic: live
+      metadata.content_size: 217088
+      metadata.execution_info.title_id: 1480657581
+      metadata.display_names[0].rstrip('\x00'): 'Squeaky the Squirrel '

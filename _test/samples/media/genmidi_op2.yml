@@ -1,0 +1,16 @@
+samples:
+  - url: https://raw.githubusercontent.com/Wohlstand/libADLMIDI/7e6e045d4e3f2614963a545e4bdfc95677e32673/fm_banks/dmx/doom2.op2
+    sha256: 02525e74901de1b179149479783d6d24a915312d2a5bbc0b2bc91c98b68634c5
+    source: libADLMIDI fm_banks (DOOM II GENMIDI lump); expects from file(1) and a manual read of the name table
+    eof: true
+    expect:
+      magic: "#OPL_II#"
+      instrument_names[0]: Acoustic Grand Piano
+      instrument_names[127]: Gun Shot
+      instrument_names[174]: Open Triangle
+  - url: https://raw.githubusercontent.com/Wohlstand/libADLMIDI/7e6e045d4e3f2614963a545e4bdfc95677e32673/fm_banks/dmx/heretic.op2
+    sha256: ddbb9933cee50c989a3700709c274a2c61362b30bb1837e9cb8ddfdc98d965ef
+    source: libADLMIDI fm_banks (Heretic GENMIDI lump); expects from a manual read
+    eof: true
+    expect:
+      instrument_names[0]: Acoustic Grand Piano

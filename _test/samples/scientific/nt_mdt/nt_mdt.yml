@@ -1,0 +1,29 @@
+samples:
+  - url: https://raw.githubusercontent.com/symartin/PyMDT/4d1210443221419ea5a74d70130bf88f33e3d17c/Test%20Files/test_structure.mdt
+    sha256: c4d66c7ec0439f18552902a24dfd6cd597efaadeab546a65261522ab33b11694
+    source: PyMDT test files (NT-MDT Nova scans)
+    license: GPL-3.0 (repository licence)
+    eof: true
+    expect:   # manual walk of the 33-byte file header and frame headers (Gwyddion nt-mdt.c)
+      size: 151288
+      len(frames.frames): 2
+      frames.frames[0].size: 75488
+      frames.frames[0].main.type: scanned
+  - url: https://raw.githubusercontent.com/symartin/PyMDT/4d1210443221419ea5a74d70130bf88f33e3d17c/Test%20Files/graphene_2.mdt
+    sha256: b0c59278b3c652efccf795dd709b2d8f175fdc5b728e3989804e03d183079a23
+    source: PyMDT test files (NT-MDT Nova scans)
+    license: GPL-3.0 (repository licence)
+    eof: true
+    expect:   # manual walk of frame headers
+      len(frames.frames): 8
+      frames.frames[2].size: 529296
+      frames.frames[7].main.type: scanned
+  - url: https://raw.githubusercontent.com/symartin/PyMDT/4d1210443221419ea5a74d70130bf88f33e3d17c/Test%20Files/f14h20-mica.mdt
+    sha256: 2f5cd1d600e4dceb2b2daf099ac3affdd30b0d31d8d05d22c9c8c6092b9a8c62
+    source: PyMDT test files (NT-MDT Nova MDA frames)
+    license: GPL-3.0 (repository licence)
+    eof: true
+    expect:   # manual walk of frame headers
+      len(frames.frames): 3
+      frames.frames[0].size: 2102648
+      frames.frames[0].main.type: metadata

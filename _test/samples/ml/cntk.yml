@@ -1,0 +1,23 @@
+# expects from a hex dump: "B\0CN\0\0" "B\0Version\0\0" u8 version "E\0Version\0\0" u8 numNodes
+samples:
+  - url: https://raw.githubusercontent.com/microsoft/CNTK/10a8ffcf50d7b9225f3236ffcfdc422b2014fb92/Tests/UnitTests/BrainScriptTests/Data/ComputationNetwork/LR_reg.dnn
+    sha256: 4d11835b7fd8bb8ebfeed6bff9233c2c3478259911a9725b502b7ffc521af68e
+    source: CNTK unit test data (BrainScript logistic regression model, legacy v1 format)
+    license: MIT
+    eof: true
+    expect:
+      network.contents.contents.version_.contents.contents.major: 10
+      network.contents.contents.node_count: 9
+    xfail: 'begin_marker_hardcode/end_marker use contents: [name] to match a parameter, but contents takes literals only, so ksc emits the ASCII bytes "name" and the first marker (B\0 C\0N\0) never validates'
+  - url: https://raw.githubusercontent.com/microsoft/CNTK/10a8ffcf50d7b9225f3236ffcfdc422b2014fb92/Tests/UnitTests/BrainScriptTests/Data/ComputationNetwork/MC.dnn
+    sha256: 499ae0b2163d9ce196138131b92cc5e9e681acfc6ff02890edaf41945db902de
+    source: CNTK unit test data (legacy v1 format)
+    license: MIT
+    eof: true
+    xfail: 'begin_marker_hardcode/end_marker use contents: [name] to match a parameter, but contents takes literals only, so ksc emits the ASCII bytes "name" and the first marker (B\0 C\0N\0) never validates'
+  - url: https://raw.githubusercontent.com/microsoft/CNTK/10a8ffcf50d7b9225f3236ffcfdc422b2014fb92/Tests/UnitTests/BrainScriptTests/Data/ComputationNetwork/01_OneHidden.dnn
+    sha256: 41b3acee78f87309b3dd7caebe817191ded83a6cb3bfc61c3856fa77dea7559b
+    source: CNTK unit test data (one-hidden-layer network, legacy v1 format)
+    license: MIT
+    eof: true
+    xfail: 'begin_marker_hardcode/end_marker use contents: [name] to match a parameter, but contents takes literals only, so ksc emits the ASCII bytes "name" and the first marker (B\0 C\0N\0) never validates'

@@ -1,0 +1,23 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/filesystem/squashfs/squashfs_v4_le/__input__/squashfs_v4.bin
+    sha256: a754b315013874eaa07f67f918278a699b8503ece1c6bbf11f153c62d7f49c69
+    source: unblob integration test fixtures (squashfs_v4_le)
+    license: MIT
+    expect:   # file(1)
+      superblock.inode_count: 3
+      superblock.block_size: 131072
+      superblock.compressor: zlib
+      superblock.bytes_used: 272
+      # 7z l: root dir + apple.txt, cherry.txt (exercises the concat/decompress processes)
+      sum(1 for h in inode_table.inodes.inode_header if h.type.name == 'basic_file'): 2
+      sum(1 for h in inode_table.inodes.inode_header if h.type.name == 'basic_directory'): 1
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/filesystem/squashfs/squashfs_v4_le/__input__/squashfs_v4.nopad.bin
+    sha256: c72ddaa56a78b3d901a037acb47eb9be4b6f5303654cf3e7d5cfed1321fbd874
+    source: unblob integration test fixtures (squashfs_v4_le)
+    license: MIT
+    expect:   # file(1)
+      superblock.inode_count: 5
+      superblock.block_size: 131072
+      superblock.bytes_used: 308
+      # 7z l: root dir + apple1..4.txt
+      sum(1 for h in inode_table.inodes.inode_header if h.type.name == 'basic_file'): 4

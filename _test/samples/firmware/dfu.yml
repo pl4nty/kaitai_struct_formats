@@ -1,0 +1,27 @@
+# Hand hex read of the DfuSe prefix and the 16-byte DFU suffix (DfuSe spec, ST UM0391);
+# the suffix CRC was recomputed independently (~crc32 of everything before it) and matches.
+samples:
+  - url: https://micropython.org/resources/firmware/ESPRUINO_PICO-20250809-v1.26.0.dfu
+    sha256: 5e0792c4bd972b61e898fec4eabcee2c39cd805cb96885027d5647a564293752
+    source: MicroPython v1.26.0 release download (versioned file name)
+    license: MIT (MicroPython)
+    eof: true
+    expect:
+      len_dfu: 276141
+      num_targets: 1
+      targets[0].len_target: 275856
+      targets[0].num_elements: 2
+      vendor: 0x0483
+      product: 0xdf11
+      crc32: 0xe701c72a
+  - url: https://micropython.org/resources/firmware/PYBV11-20250809-v1.26.0.dfu
+    sha256: 7b07fb1b66b75f0ce9f16137727319ea87104aa78423b3d419e12af722bbcd03
+    source: MicroPython v1.26.0 release download (versioned file name)
+    license: MIT (MicroPython)
+    eof: true
+    expect:
+      len_dfu: 367749
+      targets[0].len_target: 367464
+      targets[0].num_elements: 2
+      vendor: 0x0483
+      crc32: 0x9c1c7a75

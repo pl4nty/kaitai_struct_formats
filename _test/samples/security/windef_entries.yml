@@ -1,0 +1,21 @@
+# Windows Defender quarantine Entries files from fox-it/dissect.target's test data (Git LFS).
+# Expect values from dissect.target's own Defender quarantine parser test (test_defender.py).
+samples:
+  - url: https://media.githubusercontent.com/media/fox-it/dissect.target/72f4ddc31da62d413cb2c46b213f7e085317a808/tests/_data/plugins/os/windows/defender/quarantine/Entries/%7B800362A7-0000-0000-FB11-12639186E0D6%7D
+    sha256: 4ed594d33e87bb7ed14deaf0bba10833b62f0ab681fac1f50e804044afe6169f
+    name: "{800362A7-0000-0000-FB11-12639186E0D6}"
+    source: fox-it/dissect.target tests/_data/plugins/os/windows/defender/quarantine (Mimikatz mimilib.dll detection)
+    license: AGPL-3.0
+    expect:
+      data1.mal_type: HackTool:Win64/Mikatz!dha
+      data2.number_of_entries: 1
+      data2.entries[0].entry.typestr: file
+  - url: https://media.githubusercontent.com/media/fox-it/dissect.target/72f4ddc31da62d413cb2c46b213f7e085317a808/tests/_data/plugins/os/windows/defender/quarantine/Entries/%7B8006A512-0000-0000-2E01-A7D5DA185F14%7D
+    sha256: 039bd66f0e30b3d1d376c54e83b040b2967cff2c13bf8141735cf953f4d91c2c
+    name: "{8006A512-0000-0000-2E01-A7D5DA185F14}"
+    source: fox-it/dissect.target tests/_data/plugins/os/windows/defender/quarantine (file + startup detection)
+    license: AGPL-3.0
+    expect:
+      data2.number_of_entries: 2
+      data2.entries[0].entry.typestr: file
+      data2.entries[1].entry.typestr: startup

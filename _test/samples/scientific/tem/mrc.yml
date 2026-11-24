@@ -1,0 +1,21 @@
+samples:
+  - url: https://raw.githubusercontent.com/ccpem/mrcfile/a2a8c6b569a57b7f18b023b5056fa7a14f2f99c2/tests/test_data/EMD-3197.map
+    sha256: 351d5090d4c56eb5fc41796842ad64abecc238b8da6181f8857be5844dbbc262
+    source: mrcfile test data (EMDB entry EMD-3197)
+    license: CC0-1.0
+    eof: true
+    expect:   # mrcfile (Python)
+      header.dimensions: [20, 20, 20]
+      header.extended_header_size: 0
+      header.mode: 2   # float32 per MRC2014; spec names this value s4
+  - url: https://raw.githubusercontent.com/ccpem/mrcfile/a2a8c6b569a57b7f18b023b5056fa7a14f2f99c2/tests/test_data/emd_3001.map.gz
+    sha256: 88b4f0d1818a8585c31b89b84342c57eea022eebf387eb3380a1fcb6e049a5ee
+    name: emd_3001.map
+    source: mrcfile test data (EMDB entry EMD-3001, space group P21)
+    license: CC0-1.0
+    extract: {format: gzip}
+    eof: true
+    expect:   # mrcfile (Python)
+      header.dimensions: [73, 43, 25]
+      header.extended_header_size: 160
+      header.mode: 2   # float32 per MRC2014; spec names this value s4

@@ -1,0 +1,29 @@
+# QEMU's bundled iPXE and SeaVGABIOS option ROMs. Values read by hand from the header
+# (byte 2 = length in 512-byte units, u2 at 0x18 = PCIR offset, PCIR vendor/device IDs),
+# matching QEMU's emulated devices (e1000 8086:100e, rtl8139 10ec:8139, stdvga 1234:1111).
+samples:
+  - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/pc-bios/pxe-e1000.rom
+    sha256: 981a728f95b7a01645645e9b753cfb764c9eb59266fa888ac58d7008fbb48c10
+    source: QEMU pc-bios (iPXE build)
+    license: GPL-2.0-or-later (iPXE)
+    expect:
+      option_rom_header.impl_defined.optrom_len: 131
+      option_rom_header.data_struct_ptr.pci_data_struct.vid: 0x8086
+      option_rom_header.data_struct_ptr.pci_data_struct.pid: 0x100e
+  - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/pc-bios/pxe-rtl8139.rom
+    sha256: d491351e37a50eb5a40e98a9f6b4d85010ee60fb9e64129d65ea10839287f138
+    source: QEMU pc-bios (iPXE build)
+    license: GPL-2.0-or-later (iPXE)
+    expect:
+      option_rom_header.impl_defined.optrom_len: 120
+      option_rom_header.data_struct_ptr.pci_data_struct.vid: 0x10ec
+      option_rom_header.data_struct_ptr.pci_data_struct.pid: 0x8139
+  - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/pc-bios/vgabios-stdvga.bin
+    sha256: e8fc9e55790dbe3cb31f019a3deb57206ba6c54f5e581adb2ab2677a9d391472
+    source: QEMU pc-bios (SeaVGABIOS build)
+    license: LGPL-3.0 (SeaBIOS)
+    expect:
+      option_rom_header.impl_defined.optrom_len: 77
+      option_rom_header.data_struct_ptr.ptr: 0x987c
+      option_rom_header.data_struct_ptr.pci_data_struct.vid: 0x1234
+      option_rom_header.data_struct_ptr.pci_data_struct.pid: 0x1111

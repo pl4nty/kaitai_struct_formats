@@ -12,7 +12,7 @@ import sys
 import time
 import traceback
 
-from kaitaistruct import KaitaiStruct
+from kaitaistruct import KaitaiStream, KaitaiStruct
 
 MAX_NODES = 20_000  # pointer-following instances can re-parse without bound
 MAX_MEMORY = 2 * 1024 ** 3
@@ -116,7 +116,22 @@ def check(job):
     """Run one job; return an error message, or None if everything holds."""
     try:
         cls = getattr(importlib.import_module(job["module"]), job["class"])
-        root = cls.from_file(job["file"])
+    except Exception as e:
+        return f"import: {describe(e)}"
+    params = {}
+    if job.get("params"):
+        with open(job["file"], "rb") as f:
+            data = f.read()
+        for name, expr in job["params"].items():
+            try:  # _data: the sample's bytes, e.g. for a CRC spec's `array` param
+                params[name] = eval(expr, {"__builtins__": SAFE_BUILTINS}, {"_data": data})  # noqa: S307
+            except Exception as e:
+                return f"param {name!r}: {describe(e)}"
+    try:
+        if params:
+            root = cls(_io=KaitaiStream(open(job["file"], "rb")), **params)
+        else:
+            root = cls.from_file(job["file"])
     except Exception as e:
         return f"parse: {describe(e)}"
 

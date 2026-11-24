@@ -42,10 +42,11 @@ samples:
     source: where it came from     # free text, for humans
     license: CC0-1.0               # licence of the sample, if known
     extract:                       # optional
-      format: zip                  # zip | tar | gzip | bz2 | xz | hex | slice
+      format: zip                  # zip | tar | gzip | bz2 | xz | hex | base64 | slice
       member: path/in/archive      # zip, tar (required)
       offset: 0                    # slice (default 0)
       size: 1234                   # slice (default: to the end)
+      field: 1                     # base64: whitespace-separated field to decode (default 0)
       then: { format: slice, offset: 40 }   # optional, chained
     deep: true                     # force all instances (default true)
     eof: false                     # require the whole input to be consumed
@@ -55,9 +56,16 @@ samples:
       ihdr.color_type: truecolor   # enums compare by name (or by value if an int)
       magic: 89504e47              # bytes compare as hex or as latin-1 text
       len(chunks): 5
+    params:                        # for specs with top-level `params:`
+      array: _data                 # Python expression; `_data` is the sample's bytes
     xfail: why this sample fails today   # known spec bug; passing turns red (XPASS)
     skip: why it is not run              # e.g. too large
 ```
+
+Library types with no file form (CRCs, checksums, number encodings) can use
+inline bytes instead of a download: `data: <hex byte pairs>` replaces `url`,
+`sha256` and `extract`. Use it only for canonical test vectors (e.g. the CRC
+catalogue's `123456789` check input), never for real-world files.
 
 Rules for sample URLs:
 

@@ -1,0 +1,18 @@
+# version from file(1) ("LRZIP compressed data - version 0.6"); uncompressed size from a hex read
+# of header bytes 6-13 (u8 le). These are the libarchive tar/cpio test files
+# test_extract.{tar,cpio}.lrz (libarchive ships them uuencoded).
+samples:
+  - url: https://sembiance.com/fileFormatSamples/archive/lrzip/test_extract.tar.lrz
+    sha256: eddb4ae2ae87ba70f4a4246c73d2a6566676c829ec55a1d96930a33136137105
+    source: telparia fileFormatSamples (sembiance.com), archive/lrzip; originally libarchive tar/test
+    license: BSD-2-Clause (libarchive)
+    expect:
+      header.version.minor: 6
+      header.len_file_or_salt: 3072
+  - url: https://sembiance.com/fileFormatSamples/archive/lrzip/test_extract.cpio.lrz
+    sha256: ac8ab2e89611a1aa229ee13cba87efa2a82952d00c9f9c5a5ae34e9ac993856c
+    source: telparia fileFormatSamples (sembiance.com), archive/lrzip; originally libarchive cpio/test
+    license: BSD-2-Clause (libarchive)
+    expect:
+      header.version.minor: 6
+      header.len_file_or_salt: 512

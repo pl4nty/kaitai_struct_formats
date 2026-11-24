@@ -15,6 +15,7 @@ See ``_test/README.md`` for the manifest schema.
 """
 
 import argparse
+import base64
 import bz2
 import collections
 import concurrent.futures
@@ -45,14 +46,16 @@ import yaml
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SAMPLES_DIR = os.path.join(REPO, "_test", "samples")
 WORKER = os.path.join(REPO, "_test", "parse_worker.py")
+# Python implementations of opaque types and custom processes that specs import
+OPAQUE_DIR = os.path.join(REPO, "_test", "opaque")
 MAX_DOWNLOAD = 64 * 1024 * 1024
 USER_AGENT = "ksf-sample-tests/1.0"
 
-SAMPLE_KEYS = {"url", "sha256", "name", "source", "license", "extract", "deep",
-               "eof", "expect", "xfail", "skip", "timeout"}
-EXTRACT_KEYS = {"format", "member", "offset", "size", "then"}
+SAMPLE_KEYS = {"url", "sha256", "data", "name", "source", "license", "extract", "deep",
+               "eof", "expect", "params", "xfail", "skip", "timeout"}
+EXTRACT_KEYS = {"format", "member", "offset", "size", "field", "then"}
 ARCHIVES = ("zip", "tar")
-EXTRACT_FORMATS = ARCHIVES + ("gzip", "bz2", "xz", "hex", "slice")
+EXTRACT_FORMATS = ARCHIVES + ("gzip", "bz2", "xz", "hex", "base64", "slice")
 STATUSES = ("pass", "fail", "xfail", "xpass", "skip")
 FAILING = ("fail", "xpass")
 # everything XML 1.0 cannot represent, even escaped
@@ -108,7 +111,11 @@ def load_manifests(only=()):
 
 
 def sample_name(sample):
-    return str(sample.get("name") or str(sample.get("url", "?")).rstrip("/").rsplit("/", 1)[-1])
+    if sample.get("name"):
+        return str(sample["name"])
+    if "data" in sample and "url" not in sample:
+        return "data"
+    return str(sample.get("url", "?")).rstrip("/").rsplit("/", 1)[-1]
 
 
 def validate(manifest):
@@ -129,10 +136,20 @@ def validate(manifest):
             errs.append(f"{where}: must be a mapping")
             continue
         errs += [f"{where}: unknown key '{k}'" for k in s if k not in SAMPLE_KEYS]
-        if not str(s.get("url", "")).startswith("https://"):
-            errs.append(f"{where}: 'url' must be https")
-        if not re.fullmatch("[0-9a-f]{64}", str(s.get("sha256", ""))):
-            errs.append(f"{where}: 'sha256' must be 64 lowercase hex chars")
+        if "data" in s:
+            if "url" in s or "sha256" in s or "extract" in s:
+                errs.append(f"{where}: 'data' excludes 'url', 'sha256' and 'extract'")
+            if not (isinstance(s["data"], str) and re.fullmatch(r"(?:\s*[0-9a-fA-F]{2})*\s*", s["data"])):
+                errs.append(f"{where}: 'data' must be a string of hex byte pairs")
+        else:
+            if not str(s.get("url", "")).startswith("https://"):
+                errs.append(f"{where}: 'url' must be https")
+            if not re.fullmatch("[0-9a-f]{64}", str(s.get("sha256", ""))):
+                errs.append(f"{where}: 'sha256' must be 64 lowercase hex chars")
+        params = s.get("params", {})
+        if not (isinstance(params, dict) and all(isinstance(k, str) and isinstance(v, str)
+                                                  for k, v in params.items())):
+            errs.append(f"{where}: 'params' must map param id -> Python expression string")
         name = sample_name(s)
         if name in seen:
             errs.append(f"{where}: duplicate name '{name}'")
@@ -233,6 +250,10 @@ def extract(data, spec):
     elif fmt == "hex":  # hex text dump; whitespace and 0x prefixes ignored
         text = data.decode("ascii", "replace").replace("0x", " ")
         data = bytes.fromhex("".join(c for c in text if c in "0123456789abcdefABCDEF"))
+    elif fmt == "base64":  # e.g. an OpenSSH key/cert line: "<type> <base64> [comment]"
+        text = data.decode("ascii", "replace").split()
+        field = spec.get("field", 0)
+        data = base64.b64decode(text[field] if text else "", validate=True)
     elif fmt == "zip":
         with zipfile.ZipFile(io.BytesIO(data)) as z:
             data = z.read(spec["member"])
@@ -282,9 +303,10 @@ def run_worker(sample, data_path, build):
         "deep": sample.get("deep", True),
         "eof": sample.get("eof", False),
         "expect": sample.get("expect", {}),
+        "params": sample.get("params", {}),
     }
     timeout = sample.get("timeout", 60)
-    pythonpath = os.pathsep.join(filter(None, [build.dir, os.environ.get("PYTHONPATH")]))
+    pythonpath = os.pathsep.join(filter(None, [build.dir, OPAQUE_DIR, os.environ.get("PYTHONPATH")]))
     env = dict(os.environ, PYTHONPATH=pythonpath, PYTHONDONTWRITEBYTECODE="1")
     try:
         p = subprocess.run([sys.executable, WORKER], input=json.dumps(job),
@@ -310,11 +332,14 @@ def verdict(sample, ok, error):
 def test_sample(spec, sample, build, cache_dir, data_dir, lock):
     """Fetch, extract and parse one sample; return (status, message, seconds)."""
     # Fetch and extract problems are infrastructure failures, never xfail-able.
-    try:
-        with lock:  # one download per hash, however many samples share it
-            data = fetch(sample["url"], sample["sha256"], cache_dir)
-    except Exception as e:
-        return "fail", f"fetch: {e}", 0.0
+    if "data" in sample:  # inline bytes: canonical test vectors, e.g. CRC check input
+        data = bytes.fromhex("".join(sample["data"].split()))
+    else:
+        try:
+            with lock:  # one download per hash, however many samples share it
+                data = fetch(sample["url"], sample["sha256"], cache_dir)
+        except Exception as e:
+            return "fail", f"fetch: {e}", 0.0
     try:
         if sample.get("extract") is not None:
             data = extract(data, sample["extract"])
@@ -334,7 +359,7 @@ def run(manifests, args, build_root):
     data_dir = os.path.join(build_root, "_data")
     os.makedirs(data_dir, exist_ok=True)
     os.makedirs(args.cache_dir, exist_ok=True)
-    locks = {s["sha256"]: threading.Lock() for m in manifests for s in m.doc["samples"]}
+    locks = {s.get("sha256"): threading.Lock() for m in manifests for s in m.doc["samples"]}
     results = []
 
     def record(*fields):
@@ -354,7 +379,7 @@ def run(manifests, args, build_root):
                 elif build.errors:
                     record(m.spec, name, *verdict(s, False, "compile error: " + "; ".join(build.errors)))
                 else:
-                    fut = pool.submit(test_sample, m.spec, s, build, args.cache_dir, data_dir, locks[s["sha256"]])
+                    fut = pool.submit(test_sample, m.spec, s, build, args.cache_dir, data_dir, locks[s.get("sha256")])
                     pending[fut] = (m.spec, name)
         for fut in concurrent.futures.as_completed(pending):
             record(*pending[fut], *fut.result())

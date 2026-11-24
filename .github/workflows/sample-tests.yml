@@ -33,7 +33,12 @@ jobs:
           sha256sum -c -w .github/kaitai-struct-compiler_0.11_all.deb.sha256
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y default-jre-headless ./kaitai-struct-compiler_0.11_all.deb
-          pip install kaitaistruct pyyaml
+          pip install kaitaistruct pyyaml lz4 brotli
+      - name: Fetch kaitai_compress (for specs with process kaitai.compress.*)
+        run: |
+          git clone --quiet https://github.com/pl4nty/kaitai_compress "$RUNNER_TEMP/kaitai_compress"
+          git -C "$RUNNER_TEMP/kaitai_compress" checkout --quiet 6ec4c56a676ae2bf4279740ec2684fd146a40b70
+          echo "PYTHONPATH=$RUNNER_TEMP/kaitai_compress/python" >> "$GITHUB_ENV"
       - name: Validate manifests
         run: python3 _test/run_samples.py --validate-only
       - name: Restore sample cache

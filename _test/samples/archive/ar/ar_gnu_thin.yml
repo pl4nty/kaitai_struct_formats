@@ -1,0 +1,30 @@
+# LLVM test inputs. Member headers read from the plain-text archive (cat -v); file(1) reports
+# "thin archive with N symbol entries"; member data is not stored (thin archive).
+samples:
+  - url: https://raw.githubusercontent.com/llvm/llvm-project/8817a66ccf36c5585c36b424ee3eaf3f2bad6848/llvm/test/Object/Inputs/thin.a
+    sha256: 0eedaddf0af254d1745eab2eaed553170337ca3f543dca6cf6dddfaa479b85e8
+    source: llvm-project llvm/test/Object/Inputs
+    license: Apache-2.0 WITH LLVM-exception
+    eof: true
+    expect:
+      len(members): 6
+      members[5].name: IsNAN.o/   # spec documents that name keeps the terminating slash
+      members[5].size: 2280
+      members[4].size: 1465
+  - url: https://raw.githubusercontent.com/llvm/llvm-project/8817a66ccf36c5585c36b424ee3eaf3f2bad6848/llvm/test/Object/Inputs/thin-path.a
+    sha256: fc3d8c8e266297480f769288dc78ebebf9e9b6225f043971502b8c8fd3861369
+    source: llvm-project llvm/test/Object/Inputs
+    license: Apache-2.0 WITH LLVM-exception
+    eof: true
+    expect:
+      len(members): 4
+      members[3].name: t/test2.o/
+  - url: https://raw.githubusercontent.com/llvm/llvm-project/8817a66ccf36c5585c36b424ee3eaf3f2bad6848/llvm/test/tools/llvm-ar/Inputs/nested-thin-archive.a
+    sha256: 0c8d046f062a04b4e50b04dc06a598264cc90af36979786ca322acfb246cd05a
+    source: llvm-project llvm/test/tools/llvm-ar/Inputs
+    license: Apache-2.0 WITH LLVM-exception
+    eof: true
+    expect:
+      len(members): 3
+      members[1].name: a-plus-b.a/
+      members[1].size: 202

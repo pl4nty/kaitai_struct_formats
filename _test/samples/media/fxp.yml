@@ -1,0 +1,19 @@
+samples:
+  - url: https://raw.githubusercontent.com/surge-synthesizer/surge/90a36ad54bc51ed4ba6c950457cb4887b6e07c83/resources/data/patches_3rdparty/A.Liv/Basses/Bonsai%20808.fxp
+    sha256: 461d74f7accedd98febb55d7e954f7318796753958aac6491ffbb54c87178895
+    name: Bonsai_808.fxp
+    source: Surge XT 3rd-party patch library (opaque FPCh chunk); expects from a manual header read
+    license: GPL-3.0-or-later
+    eof: true
+    expect:
+      fx_magic: FPCh
+      fx_fourcc: cjs3
+      preset_name.rstrip('\x00'): Bonsai 808
+  - url: https://raw.githubusercontent.com/surge-synthesizer/surge/90a36ad54bc51ed4ba6c950457cb4887b6e07c83/resources/data/patches_factory/Basses/Attacky.fxp
+    sha256: cffb77ecfcd7fa2757bbfcdb3b6cc4a31c818b2761ec680685e46ec523d20717
+    source: Surge XT factory patch library; expects from a manual header read
+    license: GPL-3.0-or-later
+    eof: true
+    expect:
+      fx_magic: FPCh
+      num_fx_params: 1

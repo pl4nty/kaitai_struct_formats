@@ -1,0 +1,24 @@
+# NARs from the NixOS binary cache (content-addressed URLs: the file name is the FileHash of the .nar.xz).
+# The uncompressed NAR length equals NarSize from the store path's .narinfo, so eof checks it
+# is consumed exactly; both store paths are directories.
+samples:
+  - url: https://cache.nixos.org/nar/00gc6860jy681vbmxxn65i20sy89azqv2rhvfqbvi78z5ds28g95.nar.xz
+    sha256: 253d24742b1f9db817761b66b1f15709790d442cc6f65ed70ec878090c32ec01
+    name: which-2.21.nar
+    source: cache.nixos.org, /nix/store/90kqvx32c5wf1pqnlgryck8ynz45al02-which-2.21 (nixos-24.05; NarSize 47000)
+    license: GPL-3.0-or-later (GNU which)
+    extract: { format: xz }
+    eof: true
+    expect:
+      magic.body: nix-archive-1
+      root_node.type_val.body: directory
+  - url: https://cache.nixos.org/nar/11qmz3pd9189x32bk4rrl85cf4nf9s3w4fg1pgzw258nx3dnjykh.nar.xz
+    sha256: 707a69dbe81615c1ffbbe139c2874ece12c70aa23993b9c4e80985d4eef81587
+    name: zlib-1.3.1-static.nar
+    source: cache.nixos.org, /nix/store/2h7ld2190y4ynz32sff239k0br0mp7xx-zlib-1.3.1-static (nixos-24.05; NarSize 145488)
+    license: Zlib
+    extract: { format: xz }
+    eof: true
+    expect:
+      magic.body: nix-archive-1
+      root_node.type_val.body: directory

@@ -1,0 +1,7 @@
+samples:
+  - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/extra-assets/reference-assets/cotls-vanilla/figures_res/co1.bon
+    sha256: 836c81d2c4ca58335697ef4dc90e9fba0bbe53c31725d2fd6a2265260689879d
+    source: Kyr4l/ei-universal-mod (Evil Islands mod repo; vanilla game asset, proprietary, linked not vendored); 144 bytes = 12 vec3 (file size / 12)
+    eof: true
+    expect:
+      len(position): 12

@@ -1,0 +1,10 @@
+samples:
+  - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/extra-assets/reference-assets/cotls-vanilla/figures_res/efar1arrow.fig
+    sha256: 12371544a7b61d7a72672aebc376954e89ad70780bed7e159f69aec494846043
+    source: Kyr4l/ei-universal-mod (Evil Islands mod repo; vanilla game asset, proprietary, linked not vendored); values struct-decoded per aspadm/EIrepack wiki
+    eof: true
+    expect:
+      num_vertex_blocks: 2
+      num_normal_blocks: 2
+      num_texcoords: 4
+      num_indexes: 24

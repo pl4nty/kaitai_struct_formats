@@ -1,0 +1,42 @@
+# xo65 object files shipped in the Debian cc65 2.19-1 package (snapshot.debian.org). The .deb is
+# an ar archive; data.tar.xz is the member at offset 12412 (2195536 bytes).
+# Expect values read by hand from a hex dump against cc65 src/common/objdefs.h (OBJ_MAGIC,
+# OBJ_VERSION 0x0011, header fields) and the string pool layout (count, then length-prefixed
+# strings, the first of which is empty).
+samples:
+  - url: https://snapshot.debian.org/archive/debian/20201127T034359Z/pool/main/c/cc65/cc65_2.19-1_amd64.deb
+    sha256: 6a6662330df7f2d269f6747fd98a34c505cd001ebd79434dee21256fbf041ca5
+    name: c64-tgimousedata.o
+    source: Debian cc65 2.19-1 amd64, /usr/share/cc65/lib/c64-tgimousedata.o
+    license: Zlib
+    extract:
+      format: slice
+      offset: 12412
+      size: 2195536
+      then:
+        format: xz
+        then: { format: tar, member: ./usr/share/cc65/lib/c64-tgimousedata.o }
+    expect:
+      object_header.version: 17
+      object_header.ofs_options: 0x60
+      object_header.ofs_string_pool: 0xe0
+      object_header.string_pool.num_strings: 14
+      object_header.string_pool.entries[0].string: __CBM__
+      object_header.string_pool.entries[2].string: c64/extra/tgimousedata.s
+  - url: https://snapshot.debian.org/archive/debian/20201127T034359Z/pool/main/c/cc65/cc65_2.19-1_amd64.deb
+    sha256: 6a6662330df7f2d269f6747fd98a34c505cd001ebd79434dee21256fbf041ca5
+    name: apple2-iobuf-0800.o
+    source: Debian cc65 2.19-1 amd64, /usr/share/cc65/lib/apple2-iobuf-0800.o
+    license: Zlib
+    extract:
+      format: slice
+      offset: 12412
+      size: 2195536
+      then:
+        format: xz
+        then: { format: tar, member: ./usr/share/cc65/lib/apple2-iobuf-0800.o }
+    expect:
+      object_header.version: 17
+      object_header.string_pool.num_strings: 70
+      object_header.string_pool.entries[0].string: __APPLE2__
+      object_header.string_pool.entries[1].string: apple2/extra/iobuf-0800.s

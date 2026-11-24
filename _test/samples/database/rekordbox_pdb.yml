@@ -1,0 +1,25 @@
+# header expects from a hex dump (u4le fields per crate-digger's Analysis.pdf)
+samples:
+  - url: https://raw.githubusercontent.com/holzhaus/rekordcrate/82a6077bda95b072186aa551af27e2135217a30d/data/complete_export/demo_tracks/PIONEER/rekordbox/export.pdb
+    sha256: 27d5a84d7688244357c467680b7e62a36a0e6f3f7eb0ab4c37b26aa312e7f8aa
+    name: demo_tracks_export.pdb
+    source: rekordcrate test data (rekordbox USB export with demo tracks)
+    license: MPL-2.0
+    timeout: 120
+    # deep walk follows the last page's next_page past EOF (see xfail below)
+    deep: false
+    expect:
+      len_page: 4096
+      num_tables: 20
+      next_unused_page: 51
+      sequence: 34
+  - url: https://raw.githubusercontent.com/holzhaus/rekordcrate/82a6077bda95b072186aa551af27e2135217a30d/data/complete_export/empty/PIONEER/rekordbox/export.pdb
+    sha256: aa22564888963e1ad1771b20cc858a3dc36b235a4463309da244d6894d605a09
+    name: empty_export.pdb
+    source: rekordcrate test data (empty rekordbox USB export)
+    license: MPL-2.0
+    expect:
+      len_page: 4096
+      num_tables: 20
+      next_unused_page: 46
+    xfail: page_ref.body is read unconditionally, but each table's last page links next_page to its empty_candidate page, which lies past EOF in real exports (e.g. page 48 of a 42-page file), so deep evaluation hits EOF

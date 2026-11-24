@@ -1,0 +1,51 @@
+samples:
+  - url: https://raw.githubusercontent.com/openssh/openssh-portable/fa4b2a82be7df9768272cfabc2d78e4a12c2b3c0/regress/unittests/sshkey/testdata/rsa_1-cert.pub
+    sha256: 52198bcba30987ce6daade79a01c585afffbd52c812add2d4dfcc4a3beda2199
+    source: OpenSSH portable regress/unittests/sshkey/testdata (base64 blob of the cert line); expects from `ssh-keygen -L -f rsa_1-cert.pub`
+    license: BSD-2-Clause
+    extract: { format: base64, field: 1 }
+    eof: true
+    xfail: signature (cstring_tuple_packed) parses the signature blob as nested cstrings, which holds only for ECDSA (r, s); an Ed25519 CA signature is 64 raw bytes, so a bogus length is read
+    expect:
+      cert_type.value: ssh-rsa-cert-v01@openssh.com
+      body.serial: 5
+      body.type: host
+      body.key_id.value: julius
+      "[s.value for s in body.valid_principals.strings.strings]": [host1, host2]
+      body.valid_after: 915145200    # 1998-12-31T23:00:00Z
+      body.valid_before: 1293836400  # 2010-12-31T23:00:00Z
+      len(body.critical_options.tuples.tuples): 0
+      len(body.extensions.tuples.tuples): 0
+  - url: https://raw.githubusercontent.com/openssh/openssh-portable/fa4b2a82be7df9768272cfabc2d78e4a12c2b3c0/regress/unittests/sshkey/testdata/ed25519_1-cert.pub
+    sha256: 5e0e23cd62b26539493051c3b85d96746a18d8bd5e2858ceebd90278de211919
+    source: OpenSSH portable regress/unittests/sshkey/testdata (base64 blob of the cert line); expects from `ssh-keygen -L -f ed25519_1-cert.pub`
+    license: BSD-2-Clause
+    extract: { format: base64, field: 1 }
+    eof: true
+    xfail: signature (cstring_tuple_packed) parses the signature blob as nested cstrings, which holds only for ECDSA (r, s); an Ed25519 CA signature is 64 raw bytes, so a bogus length is read
+    expect:
+      cert_type.value: ssh-ed25519-cert-v01@openssh.com
+      body.serial: 8
+      body.type: host
+      body.key_id.value: julius
+      "[s.value for s in body.valid_principals.strings.strings]": [host1, host2]
+      body.valid_after: 915145200    # 1998-12-31T23:00:00Z
+      body.valid_before: 1293836400  # 2010-12-31T23:00:00Z
+      len(body.critical_options.tuples.tuples): 0
+      len(body.extensions.tuples.tuples): 0
+  - url: https://raw.githubusercontent.com/openssh/openssh-portable/fa4b2a82be7df9768272cfabc2d78e4a12c2b3c0/regress/unittests/sshkey/testdata/ecdsa_1-cert.pub
+    sha256: d65f6ba3f46d0d816d1085f4f45b2bd8fee4c6cc264d338e079c47282945a7de
+    source: OpenSSH portable regress/unittests/sshkey/testdata (base64 blob of the cert line); expects from `ssh-keygen -L -f ecdsa_1-cert.pub`
+    license: BSD-2-Clause
+    extract: { format: base64, field: 1 }
+    eof: true
+    expect:
+      cert_type.value: ecdsa-sha2-nistp256-cert-v01@openssh.com
+      body.serial: 7
+      body.type: host
+      body.key_id.value: julius
+      "[s.value for s in body.valid_principals.strings.strings]": [host1, host2]
+      body.valid_after: 915145200    # 1998-12-31T23:00:00Z
+      body.valid_before: 1293836400  # 2010-12-31T23:00:00Z
+      len(body.critical_options.tuples.tuples): 0
+      len(body.extensions.tuples.tuples): 0

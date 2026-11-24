@@ -1,0 +1,10 @@
+samples:
+  - url: https://raw.githubusercontent.com/colinmarc/cdb/60f317823f7076bef6824144d9a1d5467c182928/test/test.cdb
+    sha256: 44792a7b9e6d6d2c7832cd8083c0b2c2803f56ea4a928c9f6a9757968bf46c10
+    source: colinmarc/cdb (Go cdb library) test fixture
+    license: MIT
+    eof: true
+    expect:                        # walked by hand per cr.yp.to/cdb/cdb.txt
+      len(records): 9
+      records[0].record_key: foo
+      sum(p.pointer_length for p in pointers): 18

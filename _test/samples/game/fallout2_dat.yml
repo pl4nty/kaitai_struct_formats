@@ -1,0 +1,17 @@
+samples:
+  - url: https://raw.githubusercontent.com/sfall-team/sfall/c6831d6f2c96acf630c20bdc7aa25de45962d184/artifacts/sfall_dat/sfall.dat
+    sha256: f28bbe253b58af22be8ea28297327517a0cc0b8dd05303f62bf7410134142d31
+    source: sfall-team/sfall artifacts (Fallout 2 engine mod data archive); footer/index struct-decoded per Fallout 2 DAT docs, first entry zlib-inflated with Python zlib
+    license: GPL-3.0
+    expect:
+      footer.file_size: 499511
+      footer.index_size: 697
+      index.file_count: 17
+      index.files[0].size_unpacked: 1674
+  - url: https://raw.githubusercontent.com/sfall-team/sfall/c6831d6f2c96acf630c20bdc7aa25de45962d184/artifacts/sfall_dat/sfall_de.dat
+    sha256: e49e3b7ee2693fc4ef77d57c8519809d6337ffe252385f88652e002c53425308
+    source: sfall-team/sfall artifacts (German variant)
+    license: GPL-3.0
+    expect:
+      index.file_count: 21
+      footer.file_size: 501519

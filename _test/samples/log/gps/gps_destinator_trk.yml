@@ -1,0 +1,9 @@
+samples:
+  - url: https://raw.githubusercontent.com/GPSBabel/gpsbabel/1d6a0626bc003cfb2519a0f9b864bf944db34ffe/reference/track/destinator_trl.dat
+    sha256: ec1770b4e90d1a94ca33fa7fea2fabb8deb8b21a743b6077f6de52d5dcb439a9
+    source: GPSBabel 1.5.4 reference test data (expected output reference/track/destinator_trl.txt, 26 points)
+    license: GPL-2.0-or-later
+    eof: true
+    expect:
+      len(points): 26
+    xfail: real records are 152 bytes with "TXT" at offset 136, but the spec's point is 164 bytes (12 bytes too many between milliseconds and the TXT signature)

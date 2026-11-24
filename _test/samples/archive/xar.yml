@@ -1,0 +1,18 @@
+# compressed TOC length and checksum algorithm (1 = SHA-1) from file(1)
+# ("xar archive compressed TOC: N, SHA-1 checksum"); uncompressed TOC length from a hex read
+samples:
+  - url: https://sembiance.com/fileFormatSamples/archive/xar/libdvdcss.pkg
+    sha256: 182f272a84e04c200b6b17531b5c4ac2de759bde16e17e1097093f0374353b06
+    source: telparia fileFormatSamples (sembiance.com), archive/xar; macOS installer package
+    expect:
+      header.version: 1
+      header.len_toc_compressed: 666
+      header.toc_length_uncompressed: 2591
+      header.checksum_algorithm_int: 1
+  - url: https://sembiance.com/fileFormatSamples/archive/xar/USBAx8817x_10.6.pkg
+    sha256: 53396f626e082d70d80fc94473030ec5b833017c6a934edb2e365f2ec5eabae2
+    source: telparia fileFormatSamples (sembiance.com), archive/xar; macOS installer package
+    expect:
+      header.len_toc_compressed: 1445
+      header.toc_length_uncompressed: 7766
+      header.checksum_algorithm_int: 1

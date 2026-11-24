@@ -1,0 +1,28 @@
+samples:
+  - url: https://sembiance.com/fileFormatSamples/image/tim/SHADOW1.TIM
+    sha256: a4b550c9f9e3b68bd69db5996a2f5e0d468ce33c2507808bf4880594d50d9a94
+    source: telparia fileFormatSamples (sembiance.com; game asset, not vendored); expects from file(1)
+    eof: true
+    expect:
+      bpp: 0  # 4-bit
+      has_clut: true
+      img.origin_x: 640
+      img.origin_y: 320
+      img.height: 112
+  - url: https://sembiance.com/fileFormatSamples/image/tim/MAP01.TIM
+    sha256: e4e92e4fb358f5acd9a71be8547b2c62b60b8f1b4f173a45746f4ac6bd4c2372
+    source: telparia fileFormatSamples (sembiance.com; game asset, not vendored); expects from file(1)
+    eof: true
+    expect:
+      bpp: 1  # 8-bit
+      clut.origin_y: 496
+      img.origin_x: 768
+      img.height: 128
+  - url: https://sembiance.com/fileFormatSamples/image/tim/123.tim
+    sha256: 7bf1268a16291349221dbc0353d3ae21b2f0cec72a40ffe61b2b8637a887e045
+    source: telparia fileFormatSamples (sembiance.com); expects from file(1)
+    eof: true
+    expect:
+      bpp: 3  # 24-bit
+      has_clut: false
+      img.height: 240
