@@ -107,7 +107,7 @@ types:
         type: u4
         doc: Length of the packet as it appeared on the network when it was captured.
       - id: body
-        size: "incl_len < _root.hdr.snaplen ? incl_len : _root.hdr.snaplen"
+        size: len_body
         type:
           switch-on: _root.hdr.network
           cases:
@@ -118,6 +118,22 @@ types:
             'linktype::usb_linux': usbmon(48)
             'linktype::bluetooth_hci_h4_with_phdr': bluetooth_frame
         doc-ref: 'https://wiki.wireshark.org/Development/LibpcapFileFormat#Packet_Data'
+      - id: discarded
+        size: incl_len - len_body
+        doc: |
+          Captured bytes beyond the snapshot length. They are still stored in
+          the file, but libpcap reads and discards them.
+    instances:
+      len_body:
+        value: |
+          _root.hdr.snaplen != 0 and incl_len > _root.hdr.snaplen
+            ? _root.hdr.snaplen
+            : incl_len
+        doc: |
+          Number of bytes of packet data to use: `incl_len`, but no more than
+          the snapshot length (as in libpcap, which ignores a zero snapshot
+          length in the header).
+        doc-ref: https://github.com/the-tcpdump-group/libpcap/blob/libpcap-1.10.5/sf-pcap.c#L637-L738
 enums:
   linktype:
     # https://www.tcpdump.org/linktypes.html
