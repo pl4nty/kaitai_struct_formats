@@ -11,8 +11,8 @@ meta:
   license: CC0-1.0
   endian: le
 instances:
-  # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/filesystems/ext2.rst?id=a9edc03f13db#n116
   bg1:
+    doc-ref: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/filesystems/ext2.rst?id=a9edc03f13db#n116
     pos: 1024
     type: block_group
   root_dir:
@@ -23,15 +23,16 @@ types:
       - id: super_block
         type: super_block_struct
         size: 1024
-      # https://www.nongnu.org/ext2-doc/ext2.html#BLOCK-GROUP-DESCRIPTOR-TABLE
       - id: block_groups
         type: bgd
         repeat: expr
         repeat-expr: super_block.block_group_count
-  # https://www.nongnu.org/ext2-doc/ext2.html#super_block
-  # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/ext2/ext2.h?id=cd913c76f489#n412
-  # https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout#The_Super_Block
+        doc-ref: https://www.nongnu.org/ext2-doc/ext2.html#BLOCK-GROUP-DESCRIPTOR-TABLE
   super_block_struct:
+    doc-ref:
+      - https://www.nongnu.org/ext2-doc/ext2.html#super_block
+      - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/ext2/ext2.h?id=cd913c76f489#n412
+      - https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout#The_Super_Block
     seq:
       - id: inodes_count
         type: u4
@@ -169,9 +170,10 @@ types:
         3: legacy_unsigned
         4: half_md4_unsigned
         5: tea_unsigned
-  # https://www.nongnu.org/ext2-doc/ext2.html#BLOCK-GROUP-DESCRIPTOR-STRUCTURE
-  # https://web.archive.org/web/20160804172310/http://virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-7.html
   bgd:
+    doc-ref:
+      - https://www.nongnu.org/ext2-doc/ext2.html#BLOCK-GROUP-DESCRIPTOR-STRUCTURE
+      - https://web.archive.org/web/20160804172310/http://virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-7.html
     seq:
       - id: block_bitmap_block
         type: u4
@@ -194,9 +196,10 @@ types:
       inode_bitmap:
         pos: inode_bitmap_block * _root.bg1.super_block.block_size
         size: 1024
-      # https://www.nongnu.org/ext2-doc/ext2.html#INODE-TABLE
-      # https://web.archive.org/web/20161114202411/http://www.virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-10.html
       inodes:
+        doc-ref:
+          - https://www.nongnu.org/ext2-doc/ext2.html#INODE-TABLE
+          - https://web.archive.org/web/20161114202411/http://www.virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-10.html
         pos: inode_table_block * _root.bg1.super_block.block_size
         type: inode
         repeat: expr
@@ -259,8 +262,8 @@ types:
     seq:
       - id: body
         size: _root.bg1.super_block.block_size
-  # https://www.nongnu.org/ext2-doc/ext2.html#LINKED-DIRECTORY-ENTRY-STRUCTURE
   dir:
+    doc-ref: https://www.nongnu.org/ext2-doc/ext2.html#LINKED-DIRECTORY-ENTRY-STRUCTURE
     seq:
       - id: entries
         type: dir_entry
