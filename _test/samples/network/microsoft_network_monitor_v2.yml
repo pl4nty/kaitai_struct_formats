@@ -1,0 +1,11 @@
+samples:
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/netmon_coverage.cap
+    sha256: 679a7cf0874245e2f6920f0b7da620eff3f80372a17a45f486cf809a80ea2058
+    source: Wireshark test captures
+    license: GPL-2.0-or-later
+    expect:
+      signature: GMBU
+      version_major: 2
+      version_minor: 1
+      mac_type: 1
+      len(frame_table.entries): 49

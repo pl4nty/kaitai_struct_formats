@@ -1,0 +1,8 @@
+samples:
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/icc/sRGB_v4_ICC_preference.icc
+  sha256: 83174717332326ddc198d9df188a4daec27b8979ba152cebbfc470c793d0bb11
+  source: Pillow test suite (Tests/icc), originally color.org
+  license: ICC terms of use (redistribution permitted unmodified)
+  expect:
+    header.size: 60960
+    tag_table.tag_count: 9

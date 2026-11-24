@@ -1,0 +1,18 @@
+samples:
+  - url: https://raw.githubusercontent.com/fragglet/miniwad/72741cc441ebb5df85d9da49873b4aa575800207/levels/map01.wad
+    sha256: 6669885cd4c23251aaebb66626860b076a3743509f1220e48b280dead12eceba
+    source: fragglet/miniwad (values from struct-decoded header)
+    license: BSD-3-Clause
+    xfail: sidedef texture names decode all 8 bytes as ASCII; Doom names are NUL-terminated and bytes after the NUL may be junk (0xff here)
+    expect:
+      magic: PWAD
+      num_index_entries: 11
+      index_offset: 2476
+  - url: https://raw.githubusercontent.com/fragglet/miniwad/72741cc441ebb5df85d9da49873b4aa575800207/bootstrap/doom2.wad
+    sha256: be3a5a9a5fba03562ceae69f1d33000ed806fc3ace9d0eb5dd68711cfc35258f
+    source: fragglet/miniwad bootstrap IWAD (values from struct-decoded header)
+    license: BSD-3-Clause
+    expect:
+      magic: IWAD
+      num_index_entries: 3
+      index_offset: 796

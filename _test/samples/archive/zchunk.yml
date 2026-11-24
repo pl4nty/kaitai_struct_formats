@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/zchunk/zchunk/ae8e9f5b1e820a906c39f7eaf231e71bef72a3a6/test/files/LICENSE.dict.fodt.zck
+  sha256: e9b5bcee24965ed6bf8e60c3537c2e1558912bd851cfe0b6e47a44d12bd54cf5
+  source: 'zchunk test files: with dictionary'
+  license: BSD-2-Clause
+- url: https://raw.githubusercontent.com/zchunk/zchunk/ae8e9f5b1e820a906c39f7eaf231e71bef72a3a6/test/files/LICENSE.nocomp.fodt.zck
+  sha256: 8d06d7a8badc83b2f47b4a827013cb1897407cad3fd9ff62fa4c6630de8f813b
+  source: 'zchunk test files: uncompressed'
+  license: BSD-2-Clause

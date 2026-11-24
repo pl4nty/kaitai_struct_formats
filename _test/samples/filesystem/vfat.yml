@@ -1,0 +1,10 @@
+samples:
+  - url: https://raw.githubusercontent.com/log2timeline/dfvfs/bf5d2fd3131646306507490d0389783d69b57676/test_data/fat12.raw
+    sha256: 60aacdf576dad24743d80a66a045bcdfbbd0ef4d368cece060bf087ee114da2f
+    source: dfVFS test data
+    license: Apache-2.0
+    xfail: root_dir parses all max_root_dir_rec records, including unused all-zero ones, whose zero dates fail dos_datetime valid-min 1
+    expect:
+      boot_sector.oem_name: mkfs.fat
+      boot_sector.bpb.bytes_per_ls: 512
+      boot_sector.bpb.ls_per_clus: 4

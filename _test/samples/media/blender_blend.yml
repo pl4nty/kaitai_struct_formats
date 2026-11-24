@@ -1,0 +1,9 @@
+# header read from the first 12 bytes ("BLENDER-v279": 64-bit pointers, little-endian, 2.79)
+samples:
+  - url: https://media.githubusercontent.com/media/roomle/roomle-blender-addon/54611ef794679d1b4d2138d7d31e26fde38c0658/test/assets/scale.blend
+    sha256: a5c68f87a431d1fb9e2e023d9c9178b2c87b06af4419badbac035dd594119e95
+    source: roomle-blender-addon test assets (Git LFS)
+    license: MIT
+    expect:
+      hdr.version: "279"
+      hdr.ptr_size_id: bits_64

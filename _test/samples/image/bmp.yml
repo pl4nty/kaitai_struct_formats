@@ -1,0 +1,58 @@
+samples:
+- url: https://raw.githubusercontent.com/kaitai-io/kaitai_struct_webide/c72e3f331fb923d8593b023763fae74eb35d6c9f/samples/grad8rgb.bmp
+  sha256: 7d295c9bfec01bcd4e4e55b0f722aa94f3c09fcf2b4bb1cefd8a59dc3f0c18a9
+  source: Kaitai Web IDE samples
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/hopper.bmp
+  sha256: f1a94f3add0a2e54365dc94b51da099bd0de8289b955fc8304a8627b7b0d6aea
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    file_hdr.file_type: BM
+    dib_info.header.image_width: 128
+    dib_info.header.image_height: 128
+    dib_info.header.bits_per_pixel: 24
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/bmp/g/pal8.bmp
+  sha256: f9e38f114b12b6ba97cb9bff1b4f931cc58796439b8b722b38947d864ff5fcd9
+  name: bmp-g-pal8.bmp
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    dib_info.header.image_width: 127
+    dib_info.header.bits_per_pixel: 8
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/bmp/g/rgb24.bmp
+  sha256: a9c4fbfbf8cb6df8d2d9d1484359d037aebd25078b21137bfd6c69739fcbe2e1
+  name: bmp-g-rgb24.bmp
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    dib_info.header.image_width: 127
+    dib_info.header.image_height: 64
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/bmp/g/pal8os2.bmp
+  sha256: 2bfe739377020722872f7fa3ba3ff3ff0daa17f2f202c80e25cf66c4ec30e506
+  name: bmp-g-pal8os2.bmp
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    dib_info.header.image_width: 127
+    dib_info.header.is_core_header: true
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/bmp/g/pal8v5.bmp
+  sha256: 65ac4a579189d2fc30b3499b8246f30127e032f35d6cde90335dafe87a1b23c3
+  name: bmp-g-pal8v5.bmp
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    dib_info.header.extends_bitmap_v5: true
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/bmp/g/rgb16-565.bmp
+  sha256: c2ffadac9c1239fb397834415c7b5f85d5c6044bd9c31fa66e23056a19b82b1d
+  name: bmp-g-rgb16-565.bmp
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    dib_info.header.bits_per_pixel: 16
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/bmp/g/pal4rle.bmp
+  sha256: 3c26b6bdd22311e03b1ac0713b0a3b6af5e579bef16694cbea74ae0c4a2599e4
+  name: bmp-g-pal4rle.bmp
+  source: Pillow test suite (Tests/images)
+  license: HPND (Pillow test images)
+  expect:
+    dib_info.header.bits_per_pixel: 4

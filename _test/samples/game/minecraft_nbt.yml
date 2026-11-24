@@ -1,0 +1,15 @@
+samples:
+  - url: https://raw.githubusercontent.com/twoolie/NBT/69d707b4418edaaa39da4bf14066261600ed7dea/tests/bigtest.nbt
+    sha256: 43629bb139ff0ed46e8dd24f7abbcacf0bc9deededb055d8105b3056ca3fc8df
+    source: twoolie/NBT tests (the classic bigtest.nbt); gunzipped
+    license: MIT
+    extract: { format: gzip }
+    eof: true
+    expect:
+      root.name.data: Level
+  - url: https://raw.githubusercontent.com/twoolie/NBT/69d707b4418edaaa39da4bf14066261600ed7dea/tests/world_test/data/scoreboard.dat
+    sha256: fa76441f39a364961c7cf02554722b0a144fcef2b1c0636e5e65d14f10e864e6
+    source: twoolie/NBT tests; gunzipped
+    license: MIT
+    extract: { format: gzip }
+    eof: true

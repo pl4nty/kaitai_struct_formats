@@ -1,0 +1,41 @@
+samples:
+- url: https://raw.githubusercontent.com/gfcwfzkm/PIF-Image-Format/8dc76a462cc86348acb6140cf6de22ae137c66dd/test_images/colorful/colorful_RGB888.pif
+  sha256: 504190e85e8bf6feb49c02391c0c04d63c315b103d54b0150ec8db838c9febc1
+  source: PIF-Image-Format reference test images
+  license: LGPL-2.1 (repository licence)
+  expect:
+    file_header.magic: "PIF\0"
+    file_header.len_file: 796
+    info_header.bits_per_pixel: 24
+    info_header.width: 16
+    info_header.height: 16
+- url: https://raw.githubusercontent.com/gfcwfzkm/PIF-Image-Format/8dc76a462cc86348acb6140cf6de22ae137c66dd/test_images/colorful/colorful_RGB565_rle.pif
+  sha256: 7a17e10d479c331ff4a97823db7e4fa4028f024148dffaf6bca3e67428c6de21
+  source: PIF-Image-Format reference test images
+  license: LGPL-2.1 (repository licence)
+  expect:
+    file_header.magic: "PIF\0"
+    file_header.len_file: 76
+    info_header.bits_per_pixel: 16
+    info_header.width: 16
+    info_header.height: 16
+- url: https://raw.githubusercontent.com/gfcwfzkm/PIF-Image-Format/8dc76a462cc86348acb6140cf6de22ae137c66dd/test_images/colorful/colorful_RGB16C.pif
+  sha256: f0f78c5f34c32e009996319ce4a0ba0a31f1b459e8d943d6788bf37fa96daf1e
+  source: PIF-Image-Format reference test images
+  license: LGPL-2.1 (repository licence)
+  expect:
+    file_header.magic: "PIF\0"
+    file_header.len_file: 156
+    info_header.bits_per_pixel: 4
+    info_header.width: 16
+    info_header.height: 16
+- url: https://raw.githubusercontent.com/gfcwfzkm/PIF-Image-Format/8dc76a462cc86348acb6140cf6de22ae137c66dd/test_images/colorful/colorful_BW.pif
+  sha256: c4538d71399174220520e42e1c6fb0a0328cdb86e12717b93869126487181c7e
+  source: PIF-Image-Format reference test images
+  license: LGPL-2.1 (repository licence)
+  expect:
+    file_header.magic: "PIF\0"
+    file_header.len_file: 60
+    info_header.bits_per_pixel: 1
+    info_header.width: 16
+    info_header.height: 16
