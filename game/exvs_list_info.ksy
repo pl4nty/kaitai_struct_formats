@@ -1,6 +1,7 @@
 # Imported from https://github.com/descatal/BoostStudio/blob/6cb8d8ad01a088eb6bb6834ed0ac2e110f85b486/src/Core/Domain/BinaryFormats/ListInfoFormat/ListInfoFormat.ksy
 meta:
   id: exvs_list_info
+  title: Gundam Extreme Vs. list info
   file-extension: list
   license: LicenseRef-All-Rights-Reserved
   endian: be

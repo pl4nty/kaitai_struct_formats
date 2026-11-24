@@ -1,6 +1,7 @@
 # Imported from https://github.com/TeamT5/MalCfgParser/blob/d62d7c38c8e92251ef194aa4988cdc4824a811dd/kaitai_structs/njrat_0_11G.ksy
 meta:
   id: njrat_0_11g
+  title: njRAT 0.11G configuration
   file-extension: njrat_0_11g
   license: LicenseRef-All-Rights-Reserved
 

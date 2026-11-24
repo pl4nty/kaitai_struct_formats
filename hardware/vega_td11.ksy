@@ -1,6 +1,7 @@
 # Imported from https://github.com/gazetchik/lora-kaitai/blob/052008794a62e1ab061ffb87c868d9f1f4f66485/vega/TD11.ksy
 meta:
   id: vega_td11
+  title: Vega TD-11 LoRaWAN payload
   file-extension: vega_td11
   license: LicenseRef-All-Rights-Reserved
   endian: le  

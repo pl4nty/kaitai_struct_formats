@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/matty45/382f5a1c936504a9a1f01f0134f011cc/raw/4003d602860e803df91b26ebc643b599744e854d/halo_reach_gr2.ksy
 meta:
   id: halo_reach_gr2
+  title: "Halo: Reach Granny 3D file (.gr2)"
   application: Halo Reach
   file-extension: gr2
   license: LicenseRef-All-Rights-Reserved

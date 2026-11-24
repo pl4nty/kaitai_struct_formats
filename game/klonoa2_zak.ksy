@@ -1,6 +1,7 @@
 # Imported from https://github.com/entriphy/klonoa2-tools/blob/8632014b9c20857d4069b4db5bb11b08ebf72e31/lib/structs/ks/zak.ksy
 meta:
   id: klonoa2_zak
+  title: Klonoa 2 ZAK file
   file-extension: zak
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/u1735067/571b3594d6e1f2e4ee9cc6027f08fdd2/raw/04c08217d8f95804cbd8fbab9adf52d94f06df0e/gba_3ds_vc_footer.ksy.yml
 meta:
   id: gba_3ds_vc_footer
+  title: 3DS GBA Virtual Console ROM footer
   file-extension: ftr
   license: LicenseRef-All-Rights-Reserved
   endian: le

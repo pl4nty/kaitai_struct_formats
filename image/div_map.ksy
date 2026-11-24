@@ -1,6 +1,7 @@
 # Imported from https://github.com/AzazelN28/div-tools/blob/188127dfc552063452ff8e092511e6ab77d74823/formats/map.ksy
 meta:
   id: div_map
+  title: DIV Games Studio image (.map)
   file-extension: map
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII #cp850

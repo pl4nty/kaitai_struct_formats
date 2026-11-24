@@ -1,6 +1,7 @@
 # Imported from https://github.com/AzazelN28/div-tools/blob/188127dfc552063452ff8e092511e6ab77d74823/formats/pak.ksy
 meta:
   id: div_pak
+  title: DIV Games Studio PAK archive
   file-extension: pak
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII #cp850

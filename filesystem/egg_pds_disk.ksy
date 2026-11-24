@@ -1,6 +1,7 @@
 # Imported from https://github.com/atylo/automation-scripts/blob/2a762a1c6375655318c0935258e0a430bb4c5798/ProjectEGG/Kaitai%20Struct%20schemes/EGG_pds_disk.ksy
 meta:
   id: egg_pds_disk # special ProjectEGG format for diskettes, similar to d88
+  title: Project EGG PDS disk image
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   endian: le

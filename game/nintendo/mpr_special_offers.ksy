@@ -1,6 +1,7 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/games/mpr_special_offers.ksy
 meta:
   id: mpr_special_offers
+  title: My Pokemon Ranch special offers table
   file-extension: dat
   license: LicenseRef-All-Rights-Reserved
   endian: be

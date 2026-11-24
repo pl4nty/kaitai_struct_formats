@@ -1,6 +1,7 @@
 # Imported from https://github.com/remixer-dec/GameTranslationPipelines/blob/b145e6972ee8ae8ed121c0ea64ffa49fbf71a189/3DS/Sonic%20Generations/TranslatorUI/MG.ksy
 meta:
   id: sonic_generations_mg
+  title: Sonic Generations MG file
   file-extension: MG
   license: LicenseRef-All-Rights-Reserved
   endian: le

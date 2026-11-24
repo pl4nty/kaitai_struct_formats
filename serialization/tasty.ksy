@@ -1,6 +1,7 @@
 # Imported from https://github.com/DarkDimius/tasty-kaitai-spec/blob/a604b2d67c741fe0fdde8af48ed3c9c3961d53b1/tasty_eager.ksy
 meta:
   id: tasty
+  title: Scala TASTy file
   file-extension: tasty
   license: LicenseRef-All-Rights-Reserved
   ks-version: 0.7

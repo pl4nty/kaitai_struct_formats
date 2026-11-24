@@ -1,6 +1,7 @@
 # Imported from https://github.com/Xiphoseer/sdo-kaitai/blob/3f076d0cbcdf9c8d9bef70197dfd0bff878fb758/bimc0002.ksy
 meta:
   id: signum_bimc0002
+  title: "Signum! IMC bitmap image"
   file-extension: IMC
   license: LicenseRef-All-Rights-Reserved
   endian: be

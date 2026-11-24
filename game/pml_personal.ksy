@@ -1,6 +1,7 @@
 # Imported from https://github.com/rh-hideout/rhh-docs/blob/17e6d5ec2c7ecb8cd98447f0e8d81b3614e06ced/NX/binary_templates/pml/personal.v.1.3.2.ksy
 meta:
   id: pml_personal
+  title: Pokemon personal data table
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   endian: le

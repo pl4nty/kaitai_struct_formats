@@ -1,6 +1,7 @@
 # Imported from https://github.com/descatal/BoostStudio/blob/6cb8d8ad01a088eb6bb6834ed0ac2e110f85b486/src/Core/Domain/BinaryFormats/HitboxFormat/HitboxBinaryFormat.ksy
 meta:
   id: exvs_hitbox
+  title: Gundam Extreme Vs. hitbox table
   file-extension: hitbox
   license: LicenseRef-All-Rights-Reserved
   endian: be

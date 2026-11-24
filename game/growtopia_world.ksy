@@ -1,6 +1,7 @@
 # Imported from https://github.com/badewen/Growtopia-Things/blob/94574a38171de86125f831159bb761e9afc9f50c/parsers/world_parser.ksy
 meta:
   id: growtopia_world
+  title: Growtopia world data
   file-extension: dat
   license: LicenseRef-All-Rights-Reserved
   endian: le

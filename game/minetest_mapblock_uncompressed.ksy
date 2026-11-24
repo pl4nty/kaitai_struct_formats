@@ -1,6 +1,7 @@
 # Imported from https://github.com/rollerozxa/minetest-kaitai/blob/9f713eb11858bc2cde35f04bb292cbdc9af2b7c5/mapblock/minetest_mapblock_uncompressed.ksy
 meta:
   id: minetest_mapblock_uncompressed
+  title: Minetest map block (uncompressed)
   file-extension: idk
   license: LicenseRef-All-Rights-Reserved
   endian: be

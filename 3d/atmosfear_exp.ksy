@@ -1,6 +1,7 @@
 # Imported from https://github.com/Game3DEE/cmm/blob/83b3d15e2b6615c0a1ffbeef568c40baeb84f136/src/kaitai/atmosfear_exp.ksy
 meta:
   id: atmosfear_exp
+  title: Atmosfear engine EXP model
   application: Atmosfear Engine as used in DN:ES
   file-extension: exp
   license: LicenseRef-All-Rights-Reserved

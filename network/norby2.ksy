@@ -1,6 +1,7 @@
 # Imported from https://github.com/Muxamor/CS_EPS_PMM_N_SH/blob/754e180ef481ea5d0efdef24a377f170629e3ada/Documentation/norby_2_v0.0.ksy
 meta:
   id: norby2
+  title: Norby-2 satellite telemetry frame
   file-extension: norby
   license: LicenseRef-All-Rights-Reserved
   endian: le

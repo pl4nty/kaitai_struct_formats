@@ -1,6 +1,7 @@
 # Imported from https://github.com/mzhinf/SanMapEditor/blob/9591ed259ae61139834cc98cd043c44d26a79f0b/src/san_tools/ksy/m.ksy
 meta:
   id: san_map
+  title: San Guo Ba Ye map (.m)
   file-extension: m
   license: LicenseRef-All-Rights-Reserved
   endian: le

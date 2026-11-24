@@ -1,6 +1,7 @@
 # Imported from https://github.com/Game3DEE/cmm/blob/83b3d15e2b6615c0a1ffbeef568c40baeb84f136/src/kaitai/serious1_ba.ksy
 meta:
   id: serious1_ba
+  title: Serious Engine 1 animation (.ba)
   file-extension: ba
   license: LicenseRef-All-Rights-Reserved
   encoding: UTF-8

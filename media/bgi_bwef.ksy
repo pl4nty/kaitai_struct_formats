@@ -1,6 +1,7 @@
 # Imported from https://github.com/mnakamura1337/engine_bgi/blob/7b1995a54ecafbb6c01d941a6f59c759e1bc81fd/containers/bgi_bwef.ksy
 meta:
   id: bgi_bwef
+  title: BGI BWEF sound effect
   application: BGI (Buriko General Interpreter)
   license: LicenseRef-All-Rights-Reserved
   endian: le

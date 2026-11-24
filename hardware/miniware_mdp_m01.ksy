@@ -1,6 +1,7 @@
 # Imported from https://github.com/mblsha/miniware-mdp-m01/blob/b08b7592b3b197caf524f935e6240dc7f14a96ee/cpp/mdp.ksy
 meta:
   id: miniware_mdp_m01
+  title: Miniware MDP-M01 protocol packet
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   endian: le

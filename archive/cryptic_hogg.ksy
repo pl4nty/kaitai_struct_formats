@@ -1,6 +1,7 @@
 # Imported from https://github.com/lokkju/pyhogg/blob/8735e744de5579b31aa451f37fb684b26f834fd0/kaitai/hogg_spec.ksy
 meta:
   id: cryptic_hogg
+  title: Cryptic Studios HOGG archive
   file-extension: hogg
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -6,6 +6,7 @@
 
 meta:
   id: mpc60_seq_v1
+  title: "Akai MPC60 sequence, version 1 (.seq)"
   file-extension: seq
   license: LicenseRef-All-Rights-Reserved
 

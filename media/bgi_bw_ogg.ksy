@@ -1,6 +1,7 @@
 # Imported from https://github.com/mnakamura1337/engine_bgi/blob/7b1995a54ecafbb6c01d941a6f59c759e1bc81fd/containers/bgi_bw_ogg.ksy
 meta:
   id: bgi_bw_ogg
+  title: BGI Ogg Vorbis audio wrapper
   application: BGI (Buriko General Interpreter)
   license: LicenseRef-All-Rights-Reserved
   endian: le

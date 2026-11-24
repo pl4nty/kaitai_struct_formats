@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/encounter/106f91bd0e6293cbd0228f7e3e93b79b/raw/d7060e41f9a975d61cb89c4f54f72eebd8fdf375/mbin.ksy
 meta:
   id: no_mans_sky_mbin
+  title: "No Man's Sky MBIN"
   file-extension: mbin
   license: LicenseRef-All-Rights-Reserved
   encoding: UTF-8

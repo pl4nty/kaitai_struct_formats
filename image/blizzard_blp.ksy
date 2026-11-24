@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-blp.ksy
 meta:
   id: blizzard_blp
+  title: Blizzard BLP texture
   file-extension: blp
   license: LicenseRef-All-Rights-Reserved
   imports:

@@ -1,6 +1,7 @@
 # Imported from https://github.com/dpwhittaker/coh-parse7/blob/a3fb98be866b7107cf8efde9ee230dde1ae3602c/ksy/bin.ksy
 meta:
   id: coh_bin
+  title: City of Heroes binary data (.bin)
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII

@@ -1,6 +1,7 @@
 # Imported from https://github.com/gitter-badger/ni-file/blob/c88ef5296da4f9558a3b398ea322c03473afbd7c/nki.ksy
 meta:
   id: native_instruments_nki
+  title: Native Instruments Kontakt instrument (.nki)
   file-extension: nki
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -6,6 +6,7 @@
 
 meta:
   id: xbox360_2bl
+  title: Xbox 360 second-stage bootloader (2BL)
   file-extension: xb360_2bl
   license: LicenseRef-All-Rights-Reserved
   endian: be

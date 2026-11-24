@@ -1,6 +1,7 @@
 # Imported from https://github.com/wrongbaud/sf-cabinet/blob/34d614f59549e9f87d6ea47aa3b408e27804e42c/binary-templates/minfs.ksy
 meta:
   id: arcade1up_minfs
+  title: Arcade1Up MINFS filesystem image
   file-extension: iso
   license: LicenseRef-All-Rights-Reserved
   endian: le

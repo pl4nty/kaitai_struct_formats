@@ -1,6 +1,7 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/media/mobiclip_vx.ksy
 meta:
   id: mobiclip_vx
+  title: Actimagine VX video (Nintendo DS)
   file-extension: vx
   license: LicenseRef-All-Rights-Reserved
   endian: le

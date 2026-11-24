@@ -1,6 +1,7 @@
 # Imported from https://github.com/descatal/BoostStudio/blob/6cb8d8ad01a088eb6bb6834ed0ac2e110f85b486/src/Core/Domain/BinaryFormats/AmmoFormat/AmmoBinaryFormat.ksy
 meta:
   id: exvs_ammo
+  title: Gundam Extreme Vs. ammo table
   file-extension: ammo
   license: LicenseRef-All-Rights-Reserved
   endian: be

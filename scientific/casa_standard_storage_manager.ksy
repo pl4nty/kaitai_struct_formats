@@ -1,6 +1,7 @@
 # Imported from https://github.com/radio-astro-tools/casa-formats-specification/blob/67d16c3dcfccba74b4ec2c0ed75c80b1cc02b2a4/casaio/src/casaio/tablestream/templates/standard_storage_manager.ksy
 meta:
   id: casa_standard_storage_manager
+  title: CASA standard storage manager file
   file-extension: standard_storage_manager
   license: LicenseRef-All-Rights-Reserved
   imports:

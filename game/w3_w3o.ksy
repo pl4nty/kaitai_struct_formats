@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-w3o.ksy
 meta:
   id: w3_w3o
+  title: Warcraft III object data collection (.w3o)
   file-extension: w3o
   license: LicenseRef-All-Rights-Reserved
   imports:

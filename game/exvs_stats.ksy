@@ -1,6 +1,7 @@
 # Imported from https://github.com/descatal/BoostStudio/blob/6cb8d8ad01a088eb6bb6834ed0ac2e110f85b486/src/Core/Domain/BinaryFormats/StatsFormat/StatsBinaryFormat.ksy
 meta:
   id: exvs_stats
+  title: Gundam Extreme Vs. unit stats
   file-extension: stats
   license: LicenseRef-All-Rights-Reserved
   endian: be

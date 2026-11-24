@@ -2,6 +2,7 @@
 # Modified in https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/system/tmds.ksy
 meta:
   id: wii_tmds
+  title: Wii title metadata summary (tmds.sys)
   file-extension: sys
   license: AGPL-3.0-only
   endian: be

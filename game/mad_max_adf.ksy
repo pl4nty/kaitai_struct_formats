@@ -1,6 +1,7 @@
 # Imported from https://github.com/ferrobrew/rust-mm-tools/blob/4b0c4a4a5e97d699e1930944075e86df7ee71705/crates/mm_file_formats/kaitai/mm_adf.ksy
 meta:
   id: mad_max_adf
+  title: Mad Max Avalanche Data Format (.adf)
   file-extension: adf
   license: LicenseRef-All-Rights-Reserved
   endian: le

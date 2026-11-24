@@ -1,6 +1,7 @@
 # Imported from https://github.com/FoxAhead/IDA-Projects/blob/210ba1a91b7ad4b3fb32219a349fd1cd85dc4c2f/Ascendancy/KaitaiStructs/miles_vfx_shp.ksy
 meta:
   id: miles_vfx_shp
+  title: VFX shape table (.shp)
   file-extension: miles_vfx_shp
   license: LicenseRef-All-Rights-Reserved
   endian: le

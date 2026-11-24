@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/matty45/f786b92d28417b1c085712c41ef8393a/raw/774d95f9b8ab86e50a6f5f01853254e674ce0072/halo_5_module.ksy
 meta:
   id: halo_5_module
+  title: "Halo 5: Forge module"
   application: "Halo 5: Forge"
   file-extension: module
   license: LicenseRef-All-Rights-Reserved

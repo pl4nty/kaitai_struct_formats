@@ -1,6 +1,7 @@
 # Imported from https://github.com/auronen/bin-safe-zen-parser/blob/b1e626dfbfa0bfe3bb11e5c0f551bcad56f1428e/kaitai/bs_zen.ksy
 meta:
   id: gothic_binsafe_zen
+  title: ZenGin binary-safe ZEN archive
   file-extension: zen
   license: LicenseRef-All-Rights-Reserved
   endian: le

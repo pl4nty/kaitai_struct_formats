@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-wtg-131.ksy
 meta:
   id: w3_wtg_131
+  title: "Warcraft III triggers, 1.31+ (war3map.wtg)"
   file-extension: wtg
   license: LicenseRef-All-Rights-Reserved
   imports:

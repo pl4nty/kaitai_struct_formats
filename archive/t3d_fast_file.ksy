@@ -1,6 +1,7 @@
 # Imported from https://github.com/Wld-Doc/wld-doc.github.io/blob/fd9eef5fde2414478e24826dc14ddc6df7c8fd47/static/files/t3d_fast_file.ksy
 meta:
   id: t3d_fast_file
+  title: T3D fast file archive
   file-extension:
     - t3d
     - ff

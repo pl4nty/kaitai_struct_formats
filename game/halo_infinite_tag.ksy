@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/matty45/8fcba7c9be3fad741c9b8673e23c6b44/raw/23e9b579c315e60709ee0570e937d27de350ff67/halo_infinite_tag.ksy
 meta:
   id: halo_infinite_tag
+  title: Halo Infinite tag
   application: Halo Infinite
   license: LicenseRef-All-Rights-Reserved
   endian: le

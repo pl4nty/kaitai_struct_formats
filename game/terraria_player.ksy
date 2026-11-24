@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/iconmaster5326/3c723eba0b0ebfc41f85f6b1cc00df91/raw/80d21c894588d8117e724fcde8efc3ef66fbe313/terraria_player.ksy
 meta:
   id: terraria_player
+  title: Terraria player file
   file-extension: plr
   license: LicenseRef-All-Rights-Reserved
   imports:

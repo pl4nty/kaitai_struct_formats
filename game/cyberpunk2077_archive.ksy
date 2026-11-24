@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/rfuzzo/2b4e366b6551934337d804ead5b36744/raw/1221910924d6c173e0ff0f11b63d674fc011cdbb/cp77_archive_ksy
 meta:
   id: cyberpunk2077_archive
+  title: Cyberpunk 2077 archive (.archive)
   file-extension: archive
   license: LicenseRef-All-Rights-Reserved
   endian: le

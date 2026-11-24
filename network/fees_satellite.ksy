@@ -1,6 +1,7 @@
 # Imported from https://github.com/diomig/ist-gs-operator/blob/df54c5d1ea232ea0871532ff24c729171c61adfb/Decoders/fees.ksy
 meta:
   id: fees_satellite
+  title: FEES satellite telemetry
   file-extension: custom
   license: LicenseRef-All-Rights-Reserved
   endian: le

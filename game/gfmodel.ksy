@@ -1,6 +1,7 @@
 # Imported from https://github.com/rh-hideout/rhh-docs/blob/17e6d5ec2c7ecb8cd98447f0e8d81b3614e06ced/3DS/binary-templates/gfmodel.ksy
 meta:
   id: gfmodel
+  title: Game Freak GFModel
   file-extension: gfmodel
   license: LicenseRef-All-Rights-Reserved
   endian: le

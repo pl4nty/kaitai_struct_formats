@@ -1,6 +1,7 @@
 # Imported from https://github.com/liangminhua/qgdw376.1.ksy/blob/924d87be5c25a0898c82c2d51136d90c238193df/advance/qgdw3761.ksy
 meta:
   id: qgdw_376_1
+  title: Q/GDW 376.1 electricity data collection protocol frame
   file-extension: '3761'
   license: LicenseRef-All-Rights-Reserved
   imports:

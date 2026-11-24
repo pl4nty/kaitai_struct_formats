@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-dooUnits.ksy
 meta:
   id: w3_doo_units
+  title: Warcraft III unit placement (war3mapUnits.doo)
   file-extension: doo
   license: LicenseRef-All-Rights-Reserved
   imports:

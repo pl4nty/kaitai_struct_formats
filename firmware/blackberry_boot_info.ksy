@@ -4,6 +4,7 @@ meta:
   # For BlackBerry purposes, this
   # TODO: Figure this out
   id: blackberry_boot_info
+  title: BlackBerry boot info mapping
   file-extension: mapping
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII

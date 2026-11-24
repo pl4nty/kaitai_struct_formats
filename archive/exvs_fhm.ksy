@@ -1,6 +1,7 @@
 # Imported from https://github.com/descatal/BoostStudio/blob/6cb8d8ad01a088eb6bb6834ed0ac2e110f85b486/src/Core/Domain/BinaryFormats/FhmFormat/Fhm.ksy
 meta:
   id: exvs_fhm
+  title: Gundam Extreme Vs. FHM archive
   file-extension: fhm
   license: LicenseRef-All-Rights-Reserved
   endian: be

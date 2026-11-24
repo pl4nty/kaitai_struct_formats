@@ -1,6 +1,7 @@
 # Imported from https://github.com/ucd-eirsat-1/beacon/blob/9b86d6756b73f63eb107ea5b70e53e53375474c1/KSY/EIRSAT-1.ksy
 meta:
   id: eirsat1_beacon
+  title: EIRSAT-1 beacon telemetry
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
 

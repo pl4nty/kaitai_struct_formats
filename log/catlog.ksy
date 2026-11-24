@@ -1,6 +1,7 @@
 # Imported from https://github.com/rustyoz/catlogparser/blob/ec35012911a5fc4213cc5aface1eb1896e2f2447/log.ksy
 meta:
   id: catlog
+  title: catlog log file
   file-extension: log
   license: LicenseRef-All-Rights-Reserved
   encoding: UTF-8

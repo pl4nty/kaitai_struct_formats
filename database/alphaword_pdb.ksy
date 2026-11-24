@@ -1,6 +1,7 @@
 # Imported from https://github.com/rattiecode/alphaword_pdb_to_html/blob/98f7469a5796466a9aa716bf670f6ea52121280f/alphaword_pdb_latest.ksy
 meta:
   id: alphaword_pdb
+  title: AlphaWord Palm database (.pdb)
   file-extension: pdb
   license: LicenseRef-All-Rights-Reserved
   endian: be

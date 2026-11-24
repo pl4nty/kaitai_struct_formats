@@ -1,6 +1,7 @@
 # Imported from https://github.com/FoxAhead/IDA-Projects/blob/210ba1a91b7ad4b3fb32219a349fd1cd85dc4c2f/Ascendancy/KaitaiStructs/ascendancy_sav.ksy
 meta:
   id: ascendancy_sav
+  title: Ascendancy saved game
   file-extension: ascendancy_sav
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -1,6 +1,7 @@
 # Imported from https://github.com/TCP-23/GMF2-Tools/blob/ef980aa17bf5b223d45b1fa714b6dfff280fa6c9/addon_source/kaitai_defs/gmf2b.ksy
 meta:
   id: nmh_gmf2b
+  title: No More Heroes GMF2 model (GMF2-Tools)
   file-extension: GM2, gm2
   license: LicenseRef-All-Rights-Reserved
   imports:

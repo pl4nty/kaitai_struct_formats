@@ -1,6 +1,7 @@
 # Imported from https://github.com/mnakamura1337/engine_bgi/blob/7b1995a54ecafbb6c01d941a6f59c759e1bc81fd/bytecode/bgi_compiled_script.ksy
 meta:
   id: bgi_compiled_script
+  title: BGI (Buriko General Interpreter) compiled script
   application: BGI (Buriko General Interpreter)
   license: LicenseRef-All-Rights-Reserved
   imports:

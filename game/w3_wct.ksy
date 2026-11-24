@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-wct.ksy
 meta:
   id: w3_wct
+  title: Warcraft III custom trigger text (war3map.wct)
   file-extension: wct
   license: LicenseRef-All-Rights-Reserved
   endian: le

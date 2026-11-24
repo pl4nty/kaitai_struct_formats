@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/jabb3rd/5e4294798c3acd52fe931bdc0af189a9/raw/4b7f01268edfa455fb61e2e634b6063791abb082/npk-format.ksy
 meta:
   id: mikrotik_npk
+  title: MikroTik NPK package
   file-extension: npk
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -1,6 +1,7 @@
 # Imported from https://github.com/gazetchik/lora-kaitai/blob/052008794a62e1ab061ffb87c868d9f1f4f66485/vega/HS0101.ksy
 meta:
   id: vega_hs0101
+  title: Vega HS-0101 LoRaWAN payload
   file-extension: vega_hs0101
   license: LicenseRef-All-Rights-Reserved
   endian: le  

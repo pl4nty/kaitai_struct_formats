@@ -1,6 +1,7 @@
 # Imported from https://github.com/ZetaTwo/AoE2ScenarioParser/blob/1e130facf7871e08c9aaa456180940878d975219/map-parser/aoe2scenario.ksy
 meta:
   id: aoe2scenario
+  title: Age of Empires II scenario
   file-extension: aoe2scenario
   license: LicenseRef-All-Rights-Reserved
   endian: le

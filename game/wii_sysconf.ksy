@@ -2,6 +2,7 @@
 # Modified in https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/system/config.ksy
 meta:
   id: wii_sysconf
+  title: Wii system configuration (SYSCONF)
   application: Wii Menu
   file-extension: dat
   license: AGPL-3.0-only

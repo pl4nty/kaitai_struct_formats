@@ -1,6 +1,7 @@
 # Imported from https://github.com/nightlark/qu-editor/blob/c93044518d28793f3be250e871b7804cc3b092b6/formats/qu-scene.ksy
 meta:
   id: allen_heath_qu_scene
+  title: "Allen & Heath Qu mixer scene"
   application: QU Mixers
   file-extension: dat
   license: LicenseRef-All-Rights-Reserved

@@ -1,6 +1,7 @@
 # Imported from https://github.com/mostobriv/luajit_decomp/blob/c408ddb1ce7acb1010455c6d2cf30f154ae1c63c/luajit_btc_dump.ksy
 meta:
   id: luajit_bytecode
+  title: LuaJIT bytecode
   file-extension: ljc
   license: LicenseRef-All-Rights-Reserved
   imports:

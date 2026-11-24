@@ -3,6 +3,7 @@
 
 meta:
   id: bam
+  title: BAM sequence alignment file
   file-extension: bam
   license: LicenseRef-All-Rights-Reserved
   imports:

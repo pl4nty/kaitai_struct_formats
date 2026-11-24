@@ -1,6 +1,7 @@
 # Imported from https://github.com/soralis0912/lsi_sbr_cfg/blob/3e485d9ace766f1e0beb6523c21e311463b17e68/SAS2.ksy
 meta:
   id: lsi_sas2_sbr
+  title: LSI SAS2 SBR configuration
   file-extension: sbr
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -1,6 +1,7 @@
 # Imported from https://github.com/SevenHearts/portship.js/blob/124d26389d1f7c0bd621894f1d44a9c75c8c9c2e/src/format/AIP.ksy
 meta:
   id: rose_aip
+  title: ROSE Online AI pattern (.aip)
   file-extension: aip
   license: LicenseRef-All-Rights-Reserved
   endian: le

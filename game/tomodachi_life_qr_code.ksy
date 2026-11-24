@@ -5,6 +5,7 @@
 # - https://jsfiddle.net/u/arian_/fiddles/
 meta:
   id: tomodachi_life_qr_code
+  title: Tomodachi Life Mii QR code extra data
   application: |
     Extra data stored within Mii QR codes created from Tomodachi Life.
     To access this data, use this jsfiddle: https://jsfiddle.net/arian_/ckya346z/22/

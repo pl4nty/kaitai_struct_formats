@@ -1,6 +1,7 @@
 # Imported from https://github.com/Xiphoseer/sdo-kaitai/blob/3f076d0cbcdf9c8d9bef70197dfd0bff878fb758/sdoc0001.ksy
 meta:
   id: signum_sdoc0001
+  title: "Signum! document (sdoc 0001)"
   file-extension: SDO
   license: LicenseRef-All-Rights-Reserved
   endian: be

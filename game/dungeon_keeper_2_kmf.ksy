@@ -1,6 +1,7 @@
 # Imported from https://github.com/Trass3r/dk2tools/blob/732fe2eaea651cfb61fde48bef4a6bf7d473783c/kmf.ksy
 meta:
   id: dungeon_keeper_2_kmf
+  title: Dungeon Keeper 2 mesh (.kmf)
   file-extension: kmf
   license: LicenseRef-All-Rights-Reserved
   endian: le

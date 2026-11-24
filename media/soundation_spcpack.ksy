@@ -1,6 +1,7 @@
 # Imported from https://github.com/adriaan1313/SoundationStructs/blob/efe9dbce312b6ee900640f293392326136f0d987/spcpack.ksy
 meta:
   id: soundation_spcpack
+  title: Soundation SPC pack
   file-extension: spcpack
   license: LicenseRef-All-Rights-Reserved
 seq:

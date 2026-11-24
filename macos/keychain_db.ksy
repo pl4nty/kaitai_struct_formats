@@ -2,6 +2,7 @@
 meta:
   # https://github.com/apple-oss-distributions/Security/blob/e4ea024c9bbd3bfda30ec6df270bfb4c7438d1a9/OSX/libsecurity_apple_file_dl/doc/FORMAT
   id: keychain_db
+  title: macOS keychain database
   file-extension: db
   license: LicenseRef-All-Rights-Reserved
   endian: be

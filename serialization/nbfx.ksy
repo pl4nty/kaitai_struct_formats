@@ -1,6 +1,7 @@
 # Imported from https://github.com/silentsignal/nbfx-kaitai/blob/57a96ac6203aba318e5ffbb07c9f49bf40bc0856/nbfx.ksy
 meta:
   id: nbfx
+  title: ".NET Binary Format: XML (NBFX)"
   file-extension: nbfx
   license: LicenseRef-All-Rights-Reserved
   endian: le

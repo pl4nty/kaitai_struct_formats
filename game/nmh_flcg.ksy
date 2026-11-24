@@ -1,6 +1,7 @@
 # Imported from https://github.com/sevonj/nmh_reverse/blob/ac1d6e0e6535e5c72a8e68288b74cf3df0bf845c/lib/kaitai_defs/flcg.ksy
 meta:
   id: nmh_flcg
+  title: No More Heroes FLCG world collision
   file-extension: GCL
   license: LicenseRef-All-Rights-Reserved
   encoding: UTF-8

@@ -1,6 +1,7 @@
 # Imported from https://github.com/izzyreal/mpc2000xl_kaitai/blob/d08b543e1abe96b7ecca74e09173ab8d6055bef7/mpc60.set.v0.ksy
 meta:
   id: akai_mpc60_set_v0
+  title: "Akai MPC60 sound set, version 0 (.set)"
   file-extension: SET
   license: LicenseRef-All-Rights-Reserved
   bit-endian: le

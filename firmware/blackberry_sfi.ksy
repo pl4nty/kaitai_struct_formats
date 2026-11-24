@@ -1,6 +1,7 @@
 # Imported from https://github.com/spotlightishere/BBGhidra/blob/cad4231c4305f149dd2dcbbb06464082792b7f0f/docs/sfi.ksy
 meta:
   id: blackberry_sfi
+  title: BlackBerry SFI firmware image
   file-extension: sfi
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII

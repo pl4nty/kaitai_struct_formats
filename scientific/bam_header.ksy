@@ -1,6 +1,7 @@
 # Imported from https://github.com/marehr/bam_bai_study/blob/b37b16702ba2d1e3a004c617a23d97e756493937/kaitai/bam_header.ksy
 meta:
   id: bam_header
+  title: BAM header
   file-extension: bam_header
   license: LicenseRef-All-Rights-Reserved
   endian: le

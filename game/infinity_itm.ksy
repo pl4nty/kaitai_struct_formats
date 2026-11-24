@@ -7,6 +7,7 @@
 
 meta:
   id: infinity_itm
+  title: Infinity Engine item (.itm)
   file-extension: itm
   license: GPL-3.0-only
   imports:

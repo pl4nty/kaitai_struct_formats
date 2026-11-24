@@ -1,6 +1,7 @@
 # Imported from https://github.com/hallipr/CastleOfTheWinds/blob/827210c84605ef5522409254bc3cba7b71504d61/Notes/SaveFile/CastleOfTheWinds.ksy
 meta:
   id: castle_of_the_winds
+  title: Castle of the Winds saved game (.cwg)
   file-extension: cwg
   license: LicenseRef-All-Rights-Reserved
   endian: le

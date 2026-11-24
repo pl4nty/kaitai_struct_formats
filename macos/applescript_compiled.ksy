@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/Jinmo/1571190ec9e801dfe2fc05713b606144/raw/50e8ef86f4f6ab2222be16a721a59fd416f61e9d/apple-script.yaml
 meta:
   id: applescript_compiled
+  title: Compiled AppleScript (.scpt)
   application: AppleScript files
   file-extension: scpt
   license: LicenseRef-All-Rights-Reserved

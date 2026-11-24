@@ -1,6 +1,7 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/other/j3d.ksy
 meta:
   id: j3d_model
+  title: Nintendo J3D model (BMD/BDL)
   application: Nintendo J3D (GameCube/Wii binary model, BMD/BDL)
   file-extension:
     - bmd

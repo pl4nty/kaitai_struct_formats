@@ -1,6 +1,7 @@
 # Imported from https://github.com/AzazelN28/div-tools/blob/188127dfc552063452ff8e092511e6ab77d74823/formats/wld.ksy
 meta:
   id: div_wld
+  title: DIV Games Studio world (.wld)
   file-extension: wld
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII #cp850

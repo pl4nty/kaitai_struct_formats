@@ -1,6 +1,7 @@
 # Imported from https://github.com/gazetchik/lora-kaitai/blob/052008794a62e1ab061ffb87c868d9f1f4f66485/vega/SI11.ksy
 meta:
   id: vega_si11
+  title: Vega SI-11 LoRaWAN payload
   file-extension: vega_si11
   license: LicenseRef-All-Rights-Reserved
   endian: le

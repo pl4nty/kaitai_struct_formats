@@ -1,6 +1,7 @@
 # Imported from https://github.com/ascenttree/kaitai-structs/blob/8cefaae9b8d13f181318f1ef35c3a9994ec6c2e3/ktf/ktf.ksy
 meta:
   id: ktf
+  title: "KTF localisation file (KAEDE!)"
   file-extension: ktf
   license: LicenseRef-All-Rights-Reserved
   imports:

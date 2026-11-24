@@ -1,6 +1,7 @@
 # Imported from https://github.com/izzyreal/mpc2000xl_kaitai/blob/d08b543e1abe96b7ecca74e09173ab8d6055bef7/mpc2000xl.mid.ksy
 meta:
   id: akai_mpc2000xl_mid
+  title: Akai MPC2000XL MIDI sequence (.mid)
   file-extension: mid
   license: LicenseRef-All-Rights-Reserved
   imports:

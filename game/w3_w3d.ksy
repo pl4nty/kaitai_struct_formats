@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-w3d.ksy
 meta:
   id: w3_w3d
+  title: Warcraft III doodad data (war3map.w3d)
   file-extension: w3d
   license: LicenseRef-All-Rights-Reserved
   imports:

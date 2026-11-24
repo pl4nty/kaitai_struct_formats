@@ -1,6 +1,7 @@
 # Imported from https://github.com/lcdr/lu_formats/blob/eb15852181d3fd55f638eb20ce4a2e9cd7f08dac/files/kfm.ksy
 meta:
   id: lu_kfm
+  title: LEGO Universe KFM animation (.kfm)
   file-extension: kfm
   license: LicenseRef-All-Rights-Reserved
   imports:

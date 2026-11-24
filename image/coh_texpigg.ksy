@@ -1,6 +1,7 @@
 # Imported from https://github.com/dpwhittaker/coh-parse7/blob/a3fb98be866b7107cf8efde9ee230dde1ae3602c/ksy/texpigg.ksy
 meta:
   id: coh_texpigg
+  title: City of Heroes texture (texpigg)
   file-extension: texpigg
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII

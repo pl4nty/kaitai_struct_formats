@@ -1,6 +1,7 @@
 # Imported from https://github.com/nukep/3space-to-usd/blob/9131653c9175c106e84f239ee5897eb72f02cec3/threesp.ksy
 meta:
   id: threesp
+  title: 3Space Publisher scene (.3sp)
   file-extension: 3sp
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -1,6 +1,7 @@
 # Imported from https://github.com/Swatinem/hexite/blob/fec57a0c001293463d18321c5932d624c96087a2/kaitai/symcache.ksy
 meta:
   id: symcache
+  title: Sentry SymCache symbol cache
   file-extension: symcache
   license: LicenseRef-All-Rights-Reserved
   endian: le

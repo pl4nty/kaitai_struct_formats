@@ -1,6 +1,7 @@
 # Imported from https://github.com/SevenHearts/portship.js/blob/124d26389d1f7c0bd621894f1d44a9c75c8c9c2e/src/format/ZMS.ksy
 meta:
   id: rose_zms
+  title: ROSE Online mesh (.zms)
   file-extension: zms
   license: LicenseRef-All-Rights-Reserved
   endian: le

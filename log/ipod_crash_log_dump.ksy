@@ -1,6 +1,7 @@
 # Imported from https://github.com/spotlightishere/kaitais/blob/b08d4add98d0c1e27f64cc2b431797d56cc65d78/ipod_crash_log_dump.ksy
 meta:
   id: ipod_crash_log_dump
+  title: iPod crash log dump
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII

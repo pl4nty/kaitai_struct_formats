@@ -1,6 +1,7 @@
 # Imported from https://github.com/radio-astro-tools/casa-formats-specification/blob/67d16c3dcfccba74b4ec2c0ed75c80b1cc02b2a4/casaio/src/casaio/tablestream/templates/dtype.ksy
 meta:
   id: casa_dtype
+  title: CASA table data types
   file-extension: dtype
   license: LicenseRef-All-Rights-Reserved
   endian: be

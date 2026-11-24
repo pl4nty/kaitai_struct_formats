@@ -1,6 +1,7 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/other/jarc.ksy
 meta:
   id: jarc_archive
+  title: jARC archive
   application: "\"jARC\"/\"JARC\" archive container (with optional \"jCMP\"/\"JCMP\" LZ wrapper)"
   file-extension: arc
   license: LicenseRef-All-Rights-Reserved

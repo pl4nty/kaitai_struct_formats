@@ -1,6 +1,7 @@
 # Imported from https://github.com/retro-meister/spyro-museum/blob/e2708fcfafbae2f4800c2cde665d9ec77f9aee81/src/kaitai/ksy/SpyroLevel.ksy
 meta:
   id: spyro_level
+  title: Spyro the Dragon level data
   # Adjust file/class name to your preference
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved

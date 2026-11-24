@@ -2,6 +2,7 @@
 # Modified in https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/system/iplsave.ksy
 meta:
   id: wii_iplsave
+  title: Wii Menu channel layout (iplsave.bin)
   application: Wii Menu
   file-extension: bin
   license: AGPL-3.0-only

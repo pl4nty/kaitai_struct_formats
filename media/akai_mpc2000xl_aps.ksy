@@ -1,6 +1,7 @@
 # Imported from https://github.com/izzyreal/mpc2000xl_kaitai/blob/d08b543e1abe96b7ecca74e09173ab8d6055bef7/mpc2000xl.aps.ksy
 meta:
   id: akai_mpc2000xl_aps
+  title: Akai MPC2000XL program set (.aps)
   file-extension: aps
   license: LicenseRef-All-Rights-Reserved
   imports: akai_mpc2000xl_pgm

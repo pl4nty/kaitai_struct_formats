@@ -1,6 +1,7 @@
 # Imported from https://github.com/rh-hideout/rhh-docs/blob/17e6d5ec2c7ecb8cd98447f0e8d81b3614e06ced/NX/binary_templates/archive/gfpak.ksy
 meta:
   id: gfpak
+  title: Game Freak GFPAK archive
   file-extension: gfpak
   license: LicenseRef-All-Rights-Reserved
   endian: le

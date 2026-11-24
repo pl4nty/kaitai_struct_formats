@@ -5,6 +5,7 @@
 
 meta:
   id: esp_image
+  title: Espressif ESP firmware image
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -1,6 +1,7 @@
 # Imported from https://github.com/SevenHearts/portship.js/blob/124d26389d1f7c0bd621894f1d44a9c75c8c9c2e/src/format/STB.ksy
 meta:
   id: rose_stb
+  title: ROSE Online data table (.stb)
   file-extension: stb
   license: LicenseRef-All-Rights-Reserved
   endian: le

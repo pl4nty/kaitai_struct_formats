@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/jabb3rd/a66ba26dc34ebbc6fb285452ce57f52e/raw/0e52c07fca1cfee4e59b818c2af68de3746a0a6b/wbx.ksy
 meta:
   id: mikrotik_winbox_wbx
+  title: MikroTik Winbox saved sessions (.wbx)
   file-extension: wbx
   license: LicenseRef-All-Rights-Reserved
   endian: le

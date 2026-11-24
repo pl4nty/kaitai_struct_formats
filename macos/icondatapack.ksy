@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/spotlightishere/b77b2ba85c9323f8f89f212333cea55b/raw/6d5e2527061d68de1a6f0bd4d5e8473f1335bda5/icondatapack.yml
 meta:
   id: icondatapack
+  title: macOS icon data pack
   file-extension: icondatapack
   license: LicenseRef-All-Rights-Reserved
   endian: le

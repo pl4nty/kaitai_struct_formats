@@ -1,6 +1,7 @@
 # Imported from https://github.com/AzazelN28/div-tools/blob/188127dfc552063452ff8e092511e6ab77d74823/formats/ifs.ksy
 meta:
   id: div_ifs
+  title: DIV Games Studio IFS font
   file-extension: ifs
   license: LicenseRef-All-Rights-Reserved
   endian: le

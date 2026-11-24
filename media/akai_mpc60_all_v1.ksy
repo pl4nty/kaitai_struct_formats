@@ -6,6 +6,7 @@
 
 meta:
   id: akai_mpc60_all_v1
+  title: "Akai MPC60 all-sequences file, version 1 (.all)"
   file-extension: all
   license: LicenseRef-All-Rights-Reserved
   imports:

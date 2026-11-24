@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-w3f.ksy
 meta:
   id: w3_w3f
+  title: Warcraft III campaign info (war3campaign.w3f)
   file-extension: w3f
   license: LicenseRef-All-Rights-Reserved
   imports:

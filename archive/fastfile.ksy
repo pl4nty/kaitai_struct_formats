@@ -1,6 +1,7 @@
 # Imported from https://github.com/Wld-Doc/wld-doc.github.io/blob/fd9eef5fde2414478e24826dc14ddc6df7c8fd47/static/files/fastfile.ksy
 meta:
   id: fastfile
+  title: Fastfile archive
   file-extension: fastfile
   license: LicenseRef-All-Rights-Reserved
   endian: le

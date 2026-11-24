@@ -6,6 +6,7 @@
 
 meta:
   id: infinity_wavc
+  title: Infinity Engine WAVC audio
   file-extension: wav
   license: GPL-3.0-only
   endian: le

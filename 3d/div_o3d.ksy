@@ -1,6 +1,7 @@
 # Imported from https://github.com/AzazelN28/div-tools/blob/188127dfc552063452ff8e092511e6ab77d74823/formats/o3d.ksy
 meta:
   id: div_o3d
+  title: DIV Games Studio 3D object (.o3d)
   file-extension: o3d
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII #cp850

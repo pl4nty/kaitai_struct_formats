@@ -1,6 +1,7 @@
 # Imported from https://github.com/smx-smx/kaitai-pdb/blob/ef5b605852d9d781ffb28526091f32b4348155dc/pdb.ksy
 meta:
   id: ms_pdb
+  title: Microsoft PDB debug information (MSF 7.0)
   file-extension: pdb
   license: LicenseRef-All-Rights-Reserved
   endian: le

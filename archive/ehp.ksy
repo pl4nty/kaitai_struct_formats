@@ -6,6 +6,7 @@
 
 meta:
   id: ehp
+  title: "Konami EHP archive (Yu-Gi-Oh! PSP)"
   file-extension: ehp
   license: LicenseRef-All-Rights-Reserved
   endian: le

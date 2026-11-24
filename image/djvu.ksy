@@ -1,6 +1,7 @@
 # Imported from https://github.com/guidoism/djvu/blob/4663db76d43c7ee61e5651810a242bf2a4e8093b/djvu.ksy
 meta:
   id: djvu
+  title: DjVu document
   file-extension: djvu
   license: LicenseRef-All-Rights-Reserved
   endian: be

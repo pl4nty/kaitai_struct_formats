@@ -4,6 +4,7 @@
 # calculators.
 meta:
   id: ti_8xp
+  title: TI-83/84 Plus program (.8xp)
   file-extension: 8xp
   license: LicenseRef-All-Rights-Reserved
   # Wherever two-byte integers are used, they are in LITTLE ENDIAN format

@@ -6,6 +6,7 @@
 
 meta:
   id: infinity_gam
+  title: Infinity Engine saved game (.gam)
   file-extension: gam
   license: GPL-3.0-only
   endian: le

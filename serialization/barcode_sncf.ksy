@@ -1,6 +1,7 @@
 # Imported from https://github.com/NeoRail/train-barcode-kaitai-spec/blob/66a13883559fc7de6964570ede9252fa8eadca5a/sncf/sncf.ksy
 meta:
   id: barcode_sncf
+  title: SNCF ticket barcode
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   encoding: "ISO-8859-1"

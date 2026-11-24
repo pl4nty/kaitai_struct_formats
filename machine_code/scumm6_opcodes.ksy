@@ -1,6 +1,7 @@
 # Imported from https://github.com/mblsha/binja-scumm6/blob/c3c1f301b0c48ed9cf534212a6017eb7fa4b05b7/src/scumm6_opcodes.ksy
 meta:
   id: scumm6_opcodes
+  title: SCUMM v6 opcodes
   file-extension: scumm6_opcodes
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -1,6 +1,7 @@
 # Imported from https://github.com/mnakamura1337/engine_ikura/blob/17feacdcb2b20f47e155ad6df6b70cd9bc867550/ikura_ggp.ksy
 meta:
   id: ikura_ggp
+  title: Ikura GDL GGP image
   file-extension: ggp
   license: LicenseRef-All-Rights-Reserved
   endian: le

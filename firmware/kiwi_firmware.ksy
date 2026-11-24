@@ -1,6 +1,7 @@
 # Imported from https://github.com/spotlightishere/kaitais/blob/b08d4add98d0c1e27f64cc2b431797d56cc65d78/car_firmware_kwi.ksy
 meta:
   id: kiwi_firmware
+  title: KIWI car navigation firmware package (.kwi)
   file-extension: kwi
   license: LicenseRef-All-Rights-Reserved
   endian: "be"

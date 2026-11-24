@@ -1,6 +1,7 @@
 # Imported from https://github.com/paulvelzeboer/alfa_romeo_N67/blob/6a7564875b38fbe4d669afb32575dfae1fa57f15/N67.ksy
 meta:
   id: alfa_romeo_n67_eeprom
+  title: Alfa Romeo N67 EEPROM dump
   file-extension: n67.ksy
   license: LicenseRef-All-Rights-Reserved
   endian: be

@@ -1,6 +1,7 @@
 # Imported from https://github.com/lcdr/lu_formats/blob/eb15852181d3fd55f638eb20ce4a2e9cd7f08dac/files/pk.ksy
 meta:
   id: lu_pk
+  title: LEGO Universe pack (.pk)
   file-extension: pk
   license: LicenseRef-All-Rights-Reserved
   imports:

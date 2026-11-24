@@ -1,6 +1,7 @@
 # Imported from https://github.com/descatal/BoostStudio/blob/6cb8d8ad01a088eb6bb6834ed0ac2e110f85b486/src/Core/Domain/BinaryFormats/AssetFilesFormat/AssetFilesBinaryFormat.ksy
 meta:
   id: exvs_asset_files
+  title: Gundam Extreme Vs. asset file list
   file-extension: asset
   license: LicenseRef-All-Rights-Reserved
   endian: be

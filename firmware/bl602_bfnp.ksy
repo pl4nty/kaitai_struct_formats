@@ -1,6 +1,7 @@
 # Imported from https://github.com/pine64/bl602-re/blob/ed05fb4072a649efec11cc242edfa8478ebf7dfc/script/bfnp.ksy
 meta:
   id: bl602_bfnp
+  title: BL602 boot image (BFNP)
   file-extension: bin
   license: Apache-2.0
   endian: le

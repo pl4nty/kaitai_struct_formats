@@ -1,6 +1,7 @@
 # Imported from https://github.com/mnakamura1337/engine_ai5v/blob/9fad70bd14d6a0de553bb6320d2eb74315c686d9/elf_mes.ksy
 meta:
   id: elf_mes
+  title: Elf AI5V MES script
   application: AI5V / SILV / Elf Messaging System game engine
   license: LicenseRef-All-Rights-Reserved
   endian: le

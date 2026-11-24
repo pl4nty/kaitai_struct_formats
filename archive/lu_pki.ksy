@@ -1,6 +1,7 @@
 # Imported from https://github.com/lcdr/lu_formats/blob/eb15852181d3fd55f638eb20ce4a2e9cd7f08dac/files/pki.ksy
 meta:
   id: lu_pki
+  title: LEGO Universe pack index (.pki)
   file-extension: pki
   license: LicenseRef-All-Rights-Reserved
   imports:

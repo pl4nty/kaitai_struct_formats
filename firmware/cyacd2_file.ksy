@@ -1,6 +1,7 @@
 # Imported from https://github.com/tuyenvokhac-itr/bioring-monitoring-vv-sdk/blob/b0fd460fabcb25b96ae2d8e8ea02ce4690f5a3ff/psoc6_dfu/schema/cyacd2_file.ksy
 meta:
   id: cyacd2_file
+  title: Cypress CYACD2 bootloader file
   file-extension: cyacd2
   license: LicenseRef-All-Rights-Reserved
   ks-version: 0.9

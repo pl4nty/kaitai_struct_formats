@@ -1,6 +1,7 @@
 # Imported from https://github.com/dkw72n/notes/blob/ec8b06a0e2fa6c77ef472c246b5bb7d7eaebba11/kaitai/luac.ksy
 meta:
   id: lua52_bytecode
+  title: Lua 5.2 bytecode
   file-extension: out
   license: LicenseRef-All-Rights-Reserved
 doc: https://www.lua.org/source/5.2/lundump.c.html

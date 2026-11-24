@@ -1,6 +1,7 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/media/mobiclip_moflex.ksy
 meta:
   id: mobiclip_moflex
+  title: Mobiclip Moflex video container
   file-extension: moflex
   license: LicenseRef-All-Rights-Reserved
   endian: be

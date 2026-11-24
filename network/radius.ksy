@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/u1735067/7025b4eac8d417e2d5461ae3a4e3ce78/raw/6edbf3882c4d4eed8c74315fdfb0fa369b21a5cf/radius.ksy
 meta:
   id: radius
+  title: RADIUS packet
   file-extension: radius
   license: LicenseRef-All-Rights-Reserved
   endian: be

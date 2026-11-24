@@ -1,6 +1,7 @@
 # Imported from https://github.com/IotaBlack/TC-save-reader/blob/646cfa836daf4b5a1efe5077e12374db73ff9d93/tc.ksy
 meta:
   id: turing_complete_tc_save
+  title: Turing Complete save (.tc)
   file-extension: tc
   license: LicenseRef-All-Rights-Reserved
   endian: le

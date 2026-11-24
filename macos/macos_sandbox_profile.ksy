@@ -1,6 +1,7 @@
 # Imported from https://github.com/spotlightishere/kaitais/blob/b08d4add98d0c1e27f64cc2b431797d56cc65d78/ventura-sandbox.ksy
 meta:
   id: macos_sandbox_profile
+  title: macOS compiled sandbox profile
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   endian: le

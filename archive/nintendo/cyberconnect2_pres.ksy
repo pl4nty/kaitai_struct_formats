@@ -1,6 +1,7 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/other/kensaku.ksy
 meta:
   id: cyberconnect2_pres
+  title: CyberConnect2 Pres archive
   application: "And-Kensaku \"Pres\" archive (Nintendo DS \"Kanji Sonomama Rakubiki Jiten\" family)"
   file-extension: res
   license: LicenseRef-All-Rights-Reserved

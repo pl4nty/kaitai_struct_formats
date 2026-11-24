@@ -1,6 +1,7 @@
 # Imported from https://github.com/TCP-23/GMF2-Tools/blob/ef980aa17bf5b223d45b1fa714b6dfff280fa6c9/addon_source/kaitai_defs/tme.ksy
 meta:
   id: nmh_tme
+  title: No More Heroes TME file
   file-extension: TME, tme
   license: LicenseRef-All-Rights-Reserved
   encoding: Shift_JIS

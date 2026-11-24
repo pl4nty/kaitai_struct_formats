@@ -1,6 +1,7 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/system/play_rec.ksy
 meta:
   id: wii_play_rec
+  title: Wii play record (play_rec.dat)
   file-extension: dat
   license: LicenseRef-All-Rights-Reserved
   endian: be

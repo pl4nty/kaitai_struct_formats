@@ -1,6 +1,7 @@
 # Imported from https://github.com/silentsignal/PGM-Kaitai/blob/7b78288cbd6903695afb9ef4b1eed981b6e70ff6/pgm.ksy
 meta:
   id: ibm_i_pgm
+  title: IBM i program object (PGM)
   file-extension: pgm
   license: LicenseRef-All-Rights-Reserved
   endian: be

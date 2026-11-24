@@ -1,6 +1,7 @@
 # Imported from https://github.com/Game3DEE/cmm/blob/83b3d15e2b6615c0a1ffbeef568c40baeb84f136/src/kaitai/vivisector_cmf.ksy
 meta:
   id: vivisector_cmf
+  title: Vivisector CMF model
   file-extension: cmf
   license: LicenseRef-All-Rights-Reserved
   encoding: UTF-8

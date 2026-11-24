@@ -1,6 +1,7 @@
 # Imported from https://github.com/Game3DEE/cmm/blob/83b3d15e2b6615c0a1ffbeef568c40baeb84f136/src/kaitai/serious1_bm.ksy
 meta:
   id: serious1_bm
+  title: Serious Engine 1 mesh (.bm)
   file-extension: bm
   license: LicenseRef-All-Rights-Reserved
   encoding: UTF-8

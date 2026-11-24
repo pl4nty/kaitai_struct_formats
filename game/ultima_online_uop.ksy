@@ -1,6 +1,7 @@
 # Imported from https://github.com/polserver/polserver/blob/58c945271d5187fd2981c81f55987d39b1cb9e9a/pol-core/plib/uopreader/uopfile.ksy
 meta:
   id: ultima_online_uop
+  title: Ultima Online UOP archive
   file-extension: uop
   license: LicenseRef-All-Rights-Reserved
   endian: le

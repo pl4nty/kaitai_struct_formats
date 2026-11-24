@@ -1,6 +1,7 @@
 # Imported from https://github.com/izzyreal/mpc2000xl_kaitai/blob/d08b543e1abe96b7ecca74e09173ab8d6055bef7/mpc3000.pgm.v3.ksy
 meta:
   id: akai_mpc3000_pgm_v3
+  title: "Akai MPC3000 program, version 3 (.pgm)"
   file-extension: pgm
   license: LicenseRef-All-Rights-Reserved
   endian: le

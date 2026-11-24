@@ -1,6 +1,7 @@
 # Imported from https://github.com/scottmsilver/pentair-serial-0/blob/4a154ff2905d4d149a9f51e1acf80e2d52f20d9f/src/pentair.ksy
 meta:
   id: pentair_rs485
+  title: Pentair pool equipment RS-485 packet
   file-extension: pentair.ksy
   license: LicenseRef-All-Rights-Reserved
   endian: be

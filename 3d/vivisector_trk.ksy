@@ -1,6 +1,7 @@
 # Imported from https://github.com/Game3DEE/cmm/blob/83b3d15e2b6615c0a1ffbeef568c40baeb84f136/src/kaitai/vivisector_trk.ksy
 meta:
   id: vivisector_trk
+  title: Vivisector TRK animation
   file-extension: vivisector_trk
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII

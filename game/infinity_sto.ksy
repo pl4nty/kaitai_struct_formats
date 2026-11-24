@@ -6,6 +6,7 @@
 
 meta:
   id: infinity_sto
+  title: Infinity Engine store (.sto)
   file-extension: sto
   license: GPL-3.0-only
   endian: le

@@ -1,6 +1,7 @@
 # Imported from https://github.com/SevenHearts/portship.js/blob/124d26389d1f7c0bd621894f1d44a9c75c8c9c2e/src/format/HIM.ksy
 meta:
   id: rose_him
+  title: ROSE Online heightmap (.him)
   file-extension: him
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -1,6 +1,7 @@
 # Imported from https://github.com/DarkShadow44/UIRibbon-Reversing/blob/13a3acdcd25eac9ff7e07ef795e2bde3be1a63b5/new.ksy
 meta:
   id: uiribbon_bml
+  title: Windows Ribbon Framework binary markup (BML)
   file-extension: bml
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII

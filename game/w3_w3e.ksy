@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-w3e.ksy
 meta:
   id: w3_w3e
+  title: Warcraft III terrain (war3map.w3e)
   file-extension: w3e
   license: LicenseRef-All-Rights-Reserved
   imports:

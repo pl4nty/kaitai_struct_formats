@@ -1,6 +1,7 @@
 # Imported from https://github.com/atylo/automation-scripts/blob/2a762a1c6375655318c0935258e0a430bb4c5798/ProjectEGG/Kaitai%20Struct%20schemes/t88%20Tape%20image.ksy
 meta:
   id: t88
+  title: T88 cassette tape image (PC-8801)
   file-extension: t88
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII

@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-w3v.ksy
 meta:
   id: w3_w3v
+  title: Warcraft III game cache (.w3v)
   file-extension: w3v
   license: LicenseRef-All-Rights-Reserved
   imports:

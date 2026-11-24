@@ -1,6 +1,7 @@
 # Imported from https://github.com/vincent-clipet/exapunks_save_file_exporter/blob/d32392297c2267fb2e8f96c634b9eca31fc7ceaa/kaitai/solution.ksy
 meta:
   id: exapunks_solution
+  title: EXAPUNKS solution file
   file-extension: exapunks_solution
   license: LicenseRef-All-Rights-Reserved
   endian: le

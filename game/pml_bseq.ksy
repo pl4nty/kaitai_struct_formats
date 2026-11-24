@@ -1,6 +1,7 @@
 # Imported from https://github.com/rh-hideout/rhh-docs/blob/17e6d5ec2c7ecb8cd98447f0e8d81b3614e06ced/NX/binary_templates/pml/bseq.ksy
 meta:
   id: pml_bseq
+  title: Pokemon BSEQ sequence
   file-extension: bseq
   license: LicenseRef-All-Rights-Reserved
   endian: le

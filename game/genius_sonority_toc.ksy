@@ -1,6 +1,7 @@
 # Imported from https://github.com/rh-hideout/rhh-docs/blob/17e6d5ec2c7ecb8cd98447f0e8d81b3614e06ced/GC/Genius_Sonority/binary_templates/toc.ksy
 meta:
   id: genius_sonority_toc
+  title: Genius Sonority archive table of contents
   file-extension: toc
   license: LicenseRef-All-Rights-Reserved
   endian: be

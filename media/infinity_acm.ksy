@@ -6,6 +6,7 @@
 
 meta:
   id: infinity_acm
+  title: Interplay ACM audio
   file-extension: acm
   license: GPL-3.0-only
   endian: le

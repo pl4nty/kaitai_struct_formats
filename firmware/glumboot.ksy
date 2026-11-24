@@ -1,6 +1,7 @@
 # Imported from https://github.com/thewisenerd/glumboot-utils/blob/b562aff8e43b6f2c7efed7fb005881cdbc98d34c/glumboot.ksy
 meta:
   id: glumboot
+  title: glumboot boot image
   file-extension: img
   license: LicenseRef-All-Rights-Reserved
   endian: le

@@ -1,6 +1,7 @@
 # Imported from https://github.com/anvilsecure/SAPCARve/blob/5bcb35def66ba5a8541aa882b29cce8f3e5138cf/sar.ksy
 meta:
   id: sapcar
+  title: SAP CAR archive (SAPCAR)
   file-extension: sar
   license: LicenseRef-All-Rights-Reserved
   endian: le

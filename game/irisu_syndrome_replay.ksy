@@ -1,6 +1,7 @@
 # Imported from https://github.com/hoangcaominh/irisu-rpy-struct/blob/88eebb838fe4bc409c3a6aa50588c93c862bd10a/irisu.ksy
 meta:
   id: irisu_syndrome_replay
+  title: Irisu Syndrome replay
   file-extension: rpy
   license: LicenseRef-All-Rights-Reserved
   endian: le

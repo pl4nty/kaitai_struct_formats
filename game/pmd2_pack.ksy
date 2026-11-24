@@ -1,6 +1,7 @@
 # Imported from https://github.com/CodeDragon82/reverse-engineering-pmdsky/blob/5c07000ddb8c2cdf4072910693438ce94a418817/tools/pmd2pack.ksy
 meta:
   id: pmd2_pack
+  title: Pokemon Mystery Dungeon pack file
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   endian: le

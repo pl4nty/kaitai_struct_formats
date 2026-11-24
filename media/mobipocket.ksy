@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/u1735067/9c803a37be34e99600ccc1302a69bfdc/raw/3d471c04b1d98b920a8538fd1b03ea8c8f426cf6/mobi.ksy.yml
 meta:
   id: mobipocket
+  title: Mobipocket e-book (.mobi)
   file-extension: mobi
   license: LicenseRef-All-Rights-Reserved
   endian: be

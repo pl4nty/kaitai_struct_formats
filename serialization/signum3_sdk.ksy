@@ -1,6 +1,7 @@
 # Imported from https://github.com/Xiphoseer/sdo-kaitai/blob/3f076d0cbcdf9c8d9bef70197dfd0bff878fb758/sdoc03.ksy
 meta:
   id: signum3_sdk
+  title: "Signum! 3 document (sdoc 03)"
   file-extension: SDK
   license: LicenseRef-All-Rights-Reserved
   endian: be

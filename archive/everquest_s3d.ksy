@@ -1,6 +1,7 @@
 # Imported from https://github.com/Wld-Doc/wld-doc.github.io/blob/fd9eef5fde2414478e24826dc14ddc6df7c8fd47/static/files/s3d.ksy
 meta:
   id: everquest_s3d
+  title: EverQuest S3D archive
   file-extension: s3d
   license: LicenseRef-All-Rights-Reserved
   endian: le

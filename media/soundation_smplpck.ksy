@@ -1,6 +1,7 @@
 # Imported from https://github.com/adriaan1313/SoundationStructs/blob/efe9dbce312b6ee900640f293392326136f0d987/smplpck.ksy
 meta:
   id: soundation_smplpck
+  title: Soundation sample pack
   file-extension: smplpck
   license: LicenseRef-All-Rights-Reserved
   endian: le

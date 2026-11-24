@@ -1,6 +1,7 @@
 # Imported from https://github.com/Kh4n/jt-loader/blob/3ffa83566a8323ac21d330148598d33456b3ed37/src/main/resources/kaitai/JT_9.5.ksy
 meta:
   id: jt_9_5
+  title: JT 9.5 CAD file
   file-extension: jt
   license: LicenseRef-All-Rights-Reserved
 seq:

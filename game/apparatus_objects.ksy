@@ -1,6 +1,7 @@
 # Imported from https://github.com/rollerozxa-archive/apparatus-kaitai/blob/8c46a2508a9b34ac1ad6360e7cbe4942cefc08f3/kaitai/objects.ksy
 meta:
   id: apparatus_objects
+  title: Apparatus level objects
   file-extension: objects
   license: LicenseRef-All-Rights-Reserved
   endian: be

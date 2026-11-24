@@ -1,6 +1,7 @@
 # Imported from https://github.com/SevenHearts/portship.js/blob/124d26389d1f7c0bd621894f1d44a9c75c8c9c2e/src/format/CHR.ksy
 meta:
   id: rose_chr
+  title: ROSE Online character list (.chr)
   file-extension: chr
   license: LicenseRef-All-Rights-Reserved
   endian: le

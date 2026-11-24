@@ -1,6 +1,7 @@
 # Imported from https://github.com/eybisi/misc/blob/a0bc329d335417da375fab330b36d7b3b0b36a2f/kaitai/luac.ksy
 meta:
   id: luac
+  title: Lua bytecode (luac)
   file-extension: luac
   license: LicenseRef-All-Rights-Reserved
   endian: le

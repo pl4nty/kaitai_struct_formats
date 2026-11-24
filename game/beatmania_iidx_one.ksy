@@ -1,6 +1,7 @@
 # Imported from https://github.com/aixxe/iidx-tools/blob/e9572435e81d600e85dc1526376884896de23594/Structures/one.ksy
 meta:
   id: beatmania_iidx_one
+  title: beatmania IIDX chart (.1)
   application: beatmania IIDX
   file-extension: '1'
   license: LicenseRef-All-Rights-Reserved

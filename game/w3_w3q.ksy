@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-w3q.ksy
 meta:
   id: w3_w3q
+  title: Warcraft III upgrade data (war3map.w3q)
   file-extension: w3q
   license: LicenseRef-All-Rights-Reserved
   imports:

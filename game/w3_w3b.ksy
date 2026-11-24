@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-w3b.ksy
 meta:
   id: w3_w3b
+  title: Warcraft III destructable data (war3map.w3b)
   file-extension: w3b
   license: LicenseRef-All-Rights-Reserved
   imports:

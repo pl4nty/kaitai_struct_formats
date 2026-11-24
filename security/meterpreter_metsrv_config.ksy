@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/plowsec/ecd8f27c60787c85a347ed892bcf8146/raw/d00a28da264e3db0c4361c0b459d9e91d2676090/metsrv_config.ksy
 meta:
   id: meterpreter_metsrv_config
+  title: Meterpreter metsrv configuration
   file-extension: mtp
   license: LicenseRef-All-Rights-Reserved
 seq:

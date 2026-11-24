@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/generalmimon/0f202457ebe8f1556293d611a949c358/raw/8418b6d1da65bd49ca136f6252d9ab36dc032400/deflate_stream.ksy
 meta:
   id: deflate_stream
+  title: DEFLATE compressed data stream
   xref:
     rfc: 1951
   license: MIT

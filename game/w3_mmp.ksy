@@ -1,6 +1,7 @@
 # Imported from https://github.com/WaterKnight/Warcraft3-Formats-KaitaiStruct/blob/cdd07826b18f9ec34dfa97c77eb2ff65833f9ddf/w3-mmp.ksy
 meta:
   id: w3_mmp
+  title: Warcraft III minimap icons (war3map.mmp)
   file-extension: mmp
   license: LicenseRef-All-Rights-Reserved
   endian: le

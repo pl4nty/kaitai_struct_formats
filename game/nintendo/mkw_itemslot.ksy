@@ -1,6 +1,7 @@
 # Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/games/mkw_itemslot.ksy
 meta:
   id: mkw_itemslot
+  title: Mario Kart Wii item slot table (ITEMSLT)
   application: Mario Kart Wii (ITEMSLT, item-probability tables)
   file-extension:
     - bin

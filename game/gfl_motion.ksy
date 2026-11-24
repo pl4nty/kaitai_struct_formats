@@ -1,6 +1,7 @@
 # Imported from https://github.com/rh-hideout/rhh-docs/blob/17e6d5ec2c7ecb8cd98447f0e8d81b3614e06ced/3DS/binary-templates/gflibmotion.ksy
 meta:
   id: gfl_motion
+  title: Game Freak GFLib motion (.mbin)
   file-extension: mbin
   license: LicenseRef-All-Rights-Reserved
   endian: le

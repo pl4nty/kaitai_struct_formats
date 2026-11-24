@@ -1,6 +1,7 @@
 # Imported from https://github.com/The-Knights-of-the-Eastern-Calculus/lainextract/blob/51d8322a0d75c71e089607c97197c7bde56c82a6/lapk_python/lapk.ksy
 meta:
   id: serial_experiments_lain_lapk
+  title: Serial Experiments Lain LAPK archive
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   ks-opaque-types: true  # ksylint: disable=KSY210

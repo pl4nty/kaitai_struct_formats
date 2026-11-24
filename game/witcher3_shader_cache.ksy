@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/rfuzzo/678045cd2ddd6eff081085881a075e4e/raw/61b85ec881b0eea1fd0bf9f2be17469c9d8bacca/witcher%203%20shader.cache%20kaitai%20ksy
 meta:
   id: witcher3_shader_cache
+  title: The Witcher 3 shader cache
   file-extension: cache
   license: LicenseRef-All-Rights-Reserved
   endian: le

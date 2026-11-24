@@ -1,6 +1,7 @@
 # Imported from https://github.com/sevonj/nmh_reverse/blob/ac1d6e0e6535e5c72a8e68288b74cf3df0bf845c/lib/kaitai_defs/gmf2.ksy
 meta:
   id: nmh_gmf2
+  title: No More Heroes GMF2 model
   file-extension: GM2
   license: LicenseRef-All-Rights-Reserved
   encoding: Shift_JIS

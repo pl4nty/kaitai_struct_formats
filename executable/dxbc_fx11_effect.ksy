@@ -1,6 +1,7 @@
 # Imported from https://gist.githubusercontent.com/rfuzzo/4a078fa095e4b7f793fbe1354e00867a/raw/17d08241dc50433fc739ce123b420dc17f026317/dxbc%20kaitai%20ksy
 meta:
   id: dxbc_fx11_effect
+  title: Direct3D 11 compiled effect (FX11)
   file-extension: fx11obj
   license: LicenseRef-All-Rights-Reserved
   endian: le

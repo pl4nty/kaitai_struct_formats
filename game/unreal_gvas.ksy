@@ -1,6 +1,7 @@
 # Imported from https://github.com/Mervill/project-silverfish-saves/blob/49fd065fedaa750e8b16f2361bc53a8683e119bb/gvas.ksy
 meta:
   id: unreal_gvas
+  title: Unreal Engine GVAS save game
   file-extension: gvas
   license: LicenseRef-All-Rights-Reserved
   endian: le

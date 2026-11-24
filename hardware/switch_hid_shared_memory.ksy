@@ -1,6 +1,7 @@
 # Imported from https://github.com/roblabla/NX-010Editor/blob/bf91561f4a31d722eba1d0c1563b1e662c791d40/hid_shared_mem.ksy
 meta:
   id: switch_hid_shared_memory
+  title: Nintendo Switch HID shared memory
   file-extension: bin
   license: LicenseRef-All-Rights-Reserved
   endian: le

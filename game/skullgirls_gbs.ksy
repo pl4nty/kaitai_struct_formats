@@ -1,6 +1,7 @@
 # Imported from https://github.com/Skullgirls-Communitys-Cut/Templates/blob/8f3bd2076d7f996f21e1454c054e1bd39d8b80c6/Kaitai/gbs.ksy
 meta:
   id: skullgirls_gbs
+  title: Skullgirls GBS file
   file-extension: gbs
   license: LicenseRef-All-Rights-Reserved
   endian: le

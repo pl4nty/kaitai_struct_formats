@@ -1,6 +1,7 @@
 # Imported from https://github.com/AzazelN28/div-tools/blob/188127dfc552063452ff8e092511e6ab77d74823/formats/a3d.ksy
 meta:
   id: div_a3d
+  title: DIV Games Studio animated 3D object (.a3d)
   file-extension: a3d
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII #cp850

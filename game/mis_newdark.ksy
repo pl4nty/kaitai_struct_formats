@@ -1,6 +1,7 @@
 # Imported from https://github.com/vfig/misdeed/blob/881d221a77a3a08ba19de1653298cee750bebf18/mis_newdark.ksy
 meta:
   id: mis_newdark
+  title: Dark Engine NewDark mission (.mis)
   file-extension: mis
   license: LicenseRef-All-Rights-Reserved
   endian: le

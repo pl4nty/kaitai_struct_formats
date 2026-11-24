@@ -1,6 +1,7 @@
 # Imported from https://github.com/smx-smx/tools/blob/c9d1d874fd0c2e1ed2bc069d8099d05b87dfd732/kaitai/lgsym/lgsym.ksy
 meta:
   id: lg_sym
+  title: LG firmware symbol table (.sym)
   file-extension: sym
   license: LicenseRef-All-Rights-Reserved
   encoding: ASCII
