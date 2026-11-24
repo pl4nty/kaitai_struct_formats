@@ -279,10 +279,19 @@ types:
         seq:
           - id: utf16_size
             type: vlq_base128_le
+            doc: |
+              Size of this string, in UTF-16 code units (which is the
+              "length" of the string in many systems). That is, this is the
+              decoded length of the string, not the byte length of `data`.
           - id: data
-            size: utf16_size.value
             type: str
-            encoding: ASCII
+            terminator: 0
+            encoding: UTF-8
+            doc: |
+              A series of MUTF-8 code units (a.k.a. octets, a.k.a. bytes)
+              followed by a byte of value 0. MUTF-8 matches UTF-8 except for
+              U+0000 (encoded as C0 80) and supplementary characters (encoded
+              as surrogate pairs), which a strict UTF-8 decoder rejects.
   type_id_item:
     -webide-representation: "{type_name}"
     seq:
@@ -476,6 +485,10 @@ types:
         pos: static_values_off
         type: encoded_array_item
         if: static_values_off != 0
+      sourcefile_name:
+        value: _root.string_ids[source_file_idx].value.data
+        if: source_file_idx != 0xffff_ffff
+        doc: Name of the source file, unless `source_file_idx` is NO_INDEX
   encoded_array_item:
     seq:
       - id: value
