@@ -362,14 +362,29 @@ def run(manifests, args, build_root):
 
 
 def coverage():
+    """Report sample coverage of file formats.
+
+    Specs without ``meta.file-extension`` are mostly library types (checksums,
+    integer encodings, protocol sub-structures) that are tested through the
+    formats that import them, so they are listed separately.
+    """
     have = {m.spec for m in load_manifests()}
-    specs = []
+    formats, libraries = [], []
     for dirpath, dirs, files in os.walk(REPO):
         dirs[:] = [d for d in dirs if not d.startswith((".", "_"))]
-        specs += [os.path.relpath(os.path.join(dirpath, f), REPO).replace(os.sep, "/")
-                  for f in files if f.endswith(".ksy")]
-    missing = sorted(set(specs) - have)
-    print(f"{len(specs) - len(missing)}/{len(specs)} specs have samples")
+        for f in files:
+            if not f.endswith(".ksy"):
+                continue
+            spec = os.path.relpath(os.path.join(dirpath, f), REPO).replace(os.sep, "/")
+            try:
+                with open(os.path.join(REPO, spec), encoding="utf-8") as fh:
+                    meta = (yaml.safe_load(fh) or {}).get("meta") or {}
+            except (OSError, UnicodeDecodeError, yaml.YAMLError, AttributeError):
+                meta = {}
+            (formats if meta.get("file-extension") else libraries).append(spec)
+    missing = sorted(set(formats) - have)
+    print(f"{len(formats) - len(missing)}/{len(formats)} file formats have samples "
+          f"({len(have & set(libraries))}/{len(libraries)} other specs)")
     for m in missing:
         print("  missing:", m)
 

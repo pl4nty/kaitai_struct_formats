@@ -1,0 +1,6 @@
+samples:
+  - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/safetensors/testdata/test.safetensors
+    sha256: 654131a5c26ad5d59978940e95d3924a5f525969debd17f3cf15e6fbff92aa69
+    source: wader/fq test data
+    license: MIT
+    skip: needs the opaque type safe_tensors_parsed_header (ks-opaque-types), not provided by the harness

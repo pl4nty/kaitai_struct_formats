@@ -1,0 +1,8 @@
+samples:
+  - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/wasm/testdata/core/address-0.wasm
+    sha256: ae6dcbdd8e48fcc53e21aec99caeb49199f2a125369a81b11db9db3656e9cafc
+    source: fq test data (WebAssembly spec test suite)
+    license: Apache-2.0
+    eof: true
+    expect:
+      version: 1

@@ -9,7 +9,7 @@ pip install kaitaistruct pyyaml
 python3 _test/run_samples.py                 # everything
 python3 _test/run_samples.py 'image/*.ksy'   # a subset (globs on spec paths)
 python3 _test/run_samples.py --validate-only # schema check, no network
-python3 _test/run_samples.py --coverage      # specs without samples
+python3 _test/run_samples.py --coverage      # file formats (meta.file-extension) without samples
 ```
 
 Needs `ksc` 0.11+ on `PATH` (or `--ksc`). Downloads are cached by SHA-256 in

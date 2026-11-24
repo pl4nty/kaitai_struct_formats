@@ -1,0 +1,8 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/archive/netgear/trx/trx_v1/__input__/sample.trx
+    sha256: 94c27fcc2ceeabeefde74134c84cfbdec79b237db720b01d914a69a47d2a292e
+    source: unblob integration test inputs (Git LFS; values from header bytes)
+    license: MIT
+    expect:
+      pre_header.length: 4096
+      version: 1
