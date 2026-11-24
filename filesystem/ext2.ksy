@@ -270,7 +270,12 @@ types:
     seq:
       - id: entries
         type: dir_entry
-        repeat: eos
+        repeat: until
+        repeat-until: _.rec_len == 0 or _io.eof
+        doc: |
+          Stops at the end of the block, or at a zeroed entry (rec_len 0)
+          as found in unused directory blocks, which would otherwise never
+          advance.
   dir_entry:
     seq:
       - id: inode_ptr
@@ -287,9 +292,11 @@ types:
         type: str
         encoding: UTF-8
       - id: padding
-        size: rec_len - name_len - 8
+        size: 'rec_len >= name_len + 8 ? rec_len - name_len - 8 : 0'
     instances:
       inode:
+        if: inode_ptr != 0
+        doc: Inode of this entry; inode_ptr 0 marks an unused entry
         value: '_root.bg1.block_groups[(inode_ptr - 1) / _root.bg1.super_block.inodes_per_group].inodes[(inode_ptr - 1) % _root.bg1.super_block.inodes_per_group]'
     enums:
       # https://www.nongnu.org/ext2-doc/ext2.html#IFDIR-FILE-TYPE
