@@ -18,7 +18,6 @@ meta:
     - /common/ieee754_float/f32be
     - /common/ieee754_float/f32le
     - /common/ndarray_descriptor
-  ks-opaque-types: true
   encoding: UTF-8
   -affected-by: 703
   endian: le
