@@ -8,7 +8,7 @@ meta:
   license: MIT
   imports:
     - mdl
-    - f2
+    - ../common/ieee754_float/f2le
   endian: le
   bit-endian: le
 
@@ -67,18 +67,18 @@ types:
     doc: A 3D translation described with 16-bit floating point values.
     seq:
       - id: x_16
-        type: f2
+        type: f2le
       - id: y_16
-        type: f2
+        type: f2le
       - id: z_16
-        type: f2
+        type: f2le
     instances:
       x:
-        value: x_16.float_value
+        value: x_16.value.value
       y:
-        value: y_16.float_value
+        value: y_16.value.value
       z:
-        value: z_16.float_value
+        value: z_16.value.value
 
   translation16_padded:
     doc: |
@@ -86,24 +86,24 @@ types:
       padded to 32 bits.
     seq:
       - id: x_16
-        type: f2
+        type: f2le
       - id: x_pad
         size: 2
       - id: y_16
-        type: f2
+        type: f2le
       - id: y_pad
         size: 2
       - id: z_16
-        type: f2
+        type: f2le
       - id: z_pad
         size: 2
     instances:
       x:
-        value: x_16.float_value
+        value: x_16.value.value
       y:
-        value: y_16.float_value
+        value: y_16.value.value
       z:
-        value: z_16.float_value
+        value: z_16.value.value
 
   axis:
     doc: |

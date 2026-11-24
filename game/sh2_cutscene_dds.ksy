@@ -2,11 +2,12 @@
 # Licence and copyright: see _community/README.md
 meta:
   id: sh2_cutscene_dds
-  title: Silent Hill 2 model format
+  title: Silent Hill 2 cutscene format
   application: Silent Hill 2 (PS2)
   file-extension: dds
   license: MIT
-  imports: f2
+  imports:
+    - ../common/ieee754_float/f2le
   encoding: ASCII
   endian: le
 
@@ -178,8 +179,8 @@ types:
             '[4, 1]': f4_vector
             '[5, 0]': f2_vector # rotation to interest
             '[5, 1]': f2_vector
-            '[6, 0]': f2
-            '[6, 1]': f2
+            '[6, 0]': f2le
+            '[6, 1]': f2le
             '[7, 0]': f4
             '[7, 1]': f4
     instances:
@@ -230,30 +231,30 @@ types:
   f2_vector:
     seq:
       - id: x_16
-        type: f2
+        type: f2le
       - id: y_16
-        type: f2
+        type: f2le
       - id: z_16
-        type: f2
+        type: f2le
     instances:
       x:
-        value: x_16.float_value
+        value: x_16.value.value
       y:
-        value: y_16.float_value
+        value: y_16.value.value
       z:
-        value: z_16.float_value
+        value: z_16.value.value
 
   f2_vector2:
     seq:
       - id: x_16
-        type: f2
+        type: f2le
       - id: y_16
-        type: f2
+        type: f2le
     instances:
       x:
-        value: x_16.float_value
+        value: x_16.value.value
       y:
-        value: y_16.float_value
+        value: y_16.value.value
 
   f4_vector:
     seq:
