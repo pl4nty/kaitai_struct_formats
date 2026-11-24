@@ -49,11 +49,10 @@ types:
           Level 1 extended headers. Unlike level 2, they are not counted in
           the header size but in `file_size_compr`.
       - id: body
-        size: 'header.header1.lha_level == 1 ? header.header1.file_size_compr - len_ext_headers : header.header1.file_size_compr'
+        size: header.header1.file_size_compr - len_ext_headers
     instances:
       len_ext_headers:
-        value: 'len_first_ext_header != 0 ? ext_headers.len_total : 0'
-        if: header.header1.lha_level == 1
+        value: 'header.header1.lha_level == 1 and len_first_ext_header != 0 ? ext_headers.len_total : 0'
   ext_header:
     doc: |
       Extended header, followed by the next one as long as the size of the
