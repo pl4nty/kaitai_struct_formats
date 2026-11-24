@@ -1207,8 +1207,7 @@ types:
             repeat-expr: number_of_glyphs
           - id: glyph_names
             type: pascal_string
-            repeat: until
-            repeat-until: _.length == 0 or _io.eof
+            repeat: eos
     seq:
       - id: format
         type: fixed
