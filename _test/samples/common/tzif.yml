@@ -1,0 +1,40 @@
+samples:
+- url: https://files.pythonhosted.org/packages/5c/23/c7abc0ca0a1526a0774eca151daeb8de62ec457e77262b66b359c3c7679e/tzdata-2025.2-py2.py3-none-any.whl
+  sha256: 1a403fada01ff9221ca8044d701868fa132215d84beb92242d9acd2147f667a8
+  name: Australia_Sydney
+  extract:
+    format: zip
+    member: tzdata/zoneinfo/Australia/Sydney
+  eof: true
+  expect:
+    v2_struct.header.num_transitions: 83
+    v2_struct.header.num_local_time_types: 3
+    v2_struct.header.len_tz_designations: 14
+    v1_struct.header.num_transitions: 0
+    v2_footer.tz_string: AEST-10AEDT,M10.1.0,M4.1.0/3
+- url: https://files.pythonhosted.org/packages/5c/23/c7abc0ca0a1526a0774eca151daeb8de62ec457e77262b66b359c3c7679e/tzdata-2025.2-py2.py3-none-any.whl
+  sha256: 1a403fada01ff9221ca8044d701868fa132215d84beb92242d9acd2147f667a8
+  name: America_New_York
+  extract:
+    format: zip
+    member: tzdata/zoneinfo/America/New_York
+  eof: true
+  expect:
+    v2_struct.header.num_transitions: 175
+    v2_struct.header.num_local_time_types: 5
+    v2_struct.header.len_tz_designations: 20
+    v1_struct.header.num_transitions: 0
+    v2_footer.tz_string: EST5EDT,M3.2.0,M11.1.0
+- url: https://files.pythonhosted.org/packages/5c/23/c7abc0ca0a1526a0774eca151daeb8de62ec457e77262b66b359c3c7679e/tzdata-2025.2-py2.py3-none-any.whl
+  sha256: 1a403fada01ff9221ca8044d701868fa132215d84beb92242d9acd2147f667a8
+  name: UTC
+  extract:
+    format: zip
+    member: tzdata/zoneinfo/UTC
+  eof: true
+  expect:
+    v2_struct.header.num_transitions: 0
+    v2_struct.header.num_local_time_types: 1
+    v2_struct.header.len_tz_designations: 4
+    v1_struct.header.num_transitions: 0
+    v2_footer.tz_string: UTC0

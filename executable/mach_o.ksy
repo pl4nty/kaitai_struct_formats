@@ -7,10 +7,10 @@ meta:
       - fmt/693 # Mach-O 64bit
     wikidata: Q2627217
   license: MIT
-  ks-version: 0.9
+  ks-version: '0.10'
   imports:
+    - /common/vlq_base128_le
     - /serialization/asn1/asn1_der
-  endian: le
 doc-ref:
   - https://www.stonedcoder.org/~kd/lib/MachORuntime.pdf
   - https://opensource.apple.com/source/python_modules/python_modules-43/Modules/macholib-1.5.1/macholib-1.5.1.tar.gz
@@ -29,6 +29,9 @@ seq:
     type: load_command
     repeat: expr
     repeat-expr: header.ncmds
+instances:
+  is_big_endian:
+    value: magic == magic_type::macho_be_x86 or magic == magic_type::macho_be_x64
 enums:
   magic_type:
     # Note that for multiarch (a.k.a. fat) Mach-O files, which are the primary
@@ -135,70 +138,96 @@ types:
     instances:
       no_undefs:
         value: value & 0x1 != 0
-        doc: "the object file has no undefined references"
+        doc: the object file has no undefined references
       incr_link:
         value: value & 0x2 != 0
-        doc: "the object file is the output of an incremental link against a base file and can't be link-edited again"
+        doc: |
+          the object file is the output of an incremental link against a base file and
+          can't be link-edited again
       dyld_link:
         value: value & 0x4 != 0
-        doc: "the object file is input for the dynamic linker and can't be statically link-edited again"
+        doc: |
+          the object file is input for the dynamic linker and can't be statically
+          link-edited again
       bind_at_load:
         value: value & 0x8 != 0
-        doc: "the object file's undefined references are bound by the dynamic linker when loaded."
+        doc: |
+          the object file's undefined references are bound by the dynamic linker when
+          loaded.
       prebound:
         value: value & 0x10 != 0
-        doc: "the file has its dynamic undefined references prebound."
+        doc: the file has its dynamic undefined references prebound.
       split_segs:
         value: value & 0x20 != 0
-        doc: "the file has its read-only and read-write segments split"
+        doc: the file has its read-only and read-write segments split
       lazy_init:
         value: value & 0x40 != 0
-        doc: "the shared library init routine is to be run lazily via catching memory faults to its writeable segments (obsolete)"
+        doc: |
+          the shared library init routine is to be run lazily via catching memory faults
+          to its writeable segments (obsolete)
       two_level:
         value: value & 0x80 != 0
-        doc: "the image is using two-level name space bindings"
+        doc: the image is using two-level name space bindings
       force_flat:
         value: value & 0x100 != 0
-        doc: "the executable is forcing all images to use flat name space bindings"
+        doc: the executable is forcing all images to use flat name space bindings
       no_multi_defs:
         value: value & 0x200 != 0
-        doc: "this umbrella guarantees no multiple definitions of symbols in its sub-images so the two-level namespace hints can always be used."
+        doc: |
+          this umbrella guarantees no multiple definitions of symbols in its sub-images so
+          the two-level namespace hints can always be used.
       no_fix_prebinding:
         value: value & 0x400 != 0
-        doc: "do not have dyld notify the prebinding agent about this executable"
+        doc: do not have dyld notify the prebinding agent about this executable
       prebindable:
         value: value & 0x800 != 0
-        doc: "the binary is not prebound but can have its prebinding redone. only used when MH_PREBOUND is not set."
+        doc: |
+          the binary is not prebound but can have its prebinding redone. only used when
+          MH_PREBOUND is not set.
       all_mods_bound:
         value: value & 0x1000 != 0
-        doc: "indicates that this binary binds to all two-level namespace modules of its dependent libraries. only used when MH_PREBINDABLE and MH_TWOLEVEL are both set."
+        doc: |
+          indicates that this binary binds to all two-level namespace modules of its
+          dependent libraries. only used when MH_PREBINDABLE and MH_TWOLEVEL are both set.
       subsections_via_symbols:
         value: value & 0x2000 != 0
-        doc: "safe to divide up the sections into sub-sections via symbols for dead code stripping"
+        doc: |
+          safe to divide up the sections into sub-sections via symbols for dead code
+          stripping
       canonical:
         value: value & 0x4000 != 0
-        doc: "the binary has been canonicalized via the unprebind operation"
+        doc: the binary has been canonicalized via the unprebind operation
       weak_defines:
         value: value & 0x8000 != 0
-        doc: "the final linked image contains external weak symbols"
+        doc: the final linked image contains external weak symbols
       binds_to_weak:
         value: value & 0x10000 != 0
-        doc: "the final linked image uses weak symbols"
+        doc: the final linked image uses weak symbols
       allow_stack_execution:
         value: value & 0x20000 != 0
-        doc: "When this bit is set, all stacks in the task will be given stack execution privilege.  Only used in MH_EXECUTE filetypes."
+        doc: |
+          When this bit is set, all stacks in the task will be given stack execution
+          privilege.  Only used in MH_EXECUTE filetypes.
       root_safe:
         value: value & 0x40000 != 0
-        doc: "When this bit is set, the binary declares it is safe for use in processes with uid zero"
+        doc: |
+          When this bit is set, the binary declares it is safe for use in processes with
+          uid zero
       setuid_safe:
         value: value & 0x80000 != 0
-        doc: "When this bit is set, the binary declares it is safe for use in processes when issetugid() is true"
+        doc: |
+          When this bit is set, the binary declares it is safe for use in processes when
+          issetugid() is true
       no_reexported_dylibs:
         value: value & 0x100000 != 0
-        doc: "When this bit is set on a dylib, the static linker does not need to examine dependent dylibs to see if any are re-exported"
+        doc: |
+          When this bit is set on a dylib, the static linker does not need to examine
+          dependent dylibs to see if any are re-exported
       pie:
         value: value & 0x200000 != 0
-        doc: "When this bit is set, the OS will load the main executable at a random address. Only used in MH_EXECUTE filetypes."
+        doc: |
+          When this bit is set, the OS will load the main executable at a random address.
+          Only used in MH_EXECUTE filetypes.
       dead_strippable_dylib:
         value: value & 0x400000 != 0
       has_tlv_descriptors:
@@ -208,6 +237,12 @@ types:
       app_extension_safe:
         value: value & 0x2000000 != 0
   mach_header:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     seq:
       - id: cputype
         type: u4
@@ -231,6 +266,12 @@ types:
         type: macho_flags(flags)
         -webide-parse-mode: eager
   load_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: '{type}: {body}'
     seq:
       - id: type
@@ -285,95 +326,64 @@ types:
             'load_command_type::build_version'           : build_version_command
             'load_command_type::segment'                 : segment_command
   vm_prot:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     seq:
-      - id: strip_read
-        type: b1
-        doc: Special marker to support execute-only protection.
-        -orig-id: VM_PROT_STRIP_READ
-      - id: is_mask
-        doc: Indicates to use value as a mask against the actual protection bits.
-        -orig-id: VM_PROT_IS_MASK
-        type: b1
-      - id: reserved0
-        type: b1
-        doc: Reserved (unused) bit.
-      - id: copy
-        type: b1
-        doc: Used when write permission can not be obtained, to mark the entry as COW.
-        -orig-id: VM_PROT_COPY
-      - id: no_change
-        type: b1
-        doc: Used only by memory_object_lock_request to indicate no change to page locks.
-        -orig-id: VM_PROT_NO_CHANGE
-      - id: execute
-        type: b1
-        doc: Execute permission.
-        -orig-id: VM_PROT_EXECUTE
-      - id: write
-        type: b1
-        doc: Write permission.
-        -orig-id: VM_PROT_WRITE
-      - id: read
-        type: b1
-        doc: Read permission.
-        -orig-id: VM_PROT_READ
-      - id: reserved1
-        type: b24
-        doc: Reserved (unused) bits.
-  uleb128:
-    -webide-representation: "{value:dec}"
-    seq:
-      - id: b1
-        type: u1
-      - id: b2
-        type: u1
-        if: "b1 & 0x80 != 0"
-      - id: b3
-        type: u1
-        if: "b2 & 0x80 != 0"
-      - id: b4
-        type: u1
-        if: "b3 & 0x80 != 0"
-      - id: b5
-        type: u1
-        if: "b4 & 0x80 != 0"
-      - id: b6
-        type: u1
-        if: "b5 & 0x80 != 0"
-      - id: b7
-        type: u1
-        if: "b6 & 0x80 != 0"
-      - id: b8
-        type: u1
-        if: "b7 & 0x80 != 0"
-      - id: b9
-        type: u1
-        if: "b8 & 0x80 != 0"
-      - id: b10
-        type: u1
-        if: "b9 & 0x80 != 0"
+      - id: value
+        type: u4
     instances:
-      value:
-        value: >
-          ((b1  % 128) <<  0) + ((b1 & 0x80 == 0) ? 0 :
-          ((b2  % 128) <<  7) + ((b2 & 0x80 == 0) ? 0 :
-          ((b3  % 128) << 14) + ((b3 & 0x80 == 0) ? 0 :
-          ((b4  % 128) << 21) + ((b4 & 0x80 == 0) ? 0 :
-          ((b5  % 128) << 28) + ((b5 & 0x80 == 0) ? 0 :
-          ((b6  % 128) << 35) + ((b6 & 0x80 == 0) ? 0 :
-          ((b7  % 128) << 42) + ((b7 & 0x80 == 0) ? 0 :
-          ((b8  % 128) << 49) + ((b8 & 0x80 == 0) ? 0 :
-          ((b9  % 128) << 56) + ((b8 & 0x80 == 0) ? 0 :
-          ((b10 % 128) << 63))))))))))
-        -webide-parse-mode: eager
+      strip_read:
+        -orig-id: VM_PROT_STRIP_READ
+        value: value & 0x80 != 0
+        doc: Special marker to support execute-only protection.
+      is_mask:
+        -orig-id: VM_PROT_IS_MASK
+        value: value & 0x40 != 0
+        doc: Indicates to use value as a mask against the actual protection bits.
+      reserved0:
+        value: value & 0x20 != 0
+        doc: Reserved (unused) bit.
+      copy:
+        -orig-id: VM_PROT_COPY
+        value: value & 0x10 != 0
+        doc: Used when write permission can not be obtained, to mark the entry as COW.
+      no_change:
+        -orig-id: VM_PROT_NO_CHANGE
+        value: value & 0x08 != 0
+        doc: Used only by memory_object_lock_request to indicate no change to page locks.
+      execute:
+        -orig-id: VM_PROT_EXECUTE
+        value: value & 0x04 != 0
+        doc: Execute permission.
+      write:
+        -orig-id: VM_PROT_WRITE
+        value: value & 0x02 != 0
+        doc: Write permission.
+      read:
+        -orig-id: VM_PROT_READ
+        value: value & 0x01 != 0
+        doc: Read permission.
+      reserved1:
+        value: value >> 8
+        doc: Reserved (unused) bits.
   segment_command_64:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: '{segname} ({initprot}): offs={fileoff}, size={filesize}'
     seq:
       - id: segname
-        type: str
         size: 16
+        type: str
         pad-right: 0
-        encoding: ascii
+        encoding: ASCII
       - id: vmaddr
         type: u8
       - id: vmsize
@@ -403,13 +413,13 @@ types:
             size: 16
             type: str
             pad-right: 0
-            encoding: ascii
+            encoding: ASCII
           - id: seg_name
             -orig-id: segname
             size: 16
             type: str
             pad-right: 0
-            encoding: ascii
+            encoding: ASCII
           - id: addr
             type: u8
           - id: size
@@ -474,11 +484,11 @@ types:
                 type: u4
               - id: body
                 size: length - 4
-                if: length > 0
                 type:
                   switch-on: id
                   cases:
                     0: cie
+                if: length > 0
             types:
               char_chain:
                 seq:
@@ -501,9 +511,9 @@ types:
                   #  type: u8
                   #  if: "'eh' in augmentation_string"
                   - id: code_alignment_factor
-                    type: uleb128
+                    type: vlq_base128_le
                   - id: data_alignment_factor
-                    type: uleb128
+                    type: vlq_base128_le
                   - id: return_address_register
                     type: u1
                   - id: augmentation
@@ -512,7 +522,7 @@ types:
               augmentation_entry:
                 seq:
                   - id: length
-                    type: uleb128
+                    type: vlq_base128_le
                   - id: fde_pointer_encoding
                     type: u1
                     if: _parent.aug_str.next.chr == 82
@@ -520,7 +530,7 @@ types:
             seq:
               - id: strings
                 type: strz
-                encoding: ascii
+                encoding: ASCII
                 repeat: eos
           pointer_list:
             seq:
@@ -544,6 +554,12 @@ types:
                 type: cf_string
                 repeat: eos
   dyld_info_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: 'rebase={rebase_off}, bind={bind_off}, weakBind={weak_bind_off}, lazyBind={lazy_bind_off}, export={export_off}'
     seq:
       - id: rebase_off
@@ -611,7 +627,7 @@ types:
               - id: opcode_and_immediate
                 type: u1
               - id: uleb
-                type: uleb128
+                type: vlq_base128_le
                 if: >
                   opcode == opcode::set_segment_and_offset_uleb or
                   opcode == opcode::add_address_uleb or
@@ -619,7 +635,7 @@ types:
                   opcode == opcode::do_rebase_add_address_uleb or
                   opcode == opcode::do_rebase_uleb_times_skipping_uleb
               - id: skip
-                type: uleb128
+                type: vlq_base128_le
                 if: "opcode == opcode::do_rebase_uleb_times_skipping_uleb"
             instances:
               opcode:
@@ -646,7 +662,7 @@ types:
           - id: opcode_and_immediate
             type: u1
           - id: uleb
-            type: uleb128
+            type: vlq_base128_le
             if: >
               opcode == bind_opcode::set_dylib_ordinal_uleb or
               opcode == bind_opcode::set_append_sleb or
@@ -655,12 +671,12 @@ types:
               opcode == bind_opcode::do_bind_add_address_uleb or
               opcode == bind_opcode::do_bind_uleb_times_skipping_uleb
           - id: skip
-            type: uleb128
+            type: vlq_base128_le
             if: "opcode == bind_opcode::do_bind_uleb_times_skipping_uleb"
           - id: symbol
             type: strz
+            encoding: ASCII
             if: "opcode == bind_opcode::set_symbol_trailing_flags_immediate"
-            encoding: ascii
         instances:
           opcode:
             value: "opcode_and_immediate & 0xf0"
@@ -678,24 +694,24 @@ types:
         -webide-representation: "{children_count} children, term_size={terminal_size.value}"
         seq:
           - id: terminal_size
-            type: uleb128
+            type: vlq_base128_le
+          - id: terminal
+            size: terminal_size.value
           - id: children_count
             type: u1
           - id: children
             type: child
             repeat: expr
             repeat-expr: children_count
-          - id: terminal
-            size: terminal_size.value
         types:
           child:
             -webide-representation: "{name}: {node_offset}"
             seq:
               - id: name
                 type: strz
-                encoding: ascii
+                encoding: ASCII
               - id: node_offset
-                type: uleb128
+                type: vlq_base128_le
             instances:
               value:
                 pos: node_offset.value
@@ -716,6 +732,12 @@ types:
         0xb0: do_bind_add_address_immediate_scaled
         0xc0: do_bind_uleb_times_skipping_uleb
   symtab_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: "symbols: {n_syms:dec}, strtab: {str_off}"
     seq:
       - id: sym_off
@@ -756,10 +778,10 @@ types:
             type: u4
           - id: items
             type: strz
-            encoding: utf-8
+            eos-error: false
+            encoding: UTF-8
             repeat: until
             repeat-until: _ == ""
-            eos-error: false
       nlist_64:
         -webide-representation: "un={un} type={type} sect={sect} desc={desc} value={value}"
         seq:
@@ -777,7 +799,7 @@ types:
           name:
             pos: _parent.str_off + un
             type: strz
-            encoding: utf-8
+            encoding: UTF-8
             if: un != 0
       nlist:
         -webide-representation: "un={un} type={type} sect={sect} desc={desc} value={value}"
@@ -796,9 +818,15 @@ types:
           name:
             pos: _parent.str_off + un
             type: strz
-            encoding: utf-8
+            encoding: UTF-8
             if: un != 0
   dysymtab_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     seq:
       - id: i_local_sym
         -orig-id: ilocalsym
@@ -862,6 +890,12 @@ types:
         repeat: expr
         repeat-expr: n_indirect_syms
   lc_str:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: '{value}'
     seq:
       - id: length
@@ -882,17 +916,32 @@ types:
       - id: uuid
         size: 16
   version:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: '{major:dec}.{minor:dec}'
     seq:
-      - id: p1
-        type: u1
-      - id: minor
-        type: u1
-      - id: major
-        type: u1
-      - id: release
-        type: u1
+      - id: value
+        type: u4
+    instances:
+      p1:
+        value: value & 0xff
+      minor:
+        value: (value >> 8) & 0xff
+      major:
+        value: (value >> 16) & 0xff
+      release:
+        value: (value >> 24) & 0xff
   encryption_info_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     seq:
       - id: cryptoff
         type: u4
@@ -904,6 +953,12 @@ types:
         type: u4
         if: _root.magic == magic_type::macho_be_x64 or _root.magic == magic_type::macho_le_x64
   twolevel_hints_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     seq:
       - id: offset
         type: u4
@@ -911,13 +966,19 @@ types:
         -orig-id: nhints
         type: u4
   linker_option_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     seq:
       - id: num_strings
         -orig-id: count
         type: u4
       - id: strings
         type: strz
-        encoding: utf-8
+        encoding: UTF-8
         repeat: expr
         repeat-expr: num_strings
   sub_command:
@@ -925,6 +986,12 @@ types:
       - id: name
         type: lc_str
   routines_command_64:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     seq:
       - id: init_address
         type: u8
@@ -933,6 +1000,12 @@ types:
       - id: reserved
         size: 48 # u8 * 6
   routines_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     seq:
       - id: init_address
         type: u4
@@ -948,11 +1021,23 @@ types:
       - id: sdk
         type: version
   source_version_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: 'v:{version:dec}'
     seq:
       - id: version
         type: u8
   entry_point_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: 'entry_off={entry_off}, stack_size={stack_size}'
     seq:
       - id: entry_off
@@ -962,6 +1047,12 @@ types:
         -orig-id: stacksize
         type: u8
   dylib_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: '{name}'
     seq:
       - id: name_offset
@@ -974,16 +1065,28 @@ types:
         type: u4
       - id: name
         type: strz
-        encoding: utf-8
+        encoding: UTF-8
   rpath_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: '{path}'
     seq:
       - id: path_offset
         type: u4
       - id: path
         type: strz
-        encoding: utf-8
+        encoding: UTF-8
   linkedit_data_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: 'offs={data_off}, size={data_size}'
     seq:
       - id: data_off
@@ -993,6 +1096,12 @@ types:
         -orig-id: datasize
         type: u4
   code_signature_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     -webide-representation: 'offs={data_off}, size={data_size}'
     seq:
       - id: data_off
@@ -1072,12 +1181,13 @@ types:
           ident:
             pos: ident_offset - 8
             type: strz
-            encoding: utf-8
+            encoding: UTF-8
             -webide-parse-mode: eager
           team_id:
             pos: team_id_offset - 8
             type: strz
-            encoding: utf-8
+            encoding: UTF-8
+            if: version >= 0x20200 and team_id_offset != 0
             -webide-parse-mode: eager
           hashes:
             pos: hash_offset - 8 - hash_size * n_special_slots
@@ -1304,6 +1414,12 @@ types:
             repeat: expr
             repeat-expr: count
   build_version_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     seq:
       - id: platform
         type: u4
@@ -1325,12 +1441,18 @@ types:
           - id: version
             type: u4
   segment_command:
+    meta:
+      endian:
+        switch-on: _root.is_big_endian
+        cases:
+          true: be
+          false: le
     seq:
       - id: segname
-        type: str
         size: 16
+        type: str
         pad-right: 0
-        encoding: ascii
+        encoding: ASCII
       - id: vmaddr
         type: u4
       - id: vmsize
@@ -1359,13 +1481,13 @@ types:
             size: 16
             type: str
             pad-right: 0
-            encoding: ascii
+            encoding: ASCII
           - id: seg_name
             -orig-id: segname
             size: 16
             type: str
             pad-right: 0
-            encoding: ascii
+            encoding: ASCII
           - id: addr
             type: u4
           - id: size

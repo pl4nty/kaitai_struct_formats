@@ -1,0 +1,16 @@
+# Real zisofs file data from libarchive's test suite, committed decoded because the source is
+# uuencoded .Z (unix compress), which 'extract' cannot undo. Expects: bsdtar 3.7.2 lists "file"
+# as 12345684 bytes; 7-Zip 'Size = 1590' for the raw zisofs member; 32 KiB blocks from the header
+# byte; ceil(12345684/32768) = 377 blocks.
+samples:
+  - fixture: archive/zisofs/file.zf
+    sha256: b7d096d56969106fcf5c3878b3dad493be71936725bafa362a55c1b6445e53d2
+    recipe: >-
+      Not generated, decoded: uudecode -o iso.Z test_read_format_iso_zisofs.iso.Z.uu (GNU sharutils
+      4.15.2); uncompress -c iso.Z > zisofs.iso (ncompress 5.0); 7z x zisofs.iso file (7-Zip 23.01),
+      which equals the 1590 bytes at ISO offset 0xd000.
+    expect:
+      header.uncompressed_size: 12345684
+      header.block_size_log2: 15
+      len(block_pointers): 378
+      block_pointers[377]: 1590

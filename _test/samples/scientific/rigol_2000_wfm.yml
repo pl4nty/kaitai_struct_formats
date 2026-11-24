@@ -1,0 +1,7 @@
+samples:
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DS2072A-5.wfm
+  sha256: 810f8ee46d09ef8e0ca325faafd8add0600ee66b3af2720113c02b6d1bdfb62b
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DS2072A-8.wfm
+  sha256: 7df5402d14db62e1fd4db81d31d29f8a74cb2e24e30b14454a7af14081adc7f6
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DS2000-A.wfm
+  sha256: 3d3df0e88d62024ca353bcb5810d9ae52427e457caf7b0bfcd0ae5f845d04499

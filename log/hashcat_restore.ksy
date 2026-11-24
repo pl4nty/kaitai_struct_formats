@@ -9,8 +9,8 @@ seq:
   - id: version
     type: u4
   - id: cwd
-    type: strz
     size: 256
+    type: strz
     encoding: UTF-8
   - id: dicts_pos
     type: u4
@@ -26,7 +26,7 @@ seq:
     size: 12
   - id: argv
     type: strz
-    encoding: UTF-8
     terminator: 0x0A
+    encoding: UTF-8
     repeat: expr
     repeat-expr: argc

@@ -1,0 +1,20 @@
+# compiled terminfo entries from the conda-forge ncurses 6.3 package; header counts from a hex read,
+# names line from infocmp
+samples:
+  - url: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.3-h27087fc_1.tar.bz2
+    sha256: b801e8cf4b2c9a30bce5616746c6c2a4e36427f045b46d9fc08a4ed40a9f7065
+    name: vt100
+    extract: { format: bz2, then: { format: tar, member: share/terminfo/v/vt100 } }
+    eof: true
+    expect:
+      len_names_section: 44
+      len_boolean_section: 38
+      num_numbers_section: 7
+      num_strings_offsets: 270
+      names_section.names: vt100|vt100-am|DEC vt100 (w/advanced video)
+  - url: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.3-h27087fc_1.tar.bz2
+    sha256: b801e8cf4b2c9a30bce5616746c6c2a4e36427f045b46d9fc08a4ed40a9f7065
+    name: dumb
+    extract: { format: bz2, then: { format: tar, member: share/terminfo/d/dumb } }
+    expect:
+      names_section.names: dumb|80-column dumb tty

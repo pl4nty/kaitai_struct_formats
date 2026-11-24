@@ -1,0 +1,18 @@
+# U3D library test scenes. Expects from a hex read against ECMA-363 9.4.1: block type 0x00443355,
+# data size 24, version 0.0, declaration size 36, file size (equal to the real file size) and
+# character encoding 106 (UTF-8).
+samples:
+  - url: https://raw.githubusercontent.com/ningfei/u3d/5c141d9f0d366357e2b7cf93af2eade284a334be/Samples/TestScenes/box.u3d
+    sha256: e226dd6c345a4ebe9c0f0e336d8a605bcf81efa86b33739b7007c1cc748d7bbe
+    eof: true
+    expect:
+      header_block.block_type: file_header
+      header_block.len_data: 24
+      header_block.data.len_declarations: 36
+      header_block.data.len_file: 1276
+      header_block.data.character_encoding: 106
+  - url: https://raw.githubusercontent.com/ningfei/u3d/5c141d9f0d366357e2b7cf93af2eade284a334be/Samples/TestScenes/SimpleShapesAnimation.u3d
+    sha256: 15b0274b068d290471bbe5b9b4884076351917f9b4046e33fe7b315308a00f28
+    eof: true
+    expect:
+      header_block.data.len_file: 234744

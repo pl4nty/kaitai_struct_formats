@@ -58,7 +58,7 @@ types:
     instances:
       body:
         pos: ofs_body
-        size: len_body
+        size: 'ofs_body + len_body > _root._io.size ? _root._io.size - ofs_body : len_body'
         type:
           switch-on: type
           cases:
@@ -71,8 +71,18 @@ types:
             'types::swidths': swidths
             'types::glyph_names': glyph_names
             # TODO: bdf_accelerators
+        doc: |
+          Table body. Writers such as bdftopcf record a larger size for
+          the last table (usually BDF accelerators) than the file holds,
+          so, like FreeType, the size is clamped to the end of the file.
     types:
       properties:
+        meta:
+          endian:
+            switch-on: _parent.format.is_big_endian
+            cases:
+              true: be
+              false: le
         doc: |
           Array of properties (key-value pairs), used to convey different X11
           settings of a font. Key is always an X font atom.
@@ -116,8 +126,7 @@ types:
               - id: is_string
                 -orig-id: isStringProp
                 type: u1
-                doc: |
-                  Designates if value is an integer (zero) or a string (non-zero).
+                doc: Designates if value is an integer (zero) or a string (non-zero).
               - id: value_or_ofs_value
                 type: u4
                 doc: |
@@ -130,8 +139,7 @@ types:
                 io: _parent.strings._io
                 pos: ofs_name
                 type: strz
-                doc: |
-                  Name of the property addressed in the strings buffer.
+                doc: Name of the property addressed in the strings buffer.
                 -webide-parse-mode: eager
               str_value:
                 io: _parent.strings._io
@@ -145,8 +153,7 @@ types:
               int_value:
                 value: value_or_ofs_value
                 if: is_string == 0
-                doc: |
-                  Value of the property, if this is an integer value.
+                doc: Value of the property, if this is an integer value.
                 -webide-parse-mode: eager
 
               # As of Kaitai Struct 0.9, `value` fails with:
@@ -158,8 +165,13 @@ types:
               #value:
               #  value: '(is_string != 0) ? str_value : int_value'
       bitmaps:
-        doc: |
-          Table containing uncompressed glyph bitmaps.
+        meta:
+          endian:
+            switch-on: _parent.format.is_big_endian
+            cases:
+              true: be
+              false: le
+        doc: Table containing uncompressed glyph bitmaps.
         doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#the-bitmap-table'
         seq:
           - id: format
@@ -176,6 +188,12 @@ types:
             repeat: expr
             repeat-expr: 4
       bdf_encodings:
+        meta:
+          endian:
+            switch-on: _parent.format.is_big_endian
+            cases:
+              true: be
+              false: le
         doc: |
           Table that allows mapping of character codes to glyphs present in the
           font. Supports 1-byte and 2-byte character codes.
@@ -205,8 +223,13 @@ types:
             repeat: expr
             repeat-expr: (max_char_or_byte2 - min_char_or_byte2 + 1) * (max_byte1 - min_byte1 + 1)
       swidths:
-        doc: |
-          Table containing scalable widths of characters.
+        meta:
+          endian:
+            switch-on: _parent.format.is_big_endian
+            cases:
+              true: be
+              false: le
+        doc: Table containing scalable widths of characters.
         doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#the-scalable-widths-table'
         -webide-representation: '{num_glyphs:dec} glyphs'
         seq:
@@ -222,8 +245,13 @@ types:
               The scalable width of a character is the width of the corresponding
               PostScript character in em-units (1/1000ths of an em).
       glyph_names:
-        doc: |
-          Table containing character names for every glyph.
+        meta:
+          endian:
+            switch-on: _parent.format.is_big_endian
+            cases:
+              true: be
+              false: le
+        doc: Table containing character names for every glyph.
         doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#the-glyph-names-table'
         -webide-representation: '{num_glyphs:dec} glyphs'
         seq:
@@ -235,16 +263,14 @@ types:
             type: string_ref
             repeat: expr
             repeat-expr: num_glyphs
-            doc: |
-              Glyph names are represented as string references in strings buffer.
+            doc: Glyph names are represented as string references in strings buffer.
           - id: len_strings
             -orig-id: string_size
             type: u4
           - id: strings
             size: len_strings
             type: bytes_with_io
-            doc: |
-              Strings buffer which contains all glyph names.
+            doc: Strings buffer which contains all glyph names.
         types:
           string_ref:
             -webide-representation: '{value}'
@@ -263,9 +289,9 @@ types:
       it as always little-endian and makes liberal use of bitmasking to parse
       various parts of it.
 
-      TODO: this format specification recognizes endianness and bit
-      order format bits, but it does not really takes any parsing
-      decisions based on them.
+      Table bodies use the byte order given by `is_big_endian`; the bit
+      order and padding bits are recognized, but no parsing decisions are
+      based on them.
     doc-ref: 'https://fontforge.org/docs/techref/pcf-format.html#file-header'
     seq:
       - id: padding1
@@ -280,8 +306,8 @@ types:
         type: b1
         doc: If set, then all integers in the table are treated as big-endian
       - id: glyph_pad_mask
-        type: b2
         -orig-id: PCF_GLYPH_PAD_MASK
+        type: b2
       - id: format
         type: u1
       - id: padding

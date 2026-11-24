@@ -1,0 +1,20 @@
+samples:
+  - url: https://raw.githubusercontent.com/ZetaTwo/gameboy-project/cba4d0e9b4c3ac9410196a546ffd2f05f3b5d090/gbm-parser/test/bg.gbm
+    sha256: 3e0d1c9bc170d3d0e876d2de47d3cf767a8f3c6b6087e36149f67a04e5325425
+    eof: true
+    expect:
+      magic: GBO1
+      len(objects): 12
+      objects[1].body.width: 20          # 20x18 tiles, Game Boy screen size
+      objects[1].body.height: 18
+      objects[1].body.tile_count: 128
+      objects[10].body.num_records: 360  # map_tile_data, 1080 bytes = 360 x 3-byte records
+  - url: https://raw.githubusercontent.com/ZetaTwo/gameboy-project/cba4d0e9b4c3ac9410196a546ffd2f05f3b5d090/gbm-parser/test/buttons_unpressed.gbm
+    sha256: f0987b3ebe97c134ce0b67e1c6b7fc68c18e96845123a55233b90860cae1213a
+    eof: true
+    expect:
+      magic: GBO1
+      len(objects): 11
+      objects[1].body.width: 11
+      objects[1].body.height: 13
+      objects[10].body.num_records: 143  # 429 bytes = 143 x 3-byte records

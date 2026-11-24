@@ -1,0 +1,18 @@
+# Console fonts from kbd data/consolefonts. Expects from file(1) ("PC Screen Font v2 data, 256
+# characters, Unicode directory, 8x16" / "v1 data, 512 characters, Unicode directory, 8x16").
+samples:
+  - url: https://raw.githubusercontent.com/legionus/kbd/df8ffcb14472ca0491e3d73b0cf64da5804ebffd/data/consolefonts/default8x16.psfu
+    sha256: 27c671292282a42ebb442100a37cc77712d5abebe087ac29b016e523e913fcfd
+    expect:
+      is_psf2: true
+      num_glyphs: 256
+      width: 8
+      height: 16
+      has_unicode_table: true
+  - url: https://raw.githubusercontent.com/legionus/kbd/df8ffcb14472ca0491e3d73b0cf64da5804ebffd/data/consolefonts/eurlatgr.psfu
+    sha256: ee94260e741f162890bb43f909ff9c1205ae653a8a1dbb3a58365ed2be96086d
+    expect:
+      is_psf2: false
+      num_glyphs: 512
+      height: 16
+      has_unicode_table: true

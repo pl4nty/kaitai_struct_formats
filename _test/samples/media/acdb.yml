@@ -1,0 +1,19 @@
+# Qualcomm ACDB audio calibration files from the Fairphone 3 (msm8953) vendor blobs mirrored by
+# TheMuppets for LineageOS. Expect values from an independent walk of the hex dump: 32-byte
+# QCMSNDDB header (database name, u4 sizes) then 8-byte-name / u4-length entries to the end.
+samples:
+  - url: https://raw.githubusercontent.com/TheMuppets/proprietary_vendor_fairphone_FP3/25ea54c1974f9e6a94a63545c630371f1c3960f7/proprietary/vendor/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
+    sha256: 45ab45c52c0411693774a67ed7067eb9692e06f635296400aee741c818a8ac30
+    eof: true
+    expect:
+      header.name: AVDB
+      header.filesize1: 83795
+      len(data.entries): 69
+      data.entries[0].name: MODIFIED
+  - url: https://raw.githubusercontent.com/TheMuppets/proprietary_vendor_fairphone_FP3/25ea54c1974f9e6a94a63545c630371f1c3960f7/proprietary/vendor/etc/acdbdata/MTP/MTP_Global_cal.acdb
+    sha256: 9d581325882f02b5a107f1fa017cdd1ff778356332bbbf9e81ea710eae48d910
+    eof: true
+    expect:
+      header.name: GCDB
+      header.filesize1: 7392
+      len(data.entries): 22

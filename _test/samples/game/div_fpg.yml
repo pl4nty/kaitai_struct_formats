@@ -1,0 +1,6 @@
+samples:
+- url: https://raw.githubusercontent.com/vii1/DIV/3692483012cbdf9c85b2f93f2ae6a35ac4dd193e/help/help.fpg
+  sha256: f4831ed361142a55a496b7bc1e4b1fb816858f3c05729b3030a0c0529e4f0ec7
+  xfail: 'spec bug: meta encoding is ASCII (the spec comment says cp850); map descriptions contain CP850 accented letters (0xa2 = o-acute)'
+- url: https://raw.githubusercontent.com/vii1/DIV/3692483012cbdf9c85b2f93f2ae6a35ac4dd193e/resource/fpg/tutorial/tutor0.fpg
+  sha256: dfee7f0fef371a604591d786cbb46a1b3ab57141b8ea53901f7865646e7fe9ca

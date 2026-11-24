@@ -1,0 +1,11 @@
+samples:
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DS1102E-A.wfm
+  sha256: e0da3e66445603df7d21b6e64b65d0363c539ab3ac90296ff64541c686fc8220
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DS1102E-D.wfm
+  sha256: d2c4c55ef1e408242f35924257bc2c4feab469b15a263c214d4dbdce3fd9aa2d
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DS1052E.wfm
+  sha256: d3526d45dce72d021c2fac04544d30c5047dcb269cb9b75aafbc3f65195895ff
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DS1000E-A.wfm
+  sha256: f441868d0055e9ba22d1ae6bdec07c255e7dd3ee0b1a3d4e2c35b6f5339e7752
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm/DS1102D-A.wfm
+  sha256: c06eff32b44e4f3805c461c3c30632142ce5df6026368a4bcf9dfc45d43fc591

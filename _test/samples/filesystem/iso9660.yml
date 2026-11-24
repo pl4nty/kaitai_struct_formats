@@ -1,0 +1,14 @@
+samples:
+  - url: https://raw.githubusercontent.com/kaitai-io/kaitai_struct_webide/c72e3f331fb923d8593b023763fae74eb35d6c9f/samples/sample1.iso
+    sha256: 523dc994094868e2ce65e0612b8ff9564d227c73eee4eecb3768c846278d1d97
+  - url: https://raw.githubusercontent.com/log2timeline/dfvfs/bf5d2fd3131646306507490d0389783d69b57676/test_data/iso9660.raw
+    sha256: 7b9d0c5fbd5a22458eeb2288f2076d65b3541c6e27df449f96e372270fce7720
+    deep: false  # "." records point back at their own directory, so forcing extent_as_dir never terminates
+    expect:
+      primary_vol_desc.vol_desc_primary.volume_id.rstrip(): CDROM
+      primary_vol_desc.vol_desc_primary.vol_space_size.le: 179
+  - url: https://raw.githubusercontent.com/corkami/pocs/6d277c83efdceb6916ee8c6efe6ff0639cc6193f/mini/iso.iso
+    sha256: 3216bfb9840a082b1c4ab9f125de789804bf866ed6d23dfa7d83592710f1f2a1
+    deep: false  # see above
+    expect:
+      primary_vol_desc.vol_desc_primary.vol_space_size.le: 175

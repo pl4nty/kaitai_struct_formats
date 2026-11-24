@@ -32,8 +32,8 @@ types:
       - id: fsid
         type: info
       - id: name
-        type: str
         size: 16
+        type: str
         encoding: ASCII
       - id: root
         type: inode
@@ -72,9 +72,9 @@ types:
       - id: namelen_offset
         type: u4
       - id: name
-        type: str
         size: namelen
-        encoding: utf-8
+        type: str
+        encoding: UTF-8
     instances:
       # -- [mode] --
       type:
@@ -103,15 +103,18 @@ types:
         io: _root._io
         pos: offset
         type: chunked_data_inode
+        if: type == file_type::reg_file
       as_symlink:
         io: _root._io
         pos: offset
         type: chunked_data_inode
+        if: type == file_type::symlink
       as_dir:
         io: _root._io
         pos: offset
         size: size
         type: dir_inode
+        if: type == file_type::dir
     enums:
       file_type:
         1: fifo
@@ -141,6 +144,6 @@ types:
   dir_inode:
     seq:
       - id: children
-        repeat: eos
         type: inode
+        repeat: eos
         if: _io.size > 0

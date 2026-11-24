@@ -1,0 +1,11 @@
+# open-vcdiff test delta. Expects from a hex read against RFC 3284 section 4.1: magic d6 c3 c4,
+# version byte 'S' (0x53, open-vcdiff's interleaved extension), header indicator 0.
+samples:
+  - url: https://raw.githubusercontent.com/google/open-vcdiff/868f459a8d815125c2457f8c74b12493853100f9/testdata/allocates_4gb.vcdiff
+    sha256: 77a202052626067a5d229cf7d6ae044f59cd5adbcec123b2a4f2830f1d06916e
+    eof: true
+    expect:
+      version: 0x53
+      header_indicator.secondary_compression: false
+      header_indicator.code_table: false
+      header_indicator.app_header: false

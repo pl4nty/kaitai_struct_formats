@@ -1,0 +1,17 @@
+samples:
+  - url: https://raw.githubusercontent.com/MHermit/samsung_pit_files/26fe277105b3ca3490d22a2c863dc9fd3775a53c/KS01LTE_EUR_16G_0719_hidden200M.pit
+    sha256: 362957206f169efb4bafa725e14ad356f40dd28b390de86bf8c32074dde629a1
+    eof: true
+    expect:   # manual hex read against Heimdall libpit layout
+      num_entries: 30
+      partitions[0].partition_name: APNHLOS
+      partitions[0].flash_filename: NON-HLOS.bin
+      partitions[1].num_blocks: 117632
+  - url: https://raw.githubusercontent.com/Yayo4242/Samsung-PIT-Archive/079c281dcd9221f86a5123af3a633094b8519036/SM-J110H_J1XLTE.pit
+    sha256: 400ea89af4bbb58731919bc27f8672c5caf02b34cc5cfce78fb2bec177693a06
+    eof: true
+    expect:   # manual hex read against Heimdall libpit layout
+      num_entries: 26
+      partitions[0].partition_name: BOOTLOADER
+      partitions[0].identifier: 80
+      partitions[2].flash_filename: md5.img

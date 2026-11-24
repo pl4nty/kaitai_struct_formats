@@ -1,6 +1,6 @@
 meta:
   id: icc_4
-  title: ICC profile, version 4
+  title: ICC profile, version 4 (and version 2)
   file-extension:
     - icc
     - icm
@@ -33,8 +33,8 @@ types:
         type: u4
         enum: data_colour_spaces
       - id: pcs
-        type: str
         size: 4
+        type: str
       - id: creation_date_time
         type: date_time_number
       - id: file_signature
@@ -47,8 +47,8 @@ types:
       - id: device_manufacturer
         type: device_manufacturer
       - id: device_model
-        type: str
         size: 4
+        type: str
       - id: device_attributes
         type: device_attributes
       - id: rendering_intent
@@ -66,7 +66,13 @@ types:
       version_field:
         seq:
           - id: major
-            contents: [0x04]
+            type: u1
+            valid:
+              any-of: [2, 4]
+            doc: |
+              Major version: 4 for ICC.1 v4 profiles, 2 for the older v2
+              profiles (still very common), whose header and tag table
+              layout is the same.
           - id: minor
             type: b4
           - id: bug_fix_level
@@ -566,6 +572,7 @@ types:
                 tag_signatures::green_trc: green_trc_tag
                 tag_signatures::luminance: luminance_tag
                 tag_signatures::measurement: measurement_tag
+                tag_signatures::media_black_point: media_black_point_tag
                 tag_signatures::media_white_point: media_white_point_tag
                 tag_signatures::named_color_2: named_color_2_tag
                 tag_signatures::output_response: output_response_tag
@@ -806,6 +813,7 @@ types:
                   switch-on: tag_type
                   cases:
                     tag_type_signatures::multi_localized_unicode_type: multi_localized_unicode_type
+                    tag_type_signatures::text_type: text_type
           device_mfg_desc_tag:
             seq:
               - id: tag_type
@@ -816,6 +824,7 @@ types:
                   switch-on: tag_type
                   cases:
                     tag_type_signatures::multi_localized_unicode_type: multi_localized_unicode_type
+                    tag_type_signatures::text_description_type: text_description_type
           device_model_desc_tag:
             seq:
               - id: tag_type
@@ -826,6 +835,7 @@ types:
                   switch-on: tag_type
                   cases:
                     tag_type_signatures::multi_localized_unicode_type: multi_localized_unicode_type
+                    tag_type_signatures::text_description_type: text_description_type
           d_to_b_0_tag:
             seq:
               - id: tag_type
@@ -930,6 +940,17 @@ types:
                   switch-on: tag_type
                   cases:
                     tag_type_signatures::measurement_type: measurement_type
+          media_black_point_tag:
+            doc: ICC v2 only; removed in v4.
+            seq:
+              - id: tag_type
+                type: u4
+                enum: tag_type_signatures
+              - id: tag_data
+                type:
+                  switch-on: tag_type
+                  cases:
+                    tag_type_signatures::xyz_type: xyz_type
           media_white_point_tag:
             seq:
               - id: tag_type
@@ -1017,6 +1038,7 @@ types:
                   switch-on: tag_type
                   cases:
                     tag_type_signatures::multi_localized_unicode_type: multi_localized_unicode_type
+                    tag_type_signatures::text_description_type: text_description_type
           profile_sequence_tag:
             seq:
               - id: tag_type
@@ -1088,6 +1110,7 @@ types:
                   switch-on: tag_type
                   cases:
                     tag_type_signatures::multi_localized_unicode_type: multi_localized_unicode_type
+                    tag_type_signatures::text_description_type: text_description_type
           viewing_conditions_tag:
             seq:
               - id: tag_type
@@ -1489,8 +1512,8 @@ types:
                   - id: device_manufacturer
                     type: device_manufacturer
                   - id: device_model
-                    type: str
                     size: 4
+                    type: str
                   - id: device_attributes
                     type: device_attributes
                   - id: device_technology
@@ -1546,15 +1569,46 @@ types:
               - id: reserved
                 contents: [0x00, 0x00, 0x00, 0x00]
               - id: signature
-                type: str
                 size: 4
+                type: str
+          text_description_type:
+            doc: |
+              ICC v2 only (replaced by multiLocalizedUnicodeType in v4): an
+              ASCII description with optional Unicode and Macintosh
+              ScriptCode versions.
+            doc-ref: https://www.color.org/ICC_Minor_Revision_for_Web.pdf - ICC.1:2001-04, section 6.5.17
+            seq:
+              - id: reserved
+                contents: [0x00, 0x00, 0x00, 0x00]
+              - id: len_ascii
+                type: u4
+                doc: Length of the ASCII description, including the terminating NUL
+              - id: ascii_description
+                size: len_ascii
+                type: strz
+              - id: unicode_language_code
+                type: u4
+              - id: len_unicode
+                type: u4
+                doc: Length of the Unicode description in characters, including the terminating NUL
+              - id: unicode_description
+                size: len_unicode * 2
+                type: str
+                encoding: UTF-16BE
+              - id: script_code_code
+                type: u2
+              - id: len_script_code
+                type: u1
+              - id: script_code_description
+                size: 67
+                doc: Macintosh description; only the first `len_script_code` bytes are used
           text_type:
             seq:
               - id: reserved
                 contents: [0x00, 0x00, 0x00, 0x00]
               - id: value
-                type: strz
                 size-eos: true
+                type: strz
           u_16_fixed_16_array_type:
             seq:
               - id: reserved
@@ -1658,6 +1712,20 @@ types:
             0x74656368: technology #tech
             0x76756564: viewing_cond_desc #vued
             0x76696577: viewing_conditions #view
+            # Tags of ICC.1:2001-04 (v2) that are not in v4
+            0x626B7074: media_black_point #bkpt
+            0x62666420: ucr_bg #bfd
+            0x63726469: crd_info #crdi
+            0x64657673: device_settings #devs
+            0x6E636F6C: named_color #ncol
+            0x70736430: ps2_crd_0 #psd0
+            0x70736431: ps2_crd_1 #psd1
+            0x70736432: ps2_crd_2 #psd2
+            0x70736433: ps2_crd_3 #psd3
+            0x70733273: ps2_csa #ps2s
+            0x70733269: ps2_rendering_intent #ps2i
+            0x73637264: screening_desc #scrd
+            0x7363726E: screening #scrn
           tag_type_signatures:
             0x6368726D: chromaticity_type #chrm
             0x636C726F: colorant_order_type #clro
@@ -1687,6 +1755,13 @@ types:
             0x75693038: u_int_8_array_type #ui08
             0x76696577: viewing_conditions_type #view
             0x58595A20: xyz_type #XYZ
+            # Tag types of ICC.1:2001-04 (v2) that are not in v4
+            0x63726469: crd_info_type #crdi
+            0x64657673: device_settings_type #devs
+            0x6E636F6C: named_color_type #ncol
+            0x7363726E: screening_type #scrn
+            0x64657363: text_description_type #desc
+            0x62666420: ucr_bg_type #bfd
           multi_process_elements_types:
             0x6D666C74: curve_set_element_table_type #cvst
             0x63757266: one_dimensional_curves_type #curf

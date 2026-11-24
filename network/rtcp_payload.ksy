@@ -62,7 +62,7 @@ types:
         repeat-expr: _parent.subtype
     instances:
       ntp:
-        value: (ntp_msw << 32) & ntp_lsw
+        value: (ntp_msw.as<u8> * 0x1_0000_0000 + ntp_lsw).as<u8>
 
   rr_packet:
     seq:
@@ -78,7 +78,7 @@ types:
       - id: ssrc_source
         type: u4
       - id: lost_val
-        type: u1
+        type: u4
       - id: highest_seq_num_received
         type: u4
       - id: interarrival_jitter
@@ -91,7 +91,7 @@ types:
       fraction_lost:
         value: lost_val >> 24
       cumulative_packets_lost:
-        value: lost_val & 0x00ffffff
+        value: '(lost_val & 0x00800000) != 0 ? (lost_val & 0x00ffffff).as<s4> - 0x01000000 : (lost_val & 0x00ffffff).as<s4>'
 
   sdes_packet:
     seq:
@@ -130,11 +130,11 @@ types:
       - id: ssrc_media_source
         type: u4
       - id: fci_block
+        size-eos: true
         type:
           switch-on: fmt
           cases:
             'rtpfb_subtype::transport_feedback': rtpfb_transport_feedback_packet
-        size-eos: true
     instances:
       fmt:
         value: _parent.subtype
@@ -187,11 +187,11 @@ types:
       - id: ssrc_media_source
         type: u4
       - id: fci_block
+        size-eos: true
         type:
           switch-on: fmt
           cases:
             'psfb_subtype::afb': psfb_afb_packet
-        size-eos: true
     instances:
       fmt:
         value: _parent.subtype
@@ -202,11 +202,11 @@ types:
       - id: uid
         type: u4
       - id: contents
+        size-eos: true
         type:
           switch-on: uid
           cases:
             0x52454d42: psfb_afb_remb_packet
-        size-eos: true
 
   psfb_afb_remb_packet:
     seq:

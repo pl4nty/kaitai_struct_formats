@@ -1,0 +1,22 @@
+# expect values from a hand walk of the tag/u4be-length blocks (qtranslator.cpp do_load)
+samples:
+  - url: https://raw.githubusercontent.com/qt/qtbase/ffd56e63338a76963c11d2bab003aeb532b1fd29/tests/auto/corelib/kernel/qtranslator/hellotr_la.qm
+    sha256: 51fe2144691cc959d07584eae212ade047cbe227ed4e945e09cf860a1bf4fe57
+    eof: true
+    expect:
+      len(tags): 4
+      tags[0].tag: language
+      tags[0].data: de
+      tags[2].len_data: 181
+  - url: https://raw.githubusercontent.com/qt/qtbase/ffd56e63338a76963c11d2bab003aeb532b1fd29/tests/auto/corelib/kernel/qtranslator/dependencies_la.qm
+    sha256: c3a99701545393e8f968360b4630198393bcbc4a82ca05359950e75cbfa23e31
+    eof: true
+    expect:
+      len(tags): 4
+      tags[0].tag: dependencies
+  - url: https://raw.githubusercontent.com/qt/qtbase/ffd56e63338a76963c11d2bab003aeb532b1fd29/tests/auto/gui/kernel/qkeysequence/keys_de.qm
+    sha256: efd39b0a8c64c733c7e2d5f5589824456c93fa4f60291e8c61e1f9987088caff
+    eof: true
+    expect:
+      len(tags): 3
+      tags[1].tag: messages

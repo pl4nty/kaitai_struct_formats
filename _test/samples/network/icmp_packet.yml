@@ -1,0 +1,7 @@
+samples:
+  - url: https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/3541bd5d38635e208d7dd47cc6ea2af00dd7ef0c/tests/icmp-rfc5837.pcap
+    sha256: 72c26dd766f8e0f16c1fa2a13f6394e3225d761ca494901c4c85199b7d6cfcf7
+    name: icmp-rfc5837-time-exceeded
+    extract: {format: slice, offset: 64, size: 220}
+    expect:
+      icmp_type: 11

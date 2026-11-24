@@ -9,6 +9,7 @@ meta:
   imports:
     - /network/ipv4_packet
     - /network/ipv6_packet
+    - /network/arp_packet
 doc: |
   Ethernet frame is a OSI data link layer (layer 2) protocol data unit
   for Ethernet networks. In practice, many other networks and/or
@@ -21,17 +22,24 @@ seq:
   - id: src_mac
     size: 6
     doc: Source MAC address
-  - id: ether_type_1
+  - id: ether_type_or_tpid
     type: u2be
     enum: ether_type_enum
-    doc: Either ether type or TPID if it is a IEEE 802.1Q frame
-  - id: tci
+    doc: Either ether type or TPID if it is a IEEE 802.1Q frame or IEEE 802.1AD
+  - id: service_tci
     type: tag_control_info
-    if: ether_type_1 == ether_type_enum::ieee_802_1q_tpid
-  - id: ether_type_2
+    if: ether_type_or_tpid == ether_type_enum::ieee_802_1ad_tpid
+  - id: tpid
     type: u2be
     enum: ether_type_enum
-    if: ether_type_1 == ether_type_enum::ieee_802_1q_tpid
+    if: ether_type_or_tpid == ether_type_enum::ieee_802_1ad_tpid
+  - id: customer_tci
+    type: tag_control_info
+    if: ether_type_or_tpid == ether_type_enum::ieee_802_1ad_tpid or ether_type_or_tpid == ether_type_enum::ieee_802_1q_tpid
+  - id: ether_type_after_q_tag
+    type: u2be
+    enum: ether_type_enum
+    if: ether_type_or_tpid == ether_type_enum::ieee_802_1ad_tpid or ether_type_or_tpid == ether_type_enum::ieee_802_1q_tpid
   - id: body
     size-eos: true
     type:
@@ -39,14 +47,17 @@ seq:
       cases:
         'ether_type_enum::ipv4': ipv4_packet
         'ether_type_enum::ipv6': ipv6_packet
+        'ether_type_enum::arp': arp_packet
 instances:
   ether_type:
     value: |
-      (ether_type_1 == ether_type_enum::ieee_802_1q_tpid) ? ether_type_2 : ether_type_1
+      (ether_type_or_tpid == ether_type_enum::ieee_802_1ad_tpid or ether_type_or_tpid == ether_type_enum::ieee_802_1q_tpid) ? ether_type_after_q_tag : ether_type_or_tpid
     doc: |
-      Ether type can be specified in several places in the frame. If
-      first location bears special marker (0x8100), then it is not the
-      real ether frame yet, an additional payload (`tci`) is expected
+      Ether type can be specified in several places in the frame.
+      If first two bytes after the mac address bears special marker (0x8100 or
+      0x88a8),
+      then it is not the real ether frame yet,
+      an additional payload ('customer tci' and/or 'service tci') is expected
       and real ether type is upcoming next.
 types:
   tag_control_info:
@@ -80,6 +91,8 @@ enums:
     0x0804: chaosnet
     0x0805: x_25_level_3
     0x0806: arp
+    0x08ff: ax_25
     0x8100: ieee_802_1q_tpid
     0x86dd: ipv6
-    #0x88a8: ieee_802_1ad_tpid
+    0x88a8: ieee_802_1ad_tpid
+    0x88F7: ptp

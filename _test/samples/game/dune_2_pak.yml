@@ -1,0 +1,14 @@
+samples:
+  - url: https://archive.org/download/Dune_II_Westwood_StudiosEng/DUNE2.iso/VIRGIN%2FDUNE2%2FMERC.PAK
+    name: MERC.PAK
+    sha256: 772642c12a97d536689bc77e07c9fd1dca7c0ee33877ab59fdee9cabedd3ea0a
+    expect:
+      len(dir.files): 4
+      dir.files[0].file_name: MATRE.VOC
+      dir.files[2].ofs: 29299
+  - url: https://archive.org/download/Dune_II_Westwood_StudiosEng/DUNE2.iso/VIRGIN%2FDUNE2%2FENGLISH.PAK
+    name: ENGLISH.PAK
+    sha256: 576a7bea7826a0c47605c9b3c3abc7e24c74cc834c1b74fd997b2783a011cb74
+    expect:
+      len(dir.files): 19
+      dir.files[0].file_name: TEXTA.ENG

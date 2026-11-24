@@ -1,0 +1,3 @@
+samples:
+  - url: https://raw.githubusercontent.com/GPSBabel/gpsbabel/1d6a0626bc003cfb2519a0f9b864bf944db34ffe/reference/bushnell_trl.trl
+    sha256: abd5c24e79bd9bcb02c35b8c87211c4992360a567a8b346caab66f43f9aedb21

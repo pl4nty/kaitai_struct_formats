@@ -267,14 +267,53 @@ types:
         value: descriptor_as_info.value
   utf8_cp_info:
     -orig-id: CONSTANT_Utf8_info
+    doc: |
+      Class files store strings in "modified UTF-8": U+0000 is encoded as
+      C0 80, and supplementary characters as two 3-byte encoded UTF-16
+      surrogates (ED A0..BF xx ED B0..BF xx). Such strings are not valid
+      UTF-8, so `value` is only provided when the raw bytes contain neither
+      form; `value_raw` always holds the bytes.
     doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.7
     seq:
       - id: str_len
         type: u2
-      - id: value
-        type: str
+      - id: data
         size: str_len
-        encoding: UTF-8
+        type: modified_utf8_scan
+    instances:
+      value_raw:
+        value: data.raw
+      value:
+        value: data.raw.to_s("UTF-8")
+        if: not data.has_modified_forms
+    types:
+      modified_utf8_scan:
+        seq:
+          - id: raw
+            size-eos: true
+        instances:
+          units:
+            pos: 0
+            type: unit(_io.size - _io.pos >= 2)
+            repeat: until
+            repeat-until: _.is_modified_form or _io.eof
+            if: raw.size > 0
+          has_modified_forms:
+            value: raw.size > 0 and units.last.is_modified_form
+        types:
+          unit:
+            params:
+              - id: has_next
+                type: bool
+            seq:
+              - id: b
+                type: u1
+              - id: b2
+                type: u1
+                if: b == 0xed and has_next
+            instances:
+              is_modified_form:
+                value: b == 0xc0 or (b == 0xed and has_next and b2 >= 0xa0)
   method_handle_cp_info:
     -orig-id: CONSTANT_MethodHandle_info
     doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4.8
@@ -325,8 +364,7 @@ types:
     -orig-id:
       - CONSTANT_Module_info
       - CONSTANT_Package_info
-    doc: |
-      Project Jigsaw modules introduced in Java 9
+    doc: Project Jigsaw modules introduced in Java 9
     doc-ref:
       - https://docs.oracle.com/javase/specs/jvms/se19/html/jvms-3.html#jvms-3.16
       - https://docs.oracle.com/javase/specs/jvms/se19/html/jvms-4.html#jvms-4.4.11
@@ -376,6 +414,8 @@ types:
             '"Exceptions"': attr_body_exceptions # 4.7.5
             '"SourceFile"': attr_body_source_file # 4.7.10
             '"LineNumberTable"': attr_body_line_number_table # 4.7.12
+            '"LocalVariableTable"': attr_body_local_variable_table # 4.7.13
+            '"LocalVariableTypeTable"': attr_body_local_variable_type_table # 4.7.14
     instances:
       name_as_str:
         value: _root.constant_pool[name_index - 1].cp_info.as<utf8_cp_info>.value
@@ -473,6 +513,68 @@ types:
                 type: u2
               - id: line_number
                 type: u2
+      attr_body_local_variable_table:
+        doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.13
+        seq:
+          - id: local_variable_table_length
+            type: u2
+          - id: local_variable_table
+            type: local_variable_table_entry
+            repeat: expr
+            repeat-expr: local_variable_table_length
+        types:
+          local_variable_table_entry:
+            seq:
+              - id: start_pc
+                type: u2
+                doc: Start of the code range where the variable has a value
+              - id: length
+                type: u2
+                doc: Length of that code range
+              - id: name_index
+                type: u2
+              - id: descriptor_index
+                type: u2
+                doc: Field descriptor of the variable's type, index in constant pool
+              - id: index
+                type: u2
+                doc: Index of the variable in the local variable array of the frame
+            instances:
+              name_as_str:
+                value: _root.constant_pool[name_index - 1].cp_info.as<utf8_cp_info>.value
+              descriptor_as_str:
+                value: _root.constant_pool[descriptor_index - 1].cp_info.as<utf8_cp_info>.value
+      attr_body_local_variable_type_table:
+        doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.14
+        seq:
+          - id: local_variable_type_table_length
+            type: u2
+          - id: local_variable_type_table
+            type: local_variable_type_table_entry
+            repeat: expr
+            repeat-expr: local_variable_type_table_length
+        types:
+          local_variable_type_table_entry:
+            seq:
+              - id: start_pc
+                type: u2
+                doc: Start of the code range where the variable has a value
+              - id: length
+                type: u2
+                doc: Length of that code range
+              - id: name_index
+                type: u2
+              - id: signature_index
+                type: u2
+                doc: Field signature of the variable's generic type, index in constant pool
+              - id: index
+                type: u2
+                doc: Index of the variable in the local variable array of the frame
+            instances:
+              name_as_str:
+                value: _root.constant_pool[name_index - 1].cp_info.as<utf8_cp_info>.value
+              signature_as_str:
+                value: _root.constant_pool[signature_index - 1].cp_info.as<utf8_cp_info>.value
   method_info:
     -orig-id: method_info
     doc-ref: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.6

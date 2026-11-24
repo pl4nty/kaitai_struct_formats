@@ -1,0 +1,3 @@
+samples:
+- url: https://raw.githubusercontent.com/RetroReversing/retroReversing/2a38ef67731f2952f36c74207225dbee638e1ef0/public/tools/ILBMViewer/CHEF.LBM
+  sha256: bdfc71a9b380c796a0cda88a8d84d75f6e64ff0f8729963856bab70fc975578f

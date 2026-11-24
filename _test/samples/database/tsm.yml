@@ -1,0 +1,6 @@
+samples:
+  - url: https://raw.githubusercontent.com/tibordp/fillyfoal/a82fb96e1a120623bca981a0d2f7cea382af76f4/tests/fixtures/synthetic/influxdb-tsm/000000001-000000001.tsm
+    sha256: 35d98ba708d2e293ed15478a01957927da8b2a80918b7dec69a44f1b7cb73f9e
+    expect:
+      header.version: 1
+      index.offset: 0x2d        # "index at 0x2d", footer at 0x41

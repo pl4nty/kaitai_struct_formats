@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/trc/trace1.000
+  sha256: 563898513d4af407cd26dea24b945c0dec8fdcc005c9dc4d000f4e9c583b126b
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/trc/trace2.000
+  sha256: 8a769eac642e2aeca8e1c7206d400f5c5f26e427ca8e182de9d75af7225fd93e

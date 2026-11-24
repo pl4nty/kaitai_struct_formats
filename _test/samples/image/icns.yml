@@ -1,0 +1,5 @@
+samples:
+  - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/pillow.icns
+    sha256: 86b320323d6064ff15606637229236eddd4f547b5a1e854494e2a6ba83e6914c
+  - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/pillow2.icns
+    sha256: 0da8b3b6f0dd348d07ad874a92dab3aa1399455cbcb2260cf9d6c9eb1ca84ce2

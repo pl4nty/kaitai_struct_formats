@@ -1,0 +1,49 @@
+# Imported from https://github.com/SevenHearts/portship.js/blob/124d26389d1f7c0bd621894f1d44a9c75c8c9c2e/src/format/HIM.ksy
+meta:
+  id: rose_him
+  title: ROSE Online heightmap (.him)
+  file-extension: him
+  license: LicenseRef-All-Rights-Reserved
+  endian: le
+seq:
+  - id: width
+    type: u4
+  - id: height
+    type: u4
+  - id: grid_count
+    type: u4
+  - id: grid_size
+    type: f4
+  - id: heights
+    type: f4
+    repeat: expr
+    repeat-expr: width * height
+  - id: collision_type # currently only known Enum value is "quad"
+    type: bstr
+  - id: quadentry_count
+    type: u4
+  - id: quadentries
+    type: minmax
+    repeat: expr
+    repeat-expr: quadentry_count
+  - id: quadtree_count
+    type: u4
+  - id: quadtrees
+    type: minmax
+    repeat: expr
+    repeat-expr: quadtree_count
+types:
+  bstr:
+    seq:
+      - id: len
+        type: u1
+      - id: data
+        size: len
+        type: str
+        encoding: ASCII
+  minmax:
+    seq:
+      - id: min_z
+        type: f4
+      - id: max_z
+        type: f4

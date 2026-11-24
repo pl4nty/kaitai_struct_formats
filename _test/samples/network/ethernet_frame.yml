@@ -1,0 +1,7 @@
+samples:
+  - url: https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/3541bd5d38635e208d7dd47cc6ea2af00dd7ef0c/tests/dns_udp.pcap
+    sha256: dcb83420e7512dd4085e790d40a040bc5749decb5e551fb807da5689b990fa65
+    name: dns_udp-frame0
+    extract: {format: slice, offset: 40, size: 98}
+    expect:
+      ether_type: 0x0800

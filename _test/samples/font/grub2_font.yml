@@ -1,0 +1,12 @@
+samples:
+  - url: https://sembiance.com/fileFormatSamples/font/grub2PFF2/font.pf2
+    sha256: 279e0c6271a1950a1d44a312ffcb09749c2dc6ec89f4d50ecf7a1892e11c8dae
+    expect:
+      sections[0].body.font_name: Unifont Regular 16
+      sections[4].body.font_point_size: 16
+      len(sections[9].body.characters): 159
+  - url: https://sembiance.com/fileFormatSamples/font/grub2PFF2/euro.pf2
+    sha256: 2abf88eb82f3ce987d59d270412c94c214f4618f5237b45ce530eb377d4aed7e
+    expect:
+      sections[0].body.font_name: Unknown Regular 16
+      len(sections[9].body.characters): 1790

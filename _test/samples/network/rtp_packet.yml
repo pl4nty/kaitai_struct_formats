@@ -1,0 +1,17 @@
+samples:
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/rtp_events_coverage.pcap.gz
+    sha256: 52f9f7372665f838dd02199d07dd3a98c3a2de4e31ca428cf8127068294e65af
+    name: rtp_events-pcmu
+    extract: {format: gzip, then: {format: slice, offset: 1319, size: 172}}
+    expect:
+      version: 2
+      payload_type: 0
+      sequence_number: 100
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/rtp_events_coverage.pcap.gz
+    sha256: 52f9f7372665f838dd02199d07dd3a98c3a2de4e31ca428cf8127068294e65af
+    name: rtp_events-telephone-event
+    extract: {format: gzip, then: {format: slice, offset: 1549, size: 16}}
+    eof: true
+    expect:
+      payload_type: 101
+      marker: true

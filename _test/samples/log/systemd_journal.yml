@@ -1,0 +1,9 @@
+samples:
+  - url: https://raw.githubusercontent.com/log2timeline/plaso/70faaf25e3ca2e9b602cf3920f8e34fd0e469ea8/test_data/systemd/journal/system.journal
+    sha256: 067a624d7d46c6c1786f4244a6913147ac21d0fb0d51c9be6be004fff0629b8e
+    # Hash-table instances re-parse linked objects on every access, so a deep
+    # walk expands the object graph into a tree and exhausts memory.
+    deep: false
+    expect:
+      header.signature: LPKSHHRH
+      len(objects): 8887

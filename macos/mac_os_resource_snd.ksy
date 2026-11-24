@@ -9,8 +9,10 @@ meta:
   endian: be
 doc: |
   Sound resources were introduced in Classic MacOS with the Sound Manager program.
-  They can contain sound commands to generate sounds with given frequencies as well as sampled sound data.
-  They are mostly found in resource forks, but can occasionally appear standalone or embedded in other files.
+  They can contain sound commands to generate sounds with given frequencies as
+  well as sampled sound data.
+  They are mostly found in resource forks, but can occasionally appear standalone
+  or embedded in other files.
 doc-ref: "https://developer.apple.com/library/archive/documentation/mac/pdf/Sound/Sound_Manager.pdf"
 seq:
   - id: format
@@ -124,13 +126,13 @@ types:
       - id: num_samples
         -orig-id: length
         type: u4
-        doc: number of samples
         if: sound_header_type == sound_header_type::standard
+        doc: number of samples
       - id: num_channels
         -orig-id: numChannels
         type: u4
-        doc: number of channels in sample
         if: sound_header_type == sound_header_type::extended or sound_header_type == sound_header_type::compressed
+        doc: number of channels in sample
       - id: sample_rate
         -orig-id: sampleRate
         type: unsigned_fixed_point
@@ -148,9 +150,9 @@ types:
         enum: sound_header_type
         doc: sample's encoding option
       - id: midi_note
+        -orig-id: baseFrequency
         type: u1
         doc: base frequency of sample, expressed as MIDI note values, 60 is middle C
-        -orig-id: baseFrequency
       - id: extended_or_compressed
         type: extended_or_compressed
         if: sound_header_type == sound_header_type::extended or sound_header_type == sound_header_type::compressed
@@ -160,8 +162,8 @@ types:
           sound_header_type == sound_header_type::standard ? num_samples :
           sound_header_type == sound_header_type::extended ? extended_or_compressed.num_frames * num_channels * extended_or_compressed.bits_per_sample / 8 :
           _io.size - _io.pos
-        doc: sampled-sound data
         if: sample_ptr == 0
+        doc: sampled-sound data
     instances:
       start_ofs:
         value: _io.pos
@@ -202,8 +204,8 @@ types:
       - id: reserved
         -orig-id: futureUse1, futureUse2, futureUse3, futureUse4
         size: 14
-        doc: reserved
         if: _parent.sound_header_type == sound_header_type::extended
+        doc: reserved
   extended:
     seq:
       - id: instrument_chunk_ptr
@@ -247,7 +249,8 @@ types:
           Latest Sound Manager documentation specifies this field as:
           This field is unused. You should set it to 0.
           Inside Macintosh (Volume VI, 1991) specifies it as:
-          Indicates the resource ID number of the 'snth' resource that was used to compress the packets contained in the compressed sound header.
+          Indicates the resource ID number of the 'snth' resource that was used to
+          compress the packets contained in the compressed sound header.
         doc-ref: "https://vintageapple.org/inside_o/pdf/Inside_Macintosh_Volume_VI_1991.pdf Page 22-49, absolute page number 1169 in the PDF"
     instances:
       compression_type:

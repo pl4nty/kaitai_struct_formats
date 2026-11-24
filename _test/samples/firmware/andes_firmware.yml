@@ -1,0 +1,20 @@
+# MT76 firmware images from linux-firmware (pinned commit); header fields from a struct.unpack of the 32-byte
+# header per the Linux mt76 driver (struct mt76x02_fw_header); 32 + ilm_len + dlm_len equals the file size
+samples:
+  - url: https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/mediatek/mt7662.bin?id=9a364ea424155016663bfddcb37a64af4a1fb927
+    sha256: f7e52492f58088cae50e51a54cca68e4abc5b74f7d0b6b731dbb4c04465a94b6
+    name: mt7662.bin
+    eof: true
+    expect:
+      image_header.ilm_len: 64448
+      image_header.dlm_len: 17428
+      image_header.build_time: '201507311614____'
+  - url: https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/mediatek/mt7610u.bin?id=9a364ea424155016663bfddcb37a64af4a1fb927
+    sha256: 5a4268e9021bb587426ba624b425f1e660bfc82cd63b36ad3ce6fb9ce6751760
+    name: mt7610u.bin
+    eof: true
+    expect:
+      image_header.ilm_len: 68780
+      image_header.dlm_len: 11476
+      image_header.fw_ver: 0x7640
+      image_header.build_ver: 0x100

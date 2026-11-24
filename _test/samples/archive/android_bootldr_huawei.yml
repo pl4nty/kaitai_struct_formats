@@ -1,0 +1,17 @@
+# Nexus 6P "angler" bootloader, served by archive.org as a single member of the factory image
+# ZIP. Values read by hand per meta_format.h: meta header v1.0, image version "angler-03.78"
+# (also in the file name), image header 0x500 bytes = 16 slots of 80 bytes; first entry "partition".
+samples:
+  - url: https://archive.org/download/angler-opp6.171019.012-factory-1576678d/angler-opp6.171019.012-factory-1576678d.zip/angler-opp6.171019.012%2Fbootloader-angler-angler-03.78.img
+    sha256: bebd2a0fd08c80f3d4f9b3260b8b4013daf1eb17808a6b6e7d1e5ddbe0081152
+    name: bootloader-angler-angler-03.78.img
+    expect:
+      meta_header.version.major: 1
+      meta_header.version.minor: 0
+      meta_header.image_version: angler-03.78
+      meta_header.len_meta_header: 76
+      meta_header.len_image_header: 1280
+      len(image_header.entries): 16
+      image_header.entries[0].name: partition
+      image_header.entries[9].name: aboot
+      image_header.entries[9].len_body: 1782704

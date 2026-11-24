@@ -366,9 +366,15 @@ types:
   record_type_string:
     seq:
       - id: values
-        type: strz
+        terminator: 0
         repeat: expr
         repeat-expr: 1
+        doc: |
+          Raw NUL-terminated string bytes. If the header has an
+          `encoding` tag (added in rpm 4.13) with value "utf-8", they are
+          UTF-8, but older packages may contain strings in other
+          encodings, typically ISO-8859-1 in changelogs and descriptions,
+          so they are not decoded here.
   record_type_bin:
     params:
       - id: len_value
@@ -384,9 +390,15 @@ types:
         type: u4
     seq:
       - id: values
-        type: strz
+        terminator: 0
         repeat: expr
         repeat-expr: num_values
+        doc: |
+          Raw NUL-terminated string bytes. If the header has an
+          `encoding` tag (added in rpm 4.13) with value "utf-8", they are
+          UTF-8, but older packages may contain strings in other
+          encodings, typically ISO-8859-1 in changelogs and descriptions,
+          so they are not decoded here.
   header_record:
     seq:
       - id: magic
@@ -1173,7 +1185,9 @@ enums:
     1144:
       id: file_depends_num
       -orig-id: RPMTAG_FILEDEPENDSN
-      doc: Number of file dependencies in `::depends_dict`, starting from `::file_depends_idx`
+      doc: |
+        Number of file dependencies in `::depends_dict`, starting from
+        `::file_depends_idx`
     1145:
       id: depends_dict
       -orig-id: RPMTAG_DEPENDSDICT

@@ -1,0 +1,178 @@
+meta:
+  id: asterix_cat_034
+  title: ASTERIX category 034
+  license: GPL-3.0-only
+  ks-version: 0.9
+  imports:
+    - asterix_field_spec
+    - asterix_explicit
+    - asterix_cat_034_catalog
+  endian: be
+
+doc: |
+  Implementation of ASTERIX format.
+
+  From Eurocontrol Asterix web page at
+  https://www.eurocontrol.int/asterix
+
+  Category 034 definition file
+
+  ASTERIX Part 2b Category 34
+  Transmission of Monoradar Service Messages
+
+  SUR.ET1.ST05.2000-STD-02b-01
+
+  Edition Number: 1.27
+
+doc-ref: |
+  https://www.eurocontrol.int/publication/cat034-eurocontrol-specification-surveillance-data-exchange-part-2b
+
+seq:
+  - id: fspec
+    type: asterix_field_spec
+
+  - id: data
+    type: uap_type(fspec, [10,0,30,20,41,50,60,70,100,110,120,90].as<u2[]>.as<str>)
+
+instances:
+
+  category:
+    value: '"034"'
+
+  version:
+    value: '"1.27"'
+
+  items:
+    value: data.items
+
+  i010:
+    value: data.items[0].item
+    if: data.loop_range > 0 and fspec.octects[0].bits[0]
+#  - id: i010 #("I034/010","F","2","Data Source Identifier","N.A."),
+#    type: c34_item(10)
+#    if: fspec.octects[0].bits[0]
+#
+  i000:
+    value: data.items[1].item
+    if: data.loop_range > 1 and fspec.octects[0].bits[1]
+#  - id: i000 #("I034/000","F","1","Message Type","N.A."),
+#    type: c34_item(0)
+#    if: fspec.octects[0].bits[1]
+#
+  i030:
+    value: data.items[2].item
+    if: data.loop_range > 2 and fspec.octects[0].bits[2]
+#  - id: i030 #("I034/030","F","3","Time of Day","1/128 s"),
+#    type: c34_item(30)
+#    if: fspec.octects[0].bits[2]
+#
+  i020:
+    value: data.items[3].item
+    if: data.loop_range > 3 and fspec.octects[0].bits[3]
+#  - id: i020 #("I034/020","F","1","Sector Number ","360/(28)"),
+#    type: c34_item(20)
+#    if: fspec.octects[0].bits[3]
+#
+  i041:
+    value: data.items[4].item
+    if: data.loop_range > 4 and fspec.octects[0].bits[4]
+#  - id: i041 #("I034/041","F","2","Antenna Rotation Period","1/128 s"),
+#    type: c34_item(41)
+#    if: fspec.octects[0].bits[4]
+#
+  i050:
+    value: data.items[5].item
+    if: data.loop_range > 5 and fspec.octects[0].bits[5]
+#  - id: i050 #("I034/050","C","1+F:1,F:0,F:0,F:1,F:1,F:2,F:0,F:0","System Configuration & Status","N.A."),
+#    type: c34_item(50)
+#    if: fspec.octects[0].bits[5]
+#
+  i060:
+    value: data.items[6].item
+    if: data.loop_range > 6 and fspec.octects[0].bits[6]
+#  - id: i060 #("I034/060","C","1+F:1,F:0,F:0,F:1,F:1,F:1,F:0,F:0","System Processing Mode","N.A."),
+#    type: c34_item(60)
+#    if: fspec.octects[0].bits[6]
+#
+  i070:
+    value: data.items[7].item
+    if: data.loop_range > 7 and fspec.octects[1].bits[0]
+#  - id: i070 #("I034/070","R","1+2","Message Count Values","N.A."),
+#    type: c34_item(70)
+#    if: fspec.octects.size > 1 and fspec.octects[1].bits[0]
+#
+  i100:
+    value: data.items[8].item
+    if: data.loop_range > 8 and fspec.octects[1].bits[1]
+#  - id: i100 #("I034/100","F","8","Generic Polar Window","RHO: 1/256 NM THETA: 360/(216)"),
+#    type: c34_item(100)
+#    if: fspec.octects.size > 1 and fspec.octects[1].bits[1]
+#
+  i110:
+    value: data.items[9].item
+    if: data.loop_range > 9 and fspec.octects[1].bits[2]
+#  - id: i110 #("I034/110","F","1","Data Filter","N.A."),
+#    type: c34_item(110)
+#    if: fspec.octects.size > 1 and fspec.octects[1].bits[2]
+#
+  i120:
+    value: data.items[10].item
+    if: data.loop_range > 10 and fspec.octects[1].bits[3]
+#  - id: i120 #("I034/120","F","8","3D-position of source","Height : 1 m Latitude: 180/(223) Longitude: 180/(223)"),
+#    type: c34_item(120)
+#    if: fspec.octects.size > 1 and fspec.octects[1].bits[3]
+#
+  i090:
+    value: data.items[11].item
+    if: data.loop_range > 11 and fspec.octects[1].bits[4]
+
+types:
+  uap_type:
+    params:
+
+      - id: fspec
+        type: asterix_field_spec
+
+      - id: uap
+        type: str
+
+    seq:
+      - id: items
+        doc: |
+          One entry per UAP slot (FRN - 1), so items[k] is always UAP slot k.
+          A slot whose FSPEC bit is clear gets a catalog entry with
+          item_ref_num -1, which matches no case and consumes no bytes
+          (ASTERIX Part 1, FSPEC / UAP rules).
+        type: 'asterix_cat_034_catalog(fspec.octects[_index / 7].bits[_index % 7] ? uap_list[_index] : -1)'
+        repeat: expr
+        repeat-expr: loop_range
+
+
+      - id: ire #,"E","1","Reserved Expansion Field","N.A."),  FRN 13
+        type: asterix_explicit("RE",true)
+        if: fspec.size >= 13 and fspec.octects[1].bits[5]
+
+      - id: sp #,"E","1","Special Purpose Field","N.A."),  FRN 14
+        type: asterix_explicit("SP",true)
+        if: fspec.size >= 14 and fspec.octects[1].bits[6]
+
+
+    instances:
+
+      uap_list:
+        value: uap.as<u2[]>
+
+      loop_range:
+        value: 'fspec.size > uap_list.size ? uap_list.size : fspec.size'
+#  - id: i090 #("I034/090","F","2","Collimation Error","Range: 1/128 NM Azimuth: 360/(214)"),
+#    type: c34_item(90)
+#    if: fspec.octects.size > 1 and fspec.octects[1].bits[4]
+#
+#  - id: ire #("RE","E","1","RE-Data Item Reserved Expansion Field","N.A."),
+#    type: field('E',[0],[0])
+#    if: fspec.octects.size > 1 and fspec.octects[1].bits[5]
+#
+#  - id: isp #("SP","E","1","SP-Data Item Special Purpose Field","N.A."),
+#    type: field('E',[0],[0])
+#    if: fspec.octects.size > 1 and fspec.octects[1].bits[6]
+#

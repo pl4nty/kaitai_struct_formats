@@ -24,7 +24,8 @@ doc: |
     top of it for signed ints
     <https://avro.apache.org/docs/1.12.0/specification/#primitive-types-1>
 
-  More information on this encoding is available at <https://en.wikipedia.org/wiki/LEB128>
+  More information on this encoding is available at
+  <https://en.wikipedia.org/wiki/LEB128>
 
   This particular implementation supports integer values up to 64 bits (i.e. the
   maximum unsigned value supported is `2**64 - 1`), which implies that serialized
@@ -51,11 +52,42 @@ seq:
       )
     repeat: until
     repeat-until: not _.has_next
+instances:
+  len:
+    value: groups.size
+  value:
+    value: groups.last.interm_value
+    doc: Resulting unsigned value as normal integer
+  sign_bit:
+    value: '(len == 10 ? 0x8000_0000_0000_0000 : groups.last.multiplier * 0b100_0000).as<u8>'
+  value_signed:
+    # NOTE 1: the expression `-(sign_bit - (value - sign_bit))` performing
+    # signed extension is carefully written to avoid overflows in statically
+    # typed languages like C++ (where they would cause undefined behavior) or
+    # Nim. The goal is to achieve mathematically exactly `value - 2 * sign_bit`.
+    #
+    # NOTE 2: the `sign_bit > 0` check is a hack for PHP (it is required only
+    # because KSC 0.11 does not abstract from the fact that PHP has only
+    # **signed** 64-bit integers, which should be considered a bug because it
+    # reduces portability between target languages). Since PHP only has signed
+    # 64-bit integers, `sign_bit` will be `-0x8000_0000_0000_0000` if
+    # `len == 10`, so the `value >= sign_bit` condition that is supposed to
+    # detect whether the sign bit is set will not work (in reality, it will be
+    # true for any `value`). However, the sign extension would only cause the
+    # value to overflow and become a `float`. The fix in this case is to return
+    # `value` as is, since it already represents the correct signed value.
+    value: 'sign_bit > 0 and value >= sign_bit ? -(sign_bit - (value - sign_bit)).as<s8> : value.as<s8>'
+    # # We don't use this anymore again because of JavaScript as explained
+    # # above. Since it relies on bitwise XOR (`^`), it would truncate the value
+    # # to 32 bits in the Web IDE.
+    # value: '((value ^ sign_bit).as<s8> - sign_bit.as<s8>).as<s8>'
+    # doc-ref: https://graphics.stanford.edu/~seander/bithacks.html#VariableSignExtend
 types:
   group:
     -webide-representation: '{value}'
     doc: |
-      One byte group, clearly divided into 7-bit "value" chunk and 1-bit "continuation" flag.
+      One byte group, clearly divided into 7-bit "value" chunk and 1-bit
+      "continuation" flag.
     params:
       - id: idx
         type: s4
@@ -110,33 +142,3 @@ types:
         # Full 64-bit integer support in JavaScript is only possible via the
         # `BigInt` type: https://github.com/kaitai-io/kaitai_struct/issues/183
         value: (prev_interm_value + value * multiplier).as<u8>
-instances:
-  len:
-    value: groups.size
-  value:
-    value: groups.last.interm_value
-    doc: Resulting unsigned value as normal integer
-  sign_bit:
-    value: '(len == 10 ? 0x8000_0000_0000_0000 : groups.last.multiplier * 0b100_0000).as<u8>'
-  value_signed:
-    # NOTE 1: the expression `-(sign_bit - (value - sign_bit))` performing
-    # signed extension is carefully written to avoid overflows in statically
-    # typed languages like C++ (where they would cause undefined behavior) or
-    # Nim. The goal is to achieve mathematically exactly `value - 2 * sign_bit`.
-    #
-    # NOTE 2: the `sign_bit > 0` check is a hack for PHP (it is required only
-    # because KSC 0.11 does not abstract from the fact that PHP has only
-    # **signed** 64-bit integers, which should be considered a bug because it
-    # reduces portability between target languages). Since PHP only has signed
-    # 64-bit integers, `sign_bit` will be `-0x8000_0000_0000_0000` if
-    # `len == 10`, so the `value >= sign_bit` condition that is supposed to
-    # detect whether the sign bit is set will not work (in reality, it will be
-    # true for any `value`). However, the sign extension would only cause the
-    # value to overflow and become a `float`. The fix in this case is to return
-    # `value` as is, since it already represents the correct signed value.
-    value: 'sign_bit > 0 and value >= sign_bit ? -(sign_bit - (value - sign_bit)).as<s8> : value.as<s8>'
-    # # We don't use this anymore again because of JavaScript as explained
-    # # above. Since it relies on bitwise XOR (`^`), it would truncate the value
-    # # to 32 bits in the Web IDE.
-    # value: '((value ^ sign_bit).as<s8> - sign_bit.as<s8>).as<s8>'
-    # doc-ref: https://graphics.stanford.edu/~seander/bithacks.html#VariableSignExtend

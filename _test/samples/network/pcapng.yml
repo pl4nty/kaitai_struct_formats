@@ -1,0 +1,7 @@
+samples:
+  - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/pcap/testdata/dhcp_little_endian.pcapng
+    sha256: e79fd5bb9dd13c063f961cd067a63f2d2110dc4b1f53691b145e31f71b161bf3
+  - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/pcap/testdata/dhcp_big_endian.pcapng
+    sha256: 5c25796f37cdb7cd5f662cb785ac3acdd1c5fcee306b2d5eb2f0b575118c1d4b
+  - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/pcap/testdata/many_interfaces.pcapng
+    sha256: 9bf6c1b68fa59c9e246ddb9f95d0058945cda3dbec624f9e80ef7f27f8c71484

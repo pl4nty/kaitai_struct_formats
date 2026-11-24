@@ -10,8 +10,8 @@ meta:
   endian: le
 seq:
   - id: magic
-    type: str
     size: 4
+    type: str
     encoding: ASCII
   - id: num_index_entries
     type: s4
@@ -19,6 +19,12 @@ seq:
   - id: index_offset
     type: s4
     doc: Offset to the start of the index
+instances:
+  index:
+    pos: index_offset
+    type: index_entry
+    repeat: expr
+    repeat-expr: num_index_entries
 types:
   index_entry:
     seq:
@@ -27,10 +33,10 @@ types:
       - id: size
         type: s4
       - id: name
-        type: str
         size: 8
+        type: str
+        terminator: 0
         encoding: ASCII
-        pad-right: 0
     instances:
       contents:
         io: _root._io
@@ -98,16 +104,19 @@ types:
       - id: offset_y
         type: s2
       - id: upper_texture_name
-        type: str
         size: 8
+        type: str
+        terminator: 0
         encoding: ASCII
       - id: lower_texture_name
-        type: str
         size: 8
+        type: str
+        terminator: 0
         encoding: ASCII
       - id: normal_texture_name
-        type: str
         size: 8
+        type: str
+        terminator: 0
         encoding: ASCII
       - id: sector_id
         type: s2
@@ -166,12 +175,14 @@ types:
       - id: ceil_z
         type: s2
       - id: floor_flat
-        type: str
         size: 8
+        type: str
+        terminator: 0
         encoding: ASCII
       - id: ceil_flat
-        type: str
         size: 8
+        type: str
+        terminator: 0
         encoding: ASCII
       - id: light
         type: s2
@@ -242,9 +253,9 @@ types:
         -orig-id: maptexture_t
         seq:
           - id: name
-            type: str
             size: 8
-            pad-right: 0
+            type: str
+            terminator: 0
             encoding: ASCII
             doc: Name of a texture, only `A-Z`, `0-9`, `[]_-` are valid
           - id: masked
@@ -286,15 +297,9 @@ types:
         type: u4
         doc: Number of patches registered in this global game directory
       - id: names
-        type: str
         size: 8
+        type: str
+        terminator: 0
         encoding: ASCII
-        pad-right: 0
         repeat: expr
         repeat-expr: num_patches
-instances:
-  index:
-    pos: index_offset
-    type: index_entry
-    repeat: expr
-    repeat-expr: num_index_entries

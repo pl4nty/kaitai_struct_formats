@@ -1,0 +1,14 @@
+samples:
+  - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/dex/Hello.dex
+    sha256: 77db9193740c6d0fa5f25b7981dc1958122ac604c64f9356e12f46c0f780f152
+    expect:
+      header.file_size: 1000
+      header.string_ids_size: 22
+      header.class_defs_size: 1
+  - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/dex/HelloWorld.dex
+    sha256: 1cf848bbb3182057786f3e151c62da288a4b664ecde0606c350b3a0a0066e2bb
+    expect:
+      header.file_size: 1460
+      header.string_ids_size: 31
+      header.type_ids_size: 11
+      header.class_defs_size: 2

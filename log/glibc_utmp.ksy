@@ -18,30 +18,30 @@ types:
     seq:
       - id: ut_type
         type: s4
-        doc: Type of login
         enum: entry_type
+        doc: Type of login
       - id: pid
         type: s4
         doc: Process ID of login process
       - id: line
+        size: 32
         type: str
         encoding: UTF-8
-        size: 32
         doc: Devicename
       - id: id
+        size: 4
         type: str
         encoding: UTF-8
-        size: 4
         doc: Inittab ID
       - id: user
+        size: 32
         type: str
         encoding: UTF-8
-        size: 32
         doc: Username
       - id: host
+        size: 256
         type: str
         encoding: UTF-8
-        size: 256
         doc: Hostname for remote login
       - id: exit
         type: u4
@@ -60,8 +60,8 @@ types:
   timeval:
     seq:
       - id: sec
-        type: u4
-        doc: Seconds
+        type: s4
+        doc: Seconds (int32_t in glibc's `ut_tv`, even on 64-bit platforms)
       - id: usec
         type: s4
         doc: Microseconds

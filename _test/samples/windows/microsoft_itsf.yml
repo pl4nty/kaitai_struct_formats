@@ -1,0 +1,22 @@
+# PyWin32.chm from the pywin32 312 wheel on PyPI (files.pythonhosted.org is immutable). Expects
+# from a hex read against the unofficial CHM spec (chmspec, libmspack chmd.c): ITSF version 3,
+# header length 0x60, language 0x409, header section 1 at 0x78 (0x4e054 bytes), content at
+# 0x4e0cc, file size 2642799 in header section 0; ITSP: chunk size 0x1000, depth 2, root index chunk 0x4d, PMGL chunks 0..0x4c, 0x4e
+# chunks in all.
+samples:
+  - url: https://files.pythonhosted.org/packages/03/d9/77040d3b43df3f3be32ea289433d660d2727f5ba327bc73be835127d9d60/pywin32-312-cp312-cp312-win_amd64.whl
+    sha256: b457f6d628a47e8a7346ce22acb7e1a46a4a78b52e1d17e1af56871bd19a93bc
+    name: PyWin32.chm
+    extract: { format: zip, member: PyWin32.chm }
+    expect:
+      version: 3
+      len_header: 0x60
+      language_id: 0x409
+      ofs_content_section0: 0x4e0cc
+      header_section0.len_file: 2642799
+      directory.header.len_chunk: 0x1000
+      directory.header.index_depth: 2
+      directory.header.index_root_chunk: 0x4d
+      directory.header.first_pmgl_chunk: 0
+      directory.header.last_pmgl_chunk: 0x4c
+      directory.header.num_chunks: 0x4e

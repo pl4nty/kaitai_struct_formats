@@ -1,0 +1,8 @@
+samples:
+  - url: https://raw.githubusercontent.com/log2timeline/plaso/70faaf25e3ca2e9b602cf3920f8e34fd0e469ea8/test_data/utmp/utmp_x86_64
+    sha256: f847dcb2c03f3964867ac66266024d12af04af9fa2a995ddb273a48b3f04e244
+    eof: true
+    expect:
+      len(records): 6
+      records[1].ut_type: 8
+      records[1].pid: 19

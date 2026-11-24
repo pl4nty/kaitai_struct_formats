@@ -1,0 +1,6 @@
+samples:
+  - url: https://raw.githubusercontent.com/GPSBabel/gpsbabel/1d6a0626bc003cfb2519a0f9b864bf944db34ffe/reference/track/destinator_trl.dat
+    sha256: ec1770b4e90d1a94ca33fa7fea2fabb8deb8b21a743b6077f6de52d5dcb439a9
+    eof: true
+    expect:
+      len(points): 26

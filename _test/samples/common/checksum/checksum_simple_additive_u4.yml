@@ -1,0 +1,9 @@
+# Library type: inline vector.
+samples:
+- name: words
+  data: '00'
+  params:
+    initial: '5'
+    data: '[3735928559, 4294967295, 305419896, 1]'
+  expect:
+    value: 4041348460

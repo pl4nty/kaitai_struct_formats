@@ -1,0 +1,9 @@
+samples:
+  - url: https://raw.githubusercontent.com/wireshark/wireshark/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/tls-renegotiation.pcap
+    sha256: a3472920f5080ac32ab56d86def19dcbb418f25f4e197674d0d2a6a6e59a34ae
+    name: tls-renegotiation-clienthello-segment
+    extract: {format: slice, offset: 336, size: 131}
+    eof: true
+    expect:
+      src_port: 50242
+      dst_port: 4433

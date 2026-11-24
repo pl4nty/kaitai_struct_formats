@@ -1,0 +1,82 @@
+samples:
+  - url: https://raw.githubusercontent.com/hrydgard/pspautotests/e37443a681c6a4d562f32b6b48e1f4e36cd69c97/input/cube.cso
+    sha256: c61a33afc7e39e1c499db676d48dfadebee79561f296b7f2f883f2ad31af61e6
+    expect:   # file(1)
+      header.uncompressed_size: 468992
+      header.block_size: 2048
+      header.version: 1
+      len(indexes): 230
+  - url: https://raw.githubusercontent.com/hrydgard/pspautotests/e37443a681c6a4d562f32b6b48e1f4e36cd69c97/input/test.cso
+    sha256: 37e490fc4f183c2415d4dfef097526be3afc1fd4110568252eab92fc48dd73e4
+    expect:   # file(1)
+      header.uncompressed_size: 6369280
+      header.block_size: 2048
+      len(indexes): 3111
+  # ZSO and CSO v2 have no public sample files, so these are generated from the
+  # ISO inside cube.cso above (468992 bytes, sha256
+  # 24d3aeaaa9b8af83cf0e7767c2dafd10a4ac52369e7f4b9aac084d2c82d413af, maxcso --crc
+  # 9e89dd99). Expects come from that ISO: sector 16 is the ISO 9660 primary
+  # volume descriptor, sector 27 starts an ELF file, sector 41 is 0x88 filler,
+  # sector 78 is the last non-zero one and 79-228 are zero. The manifest
+  # cannot hash, so byte sums (of the image and of single sectors) stand in.
+  - fixture: filesystem/cso/cube.zso
+    sha256: 20f5e1fad4bf045a55f3722d38e78d124189cc248d3b3d9465579d84c1ef0693
+    recipe: >-
+      maxcso master commit 961f232cf99d546b2b7e704c0ecf3fc5bea52221 (reports v1.13.0), built with make against
+      Ubuntu 24.04 liblz4 1.9.4 and libuv 1.48.0: maxcso --decompress cube.cso -o cube.iso;
+      maxcso --threads=1 --format=zso cube.iso -o cube.zso. Every block is LZ4 (index high bit
+      clear); maxcso --crc cube.zso gives 9e89dd99, the same as the ISO.
+    expect:
+      header.flavour: Z
+      header.uncompressed_size: 468992
+      header.block_size: 2048
+      header.version: 1
+      header.index_shift: 0
+      len(indexes): 230
+      indexes[16].block[0:8]: '0143443030310100'
+      indexes[27].block[0:4]: '7f454c46'
+      indexes[41].block[0:8]: '8888888888888888'
+      sum(len(i.block) for i in indexes[:-1]): 468992
+      sum(sum(i.block) for i in indexes[:-1]): 6402166
+      sum(indexes[16].block): 47051
+      sum(indexes[27].block): 92987
+      indexes[27].block[-8:]: '211043000000448c'
+      sum(indexes[41].block): 278528
+      sum(indexes[60].block): 117550
+      indexes[60].block[0:8]: ff7f023cffff4234
+      indexes[60].block[-8:]: '000000000c000324'
+      sum(indexes[78].block): 77302
+      indexes[78].block[0:8]: dc94000002000000
+      indexes[114].block == bytes(2048): true
+      indexes[228].block == bytes(2048): true
+  - fixture: filesystem/cso/cube_v2.cso
+    sha256: aaaf43fae7f7d9ed08c6a771b7fec1db203ae34b6ca6adba8b4a10dd78ffbd32
+    recipe: >-
+      maxcso master commit 961f232cf99d546b2b7e704c0ecf3fc5bea52221 (reports v1.13.0), built with make against
+      Ubuntu 24.04 liblz4 1.9.4 and libuv 1.48.0: maxcso --decompress cube.cso -o cube.iso;
+      maxcso --threads=1 --format=cso2 --use-lz4 --lz4-cost=10 cube.iso -o cube_v2.cso. The
+      cost allowance mixes 181 LZ4 and 48 deflate blocks (sector 16 is LZ4, 27 deflate);
+      maxcso --crc cube_v2.cso gives 9e89dd99, the same as the ISO.
+    expect:
+      header.flavour: C
+      header.uncompressed_size: 468992
+      header.block_size: 2048
+      header.version: 2
+      header.index_shift: 0
+      len(indexes): 230
+      indexes[16].block[0:8]: '0143443030310100'
+      indexes[27].block[0:4]: '7f454c46'
+      indexes[41].block[0:8]: '8888888888888888'
+      sum(len(i.block) for i in indexes[:-1]): 468992
+      sum(sum(i.block) for i in indexes[:-1]): 6402166
+      sum(indexes[16].block): 47051
+      sum(indexes[27].block): 92987
+      indexes[27].block[-8:]: '211043000000448c'
+      sum(indexes[41].block): 278528
+      sum(indexes[60].block): 117550
+      indexes[60].block[0:8]: ff7f023cffff4234
+      indexes[60].block[-8:]: '000000000c000324'
+      sum(indexes[78].block): 77302
+      indexes[78].block[0:8]: dc94000002000000
+      indexes[114].block == bytes(2048): true
+      indexes[228].block == bytes(2048): true

@@ -1,0 +1,11 @@
+# IPTC-NAA stream from ExifTool's t/images/IPTC.jpg: the APP13 Photoshop 8BIM 0x0404 resource at
+# offset 50, 359 bytes (both from `exiftool -v3`). Expects from `exiftool -v3 -IPTC:all`: 24
+# datasets, the first being 2:00 ApplicationRecordVersion.
+samples:
+  - url: https://raw.githubusercontent.com/exiftool/exiftool/3d7a0538324e9b04aa8930201b007009491321d2/t/images/IPTC.jpg
+    sha256: 2fc7ca78b0abbb694c2483fee8e4b7d137ff085220004d53c5dd86f8c1cca04b
+    extract: { format: slice, offset: 50, size: 359 }
+    expect:
+      len(datasets): 24
+      datasets[0].record_number: 2
+      datasets[0].dataset_number: 0

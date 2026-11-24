@@ -11,23 +11,41 @@ meta:
   ks-version: 0.9
   endian: be
 doc: |
-  GIMP brush format is native to the GIMP image editor for storing a brush or a texture.
-  It can be used in all [Paint Tools](https://docs.gimp.org/2.10/en/gimp-tools-paint.html),
-  for example Pencil and Paintbrush. It works by repeating the brush bitmap as you move
-  the tool. The Spacing parameter sets the distance between the brush marks as a percentage
+  GIMP brush format is native to the GIMP image editor for storing a brush or a
+  texture.
+  It can be used in all [Paint
+  Tools](https://docs.gimp.org/2.10/en/gimp-tools-paint.html),
+  for example Pencil and Paintbrush. It works by repeating the brush bitmap as you
+  move
+  the tool. The Spacing parameter sets the distance between the brush marks as a
+  percentage
   of brush width. Its default value can be set in the brush file.
 
-  You can also use GIMP to create new brushes in this format. Custom brushes can be loaded
-  into GIMP for use in the paint tools by copying them into one of the Brush Folders -
-  select **Edit** > **Preferences** in the menu bar, expand the **Folders** section
+  You can also use GIMP to create new brushes in this format. Custom brushes can
+  be loaded
+  into GIMP for use in the paint tools by copying them into one of the Brush
+  Folders -
+  select **Edit** > **Preferences** in the menu bar, expand the **Folders**
+  section
   and choose **Brushes** to see the recognized Brush Folders or to add new ones.
 doc-ref: https://github.com/GNOME/gimp/blob/441631322b/devel-docs/gbr.txt
 seq:
   - id: len_header
     type: u4
   - id: header
-    type: header
     size: len_header - len_header._sizeof
+    type: header
+instances:
+  len_body:
+    value: header.width * header.height * header.bytes_per_pixel.to_i
+  body:
+    pos: len_header
+    size: len_body
+    -affected-by: 188
+    # type: bitmap # The `bitmap` type works, but it might be slow and memory intensive for larger bitmaps
+                   # because it creates a class instance for every pixel.
+                   # So it is not suitable for production, but you can use it as a reference to create your
+                   # own implementation.
 types:
   header:
     seq:
@@ -59,8 +77,8 @@ types:
         type: u4
         doc: Default spacing to be used for brush. Percentage of brush width.
       - id: brush_name
-        type: strz
         size-eos: true
+        type: strz
         encoding: UTF-8
   bitmap:
     seq:
@@ -108,17 +126,6 @@ types:
             type: u1
           - id: alpha
             type: u1
-instances:
-  len_body:
-    value: header.width * header.height * header.bytes_per_pixel.to_i
-  body:
-    pos: len_header
-    size: len_body
-    -affected-by: 188
-    # type: bitmap # The `bitmap` type works, but it might be slow and memory intensive for larger bitmaps
-                   # because it creates a class instance for every pixel.
-                   # So it is not suitable for production, but you can use it as a reference to create your
-                   # own implementation.
 enums:
   color_depth:
     1: grayscale

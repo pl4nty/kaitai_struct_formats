@@ -9,8 +9,8 @@ meta:
   file-extension: pyc
   xref:
     justsolve: Python
-    pronom: fmt/939
     mime: application/x-python-code
+    pronom: fmt/939
     wikidata: Q28009469
   license: CC0-1.0
   endian: le
@@ -247,9 +247,9 @@ types:
           - id: length
             type: u4
           - id: data
-            type: str
             size: length
-            encoding: utf-8
+            type: str
+            encoding: UTF-8
       string_ref:
         -webide-representation: "#{interned_list_index:dec}"
         seq:
@@ -263,7 +263,7 @@ types:
           - id: data
             size: length
             type: str
-            encoding: utf-8
+            encoding: UTF-8
       tuple:
         -webide-representation: "{count:dec} items"
         seq:

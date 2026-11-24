@@ -28,18 +28,6 @@ seq:
     type: group
     repeat: until
     repeat-until: not _.has_next
-types:
-  group:
-    -webide-representation: '{value}'
-    doc: |
-      One byte group, clearly divided into 7-bit "value" chunk and 1-bit "continuation" flag.
-    seq:
-      - id: has_next
-        type: b1
-        doc: If true, then we have more bytes to read
-      - id: value
-        type: b7
-        doc: The 7-bit (base128) numeric value chunk of this group
 instances:
   last:
     value: groups.size - 1
@@ -54,3 +42,16 @@ instances:
       + (last >= 6 ? (groups[last - 6].value << 42) : 0)
       + (last >= 7 ? (groups[last - 7].value << 49) : 0)).as<u8>
     doc: Resulting value as normal integer
+types:
+  group:
+    -webide-representation: '{value}'
+    doc: |
+      One byte group, clearly divided into 7-bit "value" chunk and 1-bit
+      "continuation" flag.
+    seq:
+      - id: has_next
+        type: b1
+        doc: If true, then we have more bytes to read
+      - id: value
+        type: b7
+        doc: The 7-bit (base128) numeric value chunk of this group

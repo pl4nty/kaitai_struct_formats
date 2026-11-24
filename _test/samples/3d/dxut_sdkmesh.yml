@@ -1,0 +1,17 @@
+# DirectXTK test models. Expects from a hex read of the SDKMESH header (DXUTsdkmesh.h): version
+# 101 / 200, header size 0x1a8, non-buffer data size and buffer data size, which add up to the
+# file size (424 + 4624 + 57344 = 62392; 424 + 3072 + 208896 = 212392).
+samples:
+  - url: https://raw.githubusercontent.com/walbourn/directxtktest/a3010123ab0134fe3045bae872f6b32d627fde22/ModelTest/cup.sdkmesh
+    sha256: f181472d344a522a2b9b4c5d7b355f033970a18f3de359dea584be869e9bd406
+    expect:
+      header.version: 101
+      header.len_header: 0x1a8
+      header.len_non_buffer_data: 4624
+      header.len_buffer_data: 57344
+  - url: https://raw.githubusercontent.com/walbourn/directxtktest/a3010123ab0134fe3045bae872f6b32d627fde22/PBRModelTest/BrokenCube.sdkmesh
+    sha256: c25c063e964e96eaa4d55f7925d460a3310f07f2216a8f6aa52e2efc0b19ad3c
+    expect:
+      header.version: 200
+      header.len_non_buffer_data: 3072
+      header.len_buffer_data: 208896

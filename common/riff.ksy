@@ -43,8 +43,8 @@ types:
       - id: len
         type: u4
       - id: data_slot
-        type: slot
         size: len
+        type: slot
       - id: pad_byte
         size: len % 2 # if size is odd, there is 1 padding byte
     types:
@@ -54,8 +54,8 @@ types:
       - id: form_type
         type: u4
       - id: subchunks_slot
-        type: slot
         size-eos: true
+        type: slot
     types:
       slot: {} # Keeps _io for later use of same substream
 
@@ -150,7 +150,8 @@ types:
           (id_chars[2] >= 97 and id_chars[2] <= 122) or
           (id_chars[3] >= 97 and id_chars[3] <= 122)
         doc: |
-          Check if chunk_id contains lowercase characters ([a-z], ASCII 97 = a, ASCII 122 = z).
+          Check if chunk_id contains lowercase characters ([a-z], ASCII 97 = a, ASCII
+          122 = z).
 enums:
   fourcc:
   # little-endian

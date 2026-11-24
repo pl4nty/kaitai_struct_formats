@@ -11,10 +11,13 @@ doc: |
   Compressed resource data in `'dcmp' (2)` format,
   as stored in compressed resources with header type `9` and decompressor ID `2`.
 
-  The `'dcmp' (2)` decompressor resource is included in the System file of System 7.0 and later.
-  This compression format is used for a few compressed resources in System 7.0's files
+  The `'dcmp' (2)` decompressor resource is included in the System file of System
+  7.0 and later.
+  This compression format is used for a few compressed resources in System 7.0's
+  files
   (such as the System file).
-  This decompressor is also included with and used by some other Apple applications,
+  This decompressor is also included with and used by some other Apple
+  applications,
   such as ResEdit.
   (Note: ResEdit includes the `'dcmp' (2)` resource,
   but none of its resources actually use this decompressor.)
@@ -24,7 +27,8 @@ doc: |
   based on a lookup table
   (either included in the compressed data or provided by the decompressor).
   An alternative "tagged" compression format is also supported,
-  which allows using two-byte literals in addition to single-byte table references,
+  which allows using two-byte literals in addition to single-byte table
+  references,
   at the cost of requiring an extra "tag" byte every 16 output bytes,
   to differentiate literals and table references.
 doc-ref: 'https://github.com/dgelessus/python-rsrcfork/blob/f891a6e/src/rsrcfork/compress/dcmp2.py'
@@ -45,9 +49,12 @@ seq:
     repeat: expr
     repeat-expr: header_parameters.num_custom_lookup_table_entries
     if: header_parameters.flags.has_custom_lookup_table
-    doc: |
-      The custom lookup table to be used instead of the default lookup table.
+    doc: The custom lookup table to be used instead of the default lookup table.
   - id: data
+    # The data extends to one byte before EOS if the decompressed length is odd,
+    # and otherwise extends completely to EOS.
+    size: |
+      _io.size - _io.pos - (is_len_decompressed_odd ? 1 : 0)
     type:
       switch-on: header_parameters.flags.tagged
       cases:
@@ -56,13 +63,10 @@ seq:
         # This is a workaround for kaitai-io/kaitai_struct#208 to make the compiler understand that the switch only has two cases,
         # so that it doesn't generate a third default case that maps to a byte array type.
         _: untagged_data
-    # The data extends to one byte before EOS if the decompressed length is odd,
-    # and otherwise extends completely to EOS.
-    size: |
-      _io.size - _io.pos - (is_len_decompressed_odd ? 1 : 0)
     doc: |
       The compressed data.
-      The structure of the data varies depending on whether the "tagged" or "untagged" variant of the compression format is used.
+      The structure of the data varies depending on whether the "tagged" or "untagged"
+      variant of the compression format is used.
   - id: last_byte
     size: 1
     if: is_len_decompressed_odd
@@ -71,16 +75,17 @@ seq:
       stored literally.
       Only present if the decompressed data has an odd length.
 
-      This special case is necessary because the compressed data is otherwise always stored in two-byte groups,
+      This special case is necessary because the compressed data is otherwise always
+      stored in two-byte groups,
       either literally or as table references,
-      so otherwise there would be no way to compress odd-length resources using this format.
+      so otherwise there would be no way to compress odd-length resources using this
+      format.
 instances:
   header_parameters:
     io: header_parameters_with_io._io
     pos: 0
     type: header_parameters
-    doc: |
-      The parsed decompressor-specific parameters from the compressed resource header.
+    doc: The parsed decompressor-specific parameters from the compressed resource header.
   is_len_decompressed_odd:
     value: len_decompressed % 2 != 0
     doc: |
@@ -162,8 +167,7 @@ instances:
       header_parameters.flags.has_custom_lookup_table
       ? custom_lookup_table
       : default_lookup_table
-    doc: |
-      The lookup table to be used for this compressed data.
+    doc: The lookup table to be used for this compressed data.
 types:
   header_parameters:
     doc: |
@@ -174,7 +178,8 @@ types:
         type: u2
         doc: |
           The meaning of this field is unknown.
-          It does not appear to have any effect on the format of the compressed data or the decompression process.
+          It does not appear to have any effect on the format of the compressed data or
+          the decompression process.
 
           The value of this field is usually zero and otherwise a small integer (< 10).
           For `'lpch'` resources,
@@ -191,7 +196,8 @@ types:
       - id: flags
         type: flags
         doc: |
-          Various flags that affect the format of the compressed data and the decompression process.
+          Various flags that affect the format of the compressed data and the
+          decompression process.
     instances:
       num_custom_lookup_table_entries:
         value: num_custom_lookup_table_entries_m1 + 1
@@ -207,8 +213,7 @@ types:
         seq:
           - id: reserved
             type: b6
-            doc: |
-              These flags have no known usage or meaning and should always be zero.
+            doc: These flags have no known usage or meaning and should always be zero.
           - id: tagged
             type: b1
             doc: |
@@ -227,24 +232,22 @@ types:
               The flags as a packed integer,
               as they are stored in the data.
   untagged_data:
-    doc: |
-      Compressed data in the "untagged" variant of the format.
+    doc: Compressed data in the "untagged" variant of the format.
     seq:
       - id: table_references
         type: u1
         repeat: eos
         doc: |
           References into the lookup table.
-          Each reference is an integer that is expanded to two bytes by looking it up in the table.
+          Each reference is an integer that is expanded to two bytes by looking it up in
+          the table.
   tagged_data:
-    doc: |
-      Compressed data in the "tagged" variant of the format.
+    doc: Compressed data in the "tagged" variant of the format.
     seq:
       - id: chunks
         type: chunk
         repeat: eos
-        doc: |
-          The tagged chunks that make up the compressed data.
+        doc: The tagged chunks that make up the compressed data.
     types:
       chunk:
         doc: |
@@ -261,13 +264,9 @@ types:
             repeat: expr
             repeat-expr: 8
             doc: |
-              The bits of the tag byte control the format and meaning of the 8 compressed data units that follow the tag byte.
+              The bits of the tag byte control the format and meaning of the 8 compressed data
+              units that follow the tag byte.
           - id: units
-            type:
-              switch-on: tag[_index]
-              cases:
-                true: u1
-                # If false, the type is unset, i. e. a byte array.
             # This size attribute is necessary when the tag bit is false,
             # to set the size of the byte array to 2.
             # When the tag bit is true,
@@ -278,12 +277,18 @@ types:
             # even when the tag bit is true and an explicit size is not normally necessary.
             size: |
               tag[_index] ? 1 : 2
+            type:
+              switch-on: tag[_index]
+              cases:
+                true: u1
+                # If false, the type is unset, i. e. a byte array.
             repeat: until
             repeat-until: _index >= 7 or _io.eof
             doc: |
               The compressed data units in this chunk.
 
-              The format and meaning of each unit is controlled by the bit in the tag byte with the same index.
+              The format and meaning of each unit is controlled by the bit in the tag byte
+              with the same index.
               If the bit is 0 (false),
               the unit is a pair of bytes,
               which are literally copied to the decompressed data.

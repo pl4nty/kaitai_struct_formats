@@ -1,0 +1,15 @@
+# Nexus Player "fugu" bootloader, served by archive.org as a single member of the factory image
+# ZIP. Values read by hand per fugu releasetools.py: revision 3, chunks IFWI!!!!, DROIDBT!, SPLASHS!
+# with their u4 lengths.
+samples:
+  - url: https://archive.org/download/Nexus_Player_Archive/Factory%20Images/fugu-opr6.170623.021-factory-e34311b0.zip/fugu-opr6.170623.021%2Fbootloader-fugu-fugu-02.13.img
+    sha256: c764e617627a403acd553032b662da064fb2d02b1efa0abf761ce8849f96e240
+    name: bootloader-fugu-fugu-02.13.img
+    expect:
+      revision: 3
+      images[0].chunk_id: IFWI!!!!
+      images[0].len_body: 4194468
+      images[1].chunk_id: DROIDBT!
+      images[1].len_body: 8313560
+      images[2].chunk_id: SPLASHS!
+      images[2].len_body: 46512

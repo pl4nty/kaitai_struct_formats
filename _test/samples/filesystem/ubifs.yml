@@ -1,0 +1,6 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/filesystem/ubi/ubifs/__input__/banana.zlib.ubifs
+    sha256: e883e7b2ccba4d17dc614dcf816521d3a6178e992965fd175d88a32ed5d54111
+    expect:   # file(1): "UBIfs image, sequence number 24, length 4096, CRC 0x5fd2a002"
+      superblock.header.sequence_number: 24
+      superblock.header.crc: 0x5fd2a002

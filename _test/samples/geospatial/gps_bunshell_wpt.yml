@@ -1,0 +1,8 @@
+samples:
+  - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/abbb8136037748606d09406130a9532493fa2342/reference/bushnell.wpt
+    sha256: c8cda8c6ed80031b087133d20cb05040ddee7cb63ed3d3ed56734f03a5536ad5
+    expect:
+      len(waypoints): 1
+      waypoints[0].point.lat.raw: 552963000
+      waypoints[0].point.lon.raw: -1332431000
+      waypoints[0].name: Waterfall Resort

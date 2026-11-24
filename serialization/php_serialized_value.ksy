@@ -53,8 +53,7 @@ seq:
           custom_serialized_object_contents
         'value_type::variable_reference': int_contents
         'value_type::object_reference': int_contents
-    doc: |
-      The contents of the serialized value, which vary depending on the type.
+    doc: The contents of the serialized value, which vary depending on the type.
 enums:
   value_type:
     0x43: # 'C'
@@ -246,8 +245,7 @@ types:
     instances:
       num_entries:
         value: num_entries_dec.to_i
-        doc: |
-          The number of key-value pairs in the mapping, parsed as an integer.
+        doc: The number of key-value pairs in the mapping, parsed as an integer.
   array_contents:
     doc: The contents of an array value.
     seq:

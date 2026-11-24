@@ -59,25 +59,57 @@ types:
       - id: len_events
         type: u4
       - id: events
-        type: track_events
         size: len_events
+        type: track_events
   track_events:
     seq:
       - id: event
-        type: track_event
+        type: 'track_event(_index != 0 ? event[_index - 1].running_status_out : 0)'
         repeat: eos
   track_event:
+    doc: |
+      System Common and System Real-Time messages should be stored in an
+      F7 escape event in a Standard MIDI File. These messages are also
+      accepted here when stored directly with a delta-time. Tune Request
+      (F6), Timing Clock (F8), Start (FA), Continue (FB), Stop (FC) and
+      Active Sensing (FE) have no data bytes. Reserved status bytes F4,
+      F5, F9 and FD have no defined payload and are retained as
+      header-only events.
+
+      Running status is supported: if the byte after the delta-time is a
+      data byte (bit 7 clear), the event reuses the status byte of the
+      previous channel event and `event_header` is absent. SysEx and meta
+      events cancel running status.
+    params:
+      - id: prev_running_status
+        type: u1
+        doc: |
+          Status byte in effect from the previous event (0 if there is
+          none, e.g. at the start of the track or after a SysEx or meta
+          event).
     seq:
       - id: v_time
         type: vlq_base128_be
       - id: event_header
         type: u1
+        if: not is_running_status
       - id: meta_event_body
         type: meta_event_body
-        if: event_header == 0xff
+        if: status == 0xff
       - id: sysex_body
         type: sysex_event_body
-        if: event_header == 0xf0
+        if: status == 0xf0 or status == 0xf7
+        doc: |
+          Both F0 SysEx events and F7 continuation or escape events have
+          a variable-length size followed by that many data bytes.
+      - id: system_event_body
+        type:
+          switch-on: status
+          cases:
+            0xf1: time_code_quarter_frame_event
+            0xf2: song_position_pointer_event
+            0xf3: song_select_event
+        if: status >= 0xf1 and status <= 0xf3
       - id: event_body
         type:
           switch-on: event_type
@@ -90,10 +122,22 @@ types:
             0xd0: channel_pressure_event
             0xe0: pitch_bend_event
     instances:
+      status_byte_lookahead:
+        pos: _io.pos
+        type: u1
+        doc: First byte after the delta-time, used to detect running status.
+      is_running_status:
+        value: status_byte_lookahead & 0x80 == 0
+      status:
+        value: 'is_running_status ? prev_running_status : event_header'
+        doc: Effective status byte of this event.
+      running_status_out:
+        value: 'status < 0xf0 ? status : 0'
+        doc: Status byte that a following running-status event reuses.
       event_type:
-        value: event_header & 0xf0
+        value: status & 0xf0
       channel:
-        value: event_header & 0xf
+        value: status & 0xf
         if: event_type != 0xf0
   meta_event_body:
     seq:
@@ -154,6 +198,7 @@ types:
       - id: pressure
         type: u1
   pitch_bend_event:
+    doc-ref: https://midi.org/summary-of-midi-1-0-messages
     seq:
       - id: b1
         type: u1
@@ -161,9 +206,34 @@ types:
         type: u1
     instances:
       bend_value:
-        value: (b2 << 7) + b1 - 0x4000
+        value: (b2 << 7) + b1
+        doc: Unsigned 14-bit pitch bend value (0..16383), with 8192 meaning no bend.
       adj_bend_value:
-        value: bend_value - 0x4000
+        value: bend_value - 0x2000
+        doc: Pitch bend value centered at zero (-8192..8191).
+  time_code_quarter_frame_event:
+    seq:
+      - id: data
+        type: u1
+    instances:
+      message_type:
+        value: (data >> 4) & 0x7
+      value:
+        value: data & 0xf
+  song_position_pointer_event:
+    seq:
+      - id: lsb
+        type: u1
+      - id: msb
+        type: u1
+    instances:
+      song_position:
+        value: (msb << 7) + lsb
+        doc: Number of MIDI beats since the start of the song (1 beat = 6 MIDI clocks).
+  song_select_event:
+    seq:
+      - id: song_number
+        type: u1
   sysex_event_body:
     seq:
       - id: len

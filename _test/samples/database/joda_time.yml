@@ -1,0 +1,26 @@
+# Compiled timezone files embedded in the Joda-Time 2.12.7 release jar (Maven Central).
+# Expect values read by hand from a hex dump against DateTimeZoneBuilder.readFrom.
+samples:
+  - url: https://repo.maven.apache.org/maven2/joda-time/joda-time/2.12.7/joda-time-2.12.7.jar
+    sha256: 385282b005818cfaccdbe8bd2429811e7e641782f2b88932a6b8ff51d668f616
+    name: Europe_London
+    extract:
+      format: zip
+      member: org/joda/time/tz/data/Europe/London
+    eof: true
+    expect:
+      encoding: C
+      payload.pool_size: 4
+      payload.pool[0].value: LMT
+      payload.pool[3].value: GMT
+      payload.seasons_count: 161
+  - url: https://repo.maven.apache.org/maven2/joda-time/joda-time/2.12.7/joda-time-2.12.7.jar
+    sha256: 385282b005818cfaccdbe8bd2429811e7e641782f2b88932a6b8ff51d668f616
+    name: Etc_GMT+5
+    extract:
+      format: zip
+      member: org/joda/time/tz/data/Etc/GMT+5
+    eof: true
+    expect:
+      encoding: F
+      payload.name_key.value: "-05"

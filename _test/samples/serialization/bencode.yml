@@ -1,0 +1,7 @@
+samples:
+  - url: https://raw.githubusercontent.com/wader/fq/9e3c7d12335da0bc05174433105f1b0502532f08/format/bencode/testdata/bbb.torrent
+    sha256: 746eae3d873e34c371a24386baff80858e36b6a3ca118ed2f47d0dc15fb323ce
+    eof: true
+  - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/bencode.hexpat.torrent
+    sha256: cdd798b492544c894e0965821e854a72297e9dc7aa5285dc6b4c2922194212c6
+    eof: true

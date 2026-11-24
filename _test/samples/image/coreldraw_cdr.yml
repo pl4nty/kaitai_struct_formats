@@ -1,0 +1,14 @@
+# CorelDRAW X6 document from LibreOffice's libcdr import tests; the RIFF stream is the zip member
+# content/riffData.cdr. Expects from a hex read: RIFF size 0xf82, form CDRF (version letter F),
+# first chunk vrsn = 0x05dc (1500).
+samples:
+  - url: https://raw.githubusercontent.com/LibreOffice/core/abf91474804cd93cdf7d5308e96f03ac5bfc895a/writerperfect/qa/unit/data/draw/libcdr/pass/fdo65220-2.cdr
+    sha256: 88e62beb7a7ebe812f6ce06238017d07d215de9dbf76323dde93200f2d5dd348
+    name: fdo65220-2-riffData.cdr
+    extract: { format: zip, member: content/riffData.cdr }
+    params:
+      streams: 'None'  # only read by a lazy instance for external stream refs
+    expect:
+      riff_chunk.len_body: 3970
+      riff_chunk.body.form_type: CDR
+      version: 1500

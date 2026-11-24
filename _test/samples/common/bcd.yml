@@ -1,0 +1,26 @@
+# Library type: inline vectors.
+samples:
+- name: packed-be
+  data: '1234'
+  params:
+    num_digits: '4'
+    bits_per_digit: '4'
+    is_le: 'False'
+  expect:
+    as_int: 1234
+- name: packed-le
+  data: '1234'
+  params:
+    num_digits: '4'
+    bits_per_digit: '4'
+    is_le: 'True'
+  expect:
+    as_int: 4321
+- name: unpacked-be
+  data: 0907
+  params:
+    num_digits: '2'
+    bits_per_digit: '8'
+    is_le: 'False'
+  expect:
+    as_int: 97

@@ -1,0 +1,13 @@
+# pykeepass test databases. Expects from a hex read: signatures, then the u2 minor and major
+# file version (3.1 and 4.0).
+samples:
+  - url: https://raw.githubusercontent.com/libkeepass/pykeepass/aec256659e7b2b497a37891476241b720f60c84e/tests/test3.kdbx
+    sha256: 5f6fb723d94d597b1e1c27acbe1572c0a0e4607f16748afddff40ef2598b9d7f
+    expect:
+      version_major: 3
+      version_minor: 1
+  - url: https://raw.githubusercontent.com/libkeepass/pykeepass/aec256659e7b2b497a37891476241b720f60c84e/tests/test4_aes.kdbx
+    sha256: 68f1a0472526b22fba0e6b4d1c64ab5858f59647321307bcd2b015a51a174823
+    expect:
+      version_major: 4
+      version_minor: 0

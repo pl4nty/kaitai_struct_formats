@@ -1,0 +1,17 @@
+# NQP stage0 compilation units. Expects from a hex read of the header (MoarVM docs/bytecode.md
+# and src/core/bytecode.c): "MOARVM\r\n", version 7, then the segment offsets and counts.
+samples:
+  - url: https://raw.githubusercontent.com/Raku/nqp/69b1eafe035f4b4c16309020d6980a448b923b88/src/vm/moar/stage0/ModuleLoader.moarvm
+    sha256: 8c1ad3544ccbd0440f3402c28f15754be8ea776ecae9e5a0b9743f4a8c15377a
+    expect:
+      version: 7
+      num_sc_deps: 1
+      num_frames: 29
+      num_callsites: 19
+      num_strings: 157
+      ofs_bytecode: 6256
+      len_bytecode: 10698
+  - url: https://raw.githubusercontent.com/Raku/nqp/69b1eafe035f4b4c16309020d6980a448b923b88/src/vm/moar/stage0/MASTNodes.moarvm
+    sha256: e28cb71c7486d008aadb0ffdba166d3b622057a145efe9a3b3dd1a52ec3adb7f
+    expect:
+      version: 7

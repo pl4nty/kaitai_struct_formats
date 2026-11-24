@@ -1,0 +1,7 @@
+samples:
+  - url: https://raw.githubusercontent.com/log2timeline/dfvfs/bf5d2fd3131646306507490d0389783d69b57676/test_data/ext2.vmdk
+    sha256: 578b5f75af790030113a92c4227c6e53dad53a17e65cb491781dc75b3cef31f8
+    expect:
+      version: 1
+      size_max: 8192
+      size_grain: 128

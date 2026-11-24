@@ -1,0 +1,20 @@
+# expects from an independent walk (marker, u2be CRC-16/ARC verified, u2be header
+# length, protobuf header decoded generically, payload length = field 5)
+samples:
+  - url: https://raw.githubusercontent.com/RhetTbull/apple-plj-parser/edf06770a30c8e9271ad87339a53c19f02a9f2d7/tests/data/Album-snapshot.plj
+    sha256: 9ee93264eea63614b83ca76753b7a482924c6831dc62f3ee923d7411087602fa
+    eof: true
+    expect:
+      len(records): 10
+      records[0].header.entry_type.value: 0
+  - url: https://raw.githubusercontent.com/RhetTbull/apple-plj-parser/edf06770a30c8e9271ad87339a53c19f02a9f2d7/tests/data/Asset-change.plj
+    sha256: 0184767c2b5c713729f44f2feae2d0fad7a77cf604078ae191909b192aa50791
+    eof: true
+    expect:
+      len(records): 9
+      records[0].header.entry_type.value: 1
+  - url: https://raw.githubusercontent.com/RhetTbull/apple-plj-parser/edf06770a30c8e9271ad87339a53c19f02a9f2d7/tests/data/DetectedFace-snapshot.plj
+    sha256: 81ee6c4c8d964eac4ffd41f75e1f748463d06d6608322df637f7a001bfff73a1
+    eof: true
+    expect:
+      len(records): 7

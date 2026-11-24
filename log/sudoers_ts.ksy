@@ -1,9 +1,9 @@
 meta:
   id: sudoers_ts
   title: Sudoers Time Stamp file
-  license: CC0-1.0
   tags:
     - linux
+  license: CC0-1.0
   endian: le
 doc: |
   This spec can be used to parse sudo time stamp files located in directories
@@ -17,12 +17,12 @@ types:
   record:
     seq:
       - id: version
+        type: u2
         doc: version number of the timestamp_entry struct
-        type: u2
       - id: len_record
-        doc: size of the record in bytes
-        type: u2
         -orig-id: size
+        type: u2
+        doc: size of the record in bytes
       - id: payload
         size: len_record - 4
         type:
@@ -33,58 +33,60 @@ types:
   record_v1:
     seq:
       - id: type
-        doc: record type
         type: u2
         enum: ts_type
+        doc: record type
       - id: flags
-        doc: record flags
         type: ts_flag
+        doc: record flags
       - id: auth_uid
+        type: u4
         doc: user ID that was used for authentication
-        type: u4
       - id: sid
+        type: u4
         doc: session ID associated with tty/ppid
-        type: u4
       - id: ts
-        doc: time stamp, from a monotonic time source
         type: timespec
+        doc: time stamp, from a monotonic time source
       - id: ttydev
-        doc: device number of the terminal associated with the session
+        type: u4
         if: type == ts_type::tty
-        type: u4
+        doc: device number of the terminal associated with the session
       - id: ppid
-        doc: ID of the parent process
-        if: type == ts_type::ppid
         type: u4
+        if: type == ts_type::ppid
+        doc: ID of the parent process
   record_v2:
     seq:
       - id: type
-        doc: record type
         type: u2
         enum: ts_type
+        doc: record type
       - id: flags
-        doc: record flags
         type: ts_flag
+        doc: record flags
       - id: auth_uid
+        type: u4
         doc: user ID that was used for authentication
-        type: u4
       - id: sid
+        type: u4
         doc: ID of the user's terminal session, if present (when type is TS_TTY)
-        type: u4
       - id: start_time
-        doc: start time of the session leader for records of type TS_TTY or of the parent process for records of type TS_PPID
         type: timespec
+        doc: |
+          start time of the session leader for records of type TS_TTY or of the parent
+          process for records of type TS_PPID
       - id: ts
-        doc: actual time stamp, from a monotonic time source
         type: timespec
+        doc: actual time stamp, from a monotonic time source
       - id: ttydev
-        doc: device number of the terminal associated with the session
+        type: u4
         if: type == ts_type::tty
-        type: u4
+        doc: device number of the terminal associated with the session
       - id: ppid
-        doc: ID of the parent process
-        if: type == ts_type::ppid
         type: u4
+        if: type == ts_type::ppid
+        doc: ID of the parent process
   timespec:
     seq:
       - id: sec
@@ -96,22 +98,24 @@ types:
   ts_flag:
     seq:
       - id: reserved0
-        doc: Reserved (unused) bits
         type: b6
-      - id: anyuid
-        doc: ignore uid
-        type: b1
-        -orig-id: TS_ANYUID
-      - id: disabled
-        doc: entry disabled
-        type: b1
-        -orig-id: TS_DISABLED
-      - id: reserved1
         doc: Reserved (unused) bits
+      - id: anyuid
+        -orig-id: TS_ANYUID
+        type: b1
+        doc: ignore uid
+      - id: disabled
+        -orig-id: TS_DISABLED
+        type: b1
+        doc: entry disabled
+      - id: reserved1
         type: b8
+        doc: Reserved (unused) bits
 enums:
   ts_type:
-    1: global
+    1:
+      id: global_record
+      -orig-id: TS_GLOBAL
     2: tty
     3: ppid
     4: lockexcl

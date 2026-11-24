@@ -1,0 +1,22 @@
+# TCP payloads cut from the Wireshark sample capture fcgi.pcap.gz; expects from
+# `tshark -d tcp.port==9000,fcgi -O fcgi`
+samples:
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/fcgi.pcap.gz
+    sha256: 7c3bcba991d97dc7e46f9cc7466bec911e3288c54a58cac05ccb51b9f4b59573
+    name: fcgi-frame4-begin-request
+    extract: { format: gzip, then: { format: slice, offset: 368, size: 16 } }
+    eof: true
+    expect:
+      len(records): 1
+      records[0].header.type: begin_request
+      records[0].header.request_id: 1
+      records[0].header.content_length: 8
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/fcgi.pcap.gz
+    sha256: 7c3bcba991d97dc7e46f9cc7466bec911e3288c54a58cac05ccb51b9f4b59573
+    name: fcgi-frame5-params
+    extract: { format: gzip, then: { format: slice, offset: 466, size: 1055 } }
+    eof: true
+    expect:
+      len(records): 1
+      records[0].header.type: params
+      records[0].header.content_length: 1047

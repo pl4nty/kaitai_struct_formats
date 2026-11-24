@@ -1,0 +1,13 @@
+# linux console entry from conda-forge ncurses 6.3; extended capabilities (AX, U8#1, E3, kcbt2) per
+# `infocmp -x -1` vs `infocmp -1`, counts cross-checked with a hex read
+samples:
+  - url: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.3-h27087fc_1.tar.bz2
+    sha256: b801e8cf4b2c9a30bce5616746c6c2a4e36427f045b46d9fc08a4ed40a9f7065
+    name: linux
+    extract: { format: bz2, then: { format: tar, member: share/terminfo/l/linux } }
+    eof: true
+    expect:
+      names_section.names: linux|Linux console
+      extended_storage.num_boolean_capabilities: 1
+      extended_storage.num_numeric_capabilities: 1
+      extended_storage.num_string_capabilities: 2

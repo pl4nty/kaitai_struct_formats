@@ -1,0 +1,17 @@
+samples:
+  - url: https://archive.org/download/wolfenstein-zx/WOLF2OO4.TRD
+    sha256: 8970ddb24507f9abdd4a19b00f3f5ab1ecd60ad207872f5a3f0a71d9569b0acf
+    expect:   # manual hex read of TR-DOS catalog and sector 9 (justsolve TRD docs)
+      len(files): 65          # 64 entries + 0x00 terminator
+      files[0].extension: 0x43
+      volume_info.num_files: 64
+      volume_info.num_free_sectors: 127
+      volume_info.disk_type: 0x16
+      volume_info.label: wolf2oo4
+  - url: https://archive.org/download/wolfenstein-zx/WOLFEDIT04-WED_PRO.TRD
+    sha256: 85d6f501cf0c753d13fcce3f98ebf11de68e84514f433aaa3a0d817b2888bd9d
+    expect:   # manual hex read of TR-DOS catalog and sector 9
+      len(files): 13
+      volume_info.num_files: 12
+      volume_info.num_free_sectors: 2209
+      volume_info.first_free_sector_track: 21

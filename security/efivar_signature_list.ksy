@@ -18,7 +18,8 @@ doc: |
 
   Note:
 
-  * `d719b2cb-3d3a-4596-a3bc-dad00e67656f` is defined as `EFI_IMAGE_SECURITY_DATABASE_GUID`
+  * `d719b2cb-3d3a-4596-a3bc-dad00e67656f` is defined as
+    `EFI_IMAGE_SECURITY_DATABASE_GUID`
   * `8be4df61-93ca-11d2-aa0d-00e098032b8c` is defined as `EFI_GLOBAL_VARIABLE`
 
   Each file contains an EFI attribute (32-bit integer) followed by a list of
@@ -26,8 +27,8 @@ doc: |
 doc-ref: https://uefi.org/sites/default/files/resources/UEFI_Spec_2_8_final.pdf
 seq:
   - id: var_attributes
-    doc: Attributes of the UEFI variable
     type: efi_var_attr
+    doc: Attributes of the UEFI variable
   - id: signatures
     type: signature_list
     repeat: eos
@@ -36,33 +37,33 @@ types:
     doc-ref: EFI_SIGNATURE_LIST
     seq:
       - id: signature_type
-        doc: Type of the signature as a GUID
         -orig-id: SignatureType
         size: 0x10
+        doc: Type of the signature as a GUID
       - id: len_signature_list
-        doc: Total size of the signature list, including this header
-        type: u4
         -orig-id: SignatureListSize
+        type: u4
+        doc: Total size of the signature list, including this header
       - id: len_signature_header
-        doc: Size of the signature header which precedes the array of signatures
-        type: u4
         -orig-id: SignatureHeaderSize
-      - id: len_signature
-        doc: Size of each signature
         type: u4
+        doc: Size of the signature header which precedes the array of signatures
+      - id: len_signature
         -orig-id: signatureSize
+        type: u4
+        doc: Size of each signature
       - id: header
-        doc: Header before the array of signatures
         -orig-id: SignatureHeader
         size: len_signature_header
+        doc: Header before the array of signatures
       - id: signatures
-        doc: An array of signatures
         -orig-id: Signatures
         size: len_signature
+        type: signature_data
         repeat: expr
         repeat-expr: (len_signature_list - len_signature_header - 0x1c) / len_signature
         if: len_signature > 0
-        type: signature_data
+        doc: An array of signatures
     instances:
       is_cert_sha256:
         value: signature_type == [0x26, 0x16, 0xc4, 0xc1, 0x4c, 0x50, 0x92, 0x40, 0xac, 0xa9, 0x41, 0xf9, 0x36, 0x93, 0x43, 0x28]
@@ -70,7 +71,9 @@ types:
         doc-ref: EFI_CERT_SHA256_GUID
       is_cert_rsa2048_key:
         value: signature_type == [0xe8, 0x66, 0x57, 0x3c, 0x9c, 0x26, 0x34, 0x4e, 0xaa, 0x14, 0xed, 0x77, 0x6e, 0x85, 0xb3, 0xb6]
-        doc: RSA-2048 key (only the modulus since the public key exponent is known to be 0x10001)
+        doc: |
+          RSA-2048 key (only the modulus since the public key exponent is known to be
+          0x10001)
         doc-ref: EFI_CERT_RSA2048_GUID
       is_cert_rsa2048_sha256:
         value: signature_type == [0x90, 0x61, 0xb3, 0xe2, 0x9b, 0x87, 0x3d, 0x4a, 0xad, 0x8d, 0xf2, 0xe7, 0xbb, 0xa3, 0x27, 0x84]
@@ -102,15 +105,21 @@ types:
         doc-ref: EFI_CERT_SHA512_GUID
       is_cert_sha256_x509:
         value: signature_type == [0x92, 0xa4, 0xd2, 0x3b, 0xc0, 0x96, 0x79, 0x40, 0xb4, 0x20, 0xfc, 0xf9, 0x8e, 0xf1, 0x03, 0xed]
-        doc: SHA256 hash of an X.509 certificate's To-Be-Signed contents, and a time of revocation
+        doc: |
+          SHA256 hash of an X.509 certificate's To-Be-Signed contents, and a time of
+          revocation
         doc-ref: EFI_CERT_X509_SHA256_GUID
       is_cert_sha384_x509:
         value: signature_type == [0x6e, 0x87, 0x76, 0x70, 0xc2, 0x80, 0xe6, 0x4e, 0xaa, 0xd2, 0x28, 0xb3, 0x49, 0xa6, 0x86, 0x5b]
-        doc: SHA384 hash of an X.509 certificate's To-Be-Signed contents, and a time of revocation
+        doc: |
+          SHA384 hash of an X.509 certificate's To-Be-Signed contents, and a time of
+          revocation
         doc-ref: EFI_CERT_X509_SHA384_GUID
       is_cert_sha512_x509:
         value: signature_type == [0x63, 0xbf, 0x6d, 0x44, 0x02, 0x25, 0xda, 0x4c, 0xbc, 0xfa, 0x24, 0x65, 0xd2, 0xb0, 0xfe, 0x9d]
-        doc: SHA512 hash of an X.509 certificate's To-Be-Signed contents, and a time of revocation
+        doc: |
+          SHA512 hash of an X.509 certificate's To-Be-Signed contents, and a time of
+          revocation
         doc-ref: EFI_CERT_X509_SHA512_GUID
       is_cert_der_pkcs7:
         value: signature_type == [0x9d, 0xd2, 0xaf, 0x4a, 0xdf, 0x68, 0xee, 0x49, 0x8a, 0xa9, 0x34, 0x7d, 0x37, 0x56, 0x65, 0xa7]
@@ -120,40 +129,40 @@ types:
     doc-ref: EFI_SIGNATURE_DATA
     seq:
       - id: owner
-        doc: An identifier which identifies the agent which added the signature to the list
         -orig-id: SignatureOwner
         size: 0x10
+        doc: An identifier which identifies the agent which added the signature to the list
       - id: data
-        doc: The format of the signature is defined by the SignatureType.
         -orig-id: SignatureData
         size-eos: true
+        doc: The format of the signature is defined by the SignatureType.
   efi_var_attr:
     doc: Attributes of a UEFI variable
     seq:
       - id: enhanced_authenticated_access
-        type: b1
         -orig-id: EFI_VARIABLE_ENHANCED_AUTHENTICATED_ACCESS
+        type: b1
       - id: append_write
-        type: b1
         -orig-id: EFI_VARIABLE_APPEND_WRITE
+        type: b1
       - id: time_based_authenticated_write_access
-        type: b1
         -orig-id: EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS
+        type: b1
       - id: authenticated_write_access
-        type: b1
         -orig-id: EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS
+        type: b1
       - id: hardware_error_record
-        type: b1
         -orig-id: EFI_VARIABLE_HARDWARE_ERROR_RECORD
+        type: b1
       - id: runtime_access
-        type: b1
         -orig-id: EFI_VARIABLE_RUNTIME_ACCESS
+        type: b1
       - id: bootservice_access
-        type: b1
         -orig-id: EFI_VARIABLE_BOOTSERVICE_ACCESS
-      - id: non_volatile
         type: b1
+      - id: non_volatile
         -orig-id: EFI_VARIABLE_NON_VOLATILE
+        type: b1
       - id: reserved1
-        doc: Reserved (unused) bits
         type: b24
+        doc: Reserved (unused) bits

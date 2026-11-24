@@ -35,10 +35,12 @@ instances:
       string identifiers list.
 
       These are identifiers for all the strings used by this file, either for
-      internal naming (e.g., type descriptors) or as constant objects referred to by code.
+      internal naming (e.g., type descriptors) or as constant objects referred to by
+      code.
 
       This list must be sorted by string contents, using UTF-16 code point values
-      (not in a locale-sensitive manner), and it must not contain any duplicate entries.
+      (not in a locale-sensitive manner), and it must not contain any duplicate
+      entries.
   type_ids:
     pos: header.type_ids_off
     type: type_id_item
@@ -50,7 +52,8 @@ instances:
       These are identifiers for all types (classes, arrays, or primitive types)
       referred to by this file, whether defined in the file or not.
 
-      This list must be sorted by string_id index, and it must not contain any duplicate entries.
+      This list must be sorted by string_id index, and it must not contain any
+      duplicate entries.
   proto_ids:
     pos: header.proto_ids_off
     type: proto_id_item
@@ -72,7 +75,8 @@ instances:
     doc: |
       field identifiers list.
 
-      These are identifiers for all fields referred to by this file, whether defined in the file or not.
+      These are identifiers for all fields referred to by this file, whether defined
+      in the file or not.
 
       This list must be sorted, where the defining type (by type_id index)
       is the major order, field name (by string_id index) is the intermediate
@@ -149,7 +153,7 @@ types:
       - id: version_str
         size: 4
         type: strz
-        encoding: ascii
+        encoding: ASCII
       - id: checksum
         type: u4
         doc: |
@@ -162,8 +166,7 @@ types:
           and this field); used to uniquely identify files
       - id: file_size
         type: u4
-        doc: |
-          size of the entire file (including the header), in bytes
+        doc: size of the entire file (including the header), in bytes
       - id: header_size
         type: u4
         # guard: 0x70
@@ -176,15 +179,15 @@ types:
         enum: endian_constant
       - id: link_size
         type: u4
-        doc: |
-          size of the link section, or 0 if this file isn't statically linked
+        doc: size of the link section, or 0 if this file isn't statically linked
       - id: link_off
         type: u4
         doc: |
           offset from the start of the file to the link section, or 0 if link_size == 0.
           The offset, if non-zero, should be to an offset into the link_data section.
           The format of the data pointed at is left unspecified by this document;
-          this header field (and the previous) are left as hooks for use by runtime implementations.
+          this header field (and the previous) are left as hooks for use by runtime
+          implementations.
       - id: map_off
         type: u4
         doc: |
@@ -193,8 +196,7 @@ types:
           section, and the data should be in the format specified by "map_list" below.
       - id: string_ids_size
         type: u4
-        doc: |
-          count of strings in the string identifiers list
+        doc: count of strings in the string identifiers list
       - id: string_ids_off
         type: u4
         doc: |
@@ -203,8 +205,7 @@ types:
           The offset, if non-zero, should be to the start of the string_ids section.
       - id: type_ids_size
         type: u4
-        doc: |
-          count of elements in the type identifiers list, at most 65535
+        doc: count of elements in the type identifiers list, at most 65535
       - id: type_ids_off
         type: u4
         doc: |
@@ -213,8 +214,7 @@ types:
           The offset, if non-zero, should be to the start of the type_ids section.
       - id: proto_ids_size
         type: u4
-        doc: |
-          count of elements in the prototype identifiers list, at most 65535
+        doc: count of elements in the prototype identifiers list, at most 65535
       - id: proto_ids_off
         type: u4
         doc: |
@@ -223,8 +223,7 @@ types:
           The offset, if non-zero, should be to the start of the proto_ids section.
       - id: field_ids_size
         type: u4
-        doc: |
-          count of elements in the field identifiers list
+        doc: count of elements in the field identifiers list
       - id: field_ids_off
         type: u4
         doc: |
@@ -233,8 +232,7 @@ types:
           The offset, if non-zero, should be to the start of the field_ids section.
       - id: method_ids_size
         type: u4
-        doc: |
-          count of elements in the method identifiers list
+        doc: count of elements in the method identifiers list
       - id: method_ids_off
         type: u4
         doc: |
@@ -243,8 +241,7 @@ types:
           The offset, if non-zero, should be to the start of the method_ids section.
       - id: class_defs_size
         type: u4
-        doc: |
-          count of elements in the class definitions list
+        doc: count of elements in the class definitions list
       - id: class_defs_off
         type: u4
         doc: |
@@ -253,12 +250,10 @@ types:
           The offset, if non-zero, should be to the start of the class_defs section.
       - id: data_size
         type: u4
-        doc: |
-          Size of data section in bytes. Must be an even multiple of sizeof(uint).
+        doc: Size of data section in bytes. Must be an even multiple of sizeof(uint).
       - id: data_off
         type: u4
-        doc: |
-          offset from the start of the file to the start of the data section.
+        doc: offset from the start of the file to the start of the data section.
     enums:
       endian_constant:
         0x12345678: endian_constant
@@ -273,21 +268,30 @@ types:
           The offset should be to a location in the data section, and the data
           should be in the format specified by "string_data_item" below.
           There is no alignment requirement for the offset.
+    instances:
+      value:
+        pos: string_data_off
+        type: string_data_item
+        -webide-parse-mode: eager
     types:
       string_data_item:
         -webide-representation: "{data}"
         seq:
           - id: utf16_size
             type: vlq_base128_le
+            doc: |
+              Size of this string, in UTF-16 code units (which is the
+              "length" of the string in many systems). That is, this is the
+              decoded length of the string, not the byte length of `data`.
           - id: data
-            size: utf16_size.value
             type: str
-            encoding: ascii
-    instances:
-      value:
-        pos: string_data_off
-        type: string_data_item
-        -webide-parse-mode: eager
+            terminator: 0
+            encoding: UTF-8
+            doc: |
+              A series of MUTF-8 code units (a.k.a. octets, a.k.a. bytes)
+              followed by a byte of value 0. MUTF-8 matches UTF-8 except for
+              U+0000 (encoded as C0 80) and supplementary characters (encoded
+              as surrogate pairs), which a strict UTF-8 decoder rejects.
   type_id_item:
     -webide-representation: "{type_name}"
     seq:
@@ -306,17 +310,18 @@ types:
       - id: shorty_idx
         type: u4
         doc: |
-          index into the string_ids list for the short-form descriptor string of this prototype.
+          index into the string_ids list for the short-form descriptor string of this
+          prototype.
           The string must conform to the syntax for ShortyDescriptor, defined above,
           and must correspond to the return type and parameters of this item.
       - id: return_type_idx
         type: u4
-        doc: |
-          index into the type_ids list for the return type of this prototype
+        doc: index into the type_ids list for the return type of this prototype
       - id: parameters_off
         type: u4
         doc: |
-          offset from the start of the file to the list of parameter types for this prototype,
+          offset from the start of the file to the list of parameter types for this
+          prototype,
           or 0 if this prototype has no parameters.
           This offset, if non-zero, should be in the data section, and the data
           there should be in the format specified by "type_list" below.
@@ -344,8 +349,7 @@ types:
           This must be a class type, and not an array or primitive type.
       - id: type_idx
         type: u2
-        doc: |
-          index into the type_ids list for the type of this field
+        doc: index into the type_ids list for the type of this field
       - id: name_idx
         type: u4
         doc: |
@@ -371,8 +375,7 @@ types:
           This must be a class or array type, and not a primitive type.
       - id: proto_idx
         type: u2
-        doc: |
-          index into the proto_ids list for the prototype of this method
+        doc: index into the proto_ids list for the prototype of this method
       - id: name_idx
         type: u4
         doc: |
@@ -415,7 +418,8 @@ types:
       - id: interfaces_off
         type: u4
         doc: |
-          offset from the start of the file to the list of interfaces, or 0 if there are none.
+          offset from the start of the file to the list of interfaces, or 0 if there are
+          none.
 
           This offset should be in the data section, and the data there should
           be in the format specified by "type_list" below. Each of the elements
@@ -481,6 +485,10 @@ types:
         pos: static_values_off
         type: encoded_array_item
         if: static_values_off != 0
+      sourcefile_name:
+        value: _root.string_ids[source_file_idx].value.data
+        if: source_file_idx != 0xffff_ffff
+        doc: Name of the source file, unless `source_file_idx` is NO_INDEX
   encoded_array_item:
     seq:
       - id: value
@@ -495,8 +503,7 @@ types:
           The string must conform to the syntax for MemberName, defined above.
       - id: value
         type: encoded_value
-        doc: |
-          element value
+        doc: element value
   encoded_annotation:
     seq:
       - id: type_idx
@@ -507,8 +514,7 @@ types:
           This must be a class (not array or primitive) type.
       - id: size
         type: vlq_base128_le
-        doc: |
-          number of name-value mappings in this annotation
+        doc: number of name-value mappings in this annotation
       - id: elements
         type: annotation_element
         repeat: expr
@@ -624,24 +630,188 @@ types:
           The offset should be to a location in the data section.
 
           The format of the data is specified by "code_item" below.
+    instances:
+      method_body:
+        io: _root._io
+        pos: code_off.value
+        type: code_item
+  code_item:
+    doc-ref: 'https://source.android.com/devices/tech/dalvik/dex-format#code-item'
+    seq:
+      - id: register_count
+        -orig-id: registers_size
+        type: u2
+        doc: The number of registers used by this code.
+      - id: ins_size
+        type: u2
+        doc: |
+          The number of words of incoming arguments to the method that this
+          code is for.
+      - id: outs_size
+        type: u2
+        doc: |
+          The number of words of outgoing argument space required by this
+          code for method invocation.
+      - id: tries_size
+        type: u2
+        doc: |
+          The number of try_items for this instance.
+
+          If non-zero, then these appear as the tries array just after the
+          insns in this instance.
+      - id: debug_info_off
+        type: u4
+        doc: |
+          Offset from the start of the file to the debug info (line numbers +
+          local variable info) sequence for this code, or 0 if there simply is
+          no information.
+
+          The offset, if non-zero, should be to a location in the data section.
+
+          The format of the data is specified by "debug_info_item".
+        doc-ref: 'https://source.android.com/devices/tech/dalvik/dex-format#debug-info-item'
+      - id: ops_size
+        -orig-id: insns_size
+        type: u4
+        doc: Size of the instructions list, in 16-bit code units.
+      - id: ops
+        -orig-id: insns
+        size: ops_size * 2
+        doc: |
+          Actual array of bytecode.
+
+          The format of code in an insns array is specified by the companion
+          document "Dalvik bytecode".
+
+          Note that though this is defined as an array of ushort, there are some
+          internal structures that prefer four-byte alignment. Also, if this
+          happens to be in an endian-swapped file, then the swapping is only
+          done on individual ushorts and not on the larger internal structures.
+        doc-ref: 'https://source.android.com/devices/tech/dalvik/dalvik-bytecode'
+      - id: padding
+        contents:
+          - 0x00
+          - 0x00
+        if: tries_size != 0 and ops_size % 2 == 1
+        doc: |
+          Two bytes of padding to make tries four-byte aligned.
+
+          This element is only present if tries_size is non-zero and ops_size
+          is odd.
+      - id: tries
+        type: try_item
+        repeat: expr
+        repeat-expr: tries_size
+        if: tries_size != 0
+        doc: |
+          Array indicating where in the code exceptions are caught and how to
+          handle them.
+
+          Elements of the array must be non-overlapping in range and in order
+          from low to high address.
+
+          This element is only present if tries_size is non-zero.
+      - id: handlers
+        type: encoded_catch_handler_list
+        if: tries_size != 0
+        doc: |
+          Bytes representing a list of lists of catch types and associated
+          handler addresses.
+
+          Each try_item has a byte-wise offset into this structure.
+
+          This element is only present if tries_size is non-zero.
+  try_item:
+    doc-ref: 'https://source.android.com/devices/tech/dalvik/dex-format#type-item'
+    seq:
+      - id: start_addr
+        type: u4
+        doc: |
+          Start address of the block of code covered by this entry.
+
+          The address is a count of 16-bit code units to the start of the first
+          covered instruction.
+      - id: insn_count
+        type: u2
+        doc: |
+          Number of 16-bit code units covered by this entry.
+
+          The last code unit covered (inclusive) is start_addr + insn_count - 1.
+      - id: handler_off
+        type: u2
+        doc: |
+          Offset in bytes from the start of the associated
+          encoded_catch_hander_list to the encoded_catch_handler for this
+          entry.
+
+          This must be an offset to the start of an encoded_catch_handler.
+  encoded_catch_handler_list:
+    doc-ref: 'https://source.android.com/devices/tech/dalvik/dex-format#encoded-catch-handler'
+    seq:
+      - id: size
+        type: vlq_base128_le
+        doc: Size of this list, in entries.
+      - id: list
+        type: encoded_catch_handler
+        repeat: expr
+        repeat-expr: size.value
+        doc: |
+          Actual list of handler lists, represented directly (not as offsets),
+          and concatenated sequentially.
+  encoded_catch_handler:
+    doc-ref: 'https://source.android.com/devices/tech/dalvik/dex-format#encoded-catch-handler'
+    seq:
+      - id: size
+        type: vlq_base128_le
+        doc: |
+          Number of catch types in this list.
+
+          If non-positive, then this is the negative of the number of catch
+          types, and the catches are followed by a catch-all handler. For
+          example: A size of 0 means that there is a catch-all but no explicitly
+          typed catches. A size of 2 means that there are two explicitly typed
+          catches and no catch-all. And a size of -1 means that there is one
+          typed catch along with a catch-all.
+      - id: handlers
+        type: encoded_type_addr_pair
+        repeat: expr
+        repeat-expr: 'signed_size < 0 ? -signed_size : signed_size'
+        doc: |
+          Stream of abs(size) encoded items, one for each caught type, in the
+          order that the types should be tested.
+      - id: catch_all_addr
+        type: vlq_base128_le
+        if: signed_size < 0
+        doc: |
+          Bytecode address of the catch-all handler.
+
+          This element is only present if size is non-positive.
+    instances:
+      signed_size:
+        value: size.value_signed
+  encoded_type_addr_pair:
+    doc-ref: 'https://source.android.com/devices/tech/dalvik/dex-format#encoded-type-addr-pair'
+    seq:
+      - id: type_idx
+        type: vlq_base128_le
+        doc: Index into the type_ids list for the type of the exception to catch.
+      - id: addr
+        type: vlq_base128_le
+        doc: Bytecode address of the associated exception handler.
   class_data_item:
     seq:
       - id: static_fields_size
         type: vlq_base128_le
-        doc: |
-          the number of static fields defined in this item
+        doc: the number of static fields defined in this item
       - id: instance_fields_size
         type: vlq_base128_le
-        doc: |
-          the number of instance fields defined in this item
+        doc: the number of instance fields defined in this item
       - id: direct_methods_size
         type: vlq_base128_le
-        doc: |
-          the number of direct methods defined in this item
+        doc: the number of direct methods defined in this item
       - id: virtual_methods_size
         type: vlq_base128_le
-        doc: |
-          the number of virtual methods defined in this item
+        doc: the number of virtual methods defined in this item
       - id: static_fields
         type: encoded_field
         repeat: expr
@@ -687,20 +857,16 @@ types:
       - id: type
         type: u2
         enum: map_item_type
-        doc: |
-          type of the items; see table below
+        doc: type of the items; see table below
       - id: unused
         type: u2
-        doc: |
-          (unused)
+        doc: (unused)
       - id: size
         type: u4
-        doc: |
-          count of the number of items to be found at the indicated offset
+        doc: count of the number of items to be found at the indicated offset
       - id: offset
         type: u4
-        doc: |
-          offset from the start of the file to the items in question
+        doc: offset from the start of the file to the items in question
     enums:
       map_item_type:
         0x0000: header_item

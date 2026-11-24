@@ -1,0 +1,14 @@
+# expect values from Python's stdlib wave module
+samples:
+  - url: https://raw.githubusercontent.com/python/cpython/187da85d248a884d47da2ae14573676a5af3240e/Lib/test/audiodata/pluck-pcm16.wav
+    sha256: 0c7b9ee51db4a46087da7530ade979f38e5de7a2e068b5a58cc9cc543aa8e394
+    expect:
+      form_type: wave
+      subchunks[0].chunk_data.n_channels: 2
+      subchunks[0].chunk_data.n_samples_per_sec: 11025
+  - url: https://raw.githubusercontent.com/python/cpython/187da85d248a884d47da2ae14573676a5af3240e/Lib/test/audiodata/pluck-pcm24-ext.wav
+    sha256: 0c7a222a2d24b2ecc8523b399aeaa3dd52b113f0ef7ffe0720f669ca21e133b9
+    expect:
+      subchunks[0].chunk_data.w_bits_per_sample: 24
+  - url: https://raw.githubusercontent.com/quodlibet/mutagen/48b3463d0ed70ba2b797ac9cc83983066ecf076a/tests/data/silence-2s-PCM-16000-08-ID3v23.wav
+    sha256: 0aa9b83850c24894dff7fb594915782e3e8a5a3b8cc3c0a07dc78a265dc7dfc3

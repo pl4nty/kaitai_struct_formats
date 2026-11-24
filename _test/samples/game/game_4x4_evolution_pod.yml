@@ -1,0 +1,9 @@
+samples:
+  - url: https://archive.org/download/4x4-evolution-2-custom-tracks-v-1.1/4x4%20Evolution%202%20Custom%20tracks%20v1.1.zip/4x4%20Evolution%202%20Custom%20tracks%20v1.1%2FVolume%201%2FOOPSTCKL.pod
+    sha256: 70c6df978c3fa96c366858f86b788c28aa48cede914309b6baa0fe923d03c1f9
+    name: OOPSTCKL.pod
+    expect:
+      header.num_files: 24
+      header.description: -=Created with PODTool=-
+      files[0].len_file_data: 16111
+      files[0].ofs_file_data: 1140

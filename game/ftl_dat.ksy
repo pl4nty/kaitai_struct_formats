@@ -29,8 +29,8 @@ types:
       - id: len_filename
         type: u4
       - id: filename
-        type: str
         size: len_filename
+        type: str
         encoding: UTF-8
       - id: body
         size: len_file

@@ -6,14 +6,21 @@ meta:
     wikidata: Q32097899
   license: CC0-1.0
   endian: le
+instances:
+  footer:
+    pos: _io.size - 8
+    type: footer
+  index:
+    pos: _io.size - 8 - footer.index_size
+    type: index
 types:
   pstr:
     seq:
       - id: size
         type: u4
       - id: str
-        type: str
         size: size
+        type: str
         encoding: ASCII
   footer:
     seq:
@@ -57,13 +64,6 @@ types:
       contents:
         value: 'flags == compression::zlib ? contents_zlib : contents_raw'
         if: flags == compression::zlib or flags == compression::none
-instances:
-  footer:
-    pos: _io.size - 8
-    type: footer
-  index:
-    pos: _io.size - 8 - footer.index_size
-    type: index
 enums:
   compression:
     0: none

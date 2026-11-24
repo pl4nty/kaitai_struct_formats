@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/husqvarna_vip/samples/random1-me.vip
+  sha256: 3587dfd8d1b028ab9fe211a859473d454121642869fdc1535867ff3c981e4842
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/husqvarna_vip/samples/random1-premier.vip
+  sha256: f94821fca4ce236df8148139bf8fe3acb2a1ef19201ce66c52bbda47d57d1020
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/husqvarna_vip/samples/random1-wilcom.VIP
+  sha256: ab68b37c054b89d1cd9ab8764e0f38bf38d8fbb3a0c7437982fba9c60cb96964
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/husqvarna_vip/samples/spiralbox-me.vip
+  sha256: 895bf35329fd3c250e7938c3d343f1eb4dfacb752751d596ff2a6ba053c9cf13

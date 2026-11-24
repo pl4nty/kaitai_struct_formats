@@ -1,0 +1,11 @@
+samples:
+  - url: https://raw.githubusercontent.com/Betreazen/disciples2-godot/2eae2eb344f6bfa4e810c2940d9bc4244552b9ce/tools/d2probe/Examples/Custom%20Lobby/CustomLobby.ff
+    sha256: 6b2eca66a21d978364f5a8a89924baee4aed6b67e7c7be380f86c3f43892dfd8
+    name: CustomLobby.ff
+    eof: true
+    timeout: 120
+    expect:
+      table_of_contents_offset: 284123
+      len(records): 49
+      records[1].header.id: 2
+      records[1].contents.entries_count: 46

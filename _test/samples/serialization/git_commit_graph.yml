@@ -1,0 +1,31 @@
+# commit-graph files from gitoxide's generated test repositories; `git commit-graph verify` passes on them and
+# `git rev-list --all | wc -l` gives the commit counts
+samples:
+  - url: https://raw.githubusercontent.com/GitoxideLabs/gitoxide/9abb53183a296185fc4e98376bc4ab895f39c2fe/gix-commitgraph/tests/fixtures/generated-archives/octopus_merges.tar
+    sha256: e76820940038624165ae61c9ecf26eeb22ae651207c3e0dbe473c21f886fd368
+    name: octopus_merges-commit-graph
+    extract: { format: tar, member: .git/objects/info/commit-graph }
+    eof: true
+    expect:
+      # git 2.43 `commit-graph verify` passes; values from `git rev-list --all --count`,
+      # `git rev-list --parents` (positions = index in sorted `git rev-list --all`) and `git show -s --format=%ct`
+      num_chunks: 5
+      chunks[0].body.num_commits: 7
+      chunks[1].body.oids[0]: 01fd2dcb33a3a0d0b14772aefc6fcb823bcc79c1
+      chunks[2].body.commits[3].parent1: 0
+      chunks[2].body.commits[3].extra_edge_index: 0
+      chunks[4].body.edges[1].position: 4
+      chunks[4].body.edges[1].is_last: true
+      chunks[2].body.commits[6].commit_time: 946771200
+  - url: https://raw.githubusercontent.com/GitoxideLabs/gitoxide/9abb53183a296185fc4e98376bc4ab895f39c2fe/gix-commitgraph/tests/fixtures/generated-archives/two_parents.tar
+    sha256: 1923e61c1b7b169d56abfdf1f056a7a9ad653889c77ebff9338f9d6116620049
+    name: two_parents-commit-graph
+    extract: { format: tar, member: .git/objects/info/commit-graph }
+    eof: true
+    expect:
+      # same sources as above; 4bf525a6 (index 1) has parents 7506a95b (index 2) and 12ae061a (index 0)
+      chunks[0].body.num_commits: 3
+      chunks[2].body.commits[1].tree: 4b825dc642cb6eb9a060e54bf8d69288fbee4904
+      chunks[2].body.commits[1].parent1: 2
+      chunks[2].body.commits[1].parent2: 0
+      chunks[2].body.commits[1].generation: 2

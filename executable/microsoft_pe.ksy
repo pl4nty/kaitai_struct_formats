@@ -14,8 +14,9 @@ meta:
     - executable
     - windows
   license: CC0-1.0
-  ks-version: 0.7
+  ks-version: 0.9
   endian: le
+  bit-endian: le
 doc-ref: https://learn.microsoft.com/en-us/windows/win32/debug/pe-format
 seq:
   - id: mz
@@ -46,18 +47,38 @@ types:
       - id: coff_hdr
         type: coff_header
       - id: optional_hdr
-        type: optional_header
         size: coff_hdr.size_of_optional_header
+        type: optional_header
       - id: sections
+        type: section
         repeat: expr
         repeat-expr: coff_hdr.number_of_sections
-        type: section
     instances:
       certificate_table:
         pos: optional_hdr.data_dirs.certificate_table.virtual_address
         size: optional_hdr.data_dirs.certificate_table.size
         type: certificate_table
         if: optional_hdr.data_dirs.certificate_table.virtual_address != 0
+      debug_table:
+        pos: optional_hdr.data_dirs.debug.virtual_address - (sections[1].virtual_address - sections[1].pointer_to_raw_data)
+        size: optional_hdr.data_dirs.debug.size
+        type: debug_table_entries
+        if: optional_hdr.data_dirs.debug.virtual_address != 0
+      resources_table:
+        pos: optional_hdr.data_dirs.resource_table.pointer_to_raw_data
+        size: optional_hdr.data_dirs.resource_table.size
+        type: resource_directory_table(0, optional_hdr.data_dirs.resource_table.pointer_to_raw_data, optional_hdr.data_dirs.resource_table.virtual_address)
+        if: optional_hdr.data_dirs.resource_table.size > 0
+      dotnet_header:
+        pos: optional_hdr.data_dirs.clr_runtime_header.pointer_to_raw_data
+        size: optional_hdr.data_dirs.clr_runtime_header.size
+        type: dotnet_header
+        if: optional_hdr.data_dirs.clr_runtime_header.virtual_address != 0
+      dotnet_metadata_header:
+        pos: dotnet_header.meta_data.pointer_to_raw_data
+        size: dotnet_header.meta_data.size
+        type: dotnet_metadata_header
+        if: optional_hdr.data_dirs.clr_runtime_header.virtual_address != 0 and dotnet_header.meta_data.size != 0
   coff_header:
     doc-ref: 3.3. COFF File Header (Object and Image)
     seq:
@@ -87,8 +108,13 @@ types:
       symbol_table:
         pos: pointer_to_symbol_table
         type: coff_symbol
-        repeat: expr
-        repeat-expr: number_of_symbols
+        repeat: until
+        repeat-until: _io.pos >= symbol_name_table_offset
+        if: number_of_symbols > 0
+        doc: |
+          COFF symbol records. `number_of_symbols` counts the 18-byte
+          auxiliary records too, which are read as part of the symbol they
+          follow (see `coff_symbol.aux_symbols`).
     enums:
       # Don't forget to update the `machine_type` enum in `executable/uefi_te.ksy` when
       # you modify this one.
@@ -122,6 +148,14 @@ types:
         0xaa64:
           id: arm64
           doc: ARM64 little endian
+        0xa641:
+          id: arm64ec
+          doc: ABI that enables interoperability between native ARM64 and emulated x64 code.
+        0xa64e:
+          id: arm64x
+          doc: |
+            Binary format that allows both native ARM64 and ARM64EC code to coexist in the
+            same file.
         0x1c4:
           id: arm_nt
           -orig-id: IMAGE_FILE_MACHINE_ARMNT
@@ -162,9 +196,19 @@ types:
           id: powerpc_fp
           -orig-id: IMAGE_FILE_MACHINE_POWERPCFP
           doc: Power PC with floating point support
+        0x160:
+          id: r3000_be
+          -orig-id: IMAGE_FILE_MACHINE_R3000BE
+          doc: MIPS I compatible 32-bit big endian
+        0x162:
+          id: r3000
+          doc: MIPS I compatible 32-bit little endian
         0x166:
           id: r4000
-          doc: MIPS little endian
+          doc: MIPS III compatible 64-bit little endian
+        0x168:
+          id: r10000
+          doc: MIPS IV compatible 64-bit little endian
         0x5032:
           id: riscv32
           doc: RISC-V 32-bit address space
@@ -197,8 +241,8 @@ types:
   coff_symbol:
     seq:
       - id: name_annoying
-        type: annoyingstring
         size: 8
+        type: annoyingstring
       #- id: name_zeroes
       #  type: u4
       #- id: name_offset
@@ -213,6 +257,11 @@ types:
         type: u1
       - id: number_of_aux_symbols
         type: u1
+      - id: aux_symbols
+        size: 18
+        repeat: expr
+        repeat-expr: number_of_aux_symbols
+        doc: Auxiliary symbol records; their layout depends on `storage_class`.
     instances:
       #effective_name:
       #  value: name_zeroes == 0 ? name_from_offset : '"fixme"'
@@ -224,9 +273,17 @@ types:
       #  encoding: ascii
       section:
         value: _root.pe.sections[section_number - 1]
+        if: has_section
+        doc: |
+          Section the symbol is defined in. Absent for the special section
+          numbers 0 (IMAGE_SYM_UNDEFINED), 0xffff (IMAGE_SYM_ABSOLUTE) and
+          0xfffe (IMAGE_SYM_DEBUG), and for out-of-range numbers.
+      has_section:
+        value: section_number > 0 and section_number <= _root.pe.coff_hdr.number_of_sections
       data:
         pos: section.pointer_to_raw_data + value
         size: 1
+        if: has_section
   annoyingstring:
     -webide-representation: '{name}'
     instances:
@@ -242,14 +299,14 @@ types:
         type: str
         terminator: 0
         eos-error: false
-        encoding: ascii
+        encoding: ASCII
         if: name_zeroes == 0
       name_from_short:
         pos: 0
         type: str
         terminator: 0
         eos-error: false
-        encoding: ascii
+        encoding: ASCII
         if: name_zeroes != 0
       name:
         value: 'name_zeroes == 0 ? name_from_offset : name_from_short'
@@ -395,19 +452,31 @@ types:
       - id: clr_runtime_header
         type: data_dir
   data_dir:
+    to-string: |
+      'Data Directory <VirtualAddr: ' + virtual_address.to_s + ', Size: ' + size.to_s + ', PointerToRawData: ' + pointer_to_raw_data.to_s + '>'
     seq:
       - id: virtual_address
         type: u4
       - id: size
         type: u4
+    instances:
+      sections_lookup:
+        type: sections_lookup(virtual_address)
+      pointer_to_raw_data:
+        value: >
+          (sections_lookup.has_section ?
+          (sections_lookup.section.pointer_to_raw_data + (virtual_address - sections_lookup.section.virtual_address)) :
+          0)
   section:
     -webide-representation: "{name}"
+    to-string: |
+      'Section <Name: ' + name + ', VirtualSize: ' + virtual_size.to_s + ', VirtualAddr: ' + virtual_address.to_s + ', PointerToRawData: ' + pointer_to_raw_data.to_s + '>'
     seq:
       - id: name
-        type: str
-        encoding: UTF-8
         size: 8
+        type: str
         pad-right: 0
+        encoding: UTF-8
       - id: virtual_size
         type: u4
       - id: virtual_address
@@ -425,11 +494,171 @@ types:
       - id: number_of_linenumbers
         type: u2
       - id: characteristics
-        type: u4
+        type: section_characteristics
     instances:
       body:
         pos: pointer_to_raw_data
         size: size_of_raw_data
+  section_characteristics:
+    doc: |
+      Section flags (`Characteristics` in the section header). Bits that the
+      specification marks as reserved are kept as `reserved_*` fields.
+    doc-ref: https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#section-flags
+    seq:
+      - id: reserved_0x00000001
+        type: b1
+      - id: reserved_0x00000002
+        type: b1
+      - id: reserved_0x00000004
+        type: b1
+      - id: type_no_pad
+        -orig-id: IMAGE_SCN_TYPE_NO_PAD
+        type: b1
+        doc: |
+          The section should not be padded to the next boundary. This flag
+          is obsolete and is replaced by IMAGE_SCN_ALIGN_1BYTES. This is
+          valid only for object files.
+      - id: reserved_0x00000010
+        type: b1
+      - id: cnt_code
+        -orig-id: IMAGE_SCN_CNT_CODE
+        type: b1
+        doc: The section contains executable code.
+      - id: cnt_initialized_data
+        -orig-id: IMAGE_SCN_CNT_INITIALIZED_DATA
+        type: b1
+        doc: The section contains initialized data.
+      - id: cnt_uninitialized_data
+        -orig-id: IMAGE_SCN_CNT_UNINITIALIZED_DATA
+        type: b1
+        doc: The section contains uninitialized data.
+      - id: lnk_other
+        -orig-id: IMAGE_SCN_LNK_OTHER
+        type: b1
+        doc: Reserved for future use.
+      - id: lnk_info
+        -orig-id: IMAGE_SCN_LNK_INFO
+        type: b1
+        doc: |
+          The section contains comments or other information. The .drectve
+          section has this type. This is valid for object files only.
+      - id: reserved_0x00000400
+        type: b1
+      - id: lnk_remove
+        -orig-id: IMAGE_SCN_LNK_REMOVE
+        type: b1
+        doc: |
+          The section will not become part of the image. This is valid only
+          for object files.
+      - id: lnk_comdat
+        -orig-id: IMAGE_SCN_LNK_COMDAT
+        type: b1
+        doc: |
+          The section contains COMDAT data. For more information see COMDAT
+          Sections (Object Only). This is valid only for object files.
+      - id: reserved_0x00002000
+        type: b1
+      - id: reserved_0x00004000
+        type: b1
+      - id: gprel
+        -orig-id: IMAGE_SCN_GPREL
+        type: b1
+        doc: |
+          The section contains data referenced through the global pointer
+          (GP).
+      - id: reserved_0x00010000
+        type: b1
+      - id: mem_purgeable
+        -orig-id: IMAGE_SCN_MEM_PURGEABLE
+        type: b1
+        doc: Reserved for future use. Also defined as IMAGE_SCN_MEM_16BIT.
+      - id: mem_locked
+        -orig-id: IMAGE_SCN_MEM_LOCKED
+        type: b1
+        doc: Reserved for future use.
+      - id: mem_preload
+        -orig-id: IMAGE_SCN_MEM_PRELOAD
+        type: b1
+        doc: Reserved for future use.
+      - id: align_code
+        -orig-id: IMAGE_SCN_ALIGN_*
+        type: b4
+        doc: |
+          Alignment of the section data, valid only for object files: 0 means
+          not specified, 1 to 14 mean 2^(align_code - 1) bytes
+          (IMAGE_SCN_ALIGN_1BYTES to IMAGE_SCN_ALIGN_8192BYTES). See
+          `alignment` for the decoded value.
+      - id: lnk_nreloc_ovfl
+        -orig-id: IMAGE_SCN_LNK_NRELOC_OVFL
+        type: b1
+        doc: The section contains extended relocations.
+      - id: mem_discardable
+        -orig-id: IMAGE_SCN_MEM_DISCARDABLE
+        type: b1
+        doc: The section can be discarded as needed.
+      - id: mem_not_cached
+        -orig-id: IMAGE_SCN_MEM_NOT_CACHED
+        type: b1
+        doc: The section cannot be cached.
+      - id: mem_not_paged
+        -orig-id: IMAGE_SCN_MEM_NOT_PAGED
+        type: b1
+        doc: The section is not pageable.
+      - id: mem_shared
+        -orig-id: IMAGE_SCN_MEM_SHARED
+        type: b1
+        doc: The section can be shared in memory.
+      - id: mem_execute
+        -orig-id: IMAGE_SCN_MEM_EXECUTE
+        type: b1
+        doc: The section can be executed as code.
+      - id: mem_read
+        -orig-id: IMAGE_SCN_MEM_READ
+        type: b1
+        doc: The section can be read.
+      - id: mem_write
+        -orig-id: IMAGE_SCN_MEM_WRITE
+        type: b1
+        doc: The section can be written to.
+    instances:
+      alignment:
+        value: '(align_code >= 1 and align_code <= 14) ? 1 << (align_code - 1) : 0'
+        doc: Section data alignment in bytes, or 0 if not specified (or invalid).
+
+  # Recursive lookup inside of sections to return pointer_to_raw data of dat_dir
+  lookup_iteration:
+    params:
+      - id: idx
+        type: u4
+      - id: virtual_address
+        type: u4
+    instances:
+      section:
+        value: _root.pe.sections[idx]
+      found:
+        value: "virtual_address >= section.virtual_address and virtual_address <= section.virtual_address + section.size_of_raw_data"
+      next_idx:
+        value: "idx + (idx + 1 < _root.pe.coff_hdr.number_of_sections ? 1 : 0)"
+      has_next:
+        value: next_idx > idx
+  sections_lookup:
+    to-string: |
+      'Session lockup <VirtualAddr: ' + virtual_address.to_s + ', Sections: ' + tmp_sections.size.to_s + '>'
+    params:
+      - id: virtual_address
+        type: u4
+    seq:
+      - id: tmp_sections
+        type: "lookup_iteration(_index, virtual_address)"
+        repeat: until
+        repeat-until: _.found or not _.has_next
+    instances:
+      section:
+        value: tmp_sections.last.section
+        if: tmp_sections.size > 0
+      has_section:
+        value: tmp_sections.size > 0 and tmp_sections.last.found
+
   certificate_table:
     seq:
       - id: items
@@ -437,33 +666,6 @@ types:
         repeat: eos
   certificate_entry:
     doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#the-attribute-certificate-table-image-only'
-    enums:
-      certificate_revision:
-        0x0100:
-          id: revision_1_0
-          doc: |
-            Version 1, legacy version of the Win_Certificate structure.
-            It is supported only for purposes of verifying legacy Authenticode signatures
-        0x0200:
-          id: revision_2_0
-          doc: Version 2 is the current version of the Win_Certificate structure.
-      certificate_type_enum:
-        0x0001:
-          id: x509
-          doc: |
-            bCertificate contains an X.509 Certificate
-            Not Supported
-        0x0002:
-          id: pkcs_signed_data
-          doc: 'bCertificate contains a PKCS#7 SignedData structure'
-        0x0003:
-          id: reserved_1
-          doc: 'Reserved'
-        0x0004:
-          id: ts_stack_signed
-          doc: |
-            Terminal Server Protocol Stack Certificate signing
-            Not Supported
     seq:
       - id: length
         -orig-id: dwLength
@@ -483,3 +685,335 @@ types:
         -orig-id: bCertificate
         size: length - 8
         doc: Contains a certificate, such as an Authenticode signature.
+    enums:
+      certificate_revision:
+        0x0100:
+          id: revision_1_0
+          doc: |
+            Version 1, legacy version of the Win_Certificate structure.
+            It is supported only for purposes of verifying legacy Authenticode signatures
+        0x0200:
+          id: revision_2_0
+          doc: Version 2 is the current version of the Win_Certificate structure.
+      certificate_type_enum:
+        0x0001:
+          id: x509
+          doc: |
+            bCertificate contains an X.509 Certificate
+            Not Supported
+        0x0002:
+          id: pkcs_signed_data
+          doc: bCertificate contains a PKCS#7 SignedData structure
+        0x0003:
+          id: reserved_1
+          doc: Reserved
+        0x0004:
+          id: ts_stack_signed
+          doc: |
+            Terminal Server Protocol Stack Certificate signing
+            Not Supported
+  debug_table_entries:
+    seq:
+      - id: entry
+        type: debug_table_entry
+        repeat: eos
+  debug_table_entry:
+    doc-ref: 'https://www.debuginfo.com/articles/debuginfomatch.html'
+    seq:
+      - id: characteristics
+        -orig-id: Characteristics
+        type: u4
+      - id: time_date_stamp
+        -orig-id: TimeDateStamp
+        type: u4
+      - id: major_version
+        -orig-id: MajorVersion
+        type: u2
+      - id: minor_version
+        -orig-id: MinorVersion
+        type: u2
+      - id: type
+        -orig-id: Type
+        type: u4
+        enum: debug_entry_type
+      - id: size_of_data
+        -orig-id: SizeOfData
+        type: u4
+      - id: address_of_raw_data
+        -orig-id: AddressOfRawData
+        type: u4
+      - id: pointer_to_raw_data
+        -orig-id: PointerToRawData
+        type: u4
+    instances:
+      codeview_debug:
+        io: _root._io
+        pos: pointer_to_raw_data
+        size: size_of_data
+        type: codeview_debug_info
+        if: type == debug_entry_type::codeview
+    enums:
+      debug_entry_type:
+        0: unknown
+        1: coff
+        2: codeview
+        3: fpo
+        4: misc
+        5: exception
+        6: fixup
+        9: borland
+      cv_signature:
+        0x53445352: rsds
+    types:
+      codeview_debug_info:
+        seq:
+          - id: header
+            type: cv_header
+          - id: body
+            type:
+              switch-on: header.signature
+              cases:
+                'cv_signature::rsds': cv_info_pdb70
+      cv_header:
+        seq:
+          - id: signature
+            type: u4
+            enum: cv_signature
+      cv_info_pdb70:
+        seq:
+          - id: signature
+            size: 16
+          - id: age
+            type: u4
+          - id: pdb_file_name
+            size-eos: true
+            type: strz
+            encoding: UTF-8
+
+  dotnet_header:
+    to-string: |
+      '.NET Header'
+    seq:
+      - id: cb
+        type: u4
+      - id: major_runtime_version
+        type: u2
+      - id: minor_runtime_version
+        type: u2
+      - id: meta_data
+        type: data_dir
+      - id: flags
+        type: u4
+        enum: flag_enum
+      - id: entry_point_token
+        type: u4
+      - id: entry_point_virtual_address
+        type: u4
+      - id: resources
+        type: data_dir
+      - id: strong_name_signature
+        type: data_dir
+      - id: code_manager_table
+        type: data_dir
+      - id: export_address_table_jumps
+        type: data_dir
+      - id: managed_native_header
+        type: data_dir
+    enums:
+      flag_enum:
+        0: unknown
+        0x00000001: il_only
+        0x00000002: required_32bit
+        0x00000004: il_library
+        0x00000008: strongnamesigned
+        0x00000010: native_entrypoint
+        0x00010000: trackdebugdata
+
+  dotnet_metadata_header:
+    doc-ref: https://www.ntcore.com/files/dotnetformat.htm
+    to-string: |
+      'Metadata Header <.NET Version ' + version_string + ', NumberOfStreams: ' + number_of_streams.to_s + '>'
+    seq:
+      - id: signature
+        type: u4
+      - id: major_version
+        type: u2
+      - id: minor_version
+        type: u2
+      - id: reserved
+        type: u4
+      - id: version_length
+        type: u4
+      - id: version_string
+        size: version_length
+        type: str
+        pad-right: 0
+        encoding: UTF-8
+      - id: flags
+        type: u2
+      - id: number_of_streams
+        type: u2
+      - id: streams
+        type: dotnet_stream
+        repeat: expr
+        repeat-expr: number_of_streams
+  dotnet_stream:
+    -webide-representation: '{name}'
+    to-string: |
+      'Stream <Name: ' + name + ', Offset: ' + offset.to_s + ', Size: ' + size.to_s + ', PointerToRawData: ' + pointer_to_raw_data.to_s + '>'
+    seq:
+      - id: offset
+        type: u4
+      - id: size
+        type: u4
+      - id: name
+        type: strz
+        terminator: 0
+        eos-error: false
+        encoding: ASCII
+      - id: padding
+        size: (4 - _io.pos) % 4
+    instances:
+      pointer_to_raw_data:
+        value: _root.pe.dotnet_header.meta_data.pointer_to_raw_data + offset
+
+  resource_directory_table:
+    doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#resource-directory-table'
+    params:
+      - id: depth
+        type: u4
+      - id: section_file_offset
+        type: u4
+      - id: section_virtual_address
+        type: u4
+    seq:
+      - id: reserved
+        -orig-id: characteristics
+        type: u4
+        doc: Reserved for future use, should be set to zero
+      - id: timestamp
+        -orig-id: TimeDateStamp
+        type: u4
+      - id: version
+        type: version_u2
+      - id: num_named_entries
+        -orig-id: NumberOfNamedEntries
+        type: u2
+      - id: num_id_entries
+        -orig-id: NumberOfIdEntries
+        type: u2
+      - id: named_entries
+        type: resource_directory_entry(depth)
+        repeat: expr
+        repeat-expr: num_named_entries
+      - id: id_entries
+        type: resource_directory_entry(depth)
+        repeat: expr
+        repeat-expr: num_id_entries
+
+  resource_directory_entry:
+    doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#resource-directory-entries'
+    params:
+      - id: depth
+        type: u4
+    seq:
+      - id: resource_type
+        type: u4
+        enum: enum_resource_type
+        if: depth == 0
+      - id: ofs_name
+        type: b31
+        if: depth != 0
+      - id: is_name
+        type: b1
+        if: depth != 0
+        doc: Whether ofs_name is an id or points to a directory-string
+      - id: ofs_data_entry
+        type: b31
+      - id: is_subdirectory
+        type: b1
+        doc: |
+          Whether ofs_data_entry points to a child (directory entry) or a
+          leaf (data entry).
+    instances:
+      subdirectory:
+        io: _root._io
+        pos: ofs_data_entry + _parent.section_file_offset
+        type: resource_directory_table(depth + 1, _parent.section_file_offset, _parent.section_virtual_address)
+        if: is_subdirectory
+        parent: _parent
+      data_entry:
+        io: _root._io
+        pos: ofs_data_entry + _parent.section_file_offset
+        type: resource_data_entry
+        if: not is_subdirectory
+        parent: _parent
+      name:
+        io: _root._io
+        pos: ofs_name + _parent.section_file_offset
+        type: resource_directory_string
+        if: is_name
+        parent: _parent
+    enums:
+      enum_resource_type:
+        1: cursor
+        2: bitmap
+        3: icon
+        4: menu
+        5: dialog
+        6: string
+        7: fontdir
+        8: font
+        9: accelerator
+        10: rcdata
+        11: messagetable
+        12: group_cursor
+        14: group_icon
+        16: version
+        17: dlginclude
+        19: plugplay
+        20: vxd
+        21: anicursor
+        22: aniicon
+        23: html
+        24: manifest
+
+  resource_data_entry:
+    doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#resource-data-entry'
+    seq:
+      - id: data_rva
+        -orig-id: OffsetToData
+        type: u4
+        doc: Relative virtual address of the resource data entry
+      - id: len_resource_data_entry
+        -orig-id: Size
+        type: u4
+      - id: codepage
+        type: u4
+      - id: reserved
+        type: u4
+    instances:
+      body:
+        io: _root._io
+        pos: (data_rva - _parent.section_virtual_address) + _parent.section_file_offset
+        size: len_resource_data_entry
+
+  resource_directory_string:
+    doc-ref: 'https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#resource-directory-string'
+    seq:
+      - id: len_name
+        -orig-id: Length
+        type: u2
+        doc: Number of UTF-16LE encoded characters
+      - id: name
+        -orig-id: NameString
+        size: len_name * 2
+        type: str
+        encoding: UTF-16LE
+
+  version_u2:
+    seq:
+      - id: major
+        type: u2
+      - id: minor
+        type: u2

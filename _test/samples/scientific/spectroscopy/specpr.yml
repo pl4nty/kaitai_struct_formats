@@ -1,0 +1,14 @@
+samples:
+  - url: https://raw.githubusercontent.com/PSI-edu/spectroscopy-tetracorder/615d6ba015cd88db403b0dc95ba9f700683a3a3e/sl1/usgs/library06.conv/s06as96a
+    sha256: ae5b4743f98759ef3d1905730cabacbfd66fa7665644fa268b96af157bf379aa
+    eof: true
+    expect:   # manual hex read: 1536-byte records, record 1 title (USGS ds231 specpr-format doc)
+      len(records): 7
+      records[1].icflag.type: text_initial
+      records[1].content.ids.ititle: 'USGS Digital Spectral Library: s06as96a'
+  - url: https://raw.githubusercontent.com/PSI-edu/spectroscopy-tetracorder/615d6ba015cd88db403b0dc95ba9f700683a3a3e/sl1/usgs/rlib06/r06av99a
+    sha256: 8bbf6c41beb4983acd2acc7b84f0ab535281c6a69317d11702cb3ec55659dbd8
+    eof: true
+    expect:   # manual hex read
+      len(records): 1512
+      records[2].content.ids.ititle: 'Convolved AVIRIS 1999.1 224ch library'

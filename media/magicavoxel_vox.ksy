@@ -31,7 +31,6 @@ types:
       - id: num_bytes_of_children_chunks
         type: u4
       - id: chunk_content
-        if: num_bytes_of_chunk_content != 0
         size: num_bytes_of_chunk_content
         type:
           switch-on: chunk_id
@@ -41,10 +40,14 @@ types:
             'chunk_type::xyzi': xyzi
             'chunk_type::rgba': rgba
             'chunk_type::matt': matt
+            'chunk_type::ntrn': ntrn
+            'chunk_type::nshp': nshp
+            'chunk_type::ngrp': ngrp
+        if: num_bytes_of_chunk_content != 0
       - id: children_chunks
-        if: num_bytes_of_children_chunks != 0
         type: chunk
         repeat: eos
+        if: num_bytes_of_children_chunks != 0
   pack:
     seq:
       - id: num_models
@@ -105,29 +108,29 @@ types:
         # .to_i not implemented for C# runtime yet
         #enum: property_bits_type
       - id: plastic
+        type: f4
         if: has_plastic
-        type: f4
       - id: roughness
+        type: f4
         if: has_roughness
-        type: f4
       - id: specular
+        type: f4
         if: has_specular
-        type: f4
       - id: ior
+        type: f4
         if: has_ior
-        type: f4
       - id: attenuation
+        type: f4
         if: has_attenuation
-        type: f4
       - id: power
+        type: f4
         if: has_power
-        type: f4
       - id: glow
+        type: f4
         if: has_glow
-        type: f4
       - id: is_total_power
-        if: has_is_total_power
         type: f4
+        if: has_is_total_power
     instances:
       has_plastic:
         value: '(property_bits & 1) != 0'
@@ -145,6 +148,78 @@ types:
         value: '(property_bits & 64) != 0'
       has_is_total_power:
         value: '(property_bits & 128) != 0'
+  ntrn:
+    seq:
+      - id: node_id
+        type: u4
+      - id: attributes
+        type: dict
+      - id: child_node_id
+        type: u4
+      - id: reserved_id
+        type: u4
+      - id: layer_id
+        type: u4
+      - id: num_frames
+        type: u4
+      - id: frames
+        type: dict
+        repeat: expr
+        repeat-expr: num_frames
+  nshp:
+    seq:
+      - id: node_id
+        type: u4
+      - id: attributes
+        type: dict
+      - id: num_models
+        type: u4
+      - id: models
+        type: model
+        repeat: expr
+        repeat-expr: num_models
+    types:
+      model:
+        seq:
+          - id: model_id
+            type: u4
+          - id: attributes
+            type: dict
+  ngrp:
+    seq:
+      - id: node_id
+        type: u4
+      - id: attributes
+        type: dict
+      - id: num_children
+        type: u4
+      - id: children
+        type: u4
+        repeat: expr
+        repeat-expr: num_children
+  dict:
+    seq:
+      - id: num_pairs
+        type: u4
+      - id: pairs
+        type: pair
+        repeat: expr
+        repeat-expr: num_pairs
+    types:
+      pair:
+        seq:
+          - id: key
+            type: pstring
+          - id: value
+            type: pstring
+  pstring:
+    seq:
+      - id: len
+        type: u4
+      - id: bytes
+        size: len
+        type: str
+        encoding: ASCII
 enums:
   chunk_type:
     0x4d41494e: main
@@ -153,6 +228,9 @@ enums:
     0x58595a49: xyzi
     0x52474241: rgba
     0x4d415454: matt
+    0x6e54524e: ntrn
+    0x6e534850: nshp
+    0x6e475250: ngrp
   material_type:
     0: diffuse
     1: metal

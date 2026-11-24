@@ -1,0 +1,16 @@
+# PYNQ-Z1 base overlay bitstream (XC7Z020). The .bit header (fields a-e) is 99 bytes: field 'e'
+# at 0x5e gives the raw bitstream length 0x3dbafc, and 4045663 - 4045564 = 99. Expect from a hex
+# read of the raw data: eight dummy words
+# 0xffffffff, the bus width words 0x000000bb 0x11220044, two dummy words and the sync word
+# 0xaa995566 (UG470 table 5-19).
+samples:
+  - url: https://raw.githubusercontent.com/Xilinx/PYNQ/ad141f1ff5dcce0a86bfff2cf6caa8e620a0063f/boards/Pynq-Z1/base/base.bit
+    sha256: c8eb89e71686f2412d19538a56d6077fce7720f0dfe88bf46d73298a1e35658e
+    extract: { format: slice, offset: 99 }
+    eof: true
+    expect:
+      len(preamble): 13
+      preamble[0]: 0xffffffff
+      preamble[8]: 0xbb
+      preamble[9]: 0x11220044
+      preamble[12]: 0xaa995566

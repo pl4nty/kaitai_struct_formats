@@ -1,0 +1,30 @@
+# Library type: inline vectors.
+samples:
+- name: '0x1234'
+  data: '00'
+  params:
+    needed: 'True'
+    n: '4660'
+  expect:
+    value: 11336
+- name: '0x8001'
+  data: '00'
+  params:
+    needed: 'True'
+    n: '32769'
+  expect:
+    value: 32769
+- name: '0xff'
+  data: '00'
+  params:
+    needed: 'True'
+    n: '255'
+  expect:
+    value: 65280
+- name: not-needed
+  data: '00'
+  params:
+    needed: 'False'
+    n: '4660'
+  expect:
+    value: 4660

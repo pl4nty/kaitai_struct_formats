@@ -1,0 +1,9 @@
+samples:
+  - url: https://raw.githubusercontent.com/log2timeline/plaso/70faaf25e3ca2e9b602cf3920f8e34fd0e469ea8/test_data/wal_database.db-wal
+    sha256: 1d886ad3f5993bc307872349d80f626059e8bbc954d14382768444775992b1f9
+    eof: true
+    expect:
+      header.magic: 0x377f0682        # hex dump
+      header.file_format_version: 3007000
+      header.len_database_page: 1024
+      len(frames): 9                  # (9464 - 32) / (24 + 1024)

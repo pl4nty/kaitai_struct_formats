@@ -1,0 +1,65 @@
+# Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/nw4r/scn0.ksy
+meta:
+  id: nw4r_scn0
+  title: NW4R SCN0 scene animation
+  file-extension: scn0
+  license: LicenseRef-All-Rights-Reserved
+  imports:
+    - /archive/nintendo/nw4r_brres_sub_header
+  endian: be
+doc: |
+  Scene animation: animates the scene itself (light sets, ambient lights,
+  lights, fog and cameras) rather than a model. It is the least common of
+  the NW4R animation sub-files in dumped retail archives --
+  BrawlBox/BrawlCrate support it mainly for stage and cutscene data, where a
+  game wants a camera fly-through or a scripted light change without
+  hand-coding it, rather than for character models. Unlike other NW4R
+  animations it uses a nested resource group: one outer group naming up to
+  five sections (lightset/amblight/light/fog/camera), each holding its own
+  group of fixed-size node structs -- so a lookup is a two-step walk
+  (section name, then node name within that section) instead of the single
+  flat group CHR0/SRT0/CLR0/VIS0 use.
+seq:
+  - id: header
+    type: nw4r_brres_sub_header
+  - id: ofs_data
+    type: s4
+    doc: Offset from the start of this SCN0 to the outer (5-section) resource group.
+  - id: ofs_name
+    type: s4
+    doc: |
+      Offset from the start of this SCN0 to the animation's own name in the string
+      pool.
+  - id: ofs_orig_path
+    type: s4
+    doc: |
+      Offset to the original MDL0/scene file path, as recorded by the
+      exporting SDK tool.
+  - id: n_frames
+    type: u4
+    doc: |
+      Length of the animation in frames, not counting the extra loop frame `loop`
+      implies.
+  - id: spec_light
+    type: u4
+    doc: |
+      Specular light count, preserved verbatim from the scene the
+      animation was authored against; used to size the `light` section's
+      fixed-layout node structs rather than being read from them.
+  - id: loop
+    type: u4
+    doc: Non-zero if the animation loops back to frame 0 after `n_frames`.
+instances:
+  name:
+    pos: ofs_name - 4
+    type: pooled_string
+    if: ofs_name != 0
+types:
+  pooled_string:
+    seq:
+      - id: len_name
+        type: u4
+      - id: name
+        size: len_name
+        type: str
+        encoding: UTF-8

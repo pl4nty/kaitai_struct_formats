@@ -1,0 +1,14 @@
+# expects from the navec library (Navec.load(...).pq: vectors 250002, dim 300, qdim 100, centroids 256)
+samples:
+  - url: https://storage.yandexcloud.net/natasha-navec/packs/navec_news_v1_1B_250K_300d_100q.tar
+    sha256: f07270833d78523edc5781538d67038e95b43975e4a7ae757c693b687f9cbfca
+    name: navec_news_v1-pq.bin
+    extract: { format: tar, member: pq.bin }
+    eof: true
+    timeout: 180
+    expect:
+      header.vector_count: 250002
+      header.original_vector_size: 300
+      header.parts_count: 100
+      header.centroid_count: 256
+      header.part_size: 3

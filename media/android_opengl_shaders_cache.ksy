@@ -20,8 +20,8 @@ seq:
     type: u4
     doc: crc32 of `contents`
   - id: contents
-    type: cache
     size-eos: true
+    type: cache
 
 types:
   alignment:
@@ -32,13 +32,13 @@ types:
   prefixed_string:
     seq:
       - id: len_str
-        type: u4
         -orig-id: mBuildIdLength
+        type: u4
       - id: str
-        type: strz
-        encoding: ascii
-        size: len_str
         -orig-id: mBuildId, buildId
+        size: len_str
+        type: strz
+        encoding: ASCII
       - id: alignment
         type: alignment
   cache:
@@ -48,17 +48,17 @@ types:
         -orig-id: mMagicNumber, blobCacheMagic
         contents: ["$bB_"]
       - id: version
-        type: u4
         -orig-id: mBlobCacheVersion, blobCacheVersion
+        type: u4
       - id: device_version
-        type: u4
         -orig-id: mDeviceVersion, blobCacheDeviceVersion
-      - id: num_entries
         type: u4
+      - id: num_entries
         -orig-id: mNumEntries
+        type: u4
       - id: build_id
-        type: prefixed_string
         -orig-id: mBuildIdLength, mBuildId, buildId
+        type: prefixed_string
         if: version >= 3 # hypothesis, needs deeper investigation
       - id: entries
         type: entry
@@ -68,11 +68,11 @@ types:
       entry:
         seq:
           - id: len_key
-            type: u4
             -orig-id: mKeySize, keySize
-          - id: len_value
             type: u4
+          - id: len_value
             -orig-id: mValueSize, valueSize
+            type: u4
           - id: key
             size: len_key
           - id: value

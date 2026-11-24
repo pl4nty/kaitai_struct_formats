@@ -1,0 +1,7 @@
+samples:
+  - url: https://raw.githubusercontent.com/war2/pud-quicklook/b4dc32ca36a0cce4990e2e1f3a77d3cfd6ce325f/tests/cibola.pud
+    sha256: ab006f17a24de648e6244dd8eedd48c28ef072edb44fc2192635b9657070465b
+    eof: true
+    expect:
+      sections[0].name: TYPE
+      sections[0].size: 16

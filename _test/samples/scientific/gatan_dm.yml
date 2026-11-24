@@ -1,0 +1,15 @@
+# RosettaSciIO DigitalMicrograph test files. Expects from a hex read of the header (version, file
+# size - 20 for DM3 = 0x5fac, byte order 1) and the root tag group (14 tags).
+samples:
+  - url: https://raw.githubusercontent.com/hyperspy/rosettasciio/f057050c673948b07e638b5459534ec51dc50d3b/rsciio/tests/data/digitalmicrograph/2D/test-1.dm3
+    sha256: 19832d1fc253c0d4b48f3fbbf5761c1057244d79f621e9d7bd91b819c0df5115
+    expect:
+      version: 3
+      len_file: 24492
+      byte_order: little
+      root.num_tags: 14
+  - url: https://raw.githubusercontent.com/hyperspy/rosettasciio/f057050c673948b07e638b5459534ec51dc50d3b/rsciio/tests/data/digitalmicrograph/2D/test-1.dm4
+    sha256: c02359ad86d741d90e7ec981ef0a38a682f38f5156a196d95992c419f490255f
+    expect:
+      version: 4
+      byte_order: little

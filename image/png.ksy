@@ -199,8 +199,7 @@ types:
         value: type_raw.to_s('ASCII')
       is_ancillary:
         value: type_raw[0] & 0x20 != 0
-        doc: |
-          false = critical chunk, true = ancillary chunk
+        doc: false = critical chunk, true = ancillary chunk
       is_private:
         value: type_raw[1] & 0x20 != 0
         doc: |
@@ -321,12 +320,12 @@ types:
         type: u4
     instances:
       max_content_light_level:
-        value: max_content_light_level_int * 0.0001
         -orig-id: MaxCLL
+        value: max_content_light_level_int * 0.0001
         doc: Maximum Content Light Level (MaxCLL), in cd/m^2
       max_frame_average_light_level:
-        value: max_frame_average_light_level_int * 0.0001
         -orig-id: MaxFALL
+        value: max_frame_average_light_level_int * 0.0001
         doc: Maximum Frame Average Light Level (MaxFALL), in cd/m^2
   chrm_chunk:
     doc-ref: https://www.w3.org/TR/png/#11cHRM
@@ -407,8 +406,8 @@ types:
         valid: compression_methods::zlib
       - id: profile
         size-eos: true
-        process: zlib
         type: icc_4
+        process: zlib
         doc: |
           Embedded ICC profile.
 
@@ -420,14 +419,9 @@ types:
           * a greyscale color space for greyscale images (color types
             `color_type::greyscale` = 0 and `color_type::greyscale_alpha` = 4).
 
-          Note that the imported `icc_4.ksy` spec currently in use here supports
-          only the ICC.1 v4 specification (as the name suggests), not ICC.1 v2.
-          This means that PNG files with an embedded v2 profile (for example
-          https://github.com/web-platform-tests/wpt/blob/495d9d7716298588ff49d6e701bf27c5134bde06/css/css-color/support/swap-990000-iCCP.png)
-          will fail to parse.
-
-          TODO: extend `icc_4.ksy` to support both v4 and v2 profiles, rename it
-          to `icc.ksy`, and use it here.
+          The imported `icc_4.ksy` spec parses both ICC.1 v4 and v2 profiles
+          (despite its name); v2-only tag types other than
+          textDescriptionType are left as raw bytes.
   mdcv_chunk:
     doc-ref:
       - https://www.w3.org/TR/png/#mDCV-chunk
@@ -897,8 +891,8 @@ types:
         if: compression_flag == 0
       - id: text_zlib
         size-eos: true
-        process: zlib
         type: international_text
+        process: zlib
         if: compression_flag == 1
         -affected-by:
           - 374 # `process/switch-on` would help here
@@ -919,9 +913,9 @@ types:
   international_text:
     seq:
       - id: value
+        size-eos: true
         type: str
         encoding: UTF-8
-        size-eos: true
         doc: |
           Text string (the "value" of this key-value pair), written in language
           specified in `_parent.language_tag`.
@@ -957,8 +951,8 @@ types:
           not permitted.
         doc-ref: https://www.w3.org/TR/2025/REC-png-3-20250624/#11keywords
       - id: text
-        type: str
         size-eos: true
+        type: str
         encoding: ISO-8859-1
         doc: |
           Text string (the "value" of this key-value pair).
@@ -997,15 +991,15 @@ types:
         valid: compression_methods::zlib
       - id: text
         size-eos: true
-        process: zlib
         type: compressed_text
+        process: zlib
         -affected-by: 706 # `process` does not work with `type: str`
   compressed_text:
     seq:
       - id: value
+        size-eos: true
         type: str
         encoding: ISO-8859-1
-        size-eos: true
         doc: |
           Text string (the "value" of this key-value pair).
 
@@ -1123,15 +1117,15 @@ types:
     doc-ref: https://stackoverflow.com/questions/4242402/the-fireworks-png-format-any-insight-any-libs/51683285#51683285
     seq:
       - id: preview_data
-        process: zlib
         size-eos: true
+        process: zlib
   evernote_skmf_chunk:
     doc-ref: https://web.archive.org/web/20210302212148/https://discussion.evernote.com/forums/topic/88532-how-to-extract-annotation-information-from-annotated-evernoteskitch-images/#comment-451501
     seq:
       - id: json
+        size-eos: true
         type: str
         encoding: UTF-8
-        size-eos: true
         doc: |
           JSON document with information about editable annotations (text,
           lines, paths, etc.) in Evernote/Skitch.

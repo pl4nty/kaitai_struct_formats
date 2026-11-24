@@ -1,0 +1,13 @@
+# "Alicia" (Niconi Rittai-chan) beam knife model from assimp's non-BSD test models.
+# Expect values read by hand from a hex dump against the PMX 2.0 spec (felixjones gist):
+# header globals, then four length-prefixed UTF-16LE strings, then the u4 vertex count.
+samples:
+  - url: https://raw.githubusercontent.com/assimp/assimp/93fe5d82fb206e850a21809bf45800ae00b17fc7/test/models-nonbsd/MMD/Alicia_blade.pmx
+    sha256: 90fe040b70cead1f0c73d9c304f6d61f5c1e8189a2643e88b9170b435b9c77d5
+    eof: true
+    expect:
+      header.version: 2.0
+      header.header_size: 8
+      header.vertex_index_size: 2
+      header.texture_index_size: 1
+      vertex_count: 6790

@@ -1,0 +1,12 @@
+# mux.js test segment (H.264 + AAC). Expects from tshark's MP2T dissector: 997 packets, PIDs
+# 0x0000 (24), 0x0011 (5), 0x0100 (561), 0x0101 (383), 0x0fff (24); first packet is the SDT.
+samples:
+  - url: https://raw.githubusercontent.com/videojs/mux.js/bd82121caa7edef3eddff1c1e821e46bf0072e04/test/segments/test-segment.ts
+    sha256: e099516fdac20de701d286471ab4f6125b62019b4671037095601ef59b5e7a44
+    eof: true
+    expect:
+      len(packets): 997
+      int(packets[0].pid): 0x11
+      len([p for p in packets if int(p.pid) == 0]): 24
+      len([p for p in packets if int(p.pid) == 0x100]): 561
+      len([p for p in packets if int(p.pid) == 0xfff]): 24

@@ -1,0 +1,13 @@
+samples:
+  - url: https://media.githubusercontent.com/media/BSVino/DoubleAction/d180d9de495567195065e2f8a7a2b578b8eb2c45/mp/game/dab/maps/da_official.nav
+    sha256: 6ac8b9c7ef00202f6dbd43cd758998dceafaf03d10d86f7c33771510ed875288
+    expect:
+      version: 16
+      subversion: 0
+      bsp_size: 15132764
+  - url: https://media.githubusercontent.com/media/BSVino/DoubleAction/d180d9de495567195065e2f8a7a2b578b8eb2c45/mp/game/dab/maps/da_sacred.nav
+    sha256: 1620f3e1f080cf9dd3005f861879d87a6d6ad36dd0efdf2c390cd0a4925b1be1
+    expect:
+      version: 16
+      subversion: 0
+      bsp_size: 14933336

@@ -1,0 +1,36 @@
+# MPLS packets cut out of real captures (link-layer header skipped).
+# Expected values from tshark.
+samples:
+  # tcpdump tests, PPP link type, frame 1: one label over a UDP/IPv4 probe
+  - url: https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/3541bd5d38635e208d7dd47cc6ea2af00dd7ef0c/tests/mpls-traceroute.pcap
+    sha256: d77bf1b346a99dc1ee2cab02987a8ff45939962d6601d120c653577f246faab1
+    name: mpls-traceroute-f1
+    extract: {format: slice, offset: 44, size: 44}
+    eof: true
+    expect:
+      len(label_stack): 1
+      label_stack[0].label: 100704
+      label_stack[0].ttl: 1
+      body.src_ip_addr: 0c040404
+  # Wireshark wiki SampleCaptures, Ethernet, frame 9: one label, ICMP/IPv4
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/mpls-basic.cap
+    sha256: 210a347e4cc21d9c9097856d89dc3e3583b4c3114f6f89792e671b09d848b1c1
+    name: mpls-basic-f9
+    extract: {format: slice, offset: 712, size: 104}
+    eof: true
+    expect:
+      len(label_stack): 1
+      label_stack[0].label: 29
+      label_stack[0].ttl: 255
+      body.total_length: 100
+  # Wireshark wiki SampleCaptures, Ethernet, frame 9: two labels (18, 16)
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/mpls-twolevel.cap
+    sha256: dbab4d98e9ab1e5080f26d737e1cf8fa56cc7957ecd17ba95d58dd210f1a1061
+    name: mpls-twolevel-f9
+    extract: {format: slice, offset: 5370, size: 108}
+    eof: true
+    expect:
+      len(label_stack): 2
+      label_stack[0].label: 18
+      label_stack[1].label: 16
+      label_stack[1].is_bottom_of_stack: true

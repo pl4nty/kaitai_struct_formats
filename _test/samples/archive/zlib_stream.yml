@@ -1,0 +1,13 @@
+# A Git loose object (zlib stream) from libgit2's test repository. Expects from Python's zlib:
+# header 78 01, the inflated data starts with "commit 164\0" and its Adler-32 is 0x8df13479.
+samples:
+  - url: https://raw.githubusercontent.com/libgit2/libgit2/6f7d8484366d8b23ec4ca0509fcfcb8f13aabc8b/tests/resources/testrepo.git/objects/1a/443023183e3f2bfbef8ac923cd81c1018a18fd
+    sha256: 9f1cad22c4476f018d33135b8a389f7fab6af70bb78fc37702f738944444a52c
+    eof: true
+    expect:
+      cmf: 0x78
+      flg: 0x01
+      window_size: 32768
+      has_preset_dict: false
+      adler32: 0x8df13479
+      decompressed.startswith(b'commit 164\x00'): true

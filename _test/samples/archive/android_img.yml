@@ -1,0 +1,25 @@
+# Boot images collected in cfig/android_image_res* (test resources of Android_boot_image_editor).
+# file(1) identifies them ("Android bootimg, kernel (addr), ramdisk (addr), second stage, page size");
+# sizes and header_version read by hand per bootimg.h (v0: u4 fields from offset 8; v3/v4: kernel_size,
+# ramdisk_size, os_version, header_size, reserved[4], header_version, cmdline[1536], signature_size).
+samples:
+  - url: https://raw.githubusercontent.com/cfig/android_image_res/24b0660fb6859fe738599b1e0a1faf1aa9381613/5.0_fugu_lrx21m/boot.img
+    sha256: 071d4b6853ffd51575f0e66db1cc9500ecd13e456d770819edf667af3665be2b
+    name: fugu-lrx21m-boot.img
+    expect:
+      header_version: 0
+      header.kernel.size: 4834288
+      header.kernel.addr: 0x10008000
+      header.ramdisk.size: 689983
+      header.second.size: 8192
+      header.page_size: 2048
+  - url: https://raw.githubusercontent.com/cfig/android_image_res2/b534ff8f20a167682526c248cdf1ddc25dfb3f99/issue_88/cf_13_init_boot.img.xz
+    sha256: e7b7add484ec463d0fa2572597c3b18d10def71c119e89ad734adb4bd3288bcd
+    name: cf_13_init_boot.img
+    extract: { format: xz }
+    expect:
+      header_version: 4
+      header.header.len_kernel: 0
+      header.header.len_ramdisk: 2265995
+      header.header.header_size: 1584
+      header.header.len_signature: 0

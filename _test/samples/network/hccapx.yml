@@ -1,0 +1,11 @@
+samples:
+  - url: https://hashcat.net/misc/example_hashes/hashcat.hccapx
+    sha256: e9052c9ee6a1784ed94a2d3178fa02a12c4f84ce427caa2ef1741385706f42ca
+    eof: true
+    expect:   # manual hex read against hashcat wiki hccapx layout
+      len(records): 1
+      records[0].version: 4
+      records[0].len_essid: 25
+      records[0].keyver: 1
+      records[0].mac_ap: aef50f22801c
+      records[0].len_eapol: 123

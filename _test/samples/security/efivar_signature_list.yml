@@ -1,0 +1,28 @@
+# efivarfs dumps (4-byte attributes + EFI_SIGNATURE_LISTs) from rhboot/efivar tests/machine1 (a Dell laptop);
+# expects from the hand-made annotations in tests/machine1/annotations/<var>.txt
+samples:
+  - url: https://raw.githubusercontent.com/rhboot/efivar/349e5ffff281ee1f7155194344a839ef314d45d5/tests/machine1/data/db-d719b2cb-3d3a-4596-a3bc-dad00e67656f
+    sha256: 41b2d5cbeb19a01dd19927418d4064769f949cc8d5c9f8544f8749239e4d8cc3
+    name: db-machine1
+    eof: true
+    expect:
+      len(signatures): 3
+      signatures[0].is_cert_x509: true
+      signatures[0].len_signature_list: 1006
+      signatures[1].len_signature: 1572
+  - url: https://raw.githubusercontent.com/rhboot/efivar/349e5ffff281ee1f7155194344a839ef314d45d5/tests/machine1/data/dbx-d719b2cb-3d3a-4596-a3bc-dad00e67656f
+    sha256: 3f16e608a9cd23f9228a8926749600012568d92d343111fafc6b16c0a49e9f1e
+    name: dbx-machine1
+    eof: true
+    expect:
+      len(signatures): 2
+      signatures[1].is_cert_sha256: true
+      signatures[1].len_signature: 48
+      len(signatures[1].signatures): 77
+  - url: https://raw.githubusercontent.com/rhboot/efivar/349e5ffff281ee1f7155194344a839ef314d45d5/tests/machine1/data/KEK-8be4df61-93ca-11d2-aa0d-00e098032b8c
+    sha256: c8c16ce9fcdb97a915356e6c67a750437be53a22f587cd98d419aa2c1c919123
+    name: KEK-machine1
+    eof: true
+    expect:
+      len(signatures): 2
+      signatures[1].len_signature_list: 1560

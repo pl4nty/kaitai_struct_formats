@@ -1,0 +1,14 @@
+# Lucene 10.0.0 backward-compatibility index (compound format). Expects from a hex read against
+# CodecUtil and Lucene90CompoundFormat: codec name, version 0, vint 0x19 = 25 entries, and the
+# footer CRC-32, which matches zlib.crc32 of the file without its last 8 bytes.
+samples:
+  - url: https://raw.githubusercontent.com/apache/lucene/894d24e9b0c7340e66a47812985a4b16a3d5d672/lucene/backward-codecs/src/test/org/apache/lucene/backward_index/index.10.0.0-cfs.zip
+    name: _0.cfe
+    extract: { format: zip, member: _0.cfe }
+    sha256: 794403a682f3d6e83c90b746c7224ad15737a67db33b86d04143c01ebd7ded0c
+    expect:
+      header.codec_name: Lucene90CompoundEntries
+      header.version: 0
+      num_files.value: 25
+      footer.algorithm_id: 0
+      footer.checksum: 1320719712

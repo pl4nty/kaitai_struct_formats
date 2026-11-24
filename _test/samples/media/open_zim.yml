@@ -1,0 +1,4 @@
+samples:
+  - url: https://raw.githubusercontent.com/WerWolv/ImHex-Patterns/d2d3e7cc9aac64804d5e232591645f844748a989/tests/patterns/test_data/zim.hexpat.zim
+    sha256: c97ffd4a21c4168505a36e02244a64a462d1d5e07a719b5f51d61f4f300348a0
+    skip: needs the kaitai_compress Python runtime (process kaitai.compress.lzma/zstd), not installed by the harness

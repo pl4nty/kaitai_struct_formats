@@ -1,0 +1,47 @@
+samples:
+- url: https://raw.githubusercontent.com/kaitai-io/kaitai_struct_webide/c72e3f331fb923d8593b023763fae74eb35d6c9f/samples/pnggrad8rgb.png
+  sha256: 48d8a840a19c51300bfe52e3d7199f73e960965f07532868962e8e11c143256d
+  eof: true
+  expect:
+    ihdr.width: 300
+    ihdr.color_type: truecolor
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/hopper.png
+  sha256: dbdcb9a9f8ec2c54ff99e99636059bbd57194ed84e2cca5e53853aef293faf42
+  eof: true
+  expect:
+    ihdr.width: 128
+    ihdr.height: 128
+    ihdr.color_type: truecolor
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/pil123p.png
+  sha256: 9813e3a499eb5145c88dec52327de8493362155f43ced42737caad513db94de7
+  eof: true
+  expect:
+    ihdr.width: 162
+    ihdr.height: 150
+    ihdr.color_type: indexed
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/1_trns.png
+  sha256: d382a6766a5122d2087b8d785d910bfffa3f482d0a7f09e98bc8435914a09d34
+  eof: true
+  expect:
+    ihdr.width: 64
+    ihdr.bit_depth: 1
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/apng/num_plays.png
+  sha256: 96e11a4777d431af686188e0d0de0588c953b649442fa6ffcdeaf50e8cbd76a0
+  name: apng-num_plays.png
+  eof: true
+  expect:
+    ihdr.width: 128
+    ihdr.height: 64
+    '[c.body.num_frames for c in chunks if c.type == ''acTL'']':
+    - 2
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/apng/mode_palette.png
+  sha256: 06195c323179b78da31ec2e38cee19f69c637f4f6201b44631d184ad9749d9d0
+  name: apng-mode_palette.png
+  eof: true
+  expect:
+    ihdr.color_type: indexed
+- url: https://raw.githubusercontent.com/web-platform-tests/wpt/6a5adcd62f63a67b23fa61312c2008228bd815ba/css/css-color/support/swap-990000-iCCP.png
+  sha256: e99902fe0e327cafa97933716dd4dd573181b8502558a66ee1970463c2a3f327
+  expect:
+    ihdr.width: 200
+    ihdr.height: 200

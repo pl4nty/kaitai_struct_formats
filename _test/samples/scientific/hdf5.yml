@@ -1,0 +1,11 @@
+# HDF5 library test files. Expects from a hex read: superblock version byte after the signature
+# (0 in charsets.h5, 2 in aggr.h5).
+samples:
+  - url: https://raw.githubusercontent.com/HDFGroup/hdf5/1117dfbb4c4c21d3f352624193053a2c68688d59/test/testfiles/charsets.h5
+    sha256: 5369018e38eef09f49a0f61f288f7692005995bfd8acd36014cf7b6a57f0d7b2
+    expect:
+      version: 0
+  - url: https://raw.githubusercontent.com/HDFGroup/hdf5/415f6393a869f8e86b40bc5e076343f7cc7e7621/test/testfiles/aggr.h5
+    sha256: 0ec2f2d8e89fd21fafd23b06f400b6432f42b932999315e87bfae2e54008757e
+    expect:
+      version: 2

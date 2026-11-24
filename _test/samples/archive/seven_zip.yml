@@ -1,0 +1,22 @@
+# py7zr test archives. Expects from a hex read of the 32-byte signature header (7z version 0.4,
+# next header offset and size), cross-checked with 7z l -slt: 32 + ofs_next_header +
+# len_next_header equals its "Physical Size", and for the plain-header test_6.7z,
+# 32 + len_next_header equals its "Headers Size" (3143).
+samples:
+  - url: https://raw.githubusercontent.com/miurahr/py7zr/eab11e95bd12dfb56ec31200c8b2992a3e1acc12/tests/data/test_1.7z
+    sha256: ffba5ce6affb27097b887f27ff6d25cc15a4d8eb5a350587dfb635af77258714
+    expect:
+      version_major: 0
+      version_minor: 4
+      ofs_next_header: 590
+      len_next_header: 35
+  - url: https://raw.githubusercontent.com/miurahr/py7zr/eab11e95bd12dfb56ec31200c8b2992a3e1acc12/tests/data/test_6.7z
+    sha256: 7f23ab21e56a484239f4f5cc8f262f9f6ef4d03f2faa79b3a7a0ecf176578709
+    expect:
+      ofs_next_header: 8457
+      len_next_header: 3111
+  - url: https://raw.githubusercontent.com/miurahr/py7zr/eab11e95bd12dfb56ec31200c8b2992a3e1acc12/tests/data/mblock_1.7z
+    sha256: 4ef255b44dcb22eae71cd8359808f3d3e78ca1e02f8c6d9202eac9879d81c3ee
+    expect:
+      ofs_next_header: 631622
+      len_next_header: 36

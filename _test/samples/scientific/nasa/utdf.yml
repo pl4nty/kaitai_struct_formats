@@ -1,0 +1,19 @@
+samples:
+  - url: https://raw.githubusercontent.com/trwyant/perl-Astro-UTDF/99ba09579418aeb7dd0212f033c0009c3db21198/t/data.utd
+    sha256: 0e6fedf2f2c7c7fb2ebad13b7f5b19e8fe7fcbf86889116c74fdb7348eb9b3b2
+    eof: true
+    expect:   # Astro::UTDF t/utdf.t expectations for the last record
+      len(recs): 2
+      recs[1].agc: 1234
+      recs[1].year: 10
+      recs[1].tx_pad_id: 42
+  - url: https://raw.githubusercontent.com/trwyant/perl-Astro-UTDF/99ba09579418aeb7dd0212f033c0009c3db21198/t/doppler.utdf
+    sha256: 9ca1463b0e86ba2941dab4e49499dd5b560197d1cca78b420a04ad0fae0a3a6b
+    eof: true
+    expect:   # Astro::UTDF t/real_data.t expectations for the last record
+      len(recs): 2
+      recs[1].sic: 3250
+      recs[1].vid: 1
+      recs[1].soy: 29468511
+      recs[1].tx_pad_id: 87
+      recs[1].rx_pad_id: 87

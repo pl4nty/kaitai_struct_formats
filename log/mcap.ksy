@@ -63,8 +63,8 @@ types:
       - id: len_str
         type: u4
       - id: str
-        type: str
         size: len_str
+        type: str
         encoding: UTF-8
 
   tuple_str_str:
@@ -316,7 +316,8 @@ types:
         -orig-id: crc
         type: u4
         doc: |
-          CRC-32 checksum of preceding fields in the record. A value of zero indicates that
+          CRC-32 checksum of preceding fields in the record. A value of zero indicates
+          that
           CRC validation should not be performed.
 
     instances:
@@ -435,5 +436,6 @@ types:
         -orig-id: data_section_crc
         type: u4
         doc: |
-          CRC-32 of all bytes in the data section. A value of 0 indicates the CRC-32 is not
+          CRC-32 of all bytes in the data section. A value of 0 indicates the CRC-32 is
+          not
           available.

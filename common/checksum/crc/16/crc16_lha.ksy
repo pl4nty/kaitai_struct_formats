@@ -1,0 +1,24 @@
+meta:
+  id: crc16_lha
+  title: ARC variant of CRC-16
+  license: Unlicense
+  imports:
+    - ../crc_generic
+  -initial: 0x0
+  -check: 0xbb3d
+  -polynomial: 0x8005
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the ARC variant of CRC-16 of an array.
+
+params:
+  - id: array
+    type: bytes
+
+seq:
+  - id: generic
+    type: crc_generic(16, 0, 0x0, true, true, 0x8005, array)
+
+instances:
+  value:
+    value: generic.value

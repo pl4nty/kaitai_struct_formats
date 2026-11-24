@@ -1,0 +1,3 @@
+samples:
+- url: https://raw.githubusercontent.com/matomatical/reMarkable-kaitai/730ba62be37a40ad290b568844150687e9c6c094/hello.rm
+  sha256: e1aa46946109429a890621740982284989241ce96b62c4d621b0cd1b0bdb4ae2

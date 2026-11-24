@@ -1,0 +1,7 @@
+samples:
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm-tek/golden_analog.wfm
+  sha256: 07a54541e1d8ce064fe7de8ee552d9efe670d768e4a3c7d1965b81441d5c4ba6
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm-tek/analog_waveform.wfm
+  sha256: 20e58a5c0d5f22b6fd294125c529ae0d29e880d76f886933ef98305a82fc169a
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/wfm-tek/FF5MhzX100From5Series.wfm
+  sha256: 329ab3c4c0a5ae2ed182d4bc6728cdeb4e38f248df21f60efa24c72d7bf2a745

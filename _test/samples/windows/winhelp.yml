@@ -1,0 +1,21 @@
+# len_file cross-checked with file(1) ("MS Windows 3.x help, ..., N bytes") and the file size;
+# help compiler version (|SYSTEM minor: 15 = HC 3.0, 21 = HC 3.1, 33 = HCW 4.0) read by hand
+# from the bytes after the |SYSTEM magic 6c 03.
+samples:
+  - url: https://sembiance.com/fileFormatSamples/document/hlp/RETIREA.HLP
+    sha256: ef0661fe44c686645c005f4937cd36376c57be60349d4c364468cc86a487537c
+    expect:
+      len_file: 68305
+  - url: https://sembiance.com/fileFormatSamples/document/hlp/gws.hlp
+    sha256: 12ac9441cd9cb44c7c6664d5983484ffaf03ef1fadff7d04151e3f2d546b5df8
+    expect:
+      len_file: 76582
+  - url: https://sembiance.com/fileFormatSamples/document/hlp/AFORCE.HLP
+    sha256: a2c2919177d8cd1807478606e3bed4f8f9f66076c9a7c805750247563e26b6a4
+    expect:
+      len_file: 2880
+  - url: https://sembiance.com/fileFormatSamples/document/hlp/FONTMGR.HLP
+    sha256: 0c60c736e7d0c5abdacb7ddc644430e728afb2d2b1dd12296c8ad523584adf88
+    expect:
+      len_file: 60662
+    xfail: "meta.encoding is ASCII, but WinHelp system records are ANSI (Windows-1252): byte 0xA9 (copyright sign) in the copyright record fails to decode"

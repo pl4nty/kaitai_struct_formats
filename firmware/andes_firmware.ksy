@@ -7,8 +7,8 @@ meta:
 doc: Firmware image found with MediaTek MT76xx wifi chipsets.
 seq:
   - id: image_header
-    type: image_header
     size: 32
+    type: image_header
   - id: ilm
     size: image_header.ilm_len
   - id: dlm
@@ -27,6 +27,6 @@ types:
       - id: extra
         type: u4
       - id: build_time
-        type: str
         size: 16
+        type: str
         encoding: UTF-8

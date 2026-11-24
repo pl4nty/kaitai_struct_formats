@@ -1,0 +1,8 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/compression/lzo/__input__/lorem.adler.checksum.filter.simple.file.lzo
+    sha256: 426d9ae4da14218e19762e60b6bbe725cceda268e0f9928bc5dbf5faa5540936
+    expect:
+      version: 0x1040
+      library_version: 0x20a0
+      version_needed: 0x0950
+      level: 5

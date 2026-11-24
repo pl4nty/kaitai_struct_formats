@@ -11,25 +11,33 @@ doc: |
   Compressed resource data in `'dcmp' (1)` format,
   as stored in compressed resources with header type `8` and decompressor ID `1`.
 
-  The `'dcmp' (1)` decompressor resource is included in the System file of System 7.0 and later.
-  This compression format is used for a few compressed resources in System 7.0's files
+  The `'dcmp' (1)` decompressor resource is included in the System file of System
+  7.0 and later.
+  This compression format is used for a few compressed resources in System 7.0's
+  files
   (such as the Finder Help file).
-  This decompressor is also included with and used by some other Apple applications,
+  This decompressor is also included with and used by some other Apple
+  applications,
   such as ResEdit.
   (Note: ResEdit includes the `'dcmp' (1)` resource,
   but none of its resources actually use this decompressor.)
 
   This compression format supports some basic general-purpose compression schemes,
   including backreferences to previous data and run-length encoding.
-  It also includes some types of compression tailored specifically to Mac OS resources,
-  including a set of single-byte codes that correspond to entries in a hard-coded lookup table.
+  It also includes some types of compression tailored specifically to Mac OS
+  resources,
+  including a set of single-byte codes that correspond to entries in a hard-coded
+  lookup table.
 
-  The `'dcmp' (0)` compression format (see dcmp_0.ksy) is very similar to this format,
+  The `'dcmp' (0)` compression format (see dcmp_0.ksy) is very similar to this
+  format,
   with the main difference that it operates mostly on units of 2 or 4 bytes.
   This makes the ``dcmp' (0)` format more suitable for word-aligned data,
   such as executable code, bitmaps, sounds, etc.
-  The `'dcmp' (0)` format also appears to be generally preferred over `'dcmp' (1)`,
-  with the latter only being used in resource files that contain mostly unaligned data,
+  The `'dcmp' (0)` format also appears to be generally preferred over `'dcmp'
+  (1)`,
+  with the latter only being used in resource files that contain mostly unaligned
+  data,
   such as text.
 doc-ref: 'https://github.com/dgelessus/python-rsrcfork/blob/f891a6e/src/rsrcfork/compress/dcmp1.py'
 seq:
@@ -37,15 +45,16 @@ seq:
     type: chunk
     repeat: until
     repeat-until: _.tag == 0xff
-    doc: |
-      The sequence of chunks that make up the compressed data.
+    doc: The sequence of chunks that make up the compressed data.
 types:
   chunk:
     doc: |
       A single chunk of compressed data.
-      Each chunk in the compressed data expands to a sequence of bytes in the uncompressed data,
+      Each chunk in the compressed data expands to a sequence of bytes in the
+      uncompressed data,
       except when `tag == 0xff`,
-      which marks the end of the data and does not correspond to any bytes in the uncompressed data.
+      which marks the end of the data and does not correspond to any bytes in the
+      uncompressed data.
 
       Most chunks are stateless and always expand to the same data,
       regardless of where the chunk appears in the sequence.
@@ -98,12 +107,12 @@ types:
 
           The data that this chunk expands to is stored literally in the body (`literal`).
           Optionally,
-          the literal data may also be stored for use by future backreference chunks (`do_store`).
+          the literal data may also be stored for use by future backreference chunks
+          (`do_store`).
         params:
           - id: tag
             type: u1
-            doc: |
-              The tag byte preceding this chunk body.
+            doc: The tag byte preceding this chunk body.
         seq:
           - id: len_literal_separate
             type: u1
@@ -118,8 +127,7 @@ types:
               because smaller lengths can be encoded into the tag byte.
           - id: literal
             size: len_literal
-            doc: |
-              The literal data.
+            doc: The literal data.
         instances:
           do_store:
             value: |
@@ -127,7 +135,8 @@ types:
             doc: |
               Whether this literal should be stored for use by future backreference chunks.
 
-              See the documentation of the `backreference_body` type for details about backreference chunks.
+              See the documentation of the `backreference_body` type for details about
+              backreference chunks.
           len_literal_m1_in_tag:
             value: tag & 0x0f
             if: not is_len_literal_separate
@@ -137,11 +146,11 @@ types:
               minus one.
 
               If the tag byte is 0xd0 or 0xd1,
-              the length is stored in a separate byte after the tag byte and before the literal data.
+              the length is stored in a separate byte after the tag byte and before the
+              literal data.
           is_len_literal_separate:
             value: tag >= 0xd0
-            doc: |
-              Whether the length of the literal is stored separately from the tag.
+            doc: Whether the length of the literal is stored separately from the tag.
           len_literal:
             value: |
               is_len_literal_separate
@@ -163,8 +172,7 @@ types:
         params:
           - id: tag
             type: u1
-            doc: |
-              The tag byte preceding this chunk body.
+            doc: The tag byte preceding this chunk body.
         seq:
           - id: index_separate_minus
             type: u1
@@ -182,8 +190,7 @@ types:
         instances:
           is_index_separate:
             value: tag == 0xd2
-            doc: |
-              Whether the index is stored separately from the tag.
+            doc: Whether the index is stored separately from the tag.
           index_in_tag:
             value: tag - 0x20
             doc: |
@@ -203,14 +210,17 @@ types:
             doc: |
               The index of the referenced literal chunk.
 
-              Stored literals are assigned index numbers in the order in which they appear in the compressed data,
+              Stored literals are assigned index numbers in the order in which they appear in
+              the compressed data,
               starting at 0.
-              Non-stored literals are not counted in the numbering and cannot be referenced using backreferences.
+              Non-stored literals are not counted in the numbering and cannot be referenced
+              using backreferences.
               Once an index is assigned to a stored literal,
               it is never changed or unassigned for the entire length of the compressed data.
 
               As the name indicates,
-              a backreference can only reference stored literal chunks found *before* the backreference,
+              a backreference can only reference stored literal chunks found *before* the
+              backreference,
               not ones that come after it.
       table_lookup_body:
         doc: |
@@ -219,12 +229,12 @@ types:
 
           This chunk always expands to two bytes (`value`),
           determined from the tag byte using a fixed lookup table (`lookup_table`).
-          This lookup table is hardcoded in the decompressor and always the same for all compressed data.
+          This lookup table is hardcoded in the decompressor and always the same for all
+          compressed data.
         params:
           - id: tag
             type: u1
-            doc: |
-              The tag byte preceding this chunk body.
+            doc: The tag byte preceding this chunk body.
         seq: []
         instances:
           lookup_table:
@@ -255,7 +265,8 @@ types:
       extended_body:
         doc: |
           The body of an extended chunk.
-          The meaning of this chunk depends on the extended tag byte stored in the chunk data.
+          The meaning of this chunk depends on the extended tag byte stored in the chunk
+          data.
         seq:
           - id: tag
             type: u1
@@ -267,8 +278,7 @@ types:
               switch-on: tag
               cases:
                 0x02: repeat_body
-            doc: |
-              The chunk's body.
+            doc: The chunk's body.
         types:
           repeat_body:
             doc: |
@@ -279,12 +289,10 @@ types:
             seq:
               - id: to_repeat_raw
                 type: dcmp_variable_length_integer
-                doc: |
-                  Raw variable-length integer representation of `to_repeat`.
+                doc: Raw variable-length integer representation of `to_repeat`.
               - id: repeat_count_m1_raw
                 type: dcmp_variable_length_integer
-                doc: |
-                  Raw variable-length integer representation of `repeat_count_m1`.
+                doc: Raw variable-length integer representation of `repeat_count_m1`.
             instances:
               to_repeat:
                 value: to_repeat_raw.value

@@ -1,0 +1,24 @@
+meta:
+  id: crc16_dds_110
+  title: DDS-110 variant of CRC-16
+  license: Unlicense
+  imports:
+    - ../crc_generic
+  -initial: 0x800d
+  -check: 0x9ecf
+  -polynomial: 0x8005
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the DDS-110 variant of CRC-16 of an array.
+
+params:
+  - id: array
+    type: bytes
+
+seq:
+  - id: generic
+    type: crc_generic(16, 0x800d, 0x0, false, false, 0x8005, array)
+
+instances:
+  value:
+    value: generic.value

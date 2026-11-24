@@ -1,0 +1,22 @@
+# u-root pkg/smbios test data: dmidecode --dump-bin files (entry point, then
+# the structure table at 0x20). Expects from dmidecode 3.5 --from-dump.
+samples:
+  - url: https://raw.githubusercontent.com/u-root/u-root/610575b906e3e86d797cfa12ffb706db7e7d224b/pkg/smbios/testdata/satellite_pro_l70_testdata.bin
+    sha256: 7c18c97187f8f0ac4d7fe9160bf85bb5854910f1cd485e4b3b577613812f7589
+    extract: { format: slice, offset: 32 }
+    eof: true
+    expect:
+      len(structures): 69
+      structures[0].formatted_area.vendor: Insyde Corp.
+      structures[1].formatted_area.product_name: SATELLITE PRO L70-A
+      structures[-1].type: end_of_table
+  - url: https://raw.githubusercontent.com/u-root/u-root/610575b906e3e86d797cfa12ffb706db7e7d224b/pkg/smbios/testdata/smbios_table.bin
+    name: thinkpad_t490.bin
+    sha256: 2ba9aff91ce1b253df6fbf0691e82413b7d46fed796e9128e51953d17d01f098
+    extract: { format: slice, offset: 32 }
+    eof: true
+    expect:
+      len(structures): 69
+      '[s for s in structures if s.handle == 0x11][0].formatted_area.vendor': LENOVO
+      '[s for s in structures if s.handle == 0x12][0].formatted_area.version': ThinkPad T490
+      structures[-1].handle: 0xfeff

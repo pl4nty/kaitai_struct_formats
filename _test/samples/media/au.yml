@@ -1,0 +1,13 @@
+# header fields read from the 24-byte .snd header
+samples:
+  - url: https://raw.githubusercontent.com/python/cpython/0fb18b02c8ad56299d6a2910be0bab8ad601ef24/Lib/test/audiodata/pluck-pcm16.au
+    sha256: cc925dc8ed7705c2bd444542091169073445d907f5cade9579da83e8d2568ad8
+    expect:
+      header.encoding: linear_16
+      header.sample_rate: 11025
+      header.num_channels: 2
+  - url: https://raw.githubusercontent.com/python/cpython/0fb18b02c8ad56299d6a2910be0bab8ad601ef24/Lib/test/audiodata/pluck-ulaw.au
+    sha256: 975103191246d69aac4eb605cf6d84969b2054bee95dcccbe7824a99ae26e6fa
+    expect:
+      header.encoding: mulaw_8
+      header.data_size: 6614

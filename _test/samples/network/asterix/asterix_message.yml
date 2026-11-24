@@ -1,0 +1,32 @@
+samples:
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat062cat065.raw
+    sha256: 2916c2c01ee66d316d51bf125e28f4133a38abb7b19ee5eef1a0d7f6aaf1a53d
+    eof: true
+    expect:   # manual walk of CAT/LEN block headers (ASTERIX Part 1)
+      len(data_blocks): 2
+      data_blocks[0].cat: 62
+      data_blocks[1].cat: 65
+      # tshark 4.2.2 ASTERIX dissector (block wrapped in UDP/8600 via text2pcap): 2 CAT062
+      # records, I062/040 track numbers 0x1374 and 0x1f29 (UAP slot 12)
+      len(data_blocks[0].records): 2
+      data_blocks[0].records[0].items[11].item.value: '1374'
+      data_blocks[0].records[1].items[11].item.value: 1f29
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat034.raw
+    sha256: a5d24d471cc0fac2554924cbd6aacbf532be96204b4fb335f6275b9a1a0e5766
+    eof: true
+    expect:
+      len(data_blocks): 1
+      data_blocks[0].cat: 34
+      data_blocks[0].len: 16
+      # tshark 4.2.2 ASTERIX dissector on the block wrapped in UDP/8600 (text2pcap):
+      # FSPEC f6 = I010,I000,I030,I020,I050,I060 present, I041 absent
+      data_blocks[0].records[0].i010.value: 190e            # SAC 25, SIC 14
+      data_blocks[0].records[0].i030.value: 3a692b          # ToD 29906.3359375 s * 128
+      data_blocks[0].records[0].i041 is None: true
+      data_blocks[0].records[0].i050.data[4].value: '40'    # SSR subfield, CHAB = 2
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat048.raw
+    sha256: 17481bd2955d046efc5aac1022b4f5879ab02456060c419503aded54bf2e5efd
+    eof: true
+    expect:   # manual read of CAT/LEN header (ASTERIX Part 1)
+      data_blocks[0].cat: 48
+      data_blocks[0].len: 48

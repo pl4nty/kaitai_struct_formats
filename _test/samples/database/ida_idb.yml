@@ -1,0 +1,6 @@
+# python-idb test database. Expect from a hex read: signature "IDA1" (32-bit database).
+samples:
+  - url: https://raw.githubusercontent.com/williballenthin/python-idb/5a313f27cf6200e2454eb08ef3b557227fc2e9d7/tests/data/small/small-colored.idb
+    sha256: f4768aee0258431ed1fb5825583640359fba0274054d341f8ef3dc783b00a6ed
+    expect:
+      header.signature: IDA1

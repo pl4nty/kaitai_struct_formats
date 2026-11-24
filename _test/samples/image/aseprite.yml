@@ -1,0 +1,23 @@
+samples:
+  - url: https://raw.githubusercontent.com/aseprite/aseprite/e593180ee7cb0349f40c4e057f357830ebb0fa10/tests/sprites/2f-index-3x3.aseprite
+    sha256: 05cc2706363f7b3a0d0be280b3f3165853c8306232d5bb8129fbdeab9b1d3432
+    eof: true
+    expect:
+      header.len_file: 616
+      header.num_frames: 2
+      header.width: 3
+      header.height: 3
+  - url: https://raw.githubusercontent.com/aseprite/aseprite/e593180ee7cb0349f40c4e057f357830ebb0fa10/tests/sprites/tags3.aseprite
+    sha256: d7729944e04e21c764e3791a64d4802a6a8529b5d1354f4b98cc9ad0488d8644
+    eof: true
+    expect:
+      header.num_frames: 12
+      header.color_depth: 32
+      len(frames): 12
+  - url: https://raw.githubusercontent.com/aseprite/aseprite/e593180ee7cb0349f40c4e057f357830ebb0fa10/tests/sprites/2x2tilemap2x2tile.aseprite
+    sha256: fbd2a4805c9adcc8be0f367332186236e053170571b69cb6c49bf4108ac5996e
+    eof: true
+    expect:
+      header.width: 6
+      header.height: 6
+      header.color_depth: 32

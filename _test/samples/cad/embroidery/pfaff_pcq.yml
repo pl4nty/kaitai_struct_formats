@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/pfaff_pcq/samples/random1-wilcom.PCQ
+  sha256: 9fc449b825320b9db0e3afdab09cd679a53ebd453c963d18cee4fc316a963f70
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/pfaff_pcq/samples/random2-wilcom.PCQ
+  sha256: 8d2ca59b5b02a409767bfe31ccff1ca751fb0cc9a28b585d94927c5335342a68
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/pfaff_pcq/samples/random3-wilcom.PCQ
+  sha256: dfdd5cf028224c3323bdeaf77d4e95b0e0ecdd79f659f5ab8ebf92241862d5f7
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/pfaff_pcq/samples/scene-wilcom.PCQ
+  sha256: 78f4a08f7673671de68e65066adfe9bd3a8e8d6130523488985ab7b004089d3f

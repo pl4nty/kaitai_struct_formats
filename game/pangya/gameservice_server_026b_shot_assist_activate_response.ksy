@@ -1,0 +1,26 @@
+# Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/026b.ksy
+meta:
+  id: gameservice_server_026b_shot_assist_activate_response
+  title: GameService Server Shot Assist Activate Response
+  license: ISC
+  imports:
+    - pstring
+  encoding: ASCII
+  endian: le
+
+doc: |
+  This packet acknowledges shot assist activating on a shot.
+  
+  This is the response to [GameService Client 0x0185 Shot Assist
+  Activate](/packets/gameservice/client/0185.ksy).
+
+seq:
+  - id: unknown_a
+    type: u4
+    doc: All examples are 0 (0x00000000).
+  - id: item_id
+    type: u4
+    doc: From pangya_xx.iff/Item.iff. The 'Play Assist' item ID (0x1BE00016).
+  - id: user_id
+    type: u4
+    doc: The local user's ID.

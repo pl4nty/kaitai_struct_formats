@@ -30,8 +30,8 @@ seq:
   - id: dst_ip_addr
     size: 4
   - id: options
-    type: ipv4_options
     size: ihl_bytes - 20
+    type: ipv4_options
   - id: body
     size: total_length - ihl_bytes
     type: protocol_body(protocol)

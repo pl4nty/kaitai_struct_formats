@@ -1,0 +1,12 @@
+samples:
+  - url: https://raw.githubusercontent.com/ZetaTwo/gameboy-project/cba4d0e9b4c3ac9410196a546ffd2f05f3b5d090/gbr-parser/test/digits.gbr
+    sha256: ed7b547e945152407740b6e33ebc546401de2fdc0d2e6629bc994beaa76ce9b4
+    eof: true
+    expect:
+      len(objects): 7
+      objects[0].object_type: producer
+      objects[1].body.width: 8
+      objects[1].body.count: 64
+  - url: https://raw.githubusercontent.com/ZetaTwo/gameboy-project/cba4d0e9b4c3ac9410196a546ffd2f05f3b5d090/gbr-parser/test/alpha.gbr
+    sha256: 1e0a35f4a7d5c26784ac60f10a0c80c1a4ef5d84359f30a5e19c754e90f3b30d
+    eof: true

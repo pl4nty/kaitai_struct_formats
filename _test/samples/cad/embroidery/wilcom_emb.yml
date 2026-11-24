@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/wilcom_emb/samples/random1-wilcom-e1.EMB
+  sha256: cc574b4029f3f0c30239b2954c554168fbd388ed59335146e5544a0e705a75f5
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/wilcom_emb/samples/random1-wilcom-e15.EMB
+  sha256: f17cdfba33d753a569d877c55c3439b882985aa660074a12fffd3882f88be2a1
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/wilcom_emb/samples/random1-wilcom-e18.EMB
+  sha256: fac3d859b0126aa6c63941fa588f0f25baab6d6ba7844a8fe920e357e33068fb
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/wilcom_emb/samples/random1-wilcom-e2.EMB
+  sha256: 202c8aeedcce3e80e4404ff7bbd1c2585ad1a7e2963b2fea3bea4163a91bb75b

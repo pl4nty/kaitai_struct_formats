@@ -1,0 +1,8 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/filesystem/android/sparse/__input__/fruits.sparse
+    sha256: 0558c885fb6761134e273cca6939774c920c4503dc5461ed2590fc2c50e21025
+    eof: true
+    expect:
+      header.block_size: 4096
+      header.num_blocks: 128
+      header.num_chunks: 7

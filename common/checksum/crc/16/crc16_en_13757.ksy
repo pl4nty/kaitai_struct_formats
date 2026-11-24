@@ -1,0 +1,24 @@
+meta:
+  id: crc16_en_13757
+  title: EN-13757 variant of CRC-16
+  license: Unlicense
+  imports:
+    - ../crc_generic
+  -initial: 0x0
+  -check: 0xc2b7
+  -polynomial: 0x3d65
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the EN-13757 variant of CRC-16 of an array.
+
+params:
+  - id: array
+    type: bytes
+
+seq:
+  - id: generic
+    type: crc_generic(16, 0, 0xffff, false, false, 0x3d65, array)
+
+instances:
+  value:
+    value: generic.value

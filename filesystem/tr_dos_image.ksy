@@ -41,10 +41,10 @@ types:
   file:
     seq:
       - id: name
+        size: 8
         # It uses custom type due to limitation of streams: there's no way to
         # extract first byte from byte array directly
         type: filename
-        size: 8
       - id: extension
         type: u1
       - id: position_and_length
@@ -108,19 +108,19 @@ types:
       - id: first_free_sector_sector
         type: u1
       - id: first_free_sector_track
+        type: u1
         doc: |
           track number is logical, for double-sided disks it's
           (physical_track << 1) | side, the same way that tracks are stored
           sequentially in .trd file
-        type: u1
       - id: disk_type
         type: u1
         enum: disk_type
       - id: num_files
+        type: u1
         doc: |
           Number of non-deleted files. Directory can have more than
           number_of_files entries due to deleted files
-        type: u1
       - id: num_free_sectors
         type: u2
       - id: tr_dos_id

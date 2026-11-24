@@ -58,7 +58,7 @@ seq:
   - id: samples_format
     -orig-id: Ffi
     type: u2
-    doc: '1 = signed samples, 2 = unsigned samples'
+    doc: 1 = signed samples, 2 = unsigned samples
   - id: magic2
     contents: 'SCRM'
   - id: global_volume
@@ -113,7 +113,9 @@ types:
         type: b1
       - id: ch_type
         type: b7
-        doc: Channel type (0..7 = left sample channels, 8..15 = right sample channels, 16..31 = AdLib synth channels)
+        doc: |
+          Channel type (0..7 = left sample channels, 8..15 = right sample channels,
+          16..31 = AdLib synth channels)
   instrument_ptr:
     seq:
       - id: paraptr
@@ -128,8 +130,8 @@ types:
         type: u1
         enum: inst_types
       - id: filename
-        terminator: 0
         size: 12
+        terminator: 0
       - id: body
         type:
           switch-on: type
@@ -196,10 +198,12 @@ types:
     seq:
       - id: paraptr
         type: u2
+        doc: Parapointer to the pattern; 0 means the pattern is empty and not stored.
     instances:
       body:
         pos: paraptr * 0x10
         type: pattern
+        if: paraptr != 0
   pattern:
     seq:
       - id: size

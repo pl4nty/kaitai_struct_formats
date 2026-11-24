@@ -1,0 +1,13 @@
+samples:
+  - url: https://archive.org/download/HeroesofMightandMagicIITheSuccessionWars_1020/h2demo.zip
+    sha256: 12048c8b03875c81e69534a3813aaf6340975e77b762dc1b79a4ff5514240e3c
+    name: HEROES2.AGG-ADVMBW01.BMP
+    extract:
+      format: zip
+      member: DATA/HEROES2.AGG
+      then: { format: slice, offset: 10090956, size: 1030 }
+    eof: true
+    expect:
+      magic: 33
+      width: 32
+      height: 32

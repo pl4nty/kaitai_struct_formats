@@ -1,0 +1,4 @@
+samples:
+- url: https://raw.githubusercontent.com/WolvenKit/wwise-audio-tools/ec4d73fbbc46ee86459aa3b317d0eb78201f6ed1/tests/testdata/wem/test1.wem
+  sha256: 1551570ba6071b8681e6e6b600310f4eb9a20d7e9980b85b589ab7b927ea3ae0
+  xfail: 'spec bug: fmt_chunk.guid decodes 42 bytes of binary extension data as a UTF-8 string'

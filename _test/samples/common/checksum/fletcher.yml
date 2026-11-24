@@ -1,0 +1,65 @@
+# Library type: published Fletcher-16/32/64 test vectors.
+samples:
+- name: f16-abcde
+  data: '6162636465'
+  params:
+    byteness: '1'
+    data: _data
+  expect:
+    value: 51440
+- name: f16-abcdef
+  data: '616263646566'
+  params:
+    byteness: '1'
+    data: _data
+  expect:
+    value: 8279
+- name: f16-abcdefgh
+  data: '6162636465666768'
+  params:
+    byteness: '1'
+    data: _data
+  expect:
+    value: 1575
+- name: f32-abcde
+  data: '616263646500'
+  params:
+    byteness: '2'
+    data: _data
+  expect:
+    value: 4031760169
+- name: f32-abcdef
+  data: '616263646566'
+  params:
+    byteness: '2'
+    data: _data
+  expect:
+    value: 1448095018
+- name: f32-abcdefgh
+  data: '6162636465666768'
+  params:
+    byteness: '2'
+    data: _data
+  expect:
+    value: 3957429649
+- name: f64-abcde
+  data: '6162636465000000'
+  params:
+    byteness: '4'
+    data: _data
+  expect:
+    value: 14467467625952928454
+- name: f64-abcdef
+  data: '6162636465660000'
+  params:
+    byteness: '4'
+    data: _data
+  expect:
+    value: 14467579776138987718
+- name: f64-abcdefgh
+  data: '6162636465666768'
+  params:
+    byteness: '4'
+    data: _data
+  expect:
+    value: 3543817411021686982

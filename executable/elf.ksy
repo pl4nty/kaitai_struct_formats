@@ -21,6 +21,8 @@ meta:
     - linux
   license: CC0-1.0
   ks-version: '0.11'
+  imports:
+    - /common/vlq_base128_le
 doc-ref:
   - https://forge.sourceware.org/glibc/glibc-mirror/src/tag/glibc-2.43/elf/elf.h
   - https://refspecs.linuxfoundation.org/elf/gabi4+/contents.html
@@ -86,6 +88,31 @@ instances:
   sh_idx_hi_reserved:
     -orig-id: SHN_HIRESERVE
     value: 0xffff
+  module_signature_marker:
+    -orig-id: MODULE_SIG_STRING
+    pos: _io.size - 28
+    size: 28
+    if: _io.size >= 40
+    doc: |
+      Last 28 bytes of the file. Signed Linux kernel modules have a
+      signature appended after the ELF image itself, which ends with
+      the marker "~Module signature appended~\n".
+  module_signature:
+    pos: _io.size - 40
+    type: module_signature
+    if: |
+      _io.size >= 40 and module_signature_marker == [
+        0x7e, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x20, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74,
+        0x75, 0x72, 0x65, 0x20, 0x61, 0x70, 0x70, 0x65, 0x6e, 0x64, 0x65, 0x64, 0x7e, 0x0a
+      ]
+    doc: |
+      Information block of a signature appended to a Linux kernel
+      module, present only if the file ends with the module signature
+      marker. Note that the signature is not part of the ELF image:
+      it is not described by any section or program header.
+    doc-ref:
+      - https://github.com/torvalds/linux/blob/v6.18/include/linux/module_signature.h
+      - https://github.com/torvalds/linux/blob/v6.18/scripts/sign-file.c
 types:
   phdr_type_flags:
     params:
@@ -132,8 +159,7 @@ types:
       info_link:
         -orig-id: SHF_INFO_LINK
         value: value & 0x40 != 0
-        doc: |
-          Section header's `sh_info` field holds a section header table index
+        doc: Section header's `sh_info` field holds a section header table index
       link_order:
         -orig-id: SHF_LINK_ORDER
         value: value & 0x80 != 0
@@ -355,8 +381,8 @@ types:
       no_common:
         -orig-id: DF_1_NOCOMMON
         value: value & 0x4000_0000 != 0
-        doc-ref: https://forge.sourceware.org/glibc/glibc-mirror/src/tag/glibc-2.43/elf/elf.h#L1040
         doc: No COMMON symbols exist.
+        doc-ref: https://forge.sourceware.org/glibc/glibc-mirror/src/tag/glibc-2.43/elf/elf.h#L1040
   endian_elf:
     meta:
       endian:
@@ -450,10 +476,9 @@ types:
           - https://docs.oracle.com/en/operating-systems/solaris/oracle-solaris/11.4/linkers-libraries/program-header.html
         -webide-representation: "{type} - f:{flags_obj:flags} (o:{ofs_body}, s:{len_body:dec})"
         seq:
-          - id: type
+          - id: type_raw
             -orig-id: p_type
             type: u4
-            enum: ph_type
           - id: flags64
             -orig-id: p_flags
             type: u4
@@ -505,16 +530,45 @@ types:
                 'bits::b32': u4
                 'bits::b64': u8
         instances:
+          type:
+            value: type_raw
+            enum: ph_type
+            doc: |
+              Common and OS-specific type. For processor-specific types, use
+              the matching `type_*` instance, which is only present for the
+              corresponding ELF machine. The numeric value is available via
+              `type_raw`.
+          type_arm:
+            value: type_raw
+            enum: ph_type_arm
+            if: |
+              _parent.machine == machine::arm
+              and type_raw >= 0x70000000 and type_raw <= 0x7fffffff
+            -webide-parse-mode: eager
+          type_aarch64:
+            value: type_raw
+            enum: ph_type_aarch64
+            if: |
+              _parent.machine == machine::aarch64
+              and type_raw >= 0x70000000 and type_raw <= 0x7fffffff
+            -webide-parse-mode: eager
+          type_riscv:
+            value: type_raw
+            enum: ph_type_riscv
+            if: |
+              _parent.machine == machine::riscv
+              and type_raw >= 0x70000000 and type_raw <= 0x7fffffff
+            -webide-parse-mode: eager
           body:
             io: _root._io
             pos: ofs_body
             size: len_body
             type:
-              switch-on: type
+              switch-on: type_raw
               cases:
-                'ph_type::interp': ph_interpreter
-                'ph_type::dynamic': ph_dynamic_section
-                'ph_type::note': note_section
+                'ph_type::interp.to_i': ph_interpreter
+                'ph_type::dynamic.to_i': ph_dynamic_section
+                'ph_type::note.to_i': note_section
             # This condition is necessary for successfully parsing ELF files
             # embedded within `.gnu_debugdata` sections (see
             # https://github.com/kaitai-io/kaitai_struct_formats/pull/752#discussion_r3571558218).
@@ -579,10 +633,9 @@ types:
           - id: ofs_name
             -orig-id: sh_name
             type: u4
-          - id: type
+          - id: type_raw
             -orig-id: sh_type
             type: u4
-            enum: sh_type
           - id: flags
             -orig-id: sh_flags
             type:
@@ -632,30 +685,78 @@ types:
                 'bits::b32': u4
                 'bits::b64': u8
         instances:
+          type:
+            value: type_raw
+            enum: sh_type
+            doc: |
+              Common and OS-specific type. For processor-specific types, use
+              the matching `type_*` instance, which is only present for the
+              corresponding ELF machine. The numeric value is available via
+              `type_raw`.
+          type_sparc:
+            value: type_raw
+            enum: sh_type_sparc
+            if: |
+              (_parent.machine == machine::sparc or
+              _parent.machine == machine::sparc32plus or
+              _parent.machine == machine::sparc_v9)
+              and type_raw >= 0x70000000 and type_raw <= 0x7fffffff
+            -webide-parse-mode: eager
+          type_x86_64:
+            value: type_raw
+            enum: sh_type_x86_64
+            if: |
+              _parent.machine == machine::x86_64
+              and type_raw >= 0x70000000 and type_raw <= 0x7fffffff
+            -webide-parse-mode: eager
+          type_arm:
+            value: type_raw
+            enum: sh_type_arm
+            if: |
+              _parent.machine == machine::arm
+              and type_raw >= 0x70000000 and type_raw <= 0x7fffffff
+            -webide-parse-mode: eager
+          type_aarch64:
+            value: type_raw
+            enum: sh_type_aarch64
+            if: |
+              _parent.machine == machine::aarch64
+              and type_raw >= 0x70000000 and type_raw <= 0x7fffffff
+            -webide-parse-mode: eager
           body:
             io: _root._io
             pos: ofs_body
             size: len_body
             type:
-              switch-on: type
+              switch-on: type_raw
               cases:
-                'sh_type::dynamic': sh_dynamic_section
-                'sh_type::strtab': strings_struct
-                'sh_type::dynsym': dynsym_section
-                'sh_type::symtab': dynsym_section
-                'sh_type::note': note_section
-                'sh_type::rel': relocation_section(false)
-                'sh_type::rela': relocation_section(true)
-                'sh_type::gnu_versym': versym_section
-                'sh_type::gnu_verdef': verdef_section
-                'sh_type::gnu_verneed': verneed_section
-            if: type != sh_type::nobits
+                'sh_type::dynamic.to_i': sh_dynamic_section
+                'sh_type::strtab.to_i': strings_struct
+                'sh_type::dynsym.to_i': dynsym_section
+                'sh_type::symtab.to_i': dynsym_section
+                'sh_type::note.to_i': note_section
+                'sh_type::rel.to_i': relocation_section(false)
+                'sh_type::rela.to_i': relocation_section(true)
+                'sh_type::gnu_versym.to_i': versym_section
+                'sh_type::gnu_verdef.to_i': verdef_section
+                'sh_type::gnu_verneed.to_i': verneed_section
+            if: type_raw != sh_type::nobits.to_i
+          arm_attributes:
+            io: _root._io
+            pos: ofs_body
+            size: len_body
+            type: arm_attributes_section
+            if: |
+              _parent.machine == machine::arm
+              and type_raw == sh_type_arm::attributes.to_i
           linked_section:
             value: _root.header.section_headers[linked_section_idx]
             if: |
               linked_section_idx != section_header_idx_special::undefined.to_i
               and linked_section_idx < _root.header.num_section_headers
-            doc: may reference a later section header, so don't try to access too early (use only lazy `instances`)
+            doc: |
+              may reference a later section header, so don't try to access too early (use only
+              lazy `instances`)
             doc-ref: https://refspecs.linuxfoundation.org/elf/gabi4+/ch4.sheader.html#sh_link
           name:
             io: _root.header.section_names._io
@@ -670,10 +771,10 @@ types:
         seq:
           - id: entries
             type: strz
-            repeat: eos
             # For an explanation of why UTF-8 instead of ASCII, see the comment
             # on the `name` attribute in the `dynsym_section_entry` type.
             encoding: UTF-8
+            repeat: eos
       sh_dynamic_section:
         doc: |
           Same type as `ph_dynamic_section`, but it depends on
@@ -1449,6 +1550,231 @@ types:
               Version reference exists for informational purposes and does not
               need to be validated at runtime.
             doc-ref: https://docs.oracle.com/en/operating-systems/solaris/oracle-solaris/11.4/linkers-libraries/version-dependency-section.html
+      arm_attributes_section:
+        doc-ref:
+          - >-
+            https://developer.arm.com/documentation/ihi0044/h/?lang=en
+            "Object Files > Sections > Build Attributes"
+          - >-
+            https://developer.arm.com/documentation/ihi0045/h?lang=en
+            "ADDENDUM: Build Attributes > Representing build attributes in ELF files"
+        seq:
+          - id: version
+            type: u1
+            doc: character 'A' (0x41) for the latest 2019Q1 Arm ABI release
+          - id: entries
+            type: arm_attributes_section_entry
+            repeat: eos
+      arm_attributes_section_entry:
+        seq:
+          - id: len_body
+            type: u4
+          - id: body
+            size: len_body - len_body._sizeof
+            type: arm_attributes_section_entry_body
+        types:
+          arm_attributes_section_entry_body:
+            seq:
+              - id: vendor_name
+                type: strz
+                encoding: ASCII
+                doc: |
+                  See "Object Files > Introduction > **Registered Vendor Names**" in
+                  the [ELF for the Arm
+                  Architecture](https://developer.arm.com/documentation/ihi0044/h/?lang=en)
+                  document.
+
+                  Vendor names beginning "Anon" or "anon" are reserved to
+                  unregistered private use.
+              - id: vendor_data
+                size-eos: true
+                if: not is_public
+              - id: public_subsection
+                size-eos: true
+                type: arm_attributes_public_subsection
+                if: is_public
+            instances:
+              is_public:
+                value: vendor_name == "aeabi"
+          arm_attributes_public_subsection:
+            seq:
+              - id: type
+                type: u1
+                enum: types
+                doc-ref:
+                  - >-
+                    https://developer.arm.com/documentation/ihi0045/h?lang=en
+                    "ADDENDUM: Build Attributes > Representing build attributes
+                    in ELF files > Formal syntax of a public ("aeabi")
+                    attributes subsection"
+                  - https://github.com/llvm/llvm-project/blob/014c6b07362c/llvm/lib/Support/ELFAttributeParser.cpp#L139
+              - id: len_attributes
+                type: u4
+              - id: attributes
+                size: len_attributes - type._sizeof - len_attributes._sizeof
+                type: arm_attributes_wrapper
+                if: type == types::file
+            enums:
+              types:
+                1:
+                  id: file
+                  -orig-id: File
+                2:
+                  id: section_deprecated
+                  -orig-id: Section
+                  doc: deprecated (ABI r2.09)
+                3:
+                  id: symbol_deprecated
+                  -orig-id: Symbol
+                  doc: deprecated (ABI r2.09)
+          arm_attributes_wrapper:
+            seq:
+              - id: attributes
+                type: arm_attribute
+                repeat: eos
+          arm_attribute:
+            -webide-representation: '{tag} - s:{value_str} i:{value_int}'
+            seq:
+              - id: tag_raw
+                type: vlq_base128_le
+              - id: value_str
+                type: strz
+                encoding: ASCII
+                if: is_value_str
+              - id: value_int_raw
+                type: vlq_base128_le
+                if: is_value_int
+            instances:
+              value_int:
+                value: value_int_raw.value
+                if: is_value_int
+              tag:
+                value: tag_raw.value
+                enum: tags
+              is_value_str:
+                value: |
+                  tag.to_i < 32 ? (tag == tags::cpu_raw_name or tag == tags::cpu_name)
+                  : tag.to_i % 2 != 0
+                doc-ref: https://github.com/llvm/llvm-project/blob/014c6b07362c/lldb/source/Plugins/ObjectFile/ELF/ObjectFileELF.cpp#L1260-L1276
+              is_value_int:
+                value: not is_value_str
+            enums:
+              # https://github.com/llvm/llvm-project/blob/014c6b07362c/llvm/include/llvm/Support/ARMBuildAttributes.h#L34-L85
+              tags:
+                1:
+                  id: file
+                  -orig-id: File
+                2:
+                  id: section_deprecated
+                  -orig-id: Section
+                  doc: deprecated (ABI r2.09)
+                3:
+                  id: symbol_deprecated
+                  -orig-id: Symbol
+                  doc: deprecated (ABI r2.09)
+                4: cpu_raw_name
+                5: cpu_name
+                6: cpu_arch
+                7: cpu_arch_profile
+                8: arm_isa_use
+                9: thumb_isa_use
+                10: fp_arch
+                11: wmmx_arch
+                12: advanced_simd_arch
+                13: pcs_config
+                14: abi_pcs_r9_use
+                15: abi_pcs_rw_data
+                16: abi_pcs_ro_data
+                17: abi_pcs_got_use
+                18: abi_pcs_wchar_t
+                19: abi_fp_rounding
+                20: abi_fp_denormal
+                21: abi_fp_exceptions
+                22: abi_fp_user_exceptions
+                23: abi_fp_number_model
+                24:
+                  id: abi_align_needed
+                  doc: renamed from ABI_align8_needed (ABI r2.09)
+                25:
+                  id: abi_align_preserved
+                  doc: renamed from ABI_align8_preserved (ABI r2.09)
+                26: abi_enum_size
+                27: abi_hardfp_use
+                28: abi_vfp_args
+                29: abi_wmmx_args
+                30: abi_optimization_goals
+                31: abi_fp_optimization_goals
+                32: compatibility
+                34: cpu_unaligned_access
+                36: fp_hp_extension
+                38: abi_fp_16bit_format
+                42:
+                  id: mpextension_use
+                  doc: recoded from 70 (ABI r2.08)
+                44: div_use
+                46: dsp_extension
+                48: mve_arch
+                64:
+                  id: nodefaults_deprecated
+                  -orig-id: nodefaults
+                  doc: deprecated (ABI r2.09)
+                66:
+                  id: t2ee_use_deprecated
+                  -orig-id: T2EE_use
+                  doc: deprecated (ABI r2.09)
+                65: also_compatible_with
+                67: conformance
+                68: virtualization_use
+                70:
+                  id: mpextension_use_old
+                  doc: recoded to MPextension_use (ABI r2.08)
+  module_signature:
+    -orig-id: module_signature
+    doc: |
+      Information block of an appended Linux kernel module signature.
+      It is preceded by the signer's name, the key identifier and the
+      signature data (in that order), and followed by the marker.
+    seq:
+      - id: algo
+        type: u1
+        doc: Public-key crypto algorithm (0 for PKCS#7 signatures).
+      - id: hash
+        type: u1
+        doc: Digest algorithm (0 for PKCS#7 signatures).
+      - id: id_type
+        type: u1
+        enum: pkey_id_type
+        doc: Key identifier type.
+      - id: len_signer
+        -orig-id: signer_len
+        type: u1
+        doc: Length of signer's name (0 for PKCS#7 signatures).
+      - id: len_key_id
+        -orig-id: key_id_len
+        type: u1
+        doc: Length of key identifier (0 for PKCS#7 signatures).
+      - id: pad
+        -orig-id: __pad
+        size: 3
+      - id: len_signature
+        -orig-id: sig_len
+        type: u4be
+        doc: Length of signature data.
+    instances:
+      ofs_signer:
+        value: _root._io.size - 40 - len_signature - len_key_id - len_signer
+      signer:
+        pos: ofs_signer
+        size: len_signer
+        doc: Signer's name.
+      key_id:
+        pos: ofs_signer + len_signer
+        size: len_key_id
+        doc: Key identifier.
+      signature:
+        pos: ofs_signer + len_signer + len_key_id
+        size: len_signature
+        doc: Signature data (a DER-encoded PKCS#7 message for `id_type::pkcs7`).
 enums:
   # e_ident[EI_CLASS]
   bits:
@@ -2745,8 +3071,7 @@ enums:
     0x6464e550:
       id: sunw_unwind
       -orig-id: PT_SUNW_UNWIND
-      doc: |
-        Equivalent to `PT_SUNW_EH_FRAME` (`ph_type::gnu_eh_frame`)
+      doc: Equivalent to `PT_SUNW_EH_FRAME` (`ph_type::gnu_eh_frame`)
       doc-ref: https://docs.oracle.com/en/operating-systems/solaris/oracle-solaris/11.4/linkers-libraries/program-header.html#GUID-49F99618-9CDC-4A08-A94C-E2AA264AA01A__CHAPTER6-69880
     0x6474e550:
       id: gnu_eh_frame
@@ -2863,19 +3188,20 @@ enums:
     #   id: lo_proc
     #   -orig-id: PT_LOPROC
     #   doc: First of processor-specific semantics
+    # 0x7fffffff:
+    #   id: hi_proc
+    #   -orig-id: PT_HIPROC
+    #   doc: Last of processor-specific semantics
+  ph_type_arm:
     0x70000000:
-      id: arm_archext
+      id: archext
       -orig-id: PT_ARM_ARCHEXT
       doc: Platform architecture compatibility information
       doc-ref:
         - https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L40
         - https://github.com/ARM-software/abi-aa/blob/daa7a94ca55973736c0e434a67a6e4bbcd35d7fa/aaelf32/aaelf32.rst#61program-header Git tag "2025Q4"
-    # 0x70000000:
-    #   id: aarch64_archext
-    #   -orig-id: PT_AARCH64_ARCHEXT
-    #   doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L28
     0x70000001:
-      id: arm_exidx
+      id: exidx
       -orig-id:
         - PT_ARM_EXIDX
         - PT_ARM_UNWIND
@@ -2883,20 +3209,22 @@ enums:
       doc-ref:
         - https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L41
         - https://github.com/ARM-software/abi-aa/blob/daa7a94ca55973736c0e434a67a6e4bbcd35d7fa/aaelf32/aaelf32.rst#61program-header Git tag "2025Q4"
+  ph_type_aarch64:
+    0x70000000:
+      id: archext
+      -orig-id: PT_AARCH64_ARCHEXT
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L28
     0x70000002:
-      id: aarch64_memtag_mte
+      id: memtag_mte
       -orig-id: PT_AARCH64_MEMTAG_MTE
       doc: MTE memory tags
       doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L31
+  ph_type_riscv:
     0x70000003:
-      id: riscv_attributes
+      id: attributes
       -orig-id: PT_RISCV_ATTRIBUTES
       doc: RISC-V ELF attribute section (deprecated)
       doc-ref: https://github.com/riscv-non-isa/riscv-elf-psabi-doc/blob/01017c343cd6d89ed4d1d568b1c75fac79d2a689/riscv-elf.adoc#program-header-table
-    # 0x7fffffff:
-    #   id: hi_proc
-    #   -orig-id: PT_HIPROC
-    #   doc: Last of processor-specific semantics
   # https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/common.h#L526
   # https://github.com/llvm/llvm-project/blob/ca7933e47d3a3451d81e72ac174dcb5aa28b59d1/llvm/include/llvm/BinaryFormat/ELF.h#L1144 (Git tag "llvmorg-22.1.8")
   # https://docs.oracle.com/en/operating-systems/solaris/oracle-solaris/11.4/linkers-libraries/section-headers.html#GUID-2CBE4879-2E76-426E-BB7F-CF0CB1D87C52__CHAPTER6-73445
@@ -3179,59 +3507,6 @@ enums:
     #   id: lo_proc
     #   -orig-id: SHT_LOPROC
     #   doc: First of processor-specific semantics
-    0x70000000:
-      id: sparc_gotdata
-      -orig-id: SHT_SPARC_GOTDATA
-      doc-ref: https://docs.oracle.com/en/operating-systems/solaris/oracle-solaris/11.4/linkers-libraries/section-headers.html#GUID-2CBE4879-2E76-426E-BB7F-CF0CB1D87C52__CHAPTER6-73445
-    0x70000001:
-      id: x86_64_unwind
-      -orig-id:
-        - SHT_X86_64_UNWIND
-        - SHT_AMD64_UNWIND # old name
-      doc: Unwind information
-      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/x86-64.h#L121
-    # 0x70000001:
-    #   id: arm_exidx
-    #   -orig-id: SHT_ARM_EXIDX
-    #   doc: ARM unwind section
-    #   doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L80
-    0x70000002:
-      id: arm_preemptmap
-      -orig-id: SHT_ARM_PREEMPTMAP
-      doc: Preemption details
-      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L81
-    0x70000003:
-      id: arm_attributes
-      -orig-id: SHT_ARM_ATTRIBUTES
-      doc: ARM build attributes
-      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L82
-    # 0x70000003:
-    #   id: aarch64_attributes
-    #   -orig-id: SHT_AARCH64_ATTRIBUTES
-    #   doc: AArch64 build attributes
-    #   doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L37
-    0x70000004:
-      id: arm_debugoverlay
-      -orig-id: SHT_ARM_DEBUGOVERLAY
-      doc: Overlay debug info
-      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L83
-    # 0x70000004:
-    #   id: aarch64_auth_relr
-    #   -orig-id: SHT_AARCH64_AUTH_RELR
-    #   doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L40
-    0x70000005:
-      id: arm_overlaysection
-      -orig-id: SHT_ARM_OVERLAYSECTION
-      doc: GDB and overlay integration info
-      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L84
-    0x70000007:
-      id: aarch64_memtag_globals_static
-      -orig-id: SHT_AARCH64_MEMTAG_GLOBALS_STATIC
-      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L43
-    0x70000008:
-      id: aarch64_memtag_globals_dynamic
-      -orig-id: SHT_AARCH64_MEMTAG_GLOBALS_DYNAMIC
-      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L44
     # 0x7fffffff:
     #   id: hi_proc
     #   -orig-id: SHT_HIPROC
@@ -3244,6 +3519,63 @@ enums:
     #   id: hi_user
     #   -orig-id: SHT_HIUSER
     #   doc: Last of application-specific semantics
+  sh_type_sparc:
+    0x70000000:
+      id: gotdata
+      -orig-id: SHT_SPARC_GOTDATA
+      doc-ref: https://docs.oracle.com/en/operating-systems/solaris/oracle-solaris/11.4/linkers-libraries/section-headers.html#GUID-2CBE4879-2E76-426E-BB7F-CF0CB1D87C52__CHAPTER6-73445
+  sh_type_x86_64:
+    0x70000001:
+      id: unwind
+      -orig-id:
+        - SHT_X86_64_UNWIND
+        - SHT_AMD64_UNWIND # old name
+      doc: Unwind information
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/x86-64.h#L121
+  sh_type_arm:
+    0x70000001:
+      id: exidx
+      -orig-id: SHT_ARM_EXIDX
+      doc: ARM unwind section
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L80
+    0x70000002:
+      id: preemptmap
+      -orig-id: SHT_ARM_PREEMPTMAP
+      doc: Preemption details
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L81
+    0x70000003:
+      id: attributes
+      -orig-id: SHT_ARM_ATTRIBUTES
+      doc: ARM build attributes
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L82
+    0x70000004:
+      id: debugoverlay
+      -orig-id: SHT_ARM_DEBUGOVERLAY
+      doc: Overlay debug info
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L83
+    0x70000005:
+      id: overlaysection
+      -orig-id: SHT_ARM_OVERLAYSECTION
+      doc: GDB and overlay integration info
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/arm.h#L84
+  sh_type_aarch64:
+    0x70000003:
+      id: attributes
+      -orig-id: SHT_AARCH64_ATTRIBUTES
+      doc: AArch64 build attributes
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L37
+    0x70000004:
+      id: auth_relr
+      -orig-id: SHT_AARCH64_AUTH_RELR
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L40
+    0x70000007:
+      id: memtag_globals_static
+      -orig-id: SHT_AARCH64_MEMTAG_GLOBALS_STATIC
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L43
+    0x70000008:
+      id: memtag_globals_dynamic
+      -orig-id: SHT_AARCH64_MEMTAG_GLOBALS_DYNAMIC
+      doc-ref: https://forge.sourceware.org/binutils-gdb/binutils-gdb-mirror/src/tag/binutils-2_46_1/include/elf/aarch64.h#L44
   # Reserved values of a symbol version index - see the `versym_section` type.
   #
   # https://refspecs.linuxfoundation.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/symversion.html#SYMVERTBL
@@ -3314,7 +3646,9 @@ enums:
         cause a syntax error in Python (it is a keyword).
     2:
       id: weak
-      doc: like `symbol_binding::global_symbol`, but their definitions have lower precedence
+      doc: |
+        like `symbol_binding::global_symbol`, but their definitions have lower
+        precedence
     # 10: lo_os
     10:
       id: os10
@@ -3374,7 +3708,8 @@ enums:
       doc: |
         reserved for OS-specific semantics
 
-        `STT_GNU_IFUNC` is a GNU extension to ELF format that adds support for "indirect functions"
+        `STT_GNU_IFUNC` is a GNU extension to ELF format that adds support for "indirect
+        functions"
     11:
       id: os11
       doc: reserved for OS-specific semantics
@@ -3583,3 +3918,16 @@ enums:
     0x7ffffffe: used
     0x7fffffff: filter
     # 0x7fffffff: hi_proc
+  pkey_id_type:
+    0:
+      id: pgp
+      -orig-id: PKEY_ID_PGP
+      doc: OpenPGP generated key ID.
+    1:
+      id: x509
+      -orig-id: PKEY_ID_X509
+      doc: X.509 arbitrary subjectKeyIdentifier.
+    2:
+      id: pkcs7
+      -orig-id: PKEY_ID_PKCS7
+      doc: Signature in PKCS#7 message.

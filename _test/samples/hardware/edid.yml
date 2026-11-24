@@ -1,0 +1,24 @@
+# linuxhw/EDID files are edid-decode reports: a 128-byte hex dump (bytes 20..403) followed by the
+# decoded text, which is where the expects come from
+samples:
+  - url: https://raw.githubusercontent.com/linuxhw/EDID/9c0c1bffc9c0f1cb2044115149a5ecb1652803f8/Digital/Dell/DELA0A1/DD62185FBFC7
+    sha256: 76b119d5cbd9df512a50a570bbab9b33574d94f8a91910679bf567fcd1b4acd4
+    name: DELL-E2214Hv-DD62185FBFC7
+    extract: { format: slice, offset: 20, size: 384, then: { format: hex } }
+    eof: true
+    expect:
+      manufacturer.pnp_id: DEL
+      product.product_code: 41121
+      product.week_of_manufacture: 48
+      product.year_of_manufacture: 2014
+      edid_version.minor: 3
+  - url: https://raw.githubusercontent.com/linuxhw/EDID/9c0c1bffc9c0f1cb2044115149a5ecb1652803f8/Analog/Dell/DELA007/0D35D05A6269
+    sha256: 815a8178cf6935749d216d0273b9e1eed6eaee5accf135e52dde4e0c4d41f098
+    name: DELL-2001FP-0D35D05A6269
+    extract: { format: slice, offset: 20, size: 384, then: { format: hex } }
+    eof: true
+    expect:
+      manufacturer.pnp_id: DEL
+      product.product_code: 40967
+      product.week_of_manufacture: 31
+      product.year_of_manufacture: 2005

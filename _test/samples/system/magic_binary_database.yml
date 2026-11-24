@@ -1,0 +1,34 @@
+# magic.mgc from Debian libmagic-mgc 5.45-3 (snapshot.debian.org), little-endian (amd64) and
+# big-endian (s390x) builds. Each .deb is an ar archive; data.tar.xz is the member at offset
+# 1028 / 1024. Expects from file(1) ("magic binary file for file(1) cmd (version 18) (little /
+# big endian)") and a hex read of the header: magic 0xF11E041C, then 16225 and 6409 entries in
+# the two sets (counts at bytes 8 and 12).
+samples:
+  - url: https://snapshot.debian.org/archive/debian/20240301T214050Z/pool/main/f/file/libmagic-mgc_5.45-3_amd64.deb
+    sha256: 31b5c32ce7ccf700afc08955510e3071e2b21993fcd62a27ce04f30c343e63a4
+    name: magic.mgc-amd64
+    extract:
+      format: slice
+      offset: 1028
+      size: 312748
+      then:
+        format: xz
+        then: { format: tar, member: ./usr/lib/file/magic.mgc }
+    expect:
+      body.version: 18
+      body.num_entries: 16225
+      body.num_named_entries: 6409
+  - url: https://snapshot.debian.org/archive/debian/20240302T211138Z/pool/main/f/file/libmagic-mgc_5.45-3_s390x.deb
+    sha256: ea11ee1e5d1c8180d6e9e96385d2bf1808f7b823df0348a6528364c5c6f3ea72
+    name: magic.mgc-s390x
+    extract:
+      format: slice
+      offset: 1024
+      size: 313328
+      then:
+        format: xz
+        then: { format: tar, member: ./usr/lib/file/magic.mgc }
+    expect:
+      body.version: 18
+      body.num_entries: 16225
+      body.num_named_entries: 6409

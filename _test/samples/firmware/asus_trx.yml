@@ -1,0 +1,16 @@
+# OpenWrt images built with asustrx (TRX header + 64-byte ASUS tail). Values read by hand:
+# TRX length (u4 le at 4) equals the file size; tail product ID at size-60 (space padded, as
+# passed to asustrx -p); kernel/rootfs versions are zero. sha256 matches the release index.
+samples:
+  - url: https://downloads.openwrt.org/releases/19.07.10/targets/brcm47xx/legacy/openwrt-19.07.10-brcm47xx-legacy-asus-wl-500gp-v1-squashfs.trx
+    sha256: e8634fc33212f5f203e2b88db3b094e5ab7abc3a313173d1bd54bcc53328a7a7
+    expect:
+      header.pre_header.length: 4395008
+      header.version: 1
+      footer.product_id: "WL500gp     "
+      footer.versions.kernel.major: 0
+  - url: https://downloads.openwrt.org/releases/19.07.10/targets/brcm47xx/legacy/openwrt-19.07.10-brcm47xx-legacy-asus-wl-330ge-squashfs.trx
+    sha256: 66fa646a075d2174f3ad2482dad478f26d141e7805303aad9e8be3abb33a9d2d
+    expect:
+      header.pre_header.length: 4263936
+      footer.product_id: "WL-330gE    "

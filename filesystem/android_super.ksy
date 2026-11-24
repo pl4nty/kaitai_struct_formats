@@ -8,8 +8,8 @@ meta:
     - filesystem
   license: CC0-1.0
   ks-version: 0.9
-  bit-endian: le
   endian: le
+  bit-endian: le
 
 doc: |
   The metadata stored by Android at the beginning of a "super" partition, which
@@ -35,8 +35,8 @@ types:
         type: geometry
 
       - id: backup_geometry
-        type: geometry
         size: 0x1000
+        type: geometry
 
       - id: primary_metadata
         size: primary_geometry.metadata_max_size

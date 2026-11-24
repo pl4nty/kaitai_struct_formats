@@ -1,0 +1,7 @@
+samples:
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/gbr.gbr
+  sha256: d56eb3342e06a3020ce9e8664199add4f2a236125348beba1d3528026beccc4f
+  expect:
+    header.width: 64
+    header.height: 64
+    header.magic: GIMP

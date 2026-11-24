@@ -1,0 +1,8 @@
+samples:
+  - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/extra-assets/reference-assets/lia-vanilla/redress_res/WOLF00.MMP
+    sha256: cd1c6786c8153c75fb77c6c60ccb488e0ed80fc76244525e515e8fd56cbbba5b
+    expect:
+      width: 256
+      height: 256
+      num_mip_levels: 7
+      bits_per_pixel: 4

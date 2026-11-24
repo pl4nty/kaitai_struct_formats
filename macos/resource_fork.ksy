@@ -15,7 +15,8 @@ meta:
   endian: be
 doc: |
   The data format of Macintosh resource forks,
-  used on Classic Mac OS and Mac OS X/macOS to store additional structured data along with a file's main data (the data fork).
+  used on Classic Mac OS and Mac OS X/macOS to store additional structured data
+  along with a file's main data (the data fork).
   The kinds of data stored in resource forks include:
 
   * Document resources:
@@ -32,19 +33,24 @@ doc: |
 
   Macintosh file systems (MFS, HFS, HFS+, APFS) support resource forks natively,
   which allows storing resources along with any file.
-  Non-Macintosh file systems and protocols have little or no support for resource forks,
-  so the resource fork data must be stored in some other way when using such file systems or protocols.
+  Non-Macintosh file systems and protocols have little or no support for resource
+  forks,
+  so the resource fork data must be stored in some other way when using such file
+  systems or protocols.
   Various file formats and tools exist for this purpose,
   such as BinHex, MacBinary, AppleSingle, AppleDouble, or QuickTime RezWack.
   In some cases,
-  resource forks are stored as plain data in separate files with a .rsrc extension,
+  resource forks are stored as plain data in separate files with a .rsrc
+  extension,
   even on Mac systems that natively support resource forks.
 
   On modern Mac OS X/macOS systems,
   resource forks are used far less commonly than on classic Mac OS systems,
-  because of compatibility issues with other systems and historical limitations in the format.
+  because of compatibility issues with other systems and historical limitations in
+  the format.
   Modern macOS APIs and libraries do not use resource forks,
-  and the legacy Carbon API that still used them has been deprecated since OS X 10.8.
+  and the legacy Carbon API that still used them has been deprecated since OS X
+  10.8.
   Despite this,
   even current macOS systems still use resource forks for certain purposes,
   such as custom file icons.
@@ -101,11 +107,15 @@ instances:
       In practice,
       the data blocks in newly created resource files are usually contiguous.
       When existing resources are shortened,
-      the Mac OS resource manager leaves unused space where the now removed resource data was,
-      as this is quicker than moving the following resource data into the newly freed space.
-      Such unused space may be cleaned up later when the resource manager "compacts" the resource file,
+      the Mac OS resource manager leaves unused space where the now removed resource
+      data was,
+      as this is quicker than moving the following resource data into the newly freed
+      space.
+      Such unused space may be cleaned up later when the resource manager "compacts"
+      the resource file,
       which happens when resources are removed entirely,
-      or when resources are added or grown so that more space is needed in the data area.
+      or when resources are added or grown so that more space is needed in the data
+      area.
   resource_map:
     pos: header.ofs_resource_map
     size: header.len_resource_map
@@ -125,7 +135,8 @@ types:
 
           In practice,
           this should always be `256`,
-          i. e. the resource data area should directly follow the application-specific data area.
+          i. e. the resource data area should directly follow the application-specific
+          data area.
       - id: ofs_resource_map
         type: u4
         doc: |
@@ -137,8 +148,7 @@ types:
           i. e. the resource map should directly follow the resource data area.
       - id: len_data_blocks
         type: u4
-        doc: |
-          Length of the resource data area.
+        doc: Length of the resource data area.
       - id: len_resource_map
         type: u4
         doc: |
@@ -157,16 +167,15 @@ types:
     seq:
       - id: len_data
         type: u4
-        doc: |
-          The length of the resource data stored in this block.
+        doc: The length of the resource data stored in this block.
       - id: data
         size: len_data
-        doc: |
-          The data stored in this block.
+        doc: The data stored in this block.
   resource_map:
     doc: |
       Resource map,
-      containing information about the resources in the file and where they are located in the data area.
+      containing information about the resources in the file and where they are
+      located in the data area.
     seq:
       - id: reserved_file_header_copy
         type: file_header
@@ -178,8 +187,8 @@ types:
         type: u2
         doc: Reserved space for the resource file's file reference number.
       - id: file_attributes
-        type: file_attributes
         size: 2
+        type: file_attributes
         doc: The resource file's attributes.
       - id: ofs_type_list
         type: u2
@@ -200,7 +209,9 @@ types:
         pos: ofs_type_list
         size: ofs_names - ofs_type_list
         type: type_list_and_reference_lists
-        doc: The resource map's resource type list, followed by the resource reference list area.
+        doc: |
+          The resource map's resource type list, followed by the resource reference list
+          area.
       names_with_io:
         pos: ofs_names
         size-eos: true
@@ -230,8 +241,7 @@ types:
               but ResEdit has a checkbox called "Resources Locked" for this attribute.
           - id: reserved0
             type: b6
-            doc: |
-              These attributes have no known usage or meaning and should always be zero.
+            doc: These attributes have no known usage or meaning and should always be zero.
           - id: printer_driver_multifinder_compatible
             type: b1
             doc: |
@@ -239,16 +249,20 @@ types:
               i. e. can be used simultaneously by multiple applications.
               This attribute is only meant to be set on printer driver resource forks.
 
-              This attribute is not documented in Inside Macintosh and is not defined in <CarbonCore/Resources.h>.
+              This attribute is not documented in Inside Macintosh and is not defined in
+              <CarbonCore/Resources.h>.
               It is documented in technote PR510,
-              and ResEdit has a checkbox called "Printer Driver MultiFinder Compatible" for this attribute.
+              and ResEdit has a checkbox called "Printer Driver MultiFinder Compatible" for
+              this attribute.
             doc-ref: https://developer.apple.com/library/archive/technotes/pr/pr_510.html Apple Technical Note PR510 - Printer Driver Q&As, section '"Printer driver is MultiFinder compatible" bit'
           - id: no_write_changes
             -orig-id: mapReadOnly
             type: b1
             doc: |
-              Indicates that the Resource Manager should not write any changes from memory into the resource file.
-              Any modification operations requested by the application will return successfully,
+              Indicates that the Resource Manager should not write any changes from memory
+              into the resource file.
+              Any modification operations requested by the application will return
+              successfully,
               but will not actually update the resource file.
 
               TODO Is this attribute supposed to be set on disk or only in memory?
@@ -256,7 +270,8 @@ types:
             -orig-id: mapCompact
             type: b1
             doc: |
-              Indicates that the resource file should be compacted the next time it is written by the Resource Manager.
+              Indicates that the resource file should be compacted the next time it is written
+              by the Resource Manager.
               This attribute is only meant to be set in memory;
               it is cleared when the resource file is written to disk.
 
@@ -266,7 +281,8 @@ types:
             -orig-id: mapChanged
             type: b1
             doc: |
-              Indicates that the resource map has been changed in memory and should be written to the resource file on the next update.
+              Indicates that the resource map has been changed in memory and should be written
+              to the resource file on the next update.
               This attribute is only meant to be set in memory;
               it is cleared when the resource file is written to disk.
 
@@ -274,8 +290,7 @@ types:
               but may also be set manually by the application.
           - id: reserved1
             type: b5
-            doc: |
-              These attributes have no known usage or meaning and should always be zero.
+            doc: These attributes have no known usage or meaning and should always be zero.
         instances:
           as_int:
             pos: 0
@@ -285,10 +300,12 @@ types:
               as they are stored in the file.
       type_list_and_reference_lists:
         doc: |
-          Resource type list and storage area for resource reference lists in the resource map.
+          Resource type list and storage area for resource reference lists in the resource
+          map.
 
           The two parts are combined into a single type here for technical reasons:
-          the start of the resource reference list area is not stored explicitly in the file,
+          the start of the resource reference list area is not stored explicitly in the
+          file,
           instead it always starts directly after the resource type list.
           The simplest way to implement this is by placing both types into a single `seq`.
         seq:
@@ -365,8 +382,7 @@ types:
                     io: _parent._parent._io
                     pos: ofs_reference_list
                     type: reference_list(num_references)
-                    doc: |
-                      The resource reference list for this resource type.
+                    doc: The resource reference list for this resource type.
           reference_list:
             doc: |
               A resource reference list,
@@ -406,8 +422,8 @@ types:
                       the value of this field is `0xffff`
                       i. e. `-1` truncated to a 16-bit unsigned integer.
                   - id: attributes
-                    type: attributes
                     size: 1
+                    type: attributes
                     doc: Attributes of the resource described by this reference.
                   - id: ofs_data_block
                     type: b24 # 3-byte unsigned integer, packed together with the previous 1-byte field.
@@ -423,14 +439,12 @@ types:
                     pos: ofs_name
                     type: name
                     if: ofs_name != 0xffff
-                    doc: |
-                      The name (if any) of the resource described by this reference.
+                    doc: The name (if any) of the resource described by this reference.
                   data_block:
                     io: _root.data_blocks_with_io._io
                     pos: ofs_data_block
                     type: data_block
-                    doc: |
-                      The data block containing the data for the resource described by this reference.
+                    doc: The data block containing the data for the resource described by this reference.
                 types:
                   attributes:
                     doc: |
@@ -441,27 +455,34 @@ types:
                         -orig-id: resSysRef
                         type: b1
                         doc: |
-                          Indicates that this resource reference is a system reference rather than a regular local reference.
+                          Indicates that this resource reference is a system reference rather than a
+                          regular local reference.
                           This attribute is nearly undocumented.
                           For all practical purposes,
                           it should be considered reserved and should always be zero.
 
-                          This attribute was last documented in the Promotional Edition of Inside Macintosh,
+                          This attribute was last documented in the Promotional Edition of Inside
+                          Macintosh,
                           in the Resource Manager chapter,
                           on pages 37-41,
-                          in a "System References" section that calls itself "of historical interest only".
-                          The final versions of Inside Macintosh only mention this attribute as "reserved for use by the Resource Manager".
+                          in a "System References" section that calls itself "of historical interest
+                          only".
+                          The final versions of Inside Macintosh only mention this attribute as "reserved
+                          for use by the Resource Manager".
                           <CarbonCore/Resources.h> contains a `resSysRefBit` constant,
-                          but no corresponding `resSysRef` constant like for all other resource attributes.
+                          but no corresponding `resSysRef` constant like for all other resource
+                          attributes.
 
                           According to the Inside Macintosh Promotional Edition,
-                          a system reference was effectively an alias pointing to a resource stored in the system file,
+                          a system reference was effectively an alias pointing to a resource stored in the
+                          system file,
                           possibly with a different ID and name (but not type) than the system reference.
                           If this attribute is set,
                           `ofs_data_block` is ignored and should be zero,
                           and `reserved_handle` contains
                           (in its high and low two bytes, respectively)
-                          the ID and name offset of the real system resource that this system reference points to.
+                          the ID and name offset of the real system resource that this system reference
+                          points to.
 
                           TODO Do any publicly available Mac OS versions support system references,
                           and do any real files/applications use them?
@@ -484,8 +505,10 @@ types:
                         -orig-id: resPurgeable
                         type: b1
                         doc: |
-                          Indicates that this resource's data should be purgeable by the Mac OS Memory Manager.
-                          This allows the resource data to be purged from memory if space is needed on the heap.
+                          Indicates that this resource's data should be purgeable by the Mac OS Memory
+                          Manager.
+                          This allows the resource data to be purged from memory if space is needed on the
+                          heap.
                           Purged resources can later be reloaded from disk if their data is needed again.
 
                           If the `locked` attribute is set,
@@ -498,7 +521,8 @@ types:
                         -orig-id: resLocked
                         type: b1
                         doc: |
-                          Indicates that this resource's data should be locked to the Mac OS Memory Manager.
+                          Indicates that this resource's data should be locked to the Mac OS Memory
+                          Manager.
                           This prevents the resource data from being moved when the heap is compacted.
 
                           This attribute may be set both in memory and on disk,
@@ -508,7 +532,8 @@ types:
                         type: b1
                         doc: |
                           Indicates that this resource should be protected (i. e. unmodifiable) in memory.
-                          This prevents the application from using the Resource Manager to change the resource's data or metadata,
+                          This prevents the application from using the Resource Manager to change the
+                          resource's data or metadata,
                           or delete it.
                           The only exception are the resource's attributes,
                           which can always be changed,
@@ -521,7 +546,8 @@ types:
                         -orig-id: resPreload
                         type: b1
                         doc: |
-                          Indicates that this resource's data should be immediately loaded into memory when the resource file is opened.
+                          Indicates that this resource's data should be immediately loaded into memory
+                          when the resource file is opened.
 
                           This attribute may be set both in memory and on disk,
                           but it only has any meaning when the resource file is first opened.
@@ -529,19 +555,23 @@ types:
                         -orig-id: resChanged
                         type: b1
                         doc: |
-                          Indicates that this resource's data has been changed in memory and should be written to the resource file on the next update.
+                          Indicates that this resource's data has been changed in memory and should be
+                          written to the resource file on the next update.
                           This attribute is only meant to be set in memory;
                           it is cleared when the resource file is written to disk.
 
-                          This attribute is used internally by the Resource Manager and should not be set manually by the application.
+                          This attribute is used internally by the Resource Manager and should not be set
+                          manually by the application.
                       - id: compressed
                         -orig-id: resCompressed
                         type: b1
                         doc: |
                           Indicates that this resource's data is compressed.
-                          Compressed resource data is decompressed transparently by the Resource Manager when reading.
+                          Compressed resource data is decompressed transparently by the Resource Manager
+                          when reading.
 
-                          For a detailed description of the structure of compressed resources as they are stored in the file,
+                          For a detailed description of the structure of compressed resources as they are
+                          stored in the file,
                           see the compressed_resource.ksy spec.
                     instances:
                       as_int:
@@ -561,8 +591,7 @@ types:
         seq:
           - id: len_value
             type: u1
-            doc: |
-              The length of the resource name, in bytes.
+            doc: The length of the resource name, in bytes.
           - id: value
             size: len_value
             doc: |
@@ -570,11 +599,13 @@ types:
 
               This field is exposed as a byte array,
               because there is no universal encoding for resource names.
-              Most Classic Mac software does not deal with encodings explicitly and instead assumes that all strings,
+              Most Classic Mac software does not deal with encodings explicitly and instead
+              assumes that all strings,
               including resource names,
               use the system encoding,
               which varies depending on the system language.
-              This means that resource names can use different encodings depending on what system language they were created with.
+              This means that resource names can use different encodings depending on what
+              system language they were created with.
 
               Many resource names are plain ASCII,
               meaning that the encoding often does not matter
@@ -585,7 +616,8 @@ types:
               but other encodings are also sometimes used,
               especially for software in non-Western languages.
 
-              There is no requirement that all names in a single resource file use the same encoding.
+              There is no requirement that all names in a single resource file use the same
+              encoding.
               For example,
               localized software may have some (but not all) of its resource names translated.
               For non-Western languages,

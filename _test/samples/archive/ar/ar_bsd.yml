@@ -1,0 +1,4 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/archive/ar/__input__/bsd_multi_names.ar
+    sha256: 9b57b0fc4cff4d4c8c37dbbc1f2f51ed49859f90a931da3465bb27b7ea75a412
+    eof: true

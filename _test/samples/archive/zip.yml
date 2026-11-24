@@ -1,0 +1,35 @@
+samples:
+  - url: https://raw.githubusercontent.com/kaitai-io/kaitai_struct_webide/c72e3f331fb923d8593b023763fae74eb35d6c9f/samples/sample1.zip
+    sha256: 36339093fc375dd3d4e31470f9aa9d30c3893ce9fde3239e8e0bd282831ae6a0
+  - url: https://raw.githubusercontent.com/golang/go/14d697f6612c8cbda5d70cb5dcf0e735f108411c/src/archive/zip/testdata/test.zip
+    sha256: e36d2ee9fbc41f7fe0b2717dc4b1fdc1978c9396dd28f3398b1f3a1a29dc146c
+    eof: true
+    expect:
+      len(sections): 5
+      sections[0].body.header.file_name: test.txt
+      sections[4].body.comment: This is a zipfile comment.
+
+  - url: https://raw.githubusercontent.com/golang/go/14d697f6612c8cbda5d70cb5dcf0e735f108411c/src/archive/zip/testdata/dd.zip
+    sha256: dcec917ea7852418f21c2b8fe67c8355fd6ff0e875c5bc3718e1b8684a064171
+    expect:
+      sections[0].body.header.flags.has_data_descriptor: true
+      sections[0].body.header.file_name: filename
+
+  - url: https://raw.githubusercontent.com/golang/go/14d697f6612c8cbda5d70cb5dcf0e735f108411c/src/archive/zip/testdata/go-with-datadesc-sig.zip
+    sha256: 6be41a66578438afdda77edfaec1857ca553fa091dc31a2bd7db0d8a3a3e9a30
+    expect:
+      sections[1].section_type: 0x0807
+
+  - url: https://raw.githubusercontent.com/golang/go/14d697f6612c8cbda5d70cb5dcf0e735f108411c/src/archive/zip/testdata/zip64.zip
+    sha256: d1a659d5a2d292682a17d789834d97b97650b6a8d188799ac1166fd85ace7dbd
+    expect:
+      sections[0].body.header.file_name: README
+
+  - url: https://raw.githubusercontent.com/golang/go/14d697f6612c8cbda5d70cb5dcf0e735f108411c/src/archive/zip/testdata/winxp.zip
+    sha256: d60fd70a6de4cc16363b5a424bcf703f5345f01c6a0595f5246ae12822bf719d
+    eof: true
+  - url: https://raw.githubusercontent.com/apache/commons-compress/17796875a060734aeb2bfd4c2d3ea0a5aa546c22/src/test/resources/password-encrypted.zip
+    sha256: 3a2559c7157226f1ef08ad5dcb3532e921f41474655d390932096f532f09ad85
+    expect:
+      sections[0].body.header.flags.file_encrypted: true
+      sections[0].body.header.file_name: LICENSE.txt

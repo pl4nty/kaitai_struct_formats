@@ -9,7 +9,7 @@ meta:
   ks-version: 0.9
   endian: le
 doc-ref:
-  - http://fileformats.archiveteam.org/wiki/TIM_(PlayStation_graphics)
+  - https://fileformats.archiveteam.org/wiki/TIM_(PlayStation_graphics)
   - https://mrclick.zophar.net/TilEd/download/timgfx.txt
   - https://www.romhacking.net/documents/31/
 seq:
@@ -21,9 +21,16 @@ seq:
   - id: clut
     type: bitmap
     if: has_clut
-    doc: CLUT (Color LookUp Table), one or several palettes for indexed color image, represented as a
+    doc: |
+      CLUT (Color LookUp Table), one or several palettes for indexed color image,
+      represented as a
   - id: img
     type: bitmap
+instances:
+  has_clut:
+    value: flags & 0b1000 != 0
+  bpp:
+    value: flags & 0b0011
 types:
   bitmap:
     seq:
@@ -39,11 +46,6 @@ types:
         type: u2
       - id: body
         size: len - 12 # 4 + 4 * 2
-instances:
-  has_clut:
-    value: flags & 0b1000 != 0
-  bpp:
-    value: flags & 0b0011
 enums:
   bpp_type:
     0: bpp_4

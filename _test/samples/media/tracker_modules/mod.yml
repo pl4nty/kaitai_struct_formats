@@ -1,0 +1,16 @@
+samples:
+  - url: https://raw.githubusercontent.com/libxmp/libxmp/5c63c2f7809dc6f17342df738a3dde5ca65221c9/test-dev/data/m/reborning.mod
+    sha256: 3944f6eab6d9f887484b843c1e98bff6a0a262231c51e344ba602a0aaad76bc5
+    expect:
+      song_name: reborning
+      song_length: 14
+      special: 127
+      len(patterns): 11  # highest pattern index in the order table (10) + 1
+  - url: https://raw.githubusercontent.com/libxmp/libxmp/5c63c2f7809dc6f17342df738a3dde5ca65221c9/test-dev/openmpt/mod/PatternJump.mod
+    sha256: a86295e1fc52d1f3b48536a8f2b58dba3deee3cf8e1d8b76021a52a273d28d48
+    expect:
+      song_name: Jump Commands
+  - url: https://raw.githubusercontent.com/libxmp/libxmp/5c63c2f7809dc6f17342df738a3dde5ca65221c9/test-dev/data/m/sundance.mod
+    sha256: b157311fbb1cbd21ea8ab5a29ad19eb36c59cc9a5f851d683976be7ffdb90fc0
+    expect:
+      song_name: "Sundance "

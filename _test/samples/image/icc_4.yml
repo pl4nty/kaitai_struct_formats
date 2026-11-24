@@ -1,0 +1,11 @@
+samples:
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/icc/sRGB_v4_ICC_preference.icc
+  sha256: 83174717332326ddc198d9df188a4daec27b8979ba152cebbfc470c793d0bb11
+  expect:
+    header.size: 60960
+    tag_table.tag_count: 9
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/icc/sRGB_IEC61966-2-1_black_scaled.icc
+  sha256: c4c1153168e817be61a676e403c370ce2c485a6bd54fbb59c3850845cfefad00
+  name: sRGB_IEC61966-2-1_black_scaled-v2.icc
+  expect:
+    header.size: 3048

@@ -67,11 +67,18 @@ seq:
     doc: |
       Compressed body of a file archived. Note that we don't make an
       attempt to decompress it here.
+
+      Only a file with a single member is described correctly. RFC 1952
+      allows several members to be concatenated, but the end of a
+      deflate stream can only be found by decompressing it, so this spec
+      takes everything up to the last 8 bytes of the file as the body of
+      the first member. For a multi-member file, `body` then also
+      contains the following members, and `body_crc32` and
+      `len_uncompressed` are those of the last member.
   - id: body_crc32
     -orig-id: CRC32
     type: u4
-    doc: |
-      CRC32 checksum of an uncompressed file body
+    doc: CRC32 checksum of an uncompressed file body
   - id: len_uncompressed
     -orig-id: ISIZE
     type: u4
@@ -144,8 +151,7 @@ types:
       - id: has_header_crc
         -orig-id: FHCRC
         type: b1
-        doc: |
-          If true, this archive includes a CRC16 checksum for the header.
+        doc: If true, this archive includes a CRC16 checksum for the header.
       - id: is_text
         -orig-id: FTEXT
         type: b1
@@ -170,15 +176,15 @@ types:
         size: len_subfields
         type: subfields
   subfields:
-    doc: |
-      Container for many subfields, constrained by size of stream.
+    doc: Container for many subfields, constrained by size of stream.
     seq:
       - id: entries
         type: subfield
         repeat: eos
   subfield:
     doc: |
-      Every subfield follows typical [TLV scheme](https://en.wikipedia.org/wiki/Type-length-value):
+      Every subfield follows typical [TLV
+      scheme](https://en.wikipedia.org/wiki/Type-length-value):
 
       * `id` serves role of "T"ype
       * `len_data` serves role of "L"ength

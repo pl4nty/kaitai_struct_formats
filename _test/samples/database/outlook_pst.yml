@@ -1,0 +1,15 @@
+# java-libpst test files. Expects from a hex read against MS-PST 2.2.2.6: "!BDN", "SM",
+# wVer 23 (Unicode), wVerClient 19, bCryptMethod 1 (NDB_CRYPT_PERMUTE) at 0x201.
+samples:
+  - url: https://raw.githubusercontent.com/rjohnsondev/java-libpst/f158a64acf2a0e46ac3bd699bc7a5a8da6c40d26/src/test/resources/dist-list.pst
+    sha256: c86841da106036b5abe5a2141dc7644cbb2bf8b504873515eb35a2efeb8c28ac
+    expect:
+      version: 23
+      version_client: 19
+      is_unicode: true
+      crypt_method: permute
+  - url: https://raw.githubusercontent.com/rjohnsondev/java-libpst/f158a64acf2a0e46ac3bd699bc7a5a8da6c40d26/src/test/resources/passworded.pst
+    sha256: e1085e210bc823fcfbdd1220da08b51423f3c39301c563a99dde71895f2af217
+    expect:
+      version: 23
+      is_unicode: true

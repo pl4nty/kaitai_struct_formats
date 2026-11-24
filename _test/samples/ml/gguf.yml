@@ -1,0 +1,14 @@
+# expect values from the gguf Python package (GGUFReader) and the fixed header
+samples:
+  - url: https://raw.githubusercontent.com/ggml-org/llama.cpp/af5c58347fdbc2cd19e65b278e81c8f528f8a175/models/ggml-vocab-gpt-2.gguf
+    sha256: cedc56ca6e2e89f63e781696d1fd76b4b1d49e6720dee86463e915f6e90016ac
+    eof: true
+    expect:
+      body.version: 3
+      body.num_kv_pairs: 16
+      body.num_tensor_infos: 0
+  - url: https://raw.githubusercontent.com/ggml-org/llama.cpp/af5c58347fdbc2cd19e65b278e81c8f528f8a175/models/ggml-vocab-llama-spm.gguf
+    sha256: 16c3724582d59aa8bf84711894e833f916ee46a31d80e21312759c48bf8d0e69
+    eof: true
+    expect:
+      body.num_kv_pairs: 22

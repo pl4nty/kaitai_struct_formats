@@ -1,0 +1,107 @@
+# Imported from https://github.com/narfindustries/llm-tests-langsec/blob/0b1667504c675928af2f4b175c48d700fa03c4a5/results/0.0/Network-Time-Protocol-Version-4/network-time-protocol-version-4-claude-3-5-sonnet-20241022.ksy
+meta:
+  id: ntp_packet
+  title: Network Time Protocol v4
+  file-extension: ntp
+  xref:
+    rfc: 5905
+  license: LicenseRef-All-Rights-Reserved
+  endian: be
+doc: |
+  NTPv4 packet header (RFC 5905, section 7.3) with optional extension
+  fields (RFC 7822). The optional MAC (key identifier and digest) that may
+  follow the extension fields is not modelled separately.
+
+  This spec originates from an LLM benchmark output
+  (narfindustries/llm-tests-langsec) and was reviewed against RFC 5905.
+seq:
+  - id: li_vn_mode
+    type: u1
+    doc: First byte containing Leap Indicator, Version Number and Mode
+  - id: stratum
+    type: u1
+  - id: poll
+    type: s1
+  - id: precision
+    type: s1
+  - id: root_delay
+    type: fixed_point_16_16
+  - id: root_dispersion
+    type: fixed_point_16_16_unsigned
+  - id: reference_id
+    type: u4
+  - id: reference_timestamp
+    type: ntp_timestamp
+  - id: origin_timestamp
+    type: ntp_timestamp
+  - id: receive_timestamp
+    type: ntp_timestamp
+  - id: transmit_timestamp
+    type: ntp_timestamp
+  - id: extension_fields
+    type: extension_field
+    repeat: eos
+    if: _io.size > 48
+
+instances:
+  leap_indicator:
+    value: (li_vn_mode >> 6) & 0b11
+    enum: leap_indicator_enum
+  version:
+    value: (li_vn_mode >> 3) & 0b111
+  mode:
+    value: li_vn_mode & 0b111
+    enum: mode_enum
+
+types:
+  fixed_point_16_16:
+    seq:
+      - id: integer_part
+        type: s2
+      - id: fraction_part
+        type: u2
+
+  fixed_point_16_16_unsigned:
+    seq:
+      - id: integer_part
+        type: u2
+      - id: fraction_part
+        type: u2
+
+  ntp_timestamp:
+    seq:
+      - id: seconds
+        type: u4
+        doc: Seconds since January 1, 1900
+      - id: fraction
+        type: u4
+        doc: Fraction of second
+
+  extension_field:
+    seq:
+      - id: field_type
+        type: u2
+      - id: length
+        type: u2
+      - id: value
+        size: length - 4
+      - id: padding
+        size: (4 - (_io.pos % 4)) % 4
+        if: _io.pos % 4 != 0
+
+enums:
+  leap_indicator_enum:
+    0: no_warning
+    1: last_minute_61_sec
+    2: last_minute_59_sec
+    3: alarm_condition
+
+  mode_enum:
+    0: reserved
+    1: symmetric_active
+    2: symmetric_passive
+    3: client
+    4: server
+    5: broadcast
+    6: control
+    7: private

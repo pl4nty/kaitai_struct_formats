@@ -1,0 +1,11 @@
+samples:
+  - url: https://raw.githubusercontent.com/apache/commons-compress/17796875a060734aeb2bfd4c2d3ea0a5aa546c22/src/test/resources/archives/FreeBSD_bin.cpio
+    sha256: 4a6f1dad37d27931e8ef73e1c3662c45eef020d1c234ba017fda30aa4e0ba344
+    expect:
+      files[-1].path_name: TRAILER!!!
+      files[0].path_name: '1'
+  - url: https://raw.githubusercontent.com/apache/commons-compress/17796875a060734aeb2bfd4c2d3ea0a5aa546c22/src/test/resources/archives/SunOS_.cpio
+    sha256: bdfbd16cc00a6fdd07c25900123765de34ccada2883ab0d034f78dadbb698f17
+    expect:
+      files[-1].path_name: TRAILER!!!
+      files[0].path_name: '1'

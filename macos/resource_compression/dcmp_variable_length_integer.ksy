@@ -7,10 +7,13 @@ meta:
   endian: be
 doc: |
   A variable-length integer,
-  in the format used by the 0xfe chunks in the `'dcmp' (0)` and `'dcmp' (1)` resource compression formats.
-  See the dcmp_0 and dcmp_1 specs for more information about these compression formats.
+  in the format used by the 0xfe chunks in the `'dcmp' (0)` and `'dcmp' (1)`
+  resource compression formats.
+  See the dcmp_0 and dcmp_1 specs for more information about these compression
+  formats.
 
-  This variable-length integer format can store an integer `x` in any of the following ways:
+  This variable-length integer format can store an integer `x` in any of the
+  following ways:
 
   * In a single byte,
     if `0 <= x <= 0x7f`
@@ -64,5 +67,4 @@ instances:
       first == 0xff ? more
       : first >= 0x80 ? (first << 8 | more) - 0xc000
       : first
-    doc: |
-      The decoded value of the variable-length integer.
+    doc: The decoded value of the variable-length integer.

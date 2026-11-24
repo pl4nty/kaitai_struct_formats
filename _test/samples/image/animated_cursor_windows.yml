@@ -1,0 +1,17 @@
+# Animated cursors from webamp's ani-cursor tests. Expects from a hex read against the RIFF ACON
+# layout: RIFF size 0xfd6 (piano.ani); eqslid.cur's anih chunk: cbSize 36, 8 frames, 8 steps,
+# 4 bits per pixel, 1 plane, display rate 10 jiffies.
+samples:
+  - url: https://raw.githubusercontent.com/captbaritone/webamp/99a31e26f9dbbc4351a9df33179fd99f951eecb1/packages/ani-cursor/src/__tests__/fixtures/piano.ani
+    sha256: b659ab7556abf466f39829c0603670841b84536a1905bd4e72eef8fa719efb7b
+    expect:
+      body.form_type: ACON
+      len_body: 4054
+  - url: https://raw.githubusercontent.com/captbaritone/webamp/99a31e26f9dbbc4351a9df33179fd99f951eecb1/packages/ani-cursor/src/__tests__/fixtures/Super_Mario_Amp_2/eqslid.cur
+    sha256: 60b58b8e7b5a2e617ea0ad116d7422abe909b092734d5c847d089a7fa35430b4
+    expect:
+      body.chunks[0].body.len_header: 36
+      body.chunks[0].body.num_frames: 8
+      body.chunks[0].body.num_steps: 8
+      body.chunks[0].body.bits_per_pixel: 4
+      body.chunks[0].body.display_rate: 10

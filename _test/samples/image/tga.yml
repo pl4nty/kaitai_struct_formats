@@ -1,0 +1,17 @@
+samples:
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/rgb32rle.tga
+  sha256: eecda5ea4233631a1c55b6068b61d7e1fc6b3a3c1dc89b61dc6a153f5514f830
+  expect:
+    width: 199
+    height: 199
+    image_depth: 32
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/la.tga
+  sha256: 35ed639956abe5307ec3fc86758bc2a022537c3bf6a12557d0720a74a84bd32b
+  expect:
+    width: 64
+    height: 64
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/tga_id_field.tga
+  sha256: d7946bdc5b642a5393541846a99b329fd61457fa1e2c339d3e86fba0e52dd29b
+  expect:
+    width: 100
+    height: 100

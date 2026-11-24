@@ -1,0 +1,3 @@
+samples:
+- url: https://raw.githubusercontent.com/Thell/bdo-housecraft/3af0b47113c4709afab148ae2d3fa83748e08ac6/data/houseinfo/gamecommondata/binary/regioninfo.bss
+  sha256: b4a0868e82c20520e377e3142009be1fff871363bf71c0d29758879e40e1c14d

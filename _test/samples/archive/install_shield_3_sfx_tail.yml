@@ -1,0 +1,30 @@
+# InstallShield 3 self-extracting installers (16-bit NE stub of 44272 bytes, then the tail data)
+# from telparia's fileFormatSamples; proprietary software, linked not vendored.
+# Expect values from an independent walk of the tail: file counts, and each file's data parsed
+# with Python's zipfile (member names match the decrypted path names).
+samples:
+  - url: https://sembiance.com/fileFormatSamples/archive/installShieldSelfExtractor/CD32.EXE
+    sha256: 0e738158a79cf9aae5f72b6b82bd9bfd90b52a136e0ffc072281d4b81d802d57
+    extract: { format: slice, offset: 44272 }
+    eof: true
+    expect:
+      len(files): 8
+      files[0].len_path_encrypted: 38
+      files[0].len_data: 401
+      files[0].data[0:4]: 504b0304
+  - url: https://sembiance.com/fileFormatSamples/archive/installShieldSelfExtractor/Update.exe
+    sha256: 5bae9e529367999f5fd1a60fbd1f82eedbd70e1511eec86126c4f2e085c07338
+    extract: { format: slice, offset: 44272 }
+    eof: true
+    expect:
+      len(files): 14
+      files[0].len_path_encrypted: 57
+      files[0].len_data: 270
+  - url: https://sembiance.com/fileFormatSamples/archive/installShieldSelfExtractor/cd3240b5.exe
+    sha256: 33b449f54117c99303df8da80e4701259674337bc9cd5c9de0f00b3215749e82
+    extract: { format: slice, offset: 44272 }
+    eof: true
+    expect:
+      len(files): 8
+      files[0].len_path_encrypted: 63
+      files[0].len_data: 896

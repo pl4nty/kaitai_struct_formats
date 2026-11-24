@@ -1,0 +1,24 @@
+# DTBO partition images from Pixel factory images, collected in cfig/android_image_res (test
+# resources of Android_boot_image_editor). Header values read by hand (big-endian
+# dt_table_header per source.android.com DTO partition docs); the first entry's offset
+# points at an FDT blob (magic d00dfeed).
+samples:
+  - url: https://raw.githubusercontent.com/cfig/android_image_res/24b0660fb6859fe738599b1e0a1faf1aa9381613/10.0.0_coral-qq1d.200205.002/dtbo.img.xz
+    sha256: d13b811f3d58049fb5e646c40fe8495754a55b2a69085568bfe9a6c71fda3fc7
+    name: coral-qq1d.200205.002-dtbo.img
+    extract: { format: xz }
+    expect:
+      header.total_size: 3245425
+      header.dt_entry_count: 12
+      header.page_size: 4096
+      entries[0].dt_offset: 416
+  - url: https://raw.githubusercontent.com/cfig/android_image_res/24b0660fb6859fe738599b1e0a1faf1aa9381613/9.0.0_blueline_pq1a.181105.017.a1/dtbo.img.xz
+    sha256: 8ed56ec0b862442291494148ab5623d197f7fe21e688a327142056c360223aad
+    name: blueline-pq1a.181105.017.a1-dtbo.img
+    extract: { format: xz, then: { format: tar, member: dtbo.img } }
+    expect:
+      header.total_size: 1745520
+      header.dt_entry_count: 14
+      header.page_size: 2048
+      entries[0].dt_size: 119432
+      entries[0].id: 258

@@ -1,0 +1,9 @@
+samples:
+  - url: https://raw.githubusercontent.com/Zhuagenborn/Plants-vs.-Zombies-Online-Battle/42a2cc613560f31a28559ed85e8d807201dd8121/game/userdata/user1.dat
+    sha256: 8748bcc48e71dd6060a90e2138fd78bcfd88054b2c1efc86823e4aebc78d45b0
+    name: pvz_user1.dat
+    expect:
+      version: 12
+      adventure_level: 21
+      money_div_10: 5699
+      adventure_completed_times: 2

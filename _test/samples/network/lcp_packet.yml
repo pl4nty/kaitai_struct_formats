@@ -1,0 +1,25 @@
+# LCP packets cut out of real PPPoE captures (Ethernet 14 + PPPoE 6 +
+# PPP protocol 2 bytes skipped). Expected values from tshark.
+samples:
+  # Wireshark wiki SampleCaptures, frame 6: Configure-Request (MRU, PAP, magic)
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/telecomitalia-pppoe.pcap
+    sha256: e430ed66ad07f74ccbc04570dfbb0b6a8a96923afe06bcd15552ed54dc0563d9
+    name: telecomitalia-pppoe-f6-configure-request
+    extract: {format: slice, offset: 366, size: 18}
+    eof: true
+    expect:
+      code: configure_request
+      identifier: 29
+      length: 18
+      len(data.options): 3
+      data.options[0].value: 05d4
+  # tcpdump tests, frame 1: Echo-Request with magic number 0xa4cbea34
+  - url: https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/3541bd5d38635e208d7dd47cc6ea2af00dd7ef0c/tests/pppoes.pcap
+    sha256: 14bedf817eb4c30c0186e17a8c61cc45265769e93bf8c98a2263efc60e4d61f5
+    name: pppoes-f1-echo-request
+    extract: {format: slice, offset: 62, size: 12}
+    eof: true
+    expect:
+      code: echo_request
+      identifier: 106
+      length: 12

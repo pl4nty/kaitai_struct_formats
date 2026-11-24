@@ -1,0 +1,23 @@
+samples:
+  - url: https://raw.githubusercontent.com/Experience-Monks/parse-bmfont-binary/85679cb9e76d5b7f002ec8394af9729421b3e158/test/font.bin
+    sha256: 560ab6c3ea9df9a7e04a299ed9a3bbc1d3462e1d922702b79f56c16f296498c9
+    eof: true
+    expect:
+      info.size: 32
+      info.face: Arial
+      common.line_height: 32
+      len(chars.char): 191
+      len(kernings.kerning): 91
+  - url: https://raw.githubusercontent.com/Experience-Monks/parse-bmfont-binary/85679cb9e76d5b7f002ec8394af9729421b3e158/test/font2.bin
+    sha256: c507a89b66e7231b41293222148ccced63a5b7e415adf6224c44a137008fe381
+    eof: true
+    expect:
+      info.face: Ford Antenna Semibold
+      common.scale_w: 512
+      len(kernings.kerning): 838
+  - url: https://raw.githubusercontent.com/bitnenfer/bmfont_cpp/8d876b8342cdb79409e4b7d3f0d60abea05f5194/comicsans.fnt
+    sha256: c06547234823fa38dce41b7f3810f37fe7924845988e344bd72c3fe25c3fb701
+    eof: true
+    expect:
+      info.face: Comic Sans MS
+      len(chars.char): 191

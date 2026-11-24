@@ -43,8 +43,8 @@ seq:
   - id: ofs_data
     type: u4
   - id: header
-    type: header
     size: ofs_data - magic._sizeof - ofs_data._sizeof
+    type: header
 instances:
   len_data:
     value: 'header.data_size == 0xffff_ffff ? _io.size - ofs_data : header.data_size'
@@ -75,7 +75,8 @@ types:
           Most resources claim that this field must be at least 4 bytes long.
           However, most programs don't enforce it, and [Audacity](
           https://www.audacityteam.org/) even generates .au files with this field
-          being 0-byte long. According to <https://nixdoc.net/man-pages/IRIX/man4/dmedia/next.4.html>,
+          being 0-byte long. According to
+          <https://nixdoc.net/man-pages/IRIX/man4/dmedia/next.4.html>,
           "NeXT files require that this chunk be at least 4 bytes (chars) long,
           whereas this chunk may be zerolength in a Sun .au file."
 
@@ -125,7 +126,9 @@ enums:
     14: fixed_point_32
     16:
       id: display
-      doc: non-audio display data used by the Sound Kit's `SoundView` class, can't be played
+      doc: |
+        non-audio display data used by the Sound Kit's `SoundView` class, can't be
+        played
     17:
       id: mulaw_squelch
       doc: 8-bit mu-law with run-length encoding of silence

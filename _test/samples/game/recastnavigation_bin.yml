@@ -1,0 +1,16 @@
+samples:
+  - url: https://raw.githubusercontent.com/arl/go-detour/77ed5bdb679a264490f2412cd7ffa2ad1402edef/testdata/sample/tilemesh/develer.bin
+    sha256: d08d5398f5c572094dc60e66290d0fe61b478ef2e5706d59f439f76d5c2194c8
+    name: tilemesh_develer.bin
+    eof: true
+    expect:
+      version: 1
+      num_tiles: 13
+      len(tiles): 13
+  - url: https://raw.githubusercontent.com/arl/go-detour/77ed5bdb679a264490f2412cd7ffa2ad1402edef/testdata/sample/solomesh/dungeon.bin
+    sha256: 089f46a6c9f3c35e0d8c06fb956f141796b24d74503eb65c16b78e8c938d2430
+    name: solomesh_dungeon.bin
+    eof: true
+    expect:
+      version: 1
+      num_tiles: 1

@@ -1,0 +1,8 @@
+samples:
+  - url: https://raw.githubusercontent.com/pierrec/lz4/c74c3163af038e40dbea075f4ba144545ca1b400/testdata/Mark.Twain-Tom.Sawyer_legacy.txt.lz4
+    sha256: cabd481b47f80598d9aec8f47e9fde47769902e055cebcf84e42932dbfc1673a
+    extract: { format: slice, offset: 0, size: 180039 }
+    eof: true
+    expect:
+      len(blocks): 1
+      blocks[0].len_data: 180031   # hex read; python-lz4 lz4.block decodes it to 387851 bytes

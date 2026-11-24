@@ -1,0 +1,199 @@
+meta:
+  id: wireless_regdb
+  title: Linux wireless regulatory database (regulatory.bin)
+  license: copyleft-next-0.3.0 AND ISC
+  encoding: ASCII
+  endian: be
+  bit-endian: be
+
+-license-header: |
+  Copyright (c) 2013, Luis R. Rodriguez <mcgrof@do-not-panic.com>
+
+  CRDA is licensed under copyleft-next 0.3.0
+
+  Refer to copyleft-next-0.3.0 for license details, you can also always get the latest updates of copyleft-next from:
+
+  https://gitorious.org/copyleft-next/
+
+  This file incorporates work covered by the following copyright and permission notice:
+
+  Copyright (c) 2008, Luis R. Rodriguez <mcgrof@do-not-panic.com>
+  Copyright (c) 2008, Johannes Berg <johannes@sipsolutions.net>
+  Copyright (c) 2008, Michael Green <Michael.Green@Atheros.com>
+
+  Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+doc: |
+  Binary form of wireless-regdb, the database of wireless regulatory rules
+  (allowed frequency ranges, power limits and flags per country) used by the
+  Linux kernel's 802.11 stack via CRDA. The file is signed; the signature is
+  stored at its end.
+
+  Test file: https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.bin
+doc-ref:
+  - "https://wireless.wiki.kernel.org/en/developers/Regulatory/wireless-regdb"
+  - "https://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/crda.git/tree/regdb.h"
+  - "https://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/crda.git/tree/reglib.c"
+  - "https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/db2bin.py"
+seq:
+  - id: signature
+    contents: ["RGDB"]
+  - id: version
+    type: u4
+  - id: ofs_countries
+    -orig-id: reg_country_ptr
+    type: u4
+    doc: |
+      The list is sorted alphabetically to allow binary searching (should it become
+      really huge).
+  - id: num_countries
+    -orig-id: reg_country_num
+    type: u4
+  - id: len_authentication
+    -orig-id: signature_length
+    type: u4
+    doc: length (in bytes) of the signature at the end of the file
+instances:
+  countries:
+    pos: ofs_countries
+    type: country
+    repeat: expr
+    repeat-expr: num_countries
+  authentication:
+    pos: _io.size - len_authentication
+    size: len_authentication
+    doc: |
+      Digital signature: an OpenSSL-compatible signature of the SHA-1 hash of
+      the rest of the file.
+types:
+  freq_range:
+    doc: |
+      everything is in kHz
+      Values of zero mean "not applicable", i.e. the regulatory does not limit a
+      certain value.
+    seq:
+      - id: start
+        type: u4
+      - id: end
+        type: u4
+      - id: max_bandwidth
+        type: u4
+  power_rule:
+    seq:
+      - id: max_antenna_gain
+        type: u4
+        doc: in mBi (100 * dBi)
+      - id: max_eirp
+        type: u4
+        doc: in mBi (100 * dBi)
+  rule:
+    seq:
+      - id: ofs_freq_range
+        -orig-id: freq_range_ptr
+        type: u4
+      - id: ofs_power_rule
+        -orig-id: power_rule_ptr
+        type: u4
+      - id: flags
+        type: flags
+    instances:
+      power_rule:
+        pos: ofs_power_rule
+        type: power_rule
+      freq_range:
+        pos: ofs_freq_range
+        type: freq_range
+  rule_ptr:
+    seq:
+      - id: ofs_rule
+        type: u4
+    instances:
+      rule:
+        pos: ofs_rule
+        type: rule
+  flags:
+    seq:
+      - id: reserved1
+        type: b20
+      - id: auto_bw
+        -orig-id: RRF_AUTO_BW
+        type: b1
+        doc: Auto BW calculations
+      - id: reserved0
+        type: b2
+      - id: no_ibss
+        -orig-id: __RRF_NO_IBSS
+        type: b1
+        doc: old no-IBSS rule, maps to no-ir
+      - id: do_not_initiate_radiation
+        -orig-id: RRF_NO_IR
+        type: b1
+      - id: ptmp_only
+        -orig-id: RRF_PTMP_ONLY
+        type: b1
+        doc: this is only for Point To MultiPoint links
+      - id: ptp_only
+        -orig-id: RRF_PTP_ONLY
+        type: b1
+        doc: this is only for Point To Point links
+      - id: dfs_required
+        -orig-id: RRF_DFS
+        type: b1
+        doc: DFS support is required to be used
+      - id: no_outdoor
+        -orig-id: RRF_NO_OUTDOOR
+        type: b1
+        doc: outdoor operation not allowed
+      - id: no_indoor
+        -orig-id: RRF_NO_INDOOR
+        type: b1
+        doc: indoor operation not allowed
+      - id: no_cck
+        -orig-id: RRF_NO_CCK
+        type: b1
+        doc: CCK modulation not allowed
+      - id: no_ofdm
+        -orig-id: RRF_NO_OFDM
+        type: b1
+        doc: OFDM modulation not allowed
+
+  rules_collection:
+    seq:
+      - id: num_rule_ptrs
+        -orig-id: reg_rule_num
+        type: u4
+      - id: rule_ptrs
+        -orig-id: reg_rule_ptrs
+        type: rule_ptr
+        repeat: expr
+        repeat-expr: num_rule_ptrs
+
+  country:
+    -orig-id: regdb_file_reg_country
+    seq:
+      - id: two_letter_code
+        -orig-id: alpha2
+        size: 2
+        type: str
+      - id: pad
+        type: u1
+      - id: creqs
+        type: b6
+      - id: dfs_region
+        type: b2
+        enum: dfs_region
+      - id: ofs_rules
+        -orig-id: reg_collection_ptr
+        type: u4
+    instances:
+      rules:
+        pos: ofs_rules
+        type: rules_collection
+enums:
+  dfs_region:
+    0: unset # no DFS master region specified
+    1: fcc # follows DFS master rules from FCC
+    2: etsi # follows DFS master rules from ETSI
+    3: jp # follows DFS master rules from JP/MKK/Telec

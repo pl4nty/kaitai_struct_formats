@@ -9,7 +9,6 @@ meta:
     wikidata: Q81095
   license: MIT
   endian: le
-doc-ref: 'https://dicom.nema.org/medical/dicom/current/output/html/part10.html#chapter_7'
 doc: |
   DICOM (Digital Imaging and Communications in Medicine), AKA NEMA
   PS3, AKA ISO 12052:2006, is a file format and network protocol
@@ -21,6 +20,7 @@ doc: |
   top-level parser attempts to autodetect and handle both of them. If
   any problems arise, one can use `file_explicit` and `file_implicit`
   subtypes to force parsing in particular transfer syntax.
+doc-ref: 'https://dicom.nema.org/medical/dicom/current/output/html/part10.html#chapter_7'
 seq:
   - id: file_header
     type: t_file_header
@@ -42,9 +42,9 @@ types:
       - id: tag_elem
         type: u2
       - id: vr
+        size: 2
         type: str
         encoding: ASCII
-        size: 2
         if: not is_forced_implicit
       - id: reserved
         type: u2
@@ -100,9 +100,9 @@ types:
       - id: tag_elem
         type: u2
       - id: vr
+        size: 2
         type: str
         encoding: ASCII
-        size: 2
         if: is_forced_explicit
       - id: reserved
         type: u2
@@ -120,7 +120,11 @@ types:
         type: seq_item
         repeat: until
         repeat-until: _.tag_elem == 0xe0dd
-        if: vr == 'SQ' and value_len == 0xffff_ffff
+        if: 'value_len == 0xffff_ffff and (is_forced_explicit ? vr == "SQ" : true)'
+        doc: |
+          In implicit VR, an undefined length is only allowed for sequences
+          (encapsulated pixel data requires an explicit VR transfer syntax),
+          and `vr` is not present to test.
       - id: elements
         type: t_data_element_explicit
         repeat: eos

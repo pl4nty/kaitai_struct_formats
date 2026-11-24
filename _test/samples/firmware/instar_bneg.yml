@@ -1,0 +1,10 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/archive/instar/bneg/__input__/output.bin
+    sha256: 9b422c5cd65b3c72a2c113fd6d80a5d8241a4989b8b51b35c3a3c695979119f7
+    eof: true
+    expect:   # hex read; unblob extracts part1 + part2
+      header.magic: BNEG
+      header.major: 1
+      header.minor: 1
+      header.len_kernel: 17
+      header.len_rootfs: 17

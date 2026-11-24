@@ -223,8 +223,8 @@ types:
         seq:
           - id: value
             type: strz
-            encoding: UTF-8
             eos-error: false
+            encoding: UTF-8
       sbytes:
         seq:
           - id: values

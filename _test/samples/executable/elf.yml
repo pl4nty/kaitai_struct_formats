@@ -1,0 +1,21 @@
+samples:
+  - url: https://raw.githubusercontent.com/golang/go/14d697f6612c8cbda5d70cb5dcf0e735f108411c/src/debug/elf/testdata/gcc-amd64-linux-exec
+    sha256: 1a6020203e76740ca714e07e661fa8e602aea6344d006ac21e962241531f7a77
+    expect:
+      header.e_type: 2
+      header.machine: 62
+      header.entry_point: 0x4003e0
+      header.num_section_headers: 37
+  - url: https://raw.githubusercontent.com/golang/go/14d697f6612c8cbda5d70cb5dcf0e735f108411c/src/debug/elf/testdata/gcc-386-freebsd-exec
+    sha256: e8a147f428f86cecb08283ae37ab76c70710f015a51589780ce64a5a727b2a27
+    expect:
+      abi: 9
+      header.machine: 3
+      header.entry_point: 0x80483cc
+      header.num_section_headers: 30
+  - url: https://raw.githubusercontent.com/golang/go/14d697f6612c8cbda5d70cb5dcf0e735f108411c/src/debug/elf/testdata/go-relocation-test-gcc482-aarch64.obj
+    sha256: b77a9d858ab8132a3742bc6e9bd84cb644b59567aacaf78b127726485adc9d7a
+    expect:
+      header.e_type: 1
+      header.machine: 183
+      header.num_section_headers: 20

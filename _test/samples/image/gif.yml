@@ -1,0 +1,19 @@
+samples:
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/hopper.gif
+  sha256: 19b8e092eee2eab632a36ee5644e362cb751cecaadb40bf4615334f3ffc6f1a5
+  eof: true
+  expect:
+    hdr.version: 89a
+    logical_screen_descriptor.screen_width: 128
+    logical_screen_descriptor.screen_height: 128
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/chi.gif
+  sha256: 4d036f172c9f7cf6ad076e8f1af5dba85425e6f8ac97fa5db280ad67239a54e6
+  eof: true
+  expect:
+    logical_screen_descriptor.screen_width: 320
+    '[b.block_type.name for b in blocks].count(''local_image_descriptor'')': 31
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/cd7c8ab1624628275c2446aa36fd9b10014b817f/Tests/images/dispose_bgnd.gif
+  sha256: d6375eddcc9d190c2376bbc091030d9ed0b7236b53e801e3f9500a059603f5e1
+  eof: true
+  expect:
+    '[b.block_type.name for b in blocks].count(''local_image_descriptor'')': 5

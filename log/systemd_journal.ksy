@@ -17,12 +17,13 @@ doc: |
   On live Linux system running systemd, these journals are typically located at:
 
   * /run/log/journal/machine-id/*.journal (volatile, lost after reboot)
-  * /var/log/journal/machine-id/*.journal (persistent, but disabled by default on Debian / Ubuntu)
+  * /var/log/journal/machine-id/*.journal (persistent, but disabled by default on
+    Debian / Ubuntu)
 doc-ref: https://www.freedesktop.org/wiki/Software/systemd/journal-files/
 seq:
   - id: header
-    type: header
     size: len_header
+    type: header
   - id: objects
     type: journal_object
     repeat: expr

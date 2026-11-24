@@ -1,0 +1,23 @@
+samples:
+  - url: https://raw.githubusercontent.com/elixpo/rv565/add5a4ffc2b5b792a4d2b4a9c67446378dfcdc05/tests/data/testpattern.rv565
+    sha256: 5908de84764962132f31543df0ca2276d10d7744fa2c292caf5fde3f66faa8a7
+    eof: true
+    expect:
+      version: 6
+      width: 180
+      height: 135
+      num_frames: 24
+  - url: https://raw.githubusercontent.com/elixpo/rv565/add5a4ffc2b5b792a4d2b4a9c67446378dfcdc05/tests/data/v7/gray4_stored_k3.rv565
+    sha256: 34290e3aa5a2789a824340ee9910c6a7a3e475c8a42ee316a56b3a0c959fd7b5
+    eof: true
+    expect:
+      version: 7
+      num_frames: 10
+      header_v7.keyframe_interval: 3
+  - url: https://raw.githubusercontent.com/elixpo/rv565/add5a4ffc2b5b792a4d2b4a9c67446378dfcdc05/tests/data/v7/gray8_zlib_partial_k5.rv565
+    sha256: 9874884097651d10bde2fcf5c90357ae54268f4410b29d6c83cbc82961e0395a
+    eof: true
+    expect:
+      width: 21
+      height: 13
+      header_v7.keyframe_interval: 5

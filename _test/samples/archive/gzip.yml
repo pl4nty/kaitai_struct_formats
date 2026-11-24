@@ -1,0 +1,8 @@
+samples:
+- url: https://raw.githubusercontent.com/apache/tika/39d27b43befe2776ec17137c51dfafd1ab5bc42d/tika-parsers/tika-parsers-standard/tika-parsers-standard-modules/tika-parser-miscoffice-module/src/test/resources/test-documents/testODTBodyListOpenClose.xml.gz
+  sha256: b49d470536b2c51bed9d437341384be6582e361c6d2fa8e8e2c507e07f28ebde
+  eof: true
+  expect:
+    mod_time: 1591576984
+    name: cor-s0BAC21-specimen2-content.xml
+    len_uncompressed: 58374

@@ -11,27 +11,28 @@ meta:
   license: CC0-1.0
   endian: le
 instances:
-  # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/filesystems/ext2.rst?id=a9edc03f13db#n116
   bg1:
     pos: 1024
     type: block_group
+    doc-ref: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/filesystems/ext2.rst?id=a9edc03f13db#n116
   root_dir:
     value: bg1.block_groups[0].inodes[1].as_dir
 types:
   block_group:
     seq:
       - id: super_block
-        type: super_block_struct
         size: 1024
-      # https://www.nongnu.org/ext2-doc/ext2.html#BLOCK-GROUP-DESCRIPTOR-TABLE
+        type: super_block_struct
       - id: block_groups
         type: bgd
         repeat: expr
         repeat-expr: super_block.block_group_count
-  # https://www.nongnu.org/ext2-doc/ext2.html#super_block
-  # https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/ext2/ext2.h?id=cd913c76f489#n412
-  # https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout#The_Super_Block
+        doc-ref: https://www.nongnu.org/ext2-doc/ext2.html#BLOCK-GROUP-DESCRIPTOR-TABLE
   super_block_struct:
+    doc-ref:
+      - https://www.nongnu.org/ext2-doc/ext2.html#super_block
+      - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/ext2/ext2.h?id=cd913c76f489#n412
+      - https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout#The_Super_Block
     seq:
       - id: inodes_count
         type: u4
@@ -39,12 +40,20 @@ types:
         type: u4
       - id: r_blocks_count
         type: u4
+        valid:
+          max: blocks_count
       - id: free_blocks_count
         type: u4
+        valid:
+          max: blocks_count
       - id: free_inodes_count
         type: u4
+        valid:
+          max: inodes_count
       - id: first_data_block
         type: u4
+        valid:
+          any-of: [0, 1]
       - id: log_block_size
         type: u4
       - id: log_frag_size
@@ -79,8 +88,11 @@ types:
         type: u4
       - id: creator_os
         type: u4
+        enum: os
       - id: rev_level
         type: u4
+        valid:
+          any-of: [0, 1]
       - id: def_resuid
         type: u2
       - id: def_resgid
@@ -90,6 +102,8 @@ types:
         type: u4
       - id: inode_size
         type: u2
+        valid:
+          max: block_size
       - id: block_group_nr
         type: u2
       - id: feature_compat
@@ -129,11 +143,20 @@ types:
         repeat-expr: 4
       - id: def_hash_version
         type: u1
+        enum: hashes
     instances:
       block_size:
         value: 1024 << log_block_size
+      len_inode:
+        value: 'rev_level == 0 ? 128 : inode_size'
+        doc: |
+          Size of an inode table entry: always 128 in revision 0, given by
+          `inode_size` in dynamic revision (e.g. 256 by default in ext4).
       block_group_count:
-        value: blocks_count / blocks_per_group
+        value: (blocks_count - first_data_block + blocks_per_group - 1) / blocks_per_group
+        doc: |
+          Number of block groups. The last group may be shorter than
+          `blocks_per_group`, so the division rounds up.
     enums:
       state_enum:
         1: valid_fs
@@ -142,9 +165,23 @@ types:
         1: act_continue
         2: act_ro
         3: act_panic
-  # https://www.nongnu.org/ext2-doc/ext2.html#BLOCK-GROUP-DESCRIPTOR-STRUCTURE
-  # https://web.archive.org/web/20160804172310/http://virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-7.html
+      os:
+        0: linux
+        1: hurd
+        2: masix
+        3: freebsd
+        4: lites
+      hashes:
+        0: legacy
+        1: half_md4
+        2: tea
+        3: legacy_unsigned
+        4: half_md4_unsigned
+        5: tea_unsigned
   bgd:
+    doc-ref:
+      - https://www.nongnu.org/ext2-doc/ext2.html#BLOCK-GROUP-DESCRIPTOR-STRUCTURE
+      - https://web.archive.org/web/20160804172310/http://virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-7.html
     seq:
       - id: block_bitmap_block
         type: u4
@@ -167,13 +204,15 @@ types:
       inode_bitmap:
         pos: inode_bitmap_block * _root.bg1.super_block.block_size
         size: 1024
-      # https://www.nongnu.org/ext2-doc/ext2.html#INODE-TABLE
-      # https://web.archive.org/web/20161114202411/http://www.virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-10.html
       inodes:
         pos: inode_table_block * _root.bg1.super_block.block_size
+        size: _root.bg1.super_block.len_inode
         type: inode
         repeat: expr
         repeat-expr: _root.bg1.super_block.inodes_per_group
+        doc-ref:
+          - https://www.nongnu.org/ext2-doc/ext2.html#INODE-TABLE
+          - https://web.archive.org/web/20161114202411/http://www.virtualblueness.net/Ext2fs-overview/Ext2fs-overview-0.1-10.html
   inode:
     seq:
       - id: mode
@@ -215,29 +254,57 @@ types:
       - id: osd2
         size: 12
     instances:
+      uses_extents:
+        value: (flags & 0x80000) != 0
+        doc: |
+          EXT4_EXTENTS_FL: `block` holds an ext4 extent tree instead of
+          block pointers. Extent trees are not parsed by this spec.
+      is_fast_symlink:
+        value: '(mode & 0xf000) == 0xa000 and blocks == (file_acl != 0 ? _root.bg1.super_block.block_size / 512 : 0)'
+        doc: |
+          Symlink whose target (up to 60 bytes) is stored in `block`
+          instead of a data block: `blocks` (in 512-byte sectors) counts
+          no data blocks, only an extended attribute block if `file_acl`
+          is set (as in Linux ext2_inode_is_fast_symlink).
       as_dir:
         io: 'block[0].body._io'
         pos: 0
         type: dir
+        if: (mode & 0xf000) == 0x4000 and not uses_extents
+        doc: |
+          Directory entries in the first block, only for directories
+          (S_IFDIR); for other inodes, e.g. fast symlinks, `block` does not
+          hold block pointers.
   block_ptr:
     seq:
       - id: ptr
         type: u4
     instances:
       body:
+        io: _root._io
         pos: ptr * _root.bg1.super_block.block_size
         size: _root.bg1.super_block.block_size
         type: raw_block
+        if: ptr != 0 and not _parent.is_fast_symlink and not _parent.uses_extents
+        doc: |
+          Block contents. Pointer 0 means no block is allocated (end of
+          file or a hole), and a fast symlink stores its target in the
+          pointer array itself.
   raw_block:
     seq:
       - id: body
         size: _root.bg1.super_block.block_size
-  # https://www.nongnu.org/ext2-doc/ext2.html#LINKED-DIRECTORY-ENTRY-STRUCTURE
   dir:
+    doc-ref: https://www.nongnu.org/ext2-doc/ext2.html#LINKED-DIRECTORY-ENTRY-STRUCTURE
     seq:
       - id: entries
         type: dir_entry
-        repeat: eos
+        repeat: until
+        repeat-until: _.rec_len == 0 or _io.eof
+        doc: |
+          Stops at the end of the block, or at a zeroed entry (rec_len 0)
+          as found in unused directory blocks, which would otherwise never
+          advance.
   dir_entry:
     seq:
       - id: inode_ptr
@@ -254,10 +321,12 @@ types:
         type: str
         encoding: UTF-8
       - id: padding
-        size: rec_len - name_len - 8
+        size: 'rec_len >= name_len + 8 ? rec_len - name_len - 8 : 0'
     instances:
       inode:
         value: '_root.bg1.block_groups[(inode_ptr - 1) / _root.bg1.super_block.inodes_per_group].inodes[(inode_ptr - 1) % _root.bg1.super_block.inodes_per_group]'
+        if: inode_ptr != 0
+        doc: Inode of this entry; inode_ptr 0 marks an unused entry
     enums:
       # https://www.nongnu.org/ext2-doc/ext2.html#IFDIR-FILE-TYPE
       file_type_enum:

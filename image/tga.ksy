@@ -1,20 +1,21 @@
 meta:
   id: tga
   title: TGA (AKA Truevision TGA, AKA TARGA) raster image file format
-  xref:
-    justsolve: TGA
-    loc: fdd000180 # TGA 2.0
-    pronom: fmt/402 # TGA 2.0
-    wikidata: Q1063976
   file-extension:
     - tga
     - icb
     - vda
     - vst
+  xref:
+    justsolve: TGA
+    loc: fdd000180 # TGA 2.0
+    pronom: fmt/402 # TGA 2.0
+    wikidata: Q1063976
   license: CC0-1.0
   encoding: ASCII
   endian: le
 doc:
+  |
   TGA (AKA Truevision TGA, AKA TARGA), is a raster image file format
   created by Truevision. It supports up to 32 bits per pixel (three
   8-bit RGB channels + 8-bit alpha channel), color mapping and
@@ -57,9 +58,9 @@ seq:
       Arbitrary application-specific information that is used to
       identify image. May contain text or some binary data.
   - id: color_map
+    size: (color_map_depth + 7) / 8
     repeat: expr
     repeat-expr: num_color_map
-    size: (color_map_depth + 7) / 8
     if: color_map_type == color_map_enum::has_color_map
     doc: Color map
 instances:
@@ -95,35 +96,36 @@ types:
       ext_area:
         pos: ext_area_ofs
         type: tga_ext_area
-        if: is_valid
+        if: is_valid and ext_area_ofs != 0
+        doc: An offset of 0 means that the file has no extension area.
   tga_ext_area:
     seq:
       - id: ext_area_size
         type: u2
         doc: Extension area size in bytes (always 495)
       - id: author_name
-        type: str
         size: 41
+        type: str
       - id: comments
+        size: 81
+        type: str
         repeat: expr
         repeat-expr: 4
-        type: str
-        size: 81
         doc: Comments, organized as four lines, each consisting of 80 characters plus a NULL
       - id: timestamp
         size: 12
         doc: Image creation date / time
       - id: job_id
-        type: str
         size: 41
+        type: str
         doc: Internal job ID, to be used in image workflow systems
       - id: job_time
-        type: str
         size: 6
+        type: str
         doc: Hours, minutes and seconds spent creating the file (for billing, etc.)
       - id: software_id
-        type: str
         size: 41
+        type: str
         doc: The application that created the file.
       - id: software_version
         size: 3
@@ -135,13 +137,19 @@ types:
         type: u4
       - id: color_corr_ofs
         type: u4
-        doc: Number of bytes from the beginning of the file to the color correction table if present
+        doc: |
+          Number of bytes from the beginning of the file to the color correction table if
+          present
       - id: postage_stamp_ofs
         type: u4
-        doc: Number of bytes from the beginning of the file to the postage stamp image if present
+        doc: |
+          Number of bytes from the beginning of the file to the postage stamp image if
+          present
       - id: scan_line_ofs
         type: u4
-        doc: Number of bytes from the beginning of the file to the scan lines table if present
+        doc: |
+          Number of bytes from the beginning of the file to the scan lines table if
+          present
       - id: attributes
         type: u1
         doc: Specifies the alpha channel

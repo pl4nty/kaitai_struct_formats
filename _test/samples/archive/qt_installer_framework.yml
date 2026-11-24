@@ -1,0 +1,15 @@
+samples:
+  - url: https://download.qt.io/archive/qt-installer-framework/4.1.1/QtInstallerFramework-windows-x86-4.1.1.exe
+    sha256: 85ef9117b66dae00d98553c46a20a44c80eb6e6c8b3f30d51383a95ed2c89c46
+    name: QtInstallerFramework-windows-x86-4.1.1.exe
+    params:
+      magic_cookie_offset: "_data.rindex(bytes.fromhex('f868d6991c0a63c2'))"
+    expect:   # hand read of the trailer following IFW src/libs/installer/binarycontent.cpp (readBinaryContent)
+      header.meta_resources_count: 1
+      header.binary_descriptor.binary_content_size: 38154860
+      header.binary_descriptor.marker.type: installer          # magic marker 0x33 0x32 0x02 0x12
+      header.binary_descriptor.end_of_exectuable: 22031360
+      header.binary_descriptor.segments_descriptor.operations.count: 0
+      header.binary_descriptor.segments_descriptor.collections.count: 2
+      header.binary_descriptor.segments_descriptor.collections.collections[0].name.value: org.qtproject.ifw.binaries
+      header.binary_descriptor.segments_descriptor.collections.collections[1].name.value: org.qtproject.ifw

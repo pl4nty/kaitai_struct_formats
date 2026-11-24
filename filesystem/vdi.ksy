@@ -7,14 +7,13 @@ meta:
     - VMWare Workstation
   file-extension: vdi
   xref:
-    justsolve: VDI
     forensicswiki: virtual_disk_image_(vdi)
+    justsolve: VDI
     pronom: fmt/726
     wikidata: Q29209126
   license: GPL-3.0-or-later
-  encoding: utf-8
+  encoding: UTF-8
   endian: le
-doc-ref: https://github.com/qemu/qemu/blob/master/block/vdi.c
 #  - https://github.com/qemu/qemu/blob/master/block/vdi.c
 #  - https://www.virtualbox.org/browser/vbox/trunk/src/VBox/Storage/VDI.cpp
 #  - https://forums.virtualbox.org/viewtopic.php?t=8046
@@ -27,6 +26,7 @@ doc: |
    * <https://virtualboxes.org/images/>
 
   or you can convert images of other formats.
+doc-ref: https://github.com/qemu/qemu/blob/master/block/vdi.c
 seq:
   - id: header
     type: header
@@ -41,14 +41,21 @@ instances:
     pos: header.blocks_map_offset
     size: header.blocks_map_size
     type: blocks_map
-    doc: >
+    doc: |
       block_index = offset_in_virtual_disk / block_size
-      actual_data_offset = blocks_map[block_index]*block_size+metadata_size+offset_in_block
+      actual_data_offset =
+      blocks_map[block_index]*block_size+metadata_size+offset_in_block
 
       The blocks_map will take up blocks_in_image_max * sizeof(uint32_t) bytes;
-      since the blocks_map is read and written in a single operation, its size needs to be limited to INT_MAX; furthermore, when opening an image, the blocks_map size is rounded up to be aligned on BDRV_SECTOR_SIZE.
-      Therefore this should satisfy the following: blocks_in_image_max * sizeof(uint32_t) + BDRV_SECTOR_SIZE == INT_MAX + 1 (INT_MAX + 1 is the first value not representable as an int)
-      This guarantees that any value below or equal to the constant will, when multiplied by sizeof(uint32_t) and rounded up to a BDRV_SECTOR_SIZE boundary, still be below or equal to INT_MAX.
+      since the blocks_map is read and written in a single operation, its size needs
+      to be limited to INT_MAX; furthermore, when opening an image, the blocks_map
+      size is rounded up to be aligned on BDRV_SECTOR_SIZE.
+      Therefore this should satisfy the following: blocks_in_image_max *
+      sizeof(uint32_t) + BDRV_SECTOR_SIZE == INT_MAX + 1 (INT_MAX + 1 is the first
+      value not representable as an int)
+      This guarantees that any value below or equal to the constant will, when
+      multiplied by sizeof(uint32_t) and rounded up to a BDRV_SECTOR_SIZE boundary,
+      still be below or equal to INT_MAX.
   disk:
     pos: header.blocks_offset
     #size: header.header_main.disk_size
@@ -57,8 +64,8 @@ types:
   header:
     seq:
       - id: text
-        type: str
         size: 0x40
+        type: str
 
       - id: signature
         contents: [0x7F, 0x10, 0xDA, 0xBE]
@@ -111,8 +118,8 @@ types:
             type: flags
 
           - id: description
-            type: str
             size: 256
+            type: str
 
           - id: blocks_map_offset
             -orig-id: offset_bmap
@@ -137,7 +144,7 @@ types:
           - id: block_data_size
             -orig-id: block_size
             type: u4
-            doc: "Size of block (bytes)."
+            doc: Size of block (bytes).
 
           - id: block_metadata_size
             -orig-id: block_extra

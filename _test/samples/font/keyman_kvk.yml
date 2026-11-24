@@ -1,0 +1,8 @@
+samples:
+- url: https://raw.githubusercontent.com/keymanapp/keyman/1e0a9dd113dd4ee52f09dc583060324a63eb4467/common/web/types/tests/fixtures/kvk/khmer_angkor.kvk
+  sha256: 9e7c5674f50a25bfa4e74d4d234b035594df4a57e1b935061567710c021bf9b2
+- url: https://raw.githubusercontent.com/keymanapp/keyman/1e0a9dd113dd4ee52f09dc583060324a63eb4467/common/web/types/tests/fixtures/kvk/balochi_inpage.kvk
+  sha256: f9cc8cda67c4a62cbe4ce5fec550976e310abe7aecf03d69be374df8fd4102ab
+  xfail: 'spec bug: key.bitmap reads only the u4 bitmap size and not the bitmapSize bytes of bitmap data after it (key 30 has a 35766-byte bitmap), so later keys misparse'
+- url: https://raw.githubusercontent.com/keymanapp/keyman/1e0a9dd113dd4ee52f09dc583060324a63eb4467/common/test/resources/keyboards/test_chirality.kvk
+  sha256: 1644002f20cfdb8605d1b9efb5e194f741879c1772d43f6065d75df3bcc798e5

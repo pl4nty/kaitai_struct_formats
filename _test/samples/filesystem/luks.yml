@@ -1,0 +1,8 @@
+samples:
+  - url: https://raw.githubusercontent.com/log2timeline/dfvfs/bf5d2fd3131646306507490d0389783d69b57676/test_data/luks1.raw
+    sha256: 62d74398519015912e3216766912a2a4d1afc7dc4f7378f676943aaf5e0828f1
+    deep: false   # payload instance is the whole encrypted volume
+    expect:
+      primary_binary_header.version: 1
+      primary_binary_header.luks1_fields.payload_offset: 4096
+      primary_binary_header.luks1_fields.num_key_bytes: 32

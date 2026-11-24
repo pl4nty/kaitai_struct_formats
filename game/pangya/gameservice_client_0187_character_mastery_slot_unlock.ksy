@@ -1,0 +1,41 @@
+# Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/client/0187.ksy
+meta:
+  id: gameservice_client_0187_character_mastery_slot_unlock
+  title: GameService Client Character Mastery Slot Unlock
+  license: ISC
+  imports:
+    - id_bank
+    - pstring
+  encoding: ASCII
+  endian: le
+
+doc: |
+  This packet is to unlock the next mastery slot on the 2nd character mastery tab
+  of a given character.
+  
+  Its responses are:
+  * [GameService Server 0x026E Character Mastery Slot Unlock
+    Response](/packets/gameservice/server/026e.ksy),
+  * [GameService Server 0x0216 User Status
+    Update](/packets/gameservice/server/0216.ksy),
+  * [GameService Server 0x022E Achievement
+    Unlocked](/packets/gameservice/server/022e.ksy), and
+  * [GameService Server 0x0220 Achievement
+    Update](/packets/gameservice/server/0220.ksy).
+  
+  **See Also:**
+  * [GameService Server 0x0188 Character Mastery
+    Upgrade](/packets/gameservice/client/0188.ksy),
+  * [GameService Server 0x0189 Character Mastery
+    Downgrade](/packets/gameservice/client/0189.ksy),
+  * [GameService Server 0x018A Character Mastery Card
+    Apply](/packets/gameservice/client/018a.ksy).
+  
+seq:
+  - id: item_id_character
+    type: u4
+    enum: id_bank::item_id_character
+    doc: From pangya_xx.iff/Character.iff. Item ID of relevant character.
+  - id: roster_slot_character
+    type: u4
+    doc: User-specific roster slot for relevant character.

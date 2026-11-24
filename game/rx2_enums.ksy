@@ -1,0 +1,131 @@
+# Imported from https://github.com/matty45/crackdown_2_ksy/blob/1aee060fd0649c52f47a8885deb8427987bf5e59/rx2_enums.ksy
+meta:
+  id: rx2_enums
+  title: Crackdown 2 RX2 / RenderWare 4 object type codes
+  application: Crackdown 2
+  file-extension: rx2
+  license: GPL-3.0-only
+  endian: be
+
+enums:
+  arena_object_type:
+    0x00000000: unknown
+    0x00010000: rwobjecttype_na
+    0x00010001: rwobjecttype_arena
+    0x00010002: rwobjecttype_raw
+    0x00010003: rwobjecttype_subreference
+    0x00010004: rwobjecttype_sectionmanifest
+    0x00010005: rwobjecttype_sectiontypes
+    0x00010006: rwobjecttype_sectionexternalarenas
+    0x00010007: rwobjecttype_sectionsubreferences
+    0x00010008: rwobjecttype_sectionatoms
+    0x00010009: rwobjecttype_defarenaimports
+    0x0001000a: rwobjecttype_defarenaexports
+    0x0001000b: rwobjecttype_defarenatypes
+    0x0001000c: rwobjecttype_defarenadefinedarenaid
+    0x0001000d: rwobjecttype_attributepacket
+    0x0001000e: rwobjecttype_attributepacket_delegate
+    0x0001000f: rwobjecttype_bittable
+    0x00010010: rwobjecttype_arenalocalatomtable
+    0x00010030: rwobjecttype_baseresource_start
+    0x00010031: rwobjecttype_buffer
+    0x00010032: rwobjecttype_baseresource_2
+    0x00010033: rwobjecttype_baseresource_3
+    0x00010034: rwobjecttype_baseresource_4
+    0x00010035: rwobjecttype_baseresource_5
+    0x00010036: rwobjecttype_baseresource_6
+    0x00010037: rwobjecttype_baseresource_7
+    0x00010038: rwobjecttype_baseresource_8
+    0x00010039: rwobjecttype_baseresource_9
+    0x0001003a: rwobjecttype_baseresource_a
+    0x0001003b: rwobjecttype_baseresource_b
+    0x0001003c: rwobjecttype_baseresource_c
+    0x0001003d: rwobjecttype_baseresource_d
+    0x0001003e: rwobjecttype_baseresource_e
+    0x0001003f: rwobjecttype_baseresource_reservedto
+
+    0x00020000: rwgobjecttype_na
+    0x00020001: rwgobjecttype_camera
+    0x00020002: rwgobjecttype_palette
+    0x00020003: rwgobjecttype_raster
+    0x00020004: rwgobjecttype_vdes
+    0x00020005: rwgobjecttype_vbuf
+    0x00020006: rwgobjecttype_ides
+    0x00020007: rwgobjecttype_ibuf
+    0x00020008: rwgobjecttype_light
+    0x00020009: rwgobjecttype_mesh
+    0x0002000a: rwgobjecttype_shader
+    0x0002000b: rwgobjecttype_compiledstate
+    0x0002000c: rwgobjecttype_renderobject
+    0x0002000d: rwgobjecttype_gsdata
+    0x0002000e: rwgobjecttype_vertexshader
+    0x0002000f: rwgobjecttype_vertexdata
+    0x00020010: rwgobjecttype_indexdata
+    0x00020011: rwgobjecttype_rasterdata
+    0x00020012: rwgobjecttype_buildstate
+    0x00020013: rwgobjecttype_pixelshader
+    0x00020015: rwgobjecttype_profilemesh
+    0x00020016: rwgobjecttype_designviewobject
+    0x00020017: rwgobjecttype_profilerenderobject
+    0x00020018: rwgobjecttype_image
+    0x00020019: rwgobjecttype_renderobjectcontainer
+    0x0002001a: rwgobjecttype_meshcompiledstatelink
+    0x0002001b: rwgobjecttype_shadercode
+    0x00020020: rwgobjecttype_font
+    0x00020021: rwgobjecttype_glyphtable
+    0x00020022: rwgobjecttype_kerntable
+    0x00020023: rwgobjecttype_pagetable
+    0x00020024: rwgobjecttype_rastertexture
+    0x00020025: rwgobjecttype_facename
+
+    0x00040000: objecttype_na1
+    0x00040001: objecttype_part
+    0x00040002: objecttype_partdefinition
+    0x00040003: objecttype_jointedpair
+    0x00040004: objecttype_jointlimit
+    0x00040005: objecttype_jointskeleton
+    0x00040006: objecttype_assembly
+    0x00040007: objecttype_assemblydefinition
+
+    0x00070000: objecttype_na2
+    0x00070001: objecttype_keyframeanim
+    0x00070002: objecttype_skeleton
+    0x00070003: objecttype_animationskin
+    0x00070004: objecttype_interpolator
+    0x00070005: objecttype_featherinterpolator
+    0x00070006: objecttype_oneboneik
+    0x00070007: objecttype_twoboneik
+    0x00070008: objecttype_blender
+    0x00070009: objecttype_weightedblender
+    0x0007000a: objecttype_remapper
+    0x0007000b: objecttype_skeletonsink
+    0x0007000c: objecttype_skinsink
+    0x0007000d: objecttype_lightsink
+    0x0007000e: objecttype_camerasink
+    0x0007000f: objecttype_skinmatrixbuffer
+    0x00070010: objecttype_tweakcontroller
+    0x00070011: objecttype_shadersink
+    0x00070012: objecttype_c2_vehicle_component
+
+    0x00080000: rwcobjecttype_na
+    0x00080001: rwcobjecttype_volume
+    0x00080002: rwcobjecttype_simplemappedarray
+    0x00080003: rwcobjecttype_trianglekdtreeprocedural
+    0x00080004: rwcobjecttype_kdtreemappedarray
+    0x00080005: rwcobjecttype_bbox
+    0x00080006: rwcobjecttype_clusteredmesh
+
+    0x00eb0000: rwobjecttype_rendermeshdata
+    0x00eb0001: rwobjecttype_rendermodeldata
+    0x00eb0002: rwobjecttype_modelskeletondata
+    0x00eb0003: rwobjecttype_modelrenderdata
+    0x00eb0004: rwobjecttype_splinedata
+    0x00eb0005: rwobjecttype_rendermaterialdata
+    0x00eb0006: rwobjecttype_collisionmaterialdata
+    0x00eb0007: rwobjecttype_rollerdescdata
+    0x00eb0008: rwobjecttype_versiondata
+    0x00eb0009: rwobjecttype_locationdescdata
+    0x00eb000a: rwobjecttype_collisionmodeldata
+    0x00eb000b: rwobjecttype_tableofcontents
+    0x00ec0010: arenadictionary
+    0x7fffffff: forcenumsizeint

@@ -1,0 +1,24 @@
+meta:
+  id: crc32_aixm
+  title: AIXM variant of CRC-32
+  license: Unlicense
+  imports:
+    - ../crc_generic
+  -initial: 0x0
+  -check: 0x3010bf7f
+  -polynomial: 0x814141ab
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the AIXM variant of CRC-32 of an array.
+
+params:
+  - id: array
+    type: bytes
+
+seq:
+  - id: generic
+    type: crc_generic(32, 0, 0x0, false, false, 0x814141ab, array)
+
+instances:
+  value:
+    value: generic.value

@@ -3,21 +3,24 @@ meta:
   title: Huawei Bootloader packed image format
   file-extension: img
   tags:
-    - archive
     - android
+    - archive
   license: CC0-1.0
   # The `releasetools.py` script is written for Python 2, where the default
   # encoding is ASCII.
   encoding: ASCII
   endian: le
 doc: |
-  Format of `bootloader-*.img` files found in factory images of certain Android devices from Huawei:
+  Format of `bootloader-*.img` files found in factory images of certain Android
+  devices from Huawei:
 
   * Nexus 6P "angler": [sample][sample-angler] ([other samples][others-angler]),
     [releasetools.py](https://android.googlesource.com/device/huawei/angler/+/cf92cd8/releasetools.py#29)
 
-  [sample-angler]: https://androidfilehost.com/?fid=11410963190603870158 "bootloader-angler-angler-03.84.img"
-  [others-angler]: https://androidfilehost.com/?w=search&s=bootloader-angler&type=files
+  [sample-angler]: https://androidfilehost.com/?fid=11410963190603870158
+  "bootloader-angler-angler-03.84.img"
+  [others-angler]:
+  https://androidfilehost.com/?w=search&s=bootloader-angler&type=files
 
   All image versions can be found in factory images at
   <https://developers.google.com/android/images> for the specific device. To

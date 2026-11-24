@@ -1,0 +1,20 @@
+# netCDF-C ncdump reference files. Expects from scipy.io.netcdf_file (version byte, dimensions,
+# variable names, global attribute names).
+samples:
+  - url: https://raw.githubusercontent.com/Unidata/netcdf-c/69d79a91d4f60f5ffc3eb365c6859a1c8a4ca7bd/ncdump/ref_test_365_day_1900.nc
+    sha256: 5d1d9a6e09240e3255b7f2c92a745cfd547ebd1d5c6b1a658345e571dcace763
+    expect:
+      version: classic
+      dim_list.num_dims: 1
+      dim_list.dims[0].name.value: time
+      dim_list.dims[0].len_dim: 2300
+      var_list.num_vars: 1
+      var_list.vars[0].name.value: time
+  - url: https://raw.githubusercontent.com/Unidata/netcdf-c/69d79a91d4f60f5ffc3eb365c6859a1c8a4ca7bd/ncdump/ref_null_byte_padding_test.nc
+    sha256: 4e22a94b60b0a9ff8eb3e0de13b8f28b61c027bf79f23e0d232bebf179d7a8d1
+    expect:
+      version: offset_64bit
+      dim_list.num_dims: 0
+      var_list.num_vars: 5
+      var_list.vars[0].name.value: raw_data_start_date
+      global_attrs.attrs[0].name.value: coordinates

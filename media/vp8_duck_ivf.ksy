@@ -65,8 +65,8 @@ types:
   block:
     seq:
       - id: len_frame
-        doc: size of the frame data
         type: u4
+        doc: size of the frame data
       - id: timestamp
         type: u8
       - id: framedata

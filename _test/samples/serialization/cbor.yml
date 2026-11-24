@@ -1,0 +1,17 @@
+samples:
+  - url: https://raw.githubusercontent.com/spruceid/isomdl/9087dcf5c1dd20facb73af906b51cb154b636ebc/test/definitions/device_response.cbor
+    sha256: ec47734dd047b5679c6ff2633949f68b15fe71ed6461bd3cfc5da779dbabb7dc
+    extract: { format: hex }
+    eof: true
+    expect:
+      ib.major_type: cbor_map
+      payload.length.value: 4
+      payload.items[0].key.payload.value: version
+  - url: https://raw.githubusercontent.com/spruceid/isomdl/9087dcf5c1dd20facb73af906b51cb154b636ebc/test/definitions/cose_key/ec_p256.cbor
+    sha256: afe2f0a0c282d275040bc1651ba69e0fe42fd02371898283e1dc481b85c9bf28
+    extract: { format: hex }
+    eof: true
+    expect:
+      ib.major_type: cbor_map
+      payload.length.value: 4
+      payload.items[0].key.payload.value: 1

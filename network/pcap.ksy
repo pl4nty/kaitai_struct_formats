@@ -11,8 +11,12 @@ meta:
   license: CC0-1.0
   ks-version: '0.11'
   imports:
+    - /network/bluetooth_frame
     - /network/ethernet_frame
     - /network/packet_ppi
+    - /network/ieee802_11_prism
+    - /hardware/usb/pcap/usbmon
+    - /hardware/usb/pcap/usbpcap
 doc: |
   PCAP (named after libpcap / winpcap) is a popular format for saving
   network traffic grabbed by network sniffers. It is typically
@@ -85,7 +89,8 @@ types:
           Timestamp of a packet in seconds since 1970-01-01 00:00:00 UTC (UNIX timestamp).
 
           In practice, some captures are not following that (e.g. because the device lacks
-          a real-time clock), so this field might represent time since device boot, start of
+          a real-time clock), so this field might represent time since device boot, start
+          of
           capture, or other arbitrary epoch.
       - id: ts_usec
         type: u4
@@ -103,13 +108,34 @@ types:
         type: u4
         doc: Length of the packet as it appeared on the network when it was captured.
       - id: body
-        size: "incl_len < _root.hdr.snaplen ? incl_len : _root.hdr.snaplen"
+        size: len_body
         type:
           switch-on: _root.hdr.network
           cases:
             'linktype::ppi': packet_ppi
             'linktype::ethernet': ethernet_frame
+            'linktype::ieee802_11_prism': ieee802_11_prism
+            'linktype::usb_linux_mmapped': usbmon(64)
+            'linktype::usb_linux': usbmon(48)
+            'linktype::bluetooth_hci_h4_with_phdr': bluetooth_frame
+            'linktype::usbpcap': usbpcap
         doc-ref: 'https://wiki.wireshark.org/Development/LibpcapFileFormat#Packet_Data'
+      - id: discarded
+        size: incl_len - len_body
+        doc: |
+          Captured bytes beyond the snapshot length. They are still stored in
+          the file, but libpcap reads and discards them.
+    instances:
+      len_body:
+        value: |
+          _root.hdr.snaplen != 0 and incl_len > _root.hdr.snaplen
+            ? _root.hdr.snaplen
+            : incl_len
+        doc: |
+          Number of bytes of packet data to use: `incl_len`, but no more than
+          the snapshot length (as in libpcap, which ignores a zero snapshot
+          length in the header).
+        doc-ref: https://github.com/the-tcpdump-group/libpcap/blob/libpcap-1.10.5/sf-pcap.c#L637-L738
 enums:
   linktype:
     # https://www.tcpdump.org/linktypes.html

@@ -1,0 +1,14 @@
+# StarCraft II replay from the mpyq tests. Expects from a hex read against the MPQ format
+# (StormLib/mpyq): user data header "MPQ\x1b" with archive header at 0x400; archive header at
+# 0x400: header size 0x2c, format version 1, sector size shift 3, 16 hash and 10 block entries.
+samples:
+  - url: https://raw.githubusercontent.com/arkx/mpyq/6bfba18ec403f702666b4109db3d95f3b97b1dc5/test/test.SC2Replay
+    sha256: 61c23144e77c3563c37801c8eed9d2dca672b3402b7488431d964d12b07c07da
+    expect:
+      user_data.ofs_mpq_header: 0x400
+      ofs_archive: 0x400
+      header.len_header: 0x2c
+      header.format_version: 1
+      header.sector_size_shift: 3
+      header.num_hash_table_entries: 16
+      header.num_block_table_entries: 10

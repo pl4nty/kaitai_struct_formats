@@ -1,0 +1,25 @@
+# astropy FITS test files (tag v7.0.0). Expects from astropy.io.fits (number of HDUs, BITPIX,
+# NAXIS, NAXISn). deep: false because card.integer_value is documented as meaningful only for
+# integer-valued keywords and raises on float values such as 0.4 when forced on every card.
+samples:
+  - url: https://raw.githubusercontent.com/astropy/astropy/465a7ffe0cc9c776bc668a6938d029ffb83b68de/astropy/io/fits/tests/data/test0.fits
+    sha256: ea06ee30b28f1ea2e8ca62c5289756763b7f41356d7fa3291dbc346e2ed34e94
+    deep: false
+    eof: true
+    expect:
+      len(hdus): 5
+      hdus[0].is_primary: true
+      hdus[0].num_axes: 0
+      hdus[1].bitpix: 16
+      hdus[1].num_axes: 2
+      hdus[1].axes[0].len_axis: 40
+      hdus[1].axes[1].len_axis: 40
+  - url: https://raw.githubusercontent.com/astropy/astropy/465a7ffe0cc9c776bc668a6938d029ffb83b68de/astropy/io/fits/tests/data/tb.fits
+    sha256: e1891a5453af2ccca16a1a3d83c96785ea628fc659a453df84c90d8539c9f0a7
+    deep: false
+    eof: true
+    expect:
+      len(hdus): 2
+      hdus[1].bitpix: 8
+      hdus[1].axes[0].len_axis: 12
+      hdus[1].axes[1].len_axis: 2

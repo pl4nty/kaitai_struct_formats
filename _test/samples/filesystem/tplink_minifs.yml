@@ -1,0 +1,6 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/filesystem/minifs/__input__/test.minifs
+    sha256: 26bae118cba2976495dbfeb15aa5d75957c22c66379340837419f296c0908637
+    expect:   # unblob extracts 4 files (text.txt, fruit/{apple,banana,cherry}.txt)
+      header.magic: 4d494e49465300000000000000000000   # "MINIFS" + NUL padding (hex read)
+      header.num_files: 4

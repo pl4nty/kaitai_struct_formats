@@ -1,0 +1,10 @@
+# GPSBabel test file (written by gpsbabel -o ggv_log, testo.d/ggv_log.test). Expects from a hex
+# read: signature "DOMGVGPS Logfile V1.0:" (23 bytes with NUL), then (31397 - 23) / 42 = 747
+# fixed 42-byte v1.0 records (ggv_log.cc).
+samples:
+  - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/e1e195beca8e0f24ca0e41c02d1986af13865cd0/reference/track/ggv_log-sample.log
+    sha256: 573129e0178d4cc075e4b0ae8fd3f36059506e77aeb3743a75ba1f39c732821e
+    eof: true
+    expect:
+      version: '1.0'
+      len(points): 747

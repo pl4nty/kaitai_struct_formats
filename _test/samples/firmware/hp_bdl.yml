@@ -1,0 +1,9 @@
+samples:
+  - url: https://media.githubusercontent.com/media/onekey-sec/unblob/1179e5fd4fe4b04726c8a56d9a25b4d6d9008aec/tests/integration/archive/hp/bdl/__input__/sample.bdl
+    sha256: 240533e4188e0af859989fca729c4a0847de3d5688906c4a22d36f843afdf271
+    expect:   # hex read; unblob extracts ipkg000 + ipkg001
+      header.magic: ibdl
+      header.major: 1
+      header.minor: 1
+      header.num_toc_entries: 2
+      header.release: 2023.01.01

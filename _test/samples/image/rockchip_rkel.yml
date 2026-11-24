@@ -1,0 +1,17 @@
+# PineNote-style e-ink logo image (RK3566 eink) from Banana Pi's Rockchip Android 11 BSP, the
+# example file named in the spec's doc. Expect values read by hand from a hex dump: 64-byte
+# RKEL header (total length = file size, 0x750 x 0x57c, 10 images, "1.00"), then 32-byte GR04
+# entries.
+samples:
+  - url: https://raw.githubusercontent.com/BPI-SINOVOIP/BPI-Rockchip-Android11/b5f7fc75ca3c556af33df03fadd4ea1211991acb/device/rockchip/rk356x/rk3566_eink/ota/logo.img
+    sha256: b27f10540fca571ad8d211a7363a04f6cccdd2e253587b22dd84cedf05a5cec3
+    name: rk3566_eink-logo.img
+    eof: true
+    expect:
+      header.len_data: 13143392
+      header.height: 1872
+      header.width: 1404
+      header.num_images: 10
+      header.version: "1.00"
+      data.image_entries[0].ofs_image_data: 0x200
+      data.image_entries[1].ofs_image_data: 0x141000

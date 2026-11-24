@@ -70,8 +70,8 @@ seq:
       as indicated by the file's flags in the manifest). The files are stored
       in the same order as they appear in the manifest.
   - id: signature
-    type: signature
     size-eos: true
+    type: signature
     if: manifest.flags.has_signature
     doc: |
       The archive's signature - a digest of all archive data before
@@ -91,13 +91,13 @@ enums:
       id: sha1
       -orig-id: PHAR_SIG_SHA1
       doc: Indicates a SHA-1 hash.
-    0x4:
+    0x3:
       id: sha256
       -orig-id: PHAR_SIG_SHA256
       doc: |
         Indicates a SHA-256 hash. Available since API version 1.1.0,
         PHP_Archive 0.12.0 and phar extension 1.1.0.
-    0x8:
+    0x4:
       id: sha512
       -orig-id: PHAR_SIG_SHA512
       doc: |
@@ -115,6 +115,14 @@ enums:
         Note: In older versions of the phar extension, this value was used
         for an undocumented and unimplemented "PGP" signature type
         (`PHAR_SIG_PGP`).
+    0x11:
+      id: openssl_sha256
+      -orig-id: PHAR_SIG_OPENSSL_SHA256
+      doc: Indicates an OpenSSL signature over a SHA-256 hash.
+    0x12:
+      id: openssl_sha512
+      -orig-id: PHAR_SIG_OPENSSL_SHA512
+      doc: Indicates an OpenSSL signature over a SHA-512 hash.
 types:
   serialized_value:
     seq:
@@ -133,16 +141,16 @@ types:
         doc: The unparsed flag bits.
     instances:
       permissions:
-        value: value & 0x1ff
         -orig-id: PHAR_ENT_PERM_MASK
+        value: value & 0x1ff
         doc: The file's permission bits.
       zlib_compressed:
-        value: (value & 0x1000) != 0
         -orig-id: PHAR_ENT_COMPRESSED_GZ
+        value: (value & 0x1000) != 0
         doc: Whether this file's data is stored using zlib compression.
       bzip2_compressed:
-        value: (value & 0x2000) != 0
         -orig-id: PHAR_ENT_COMPRESSED_BZ2
+        value: (value & 0x2000) != 0
         doc: Whether this file's data is stored using bzip2 compression.
   file_entry:
     seq:
@@ -238,20 +246,20 @@ types:
         doc: The unparsed flag bits.
     instances:
       any_zlib_compressed:
-        value: (value & 0x1000) != 0
         -orig-id: PHAR_HDR_COMPRESSED_GZ
+        value: (value & 0x1000) != 0
         doc: |
           Whether any of the files in this phar are stored using
           zlib compression.
       any_bzip2_compressed:
-        value: (value & 0x2000) != 0
         -orig-id: PHAR_HDR_COMPRESSED_BZ2
+        value: (value & 0x2000) != 0
         doc: |
           Whether any of the files in this phar are stored using
           bzip2 compression.
       has_signature:
-        value: (value & 0x10000) != 0
         -orig-id: PHAR_HDR_SIGNATURE
+        value: (value & 0x10000) != 0
         doc: Whether this phar contains a signature.
   manifest:
     seq:
@@ -276,8 +284,7 @@ types:
         doc: The length of the alias, in bytes.
       - id: alias
         size: len_alias
-        doc: |
-          The phar's alias, i. e. the name under which it is loaded into PHP.
+        doc: The phar's alias, i. e. the name under which it is loaded into PHP.
       - id: len_metadata
         type: u4
         doc: The size of the metadata, in bytes, or 0 if there is none.

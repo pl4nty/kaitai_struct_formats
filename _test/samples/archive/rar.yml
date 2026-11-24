@@ -1,0 +1,7 @@
+samples:
+- url: https://raw.githubusercontent.com/markokr/rarfile/d2f7df6fc843dae356fd6b0a85971dc36fd6e757/test/files/rar3-comment-plain.rar
+  sha256: 224a3f0aacab5cbb140b72dde616280a871589f251b9147bdb55b49651661813
+- url: https://raw.githubusercontent.com/markokr/rarfile/d2f7df6fc843dae356fd6b0a85971dc36fd6e757/test/files/rar5-crc.rar
+  sha256: 9e42359428fe8d6c364536a3fe2ff4b705b4af63dfe0f56bd5cac8d042abd803
+- url: https://raw.githubusercontent.com/apache/tika/39d27b43befe2776ec17137c51dfafd1ab5bc42d/tika-parsers/tika-parsers-standard/tika-parsers-standard-modules/tika-parser-pkg-module/src/test/resources/test-documents/test-documents.rar
+  sha256: 466e4703e8505ccdaaa8fda233c84ce0de7fbdd7e4ec041af45b1e06e5621330

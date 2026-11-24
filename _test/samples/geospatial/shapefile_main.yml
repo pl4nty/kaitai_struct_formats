@@ -1,0 +1,14 @@
+# header read from the 100-byte file header; record counts from the matching .shx size
+samples:
+  - url: https://raw.githubusercontent.com/OSGeo/gdal/6d7a6388745ef760b68d3ea460d700f4be5479c4/autotest/ogr/data/poly.shp
+    sha256: 0785601f2dfa49ab2c50c6c13806fb95ce9c4c58c0182273850e066799b1c344
+    eof: true
+    expect:
+      header.shape_type: 5
+      len(records): 10
+  - url: https://raw.githubusercontent.com/OSGeo/gdal/6d7a6388745ef760b68d3ea460d700f4be5479c4/autotest/ogr/data/shp/arcm_with_m.shp
+    sha256: e513613e459a4cf89ff281c4e521d1802bc8e60a58d6085c140a8f9405dba78c
+    eof: true
+    expect:
+      header.shape_type: 23
+      len(records): 2

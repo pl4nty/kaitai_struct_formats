@@ -1,0 +1,15 @@
+# scikit-hep-testdata ROOT files. Expects from uproot 5 (file.fVersion, fBEGIN, fEND, fCompress).
+samples:
+  - url: https://raw.githubusercontent.com/scikit-hep/scikit-hep-testdata/212344e16e0bc75b5729f1fc522065fb1de4644d/src/skhep_testdata/data/uproot-simple.root
+    sha256: 268ed34f80711d5cd51b85adf00350844700c110f4a017ddb2afdb126d42f458
+    expect:
+      header.version: 60600
+      header.ofs_begin: 100
+      header.ofs_end: 5614
+      header.compress: 1
+  - url: https://raw.githubusercontent.com/scikit-hep/scikit-hep-testdata/212344e16e0bc75b5729f1fc522065fb1de4644d/src/skhep_testdata/data/uproot-Zmumu.root
+    sha256: 8290ddc1f2b1f866f30df016558936da27107f7f5b87e574c741f2baab1bad64
+    expect:
+      header.version: 60804
+      header.ofs_end: 178971
+      header.compress: 104

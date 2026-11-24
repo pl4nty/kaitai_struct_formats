@@ -9,15 +9,22 @@ meta:
   license: CC0-1.0
   endian: le
 doc: |
-  Btrfs is a copy on write file system based on B-trees focusing on fault tolerance, repair and easy
-  administration. Btrfs is intended to address the lack of pooling, snapshots, checksums, and
+  Btrfs is a copy on write file system based on B-trees focusing on fault
+  tolerance, repair and easy
+  administration. Btrfs is intended to address the lack of pooling, snapshots,
+  checksums, and
   integral multi-device spanning in Linux file systems.
-  Given any pair of subvolumes (or snapshots), Btrfs can generate a binary diff between them by
-  using the `btrfs send` command that can be replayed later by using `btrfs receive`, possibly on a
-  different Btrfs file system. The `btrfs send` command creates a set of data modifications required
+  Given any pair of subvolumes (or snapshots), Btrfs can generate a binary diff
+  between them by
+  using the `btrfs send` command that can be replayed later by using `btrfs
+  receive`, possibly on a
+  different Btrfs file system. The `btrfs send` command creates a set of data
+  modifications required
   for converting one subvolume into another.
-  This spec can be used to disassemble the binary diff created by the `btrfs send` command.
-  If you want a text representation you may want to checkout `btrfs receive --dump` instead.
+  This spec can be used to disassemble the binary diff created by the `btrfs send`
+  command.
+  If you want a text representation you may want to checkout `btrfs receive
+  --dump` instead.
 doc-ref: https://archive.kernel.org/oldwiki/btrfs.wiki.kernel.org/index.php/Design_notes_on_Send/Receive.html
 
 seq:
@@ -42,10 +49,12 @@ types:
         enum: command
       - id: checksum
         size: 4
-        doc: CRC32 checksum of a whole send command, including the header, with this attribute set to 0.
+        doc: |
+          CRC32 checksum of a whole send command, including the header, with this
+          attribute set to 0.
       - id: data
-        type: tlvs
         size: len_data
+        type: tlvs
     types:
       tlvs:
         seq:
@@ -55,12 +64,13 @@ types:
       tlv:
         seq:
           - id: type
-            enum: attribute
             type: u2le
+            enum: attribute
           - id: length
             type: u2le
+            if: not has_implicit_length
           - id: value
-            size: length
+            size: 'has_implicit_length ? _io.size - _io.pos : length'
             type:
               switch-on: type
               cases:
@@ -89,6 +99,12 @@ types:
                 'attribute::clone_path': string
                 'attribute::clone_offset': u8le
                 'attribute::clone_len': u8le
+        instances:
+          has_implicit_length:
+            value: _root.header.version >= 2 and type == attribute::data
+            doc: |
+              As of send stream v2, the `data` attribute has no length: it
+              must be the last attribute of the command and runs to its end.
       timespec:
         seq:
           - id: ts_sec
@@ -98,8 +114,8 @@ types:
       string:
         seq:
           - id: string
-            type: str
             size-eos: true
+            type: str
             encoding: UTF-8
       uuid:
         seq:
@@ -133,6 +149,10 @@ enums:
     0x14: utimes
     0x15: end
     0x16: update_extent
+    0x17: fallocate
+    0x18: fileattr
+    0x19: encoded_write
+    0x1a: enable_verity
   attribute:
     0x00: unspec
     0x01: uuid
@@ -159,3 +179,14 @@ enums:
     0x16: clone_path
     0x17: clone_offset
     0x18: clone_len
+    0x19: fallocate_mode
+    0x1a: fileattr
+    0x1b: unencoded_file_len
+    0x1c: unencoded_len
+    0x1d: unencoded_offset
+    0x1e: compression
+    0x1f: encryption
+    0x20: verity_algorithm
+    0x21: verity_block_size
+    0x22: verity_salt_data
+    0x23: verity_sig_data

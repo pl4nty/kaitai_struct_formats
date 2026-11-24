@@ -1,0 +1,23 @@
+# TCP payloads cut from Wireshark's test/captures/websocket.pcapng.gz (offsets located by searching the
+# decompressed pcapng for tshark's tcp.payload); expects from `tshark -O websocket`
+samples:
+  - url: https://gitlab.com/wireshark/wireshark/-/raw/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/websocket.pcapng.gz
+    sha256: 10929bf35a3cf14e0e079d41f021f23c298aba896627258812b7d2e03646add0
+    name: websocket-frame8-masked-text
+    extract: { format: gzip, then: { format: slice, offset: 1374, size: 54 } }
+    eof: true
+    expect:
+      initial_frame.header.finished: true
+      initial_frame.header.opcode: text
+      initial_frame.header.is_masked: true
+      initial_frame.header.len_payload: 48
+      initial_frame.payload_text: "{\"type\":\"request\",\"data\":\"1265307447409499018\"}\n"
+  - url: https://gitlab.com/wireshark/wireshark/-/raw/eab724ffbb8c25caf9a2812fa5b8b24223f787f5/test/captures/websocket.pcapng.gz
+    sha256: 10929bf35a3cf14e0e079d41f021f23c298aba896627258812b7d2e03646add0
+    name: websocket-frame9-unmasked-text
+    extract: { format: gzip, then: { format: slice, offset: 1526, size: 51 } }
+    eof: true
+    expect:
+      initial_frame.header.is_masked: false
+      initial_frame.header.len_payload: 49
+      initial_frame.payload_text: "{\"type\":\"response\",\"data\":\"1265307447409499018\"}\n"

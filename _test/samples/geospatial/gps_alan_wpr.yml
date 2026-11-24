@@ -1,0 +1,13 @@
+# GPSBabel test file. Expects from reference/alanwpr.gpx, GPSBabel's conversion of this file
+# (testo.d/alanwpr.test): 60 waypoints, the first "Home" at 47.650694444,9.483111111, and one
+# route GCHND9 with 4 points.
+samples:
+  - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/f0f20ea4db9b71238ceb72c4838024699181d657/reference/alanwpr.wpr
+    sha256: 18c5a58ff8c26d7e17fbf6dc66f532d4a6ab80d0d41a1a47eca14d1381b7012d
+    expect:
+      wpthdr.num: 60
+      wpts[wpthdr.idx[0]].name.rstrip(): Home
+      abs(wpts[wpthdr.idx[0]].pt.latitude - 47.650694444) < 0.000001: true
+      rtehdr.num: 1
+      rtes[0].name.rstrip(): GCHND9
+      rtes[0].wptnum: 4

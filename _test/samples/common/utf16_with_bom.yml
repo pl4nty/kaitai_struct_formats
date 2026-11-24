@@ -1,0 +1,12 @@
+# Library type: inline vectors.
+samples:
+- name: be
+  data: feff0047007200fc00df0065002c00204e16754c
+  eof: true
+  expect:
+    value: "Gr\xFC\xDFe, \u4E16\u754C"
+- name: le
+  data: fffe47007200fc00df0065002c002000164e4c75
+  eof: true
+  expect:
+    value: "Gr\xFC\xDFe, \u4E16\u754C"

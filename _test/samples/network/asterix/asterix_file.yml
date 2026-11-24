@@ -1,0 +1,30 @@
+samples:
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat062cat065.raw
+    sha256: 2916c2c01ee66d316d51bf125e28f4133a38abb7b19ee5eef1a0d7f6aaf1a53d
+    eof: true
+    expect:   # manual walk of CAT/LEN block headers (ASTERIX Part 1)
+      len(messages): 1
+      len(messages[0].data_blocks): 2
+      messages[0].data_blocks[0].cat: 62
+      messages[0].data_blocks[1].cat: 65
+      # tshark 4.2.2 ASTERIX dissector (block wrapped in UDP/8600 via text2pcap): 2 CAT062
+      # records, I062/040 track numbers 0x1374 and 0x1f29 (UAP slot 12)
+      len(messages[0].data_blocks[0].records): 2
+      messages[0].data_blocks[0].records[0].items[11].item.value: '1374'
+      messages[0].data_blocks[0].records[1].items[11].item.value: 1f29
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/install/sample_data/cat21_re.ast
+    sha256: 9979def457ecc7a8b70a6252cc59d52f60f686e6e84c32b0d83fbca6f2273f5a
+    eof: true
+    expect:   # manual walk of CAT/LEN block headers (ASTERIX Part 1)
+      len(messages[0].data_blocks): 2
+      messages[0].data_blocks[0].cat: 21
+      # tshark 4.2.2 ASTERIX dissector: I021/080 target addresses 0x000001 and 0x000002
+      # (UAP slot 11); I021/295 data ages compound is the last item present
+      messages[0].data_blocks[0].records[0].items[10].item.value: '000001'
+      messages[0].data_blocks[1].records[0].items[10].item.value: '000002'
+  - url: https://raw.githubusercontent.com/CroatiaControlLtd/asterix/2c442a31e52d13c46675db3f9a6218714e6e2440/asterix/sample_data/cat048.raw
+    sha256: 17481bd2955d046efc5aac1022b4f5879ab02456060c419503aded54bf2e5efd
+    eof: true
+    expect:   # manual read of CAT/LEN header (ASTERIX Part 1)
+      messages[0].data_blocks[0].cat: 48
+      messages[0].data_blocks[0].len: 48

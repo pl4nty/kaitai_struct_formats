@@ -27,46 +27,38 @@ types:
         contents: ' '
       - id: ip
         type: str
-        encoding: ascii
         terminator: 0x2f # '/'
+        encoding: ASCII
       - id: port
         type: str
-        encoding: ascii
         terminator: 0x0a # '\n'
+        encoding: ASCII
       - id: start_sec
         type: u4
-        doc: |
-          start of recording, the seconds part.
+        doc: start of recording, the seconds part.
       - id: start_usec
         type: u4
-        doc: |
-          start of recording, the microseconds part.
+        doc: start of recording, the microseconds part.
       - id: ip2
         type: u4
-        doc: |
-          network source.
+        doc: network source.
       - id: port2
         type: u2
-        doc: |
-          port.
+        doc: port.
       - id: padding
         type: u2
-        doc: |
-          2 bytes padding.
+        doc: 2 bytes padding.
   packet_t:
     seq:
       - id: length
         type: u2
-        doc: |
-          packet length (including this header).
+        doc: packet length (including this header).
       - id: len_body
         type: u2
-        doc: |
-          payload length.
+        doc: payload length.
       - id: packet_usec
         type: u4
-        doc: |
-          timestamp of packet since the start.
+        doc: timestamp of packet since the start.
       - id: body
         size: len_body
         type: rtp_packet

@@ -1,0 +1,9 @@
+samples:
+  - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/Universal-Mod/config/ai.reg
+    sha256: dd282fa6840ab17ede47b1264ca3e4c435db795e6894dbdd4866807a4cb3375c
+    expect:
+      num_sections: 5
+  - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/Universal-Mod/config.reg
+    sha256: 987be6818e935fb548ced490a4d9ab5afd9e648b8f2f3ca305923b2540898373
+    expect:
+      num_sections: 6

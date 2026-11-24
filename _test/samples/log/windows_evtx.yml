@@ -1,0 +1,19 @@
+# python-evtx test logs. Expects from python-evtx 0.8 (file header major/minor version, chunk
+# count, next record number, flags, and the number of records it iterates).
+samples:
+  - url: https://raw.githubusercontent.com/williballenthin/python-evtx/4d8ba92d934d8c08975ecb325124d480249312a6/tests/data/dns_log_malformed.evtx
+    sha256: 56884d5665a02dd4f26de67eabfad751843eff06f3fdeee7ea57a9911baa090b
+    expect:
+      header.major_version: 3
+      header.minor_version: 1
+      header.num_chunks: 1
+      header.next_record_id: 6
+      sum(len(c.records) for c in chunks): 5
+  - url: https://raw.githubusercontent.com/williballenthin/python-evtx/4d8ba92d934d8c08975ecb325124d480249312a6/tests/data/system.evtx
+    sha256: ccb83cfefc9038017224cd97b800b66e248fe14529649ddf47907e5a2021449e
+    expect:
+      header.num_chunks: 9
+      header.next_record_id: 13528
+      header.flags: 1
+      len(chunks): 9
+      sum(len(c.records) for c in chunks): 1601

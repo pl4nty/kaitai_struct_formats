@@ -1,0 +1,22 @@
+# expects from tpm2_eventlog (tpm2-tools 5.x); events2 excludes the Spec ID header event (EventNum 0)
+samples:
+  - url: https://raw.githubusercontent.com/tpm2-software/tpm2-tools/915443b32e04fb4c8ddee80b653b234669395a6a/test/integration/fixtures/event-arch-linux.bin
+    sha256: e96acdafe7b7e31473326028613351f166615f82427340837aacd299c2c16dd1
+    eof: true
+    expect:
+      is_agile_log: true
+      specid.num_algorithms: 2
+      len(events2): 24
+      events2[0].event_type: 8   # EV_S_CRTM_VERSION
+  - url: https://raw.githubusercontent.com/tpm2-software/tpm2-tools/915443b32e04fb4c8ddee80b653b234669395a6a/test/integration/fixtures/event-sd-boot-fedora37.bin
+    sha256: e62ca8efa2b0f7cb3ff822171cd6b453d7b46caf47ae1fb9440dce45e3abaf26
+    eof: true
+    expect:
+      specid.num_algorithms: 1
+      len(events2): 27
+  - url: https://raw.githubusercontent.com/tpm2-software/tpm2-tools/915443b32e04fb4c8ddee80b653b234669395a6a/test/integration/fixtures/event-gce-ubuntu-2104-log.bin
+    sha256: 8334fef7db8976292abeaf39e16abcecd8fc01f501bac50f8f6bd837425029c5
+    eof: true
+    expect:
+      specid.num_algorithms: 3
+      len(events2): 111

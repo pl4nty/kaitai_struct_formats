@@ -15,9 +15,9 @@ seq:
     type: initial_frame
   - id: trailing_frames
     type: dataframe
-    if: initial_frame.header.finished != true
     repeat: until
     repeat-until: _.header.finished
+    if: initial_frame.header.finished != true
 
 types:
   frame_header:
@@ -29,8 +29,8 @@ types:
         -orig-id: 'rsv1, rsv2, rsv3'
         type: b3
       - id: opcode
-        enum: opcode
         type: b4
+        enum: opcode
       - id: is_masked
         type: b1
       - id: len_payload_primary
@@ -39,12 +39,17 @@ types:
         type: u2
         if: len_payload_primary == 126
       - id: len_payload_extended_2
-        type: u4
+        type: u8
         if: len_payload_primary == 127
       - id: mask_key
-        type: u4
+        size: 4
         if: is_masked
     instances:
+      mask:
+        value: 'is_masked ? mask_key : [0, 0, 0, 0]'
+        doc: |
+          Key the payload is XORed with: `mask_key` for masked frames, all
+          zeroes (i.e. no change) otherwise.
       len_payload:
         value: |
           len_payload_primary <= 125 ? len_payload_primary : (
@@ -57,11 +62,11 @@ types:
         type: frame_header
       - id: payload_bytes
         size: header.len_payload
-        if: 'header.opcode != opcode::text'
-      - id: payload_text
-        size: header.len_payload
-        type: str
-        encoding: UTF-8
+        process: xor(header.mask)
+        doc: Payload, already unmasked.
+    instances:
+      payload_text:
+        value: payload_bytes.to_s("UTF-8")
         if: 'header.opcode == opcode::text'
 
   dataframe:
@@ -70,11 +75,11 @@ types:
         type: frame_header
       - id: payload_bytes
         size: header.len_payload
-        if: '_root.initial_frame.header.opcode != opcode::text'
-      - id: payload_text
-        size: header.len_payload
-        type: str
-        encoding: UTF-8
+        process: xor(header.mask)
+        doc: Payload, already unmasked.
+    instances:
+      payload_text:
+        value: payload_bytes.to_s("UTF-8")
         if: '_root.initial_frame.header.opcode == opcode::text'
 
 enums:

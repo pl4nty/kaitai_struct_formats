@@ -92,7 +92,10 @@ types:
   padding:
     seq:
       - id: padding
-        size: _root.tag.header.size.value - _io.pos
+        size: _parent.header.size.value + 10 - _io.pos
+        doc: |
+          Rest of the tag: header.size counts everything after the 10-byte
+          header, so the tag ends at header.size + 10.
 
   # Section 3.4. ID3v2 footer
   footer:
@@ -125,8 +128,8 @@ types:
   frame:
     seq:
       - id: id
-        type: str
         size: 4
+        type: str
         encoding: ASCII
       - id: size
         type: u4be_synchsafe
@@ -136,6 +139,9 @@ types:
         type: flags_format
       - id: data
         size: size.value
+    instances:
+      is_invalid:
+        value: "id == '\x00\x00\x00\x00'"
     types:
       flags_status:
         seq:
@@ -165,9 +171,6 @@ types:
             type: b1
           - id: flag_indicator
             type: b1
-    instances:
-      is_invalid:
-        value: "id == '\x00\x00\x00\x00'"
 
   # Section 6.2. Synchsafe integers
   u1be_synchsafe:

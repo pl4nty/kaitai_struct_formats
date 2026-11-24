@@ -1,0 +1,26 @@
+# Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/server/010b.ksy
+meta:
+  id: gameservice_server_010b_rare_shop_open_response
+  title: GameService Server Rare Shop Open Response
+  license: ISC
+  imports:
+    - pstring
+  encoding: ASCII
+  endian: le
+
+doc: |
+  This packet acknowledges the player has opened the rare shop.
+  
+  This is a response to [GameService Client 0x0098 Rare Shop
+  Open](/packets/gameservice/client/0098.ksy).
+
+seq:
+  - id: unknown_a
+    type: s4
+    doc: All examples show -1 (0xFFFFFFFF)
+  - id: unknown_b
+    type: s4
+    doc: All examples show -1 (0xFFFFFFFF)
+  - id: unknown_c
+    type: u4
+    doc: All examples show 0 (0x00000000)

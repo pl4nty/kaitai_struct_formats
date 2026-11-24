@@ -1,0 +1,13 @@
+# flashmap example image. Expects from a hex read at offset 512 against flashmap lib/fmap.h:
+# "__FMAP__", version 1.0, base 0, size 0x400, name "example", 4 areas.
+samples:
+  - url: https://raw.githubusercontent.com/dhendrix/flashmap/976420e9ecae3c3933d5e59e67a4debad751d003/bin/example.bin
+    sha256: f403d7e4904d656c8fb27f7dbc56345d4ec067a4322a8cd23a2b4f896daef738
+    extract: { format: slice, offset: 512 }
+    expect:
+      version.major: 1
+      version.minor: 0
+      base: 0
+      len_image: 0x400
+      name: example
+      num_areas: 4

@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/mozilla-releng/build-mar/2d9f7de6cb5d74c0957b3a7010b33604612afbc1/tests/test-bz2.mar
+  sha256: fe4ea45f8455b33fb65ca445709281880e2c5063c90f1f60c0a62e8b666333ce
+  expect:
+    ofs_index: 989
+- url: https://raw.githubusercontent.com/mozilla-releng/build-mar/2d9f7de6cb5d74c0957b3a7010b33604612afbc1/tests/test-xz.mar
+  sha256: d7fe0903a079dd81fbe671ce66f68bd47e225f78cdea558a23ec3fd2ac9ce597
+  expect:
+    ofs_index: 844

@@ -1,0 +1,11 @@
+samples:
+  - url: https://raw.githubusercontent.com/GPSBabel/gpsbabel/1d6a0626bc003cfb2519a0f9b864bf944db34ffe/reference/track/webpark1.gpl
+    sha256: 38fa15a56b0f3cf5f96621fa6f4470cd4f3cecf9267f208a0eeeb3e8f3b878d2
+    eof: true
+    expect:
+      len(points): 976    # 54656 bytes / 56-byte records (gpsbabel gpl.cc record size)
+  - url: https://raw.githubusercontent.com/GPSBabel/gpsbabel/431de8553ef4c5639c8c3782a3e7f13e9f057a59/reference/dg-388.gpl
+    sha256: 45651551dea2549bcec242389efc52ca7665f6bb2c2d9839cdacdb06320fc14f
+    eof: true
+    expect:
+      len(points): 5      # 280 bytes / 56-byte records

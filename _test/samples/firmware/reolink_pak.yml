@@ -1,0 +1,18 @@
+# Reolink RLC-411S firmware (versioned CDN path), .pak taken out of the vendor ZIP.
+# Section/partition tables read by hand (32-bit layout: 12-byte header, 9 x 64-byte sections,
+# 9 x 76-byte partitions; layout per pakler's structure.py); last section ends at the file size.
+samples:
+  - url: https://home-cdn.reolink.us/files/firmware/20180814firmware/RLC-411S_1389_18081407.zip
+    sha256: 269a095bf48db39a5285b7a30d614bf56aa47fe42fa390b1396ec7f8067e2c89
+    name: IPC_3816M.1389_18081407.RLC-411S.pak
+    extract:
+      format: zip
+      member: RLC-411S_1389_18081407/IPC_3816M.1389_18081407.RLC-411S.IMX326.5MP.AF.REOLINK.pak
+    expect:
+      num_sections: 9
+      sections[0].name: uboot
+      sections[3].name: kernel
+      sections[3].ofs_section: 394488
+      sections[4].name: fs
+      sections[4].len_section: 7790592
+      partitions[6].name: para

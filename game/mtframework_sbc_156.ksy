@@ -1,0 +1,106 @@
+# Imported from https://github.com/Brachi/albam/blob/6242aaff6c4145732b9b78213f2d7cf9b84d4545/albam/engines/mtfw/structs/sbc-156.ksy
+meta:
+  id: mtframework_sbc_156
+  title:  Resident Evil 5 (MTFramework) collision format
+  file-extension: sbc
+  license: MIT
+  ks-version: '0.11'
+  endian: le
+
+seq:
+  - {id: header, type: sbc_header}
+  - {id: nodes, type: bvh_node, repeat: expr, repeat-expr: header.num_boxes}
+  - {id: sbc_info, type: info, repeat: expr, repeat-expr: header.num_objects}
+  - {id: faces, type : face, repeat: expr, repeat-expr: header.num_faces}
+  - {id: vertices, type: vertex, repeat: expr, repeat-expr: header.num_vertices}
+
+types:
+  sbc_header:
+    seq:
+      - {id: indent, contents: [0x53, 0x42, 0x43, 0x31]} # SBC1
+      - {id: version, type: u2}
+      - {id: num_objects, type: u2}
+      - {id: num_objects_nodes, type: u2} # parts node num
+      - {id: num_max_objects_nest, type: u1} # max parts nest count
+      - {id: num_max_nest, type: u1} # max nest count
+      - {id: num_boxes, type: u4} # total node num
+      - {id: num_faces, type: u4} # total triangle num
+      - {id: num_vertices, type: u4} # total vertex num
+      - {id: bounding_box, type: bbox3}
+
+
+  info: #96 bytes unloaded
+    seq:
+      - {id: base, type: u4}
+      - {id: start_faces, type: u4}
+      - {id: start_nodes, type: u4} # ?
+      - {id: start_vertices, type: u4}
+      - {id: index_id, type: u4}
+      - {id: bounding_box, type: bbox3}
+      - {id: vmin, type: vec3, repeat: expr, repeat-expr: 2}
+      - {id: vmax, type: vec3, repeat: expr, repeat-expr: 2}
+      - {id: child_index, type: u2, repeat: expr, repeat-expr: 2}
+
+  face: #28 bytes
+    seq:
+      - {id: vert, type: u2, repeat: expr, repeat-expr: 3}
+      - {id: unk_00, type: u1} # probably junk u2 filler
+      - {id: unk_01, type: u1}
+      - {id: runtime_attr, type: u4} # 1 in scr  16 64 128 in eff
+      - {id: type, type: u4} # 32 64 128
+      - {id: special_attr, type: u4} # 0
+      - {id: surface_attr, type: u4} # 0
+      - {id: unk_02, type: u4}
+
+  bvh_node: # 80 bytes
+    doc: |
+      Node in binary bounding volume hierarchy tree
+      bit - is actually u1 value + u1 padding it contains 8 flags
+      first 6 almost certainly unused by the games and the last two define what is in
+      the child_index
+      0 - index of the bvh_node, 1 - index of the face (leaf)
+      For box A0 and A1
+      b0: A0.min.x < A1.min.x
+      b1: A0.min.y < A1.min.y
+      b2: A0.min.z < A1.min.z
+      b3: A0.max.x > A1.max.x
+      b4: A0.max.y > A1.max.y
+      b5: A0.max.z > A1.max.z
+      b6: is a leaf in the right node
+      b7: is a leaf in the left node
+    seq:
+      - {id: boxes, type: bbox4, repeat: expr, repeat-expr: 2}
+      - {id: bit, type: u2}
+      - {id: child_index, type: u2, repeat: expr, repeat-expr: 2} # references to a box
+      - {id: nulls, type: u1, repeat: expr, repeat-expr: 10}
+
+  bbox4:
+    seq:
+      - {id: min, type: f4, repeat: expr, repeat-expr: 4}
+      - {id: max, type: f4, repeat: expr, repeat-expr: 4}
+    
+  
+  bbox3:
+    seq:
+      - {id: min, type: f4, repeat: expr, repeat-expr: 3}
+      - {id: max, type: f4, repeat: expr, repeat-expr: 3}
+    
+  vec4:
+    seq:
+      - {id: x, type: f4}
+      - {id: y, type: f4}
+      - {id: z, type: f4}
+      - {id: w, type: f4}
+
+  vec3:
+    seq:
+      - {id: x, type: f4}
+      - {id: y, type: f4}
+      - {id: z, type: f4}
+
+  vertex:
+    seq:
+      - {id: x, type: f4}
+      - {id: y, type: f4}
+      - {id: z, type: f4}
+      - {id: w, type: f4}

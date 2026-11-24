@@ -14,10 +14,14 @@ doc: |
   which created the file. Note that the daylight saving time (DST) shifts
   also change the UTC time offset.
 
-  For example, if you pack two files A and B into a ZIP archive, file A last modified
-  at 2020-03-29 00:59 UTC+00:00 (GMT) and file B at 2020-03-29 02:00 UTC+01:00 (BST),
-  the file modification times saved in MS-DOS format in the ZIP file will vary depending
-  on whether the computer packing the files is set to GMT or BST at the time of ZIP creation.
+  For example, if you pack two files A and B into a ZIP archive, file A last
+  modified
+  at 2020-03-29 00:59 UTC+00:00 (GMT) and file B at 2020-03-29 02:00 UTC+01:00
+  (BST),
+  the file modification times saved in MS-DOS format in the ZIP file will vary
+  depending
+  on whether the computer packing the files is set to GMT or BST at the time of
+  ZIP creation.
 
     - If set to GMT:
         - file A: 2020-03-29 00:59 (UTC+00:00)
@@ -79,13 +83,15 @@ types:
     seq:
       - id: day
         type: b5
-        valid:
-          min: 1
+        doc: |
+          1-31 in a valid date. 0 is accepted because many writers (e.g. zip
+          tools that do not know the time, or unused FAT directory entries)
+          store an all-zero date, shown as "1980-00-00".
       - id: month
         type: b4
         valid:
-          min: 1
           max: 12
+        doc: 1-12 in a valid date, 0 in an all-zero date (see `day`)
       - id: year_minus_1980
         type: b7
     instances:

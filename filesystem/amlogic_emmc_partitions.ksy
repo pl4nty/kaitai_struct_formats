@@ -60,8 +60,7 @@ types:
         type: u8
       - id: offset
         type: u8
-        doc: |
-          The start of the partition relative to the start of the eMMC, in bytes
+        doc: The start of the partition relative to the start of the eMMC, in bytes
       - id: flags
         size: 4
         type: part_flags

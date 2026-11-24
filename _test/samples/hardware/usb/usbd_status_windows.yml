@@ -1,0 +1,13 @@
+# USBD_STATUS fields (bytes 10-13 of a USBPcap packet header) from real
+# USBPcap captures. Only successful requests were found in public captures.
+# Expected values from tshark (usb.usbd_status).
+samples:
+  # Wireshark wiki SampleCaptures usb_u3v_sample.pcapng, frame 1
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/usb_u3v_sample.pcapng
+    sha256: f278c4178696d4a744e6e2894d08d1211e2f4aa058d0f23c1f9267d7813c2937
+    name: usb_u3v_sample-f1-status
+    extract: {format: slice, offset: 190, size: 4}
+    eof: true
+    expect:
+      code: 0
+      state: success

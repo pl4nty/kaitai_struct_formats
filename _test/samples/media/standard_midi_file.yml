@@ -1,0 +1,9 @@
+# expect values decoded by hand from the MThd chunk
+samples:
+  - url: https://raw.githubusercontent.com/quodlibet/mutagen/48b3463d0ed70ba2b797ac9cc83983066ecf076a/tests/data/sample.mid
+    sha256: 59d8340cdbe299af3855f81d2df1adec6cf9f9698d66ecf98f9fc09e0c0aad36
+    eof: true
+    expect:
+      hdr.format: 1
+      hdr.num_tracks: 6
+      hdr.division: 480

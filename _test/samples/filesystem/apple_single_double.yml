@@ -1,0 +1,6 @@
+samples:
+  - url: https://raw.githubusercontent.com/apache/tika/39d27b43befe2776ec17137c51dfafd1ab5bc42d/tika-parsers/tika-parsers-standard/tika-parsers-standard-modules/tika-parser-apple-module/src/test/resources/test-documents/testAppleSingleFile.pdf
+    sha256: f50a85432544cbb5fc76b332b057c1529b20145693ff1191177d28b670fd23c1
+    expect:
+      version: 0x20000
+      num_entries: 6

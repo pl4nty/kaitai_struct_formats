@@ -1,0 +1,11 @@
+# GPSBabel test file. Expects from GPSBabel's own decoding: reference/an1-in.ref is
+# `gpsbabel -i an1 -f foo.an1 -o csv` (testo.d/an1.test), 26 waypoints, first 41.11111,-85.16351.
+samples:
+  - url: https://raw.githubusercontent.com/gpsbabel/gpsbabel/e1e195beca8e0f24ca0e41c02d1986af13865cd0/reference/foo.an1
+    sha256: 43854d0968813cc08ee33fc81baa376ddc1465e433033d9fea9b4f6a7007a636
+    eof: true
+    expect:
+      num_waypoints: 26
+      abs(waypoints[0].latitude - 41.11111) < 0.000005: true
+      abs(waypoints[0].longitude - -85.16351) < 0.000005: true
+      abs(waypoints[25].latitude - 41.10681) < 0.000005: true

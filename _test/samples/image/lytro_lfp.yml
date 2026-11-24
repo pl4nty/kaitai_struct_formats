@@ -1,0 +1,18 @@
+samples:
+  - url: https://raw.githubusercontent.com/behnam/python-lfp-reader/d1a5081008ea6379b3ad8f340db3bf442e8cc0e1/samples/IMG_0002-dm.lfp
+    sha256: ded821a95026b50af1bec8ea3f9c3407d591262da46fa7676d306b9cfe063ad1
+    expect:
+      sections[0].contents.type: LFP
+      sections[1].contents.type: LFM
+  - url: https://raw.githubusercontent.com/behnam/python-lfp-reader/d1a5081008ea6379b3ad8f340db3bf442e8cc0e1/samples/IMG_0001-stk.lfp
+    sha256: 640dbd5a7ef89c8aadfd18f576df85ae1a8bde0e13478c5afb9d4d11c8ad18e4
+    expect:
+      sections[0].contents.type: LFP
+  - url: https://raw.githubusercontent.com/behnam/python-lfp-reader/d1a5081008ea6379b3ad8f340db3bf442e8cc0e1/samples/IMG_0001.lfp
+    sha256: acb560d5a9edd25b20823a906b4d2eb0b10aeef0e78646892ff938806eac3798
+    expect:
+      sections[0].contents.type: LFP
+      sections[1].contents.type: LFM
+      sections[1].contents.data.json_str.count('"imageRef"'): 1
+      "'\"imageRef\" : \"sha1-06ae44216bf153a76fdf80ba48794c2d0d8b740b\"' in sections[1].contents.data.json_str": true
+      "[s.contents.identifier for s in sections if s.is_section and s.contents.size].count('sha1-06ae44216bf153a76fdf80ba48794c2d0d8b740b')": 1

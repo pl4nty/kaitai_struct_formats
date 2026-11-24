@@ -40,18 +40,30 @@ seq:
     type: s8
   - id: is_dirty
     type: u1
-  - id: stuff
-    size: 4
+  - id: single_end_line_char
+    type: u1
+    doc: Should be '\n'; used to detect FTP text-mode corruption
+  - id: non_end_line_char
+    type: u1
+    doc: Should be ' '; used to detect FTP text-mode corruption
+  - id: double_end_line_char1
+    type: u1
+    doc: Should be '\r'; used to detect FTP text-mode corruption
+  - id: double_end_line_char2
+    type: u1
+    doc: Should be '\n'; used to detect FTP text-mode corruption
   - id: compression_method
     type: u2
     enum: compression_methods
-enums:
-  compression_methods:
-    0: none
-    1: deflate
 instances:
   len_sector:
     value: 0x200
+  gd_at_end:
+    value: start_primary_grain == -1
+    doc: |
+      Primary grain directory start is GD_AT_END (0xffffffffffffffff): in
+      stream-optimized disks, the grain directory location is given by a
+      footer at the end of the file.
   descriptor:
     pos: start_descriptor * _root.len_sector
     size: size_descriptor * _root.len_sector
@@ -61,6 +73,10 @@ instances:
   grain_secondary:
     pos: start_secondary_grain * _root.len_sector
     size: size_grain * _root.len_sector
+enums:
+  compression_methods:
+    0: none
+    1: deflate
 types:
   header_flags:
     doc-ref: 'https://github.com/libyal/libvmdk/blob/main/documentation/VMWare%20Virtual%20Disk%20Format%20(VMDK).asciidoc#411-flags'

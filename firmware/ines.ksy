@@ -42,7 +42,9 @@ types:
         type: f7
       - id: len_prg_ram
         type: u1
-        doc: Size of PRG RAM in 8 KB units (Value 0 infers 8 KB for compatibility; see PRG RAM circuit on nesdev.com)
+        doc: |
+          Size of PRG RAM in 8 KB units (Value 0 infers 8 KB for compatibility; see PRG
+          RAM circuit on nesdev.com)
       - id: f9
         size: 1
         type: f9
@@ -66,13 +68,17 @@ types:
             doc: Lower nibble of mapper number
           - id: four_screen
             type: b1
-            doc: Ignore mirroring control or above mirroring bit; instead provide four-screen VRAM
+            doc: |
+              Ignore mirroring control or above mirroring bit; instead provide four-screen
+              VRAM
           - id: trainer
             type: b1
             doc: 512-byte trainer at $7000-$71FF (stored before PRG data)
           - id: has_battery_ram
             type: b1
-            doc: If on the cartridge contains battery-backed PRG RAM ($6000-7FFF) or other persistent memory
+            doc: |
+              If on the cartridge contains battery-backed PRG RAM ($6000-7FFF) or other
+              persistent memory
           - id: mirroring
             type: b1
             enum: mirroring

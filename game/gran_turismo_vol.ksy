@@ -37,11 +37,11 @@ types:
       - id: flags
         type: u1
       - id: name
-        type: str
-        encoding: ASCII
         size: 25
-        pad-right: 0
+        type: str
         terminator: 0
+        pad-right: 0
+        encoding: ASCII
     instances:
       size:
         value: '(_root.offsets[offset_idx + 1] & 0xFFFFF800) - _root.offsets[offset_idx]'

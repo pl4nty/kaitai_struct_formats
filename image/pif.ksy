@@ -4,7 +4,7 @@ meta:
   file-extension: pif
   xref:
     justsolve: PIF_(Portable_Image_Format)
-  license: LGPL-2.1
+  license: LGPL-2.1-only
   ks-version: 0.9
   endian: le
   bit-endian: le

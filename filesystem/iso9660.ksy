@@ -18,6 +18,12 @@ doc: |
   features and very conservative file names standards) and sequential
   access (which favors disc devices with relatively slow rotation
   speed).
+instances:
+  sector_size:
+    value: 2048
+  primary_vol_desc:
+    pos: 0x010 * sector_size
+    type: vol_desc
 types:
   vol_desc:
     seq:
@@ -36,12 +42,12 @@ types:
   vol_desc_boot_record:
     seq:
       - id: boot_system_id
-        type: str
         size: 32
+        type: str
         encoding: UTF-8
       - id: boot_id
-        type: str
         size: 32
+        type: str
         encoding: UTF-8
   vol_desc_primary:
     doc-ref: 'https://wiki.osdev.org/ISO_9660#The_Primary_Volume_Descriptor'
@@ -49,12 +55,12 @@ types:
       - id: unused1
         contents: [0]
       - id: system_id
-        type: str
         size: 32
+        type: str
         encoding: UTF-8
       - id: volume_id
-        type: str
         size: 32
+        type: str
         encoding: UTF-8
       - id: unused2
         contents: [0, 0, 0, 0, 0, 0, 0, 0]
@@ -79,35 +85,35 @@ types:
       - id: lba_opt_path_table_be
         type: u4be
       - id: root_dir
-        type: dir_entry
         size: 34
+        type: dir_entry
       - id: vol_set_id
-        type: str
         size: 128
+        type: str
         encoding: UTF-8
       - id: publisher_id
-        type: str
         size: 128
+        type: str
         encoding: UTF-8
       - id: data_preparer_id
-        type: str
         size: 128
+        type: str
         encoding: UTF-8
       - id: application_id
-        type: str
         size: 128
+        type: str
         encoding: UTF-8
       - id: copyright_file_id
-        type: str
         size: 38
+        type: str
         encoding: UTF-8
       - id: abstract_file_id
-        type: str
         size: 36
+        type: str
         encoding: UTF-8
       - id: bibliographic_file_id
-        type: str
         size: 37
+        type: str
         encoding: UTF-8
       - id: vol_create_datetime
         type: dec_datetime
@@ -129,19 +135,28 @@ types:
         size: path_table_size.le
         type: path_table_le
   dir_entries:
+    doc: |
+      Directory records of a directory extent. Records never cross a
+      sector boundary: the unused rest of a sector is filled with zeros,
+      and the next record starts at the next sector.
     seq:
       - id: entries
         type: dir_entry
-        repeat: until
-        repeat-until: _.len == 0
+        repeat: eos
   dir_entry:
     seq:
       - id: len
         type: u1
       - id: body
-        type: dir_entry_body
         size: len - 1
+        type: dir_entry_body
         if: len > 0
+      - id: padding
+        size: (-_io.pos) % _root.sector_size
+        if: len == 0
+        doc: |
+          Zero fill up to the end of the sector, after the last record in
+          it (only in a directory extent, which starts on a sector boundary)
   dir_entry_body:
     seq:
       - id: len_ext_attr_rec
@@ -163,9 +178,9 @@ types:
       - id: len_file_name
         type: u1
       - id: file_name
+        size: len_file_name
         type: str
         encoding: UTF-8
-        size: len_file_name
       - id: padding
         type: u1
         if: len_file_name % 2 == 0
@@ -201,9 +216,9 @@ types:
       - id: parent_dir_idx
         type: u2le
       - id: dir_name
+        size: len_dir_name
         type: str
         encoding: UTF-8
-        size: len_dir_name
       - id: padding
         type: u1
         if: len_dir_name % 2 == 1
@@ -227,32 +242,32 @@ types:
     doc-ref: 'https://wiki.osdev.org/ISO_9660#Date.2Ftime_format'
     seq:
       - id: year
-        type: str
         size: 4
+        type: str
         encoding: ASCII
       - id: month
-        type: str
         size: 2
+        type: str
         encoding: ASCII
       - id: day
-        type: str
         size: 2
+        type: str
         encoding: ASCII
       - id: hour
-        type: str
         size: 2
+        type: str
         encoding: ASCII
       - id: minute
-        type: str
         size: 2
+        type: str
         encoding: ASCII
       - id: sec
-        type: str
         size: 2
+        type: str
         encoding: ASCII
       - id: sec_hundreds
-        type: str
         size: 2
+        type: str
         encoding: ASCII
       - id: timezone
         type: u1
@@ -268,9 +283,3 @@ types:
         type: u4le
       - id: be
         type: u4be
-instances:
-  sector_size:
-    value: 2048
-  primary_vol_desc:
-    pos: 0x010 * sector_size
-    type: vol_desc

@@ -1,0 +1,14 @@
+samples:
+  - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/resources/universal-mod/res-unpacked/databaseadb_res/unanhoco.adb
+    sha256: 8d5840e059fc7cb3765b7ccf4f0374471a42ee406746a7f00315052851b1bdc0
+    eof: true
+    expect:
+      num_animations: 7
+      'unit_name.rstrip("\x00")': Cow
+      'animations[0].name.rstrip("\x00")': udeath
+  - url: https://raw.githubusercontent.com/Kyr4l/ei-universal-mod/810a9019a57d1b3081e39d50444f3339ba0fa56f/resources/universal-mod/res-unpacked/databaseadb_res/unanwiba.adb
+    sha256: 26ecdc6cf8d460b1562c90e2b5bd766b3ae4f2c5a25803c7583c5cb235d9c94c
+    eof: true
+    expect:
+      num_animations: 6
+      'animations[0].name.rstrip("\x00")': uattack

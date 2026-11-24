@@ -1,0 +1,21 @@
+# Generated: no public real-world .restore file was found. version is RESTORE_VERSION_CUR from
+# hashcat v6.2.6 include/restore.h (commit e5b302363654cf4717dbe5bbe417504fc5d0ca72); cwd, argc
+# and argv are the command's own inputs.
+samples:
+  - fixture: log/hashcat_restore/ksf.restore
+    sha256: 9e7a0241e072525a10921430e959add0948e043c91e3c810bb93975cade4ce89
+    recipe: >-
+      hashcat v6.2.6 (Ubuntu 6.2.6+ds1-1build2, PoCL CPU device), run in /work with hash.txt holding
+      md5("zzzzzzzz"): hashcat -m 0 -a 3 --session ksf --runtime 10 --potfile-disable -O hash.txt
+      '?a?a?a?a?a?a?a?a'; the restore file is ~/.local/share/hashcat/sessions/ksf.restore after the
+      runtime limit aborts the run. Bytes 0x120-0x127 are the in-memory argv pointer.
+    eof: true
+    expect:
+      version: 611
+      cwd: /work
+      dicts_pos: 0
+      masks_pos: 0
+      argc: 13
+      argv[0]: hashcat
+      argv[6]: ksf
+      argv[12]: '?a?a?a?a?a?a?a?a'

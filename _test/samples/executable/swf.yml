@@ -1,0 +1,7 @@
+samples:
+  - url: https://raw.githubusercontent.com/radareorg/radare2-testbins/0e2c6a3d8840134fa1a14863adbe5d021f711665/swf/CurveBall.swf
+    sha256: 6c83ea8277630ebf5c97d72cd901907e82759400469afa4f02d221d936ea0927
+    expect:
+      compression: 0x46
+      version: 5
+      len_file: 67765

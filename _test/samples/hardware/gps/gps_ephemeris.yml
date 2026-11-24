@@ -1,0 +1,27 @@
+# CNAV messages type 10 and 11 of PRN 30 (L5 I), taken from the UBX-RXM-SFRBX
+# messages at offsets 7144 and 12052 of pyubx2's example log
+# https://raw.githubusercontent.com/semuconsulting/pyubx2/c594f806e00344c12b0b7857b83904e1cf1dcfd9/examples/pygpsdata-rxmsfrbx.log
+# (sha256 205c86dd4bad7260768d3b2a8561f0a316d4c19fdb0176e596eb044b695c5432).
+# SFRBX stores the 300 bits in ten little-endian u4 words, first bit in the
+# MSB of the first word; the data is the words written big endian, cut to
+# 38 bytes. Expects from reading the bits against IS-GPS-200 Figures 30-1
+# and 30-2; the CRC-24Q over the first 276 bits matches for both messages,
+# and both carry the same t_oe.
+samples:
+  - data: 8b78ac1ca92dc7a9f7e1012ba54000b4f3abcfffe9972abd70f021a23a068b4759a8676d5718
+    name: prn30_cnav_type10
+    eof: true
+    expect:
+      message_type: 10
+      message.prn: 30
+      message.tow_count: 99221
+      message.week_number: 2414
+      message.ephemeris_time_raw: 1986
+  - data: 8b78bc1cb3e16ecb65630988d2ed1fcaae845ff39ffcbffb80e01f60e01906ffbea65b97b5e8
+    name: prn30_cnav_type11
+    eof: true
+    expect:
+      message_type: 11
+      message.prn: 30
+      message.tow_count: 99222
+      message.ephemeris_time_raw: 1986

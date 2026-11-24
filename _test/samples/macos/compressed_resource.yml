@@ -1,0 +1,26 @@
+# Compressed resources sliced out of System 7.5.5 resource forks in python-rsrcfork's test data.
+# Offsets, lengths and header values from the python rsrcfork library (Resource.compressed_info),
+# an implementation independent of this spec.
+samples:
+  - url: https://raw.githubusercontent.com/dgelessus/python-rsrcfork/d2bbab1f5dd8670baa1ea5a31a1754b824743493/tests/data/compress/compressed/Finder%20Help.rsrc
+    sha256: 9e8cf9a898a4e7561bf7321bb3c3b93c11c018f3e2b343ca0e5ed0d8f4cb8d14
+    name: finder-help-hmnu-1251
+    extract: { format: slice, offset: 300, size: 116 }
+    eof: true
+    expect:
+      header.common_part.len_header: 18
+      header.common_part.header_type: 8
+      header.common_part.len_decompressed: 120
+      header.type_specific_part.working_buffer_fractional_size: 89
+      header.type_specific_part.expansion_buffer_size: 5
+      header.type_specific_part.decompressor_id: 1
+  - url: https://raw.githubusercontent.com/dgelessus/python-rsrcfork/d2bbab1f5dd8670baa1ea5a31a1754b824743493/tests/data/compress/compressed/System.rsrc
+    sha256: 124a80bebe271c0086974d9cb9eb338fd011a947a2d83200c6b7e35978a91c34
+    name: system-snth-2053
+    extract: { format: slice, offset: 5851, size: 10965 }
+    eof: true
+    expect:
+      header.common_part.header_type: 9
+      header.common_part.len_decompressed: 15000
+      header.type_specific_part.decompressor_id: 2
+      header.type_specific_part.decompressor_specific_parameters: 0000ff03

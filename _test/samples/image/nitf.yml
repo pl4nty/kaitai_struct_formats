@@ -1,0 +1,16 @@
+samples:
+- url: https://raw.githubusercontent.com/OSGeo/gdal/6d7a6388745ef760b68d3ea460d700f4be5479c4/autotest/gdrivers/data/nitf/rgb.ntf
+  sha256: 8fe5a3067f73d125938c9038d1c7b107d678f8ea9dda94fc6145b0cf92d6a12d
+  expect:
+    header.file_profile_name: NITF
+    header.file_version: '02.10'
+- url: https://raw.githubusercontent.com/OSGeo/gdal/6d7a6388745ef760b68d3ea460d700f4be5479c4/autotest/gdrivers/data/nitf/i_3034c.ntf
+  sha256: 8f4862b01d5ff063b12e0cf5695fbf0142f3945f8402e90931df45ccb1cafe52
+  expect:
+    header.file_profile_name: NITF
+    header.file_version: '02.10'
+- url: https://raw.githubusercontent.com/OSGeo/gdal/6d7a6388745ef760b68d3ea460d700f4be5479c4/autotest/gdrivers/data/nitf/two_images_jp2.ntf
+  sha256: e36dea5c480533914e1ddd5f02e03f1085634b6754fe9d7f4885e09faffcc746
+  expect:
+    header.file_profile_name: NITF
+    header.file_version: '02.10'

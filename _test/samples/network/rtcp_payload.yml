@@ -1,0 +1,26 @@
+# UDP payloads cut from Wireshark SampleCaptures sip-tls-1.3-and-rtcp.zip (tls-1.3/sip.pcap, Linux cooked v1:
+# 16-byte SLL + 20-byte IPv4 + 8-byte UDP header skipped); expects from
+# `tshark -o rtcp.heuristic_rtcp:TRUE -O rtcp`
+samples:
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/sip-tls-1.3-and-rtcp.zip
+    sha256: 57710cee712e7ccbcd61bacf786546445b7717b6d200a94dd5667c6849a4d629
+    name: sip-tls-rtcp-frame228-sr-sdes
+    extract: { format: zip, member: tls-1.3/sip.pcap, then: { format: slice, offset: 61423, size: 112 } }
+    eof: true
+    expect:
+      len(rtcp_packets): 2
+      rtcp_packets[0].payload_type: sr
+      rtcp_packets[0].length: 12
+      rtcp_packets[0].body.ssrc: 0x5d931534
+      rtcp_packets[0].body.sender_packet_count: 200
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/sip-tls-1.3-and-rtcp.zip
+    sha256: 57710cee712e7ccbcd61bacf786546445b7717b6d200a94dd5667c6849a4d629
+    name: sip-tls-rtcp-frame230-rr-sdes
+    extract: { format: zip, member: tls-1.3/sip.pcap, then: { format: slice, offset: 61859, size: 92 } }
+    eof: true
+    expect:
+      len(rtcp_packets): 2
+      rtcp_packets[0].payload_type: rr
+      rtcp_packets[0].length: 7
+      rtcp_packets[0].body.ssrc: 0x01932db4
+      rtcp_packets[1].payload_type: sdes

@@ -1,0 +1,27 @@
+# QEMU q35 reference ACPI tables (bios-tables-test expected data); expects from a hex read of the 36-byte header
+samples:
+  - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/tests/data/acpi/x86/q35/FACP
+    sha256: ffb46ef7584e57c686f789edc7109c7ae23191fad5bd7f96956771cffd454c2b
+    name: q35-FACP
+    eof: true
+    expect:
+      header.signature: FACP
+      header.length: 244
+      header.revision: 3
+      header.oem_id: 424f43485320   # "BOCHS "
+  - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/tests/data/acpi/x86/q35/DSDT
+    sha256: b5fbc5a9d438ac80308af94efc639248aaeb54e1a4a481130682dcbba450b5ee
+    name: q35-DSDT
+    eof: true
+    expect:
+      header.signature: DSDT
+      header.length: 8428
+      header.revision: 1
+      header.creator_id: BXPC
+  - url: https://raw.githubusercontent.com/qemu/qemu/2bfbe39d0fff8af881cffe2bab9b615e77807c35/tests/data/acpi/x86/q35/APIC
+    sha256: 730d87a32397365641ca2c58beb3832119c66813e98774fb482571f08668143c
+    name: q35-APIC
+    eof: true
+    expect:
+      header.signature: APIC
+      header.length: 120

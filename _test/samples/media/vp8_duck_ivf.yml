@@ -1,0 +1,15 @@
+# header fields read from the 32-byte IVF header
+samples:
+  - url: https://raw.githubusercontent.com/webmproject/vp8-test-vectors/8afcf0579a9d5221ff892dd197af21ac3d56962d/vp80-00-comprehensive-001.ivf
+    sha256: e01278ada71e61d4b6f7b7d6ec1ebf8317d12501400b0ceff639e02d3ce7ccb5
+    eof: true
+    expect:
+      width: 176
+      height: 144
+      num_frames: 29
+  - url: https://raw.githubusercontent.com/webmproject/vp8-test-vectors/8afcf0579a9d5221ff892dd197af21ac3d56962d/vp80-00-comprehensive-007.ivf
+    sha256: 7c8191908d724f446ddd3d415e4a487fa7c11eb94f69190bf2cab938c8b52ece
+    eof: true
+    expect:
+      codec: VP80
+      len(image_data): 29

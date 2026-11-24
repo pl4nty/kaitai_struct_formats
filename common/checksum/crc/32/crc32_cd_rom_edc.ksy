@@ -1,0 +1,24 @@
+meta:
+  id: crc32_cd_rom_edc
+  title: CD-ROM-EDC variant of CRC-32
+  license: Unlicense
+  imports:
+    - ../crc_generic
+  -initial: 0x0
+  -check: 0x6ec2edc4
+  -polynomial: 0x8001801b
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the CD-ROM-EDC variant of CRC-32 of an array.
+
+params:
+  - id: array
+    type: bytes
+
+seq:
+  - id: generic
+    type: crc_generic(32, 0, 0x0, true, true, 0x8001801b, array)
+
+instances:
+  value:
+    value: generic.value

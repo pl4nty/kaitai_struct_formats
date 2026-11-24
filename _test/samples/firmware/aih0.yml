@@ -1,0 +1,13 @@
+# D-Link DIR-100 rev D firmware 4.03b18 from D-Link Germany's FTP mirror: two AIH0 blocks
+# (at 0 and 282464). Expect values read by hand from a hex dump against binwalk's AIH0 magic
+# (data size at 12, load address at 8, version string at 32).
+samples:
+  - url: https://ftp.dlink.de/dir/dir-100/driver_software/DIR-100_fw_revd_403b18_ALL_de_20151202.zip
+    sha256: 382409781cdfbda54f312ff9f8b7beec4ae58158a6370f55583bf5280850eac3
+    name: DIR100D1_FW403WWB18.bin
+    extract:
+      format: zip
+      member: DIR-100_fw_revd_403b18_ALL_de_20151202/DIR100D1_FW403WWB18.bin
+    expect:
+      header.len_data: 282416
+      header.version_str: "4.03"

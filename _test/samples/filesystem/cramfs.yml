@@ -1,0 +1,6 @@
+samples:
+  - url: https://raw.githubusercontent.com/ReFirmLabs/binwalk/26713972e3f9f52dc37d4a421c4554b0bd9e82ef/tests/inputs/cramfs.bin
+    sha256: 1e75d47c5c759bfb964011a4530ce353bcf7fe2377eb59b32b773445dbad4216
+    expect:
+      super_block.size: 4096
+      super_block.signature: Compressed ROMFS

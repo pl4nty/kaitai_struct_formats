@@ -1,0 +1,24 @@
+meta:
+  id: crc16_genibus
+  title: GENIBUS variant of CRC-16
+  license: Unlicense
+  imports:
+    - ../crc_generic
+  -initial: 0xffff
+  -check: 0xd64e
+  -polynomial: 0x1021
+  -reflect-in: false
+  -reflect-out: false
+doc: Computes the GENIBUS variant of CRC-16 of an array.
+
+params:
+  - id: array
+    type: bytes
+
+seq:
+  - id: generic
+    type: crc_generic(16, 0xffff, 0xffff, false, false, 0x1021, array)
+
+instances:
+  value:
+    value: generic.value

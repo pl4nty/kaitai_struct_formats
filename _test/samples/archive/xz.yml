@@ -1,0 +1,16 @@
+# XZ Utils test files (tests/files). Expects from `xz --robot -lvv` (check type, block count,
+# uncompressed size 13, block header size 12, filter --lzma2).
+samples:
+  - url: https://raw.githubusercontent.com/tukaani-project/xz/c308e9f27201300fd042d3e7324a21e55c25852f/tests/files/good-1-check-crc32.xz
+    sha256: eaa0f7d82fb273920c5247fa4928e695830ce40631945c6dda3cdf3f14d65cec
+    expect:
+      stream_header.flags.check_type: crc32
+      index.num_records.value: 1
+      index.records[0].len_uncompressed.value: 13
+      index.records[0].block.header.filters[0].filter_id.value: 0x21
+  - url: https://raw.githubusercontent.com/tukaani-project/xz/c308e9f27201300fd042d3e7324a21e55c25852f/tests/files/good-1-check-sha256.xz
+    sha256: dda8bb24f50e39e750a5ad3697960083450a21ae054b2dff30699d542894826c
+    expect:
+      stream_footer.flags.check_type: sha256
+      len_check: 32
+      index.records[0].len_uncompressed.value: 13

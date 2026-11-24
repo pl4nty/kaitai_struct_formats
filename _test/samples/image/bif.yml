@@ -1,0 +1,15 @@
+samples:
+  - url: https://raw.githubusercontent.com/zerorooot/BIFParser/f9419c9c0c054136b8202a8844946fb4c7575c0c/demo-320-10.bif
+    sha256: 7c8b49e27e7a1ff59947ef143b458c11d5e982c32969833d9a57436144d5bcee
+    expect:
+      header.version: 0
+      header.num_images: 23
+      header.timestamp_multiplier: 10000
+  - url: https://raw.githubusercontent.com/eutychus/bifjs/8c6c0915cb0ec79f0a0db32b14b8555f9b84a0fb/example/example.bif
+    sha256: 4929caa074e8163b0d7293b04a065a06dfce6f32d053b5dc30916b6216389d27
+    expect:
+      header.num_images: 153
+  - url: https://raw.githubusercontent.com/alfg/bifextract/907250b95e71a0b17a0a291724bc1070616d6a3d/tears-of-steel.bif
+    sha256: 808018b1e792ab59275af30d67c79ac4781a0530efbc9e1219ae15490474909d
+    expect:
+      header.num_images: 185

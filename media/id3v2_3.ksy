@@ -24,14 +24,23 @@ types:
         type: header
       - id: header_ex
         type: header_ex
-        if: header.flags.flag_headerex
+        if: header.flags.flag_headerex and not header.flags.flag_unsynchronization
       - id: frames
         type: frame
         repeat: until
         repeat-until: _io.pos + _.size > header.size.value or _.is_invalid
+        if: not header.flags.flag_unsynchronization
       - id: padding
-        if: header.flags.flag_headerex
         size: header_ex.padding_size - _io.pos
+        if: header.flags.flag_headerex and not header.flags.flag_unsynchronization
+      - id: unsynchronized_data
+        size: header.size.value
+        if: header.flags.flag_unsynchronization
+        doc: |
+          With the unsynchronisation flag set, a 0x00 byte was inserted after
+          every 0xFF in everything following the header (section 5). The
+          extended header and frames can only be parsed after removing those
+          bytes, which this spec cannot express, so the tag is left raw here.
 
   header:
     doc: ID3v2 fixed header
@@ -84,8 +93,8 @@ types:
     doc-ref: Section 3.3. ID3v2 frame overview
     seq:
       - id: id
-        type: str
         size: 4
+        type: str
         encoding: ASCII
       - id: size
         type: u4

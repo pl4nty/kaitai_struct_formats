@@ -1,0 +1,24 @@
+meta:
+  id: crc32_k
+  title: Koopman variant of CRC-32
+  license: Unlicense
+  imports:
+    - ../crc_generic
+  -initial: 0xffffffff
+  -check: 0x2d3dd0ae
+  -polynomial: 0x741b8cd7
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the Koopman variant of CRC-32 of an array.
+
+params:
+  - id: array
+    type: bytes
+
+seq:
+  - id: generic
+    type: crc_generic(32, 0xffffffff, 0xffffffff, true, true, 0x741b8cd7, array)
+
+instances:
+  value:
+    value: generic.value

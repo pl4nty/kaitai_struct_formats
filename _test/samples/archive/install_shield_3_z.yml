@@ -1,0 +1,18 @@
+# num_files (header u2 at 0x0c) and len_archive (u4 at 0x12) read by hand from the header;
+# len_archive equals each file's size. file(1): "InstallShield Z archive Data".
+samples:
+  - url: https://sembiance.com/fileFormatSamples/archive/installShieldZ/DATA.Z
+    sha256: 72f4e82294131e38cb5d808488bda09e5f9e86da4ccc8970c6b6d231a812afb9
+    expect:
+      header.num_files: 4
+      header.len_archive: 230504
+  - url: https://sembiance.com/fileFormatSamples/archive/installShieldZ/SETUP.Z
+    sha256: ecd9deaf8c631fef63a58f49fb7126138a04bf53d7c2c83dbb7fa828e0c2fded
+    expect:
+      header.num_files: 20
+      header.len_archive: 264681
+  - url: https://sembiance.com/fileFormatSamples/archive/installShieldZ/_SETUP_8.LIB
+    sha256: a24c6f339feb0861c942480570a38708b60c8039a46c442356a8fbc09058db29
+    expect:
+      header.num_files: 2
+      header.len_archive: 24451

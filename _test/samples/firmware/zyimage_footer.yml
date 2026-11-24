@@ -1,0 +1,15 @@
+# OpenWrt 23.05.5 factory images for ZyXEL Keenetic routers, which OpenWrt's build tags with
+# the zyimage footer (target/linux/ramips/image/mt7620.mk: zyimage -d <id> -v "<name>").
+# Expect values read by hand from a hex dump of the last 60 bytes, cross-checked against the
+# device IDs passed to zyimage in mt7620.mk.
+samples:
+  - url: https://downloads.openwrt.org/releases/23.05.5/targets/ramips/mt7620/openwrt-23.05.5-ramips-mt7620-zyxel_keenetic-omni-squashfs-factory.bin
+    sha256: 0dd85ddbd75c061d281c70f6d94a40f59b2742b2a095fbebca44b3ed4613b073
+    expect:
+      footer.device_id: keenetic_omni
+      footer.firmware_version: ZyXEL Keenetic Omni
+  - url: https://downloads.openwrt.org/releases/23.05.5/targets/ramips/mt7620/openwrt-23.05.5-ramips-mt7620-zyxel_keenetic-lite-iii-a-squashfs-factory.bin
+    sha256: 760b722b514764905c2e6083d42d5f46066933cf298d2eec474a3279f9e2ba68
+    expect:
+      footer.device_id: keenetic_lite_iii_rev_a
+      footer.firmware_version: ZyXEL Keenetic Lite III

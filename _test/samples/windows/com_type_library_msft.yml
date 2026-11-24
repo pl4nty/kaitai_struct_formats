@@ -1,0 +1,16 @@
+# comtypes test type libraries. Expects from a hex read of the MSFT header (Wine
+# dlls/oleaut32/typelib.h MSFT_Header): magic "MSFT", version 0x00010002, lcid 0x409, varflags 0x41,
+# nrtypeinfos 4 / 12.
+samples:
+  - url: https://raw.githubusercontent.com/enthought/comtypes/35025ca3b43d35bc46f19439c89e7fae00cbb625/comtypes/test/TestComServer.tlb
+    sha256: 7ddc00b468bedac91bad31c1128388984838f2bc60966798d07e48b83e7fdd29
+    expect:
+      header.format_version: 0x00010002
+      header.lcid: 0x409
+      header.var_flags: 0x41
+      header.num_type_infos: 4
+  - url: https://raw.githubusercontent.com/enthought/comtypes/35025ca3b43d35bc46f19439c89e7fae00cbb625/comtypes/test/urlhist.tlb
+    sha256: bb646b52b8140f747eb0f44ff2205ae88dc570ce00cab6e00aba3ae2f4866685
+    expect:
+      header.lcid: 0x409
+      header.num_type_infos: 12

@@ -1,0 +1,9 @@
+samples:
+  - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/fonts/10x20-ISO8859-1.pcf
+    sha256: 06f927ae0c6ca5e6a3ff278dc9ea6f51aa4a22eb48186dd651de196f808f386e
+    expect:
+      num_tables: 9
+  - url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/fonts/ter-x20b.pcf
+    sha256: c67d5e29657e94f94c6f4e3c77036eb6284e6707950b2eed30d57d33d6c5ca7e
+    expect:
+      num_tables: 9

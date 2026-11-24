@@ -1,0 +1,13 @@
+# header fields read from offsets 58..74
+samples:
+  - url: https://raw.githubusercontent.com/libxmp/libxmp/5c63c2f7809dc6f17342df738a3dde5ca65221c9/test-dev/data/finefx_ft2.xm
+    sha256: e5cc6f7990465d31901c3fe20a3fd02992aa1f1917c35366d29e4c96dd8dfe3e
+    expect:
+      preheader.version_number.value: 260
+      header.num_channels: 2
+      header.num_instruments: 4
+  - url: https://raw.githubusercontent.com/libxmp/libxmp/5c63c2f7809dc6f17342df738a3dde5ca65221c9/test-dev/data/ft2_delay_defaults.xm
+    sha256: 5923929ec04d5932093b5b13ebb623ed2cfcf67feece9eaba043a00adc2186c9
+    expect:
+      header.num_patterns: 2
+      header.num_instruments: 8

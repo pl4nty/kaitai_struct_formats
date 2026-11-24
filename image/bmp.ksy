@@ -24,8 +24,10 @@ meta:
   # ks-opaque-types: true # uncomment this line and comment `/types/bitmap`,
                           # if you provide an opaque type `bitmap` for bitmap data
 doc: |
-  The **BMP file format**, also known as **bitmap image file** or **device independent
-  bitmap (DIB) file format** or simply a **bitmap**, is a raster graphics image file
+  The **BMP file format**, also known as **bitmap image file** or **device
+  independent
+  bitmap (DIB) file format** or simply a **bitmap**, is a raster graphics image
+  file
   format used to store bitmap digital images, independently of the display
   device (such as a graphics adapter), especially on Microsoft Windows
   and OS/2 operating systems.
@@ -37,13 +39,19 @@ doc: |
     http://entropymine.com/jason/bmpsuite/bmpsuite/html/bmpsuite.html
   ) (by Jason Summers)
 
-  If only there was such a comprehensive sample suite for every file format! It's like
-  a dream for every developer of any binary file format parser. It contains a lot of
-  different types and variations of BMP files, even the tricky ones, where it's not clear
-  from the specification how to deal with them (marked there as "**q**uestionable").
+  If only there was such a comprehensive sample suite for every file format! It's
+  like
+  a dream for every developer of any binary file format parser. It contains a lot
+  of
+  different types and variations of BMP files, even the tricky ones, where it's
+  not clear
+  from the specification how to deal with them (marked there as
+  "**q**uestionable").
 
-  If you make a program which will be able to read all the "**g**ood" and "**q**uestionable"
-  BMP files and won't crash on the "**b**ad" ones, it will definitely have one of the most
+  If you make a program which will be able to read all the "**g**ood" and
+  "**q**uestionable"
+  BMP files and won't crash on the "**b**ad" ones, it will definitely have one of
+  the most
   extensive support of BMP files in the universe!
 
   ## BITMAPV2INFOHEADER and BITMAPV3INFOHEADER
@@ -53,9 +61,11 @@ doc: |
     https://web.archive.org/web/20150127132443/https://forums.adobe.com/message/3272950
   )
 
-  In 2010, someone noticed that Photoshop generated BMP with an odd type of header. There wasn't
+  In 2010, someone noticed that Photoshop generated BMP with an odd type of
+  header. There wasn't
   any documentation available for this header at the time (and still isn't).
-  However, Chris Cox (former Adobe employee) claimed that they hadn't invented any type
+  However, Chris Cox (former Adobe employee) claimed that they hadn't invented any
+  type
   of proprietary header and everything they were writing was taken directly
   from the Microsoft documentation.
 
@@ -65,10 +75,13 @@ doc: |
   forgotten about this type of header.
 
   This is the only source I could find about these structures, so we couldn't rely
-  on it so much, but I think supporting them as a read-only format won't harm anything.
-  Due to the fact that it isn't documented anywhere else, most applications don't support it.
+  on it so much, but I think supporting them as a read-only format won't harm
+  anything.
+  Due to the fact that it isn't documented anywhere else, most applications don't
+  support it.
 
-  All Windows headers at once (including mentioned BITMAPV2INFOHEADER and BITMAPV3INFOHEADER):
+  All Windows headers at once (including mentioned BITMAPV2INFOHEADER and
+  BITMAPV3INFOHEADER):
 
   ![Bitmap headers overview](
     https://web.archive.org/web/20190527043845/https://forums.adobe.com/servlet/JiveServlet/showImage/2-3273299-47801/BMP_Headers.png
@@ -103,8 +116,8 @@ seq:
     size: file_hdr.ofs_bitmap - file_hdr._sizeof
     type: bitmap_info
   - id: bitmap
-    type: bitmap
     size-eos: true
+    type: bitmap
 types:
   bitmap:
     doc: |
@@ -134,7 +147,12 @@ types:
       - id: ofs_bitmap
         -orig-id: bfOffBits
         type: s4
-        doc: Offset to actual raw pixel data of the image
+        valid:
+          min: 14 + 12
+        doc: |
+          Offset to actual raw pixel data of the image. It must leave room
+          for this 14-byte file header and at least the smallest (12-byte
+          BITMAPCOREHEADER) DIB header.
   bitmap_info:
     -orig-id: BITMAPINFO
     doc-ref: https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfo
@@ -148,7 +166,9 @@ types:
       - id: color_mask
         type: color_mask(header.bitmap_info_ext.compression == compressions::alpha_bitfields)
         if: is_color_mask_here
-        doc: Valid only for BITMAPINFOHEADER, in all headers extending it the masks are contained in the header itself.
+        doc: |
+          Valid only for BITMAPINFOHEADER, in all headers extending it the masks are
+          contained in the header itself.
       - id: color_table
         -orig-id: bmciColors
         size-eos: true
@@ -296,7 +316,8 @@ types:
         -orig-id: biSizeImage
         type: u4
         doc: |
-          If biCompression is BI_JPEG or BI_PNG, indicates the size of the JPEG or PNG image buffer.
+          If biCompression is BI_JPEG or BI_PNG, indicates the size of the JPEG or PNG
+          image buffer.
           This may be set to zero for BI_RGB bitmaps.
       - id: x_resolution
         -orig-id: biXPelsPerMeter
@@ -399,8 +420,10 @@ types:
         enum: intent
       - id: ofs_profile
         -orig-id: bV5ProfileData
-        doc: The offset, in bytes, from the beginning of the BITMAPV5HEADER structure to the start of the profile data.
         type: u4
+        doc: |
+          The offset, in bytes, from the beginning of the BITMAPV5HEADER structure to the
+          start of the profile data.
       - id: len_profile
         -orig-id: bV5ProfileSize
         type: u4
@@ -431,12 +454,16 @@ types:
       - id: has_reserved_field
         type: bool
       - id: num_colors
-        doc: |
-          If equal to 0, the palette should contain as many colors as can fit into the pixel value
-          according to the `bits_per_pixel` field (if `bits_per_pixel` = 8, then the pixel can
-          represent 2 ** 8 = 256 values, so exactly 256 colors should be present). For more flexibility,
-          it reads as many colors as it can until EOS is reached (and the image data begin).
         type: u4
+        doc: |
+          If equal to 0, the palette should contain as many colors as can fit into the
+          pixel value
+          according to the `bits_per_pixel` field (if `bits_per_pixel` = 8, then the pixel
+          can
+          represent 2 ** 8 = 256 values, so exactly 256 colors should be present). For
+          more flexibility,
+          it reads as many colors as it can until EOS is reached (and the image data
+          begin).
     seq:
       - id: colors
         type: rgb_record(has_reserved_field)
@@ -559,7 +586,9 @@ enums:
     0:
       id: calibrated_rgb
       -orig-id: LCS_CALIBRATED_RGB
-      doc: This value implies that endpoints and gamma values are given in the appropriate fields.
+      doc: |
+        This value implies that endpoints and gamma values are given in the appropriate
+        fields.
     0x73524742: # 'sRGB'
       id: s_rgb
       -orig-id: LCS_sRGB
@@ -577,7 +606,8 @@ enums:
         to use (gamma and endpoints values are ignored).
 
         If a profile is linked, the path of the profile can be any fully qualified name
-        (including a network path) that can be opened using the Win32 CreateFile function.
+        (including a network path) that can be opened using the Win32 CreateFile
+        function.
     0x4d424544: # 'MBED'
       id: profile_embedded
       -orig-id: PROFILE_EMBEDDED
@@ -589,11 +619,15 @@ enums:
     8:
       id: abs_colorimetric
       -orig-id: LCS_GM_ABS_COLORIMETRIC
-      doc: Maintains the white point. Matches the colors to their nearest color in the destination gamut.
+      doc: |
+        Maintains the white point. Matches the colors to their nearest color in the
+        destination gamut.
     1:
       id: business
       -orig-id: LCS_GM_BUSINESS
-      doc: Maintains saturation. Used for business charts and other situations in which undithered colors are required.
+      doc: |
+        Maintains saturation. Used for business charts and other situations in which
+        undithered colors are required.
     2:
       id: graphics
       -orig-id: LCS_GM_GRAPHICS

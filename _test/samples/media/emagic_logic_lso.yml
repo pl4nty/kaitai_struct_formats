@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/benmca/lso-spec/f431d76bce618816752d85f031dfc04833ba6335/corpus/a.LSO
+  sha256: 653fbcdccc09621e49b8a1c773feddd8ffb745b833163fc34259beb9da9e2fec
+- url: https://raw.githubusercontent.com/benmca/lso-spec/f431d76bce618816752d85f031dfc04833ba6335/corpus/b.LSO
+  sha256: de9c4fa337394cb8c6fd9b6e09f5be2108577c2fbc6a2d082c55a9bd9f14b0ed

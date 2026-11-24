@@ -12,7 +12,9 @@ meta:
   license: MIT
   encoding: UTF-8
   endian: be
-doc: The OpenPGP Message Format is a format to store encryption and signature keys for emails.
+doc: |
+  The OpenPGP Message Format is a format to store encryption and signature keys
+  for emails.
 doc-ref: https://www.rfc-editor.org/rfc/rfc4880
 seq:
   - id: packets
@@ -28,12 +30,12 @@ types:
         type: b1
       - id: packet_type_new
         type: b6
-        if: new_packet_format
         enum: packet_tags
+        if: new_packet_format
       - id: packet_type_old
         type: b4
-        if: not new_packet_format
         enum: packet_tags
+        if: not new_packet_format
       - id: len_type
         type: b2
         if: not new_packet_format
@@ -41,14 +43,14 @@ types:
         type:
           switch-on: new_packet_format
           cases:
-            #true: new_packet
+            true: new_packet
             false: old_packet
 
   old_packet:
     seq:
       - id: len
         type:
-          switch-on: _parent.len_type
+          switch-on: _parent.len_type.as<u1>
           cases:
             0: u1
             1: u2
@@ -63,7 +65,66 @@ types:
             packet_tags::public_key_packet: public_key_packet
             packet_tags::public_subkey_packet: public_key_packet
             packet_tags::secret_key_packet: secret_key_packet
-            packet_tags::secret_subkey_packet: public_key_packet
+            packet_tags::secret_subkey_packet: secret_key_packet
+
+  new_packet:
+    doc-ref: https://www.rfc-editor.org/rfc/rfc4880#section-4.2.2
+    seq:
+      - id: len
+        type: new_packet_length
+      - id: body
+        size: len.len
+        type:
+          switch-on: _parent.packet_type_new
+          cases:
+            packet_tags::user_id_packet: user_id_packet
+            packet_tags::signature_packet: signature_packet
+            packet_tags::public_key_packet: public_key_packet
+            packet_tags::public_subkey_packet: public_key_packet
+            packet_tags::secret_key_packet: secret_key_packet
+            packet_tags::secret_subkey_packet: secret_key_packet
+        if: not len.is_partial
+      - id: partial_body_first
+        size: len.len
+        if: len.is_partial
+        doc: First chunk of a body sent with partial body lengths.
+      - id: partial_body_rest
+        type: partial_body_chunk
+        repeat: until
+        repeat-until: not _.len.is_partial
+        if: len.is_partial
+        doc: |
+          Remaining chunks of a body sent with partial body lengths; the last
+          one has a non-partial length. The body is the concatenation of
+          `partial_body_first` and the `data` of these chunks.
+
+  partial_body_chunk:
+    seq:
+      - id: len
+        type: new_packet_length
+      - id: data
+        size: len.len
+
+  new_packet_length:
+    doc-ref: https://www.rfc-editor.org/rfc/rfc4880#section-4.2.2
+    seq:
+      - id: first_octet
+        type: u1
+      - id: second_octet
+        type: u1
+        if: first_octet >= 192 and first_octet < 224
+      - id: five_octet_len
+        type: u4
+        if: first_octet == 255
+    instances:
+      is_partial:
+        value: first_octet >= 224 and first_octet < 255
+      len:
+        value: >-
+          first_octet < 192 ? first_octet :
+          first_octet < 224 ? ((first_octet - 192) << 8) + second_octet + 192 :
+          first_octet == 255 ? five_octet_len :
+          1 << (first_octet & 0x1f)
 
   public_key_packet:
     seq:
@@ -106,13 +167,13 @@ types:
       - id: len_hashed_subpacket
         type: u2
       - id: hashed_subpackets
-        type: subpackets
         size: len_hashed_subpacket
+        type: subpackets
       - id: len_unhashed_subpacket
         type: u2
       - id: unhashed_subpackets
-        type: subpackets
         size: len_unhashed_subpacket
+        type: subpackets
       - id: left_signed_hash
         type: u2
       - id: rsa_n
@@ -167,7 +228,7 @@ types:
             subpacket_types::preferred_key_server: preferred_key_server
             subpacket_types::primary_user_id: primary_user_id
             subpacket_types::policy_uri: policy_uri
-            subpacket_types::key_flags: key_flags
+            subpacket_types::key_flags: key_flags_subpacket
             subpacket_types::signers_user_id: signers_user_id
             subpacket_types::reason_for_revocation: reason_for_revocation
             subpacket_types::features: features
@@ -247,11 +308,11 @@ types:
 
   revocation_key:
     seq:
-      - id: class
+      - id: revocation_class
         type: u1
       - id: public_key_algorithm
-        enum: public_key_algorithms
         type: u1
+        enum: public_key_algorithms
       - id: fingerprint
         size: 20
 
@@ -278,8 +339,8 @@ types:
   preferred_key_server:
     seq:
       - id: uri
-        type: str
         size-eos: true
+        type: str
 
   primary_user_id:
     seq:
@@ -289,10 +350,10 @@ types:
   policy_uri:
     seq:
       - id: uri
-        type: str
         size-eos: true
+        type: str
 
-  key_flags:
+  key_flags_subpacket:
     seq:
       - id: flag
         type: u1
@@ -302,8 +363,8 @@ types:
   signers_user_id:
     seq:
       - id: user_id
-        type: str
         size-eos: true
+        type: str
 
   reason_for_revocation:
     seq:
@@ -311,8 +372,8 @@ types:
         type: u1
         enum: revocation_codes
       - id: reason
-        type: str
         size-eos: true
+        type: str
 
   features:
     seq:

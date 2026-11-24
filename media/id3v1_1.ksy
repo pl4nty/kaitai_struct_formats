@@ -45,9 +45,9 @@ types:
         size: 30
         doc: Album title
       - id: year
+        size: 4
         type: str
         encoding: ASCII
-        size: 4
         doc: Year of release
       - id: comment
         size: 30

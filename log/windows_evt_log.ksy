@@ -6,8 +6,8 @@ meta:
     forensicswiki: windows_event_log_(evt)
     justsolve: Windows_Event_Log
   tags:
-    - windows
     - log
+    - windows
   license: CC0-1.0
   ks-version: 0.9
   endian: le
@@ -16,7 +16,8 @@ doc: |
   operating systems (2000, XP, 2003). They are used as binary log
   files by several major Windows subsystems and
   applications. Typically, several of them can be found in
-  `%WINDIR%\system32\config` directory:
+  `%WINDIR%/system32/config` directory (`/` standing for the Windows
+  path separator):
 
   * Application = `AppEvent.evt`
   * System = `SysEvent.evt`

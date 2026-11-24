@@ -1,0 +1,5 @@
+samples:
+- url: https://raw.githubusercontent.com/python/cpython/187da85d248a884d47da2ae14573676a5af3240e/Lib/test/test_tools/msgfmt_data/general.mo
+  sha256: 87c00cd375a96c45794ec0536646448b3998a5c22936424b6f2c2f97778d8253
+  expect:
+    mo.num_translations: 9

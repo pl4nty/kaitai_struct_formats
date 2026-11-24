@@ -1,0 +1,14 @@
+# osu!.db from the test data of the rewind replay viewer (Git LFS, 40 MB;
+# the only real-world osu!.db found). Expects from a hex read against the
+# osu! wiki layout: version 20210820, 3175 folders, 15875 beatmaps, first
+# artist name string marker (0x0b) at 0x17; text starts at 0x19.
+samples:
+  - url: https://media.githubusercontent.com/media/abstrakt8/rewind/d9d24182c893c192aba207ce088f55b543efec9e/testdata/osu%21/osu%21.db
+    name: osu.db
+    sha256: 3e049d9a17a3d2416350e6123c2169a68edd03f96f8cd06eee3de9db0b60ad5c
+    eof: true
+    expect:
+      version: 20210820
+      num_folders: 3175
+      num_beatmaps: 15875
+      beatmaps[0].artist_name.value: 'Momohara Natsuki (CV: Murakawa Rie)'

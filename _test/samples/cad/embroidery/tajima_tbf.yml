@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/tajima_tbf/samples/RANDOM1-WILCOM.TBF
+  sha256: 4d4f4188edcd68ac4177ccd06e2f0a7d9fd08604cfa6e10df1c1abbdadf16b08
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/tajima_tbf/samples/RANDOM2-WILCOM.TBF
+  sha256: 9ee256c0821bf9656f1cb60d65ff036b7c31761b27ad122669c9fac23de9ff2c
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/tajima_tbf/samples/RANDOM3-WILCOM.TBF
+  sha256: e26b5dbd61e0df5df5968e08c13784f7e43889816d8aeb06258b46b985582c3f
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/tajima_tbf/samples/SCENE-WILCOM.TBF
+  sha256: b9ef1fa8aadffa8efdf69b9db646e4dc5c012a86148d7a40e66056063957d7ee

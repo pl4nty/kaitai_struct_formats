@@ -119,7 +119,7 @@ instances:
     pos: ofs_skins
     size: 64
     type: strz
-    encoding: ascii
+    encoding: ASCII
     repeat: expr
     repeat-expr: num_skins
   tex_coords:
@@ -160,9 +160,6 @@ instances:
       11, 17, 11, 12, 19, 6, 9,
       4, 5, 6, 6, 8]
   anorms_table:
-    doc-ref: |
-      https://github.com/skullernet/q2pro/blob/f4faabd/src/common/math.c#L80
-      from Quake anorms.h
     value: |
       [
         [-0.525731, 0.000000, 0.850651],
@@ -328,6 +325,9 @@ instances:
         [-0.587785, -0.425325, -0.688191],
         [-0.688191, -0.587785, -0.425325],
       ]
+    doc-ref: |
+      https://github.com/skullernet/q2pro/blob/f4faabd/src/common/math.c#L80
+      from Quake anorms.h
 types:
   tex_point:
     seq:
@@ -393,7 +393,7 @@ types:
       - id: name
         size: 16
         type: strz
-        encoding: ascii
+        encoding: ASCII
       - id: vertices
         type: vertex
         repeat: expr

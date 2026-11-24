@@ -1,0 +1,18 @@
+# Almanac page (subframe 5, page of SV 24) received from PRN 18, taken from
+# the u-blox UBX-RXM-SFRB message at offset 5854 of RTKLIB's test log
+# https://raw.githubusercontent.com/tomojitakasu/RTKLIB/71db0ffa0d9735697c6adfd06fdf766d0e5ce807/test/data/rcvraw/ubx_20080526.ubx
+# (sha256 8986134fbac86b910c9a79f82c53c05dbc7b9442dd5cba669ae7be6a05b75870).
+# SFRB stores each parity-free 24-bit word in a little-endian u4; the data
+# below is words 3 to 10, each written as its 3 low bytes, high byte first.
+# Expects from reading those words against IS-GPS-200 Figure 20-1.
+samples:
+  - data: 583f1e390706fd3e00a10ceafb7990e2527bbb44760c0039
+    name: ubx_20080526_sv24_almanac
+    eof: true
+    expect:
+      data_id: 1
+      sv_id: 24
+      eccentricity_raw: 0x3f1e
+      reference_time: 233472
+      sv_health: 0
+      sqrt_semi_major_axis_raw: 0xa10cea

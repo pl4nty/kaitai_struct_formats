@@ -1,0 +1,24 @@
+meta:
+  id: crc64_xz
+  title: XZ variant of CRC-64
+  license: Unlicense
+  imports:
+    - ../crc_generic
+  -initial: 0xffffffffffffffff
+  -check: 0x995dc9bbdf1939fa
+  -polynomial: 0x42f0e1eba9ea3693
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the XZ variant of CRC-64 of an array.
+
+params:
+  - id: array
+    type: bytes
+
+seq:
+  - id: generic
+    type: crc_generic(64, 0xffffffffffffffff, 0xffffffffffffffff, true, true, 0x42f0e1eba9ea3693, array)
+
+instances:
+  value:
+    value: generic.value

@@ -1,0 +1,34 @@
+# LLC frames cut out of real IEEE 802.3 captures (the 14-byte MAC header
+# skipped, size taken from its length field). Expected values from tshark.
+samples:
+  # tcpdump tests, frame 1: Spanning Tree BPDU, SAP 0x42, UI frame
+  - url: https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/3541bd5d38635e208d7dd47cc6ea2af00dd7ef0c/tests/802.1D_spanning_tree.pcap
+    sha256: 69d6c6d35deb955cfb9c30ef28b92022cf2378aea20ea2a0a66d4b468a79b827
+    name: 802.1D_spanning_tree-f1
+    extract: {format: slice, offset: 54, size: 38}
+    eof: true
+    expect:
+      dsap: 0x42
+      ssap: 0x42
+      control.frame_type: 3
+      len(body): 35
+  # tcpdump tests, frame 1: CDP in SNAP, OUI 00000c (Cisco), PID 0x2000
+  - url: https://raw.githubusercontent.com/the-tcpdump-group/tcpdump/3541bd5d38635e208d7dd47cc6ea2af00dd7ef0c/tests/3560_CDP.pcap
+    sha256: 31e38b7857ae13b0a8147f56bdd5000faaac4aa8562a8edf5c5419e3c3016686
+    name: 3560_CDP-f1-snap
+    extract: {format: slice, offset: 54, size: 386}
+    eof: true
+    expect:
+      dsap: 0xaa
+      snap.organization_code: 00000c
+      snap.protocol_id: 0x2000
+  # Wireshark wiki SampleCaptures, frame 1: IPX/NetBIOS, SAP 0xe0
+  - url: https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/novell_llc_netbios.pcapng
+    sha256: 0df7d7a59b1592f512676b38fbee02e8ea66b1afd76deaf3a02f078dfc8690df
+    name: novell_llc_netbios-f1
+    extract: {format: slice, offset: 394, size: 83}
+    eof: true
+    expect:
+      dsap: 0xe0
+      ssap: 0xe0
+      body[0:2]: ffff

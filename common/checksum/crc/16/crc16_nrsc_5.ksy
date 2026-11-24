@@ -1,0 +1,24 @@
+meta:
+  id: crc16_nrsc_5
+  title: NRSC-5 variant of CRC-16
+  license: Unlicense
+  imports:
+    - ../crc_generic
+  -initial: 0xffff
+  -check: 0xa066
+  -polynomial: 0x80b
+  -reflect-in: true
+  -reflect-out: true
+doc: Computes the NRSC-5 variant of CRC-16 of an array.
+
+params:
+  - id: array
+    type: bytes
+
+seq:
+  - id: generic
+    type: crc_generic(16, 0xffff, 0x0, true, true, 0x80b, array)
+
+instances:
+  value:
+    value: generic.value

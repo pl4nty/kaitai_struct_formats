@@ -15,7 +15,9 @@ seq:
   - id: records
     type: record
     repeat: eos
-    doc: the size of this section of the file in bytes must equal (header.file_length * 2) - 100
+    doc: |
+      the size of this section of the file in bytes must equal
+      (header.file_length * 2) - 100
 types:
   file_header:
     seq:

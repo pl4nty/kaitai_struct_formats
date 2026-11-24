@@ -1,0 +1,15 @@
+# header and first chunk read from the 20-byte GLB preamble
+samples:
+  - url: https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/d7a3cc8e51d7c573771ae77a57f16b0662a905c6/2.0/Box/glTF-Binary/Box.glb
+    sha256: ed52f7192b8311d700ac0ce80644e3852cd01537e4d62241b9acba023da3d54e
+    eof: true
+    expect:
+      header.version: 2
+      header.length: 1664
+      chunks[0].len_data: 988
+  - url: https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/d7a3cc8e51d7c573771ae77a57f16b0662a905c6/2.0/Duck/glTF-Binary/Duck.glb
+    sha256: 65bf938f54d6073e619e76e007820bbf980cdc3dc0daec0d94830ffc4ae54ab5
+    eof: true
+    expect:
+      header.length: 120484
+      len(chunks): 2

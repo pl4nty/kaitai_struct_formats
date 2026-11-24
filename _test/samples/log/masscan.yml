@@ -1,0 +1,16 @@
+# masscan -oB output used as a test fixture by the ruby-masscan gem
+# (spec/fixtures/masscan.bin): three status records and five banners of a
+# scan of 93.184.216.34, ending with the footer record. Expected values from
+# a manual hex read (xxd) against out-binary.c of masscan.
+samples:
+  - url: https://raw.githubusercontent.com/postmodern/ruby-masscan/f50229e325b0d1ed3f4c3b2c2625db04566bd074/spec/fixtures/masscan.bin
+    sha256: c56dccea3a68c0e793d58db9e09c0cd101dafb947109e2caeab3c8c9f56c523a
+    eof: true
+    expect:
+      header.magic: "masscan/1.1"
+      records[0].type: status2_open
+      records[0].payload.timestamp: 1630019253
+      records[0].payload.ipv4_address: 5db8d822
+      records[0].payload.port: 80
+      len(records): 9
+      records[-1].type: file_header

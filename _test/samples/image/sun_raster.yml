@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/python-pillow/Pillow/ea32abe14f93f58d7718d8a069333cf1e4ef6392/Tests/images/hopper.ras
+  sha256: 90c328734961808f4bd926f160fc7013a57235131c79c42d270ccc88555b791a
+  expect:
+    width: 128
+    height: 128
+    depth: 24
+    len_image_data: 49152
+    bitmap_type: 3

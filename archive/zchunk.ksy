@@ -276,8 +276,7 @@ types:
           # field and use `valid/in-enum: true` to achieve the same effect, but
           # it's not implemented.
           expr: len_checksum != 0
-        doc: |
-          Raw integer, don't read this field - access `value` instead.
+        doc: Raw integer, don't read this field - access `value` instead.
     instances:
       value:
         value: raw.value
@@ -303,12 +302,29 @@ types:
         type: group(_index)
         repeat: until
         repeat-until: _.is_last
+    instances:
+      len:
+        value: groups.size
+      value:
+        value: |
+          (groups[0].value
+          | (len >= 2 ? (groups[1].value << 7) : 0)
+          | (len >= 3 ? (groups[2].value << 14) : 0)
+          | (len >= 4 ? (groups[3].value << 21) : 0)
+          | (len >= 5 ? (groups[4].value << 28) : 0)
+          | (len >= 6 ? (groups[5].value << 35) : 0)
+          | (len >= 7 ? (groups[6].value << 42) : 0)
+          | (len >= 8 ? (groups[7].value << 49) : 0)
+          | (len >= 9 ? (groups[8].value << 56) : 0)
+          | (len >= 10 ? (groups[9].value << 63) : 0)).as<u8>
+        doc: Resulting unsigned value as normal integer
     types:
       group:
         meta:
           bit-endian: be
         doc: |
-          One byte group, clearly divided into 7-bit "value" chunk and 1-bit "continuation" flag.
+          One byte group, clearly divided into 7-bit "value" chunk and 1-bit
+          "continuation" flag.
         -webide-representation: '{value}'
         params:
           - id: idx
@@ -335,22 +351,6 @@ types:
               the `value` in the 10th group (`groups[9]`) can only be `0` or `1`
               (otherwise the width of the represented value would be 65 bits or
               more, which is not supported).
-    instances:
-      len:
-        value: groups.size
-      value:
-        value: |
-          (groups[0].value
-          | (len >= 2 ? (groups[1].value << 7) : 0)
-          | (len >= 3 ? (groups[2].value << 14) : 0)
-          | (len >= 4 ? (groups[3].value << 21) : 0)
-          | (len >= 5 ? (groups[4].value << 28) : 0)
-          | (len >= 6 ? (groups[5].value << 35) : 0)
-          | (len >= 7 ? (groups[6].value << 42) : 0)
-          | (len >= 8 ? (groups[7].value << 49) : 0)
-          | (len >= 9 ? (groups[8].value << 56) : 0)
-          | (len >= 10 ? (groups[9].value << 63) : 0)).as<u8>
-        doc: Resulting unsigned value as normal integer
 enums:
   checksum_types:
     0: sha1

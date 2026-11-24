@@ -23,7 +23,7 @@ doc: |
   segment of raw CPU instructions), DOS MZ .exe file format allowed
   more flexible memory management, loading of larger programs and
   added support for relocations.
-doc-ref: http://www.delorie.com/djgpp/doc/exe/
+doc-ref: https://www.delorie.com/djgpp/doc/exe/
 seq:
   - id: header
     type: exe_header
@@ -31,8 +31,8 @@ seq:
     size: header.len_body
 instances:
   relocations:
-    pos: header.mz.ofs_relocations
     io: header._io
+    pos: header.mz.ofs_relocations
     type: relocation
     repeat: expr
     repeat-expr: header.mz.num_relocations
