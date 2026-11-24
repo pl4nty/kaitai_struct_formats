@@ -79,13 +79,15 @@ types:
     seq:
       - id: day
         type: b5
-        valid:
-          min: 1
+        doc: |
+          1-31 in a valid date. 0 is accepted because many writers (e.g. zip
+          tools that do not know the time, or unused FAT directory entries)
+          store an all-zero date, shown as "1980-00-00".
       - id: month
         type: b4
         valid:
-          min: 1
           max: 12
+        doc: 1-12 in a valid date, 0 in an all-zero date (see `day`)
       - id: year_minus_1980
         type: b7
     instances:
