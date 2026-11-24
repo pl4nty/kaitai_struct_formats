@@ -1,0 +1,16 @@
+samples:
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/trc/lecroy_2.trc
+  sha256: 6ba648bed5c0fd412c1603f0f56fab4cae2e1b870d5e39f0c74102b7a4b99214
+  extract:
+    format: slice
+    offset: 11
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/trc/lecroy_3.trc
+  sha256: a674cfec031d433ca58c1f00a648893f1addb67ad0c1264a8def56194acb4b36
+  extract:
+    format: slice
+    offset: 11
+- url: https://raw.githubusercontent.com/scottprahl/RigolWFM/9e6f993103f773f81df409fc65c2cc359d7bd249/tests/files/trc/lecroy_4.trc
+  sha256: 2b680f727bc1a868d985f7ba68e22fbf924c67339f6f68db4c7de680d1d74746
+  extract:
+    format: slice
+    offset: 11

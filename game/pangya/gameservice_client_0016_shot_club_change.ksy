@@ -1,0 +1,43 @@
+# Imported from https://github.com/pangbox/packetdoc/blob/d61f583a3e67e37695f7f560f7dc9af0fcf6e7e8/src/packets/gameservice/client/0016.ksy
+meta:
+  id: gameservice_client_0016_shot_club_change
+  title: GameService Client Shot Club Change
+  license: ISC
+  imports:
+    - pstring
+  encoding: ASCII
+  endian: le
+
+doc: |
+  This packet relays how the user has changed their active club, so it can be
+  relayed to all other players in the room.
+  
+  The response is [GameService Server 0x0059 Shot Club Change
+  Announce](/packets/gameservice/server/0059.ksy).
+  
+  **Aliases:**
+  * `hsreina/pangya-server`: `PLAYER_ACTION_CHANGE_CLUB`
+  * `eantoniobr/UGPangya`: `PLAYER_CHANGE_CLUB`
+
+seq:
+  - id: club
+    type: u1
+    enum: club
+    doc: The user's new active club.
+
+enums:
+  club:
+    0x00: club_1_wood
+    0x01: club_2_wood
+    0x02: club_3_wood
+    0x03: club_2_iron
+    0x04: club_3_iron
+    0x05: club_4_iron
+    0x06: club_5_iron
+    0x07: club_6_iron
+    0x08: club_7_iron
+    0x09: club_8_iron
+    0x0a: club_9_iron
+    0x0b: club_putting_wedge
+    0x0c: club_sand_wedge
+    0x0d: club_putter

@@ -1,0 +1,59 @@
+# Imported from https://github.com/thomasjungblut/go-sstables/blob/70b38f7bc9b929af88ef2f038f1e00c5928158b5/kaitai/recordio_v4.ksy
+meta:
+  id: go_sstables_recordio_v4
+  title: go-sstables RecordIO v4 file
+  license: Apache-2.0
+  imports:
+    - /common/vlq_base128_le
+  endian: le
+seq:
+  - id: file_header
+    type: file_header
+  - id: record
+    type: record
+    repeat: eos
+types:
+  file_header:
+    doc: |
+      recordio header format to figure out the version it was written and whether the
+      records are compressed.
+    seq:
+      - id: version
+        type: u4
+        doc: The version of the recordio format used in this file.
+      - id: compression_type
+        type: u4
+        enum: compression
+        doc: |
+          The compression algorithm used. 0 means no compression, 1 means Snappy, 2 means
+          Gzip.
+  record:
+    doc: |
+      recordio record is an "infinite" stream of magic number separated and length
+      encoded byte arrays.
+    seq:
+      - id: magic
+        contents: [0x91, 0x8D, 0x4C]
+      - id: record_nil
+        type: u1
+        doc: 1 means the record is nil, 0 otherwise
+      - id: uncompressed_payload_len
+        type: vlq_base128_le
+      - id: compressed_payload_len
+        type: vlq_base128_le
+      - id: crc32_checksum
+        type: vlq_base128_le
+        doc: |
+          The checksum is a CRC32 (Castagnoli table mapping) built from the previous
+          fields of the record header.
+      - id: payload
+        size: len_payload
+    instances:
+      len_payload:
+        value: uncompressed_payload_len.value ^ compressed_payload_len.value
+        doc: The size is either the compressed or uncompressed length.
+enums:
+  compression:
+    0: none
+    1: snappy
+    2: gzip

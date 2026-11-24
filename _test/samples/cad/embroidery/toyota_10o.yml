@@ -1,0 +1,7 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/toyota_10o/samples/random1-wilcom.10O
+  sha256: e514a88f78a817b464169ea4abd96959fe68cd40bc7ac4e491ff964b4d0aa0c1
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/toyota_10o/samples/spiralbox-premier.10o
+  sha256: c970610b744d6465bcf6da9ca47017a4db8d5dc9e64662d472d440c3f597266e
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/toyota_10o/samples/spiralbox-wilcom.10O
+  sha256: 77b0f163128ca5ad55269da4d7966f165711ec572fdabab7fb28c62bc25e79c2

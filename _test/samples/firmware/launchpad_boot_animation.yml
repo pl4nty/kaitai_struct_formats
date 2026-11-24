@@ -1,0 +1,4 @@
+samples:
+- url: https://raw.githubusercontent.com/anthonyhfm/launchpad-core-firmware/9fdc7bc54abac5e450be3cc5555b65b6522055e3/animations/launchpad-x.bin
+  sha256: 279243d761a80a2c78436f49a252ed89179c11369008e872675bd7f9f33af51c
+  xfail: 'spec bug: layout (u4 num_changes, fixed 4-byte frames) does not match the grouped velocity/mask encoding that the same repo tools/boot_anim.py reads and writes for the shipped animations'

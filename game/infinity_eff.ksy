@@ -1,0 +1,306 @@
+# Imported from https://github.com/sbtlocalization/sbt-infinity/blob/74b697f643d53c72e4c54b5b40710d593dcf5079/kaitai/eff.ksy
+# SPDX-FileCopyrightText: © 2025 SBT Localization https://sbt.localization.com.ua
+# SPDX-FileContributor: Serhii Olendarenko <sergey.olendarenko@gmail.com>
+# SPDX-FileContributor: @definitelythehuman
+#
+# SPDX-License-Identifier: GPL-3.0-only
+
+meta:
+  id: infinity_eff
+  title: EFF v1 and v2
+  file-extension: eff
+  license: GPL-3.0-only
+  ks-version: "0.11"
+  endian: le
+  bit-endian: le
+doc-ref: |
+  https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm
+seq:
+  - id: magic
+    contents: "EFF "
+  - id: version
+    contents: "V2.0"
+  - id: body
+    type: body_v2(false)
+types:
+  body_v1:
+    doc: |
+      This file format describes an effect (opcode) and its parameters.
+      The format is only ever found embedded in other files (e.g. ITM or SPL).
+      The engine appears to roll a probability for each valid target type, rather than
+      one probability per attack.
+
+    doc-ref: |
+      https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm
+
+    seq:
+      - id: opcode
+        type: u2
+      - id: target_type
+        type: u1
+        enum: target_type
+      - id: power
+        type: u1
+        # [TODO] : Link IDS files to parameter_1 and parameter_2
+      - id: parameter_1 #IDS value
+        type: u4
+      - id: parameter_2 #IDS target
+        type: u4
+      - id: timing_mode
+        type: u1
+        enum: timing_mode
+      - id: dispel_resistance
+        size: 1
+        type: dispel_resistance
+      - id: duration
+        type: u4
+      - id: probability1
+        type: u1
+      - id: probability2
+        type: u1
+      - id: res_spl
+        size: 8
+        type: strz
+        encoding: ASCII
+      - id: dice_thrown
+        type: u4
+      - id: dice_sides
+        type: u4
+      - id: saving_throw_type
+        size: 4
+        type: saving_throw_type
+      - id: saving_throw_bonus
+        type: u4
+      - id: tobex_stacking_id
+        type: u4
+    types:
+      dispel_resistance:
+        seq:
+          - id: dispel
+            type: b1
+          - id: bypass_resistance
+            type: b1
+
+  body_v2:
+    params:
+      - id: embedded
+        type: bool
+    seq:
+      # [HACK] @GooRoo: This is implemented according to “the specification”,
+      # but in reality you may encounter zeroes even if the file is not embedded.
+
+      # - id: magic
+      #   contents: "EFF "
+      #   if: not embedded
+      # - id: version
+      #   contents: "V2.0"
+      #   if: not embedded
+      # - id: magic2
+      #   contents: [0, 0, 0, 0]
+      #   if: embedded
+      # - id: version2
+      #   contents: [0, 0, 0, 0]
+      #   if: embedded
+
+      # So instead we do this:
+      - size: 8
+      # [HACK] End.
+      - id: opcode
+        type: u4
+      - id: target_type
+        type: u4
+        enum: target_type
+      - id: power
+        type: u4
+      - id: parameter1
+        type: u4
+      - id: parameter2
+        type: u4
+      - id: timing_mode
+        type: u2
+        enum: timing_mode
+      - type: u2
+      - id: duration
+        type: u4
+      - id: probability1
+        type: u2
+      - id: probability2
+        type: u2
+      - id: res_name
+        size: 8
+        type: strz
+        encoding: ASCII
+      - id: dice_thrown
+        type: u4
+      - id: dice_sides
+        type: u4
+      - id: saving_throw_type
+        size: 4
+        type: saving_throw_type
+      - id: save_bonus
+        type: u4
+      - id: special
+        type: u4
+      - id: primary_type
+        type: u4
+        doc: See `MSCHOOL.2DA`.
+      - id: reserved
+        type: u4
+      - id: parent_resource_lowest_affected_level
+        type: u4
+      - id: parent_resource_highest_affected_level
+        type: u4
+      - id: dispel_resistance
+        size: 4
+        type: dispel_resistance
+      - id: parameter3
+        type: u4
+      - id: parameter4
+        type: u4
+      - id: parameter5
+        type: u4
+      - id: time_applied
+        type: u4
+      - id: res_name2
+        size: 8
+        type: strz
+        encoding: ASCII
+        doc: |
+          `VCC` in many effects.
+      - id: res_name3
+        size: 8
+        type: strz
+        encoding: ASCII
+      - id: caster_coordinate
+        type: coord
+      - id: target_coordinate
+        type: coord
+      - id: parent_resource_type
+        type: u4
+        enum: parent_resource_type
+      - id: parent_resource
+        size: 8
+        type: strz
+        encoding: ASCII
+      - id: parent_resource_flags
+        size: 4
+        type: parent_resource_flags
+      - id: projectile
+        type: u4
+      - id: parent_resource_slot
+        type: u4
+      - id: variable_name
+        size: 32
+        type: strz
+        encoding: ASCII
+      - id: caster_level
+        type: u4
+      - id: first_apply
+        type: u4
+      - id: secondary_type
+        type: u4
+        doc: See `MSECTYPE.2DA`.
+      - size: 4 * 15
+    types:
+      coord:
+        seq:
+          - id: x
+            type: u4
+          - id: 'y'
+            type: u4
+      dispel_resistance:
+        seq:
+          - id: dispel
+            type: b1
+          - id: bypass_resistance
+            type: b1
+          - id: bypass_ee
+            type: b1
+          - id: self_targeted
+            type: b1
+          - type: b27
+          - id: effect_applied_by_ite
+            type: b1
+      parent_resource_flags:
+        seq:
+          - type: b10
+          - id: hostile
+            type: b1
+          - id: no_los_required
+            type: b1
+          - id: allow_spotting
+            type: b1
+          - id: outdoors_only
+            type: b1
+          - id: non_magical_ability
+            type: b1
+          - id: ignore_wild_surge
+            type: b1
+          - id: non_combat_ability
+            type: b1
+    enums:
+      parent_resource_type:
+        0: none
+        1: spell
+        2: item
+
+  saving_throw_type:
+    seq:
+      - id: spells
+        type: b1
+      - id: breath
+        type: b1
+      - id: paralyze_poison_death
+        type: b1
+      - id: wands
+        type: b1
+      - id: petrify_polymorph
+        type: b1
+      - id: ee_spells
+        type: b1
+      - id: ee_breath
+        type: b1
+      - id: ee_paralyze_poison_death
+        type: b1
+      - id: ee_wands
+        type: b1
+      - id: ee_petrify_polymorph
+        type: b1
+      - id: ignore_primary_target
+        type: b1
+      - id: ignore_secondary_target
+        type: b1
+      - type: b13
+      - id: bypass_mirror_image
+        type: b1
+      - id: ignore_difficulty
+        type: b1
+      - id: reserved
+        type: b1
+
+enums:
+  target_type:
+    0: none
+    1: self
+    2: projectile_target
+    3: party
+    4: everyone
+    5: everyone_but_party
+    6: caster_group
+    7: target_group
+    8: everyone_but_self
+    9: original_caster
+
+  timing_mode:
+    0: instant_limited
+    1: instant_permanent_until_death
+    2: instant_while_equipped
+    3: delay_limited
+    4: delay_permanent
+    5: delay_while_equipped
+    6: limited_after_duration
+    7: permanent_after_duration
+    8: equipped_after_duration
+    9: instant_permanent
+    10: instant_limited_ticks
+    4096: absolute_duration

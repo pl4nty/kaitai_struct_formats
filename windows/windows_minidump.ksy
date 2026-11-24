@@ -75,6 +75,7 @@ types:
         type:
           switch-on: stream_type
           cases:
+            'stream_types::module_list': module_list
             'stream_types::system_info': system_info
             'stream_types::misc_info': misc_info
             'stream_types::thread_list': thread_list
@@ -205,6 +206,147 @@ types:
       - id: thread_context
         -orig-id: ThreadContext
         type: location_descriptor
+  module_list:
+    -orig-id: MINIDUMP_MODULE_LIST
+    doc: |
+      Module list stream contains information about all loaded modules
+      (executables, DLLs) at the time of the dump.
+    doc-ref: https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_module_list
+    seq:
+      - id: num_modules
+        -orig-id: NumberOfModules
+        type: u4
+      - id: modules
+        -orig-id: Modules
+        type: module
+        repeat: expr
+        repeat-expr: num_modules
+  module:
+    -orig-id: MINIDUMP_MODULE
+    doc: A single loaded module (executable or DLL) of the process.
+    doc-ref: https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_module
+    seq:
+      - id: base_of_image
+        -orig-id: BaseOfImage
+        type: u8
+        doc: Base address where the module is loaded in memory
+      - id: size_of_image
+        -orig-id: SizeOfImage
+        type: u4
+        doc: Size of the module in memory, in bytes
+      - id: checksum
+        -orig-id: CheckSum
+        type: u4
+        doc: Checksum from the PE header
+      - id: time_date_stamp
+        -orig-id: TimeDateStamp
+        type: u4
+        doc: Time and date stamp from the PE header
+      - id: ofs_module_name
+        -orig-id: ModuleNameRva
+        type: u4
+      - id: version_info
+        -orig-id: VersionInfo
+        type: vs_fixedfileinfo
+      - id: cv_record
+        -orig-id: CvRecord
+        type: location_descriptor
+        doc: CodeView debug information
+      - id: misc_record
+        -orig-id: MiscRecord
+        type: location_descriptor
+        doc: Miscellaneous debug information (IMAGE_DEBUG_MISC)
+      - id: reserved0
+        -orig-id: Reserved0
+        type: u8
+      - id: reserved1
+        -orig-id: Reserved1
+        type: u8
+    instances:
+      module_name:
+        io: _root._io
+        pos: ofs_module_name
+        type: minidump_string
+        doc: Full path name of the module
+      cv_signature:
+        io: _root._io
+        pos: cv_record.ofs_data
+        type: u4
+        if: cv_record.len_data >= 4
+      cv_info_pdb70:
+        io: _root._io
+        pos: cv_record.ofs_data
+        size: cv_record.len_data
+        type: cv_info_pdb70
+        if: cv_record.len_data >= 24 and cv_signature == 0x53445352
+  vs_fixedfileinfo:
+    -orig-id: VS_FIXEDFILEINFO
+    doc: Version information of a file, independent of language and code page.
+    doc-ref: https://learn.microsoft.com/en-us/windows/win32/api/verrsrc/ns-verrsrc-vs_fixedfileinfo
+    seq:
+      - id: signature
+        -orig-id: dwSignature
+        type: u4
+        doc: Should be 0xfeef04bd
+      - id: struc_version
+        -orig-id: dwStrucVersion
+        type: u4
+      - id: file_version_ms
+        -orig-id: dwFileVersionMS
+        type: u4
+        doc: Most significant 32 bits of the file version
+      - id: file_version_ls
+        -orig-id: dwFileVersionLS
+        type: u4
+        doc: Least significant 32 bits of the file version
+      - id: product_version_ms
+        -orig-id: dwProductVersionMS
+        type: u4
+      - id: product_version_ls
+        -orig-id: dwProductVersionLS
+        type: u4
+      - id: file_flags_mask
+        -orig-id: dwFileFlagsMask
+        type: u4
+      - id: file_flags
+        -orig-id: dwFileFlags
+        type: u4
+      - id: file_os
+        -orig-id: dwFileOS
+        type: u4
+      - id: file_type
+        -orig-id: dwFileType
+        type: u4
+      - id: file_subtype
+        -orig-id: dwFileSubtype
+        type: u4
+      - id: file_date_ms
+        -orig-id: dwFileDateMS
+        type: u4
+      - id: file_date_ls
+        -orig-id: dwFileDateLS
+        type: u4
+  cv_info_pdb70:
+    -orig-id: CV_INFO_PDB70
+    doc: |
+      CodeView PDB 7.0 debug information ("RSDS"): the GUID and age used to
+      locate the matching PDB symbol file.
+    seq:
+      - id: cv_signature
+        -orig-id: CvSignature
+        contents: RSDS
+      - id: guid
+        -orig-id: Signature
+        size: 16
+        doc: PDB GUID, in the usual mixed-endian GUID layout
+      - id: age
+        -orig-id: Age
+        type: u4
+        doc: Incremented each time the PDB is updated
+      - id: pdb_file_name
+        -orig-id: PdbFileName
+        type: strz
+        encoding: UTF-8
   memory_list:
     -orig-id: MINIDUMP_MEMORY_LIST
     doc-ref: https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/ns-minidumpapiset-minidump_memory_list

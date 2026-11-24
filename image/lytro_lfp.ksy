@@ -27,7 +27,8 @@ doc-ref:
   - https://github.com/hahnec/plenopticam
   - https://github.com/nrpatel/lfptools
   - https://eclecti.cc/computervision/reverse-engineering-the-lytro-lfp-file-format
-  - http://optics.miloush.net/lytro/TheFileFormat.aspx
+  - https://optics.miloush.net/lytro/TheFileFormat.aspx
+  - https://github.com/pathawks/Light-Field-Foundry/blob/b41df8a0cca4bb08f744be6a00c8a42f02ad7637/formats/lfp_framing.ksy
 
 seq:
   - id: sections
@@ -55,11 +56,13 @@ types:
     seq:
       - id: marker
         type: u1
+        doc: Signature prefix 0x89; anything else ends the section list.
       - id: contents
         type: section_contents
         if: is_section
       - id: alignment
         type: alignment(16)
+        doc: NUL padding to the next 16-byte file offset.
     instances:
       is_section:
         value: marker == 0x89
@@ -69,19 +72,34 @@ types:
           - id: type
             size: 3
             type: str
+            doc: |
+              `LFP` for the 16-byte package header at the start of the file,
+              `LFM` for the master JSON metadata, `LFC` for any other content
+              (JSON metadata, raw sensor data, images, depth maps).
           - id: crlf
             contents: [0x0d, 0x0a]
           - id: unkn1
             type: u2
+            valid: 0x1a0a
+            doc: Rest of the 8-byte signature, SUB LF (0x1a 0x0a).
           - id: unkn0
             type: u4
+            doc: |
+              In the `LFP` package header, the version (1). In `LFM`/`LFC`
+              sections, the high 32 bits of a 64-bit payload length, which
+              is always 0 in practice.
           - id: size
             type: u4
+            doc: |
+              Payload length in bytes, excluding the identifier and the
+              alignment padding (0 in the `LFP` package header).
           - id: identifier
             size: 80
             type: strz
             if: size != 0
-            doc: Usually contains SHA-1 checksum
+            doc: |
+              Section name, NUL padded: usually `sha1-` followed by the 40
+              lowercase hex digits of the SHA-1 of `data`.
           - id: data
             size: size
             type:

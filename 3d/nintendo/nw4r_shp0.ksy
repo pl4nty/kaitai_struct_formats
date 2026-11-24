@@ -1,0 +1,71 @@
+# Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/nw4r/shp0.ksy
+meta:
+  id: nw4r_shp0
+  title: NW4R SHP0 vertex morph animation
+  file-extension: shp0
+  license: LicenseRef-All-Rights-Reserved
+  imports:
+    - /archive/nintendo/nw4r_brres_sub_header
+  endian: be
+doc: |
+  Vertex-morph ("shape") animation: blends between named vertex sets of a
+  polygon over time. BrawlBox/BrawlCrate call this `SHP0` and model it as
+  one entry per *object* (not material -- shape animation targets an MDL0
+  object's replacement vertex arrays, unlike SRT0/CLR0 which target
+  materials by name), carrying one keyframe track per morph target. Wexos's
+  Toolbox and Tockdom's MDL0 documentation both note SHP0 is the rarest of
+  the NW4R animation formats in retail Wii titles -- most games instead
+  drive visual variation through CLR0/SRT0/VIS0, and SHP0 shows up mainly
+  where a model needs true per-vertex deformation (e.g. squash-and-stretch
+  or facial blend shapes) that a bone or texture animation cannot express.
+
+  Each morph target is named by index into a file-level string list
+  rather than carrying its own name inline, so a target's identity comes
+  from position, not from a pooled-string offset next to its track --
+  matching how the sibling MDL0 stores its vertex-set names.
+
+  Only the fixed top-level header is modeled here.
+seq:
+  - id: header
+    type: nw4r_brres_sub_header
+  - id: ofs_data
+    type: s4
+    doc: Offset from the start of this SHP0 to the polygon-entry resource group.
+  - id: ofs_name
+    type: s4
+    doc: |
+      Offset from the start of this SHP0 to the animation's own name in the string
+      pool.
+  - id: ofs_orig_path
+    type: s4
+    doc: |
+      Offset to the original MDL0 file path, as recorded by the exporting
+      SDK tool; present so an editor can re-link the animation to the
+      model it was authored against.
+  - id: n_frames
+    type: u2
+    doc: |
+      Length of the animation in frames, not counting the extra loop frame `loop`
+      implies.
+  - id: n_entries
+    type: u2
+    doc: Number of animated polygon (object) entries in the resource group below.
+  - id: loop
+    type: u4
+    doc: |
+      Non-zero if the animation loops; when set, playback wraps past `n_frames` back
+      to frame 0.
+instances:
+  name:
+    pos: ofs_name - 4
+    type: pooled_string
+    if: ofs_name != 0
+types:
+  pooled_string:
+    seq:
+      - id: len_name
+        type: u4
+      - id: name
+        size: len_name
+        type: str
+        encoding: UTF-8

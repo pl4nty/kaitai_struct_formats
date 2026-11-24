@@ -1,0 +1,133 @@
+# Imported from https://github.com/wpyoga/s7-200-smart-project-file/blob/6803dc0fd0240472457eae4245fd69e37b6a549f/kaitai/smart_project.ksy
+meta:
+  id: s7_200_smart_project
+  title: MicroWIN SMART decompressed project data
+  license: MIT
+  imports:
+    - smart_types
+    - preamble
+    - system_block
+    - program_block
+    - symbol_table
+    - status_chart
+    - data_block
+    - cpu_information
+    - project_info
+    - motion_config
+    - pid_config
+    - hsc_config
+    - pwm_config
+    - td_config
+    - get_put_config
+    - data_log_config
+    - profinet_config
+    - web_server_config
+    - motion_axis_group_config
+    - pid_config_2
+    - hsc_config_2
+  endian: le
+
+seq:
+  - id: preamble
+    type: preamble
+
+  - id: timestamp1a
+    type: smart_types::timestamp
+
+  - id: timestamp1b
+    type: smart_types::timestamp
+
+  - type: u1
+    valid: 0x01
+
+  # TODO: consider whether these timestamps are
+  #       part of the system block
+  #       maybe also the preceding 0x01 marker
+  - id: timestamp1c
+    type: smart_types::timestamp
+
+  - id: timestamp1d
+    type: smart_types::timestamp
+
+  - id: system_block
+    type: system_block
+
+  - type: u1
+    # this is sometimes 1 and sometimes 0
+    # not related to version -- not sure what this is
+
+  - id: timestamp2a
+    type: smart_types::timestamp
+
+  - id: timestamp2b
+    type: smart_types::timestamp
+
+  - id: timestamp2c
+    type: smart_types::timestamp
+
+  - id: timestamp2d
+    type: smart_types::timestamp
+
+  - id: program_block
+    type: program_block
+
+  - id: symbol_table
+    type: symbol_table
+
+  - id: status_chart
+    type: status_chart
+
+  - id: data_block
+    type: data_block
+
+  - id: cpu_information
+    type: cpu_information
+
+  - id: project_info
+    type: project_info
+
+  - id: motion_config
+    type: motion_config
+
+  - id: pid_config
+    type: pid_config
+
+  - id: hsc_config
+    type: hsc_config
+
+  - id: pwm_config
+    type: pwm_config
+
+  - id: td_config
+    type: td_config
+
+  - id: get_put_config
+    type: get_put_config
+    if: preamble.editor_version > 0x12
+
+  - id: data_log_config
+    type: data_log_config
+    if: preamble.editor_version > 0x12
+
+  - id: profinet_config
+    type: profinet_config
+    if: preamble.editor_version >= 0x19
+
+  - id: web_server_config
+    type: web_server_config
+    if: preamble.editor_version >= 0x1a
+
+  - id: motion_axis_group_config
+    type: motion_axis_group_config
+    if: preamble.editor_version >= 0x1b
+
+  - id: pid_config_2
+    type: pid_config_2
+    if: preamble.editor_version >= 0x1b
+
+  - id: hsc_config_2
+    type: hsc_config_2
+    if: preamble.editor_version >= 0x1c
+
+  - id: footer_nulls
+    type: smart_types::nulls(16)

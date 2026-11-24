@@ -38,11 +38,11 @@ types:
       - id: width
         -orig-id: bWidth
         type: u1
-        doc: Width of image, px
+        doc: Width of image, px. Value 0 means 256 pixels.
       - id: height
         -orig-id: bHeight
         type: u1
-        doc: Height of image, px
+        doc: Height of image, px. Value 0 means 256 pixels.
       - id: num_colors
         -orig-id: bColorCount
         type: u1
@@ -51,7 +51,10 @@ types:
           no palette (i.e. RGB, RGBA, etc)
       - id: reserved
         -orig-id: bReserved
-        contents: [0]
+        type: u1
+        valid:
+          any-of: [0, 255]
+        doc: Should be 0; the .NET encoder (System.Drawing.Icon.Save) writes 255.
       - id: num_planes
         -orig-id: wPlanes
         type: u2

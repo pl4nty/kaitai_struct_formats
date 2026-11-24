@@ -151,7 +151,7 @@ types:
       - id: status
         type: u4
         enum: cue_entry_status
-        doc: If zero, this entry should be ignored.
+        doc: If zero, this entry should be ignored; 4 marks an active loop.
       - type: u4  # Seems to always be 0x10000
       - id: order_first
         type: u2
@@ -233,7 +233,17 @@ types:
         doc: |
           References a row in the colors table if this is a memory cue or loop
           and has been assigned a color.
-      - size: 11  # Loops seem to have some non-zero values in the last four bytes of this.
+      - size: 7
+      - id: loop_numerator
+        type: u2
+        doc: |
+          The numerator of the loop length in beats.
+          Zero if the loop is not quantized.
+      - id: loop_denominator
+        type: u2
+        doc: |
+          The denominator of the loop length in beats.
+          Zero if the loop is not quantized.
       - id: len_comment
         type: u4
         if: len_entry > 43
@@ -369,17 +379,53 @@ types:
       - id: len_entries
         type: u2
         doc: The number of phrases.
-      - id: style
-        type: u2
-        # enum: phrase_style   Can't use this line until KSC supports switching on possibly-null enums in Java.
+      - id: body
+        size-eos: true
+        type: song_structure_body
+        process: 'xor(is_masked ? mask : [0])'
         doc: |
-          The phrase style. 1 is the up-down style
-          (white label text in rekordbox) where the main phrases consist
-          of up, down, and chorus. 2 is the bridge-verse style
-          (black label text in rekordbox) where the main phrases consist
-          of verse, chorus, and bridge. Style 3 is mostly identical to
-          bridge-verse style except verses 1-3 are labeled VERSE1 and verses
-          4-6 are labeled VERSE2 in rekordbox.
+          The rest of the tag, which needs to be unmasked before it
+          can be parsed.
+    instances:
+      c:
+        value: len_entries
+      mask:
+        value: |
+          [
+            ((0xcb + c) & 0xff).as<u1>, ((0xe1 + c) & 0xff).as<u1>, ((0xee + c) & 0xff).as<u1>,
+            ((0xfa + c) & 0xff).as<u1>, ((0xe5 + c) & 0xff).as<u1>, ((0xee + c) & 0xff).as<u1>,
+            ((0xad + c) & 0xff).as<u1>, ((0xee + c) & 0xff).as<u1>, ((0xe9 + c) & 0xff).as<u1>,
+            ((0xd2 + c) & 0xff).as<u1>, ((0xe9 + c) & 0xff).as<u1>, ((0xeb + c) & 0xff).as<u1>,
+            ((0xe1 + c) & 0xff).as<u1>, ((0xe9 + c) & 0xff).as<u1>, ((0xf3 + c) & 0xff).as<u1>,
+            ((0xe8 + c) & 0xff).as<u1>, ((0xe9 + c) & 0xff).as<u1>, ((0xf4 + c) & 0xff).as<u1>,
+            ((0xe1 + c) & 0xff).as<u1>
+          ].as<bytes>
+        doc: |
+          Newer rekordbox versions XOR the tag body with this 19-byte key,
+          each byte offset by `len_entries`.
+      raw_mood:
+        pos: 6
+        type: u2
+        doc: |
+          This is a way to tell whether the rest of the tag has been masked.
+          The value is supposed to range from 1 to 3, but in masked files it
+          will be much larger.
+      is_masked:
+        value: raw_mood > 20
+
+  song_structure_body:
+    doc: |
+      Stores the rest of the song structure tag, which can only be
+      parsed after unmasking.
+    seq:
+      - id: mood
+        type: u2
+        # enum: track_mood   Can't use this line until KSC supports switching on possibly-null enums in Java.
+        doc: |
+          The mood which rekordbox assigns the track as a whole during
+          phrase analysis (see `track_mood`): 1 is high (white label text
+          in rekordbox, phrases up, down and chorus), 2 is mid (black label
+          text, phrases verse, chorus and bridge), 3 is low.
       - size: 6
       - id: end_beat
         type: u2
@@ -387,11 +433,23 @@ types:
           The beat number at which the last phrase ends. The track may
           continue after the last phrase ends. If this is the case, it will
           mostly be silence.
-      - size: 4
+      - size: 2
+      - id: bank
+        type: u1
+        enum: track_bank
+        doc: |
+          The stylistic bank which can be assigned to the track in rekordbox
+          Lighting mode.
+      - size: 1
       - id: entries
+        size: _parent.len_entry_bytes
         type: song_structure_entry
         repeat: expr
-        repeat-expr: len_entries
+        repeat-expr: _parent.len_entries
+    instances:
+      track_mood:
+        value: mood
+        enum: track_mood
 
   song_structure_entry:
     doc: A song structure entry, represents a single phrase.
@@ -404,31 +462,72 @@ types:
         doc: The beat number at which the phrase starts.
       - id: phrase_id
         type:
-          switch-on: _parent.style
+          switch-on: _parent.mood
           cases:
-            1: phrase_up_down       # 'phrase_style::up_down'
-            2: phrase_verse_bridge  # 'phrase_style::verse_bridge'
+            1: phrase_up_down       # 'track_mood::high'
+            2: phrase_verse_bridge  # 'track_mood::mid'
+            3: phrase_low           # 'track_mood::low'
             _: phrase_verse_bridge
         doc: Identifier of the phrase label.
-      - size: _parent.len_entry_bytes - 9
+      - size: 1
+      - id: k1
+        type: u1
+        doc: One of three flags that identify phrase kind variants in high-mood tracks.
+      - size: 1
+      - id: k2
+        type: u1
+        doc: One of three flags that identify phrase kind variants in high-mood tracks.
+      - size: 1
+      - id: b
+        type: u1
+        doc: Flags how many more beat numbers are in a high-mood "Up 3" phrase.
+      - id: beat2
+        type: u2
+        doc: |
+          Extra beat number (falling within phrase) always present in
+          high-mood "Up 3" phrases.
+      - id: beat3
+        type: u2
+        doc: |
+          Extra beat number (falling within phrase, larger than beat2)
+          present in high-mood "Up 3" phrases when b has value 1.
+      - id: beat4
+        type: u2
+        doc: |
+          Extra beat number (falling within phrase, larger than beat3)
+          present in high-mood "Up 3" phrases when b has value 1.
+      - size: 1
+      - id: k3
+        type: u1
+        doc: One of three flags that identify phrase kind variants in high-mood tracks.
+      - size: 1
       - id: fill_in
         type: u1
-        doc: If nonzero, fill-in is present.
+        doc: If nonzero, fill-in is present at the end of the phrase.
       - id: fill_in_beat_number
         type: u2
         doc: The beat number at which fill-in starts.
 
   phrase_up_down:
+    doc: Phrase label of a high-mood track.
     seq:
       - id: id
         type: u2
         enum: phrase_up_down_id
 
   phrase_verse_bridge:
+    doc: Phrase label of a mid-mood track.
     seq:
       - id: id
         type: u2
         enum: phrase_verse_bridge_id
+
+  phrase_low:
+    doc: Phrase label of a low-mood track.
+    seq:
+      - id: id
+        type: u2
+        enum: mood_low_phrase
 
   unknown_tag: {}
 
@@ -457,11 +556,35 @@ enums:
   cue_entry_status:
     0: disabled
     1: enabled
+    4: active_loop
 
-  phrase_style:
-    1: up_down
-    2: verse_bridge
-    3: verse_bridge_2
+  track_mood:
+    1: high
+    2: mid
+    3: low
+
+  track_bank:
+    0: default
+    1: cool
+    2: natural
+    3: hot
+    4: subtle
+    5: warm
+    6: vivid
+    7: club_1
+    8: club_2
+
+  mood_low_phrase:
+    1: intro
+    2: verse_1
+    3: verse_1b  # Just displayed as "Verse 1" in rekordbox.
+    4: verse_1c  # Just displayed as "Verse 1" in rekordbox.
+    5: verse_2
+    6: verse_2b  # Just displayed as "Verse 2" in rekordbox.
+    7: verse_2c  # Just displayed as "Verse 2" in rekordbox.
+    8: bridge
+    9: chorus
+    10: outro
 
   phrase_verse_bridge_id:
     1: intro

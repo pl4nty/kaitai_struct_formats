@@ -6,7 +6,7 @@ meta:
   xref:
     wikidata: Q2378
   license: Apache-2.0
-  ks-opaque-types: true
+  ks-opaque-types: true  # ksylint: disable=KSY210
   encoding: ASCII
   endian: le
 doc: |

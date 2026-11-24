@@ -1,0 +1,8 @@
+samples:
+- url: https://raw.githubusercontent.com/armijnhemel/binaryanalysis-ng/d72f0d9c5c4e5484878f357d07690e68334365db/test/testdata/unpackers/cpio/test-old.cpio
+  sha256: da6764f4ddaabf71c80860c2fce01abd5482fbfac842c28e7430df1a37574620
+  expect:
+    entries[0].filename: test.sgi
+    len(entries): 2
+- url: https://raw.githubusercontent.com/armijnhemel/binaryanalysis-ng/d72f0d9c5c4e5484878f357d07690e68334365db/test/testdata/unpackers/cpio/test-old-multiple-files.cpio
+  sha256: a01a74b930a533b729bfdefb68f8331a54fdfee3e1538ee527f26af2ef4d0249

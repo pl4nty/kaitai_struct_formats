@@ -1,0 +1,3 @@
+samples:
+- url: https://raw.githubusercontent.com/dalvarezperez/umse/ed50248b15828991aed14a9be25daf2e8fad4efb/UMSE%20Implementation/libUmse/test/output/test.c.umse
+  sha256: 90ade0e88c517d84c3e080846c4881839d8c82c364c12e609fd738a3b3026edf

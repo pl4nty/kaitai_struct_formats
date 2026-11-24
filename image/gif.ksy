@@ -145,6 +145,7 @@ types:
             'extension_label::application': ext_application
             'extension_label::comment': subblocks
             'extension_label::graphic_control': ext_graphic_control
+            'extension_label::plain_text': ext_plain_text
             _: subblocks
   ext_application:
     seq:
@@ -172,6 +173,37 @@ types:
         value: '(flags & 0b00000001) != 0'
       user_input_flag:
         value: '(flags & 0b00000010) != 0'
+  ext_plain_text:
+    doc-ref: https://www.w3.org/Graphics/GIF/spec-gif89a.txt - section 25
+    seq:
+      - id: block_size
+        contents: [12]
+      - id: text_grid_left
+        type: u2
+        doc: Column number, in pixels, of the left edge of the text grid
+      - id: text_grid_top
+        type: u2
+        doc: Row number, in pixels, of the top edge of the text grid
+      - id: text_grid_width
+        type: u2
+        doc: Width of the text grid in pixels
+      - id: text_grid_height
+        type: u2
+        doc: Height of the text grid in pixels
+      - id: char_cell_width
+        type: u1
+        doc: Width of each cell in the grid, in pixels
+      - id: char_cell_height
+        type: u1
+        doc: Height of each cell in the grid, in pixels
+      - id: text_fg_color_idx
+        type: u1
+        doc: Index of the foreground color in the global color table
+      - id: text_bg_color_idx
+        type: u1
+        doc: Index of the background color in the global color table
+      - id: plain_text_data
+        type: subblocks
   subblocks:
     seq:
       - id: entries
@@ -201,6 +233,7 @@ enums:
     0x2c: local_image_descriptor
     0x3b: end_of_file
   extension_label:
+    0x01: plain_text
     0xf9: graphic_control
     0xfe: comment
     0xff: application

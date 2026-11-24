@@ -1,0 +1,493 @@
+# Imported from https://github.com/quatric/Wii-Kaitai/blob/d5029381b1ac4052b07a214f5529978210c7e111/nw4c/bflyt.ksy
+meta:
+  id: bflyt
+  title: NintendoWare BFLYT layout
+  file-extension: bflyt
+  license: LicenseRef-All-Rights-Reserved
+doc: |
+  The 3DS and Wii U successor to the Wii's BRLYT. Magic `FLYT`, a 20-byte
+  header, then a flat ordered list of tagged sections -- the same shape as
+  BRLYT, with wider name fields and two new section kinds.
+
+  As on the Wii, the pane hierarchy is carried by *order* rather than by
+  pointers: `pas1` opens a child list and `pae1` closes it, `grs1`/`gre1`
+  do the same for groups. What is new is `prt1`, a pane that instantiates
+  another layout file by name, and `cnt1`, which names the panes a part
+  exposes to whatever embeds it.
+
+  This definition is little-endian because that is what the 3DS samples
+  are. Wii U layouts are big-endian with the same structure; the mark at
+  offset 4 tells them apart, and swapping `meta/endian` is the only change
+  needed. `nintendo_sarc` in this directory shows the parameterised pattern if
+  a single definition must handle both.
+
+  BFLYT is properly an NW4C (NintendoWare for CTR) format -- the `Lyt`
+  library shipped for the 3DS -- but Nintendo's NW4F (NintendoWare for
+  Cafe/Wii U) `Lyt` library is close enough to the same on-disk layout,
+  same `FLYT` magic, same section tags, just re-endianed, that the two
+  have historically been treated as one format by tooling rather than as
+  a 3DS format one console generation later reused verbatim. This
+  definition follows that convention and does not distinguish them beyond
+  the byte-order mark.
+
+  Field widths grew from BRLYT and are worth stating, because nothing in
+  the file announces them: a pane name is 24 bytes, a material name 28, a
+  group name 34, and a group's pane references 24 each. All four were
+  measured against the sample set rather than assumed -- the material name
+  in particular is exactly 28, since testing 32 fails on 455 of 2209
+  materials while 28 holds for all of them.
+seq:
+  - id: magic
+    contents: "FLYT"
+  - id: bom
+    type: u2le
+    doc: |
+      Byte-order mark; bytes FF FE (read here as 0xFEFF) mean little endian (3DS), FE
+      FF mean big endian (Wii U).
+  - id: body
+    type: body(bom == 0xfeff)
+types:
+  body:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: len_header
+        type: u2
+        doc: 0x14.
+      - id: version
+        type: u4
+        doc: 0x07020100 across all 299 samples.
+      - id: len_file
+        type: u4
+      - id: num_sections
+        type: u2
+      - id: reserved
+        type: u2
+      - id: sections
+        type: section(is_le)
+        repeat: expr
+        repeat-expr: num_sections
+  section:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: magic
+        size: 4
+        type: str
+        encoding: ASCII
+      - id: len_section
+        type: u4
+        doc: Size including these eight bytes; the stride to the next section.
+      - id: body
+        size: len_section - 8
+        type:
+          switch-on: magic
+          cases:
+            '"lyt1"': layout(is_le)
+            '"txl1"': string_list(is_le)
+            '"fnl1"': string_list(is_le)
+            '"mat1"': material_list(is_le)
+            '"pan1"': pane(is_le)
+            '"bnd1"': pane(is_le)
+            '"pic1"': picture(is_le)
+            '"txt1"': text_box(is_le)
+            '"wnd1"': window(is_le)
+            '"grp1"': group(is_le)
+        doc: |
+          `pas1`, `pae1`, `grs1` and `gre1` are pure markers with no body
+          and are always exactly 8 bytes. `prt1`, `cnt1` and `usd1` are
+          left as raw bytes: parts and control sections carry
+          variable-length property tables whose layout is not settled
+          here, and inventing a structure for them would be worse than
+          handing back the bytes.
+
+  layout:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    doc: |
+      `lyt1`. Unlike BRLYT's, this one carries the layout's own name and
+      the maximum size of any part that embeds it.
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: draw_from_center
+        type: u1
+      - id: reserved
+        size: 3
+      - id: width
+        type: f4
+      - id: height
+        type: f4
+        doc: 400 x 240 in the 3DS samples -- one screen.
+      - id: max_part_width
+        type: f4
+      - id: max_part_height
+        type: f4
+      - id: name
+        type: strz
+        encoding: ASCII
+
+  string_list:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    doc: |
+      Shared shape of `txl1` (textures) and `fnl1` (fonts). Offsets are
+      relative to the start of the offset table, which is 12 bytes into
+      the section, hence 4 into this body. Entries are a bare u4 here --
+      BRLYT's second, always-zero word is gone.
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: num_entries
+        type: u2
+      - id: reserved
+        type: u2
+      - id: entries
+        type: string_ref(is_le)
+        repeat: expr
+        repeat-expr: num_entries
+
+  string_ref:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: ofs_name
+        type: u4
+    instances:
+      name:
+        io: _parent._io
+        pos: ofs_name + 4
+        type: strz
+        encoding: ASCII
+
+  material_list:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    doc: |
+      `mat1`. Offsets are relative to the start of the *section* -- tag
+      included -- unlike the string lists above, so 8 is subtracted to
+      index into this body. Past the name a material holds colour
+      registers, texture and matrix references, and TEV stages, all sized
+      by per-material flags; only the name is broken out.
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: num_materials
+        type: u2
+      - id: reserved
+        type: u2
+      - id: materials
+        type: material_ref(is_le)
+        repeat: expr
+        repeat-expr: num_materials
+
+  material_ref:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: ofs_material
+        type: u4
+    instances:
+      name:
+        io: _parent._io
+        pos: ofs_material - 8
+        size: 28
+        type: str
+        pad-right: 0
+        encoding: ASCII
+
+  pane:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    doc: |
+      `pan1`, and identically `bnd1` -- a bounding pane, which takes part
+      in the hierarchy and in hit-testing but draws nothing. Both are
+      always 84 bytes.
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: flags
+        type: u1
+        doc: Bit 0 is visible; bit 1 makes the pane's alpha influence its children.
+      - id: origin
+        type: u1
+        doc: |
+          Packed anchor: `origin % 3` selects left/centre/right,
+          `origin / 3` selects top/centre/bottom.
+      - id: alpha
+        type: u1
+      - id: part_scale
+        type: u1
+      - id: name
+        size: 24
+        type: str
+        pad-right: 0
+        encoding: ASCII
+      - id: user_data
+        size: 8
+        type: str
+        pad-right: 0
+        encoding: ASCII
+      - id: translate
+        type: vec3(is_le)
+      - id: rotate
+        type: vec3(is_le)
+      - id: scale_x
+        type: f4
+      - id: scale_y
+        type: f4
+      - id: width
+        type: f4
+      - id: height
+        type: f4
+
+  picture:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    doc: '`pic1`: a textured quad, a pane followed by its corner colours and UVs.'
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: base
+        type: pane(is_le)
+      - id: vertex_colors
+        size: 16
+        doc: Four RGBA8 corner colours -- top-left, top-right, bottom-left, bottom-right.
+      - id: material_index
+        type: u2
+      - id: num_tex_coords
+        type: u1
+      - id: reserved
+        type: u1
+      - id: tex_coords
+        type: tex_coord_set(is_le)
+        repeat: expr
+        repeat-expr: num_tex_coords
+        doc: |
+          One set of four UV pairs per texture the material samples. The
+          count really does vary here, unlike BRLYT's fixed single set:
+          most pictures carry one (136-byte section), some two (168) and a
+          few three (200).
+
+  tex_coord_set:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: top_left
+        type: vec2(is_le)
+      - id: top_right
+        type: vec2(is_le)
+      - id: bottom_left
+        type: vec2(is_le)
+      - id: bottom_right
+        type: vec2(is_le)
+  text_box:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    doc: |
+      `txt1`. As on the Wii the reserved length is stored before the used
+      one, and both count bytes of UTF-16 rather than characters: a
+      60-character message reports 130 then 120. `ofs_text` is relative to
+      the start of the section.
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: base
+        type: pane(is_le)
+      - id: len_text_max
+        type: u2
+      - id: len_text
+        type: u2
+        doc: Bytes actually stored, the terminating NUL included.
+      - id: material_index
+        type: u2
+      - id: font_index
+        type: u2
+      - id: alignment
+        type: u1
+      - id: line_alignment
+        type: u1
+      - id: flags
+        type: u1
+      - id: reserved
+        type: u1
+      - id: italic_tilt
+        type: f4
+      - id: ofs_text
+        type: u4
+      - id: color_top
+        size: 4
+      - id: color_bottom
+        size: 4
+      - id: font_size_x
+        type: f4
+      - id: font_size_y
+        type: f4
+      - id: char_space
+        type: f4
+      - id: line_space
+        type: f4
+      - id: rest
+        size-eos: true
+        doc: |
+          Shadow parameters and a tag-name offset follow. They are left
+          raw rather than guessed at; the text itself is reachable through
+          `text` regardless.
+    instances:
+      text:
+        pos: ofs_text - 8
+        size: len_text
+        type: str
+        encoding: UTF-16LE
+        if: ofs_text >= 8
+
+  window:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    doc: |
+      `wnd1`: a nine-patch frame. The pane header is typed; the inflation
+      rectangle, frame count and per-frame material references that follow
+      are sized by the frame count and are left raw.
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: base
+        type: pane(is_le)
+      - id: rest
+        size-eos: true
+
+  group:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    doc: |
+      `grp1`. Names its members rather than owning them; the runtime
+      resolves the names against the pane tree. The 34-byte name is not a
+      typo -- `num_panes` sits at offset 42 of the section, which a
+      32-byte name would misread, and the 24-byte references then divide
+      the remainder exactly.
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: name
+        size: 34
+        type: str
+        pad-right: 0
+        encoding: ASCII
+      - id: num_panes
+        type: u2
+      - id: panes
+        size: 24
+        type: str
+        pad-right: 0
+        encoding: ASCII
+        repeat: expr
+        repeat-expr: num_panes
+
+  vec2:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: x
+        type: f4
+      - id: 'y'
+        type: f4
+
+  vec3:
+    meta:
+      endian:
+        switch-on: is_le
+        cases:
+          true: le
+          false: be
+    params:
+      - id: is_le
+        type: bool
+    seq:
+      - id: x
+        type: f4
+      - id: 'y'
+        type: f4
+      - id: z
+        type: f4

@@ -1,0 +1,9 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/sunstar_sst/samples/random1-me.sst
+  sha256: 4d49edd7ed4c33e3defd9e8f5ec471a85371f8bd383c681bb10dfc4a72946a5b
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/sunstar_sst/samples/random2-me.sst
+  sha256: 9af5aef45689943379918d2a6c3445ed6addb49b38c55e58e294d845e8f41bb5
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/sunstar_sst/samples/random3-me.sst
+  sha256: 11673fa321c9e456605a06e30b75ef305446b65465216ba61097fdfa17e7d011
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/sunstar_sst/samples/scene-me.sst
+  sha256: fa14f058853b3df07e6255d1948eb19d4bf3647f98bea6584b0332be09133209

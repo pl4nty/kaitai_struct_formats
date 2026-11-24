@@ -1,0 +1,7 @@
+samples:
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/barudan_dsb/samples/scene-me.dsb
+  sha256: 2ebfbb6e1038ed57b96b02afbdd8420c0ccbe2ce378f1992951c8bebb87631a4
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/barudan_dsb/samples/scene-wilcom.DSB
+  sha256: f975645dfef77ef5d4d5bd7507d651fff476a57d9fa47946aea7bfa57bffbb43
+- url: https://raw.githubusercontent.com/broideryfab/embroidery-ksy/424184f8b4222794314ba3149aef31afea9c6e13/formats/barudan_dsb/samples/spiralbox-wilcom.DSB
+  sha256: 3a9537e32f07fdec0746bfbeb1499cad8470e03c8e6458c39ef3da65cbd84dd3

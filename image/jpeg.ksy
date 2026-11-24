@@ -54,7 +54,7 @@ types:
         enum: marker_enum
       - id: length
         type: u2
-        if: marker != marker_enum::soi and marker != marker_enum::eoi
+        if: has_length
       - id: data
         size: length - 2
         type:
@@ -62,9 +62,24 @@ types:
           cases:
             'marker_enum::app0': segment_app0
             'marker_enum::app1': segment_app1
+            'marker_enum::dqt': segment_dqt
+            'marker_enum::dht': segment_dht
+            # All SOFn segments share the same frame header layout (T.81 B.2.2)
             'marker_enum::sof0': segment_sof0
+            'marker_enum::sof1': segment_sof0
+            'marker_enum::sof2': segment_sof0
+            'marker_enum::sof3': segment_sof0
+            'marker_enum::sof5': segment_sof0
+            'marker_enum::sof6': segment_sof0
+            'marker_enum::sof7': segment_sof0
+            'marker_enum::sof9': segment_sof0
+            'marker_enum::sof10': segment_sof0
+            'marker_enum::sof11': segment_sof0
+            'marker_enum::sof13': segment_sof0
+            'marker_enum::sof14': segment_sof0
+            'marker_enum::sof15': segment_sof0
             'marker_enum::sos': segment_sos
-        if: marker != marker_enum::soi and marker != marker_enum::eoi
+        if: has_length
       - id: image_data
         size-eos: true
         if: marker == marker_enum::sos
@@ -74,6 +89,15 @@ types:
           cannot be expressed here, so this takes the rest of the file and
           the segments after the first scan (further scans of progressive
           JPEGs, EOI, trailing data) are not parsed as segments.
+    instances:
+      has_length:
+        value: |
+          marker != marker_enum::soi and marker != marker_enum::eoi and
+          marker != marker_enum::tem and
+          (marker.to_i < 0xd0 or marker.to_i > 0xd7)
+        doc: |
+          SOI, EOI, TEM and RST0-RST7 are standalone markers without a length
+          field (T.81 B.1.1.3).
     enums:
       marker_enum:
         0x01: tem
@@ -85,6 +109,22 @@ types:
         0xc5: sof5 # start of frame 5
         0xc6: sof6 # start of frame 6
         0xc7: sof7 # start of frame 7
+        0xc8: jpg # reserved for JPEG extensions
+        0xc9: sof9 # start of frame 9
+        0xca: sof10 # start of frame 10
+        0xcb: sof11 # start of frame 11
+        0xcc: dac # define arithmetic coding conditioning
+        0xcd: sof13 # start of frame 13
+        0xce: sof14 # start of frame 14
+        0xcf: sof15 # start of frame 15
+        0xd0: rst0 # restart with modulo 8 count 0
+        0xd1: rst1
+        0xd2: rst2
+        0xd3: rst3
+        0xd4: rst4
+        0xd5: rst5
+        0xd6: rst6
+        0xd7: rst7
         0xd8: soi # start of image
         0xd9: eoi # end of image
         0xda: sos # start of scan
@@ -92,6 +132,7 @@ types:
         0xdc: dnl # define number of lines
         0xdd: dri # define restart interval
         0xde: dhp # define hierarchical progression
+        0xdf: exp # expand reference components
         0xe0: app0
         0xe1: app1
         0xe2: app2
@@ -108,6 +149,20 @@ types:
         0xed: app13
         0xee: app14
         0xef: app15
+        0xf0: jpg0 # reserved for JPEG extensions
+        0xf1: jpg1
+        0xf2: jpg2
+        0xf3: jpg3
+        0xf4: jpg4
+        0xf5: jpg5
+        0xf6: jpg6
+        0xf7: jpg7
+        0xf8: jpg8
+        0xf9: jpg9
+        0xfa: jpg10
+        0xfb: jpg11
+        0xfc: jpg12
+        0xfd: jpg13
         0xfe: com # comment
   segment_app0:
     seq:
@@ -154,7 +209,66 @@ types:
           switch-on: magic
           cases:
             '"Exif"': exif_in_jpeg
+  segment_dqt:
+    doc: Define quantization tables
+    doc-ref: https://www.w3.org/Graphics/JPEG/itu-t81.pdf - section B.2.4.1
+    seq:
+      - id: tables
+        type: quantization_table
+        repeat: eos
+    types:
+      quantization_table:
+        seq:
+          - id: precision
+            type: b4
+            valid:
+              any-of: [0, 1]
+            doc: Element precision; 0 = 8-bit values, 1 = 16-bit values
+          - id: table_id
+            type: b4
+            doc: Destination identifier (0-3)
+          - id: values
+            type:
+              switch-on: precision
+              cases:
+                0: u1
+                1: u2
+            repeat: expr
+            repeat-expr: 64
+            doc: Quantization table elements, in zig-zag order
+  segment_dht:
+    doc: Define Huffman tables
+    doc-ref: https://www.w3.org/Graphics/JPEG/itu-t81.pdf - section B.2.4.2
+    seq:
+      - id: tables
+        type: huffman_table
+        repeat: eos
+    types:
+      huffman_table:
+        seq:
+          - id: table_class
+            type: b4
+            doc: 0 = DC table or lossless table, 1 = AC table
+          - id: table_id
+            type: b4
+            doc: Destination identifier (0-3)
+          - id: num_codes
+            type: u1
+            repeat: expr
+            repeat-expr: 16
+            doc: Number of Huffman codes of each length 1-16
+          - id: values
+            size: |
+              num_codes[0] + num_codes[1] + num_codes[2] + num_codes[3] +
+              num_codes[4] + num_codes[5] + num_codes[6] + num_codes[7] +
+              num_codes[8] + num_codes[9] + num_codes[10] + num_codes[11] +
+              num_codes[12] + num_codes[13] + num_codes[14] + num_codes[15]
+            doc: Values associated with each Huffman code, in order of increasing code length
   segment_sof0:
+    doc: |
+      Frame header. Despite the name, used for all SOFn markers, which share
+      this layout.
+    doc-ref: https://www.w3.org/Graphics/JPEG/itu-t81.pdf - section B.2.2
     seq:
       - id: bits_per_sample
         type: u1

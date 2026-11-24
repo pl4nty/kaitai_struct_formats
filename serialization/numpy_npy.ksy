@@ -18,7 +18,7 @@ meta:
     - /common/ieee754_float/f16le
     - /common/ieee754_float/f32be
     - /common/ieee754_float/f32le
-  ks-opaque-types: true
+  ks-opaque-types: true  # ksylint: disable=KSY210
   endian: le
 doc: |
   Serialization format used by NumPy to store a single array: a magic string,
