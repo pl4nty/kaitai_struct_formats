@@ -1,4 +1,5 @@
 # Imported from https://github.com/kenrinzero/palimpsest/blob/6d3d9a577e19ebd344da420ecda1aad594a5bc5c/formats/thp.ksy
+# Frame chain model from https://github.com/quatric/Wii-Kaitai/blob/HEAD/media/thp.ksy
 meta:
   id: thp
   title: Nintendo GameCube THP header and component table
@@ -15,8 +16,8 @@ doc: |
     type list, then one record per listed component
   * video (type 0): width, height; version 0x11000 adds a pad u32
   * audio (type 1): channels, sample rate, sample count
-  * frame payload at `first_frame_offset` (uninterpreted; this
-    FATE head is a 1 MiB partial of a ~189 MiB movie)
+  * frames from `first_frame_offset`, walked as a linked chain from
+    `first_frame` (see `frame`); video and audio payloads are kept raw
 
   This unit requires one video and one audio component.
 
@@ -111,6 +112,12 @@ instances:
   walked_component_count:
     value: component_table.components.size
     doc: Number of component records actually walked.
+  first_frame:
+    pos: first_frame_offset
+    type: frame(first_frame_offset, first_frame_size, 0)
+    doc: |
+      First frame. Follow `next` (bounded by `num_frames`) to reach the
+      later frames.
   codec_label:
     value: '"thp"'
     doc: ffprobe video codec_name.  THP video has no fourcc.
@@ -143,6 +150,9 @@ types:
         repeat: expr
         repeat-expr: num_components
         doc: Per-component records in type-list order.
+    instances:
+      has_audio:
+        value: component_types[0] == 1 or component_types[1] == 1
 
   component:
     params:
@@ -188,3 +198,47 @@ types:
         value: kind == 0
       is_audio:
         value: kind == 1
+
+  frame:
+    doc: |
+      Frame header, followed by the video payload and, if there is an
+      audio component, the audio payload. A frame's own header does not
+      give its total size: the size of frame 0 is the file header's
+      `first_frame_size`, and every frame's `next_frame_size` gives the
+      size of the frame after it, so frame k+1 starts at frame k's start
+      plus that size (FFmpeg libavformat/thp.c). The chain is therefore
+      modelled as a linked list through `next`.
+    params:
+      - id: ofs_frame
+        type: u4
+        doc: Absolute file offset of this frame.
+      - id: len_frame
+        type: u4
+        doc: Size of this frame, as given by the previous frame (or header).
+      - id: idx
+        type: u4
+        doc: Zero-based frame number.
+    seq:
+      - id: next_frame_size
+        type: u4
+        doc: Total size of the next frame.
+      - id: prev_frame_size
+        type: u4
+        doc: Total size of the previous frame.
+      - id: len_video
+        type: u4
+        doc: Size of the video payload.
+      - id: len_audio
+        type: u4
+        if: _root.component_table.has_audio
+        doc: Size of the audio payload.
+      - id: video
+        size: len_video
+      - id: audio
+        size: len_audio
+        if: _root.component_table.has_audio
+    instances:
+      next:
+        pos: ofs_frame + len_frame
+        type: frame(ofs_frame + len_frame, next_frame_size, idx + 1)
+        if: idx + 1 < _root.num_frames
