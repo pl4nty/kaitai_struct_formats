@@ -2,6 +2,8 @@ meta:
   id: xo65
   title: xo65 object file
   license: CC0-1.0
+  imports:
+    - /common/vlq_base128_le
   encoding: ASCII
   endian: le
 doc: |
@@ -105,15 +107,16 @@ types:
   string_pool:
     seq:
       - id: num_strings
-        type: u2
+        type: vlq_base128_le
       - id: entries
         type: string_pool_entry
         repeat: expr
-        repeat-expr: num_strings - 1
+        repeat-expr: num_strings.value
+        doc: Indexed by string id. Entry 0 is normally the empty string.
   string_pool_entry:
     seq:
       - id: len_string
-        type: u1
+        type: vlq_base128_le
       - id: string
-        size: len_string
+        size: len_string.value
         type: str
