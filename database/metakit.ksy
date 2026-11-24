@@ -107,7 +107,7 @@ types:
         repeat-until: _.is_last
     instances:
       is_negative:
-        value: groups[0].byte == 0
+        value: groups[0].raw == 0
       value:
         value: 'is_negative ? ~groups.last.value : groups.last.value'
   packed_int_group:
@@ -115,10 +115,10 @@ types:
       - id: value_before
         type: s8
     seq:
-      - id: byte
+      - id: raw
         type: u1
     instances:
       is_last:
-        value: byte & 0x80 != 0
+        value: raw & 0x80 != 0
       value:
-        value: (value_before << 7) | (byte & 0x7f)
+        value: (value_before << 7) | (raw & 0x7f)
