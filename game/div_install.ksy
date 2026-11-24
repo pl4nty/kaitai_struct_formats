@@ -1,0 +1,84 @@
+# Imported from https://github.com/vii1/DIV/blob/3692483012cbdf9c85b2f93f2ae6a35ac4dd193e/formats/install.ksy
+# Licence and copyright: see _community/README.md
+meta:
+  id: div_install
+  file-extension: exe
+  license: GPL-3.0-only
+  imports:
+    - fpg
+    - fnt
+  encoding: ASCII
+  endian: le
+    
+instances:
+  tail:
+    pos: _io.size - 28
+    type: tail
+  
+  install_data:
+    pos: _io.size - tail.data_size
+    type: install_data
+        
+types:
+  tail:
+    seq:
+      - id: size_fpg_z
+        type: u4
+      - id: size_fpg
+        type: u4
+      - id: size_fnt1_z
+        type: u4
+      - id: size_fnt1
+        type: u4
+      - id: size_fnt2_z
+        type: u4
+      - id: size_fnt2
+        type: u4
+      - id: data_size
+        type: u4
+  
+  install_data:
+    seq:
+      - id: app_name
+        type: strz
+      - id: copyright
+        type: strz
+      - id: pack_name
+        type: strz
+      - id: default_dir
+        type: strz
+      - id: msg_fin
+        type: strz
+      - id: msg_help
+        type: strz
+      - id: msg_disk_1
+        type: strz
+      - id: msg_disk_2
+        type: strz
+      - id: error
+        type: strz
+        repeat: expr
+        repeat-expr: 9
+      - id: total_len
+        type: u4
+      - id: pack_size
+        type: u4
+      - id: create_dir
+        type: u4
+      - id: include_setup
+        type: u4
+      - id: segundo_font
+        type: u4
+      - id: install_fpg
+        size: _root.tail.size_fpg_z
+        type: fpg
+        process: zlib
+      - id: small_fnt
+        size: _root.tail.size_fnt1_z
+        type: fnt
+        process: zlib
+      - id: big_fnt
+        size: _root.tail.size_fnt2_z
+        type: fnt
+        process: zlib
+        if: segundo_font != 0
