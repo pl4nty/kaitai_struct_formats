@@ -162,7 +162,10 @@ types:
         enum: format_version
         valid:
           any-of:
+            - format_version::windows_30
             - format_version::windows_31
+            - format_version::media_view
+            - format_version::windows_95
       - id: major
         type: u2
         valid: 1
@@ -170,9 +173,14 @@ types:
         type: u4
       - id: flags
         type: u2
+      - id: title
+        type: strz
+        if: minor.to_i <= 16
+        doc: Help file title. Only in Windows 3.0 files (minor 16 or less).
       - id: system_records
         type: system_record
         repeat: eos
+        if: minor.to_i > 16
     types:
       system_record:
         seq:
