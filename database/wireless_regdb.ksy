@@ -1,12 +1,10 @@
 meta:
-  id: crdb
-  title: GNU/Linux wireless regulation database
+  id: wireless_regdb
+  title: Linux wireless regulatory database (regulatory.bin)
   license: copyleft-next-0.3.0 AND ISC
   encoding: ASCII
   endian: be
-
--license-URIs:
-  - https://github.com/copyleft-next/copyleft-next/blob/master/Releases/copyleft-next-0.3.0
+  bit-endian: be
 
 -license-header: |
   Copyright (c) 2013, Luis R. Rodriguez <mcgrof@do-not-panic.com>
@@ -28,7 +26,12 @@ meta:
   THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 doc: |
-  the test file: https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.bin
+  Binary form of wireless-regdb, the database of wireless regulatory rules
+  (allowed frequency ranges, power limits and flags per country) used by the
+  Linux kernel's 802.11 stack via CRDA. The file is signed; the signature is
+  stored at its end.
+
+  Test file: https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.bin
 doc-ref:
   - "https://wireless.wiki.kernel.org/en/developers/Regulatory/wireless-regdb"
   - "https://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/crda.git/tree/regdb.h"
@@ -39,33 +42,35 @@ seq:
     contents: ["RGDB"]
   - id: version
     type: u4
-  - id: states_ptr
-    -orig-id: countries_ptr
+  - id: ofs_countries
+    -orig-id: reg_country_ptr
     type: u4
     doc: |
       The list is sorted alphabetically to allow binary searching (should it become
       really huge).
-  - id: states_count
-    -orig-id: countries_count
+  - id: num_countries
+    -orig-id: reg_country_num
     type: u4
   - id: authentication_size
     -orig-id: signature_len
     type: u4
     doc: length (in bytes) of the signature at the end of the file
 instances:
-  states:
-    pos: states_ptr
-    type: state
+  countries:
+    pos: ofs_countries
+    type: country
     repeat: expr
-    repeat-expr: states_count
+    repeat-expr: num_countries
   authentication:
     pos: _io.size - authentication_size
     size: authentication_size
-    doc: digital signature
+    doc: |
+      Digital signature: an OpenSSL-compatible signature of the SHA-1 hash of
+      the rest of the file.
 types:
   freq_range:
     doc: |
-      everything is in in kHz
+      everything is in kHz
       Values of zero mean "not applicable", i.e. the regulatory does not limit a
       certain value.
     seq:
@@ -162,7 +167,7 @@ types:
         repeat: expr
         repeat-expr: count
 
-  state:
+  country:
     -orig-id: regdb_file_reg_country
     seq:
       - id: two_letter_code
