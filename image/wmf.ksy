@@ -254,7 +254,13 @@ enums:
     0x0003: masknotpen
     0x0004: notcopypen
     0x0005: maskpennot
-    0x0006: not_
+    0x0006:
+      id: not_screen
+      -orig-id: R2_NOT
+      doc: |
+        Pixel is the inverse of the screen color. Named `not_screen`
+        rather than `not_`, which renders as the reserved word `not` in
+        lowerCamelCase targets.
     0x0007: xorpen
     0x0008: notmaskpen
     0x0009: maskpen
