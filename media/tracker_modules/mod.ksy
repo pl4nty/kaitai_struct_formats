@@ -55,10 +55,10 @@ seq:
   - id: patterns
     type: pattern
     repeat: expr
-    repeat-expr: song_positions.last.index
+    repeat-expr: num_patterns
     doc: |
       Number of patterns stored is equal to the highest pattern_number in the song
-      position table (at offset 952-1079).
+      position table (at offset 952-1079), plus one.
 
 instances:
   application_id_31_pos:
@@ -76,6 +76,14 @@ instances:
     if: not application_id_31.is_detected
   application_id:
     value: "(application_id_31.is_detected ? application_id_31 : application_id_15)"
+  song_position_numbers:
+    pos: '(application_id_31.is_detected ? application_id_31_pos.pos : application_id_15_pos.pos) - 128'
+    type: u1
+    repeat: expr
+    repeat-expr: 128
+    doc: The pattern numbers of `song_positions`, as plain integers.
+  num_patterns:
+    value: song_position_numbers.max + 1
 
 types:
   application_id_pos_calc:
