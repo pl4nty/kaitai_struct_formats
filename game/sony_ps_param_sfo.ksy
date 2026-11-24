@@ -49,14 +49,24 @@ types:
           switch-on: name
           cases:
             "'CATEGORY'": category
-            "'PARENTAL_LEVEL'": u4 # I guess it is min allowed age
-            "'SAVEDATA_DETAIL'": strz # the string displayed in save description
-            "'SAVEDATA_DIRECTORY'": strz # the name of the directory where a save is saved
+            "'PARENTAL_LEVEL'": int_value # I guess it is min allowed age
+            "'SAVEDATA_DETAIL'": string_value # the string displayed in save description
+            "'SAVEDATA_DIRECTORY'": string_value # the name of the directory where a save is saved
             "'SAVEDATA_FILE_LIST'": savedata_file_list
             "'SAVEDATA_PARAMS'": savedata_params # don't know what is it
-            "'SAVEDATA_TITLE'": strz # arbitrary string, usually contains a name of a player or a anme of last played level
-            "'TITLE'": strz # contains a name of a game
+            "'SAVEDATA_TITLE'": string_value # arbitrary string, usually contains a name of a player or a anme of last played level
+            "'TITLE'": string_value # contains a name of a game
     types:
+      # Primitive values are wrapped in user types: a switch mixing strings,
+      # integers and user types cannot be compiled for C++.
+      string_value:
+        seq:
+          - id: value
+            type: strz
+      int_value:
+        seq:
+          - id: value
+            type: u4
       savedata_file_list:
         doc: I guess list of files with their "crypto" keys
         seq:
