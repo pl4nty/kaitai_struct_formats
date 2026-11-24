@@ -148,7 +148,10 @@ types:
       block_size:
         value: 1024 << log_block_size
       block_group_count:
-        value: blocks_count / blocks_per_group
+        value: (blocks_count - first_data_block + blocks_per_group - 1) / blocks_per_group
+        doc: |
+          Number of block groups. The last group may be shorter than
+          `blocks_per_group`, so the division rounds up.
     enums:
       state_enum:
         1: valid_fs
