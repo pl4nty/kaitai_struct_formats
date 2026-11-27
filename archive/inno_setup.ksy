@@ -27,7 +27,10 @@ doc: |
   stored size and whether it is compressed (zlib before 4.1.6, LZMA
   since), followed by the stored data in blocks of up to 4 KiB, each
   preceded by its CRC-32. The compressed data is the concatenation of the
-  block payloads, so it is not decompressed here.
+  block payloads; it is joined and checked with kaitai_compress's
+  `crc32_chunks` process and then decompressed with `zlib` or
+  `lzma_props`. The decompressed setup header and entries, whose layout
+  changes with almost every release, are not parsed here.
 doc-ref:
   - https://github.com/russellbanks/inno/tree/v0.7.6/core/src
   - https://github.com/devicie/Komac-anthelion/blob/f9b303df556625ef39215e9c66e08ca037829866/src/analysis/installers/exe.rs
@@ -244,9 +247,11 @@ types:
     seq:
       - id: header
         type: stream_header
-      - id: blocks
+      - id: data
         size: header.len_blocks
-        type: blocks
+        type: stream_data(header.compression)
+        process: kaitai.compress.crc32_chunks(4096)
+        doc: The stream with the block CRCs checked and removed.
   stream_header:
     seq:
       - id: checksum
@@ -280,7 +285,8 @@ types:
         enum: compression
         doc: |
           LZMA streams start with the 5-byte LZMA properties and dictionary
-          size; there is no uncompressed size and no end marker.
+          size; there is no uncompressed size, and the stream ends with an
+          end marker.
       len_payload_old:
         value: 'len_compressed_old == 0xffff_ffff ? len_uncompressed_old : len_compressed_old'
         if: version < 40009
@@ -297,15 +303,28 @@ types:
         0: stored
         1: zlib
         2: lzma
-  blocks:
+  stream_data:
+    params:
+      - id: compression
+        type: u1
+        enum: stream_header::compression
     seq:
-      - id: blocks
-        type: block
-        repeat: eos
-  block:
-    seq:
-      - id: checksum
-        type: u4
-        doc: CRC-32 of the block's data.
-      - id: data
-        size: '_io.size - _io.pos < 4096 ? _io.size - _io.pos : 4096'
+      - id: stored
+        size-eos: true
+        if: compression == stream_header::compression::stored
+      - id: zlib
+        size-eos: true
+        process: zlib
+        if: compression == stream_header::compression::zlib
+      - id: lzma
+        size-eos: true
+        process: kaitai.compress.lzma_props
+        if: compression == stream_header::compression::lzma
+    instances:
+      contents:
+        value: |
+          compression == stream_header::compression::lzma ? lzma
+          : compression == stream_header::compression::zlib ? zlib
+          : stored
+        doc: |
+          The decompressed stream.

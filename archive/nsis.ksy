@@ -22,13 +22,13 @@ doc: |
   sequence of blocks, each with a 4-byte length whose top bit says whether
   the block is compressed). The compressor (deflate, NSIS's variant of
   bzip2, or LZMA) is not recorded anywhere, so it is detected from the
-  first bytes in the same way as the NSIS decompilers do. Only a
-  non-solid header that is stored, or compressed with deflate, is
-  decompressed and parsed here (with `kaitai.compress.deflate`): NSIS's
-  bzip2 has no stream header and its LZMA streams have no length, so
-  neither can be decoded by a stock decompressor. NSIS's deflate also
-  omits the one's complement length of stored blocks, so a header with a
-  stored deflate block fails to decompress.
+  first bytes in the same way as the NSIS decompilers do. The header is
+  decompressed with the kaitai_compress processes for NSIS's formats:
+  `deflate_nsis` (NSIS 2 omits the one's complement length of stored
+  blocks), `bz2_nsis` (bzip2 blocks without the stream framing) and
+  `lzma_props` (LZMA properties then data, no length, with an optional BCJ
+  filter flag). In non-solid data only the header block is parsed; the
+  files follow it as more blocks.
 
   The layout of the decompressed header is that of NSIS 2.0 to 3.x, as
   read by Komac; NSIS 1.x headers, whose first header signatures are
@@ -133,30 +133,98 @@ types:
         type: block
         if: not is_solid
         doc: The installer header, as the first block of non-solid data.
-      solid_data:
+      solid_lzma:
         pos: 0
         size-eos: true
+        type: solid_stream
+        process: kaitai.compress.lzma_props(start.has_filter_flag)
+        if: is_solid and solid_compression == compression::lzma
+      solid_bzip2:
+        pos: 0
+        size-eos: true
+        type: solid_stream
+        process: kaitai.compress.bz2_nsis
+        if: is_solid and solid_compression == compression::bzip2
+      solid_deflate:
+        pos: 0
+        size-eos: true
+        type: solid_stream
+        process: kaitai.compress.deflate_nsis
+        if: is_solid and solid_compression == compression::deflate
+      solid:
+        value: |
+          solid_compression == compression::lzma ? solid_lzma
+          : solid_compression == compression::bzip2 ? solid_bzip2
+          : solid_deflate
         if: is_solid
-        doc: |
-          One compressed stream of the 4-byte header length, the header and
-          every file, each file preceded by its 4-byte length. LZMA streams
-          start with the 5-byte properties and dictionary size.
+        doc: The decompressed solid stream.
+  solid_stream:
+    doc: |
+      The decompressed data of a solid installer: the header and every file,
+      each preceded by its 4-byte length.
+    seq:
+      - id: len_header_data
+        type: u4
+      - id: header_data
+        size: len_header_data
+        type: header_data
+      - id: files
+        type: solid_file
+        repeat: eos
+    instances:
+      header:
+        value: header_data.header
+        if: header_data.is_supported
+  header_data:
+    doc: |
+      Decompressed header bytes, parsed as `header` if the size of its
+      fixed part (the offset of the pages block) is one of the NSIS 2.0 to
+      3.x layouts. NSIS 1.x headers are left as bytes.
+    seq:
+      - id: data
+        size-eos: true
+    instances:
+      len_header_struct:
+        pos: 4
+        type: u4
+        if: _io.size >= 8
+      is_supported:
+        value: |
+          _io.size >= 8 and (len_header_struct == 276 or len_header_struct == 284
+          or len_header_struct == 288 or len_header_struct == 300)
+      header:
+        pos: 0
+        type: header
+        if: is_supported
+  solid_file:
+    seq:
+      - id: len_data
+        type: u4
+      - id: data
+        size: len_data
   block:
     seq:
       - id: len_and_flag
         type: u4
       - id: stored
         size: len_data
-        type: header
+        type: header_data
         if: not is_compressed
+      - id: lzma
+        size: len_data
+        type: header_data
+        process: kaitai.compress.lzma_props(start.has_filter_flag)
+        if: is_compressed and compression == compression::lzma
+      - id: bzip2
+        size: len_data
+        type: header_data
+        process: kaitai.compress.bz2_nsis
+        if: is_compressed and compression == compression::bzip2
       - id: deflate
         size: len_data
-        type: header
-        process: kaitai.compress.deflate
+        type: header_data
+        process: kaitai.compress.deflate_nsis
         if: is_compressed and compression == compression::deflate
-      - id: compressed
-        size: len_data
-        if: is_compressed and compression != compression::deflate
     instances:
       is_compressed:
         value: (len_and_flag & 0x8000_0000) != 0
@@ -173,9 +241,17 @@ types:
           : compression::deflate
         enum: compression
         if: is_compressed
+      data:
+        value: |
+          not is_compressed ? stored
+          : compression == compression::lzma ? lzma
+          : compression == compression::bzip2 ? bzip2
+          : deflate
+        doc: The decompressed block.
       header:
-        value: 'is_compressed ? deflate : stored'
-        if: not is_compressed or compression == compression::deflate
+        value: data.header
+        if: data.is_supported
+        doc: The block parsed as the installer header (first block only).
   compression_signature:
     doc: |
       The first bytes of compressed data, from which the compressor is
@@ -190,7 +266,8 @@ types:
           and bytes[5] == 0 and (bytes[6] & 0x80) == 0
         doc: |
           LZMA properties 0x5D (lc=3, lp=0, pb=2) and a dictionary size
-          below 16 MiB, then a range coder that starts with a zero byte.
+          that is a multiple of 64 KiB, then a range coder that starts with
+          a zero byte and a byte below 0x80.
       is_lzma_at_1:
         value: |
           bytes[0] <= 1 and bytes[1] == 0x5d and bytes[2] == 0 and bytes[3] == 0
