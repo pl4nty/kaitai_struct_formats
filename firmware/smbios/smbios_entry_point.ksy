@@ -100,7 +100,7 @@ types:
     instances:
       table:
         io: _io
-        pos: ofs_structure_table
+        pos: ofs_structure_table.as<s8>
         size: len_structure_table
         type: smbios
         if: ofs_structure_table + len_structure_table <= _io.size
@@ -136,7 +136,7 @@ types:
     instances:
       table:
         io: _io
-        pos: ofs_structure_table
-        size: 'ofs_structure_table + max_len_structure_table <= _io.size ? max_len_structure_table : _io.size - ofs_structure_table'
+        pos: ofs_structure_table.as<s8>
+        size: 'ofs_structure_table.as<s8> + max_len_structure_table <= _io.size ? max_len_structure_table : _io.size - ofs_structure_table.as<s8>'
         type: smbios
-        if: ofs_structure_table < _io.size
+        if: ofs_structure_table.as<s8> < _io.size

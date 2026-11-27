@@ -463,7 +463,7 @@ types:
         type: u1
         if: not _io.eof
       - id: contained_elements
-        size: len_contained_element
+        size: len_contained_element.as<u4>
         type: contained_element
         repeat: expr
         repeat-expr: num_contained_elements
@@ -1080,7 +1080,7 @@ types:
         type: u1
         if: not _io.eof
       - id: supported_log_type_descriptors
-        size: len_log_type_descriptor
+        size: len_log_type_descriptor.as<u4>
         type: event_log_type_descriptor
         repeat: expr
         repeat-expr: num_supported_log_type_descriptors
@@ -1922,7 +1922,7 @@ types:
           Absent before version 3.2, when the data of an OEM interface
           started with the IANA enterprise number right here.
       - id: interface_type_specific_data
-        size: len_interface_type_specific_data
+        size: len_interface_type_specific_data.as<u4>
         if: is_length_prefixed
         doc: |
           For an OEM interface, starts with the IANA enterprise number
