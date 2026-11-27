@@ -4,6 +4,10 @@
 # stub searches. Expects were read by hand from the first header and, for the
 # non-solid deflate sample, from the header inflated with Python's zlib (wbits
 # -15) and decoded following NSIS fileform.h v311 and Komac's nsis module.
+# Solid samples: sizes and counts from the stream decompressed with the
+# kaitai_compress Python processes (lzma_props and bz2_nsis, checked by the
+# decompressed length matching the header and files exactly), read with a
+# separate struct.unpack script, not with this spec.
 samples:
   - url: https://sembiance.com/fileFormatSamples/archive/nullsoftInstallerPackage/Setup.exe
     sha256: ddc52adcbdaad9fb764609d29c98ad8484933a9c47c0ff596716089014de2936
@@ -34,6 +38,11 @@ samples:
       first_header.len_header: 19373
       body.is_solid: true
       body.solid_compression: lzma
+      body.solid.len_header_data: 19373
+      body.solid.header.len_header_struct: 276   # NSIS 2.0 layout
+      len(body.solid.header.sections): 1
+      len(body.solid.header.entries): 478
+      len(body.solid.files): 12
   - url: https://sembiance.com/fileFormatSamples/archive/nullsoftInstallerPackage/privoxy_setup_3_0_6.exe
     sha256: 6ad9d6a2e3b6d46614e93e9e2613183a09bb5e99c27c56372c1a45b4507d11da
     extract:
@@ -43,6 +52,9 @@ samples:
       first_header.len_header: 25353
       body.is_solid: true
       body.solid_compression: bzip2
+      # "Nullsoft Install System v1.98": an NSIS 1.x header, left unparsed
+      body.solid.header_data.is_supported: false
+      len(body.solid.files): 85
   # Authenticode signature follows the installer data (len_all_data is
   # 6283438 of the 6294024 bytes after the slice offset).
   - url: https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.7/npp.8.7.Installer.exe
@@ -55,3 +67,54 @@ samples:
       first_header.len_all_data: 6283438
       body.is_solid: true
       body.solid_compression: lzma
+      body.solid.header.len_header_struct: 300
+      len(body.solid.header.sections): 206
+      len(body.solid.header.entries): 11562
+      len(body.solid.files): 245
+# winget-pkgs NSIS installers (InstallerType nullsoft) on GitHub releases,
+# chosen by probing the first header of each for its compressor. Expects
+# come from the header decompressed with the kaitai_compress Python
+# processes and read with a separate struct.unpack script.
+  # non-solid, LZMA header block
+  - url: https://github.com/scaryrawr/sl/releases/download/v5.06.3/sl-5.06.0-win64.exe
+    sha256: 4d7d1583c57bf95a5d7670303faf1d764ae09282b6ec10485b58f27ae9e62de0
+    extract:
+      format: slice
+      offset: 71680
+    eof: true
+    expect:
+      first_header.len_header: 410774
+      body.is_solid: false
+      body.header_block.compression: lzma
+      body.header_block.header.len_header_struct: 300
+      len(body.header_block.header.pages): 9
+      len(body.header_block.header.sections): 6
+      len(body.header_block.header.entries): 727
+  # non-solid, NSIS bzip2 header block
+  - url: https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.2/libjpeg-turbo-3.0.2-gcc.exe
+    sha256: 6bf8e38a51a2ed86d0865a181d7bf3b12b7ef2c9904e620c2b8cebf1e608003a
+    extract:
+      format: slice
+      offset: 35840
+    expect:
+      first_header.len_header: 5492
+      body.is_solid: false
+      body.header_block.compression: bzip2
+      body.header_block.header.len_header_struct: 300
+      len(body.header_block.header.pages): 3
+      len(body.header_block.header.sections): 1
+      len(body.header_block.header.entries): 60
+  # solid deflate (a Tauri app)
+  - url: https://github.com/fuyoo/bs-redis-desktop-client/releases/download/v2.0.0-2/BS_2.0.0-2_x64-setup.exe
+    sha256: 8a587cd921c8e2c2607928e578969eeba406292b679bae38dd55c050cdc1de33
+    extract:
+      format: slice
+      offset: 74240
+    expect:
+      first_header.len_header: 73306
+      body.is_solid: true
+      body.solid_compression: deflate
+      body.solid.header.len_header_struct: 300
+      len(body.solid.header.sections): 3
+      len(body.solid.header.entries): 1961
+      len(body.solid.files): 10

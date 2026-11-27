@@ -4,7 +4,10 @@
 # ("rDlPtS" CD E6 D7 7B 0B 2A) otherwise. Expects were read by hand: the
 # version strings ("Inno Setup Setup Data (x.y.z)") and table revisions from a
 # hex dump, the encryption header following issrc Shared.Struct.pas and the
-# inno crate v0.7.6.
+# inno crate v0.7.6. Decompressed streams: the CRC-32 blocks joined by a
+# separate script and inflated with Python's zlib, or decoded with Python's
+# lzma (raw LZMA1, filter from the 5 property bytes, ending with an end
+# marker). The primary stream starts with the application name.
 samples:
   - url: https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/1674007302_setup.exe
     sha256: 3b35d5b00c0286c8b1f5bea0811330102383410fdc9430ebcfac4fe596baa9a4
@@ -12,6 +15,9 @@ samples:
       ofs_offset_table: "int.from_bytes(_data[0x34:0x38], 'little')"
     expect:
       setup_0.version.number: 30005
+      len(setup_0.primary_stream.data.contents): 170432
+      setup_0.primary_stream.data.contents[4:23]: Look Around Castles
+      len(setup_0.file_location_stream.data.contents): 82
       setup_0.version.is_unicode: false
   - url: https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/Setup.exe
     sha256: 05db659b508fc9eaa84fdcae8731ba735187a85f817191c01e83d66558475449
@@ -21,12 +27,18 @@ samples:
     expect:
       offset_table.signature: 72446c507453303287655678   # "rDlPtS02" 87 65 56 78
       setup_0.version.number: 20011
+      len(setup_0.primary_stream.data.contents): 175831
+      setup_0.primary_stream.data.contents[4:24]: Advanced Privacy Pro
+      len(setup_0.file_location_stream.data.contents): 943
   - url: https://sembiance.com/fileFormatSamples/archive/innoSetupInstaller/etc_setup.exe
     sha256: 76fc3ca99f81a2cb46caa69cedc74bd65fd0a179d1b86ed75462e0e894490c4e
     params:
       ofs_offset_table: "int.from_bytes(_data[0x34:0x38], 'little')"
     expect:
       setup_0.version.number: 20018
+      len(setup_0.primary_stream.data.contents): 52349
+      setup_0.primary_stream.data.contents[4:24]: Express Thumbnail Cr
+      len(setup_0.file_location_stream.data.contents): 3731
   - url: https://github.com/greenshot/greenshot/releases/download/Greenshot-RELEASE-1.2.10.6/Greenshot-INSTALLER-1.2.10.6-RELEASE.exe
     sha256: 1687311b4e7a3720be20490e8ed6cc772a32336a7bed8896e475b8ec616c6b81
     params:
@@ -36,6 +48,7 @@ samples:
       setup_0.version.number: 50507
       setup_0.version.is_unicode: true
       setup_0.primary_stream.header.compression: lzma
+      setup_0.primary_stream.data.contents[:22]: 1200000047007200650065006e00730068006f007400   # "Greenshot" (UTF-16LE)
   - url: https://github.com/jrsoftware/issrc/releases/download/is-6_4_3/innosetup-6.4.3.exe
     sha256: f3c42116542c4cc57263c5ba6c4feabfc49fe771f2f98a79d2f7628b8762723b
     params:
@@ -44,6 +57,7 @@ samples:
       offset_table.revision: 1
       setup_0.version.number: 60403
       setup_0.version.suffix: ''
+      setup_0.primary_stream.data.contents[:12]: 1400000049006e006e006f00   # "Inno" (UTF-16LE)
       setup_0.version.is_unicode: true
   - url: https://github.com/jrsoftware/issrc/releases/download/is-6_5_4/innosetup-6.5.4.exe
     sha256: fa73bf47a4da250d185d07561c2bfda387e5e20db77e4570004cf6a133cc10b1
@@ -54,9 +68,11 @@ samples:
       setup_0.version.number: 60502
       setup_0.encryption_header.encryption_use: none
       setup_0.encryption_header.kdf_iterations: 220000
+      setup_0.primary_stream.data.contents[:12]: 1400000049006e006e006f00   # "Inno" (UTF-16LE)
   - url: https://github.com/jrsoftware/issrc/releases/download/is-6_7_0/innosetup-6.7.0.exe
     sha256: f45c7d68d1e660cf13877ec36738a5179ce72a33414f9959d35e99b68c52a697
     params:
       ofs_offset_table: "_data.index(bytes.fromhex('72446c507453cde6d77b0b2a'))"
     expect:
       setup_0.version.number: 60700
+      setup_0.primary_stream.data.contents[:12]: 1400000049006e006e006f00   # "Inno" (UTF-16LE)

@@ -23,12 +23,14 @@ doc: |
   parsed here.
 
   A file whose flags have bit 1 (encoded) or bit 2 (encoded in 1024-byte
-  chunks) set is obfuscated with a key derived from its name and then
-  usually zlib-compressed; it is not decoded here. Each byte is
-  `~(key[i % len(key)] ^ rotate_left(byte, 4))`, where the key is the
-  file name's UTF-8 bytes (as Komac computes it; not the stored UTF-16
-  of `ISSetupStream` names) XORed with 13 35 86 07 repeated, and the key index
-  restarts for every chunk of a chunked file.
+  chunks) set is obfuscated with a key derived from its name: each byte is
+  `~(key[i % len(key)] ^ rotate_left(byte, 4))`, where the key is the file
+  name's UTF-8 bytes XORed with 13 35 86 07 repeated, and the key index
+  restarts for every chunk of a chunked file. Even for `ISSetupStream`,
+  whose names are stored as UTF-16LE, the key is the UTF-8 name. The
+  decoded data of newer launchers is zlib-compressed; older ones store it
+  as it is. `contents` decodes both, with the
+  `installshield` and `zlib` processes of kaitai_compress.
 doc-ref:
   - https://github.com/devicie/Komac-anthelion/tree/f9b303df556625ef39215e9c66e08ca037829866/src/analysis/installers/installshield
 seq:
@@ -112,8 +114,40 @@ types:
         if: is_stream
       - id: data
         size: len_data
+        if: not is_encoded
+      - id: decoded
+        size: len_data
+        type: decoded
+        process: kaitai.compress.installshield(name, is_chunked)
+        if: is_encoded
     instances:
       name:
         value: 'is_stream ? name_utf16 : name_ansi'
       is_encoded:
         value: (flags & 0b110) != 0
+      is_chunked:
+        value: (flags & 0b100) != 0
+      contents:
+        value: 'is_encoded ? decoded.contents : data'
+        doc: The file, decoded and decompressed.
+  decoded:
+    seq:
+      - id: data
+        size-eos: true
+    instances:
+      is_zlib:
+        value: |
+          data.size >= 2 and data[0] == 0x78
+          and (data[1] == 0x01 or data[1] == 0x5e or data[1] == 0x9c or data[1] == 0xda)
+        doc: |
+          Whether the data starts with a zlib header with a 32 KiB window and
+          no preset dictionary, as zlib writes by default. Stricter than
+          the zlib header rules, so that plain files that happen to start
+          with a valid header (such as "x^") are less likely to match.
+      inflated:
+        pos: 0
+        size-eos: true
+        process: zlib
+        if: is_zlib
+      contents:
+        value: 'is_zlib ? inflated : data'

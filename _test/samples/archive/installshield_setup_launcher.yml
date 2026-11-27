@@ -23,3 +23,86 @@ samples:
       files[3].len_data: 1346
       files[3].flags: 6
       files[3].is_encoded: true
+      len(files[0].contents): 360054
+      files[0].contents[:2]: BM
+      len(files[2].contents): 13090364
+      files[2].contents[:8]: d0cf11e0a1b11ae1
+      files[3].contents[:12]: fffe5b0049006e0066006f00   # "[Info" in UTF-16LE, with BOM
+# The samples below are winget-pkgs installers (commit 2226cc1e, sha256s
+# match the InstallerSha256 of their manifests: Pathloss.AntRad 5.01.05,
+# Tachosys.digiCentralArchiveSync 1.31, ITRI.QuickSECS 2.3.05 and
+# Robomatter.RobotVirtualWorlds.FTCCascadeEffect 2.0.1). Slices start at the
+# end of the last PE section and end at the Authenticode signature, if any
+# (both from pefile 2024.8.26). Headers, file entries, the decoded data and
+# its zlib size come from a separate Python reading that follows Komac's
+# installshield module, with zlib for the inflated sizes.
+  # ISSetupStream, header type 4 (24 bytes of attributes per entry)
+  - url: https://pathloss.com/antrad_setup.exe
+    sha256: d8af68f0e3af82f56f65d426594fb779408c83bca1cd9fbd3a5dfa2d71e1cff0
+    extract:
+      format: slice
+      offset: 1096192
+      size: 1274576
+    eof: true
+    expect:
+      header.magic: ISSetupStream
+      header.header_type: 4
+      header.num_files: 4
+      files[0].name: 0x0409.ini
+      files[1].name: AntRad.isc
+      files[2].name: AntRad.msi
+      files[2].len_data: 1266524
+      files[2].is_chunked: true
+      len(files[2].contents): 2397184
+      files[2].contents[:8]: d0cf11e0a1b11ae1
+      files[3].name: Setup.ini
+      len(files[3].contents): 5410
+  # ISSetupStream, header type 2, unsigned
+  - url: https://www.prosysdev.com/downloads/ArchiveSync_1_31.exe
+    sha256: 21cdb9025f7833f90e5285115081280e391f36ff3865d92318eb9eb959b5235d
+    extract:
+      format: slice
+      offset: 1463296
+    eof: true
+    expect:
+      header.magic: ISSetupStream
+      header.header_type: 2
+      header.num_files: 15
+      files[6].name: Microsoft .NET Framework 4.8 Full.prq
+      files[6].contents[:5]: <?xml
+      len(files[6].contents): 1640
+      files[13].name: digiCentral Archive Sync.msi
+      len(files[13].contents): 9631232
+      files[14].name: Setup.ini
+  # "InstallShield" overlay whose encoded files are not zlib-compressed
+  - url: https://secs.itri.org.tw/download/QuickSECS%20Driver/QS2305A2_Retail.exe
+    sha256: 081b5fc1a3101a22a8570a383cc1c238d835d23b5f55324db60a5fcf4ce642f3
+    name: QS2305A2_Retail.exe
+    extract:
+      format: slice
+      offset: 262144
+    eof: true
+    expect:
+      header.magic: InstallShield
+      header.num_files: 5
+      files[1].name: instmsiw.exe
+      files[1].decoded.is_zlib: false
+      files[1].contents[:2]: MZ
+      files[4].name: Setup.ini
+      files[4].len_data: 1957
+      files[4].contents[:6]: '[Info]'
+  # NB10 debug information before an "InstallShield" header
+  - url: https://www.robotvirtualworlds.com/files/competition-worlds/RVWLevelPack_FTCCascadeEffect201.exe
+    sha256: 0070e821f3bfae1f8a6bfee80e3de4946771a01f6e8fd2af5b5fc2411733ab2c
+    extract:
+      format: slice
+      offset: 634880
+      size: 18915274
+    eof: true
+    expect:
+      has_pdb_info: true
+      header.magic: InstallShield
+      header.num_files: 4
+      files[2].name: FTC Cascade Effect.msi
+      len(files[2].contents): 19470336
+      files[3].contents[:6]: '[Info]'
