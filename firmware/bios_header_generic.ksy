@@ -5,7 +5,7 @@ meta:
   license: Unlicense
   imports:
     - ./pirt
-    - ./smbios32
+    - ./smbios/smbios_entry_point
     - ./pnp_hdr
     - ./pmm_str
     - ./bios32
@@ -32,7 +32,7 @@ seq:
         '"$PMM"': pmm_str
         '"_32_"': bios32
         '"$PIR"': pirt
-        '"_SM_"': smbios32
+        '"_SM_"': smbios_entry_point::entry_point_32
 types:
   header_ptr:
     seq:
