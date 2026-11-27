@@ -1,0 +1,68 @@
+# Expects from dmidecode 3.5 --from-dump ("SMBIOS x.y present", structure
+# counts) and the header bytes it reads.
+samples:
+  # u-root pkg/smbios test data: dmidecode --dump-bin files, so the table
+  # address is 0x20 and `table` parses the whole structure table.
+  - url: https://raw.githubusercontent.com/u-root/u-root/610575b906e3e86d797cfa12ffb706db7e7d224b/pkg/smbios/testdata/satellite_pro_l70_testdata.bin
+    sha256: 7c18c97187f8f0ac4d7fe9160bf85bb5854910f1cd485e4b3b577613812f7589
+    expect:
+      anchor: _SM_
+      body.major_version: 2
+      body.minor_version: 7
+      body.legacy.ofs_structure_table: 0x20
+      body.legacy.len_structure_table: 3054
+      body.legacy.num_structures: 69
+      body.legacy.bcd_revision: 0x27
+      len(body.table.structures): 69
+      body.table.structures[0].formatted_area.vendor.value: Insyde Corp.
+  - url: https://raw.githubusercontent.com/u-root/u-root/610575b906e3e86d797cfa12ffb706db7e7d224b/pkg/smbios/testdata/smbios_table.bin
+    name: thinkpad_t490.bin
+    sha256: 2ba9aff91ce1b253df6fbf0691e82413b7d46fed796e9128e51953d17d01f098
+    expect:
+      anchor: _SM3
+      body.major_version: 3
+      body.minor_version: 1
+      body.docrev: 1
+      body.entry_point_revision: 1
+      body.ofs_structure_table: 0x20
+      body.max_len_structure_table: 3320
+      len(body.table.structures): 69
+      body.table.structures[-1].type: end_of_table
+  # fwupd test firmware: /sys/firmware/dmi/tables/smbios_entry_point files.
+  # The table address is a physical one, beyond the end of the file.
+  - url: https://raw.githubusercontent.com/fwupd/fwupd-test-firmware/e4ed048a3d5bbd1f1df08702052277959cca7e80/ci-tests/libfwupdplugin/tests/dmi/tables/smbios_entry_point
+    name: smbios_entry_point_32.bin
+    sha256: 232c2bb9edf649923a653fdad0a5204af56603ecfa174c8dd78d998ad957a2eb
+    eof: true
+    expect:
+      anchor: _SM_
+      body.len_entry_point: 0x1f
+      body.major_version: 2
+      body.minor_version: 7
+      body.len_max_structure: 0x8a
+      body.legacy.ofs_structure_table: 0xbcd3d000
+      body.legacy.len_structure_table: 2523
+      body.legacy.num_structures: 62
+      body.table: null
+  - url: https://raw.githubusercontent.com/fwupd/fwupd-test-firmware/e4ed048a3d5bbd1f1df08702052277959cca7e80/ci-tests/libfwupdplugin/tests/dmi/tables64/smbios_entry_point
+    name: smbios_entry_point_64.bin
+    sha256: a6735557a1924d0eb9ba490cf904187c8ea79d0004ad64f9c85d70df94a5712e
+    eof: true
+    expect:
+      anchor: _SM3
+      body.major_version: 3
+      body.minor_version: 0
+      body.docrev: 0
+      body.max_len_structure_table: 5829
+      body.ofs_structure_table: 0x6a162000
+      body.table: null
+  - url: https://raw.githubusercontent.com/fwupd/fwupd-test-firmware/e4ed048a3d5bbd1f1df08702052277959cca7e80/ci-tests/plugins/intel-me-smbios/tests/smbios_entry_point
+    name: smbios_entry_point_3_5.bin
+    sha256: 5ad5bfcc4638dd68b4a37849b346e8df75cf5a41c5b75dbea69796f5f66a3767
+    eof: true
+    expect:
+      anchor: _SM3
+      body.major_version: 3
+      body.minor_version: 5
+      body.max_len_structure_table: 5965
+      body.ofs_structure_table: 0x333fe000

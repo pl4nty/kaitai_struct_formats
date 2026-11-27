@@ -1,14 +1,16 @@
-# u-root pkg/smbios test data: dmidecode --dump-bin files (entry point, then
-# the structure table at 0x20). Expects from dmidecode 3.5 --from-dump.
+# Structure tables. Expects from dmidecode 3.5 --from-dump (raw tables are
+# wrapped in a synthetic _SM3_ entry point for it).
 samples:
+  # u-root pkg/smbios test data: dmidecode --dump-bin files (entry point, then
+  # the structure table at 0x20).
   - url: https://raw.githubusercontent.com/u-root/u-root/610575b906e3e86d797cfa12ffb706db7e7d224b/pkg/smbios/testdata/satellite_pro_l70_testdata.bin
     sha256: 7c18c97187f8f0ac4d7fe9160bf85bb5854910f1cd485e4b3b577613812f7589
     extract: { format: slice, offset: 32 }
     eof: true
     expect:
       len(structures): 69
-      structures[0].formatted_area.vendor: Insyde Corp.
-      structures[1].formatted_area.product_name: SATELLITE PRO L70-A
+      structures[0].formatted_area.vendor.value: Insyde Corp.
+      structures[1].formatted_area.product_name.value: SATELLITE PRO L70-A
       structures[-1].type: end_of_table
   - url: https://raw.githubusercontent.com/u-root/u-root/610575b906e3e86d797cfa12ffb706db7e7d224b/pkg/smbios/testdata/smbios_table.bin
     name: thinkpad_t490.bin
@@ -17,6 +19,99 @@ samples:
     eof: true
     expect:
       len(structures): 69
-      '[s for s in structures if s.handle == 0x11][0].formatted_area.vendor': LENOVO
-      '[s for s in structures if s.handle == 0x12][0].formatted_area.version': ThinkPad T490
+      '[s for s in structures if s.handle == 0x11][0].formatted_area.vendor.value': LENOVO
+      '[s for s in structures if s.handle == 0x12][0].formatted_area.version.value': ThinkPad T490
       structures[-1].handle: 0xfeff
+  # fwupd test firmware: raw tables as in /sys/firmware/dmi/tables/DMI.
+  - url: https://raw.githubusercontent.com/fwupd/fwupd-test-firmware/e4ed048a3d5bbd1f1df08702052277959cca7e80/ci-tests/libfwupdplugin/tests/DMI-T440s.bin
+    sha256: 68c6907fe73826452ee71275476098b81e87475ffbfe93b57af17f9b11426049
+    eof: true
+    expect:
+      len(structures): 62
+      '[s for s in structures if int(s.type) == 0][0].formatted_area.firmware_version.value': 'GJET75WW (2.25 )'
+      '[s for s in structures if s.handle == 0][0].formatted_area.processor_version.value': Intel(R) Core(TM) i7-4600U CPU @ 2.10GHz
+      '[s for s in structures if s.handle == 6][0].formatted_area.part_number.value': 'EDJ8416E6MB-GN-F  '
+  - url: https://raw.githubusercontent.com/fwupd/fwupd-test-firmware/e4ed048a3d5bbd1f1df08702052277959cca7e80/ci-tests/libfwupdplugin/tests/DMI-xps13.bin
+    sha256: fcd168f921b1e0d24e5b82fcf3650b668e5520b11e58bb4fcc779e953d2ce621
+    eof: true
+    expect:
+      len(structures): 94
+      '[s for s in structures if int(s.type) == 0][0].formatted_area.vendor.value': Dell Inc.
+      '[s for s in structures if int(s.type) == 1][0].formatted_area.product_name.value': XPS 13 9350
+      '[s for s in structures if s.handle == 0x14][0].formatted_area.slot_designation.value': J6B2
+  - url: https://raw.githubusercontent.com/fwupd/fwupd-test-firmware/e4ed048a3d5bbd1f1df08702052277959cca7e80/ci-tests/libfwupdplugin/tests/DMI-MicroServer.bin
+    sha256: fc946b8e2efba7e1a4437887187bfce3dba846dfc334cfae5444f763d762c765
+    eof: true
+    expect:
+      len(structures): 35
+      '[s for s in structures if int(s.type) == 1][0].formatted_area.product_name.value': ProLiant MicroServer
+      '[s for s in structures if s.handle == 0x1b][0].formatted_area.interface_type': kcs
+      '[s for s in structures if s.handle == 0x1b][0].formatted_area.i2c_target_address': 0x20
+  - url: https://raw.githubusercontent.com/fwupd/fwupd-test-firmware/e4ed048a3d5bbd1f1df08702052277959cca7e80/ci-tests/libfwupdplugin/tests/dmi/tables64/DMI
+    name: xps13_9365.bin
+    sha256: 59de56a3304ef66901a0225686a69d5cb71e157e55f578594b72303a346f8044
+    eof: true
+    expect:
+      len(structures): 83
+      '[s for s in structures if int(s.type) == 0][0].formatted_area.firmware_version.value': 99.01.21
+      '[s for s in structures if int(s.type) == 2][0].formatted_area.product.value': 0DVT6M
+  - url: https://raw.githubusercontent.com/fwupd/fwupd-test-firmware/e4ed048a3d5bbd1f1df08702052277959cca7e80/ci-tests/plugins/intel-me-smbios/tests/DMI
+    name: rog_maximus_z790_hero.bin
+    sha256: c8c69dadcef9f8142f5d2ae5dd126c73ae81f5fef0c509f8cadfd79195b9c852
+    eof: true
+    expect:
+      len(structures): 118
+      '[s for s in structures if int(s.type) == 0][0].formatted_area.vendor.value': American Megatrends Inc.
+      '[s for s in structures if s.handle == 0x23][0].formatted_area.processor_version.value': 13th Gen Intel(R) Core(TM) i9-13900K
+      '[s for s in structures if s.handle == 0x0e][0].formatted_area.part_number.value': 'F5-6000J3636F16G    '
+      '[s for s in structures if s.handle == 0x12][0].formatted_area.vendor_id': INTC
+      '[s for s in structures if s.handle == 0x13][0].formatted_area.firmware_component_name.value': TPM Firmware
+  # Generated: no public dump has these types or the 3.5+ slot fields.
+  # Expects from dmidecode 3.5 --from-dump (types 0-33, 42) and from the
+  # generator's inputs (37, where dmidecode 3.5 reads device loads one byte
+  # early; 44 and 46, which it does not decode).
+  - fixture: firmware/smbios/synthetic.bin
+    sha256: a9dc6bf6e35bab49d90bb428d2120396091671ffd0afbb1b514444409c035d42
+    recipe: >-
+      Python 3.13: python3 _test/fixtures/firmware/smbios/make_synthetic.py
+      _test/fixtures/firmware/smbios/synthetic.bin
+    eof: true
+    expect:
+      len(structures): 12
+      structures[0].formatted_area.rom_size: 0xff
+      structures[0].formatted_area.extended_rom_size.size: 48
+      structures[0].formatted_area.extended_rom_size.unit: gib
+      structures[0].formatted_area.characteristics_ext2.uefi: true
+      structures[1].formatted_area.enclosure_type: rack_mount_chassis
+      structures[1].formatted_area.contained_elements[0].board_type: server_blade
+      structures[1].formatted_area.contained_elements[0].maximum: 8
+      structures[1].formatted_area.contained_elements[1].structure_type: system_power_supply
+      structures[1].formatted_area.sku_number.value: SKU-1
+      structures[1].formatted_area.rack_height: 2
+      structures[2].formatted_area.slot_type: pci_express_gen3_x16
+      structures[2].formatted_area.base_address.bus_number: 0x3a
+      structures[2].formatted_area.base_address.device_number: 2
+      structures[2].formatted_area.base_address.function_number: 1
+      structures[2].formatted_area.peer_groups[0].address.segment_group_number: 1
+      structures[2].formatted_area.peer_groups[0].address.bus_number: 0x3b
+      structures[2].formatted_area.peer_groups[0].data_bus_width: 11
+      structures[2].formatted_area.slot_information: 3
+      structures[2].formatted_area.slot_pitch: 2032
+      structures[2].formatted_area.slot_height: full_height
+      structures[3].formatted_area.boot_option_on_limit: do_not_reboot
+      structures[3].formatted_area.timer_interval: 10
+      structures[4].formatted_area.minimum_value: -100
+      structures[4].formatted_area.nominal_value: 1500
+      structures[5].formatted_area.outbound_connection_enabled: true
+      structures[6].formatted_area.error_type: corrected_single_bit_error
+      structures[6].formatted_area.memory_array_error_address: 0x123456789
+      structures[7].formatted_area.memory_devices[0].load: 2
+      structures[7].formatted_area.memory_devices[1].handle: 0x21
+      structures[8].formatted_area.interface_type: network
+      structures[8].formatted_area.protocol_records[0].protocol_type: redfish_over_ip
+      structures[9].formatted_area.processor_type: aarch64
+      structures[9].formatted_area.processor_specific_data.vendor_jep106_code: 0x3b
+      structures[9].formatted_area.processor_specific_data.sub_type_data.id_aa64zfr0_el1: 0x1013
+      structures[10].formatted_area.string_property_id: uefi_device_path
+      structures[10].formatted_area.string_property_value.value: PciRoot(0x0)/Pci(0x1,0x0)
+      structures[10].formatted_area.parent_handle: 2
